@@ -1,0 +1,129 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hezuoguanli.css">
+<div class="rdivv">
+	<!--同城地接社-->
+	<div class="train_local">
+		<div class="train_local_suptop">
+			<img src="$staticRoot/images/ren.png" />
+			<span>同业管理</span>
+			<!--
+				<input value="返回上一级" onclick="index.load(page.backurl);" style="cursor:pointer;" class="tongye_fan" type="button"/>
+			-->
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<div class="setfood_top">
+			<form id="form1" method="post">
+				<input type="hidden" value="$ntype" name="ntype"/>
+				<input type="hidden" value="$cid" name="cid"/>
+    			<div class="setfood_topbox" style="width:240px;">
+    				<span>公司名称：</span>
+    				<input type="text" name="cpyName" value="$!companyDetail.cpyName" style="width:130px;">
+    			</div>
+    			<div class="setfood_topbox" style="width:240px;">
+    				<span>品牌名称：</span>
+    				<input type="text" name="cpyBrand" value="$!companyDetail.cpyBrand" style="width:130px;">
+    			</div>
+    			<button class="setfood_see" type="button" onclick="index.searchform('form1','$appRoot/town/detail/setsametown');">查询</button>
+			 </form>
+		</div>
+		<div class="trainl_cttop">
+			<input value="选择全部" id="inp_all" style="cursor:pointer;" class="dianji_all" type="button"/>
+			<input value="全部取消" id="quxiao_all" style="cursor:pointer;" class="quxiao_all" type="button"/>
+			<span style="margin-left:24px;margin-top:27px;">此列表为同城地接社信息,请您在此选择资源共享伙伴 </span>
+			<div class="trainl_biger">
+				<div class="train_box show">
+					<div class="carad_ctrtable" style="margin-top:10px;">
+						<table cellspacing="0" cellspadding="0" style="margin-left:0px;">
+							<thead>
+								<tr>
+									<td>合作选择</td>
+									<td>所在城市</td>
+									<td>公司/品牌</td>
+									<td>公司地址</td>
+									##<td>负责人/电话</td>
+									<td>联系人/电话</td>
+									<td>在线交流</td>
+								</tr>
+							</thead>
+							<tbody>
+								#foreach($item in $companyList)
+    								<tr>
+    									<td><input type="checkbox" name="cpyids" value="$item.id"/></td>
+    									<td>
+											#if($!item.cpyIsInland == '02') 
+                    							#vregion($!item.cpyProvince) #vregion($!item.cpyCity) 
+                    						#else
+                    							#if($!item.cpyExternal == '04')
+                    								$!item.cpyForeign $!item.cpyForeignCity
+                    							#else
+                    								#vtext($!item.cpyExternal,'C108')
+                    							#end
+                    						#end 
+										</td>
+    									<td>$!item.cpyName / $!item.cpyBrand</td>
+    									<td>$!item.cpyAddress</td>
+    									##<td>$!item.cpyPeople &nbsp;$!item.cpyPhone</td>
+    									<td>$!item.ccpName &nbsp; / $!item.ccpTelephone</td>
+    									<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+    								</tr>
+								#end
+							</tbody>
+						</table>
+						<div style="margin-left:-35px;float: left;width: 100%;">#parse("common/page.vm")</div>
+					</div>
+					<button  type="button" onclick="page.url=index.pageurl; index.load(page.backurl);"  class="tongye_fan">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /同城地接社 -->
+</div>
+<script >
+	
+    #foreach($item in $listsametown)
+    	$("input[name='cpyids'][value='$item.cpyidTo']").attr("checked",true);
+    #end
+	
+	//选中
+	$("input[name='cpyids']").click(function(){
+		//是否选中
+		var bolcho   = $(this).prop("checked");
+		//值
+		var checkval = $(this).val();
+		
+		var url = "$appRoot/town/detail/update?type="+bolcho+"&cpyid="+checkval+"&ntype=$ntype&cid=$cid";
+		subform.nocheckSub(url);
+	});
+	
+	//选择所有 默认为取消
+	$("#quxiao_all").click(function(){
+		var url = "$appRoot/town/detail/deleteAll?ntype=$ntype&cid=$cid";
+		subform.nocheckSub(url);
+		
+		$("input[name='cpyids']").attr("checked",false);
+	});
+	
+	//选择所有  默认为所有地接社
+	$("#inp_all").click(function(){
+		var url = "$appRoot/town/detail/insert?ntype=$ntype&cid=$cid";
+		subform.nocheckSub(url);
+		
+		$("input[name='cpyids']").attr("checked",true);
+	});
+	
+	/*
+    $("#checkAllt").click(function() {
+        $('input[name="subBoxt"]').attr("checked",this.checked); 
+    });
+    var subBoxt = $("input[name='subBoxt']");
+    subBoxt.click(function(){
+        $("#checkAllt").attr("checked",subBoxt.length == $("input[name='subBoxt']:checked").length ? true : false);
+    });
+    $(".trainl_cttop li").click(function(){
+    	var liindex = $('.trainl_cttop li').index(this);
+		$(this).css({"background":"#d09e64"}).siblings().css({"background":"#969696"});
+        $('.trainl_biger .train_box').eq(liindex).show(0).siblings(".trainl_biger .train_box").hide(0);
+    });
+	*/
+	
+</script>

@@ -1,0 +1,246 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+<script type="text/javascript" >
+    var imageObject = {
+    	clickSwap : function(obj) {
+    		obj.click(function() {
+    			var activeImage = $(this).children('img.active');
+    			activeImage.removeClass('active');
+    			if (activeImage.next().length > 0) {
+    				activeImage.next().addClass('active');
+    			} else {
+    				$(this).children('img:first-child').addClass('active');
+    			}
+    			return false;
+    		});
+    	}
+    };
+	
+    $(function() {
+    	imageObject.clickSwap($('.imageContainer'));
+    });
+
+	//初始化省市县
+	regUtil.initProvince(0,'cdlProvince','cdlCity','cdlCounty');
+	
+	//国内/国际港澳台切换
+	$('#city_gj').hide();
+	
+	$('#newfood01').click(function() {
+		$('#city_gj').hide();
+		$('#city_gn').show();
+	});
+	$('#newfood02').click(function() {
+		$('#city_gn').hide();
+		$('#city_gj').show();
+	});
+	
+	//点击国际显示国家城市
+	$('#county01').hide();
+	
+	$('#county').click(function(){
+		$('#county01').toggle();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county02').click(function(){
+		$('#county01').hide();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county03').click(function(){
+		$('#county01').hide();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county04').click(function(){
+		$('#county01').hide();
+	});
+	//点击国内时候，国家和城市文本框隐藏
+	$('#newfood01').click(function(){
+		$('#county01').hide();
+	});
+	
+	// 是否国内
+	var a = $("input[name='cdlInland']:checked").val();	
+	if (a == '02') {
+    	var b = $("select[name='cdlProvince']").val();
+		var city = $("input[name='dis_city']").val();
+		var county = $("input[name='dis_county']").val();
+		$('#city_gn').show();
+		$('#city_gj').hide();
+		regUtil.initProvince(b,'cdlProvince','cdlCity','cdlCounty',city,county);
+	} else if (a == '01') {
+		$('#city_gn').hide();
+		$('#city_gj').show();
+		//初始化省市县
+		regUtil.initProvince(0,'cdlProvince','cdlCity','cdlCounty');
+	} else {
+		//国内/国际港澳台切换
+    	$('#county01').hide();
+    	$('#county05').hide();
+    	$('#city_gj').hide();
+		
+		var b = $("select[name='cdlProvince']").val();
+		var city = $("input[name='dis_city']").val();
+		var county = $("input[name='dis_county']").val();
+		if (b == '') {
+    		//初始化省市县
+    		regUtil.initProvince(0,'cdlProvince','cdlCity','cdlCounty');
+		} else {
+			regUtil.initProvince(b,'cdlProvince','cdlCity','cdlCounty',city,county);
+		}
+	}
+
+	// 是否为港澳台/国际
+	var a = $("input[name='cdlExternal']:checked").val();
+	if (a == '04') {
+		$('#county01').show();
+		$('#county05').hide();
+	}else if (a == '03'){
+		$('#county01').hide();
+		$('#county05').show();
+	}else{
+		$('#county01').hide();//主要国家隐藏
+		$('#county05').hide();//出发城市隐藏
+	}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/ren.png" alt="同业资源特色餐" title="同业资源特色餐">同业资源特色餐<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		#*
+		<div class="doadmin_topl mt0">
+			<div class="doadmin_toplbox">
+                <span class="doadmin_span">餐厅区域：</span>
+                <label>
+                    <input type="radio" id="newfood01" name="cdlInland" #if($cafeteriaDetail.cdlInland == '02') checked #end value="02"  /> 国内
+				</label>
+                <label>
+                    <input type="radio" id="newfood02" name="cdlInland" #if($cafeteriaDetail.cdlInland == '01') checked #end value="01" /> 国际/港澳台
+				</label>
+            </div>
+		</div>
+		*#
+		<div class="doadmin_topl mb7">
+			<span class="doadmin_span w100" >产品编码：</span>
+			<div class="doadmin_toplbrb" style="width:150px;">
+				<input style="width:130px;" type="text" name="cdlCode" value="$!cafeteriaDetail.cdlCode">
+			</div>
+			<div class="doadmin_toplbox" id="city_gn" style="width:500px;margin-top:4px;">
+				<span class="doadmin_span" style="width:87px;" >所在城市：</span>
+				<div class="doadmin_toplbrb" style="width:360px;">
+                    <select name="cdlProvince" style="float:none;width:90px;" value="$!cafeteriaDetail.cdlProvince">
+						<option value=""></option>
+						#foreach($item in $provinces)
+                            <option value="$item.regionNo" #if($cafeteriaDetail.cdlProvince == $item.regionNo) selected #end>$item.regionName</option>
+    					#end
+                    </select>
+					<em class="w20">省</em>
+					<select type="text" class="w90" name="cdlCity" style="float:none;width:90px;">
+					</select>
+					<em class="w20">市</em>
+					<select type="text" class="w90" name="cdlCounty" style="float:none;width:90px;">
+                    </select>
+					<em class="w20" style="width:30px;">区县</em>
+				</div>
+			</div>	
+			<div class="doadmin_toplbox" id="city_gj">
+				<span class="doadmin_span" style="width:87px;">所在城市：</span>
+				<div class="doadmin_toplbrb" style="width:300px;">
+    				<label>
+						<input type="radio" id="county02" name="cdlExternal" #if($cafeteriaDetail.cdlExternal == '01') checked #end value="01" />香港&nbsp;
+					</label>
+                    <label>
+						<input type="radio" id="county03" name="cdlExternal" #if($cafeteriaDetail.cdlExternal == '02') checked #end value="02" />澳门&nbsp;
+					</label>
+					<label>
+					    <input type="radio" id="county04" name="cdlExternal" #if($cafeteriaDetail.cdlExternal == '03') checked #end value="03" />台湾&nbsp;
+					</label>
+					<label>
+						<input type="radio" id="county" name="cdlExternal"  #if($cafeteriaDetail.cdlExternal == '04') checked #end value="04" />国际&nbsp;
+    				</label>
+                </div>
+        	</div>
+			<div class="co_nationdiv" id="county01" style="margin-left:-12px;margin-top:0px;">
+                <span>国家：</span>	
+				<input type="text" name="cdlForeign" class="validate[maxSize[15]]" value="$!cafeteriaDetail.cdlForeign" style="width:120px;height:25px;">
+                <div id="county05" ></div>
+				<span>城市：</span>
+				<input type="text" name="cdlForeignCity" class="validate[maxSize[10]]" value="$!cafeteriaDetail.cdlForeignCity" style="width:120px;height:25px">
+			</div>
+		</div>
+    	<div class="input_block clearfix mb20">
+    		<div class="label_left" style="font-weight:400;width:124px;">最低正餐标准： </div>
+    		<div class="input_right input_right_wauto">
+    			<span class="tishi_box w130" >
+    				<input type="text" value="$!cafeteriaDetail.cdlOrderNormz" class="w65" name="cdlOrderNormz"> 元/人/起
+    			</span>
+    			<label class="ml15">公司/品牌名称： </label>
+    			<input type="text" value="$!cafeteriaDetail.cpyName" class="w200" name="cpyName" />
+				<!-- 就餐时间 ------------------------>
+    			<label class="ml15">就餐时间： </label>
+				<span class="tishi_box w110" onClick="WdatePicker()">
+        			<input type="text" value="$!cafeteriaDetail.cpcDate" class="w100" name="cpcDate" style="width:108px;background:url($staticRoot/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer">
+    			</span>
+    			<button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/cafeteria/detail/sametown');">查 询</button>
+    		</div>
+    	</div>
+	</form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" style="min-width:1100px;table-layout:fixed;">
+			<thead>
+				<tr>
+					<td style="width:90px;">产品编码</td>
+					<td style="width:80px;">所在地区</td>
+					<td style="width:180px;">餐厅名称</td>
+					<td style="width:85px;">餐厅业务</td>
+					<td style="width:150px;">最低早餐/正餐标准</td>
+                    <td>代金券面额/价格</td>
+					<td style="width:120px;">套餐价格</td>
+					<td >公司/品牌名称</td>
+					<td>联系人/电话</td>
+					<td style="width:90px;">在线交流</td>
+					<!-- 
+					<td>在线预定</td>
+					-->
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $cafeteriaList)
+    				<tr>
+    					<td>$!item.cdlCode</td>
+    					<td>$!item.cdlCity</td>
+    					<td><a style="white-space:normal;word-break:break-all;word-wrap:break-word;" href="$webRoot/cafeteria/tesecanxiang/$item.id" target="_blank" title="点击打开外网展示">$!item.cdlName</a></td>
+    					<td>$!item.cdlBusiness</td>
+    					<td>
+							#if($erim.isNotEmpty($!item.cdlOrderNorme) && $erim.isNotEmpty($!item.cdlOrderNormz))
+								$!item.cdlOrderNorme 元起 / $!item.cdlOrderNormz 元起
+							#else
+								无
+							#end
+						</td>
+                        <td style="width:150px;">
+							#if($erim.isNotEmpty($!item.cvpPriceTotal))
+								面额:$!item.cvpPriceTotal
+							#end
+							#if($erim.isNotEmpty($!item.cvpPriceTown))
+    							<br/>
+    							同业价:$!item.cvpPriceTown</td>
+							#end
+    					<td>
+							<a href="javascript:price.sametown('$appRoot/cafeteria/price/getPackageNum?cdlID=$item.id', '$appRoot/cafeteria/price/list?portal=05&cdlId=$item.id&cpeId=$!item.cpeId');">￥$!item.cpcTradePrice元/ #if($item.cpcIsSign == '01') 不限量 #else $!item.cpcSign份 #end</a>
+						</td>
+    					<td>$!item.cpyName / $!item.cpyBrand</td>
+    					<td>$!item.ccpName / $!item.ccpTelephone</td>
+						<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+						<!--<td><a href="javascript:index.load('$appRoot/cafeteria/order/insert')">预订</a></td>-->
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

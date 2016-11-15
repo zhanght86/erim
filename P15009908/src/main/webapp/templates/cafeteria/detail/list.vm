@@ -1,0 +1,308 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+<script type="text/javascript" >
+    var imageObject = {
+    	clickSwap : function(obj) {
+    		obj.click(function() {
+    			var activeImage = $(this).children('img.active');
+    			activeImage.removeClass('active');
+    			if (activeImage.next().length > 0) {
+    				activeImage.next().addClass('active');
+    			} else {
+    				$(this).children('img:first-child').addClass('active');
+    			}
+    			return false;
+    		});
+    	}
+    };
+	
+    $(function() {
+    	imageObject.clickSwap($('.imageContainer'));
+    });
+
+	//初始化省市县
+	regUtil.initProvince(0,'cdlProvince','cdlCity','cdlCounty');
+	
+	//国内/国际港澳台切换
+	$('#city_gj').hide();
+	
+	$('#newfood01').click(function() {
+		$('#city_gj').hide();
+		$('#city_gn').show();
+	});
+	$('#newfood02').click(function() {
+		$('#city_gn').hide();
+		$('#city_gj').show();
+	});
+	
+	//点击国际显示国家城市
+	$('#county01').hide();
+	
+	$('#county').click(function(){
+		$('#county01').toggle();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county02').click(function(){
+		$('#county01').hide();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county03').click(function(){
+		$('#county01').hide();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county04').click(function(){
+		$('#county01').hide();
+	});
+	//点击国内时候，国家和城市文本框隐藏
+	$('#newfood01').click(function(){
+		$('#county01').hide();
+	});
+	
+	// 是否国内
+	var a = $("input[name='cdlInland']:checked").val();	
+	if (a == '02') {
+    	var b = $("select[name='cdlProvince']").val();
+		var city = $("input[name='dis_city']").val();
+		var county = $("input[name='dis_county']").val();
+		$('#city_gn').show();
+		$('#city_gj').hide();
+		regUtil.initProvince(b,'cdlProvince','cdlCity','cdlCounty',city,county);
+	} else if (a == '01') {
+		$('#city_gn').hide();
+		$('#city_gj').show();
+		//初始化省市县
+		regUtil.initProvince(0,'cdlProvince','cdlCity','cdlCounty');
+	} else {
+		//国内/国际港澳台切换
+    	$('#county01').hide();
+    	$('#county05').hide();
+    	$('#city_gj').hide();
+		
+		var b = $("select[name='cdlProvince']").val();
+		var city = $("input[name='dis_city']").val();
+		var county = $("input[name='dis_county']").val();
+		if (b == '') {
+    		//初始化省市县
+    		regUtil.initProvince(0,'cdlProvince','cdlCity','cdlCounty');
+		} else {
+			regUtil.initProvince(b,'cdlProvince','cdlCity','cdlCounty',city,county);
+		}
+	}
+
+	// 是否为港澳台/国际
+	var a = $("input[name='cdlExternal']:checked").val();
+	if (a == '04') {
+		$('#county01').show();
+		$('#county05').hide();
+	}else if (a == '03'){
+		$('#county01').hide();
+		$('#county05').show();
+	}else{
+		$('#county01').hide();//主要国家隐藏
+		$('#county05').hide();//出发城市隐藏
+	}
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+   var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+});
+</script>
+<div class="jd_block" style="min-width:1000px;">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/htfood.png" alt="特色餐管理" title="特色餐管理" />特色餐管理
+	</p>
+    <div class="g_line mb20"></div>
+	<input type="hidden" name="dis_city" value="$cafeteriaDetail.cdlCity">
+	<input type="hidden" name="dis_county" value="$cafeteriaDetail.cdlCounty">
+	<form method="post" id="form1">
+		<!-- 国内和国际都不为null时，显示所在区域 -->
+		#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1) && $erim.isNotEmpty($!userBussiness.cbsRanInterna))
+		<div class="doadmin_topl mt0" style="width:98%;">
+		#else
+		<div class="doadmin_topl mt0" style="width:98%;" hidden>
+		#end
+			<div class="doadmin_toplbox">
+                <span class="doadmin_span">餐厅区域：</span>
+				#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+                <label>
+                    <input type="radio" id="newfood01" name="cdlInland" #if($cafeteriaDetail.cdlInland == '02') checked #end value="02"  /> 国内
+				</label>
+				#end
+        		#if($erim.isNotEmpty($!userBussiness.cbsRanInterna))
+                <label>
+                    <input type="radio" id="newfood02" name="cdlInland" #if($cafeteriaDetail.cdlInland == '01' || $erim.isEmpty($!userBussiness.cbsRanProvince1)) checked #end value="01" /> 国际/港澳台
+				</label>
+        		#end
+            </div>
+		</div>
+		<div class="doadmin_topl mb7" style="width:98%;">
+			<span class="doadmin_span w100">产品编码：</span>
+			<div class="doadmin_toplbrb" style="width:205px;">
+			    <input style="width:200px;" type="text" name="cdlCode" value="$!cafeteriaDetail.cdlCode">
+			</div>
+			<div class="doadmin_toplbox" id="city_gn" style="width:500px;">
+				<span class="doadmin_span" >所在城市：</span>
+				<!--<div class="doadmin_toplbrb" style="width:360px;">
+                    <select name="cdlProvince" style="float:none;width:90px;" value="$!cafeteriaDetail.cdlProvince">
+						<option value=""></option>
+						#foreach($item in $provinces)
+                            <option value="$item.regionNo" #if($cafeteriaDetail.cdlProvince == $item.regionNo) selected #end>$item.regionName</option>
+    					#end
+                    </select>
+					<em class="w20">省</em>
+					<select type="text" class="w90" name="cdlCity" style="float:none;width:90px;">
+					</select>
+					<em class="w20">市</em>
+					<select type="text" class="w90" name="cdlCounty" style="float:none;width:90px;">
+                    </select>
+					<em class="w20" style="width:30px;">区县</em>
+				</div>-->
+				<div class="doadmin_toplbrb" style="width:280px;">
+					#lockProvince('cdlProvince','cdlProvince','','1',$!cafeteriaDetail.cdlProvince,'cdlCity','cdlCounty',$!cafeteriaDetail.cdlCity,$!cafeteriaDetail.cdlCounty)
+                    <select name='cdlCity' id='cdlCity' class='w90' onchange="lock.town($(this),'cdlCounty');"></select>
+                    <select name='cdlCounty' id='cdlCounty' class='w90'></select>
+				</div>
+			</div>	
+			<div class="doadmin_toplbox" id="city_gj">
+				<span class="doadmin_span">所在城市：</span>
+				<div class="doadmin_toplbrb" style="width:300px;">
+    				<label>
+						<input type="radio" id="county02" name="cdlExternal" #if($cafeteriaDetail.cdlExternal == '01') checked #end value="01" />香港&nbsp;
+					</label>
+                    <label>
+						<input type="radio" id="county03" name="cdlExternal" #if($cafeteriaDetail.cdlExternal == '02') checked #end value="02" />澳门&nbsp;
+					</label>
+					<label>
+					    <input type="radio" id="county04" name="cdlExternal" #if($cafeteriaDetail.cdlExternal == '03') checked #end value="03" />台湾&nbsp;
+					</label>
+					<label>
+						<input type="radio" id="county" name="cdlExternal"  #if($cafeteriaDetail.cdlExternal == '04') checked #end value="04" />国际&nbsp;
+    				</label>
+                </div>
+        	</div>
+			<div class="co_nationdiv" id="county01" style="margin-left:-12px;margin-top:0px;">
+                <span>国家：</span>	
+				<input type="text" name="cdlForeign" class="validate[maxSize[15]] autoquerycountry" value="$!cafeteriaDetail.cdlForeign" style="width:120px;height:25px;">
+                <div id="county05" ></div>
+				<span>城市：</span>
+				<input type="text" name="cdlForeignCity" class="validate[maxSize[10]]" value="$!cafeteriaDetail.cdlForeignCity" style="width:120px;height:25px">
+			</div>		
+		</div>
+		<div class="input_block clearfix mb30">
+    		<div style="width:124px;font-weight:400" class="label_left doadmin_span">餐厅名称：</div>
+			<div class="input_right1" style="width:800px;">
+    			<input class="w200" type="text" name="cdlName" value="$!cafeteriaDetail.cdlName" />
+        		<button class="y_but ml35" type="button" style="margin-left:500px;" onclick="index.searchform('form1','$appRoot/cafeteria/detail/list');">&nbsp;查 询&nbsp;</button>
+    		</div>
+		</div>
+	</form>
+	<div class="g_line"></div>
+	#if($shiro.hasPermission("PRODUCT_CAFETERIA_INSERT"))
+	<div class="carad_ct">
+	    <div class="carad_ctbtn" style="margin-left:0px;">
+			<button class="y_but pl0" type="button" style="margin-left:58px;" onclick="index.load('$appRoot/cafeteria/detail/insertPage');">+ 新增餐厅</button>
+		</div>
+	</div>
+	#end
+	<div class="doadmin_ct" style="width: 98%;">
+		<div class="carad_ct ml30">
+        	<div class="carad_ctrtable">
+        		<table border="0" cellspadding="0" cellspacing="0">
+        			<thead>
+        				<tr>
+                            <td style="min-width:80px;">产品编码</td>
+        					<td style="min-width:100px;">所在城市</td>
+        					<td style="min-width:200px;">餐厅名称</td>
+        					<td style="min-width:120px;">联系电话</td>
+                            <td style="min-width:400px;">餐厅管理</td>
+							#if($shiro.hasPermission("PRODUCT_CAFETERIA_FUNC"))
+								<td style="min-width:65px;">操作人管理</td>
+							#end
+							#if($shiro.hasPermission("PRODUCT_CAFETERIA_DELETE"))
+								<td style="min-width:61px;">上架状态</td>
+							#end
+        				</tr>
+        			</thead>
+        			<tbody>
+        				#foreach($item in $cafeteriaList)
+							<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+								<td>$!item.cdlCode</td>	
+								#if($!item.cdlInland == '01')
+									#if($!item.cdlExternal == '04')
+										<td>$!item.cdlForeignCity</td>
+									#else
+										<td>$!item.cdlExternal</td>
+									#end
+								#elseif($!item.cdlInland == '02')
+									<td>$!item.cdlCity</td>
+								#else
+									<td></td>
+								#end
+								<td>
+									#if('1' == $!userIsCooperation)
+            							$!item.cdlName
+            						#else
+										<a href="$webRoot/cafeteria/tesecanxiang/$item.id" target="_blank" style="white-space:normal; word-break:break-all; word-wrap:break-word;" title="点击打开外网展示">$!item.cdlName</a>
+									#end
+								</td>
+								<td>$!item.cdlTelephone</td>
+								<td>
+            						#if($shiro.hasPermission("PRODUCT_CAFETERIA_UPDATE"))
+            						<a href="javascript:index.load('$appRoot/cafeteria/detail/updatePage?id=$item.id');" style="margin-right:10px;">查看/修改</a>
+									#end
+									
+            						#if($shiro.hasPermission("PRODUCT_CAFETERIA_PACKAGE"))
+            						<a href="javascript:index.load('$appRoot/cafeteria/package/list?cdlID=$item.id');" style="margin-right:10px;">套餐管理</a>
+            						#end
+									#if($shiro.hasPermission("PRODUCT_CAFETERIA_VOUCHER_SHOW"))
+            						<a href="javascript:index.load('$appRoot/cafeteria/voucher/showvoucher?cdlID=$item.id');" style="margin-right:10px;">代金券管理</a>
+            						#end  
+            						#if($shiro.hasPermission("PRODUCT_CAFETERIA_CUISINE_QUERY"))
+            						<a href="javascript:index.load('$appRoot/cafeteria/cuisine/list?cdlID=$!item.id');" style="margin-right:10px;">特色菜管理</a>
+									#end
+									#if($shiro.hasPermission("PRODUCT_CAFETERIA_SAMETOWN"))
+										<a href="javascript:index.nextPage('$appRoot/town/detail/setsametown?ntype=$sametownntype&cid=$item.id');" style="margin-right:10px;">同业管理</a>
+									#end
+									#if($shiro.hasPermission("PRODUCT_CAFETERIA_SCHEDULED"))
+            						<a href="javascript:index.load('$appRoot/cafeteria/detail/scheduledPage?id=$item.id');">预定方式</a>
+									#end
+									##<a href="">短信内容</a>
+								</td>
+								#if($shiro.hasPermission("PRODUCT_CAFETERIA_FUNC"))
+                					<td>	
+                						<a href="javascript:index.load('$appRoot/cus/func/addChildUser?ntype=$sametownntype&cid=$item.id');">权限设置</a>
+                                    </td>
+								#end
+								#if($shiro.hasPermission("PRODUCT_CAFETERIA_DELETE"))
+    								<td>
+    									<div class="wrapper">
+    										<div class="imageContainer1">
+            								#if($!item.cdlIsDelStatus == '1')
+                                                 <span><img src="$staticRoot/images/lvdui.png"/></span>
+                                                 <a href="javascript:index.load('$appRoot/cafeteria/detail/delete?id=$item.id&cdlIsDelStatus=0');">
+            										<img src="$staticRoot/images/huicuo.png" id="img" class="active" />
+            									 </a>
+            						         #end
+            						         #if($!item.cdlIsDelStatus == '0')
+            							        <a href="javascript:index.load('$appRoot/cafeteria/detail/delete?id=$item.id&cdlIsDelStatus=1');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+            								    <span><img src="$staticRoot/images/hongcuo.png"/></span>
+            						        #end
+    										</div>
+    									</div>
+    								</td>
+								#end
+							</tr>
+						#end
+        			</tbody>
+        		</table>
+        		#parse("common/page.vm")
+        	</div>
+		</div>
+    </div>
+</div>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

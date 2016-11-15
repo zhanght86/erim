@@ -1,0 +1,52 @@
+    <div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">联系人信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">姓名：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left w80">手机号码：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+	</div>
+    <div class="cb"></div>
+ 	<div class="g_block_1 mb20 mr20">
+        <p class="g_tit_1 mb10">订单信息</p>
+        <div class="input_block clearfix">
+            <div class="input_block clearfix">
+				<div class="label_left w80">用车时间：</div>
+				<div class="input_right">
+					<input type="text" class="w90 riqi"> 至 <input type="text" class="w90 riqi">
+				</div>
+			</div>
+            <div class="input_block clearfix">
+				<div class="label_left w80">用车方式：</div>
+				<div class="input_right input_right_wauto">
+					<select class="w90"><option></option></select><label class="ml15">乘客人数：</label><input class="w90">
+				</div>
+			</div>
+            <div class="input_block clearfix">
+				<div class="label_left w80">出发地：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w130">
+				</div>
+			</div>
+            <div class="input_block clearfix">
+				<div class="label_left w80">目的地：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w130">
+				</div>
+			</div>
+            <div class="input_block clearfix">
+                <div class="label_left w80">备注：</div>
+                <div class="input_right">
+                    <textarea class="w200" style="height:50px;"></textarea>
+                </div>
+			</div>
+        </div>
+    </div>
+	<div class="g_right w515"><a class="hui2_a" href="javascript:void(0);">取消</a><a class="red_a ml25" href="javascript:void(0);">提交订单</a></div>

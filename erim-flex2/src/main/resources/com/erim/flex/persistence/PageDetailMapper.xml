@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pagedetail">
+
+    <!-- 查找全部页面详细信息，用于flex端画页面 -->
+    <select id="selectAll" parameterType="hashMap" resultType="pageDetailBean">
+        SELECT
+            page_detail_id          AS id,
+            page_id                 AS pageid,
+            page_detail_name        AS name,
+            page_detail_type        AS type,
+            page_detail_no          AS no,
+            page_detail_x           AS x,
+            page_detail_y           AS y,
+            page_detail_width       AS width,
+            page_detail_height      AS height,
+            page_detail_style       AS style,
+            page_detail_text        AS text,
+            page_detail_data        AS data,
+            page_detail_action      AS action,
+            page_detail_validator   AS validator,
+            page_detail_errmsg      AS errmsg,
+            page_detail_visable     AS visable,
+            page_detail_required    AS required,
+            page_detail_args        AS args
+        FROM
+            tm_system_page_detail
+        ORDER BY
+            page_id,page_detail_no
+    </select>
+
+    <!-- 查找页面详细信息，用于flex端画页面 -->
+    <select id="selectListByPageId" parameterType="int" resultType="pageDetailBean">
+        SELECT
+            page_detail_id          AS id,
+            page_id                 AS pageid,
+            page_detail_name        AS name,
+            page_detail_type        AS type,
+            page_detail_no          AS no,
+            page_detail_x           AS x,
+            page_detail_y           AS y,
+            page_detail_width       AS width,
+            page_detail_height      AS height,
+            page_detail_style       AS style,
+            page_detail_text        AS text,
+            page_detail_data        AS data,
+            page_detail_action      AS action,
+            page_detail_validator   AS validator,
+            page_detail_errmsg      AS errmsg,
+            page_detail_visable     AS visable,
+            page_detail_required    AS required,
+            page_detail_args        AS args
+        FROM
+            tm_system_page_detail
+        WHERE
+            page_id = #{pageid}
+        ORDER BY
+            page_detail_no
+    </select>
+    
+    <!-- 查询本页数据，用于显示当前页 -->
+    <select id="selectPage" parameterType="hashMap" resultType="pageDetailBean">
+        SELECT
+            page_detail_id          AS id,
+            page_id                 AS pageid,
+            page_detail_name        AS name,
+            page_detail_type        AS type,
+            page_detail_no          AS no,
+            page_detail_x           AS x,
+            page_detail_y           AS y,
+            page_detail_width       AS width,
+            page_detail_height      AS height,
+            page_detail_style       AS style,
+            page_detail_text        AS text,
+            page_detail_data        AS data,
+            page_detail_action      AS action,
+            page_detail_validator   AS validator,
+            page_detail_errmsg      AS errmsg,
+            page_detail_visable     AS visable,
+            page_detail_required    AS required,
+            page_detail_args        AS args
+        FROM
+            tm_system_page_detail
+        <where>
+            <if test="id != null">and page_detail_id = #{id}</if>
+            <if test="pageid != null">and page_id = #{pageid}</if>
+            <if test="name != null">and page_detail_name like "%"#{name}"%"</if>
+            <if test="type != null">and page_detail_type = #{type}</if>
+            <if test="no != null">and page_detail_no = #{no}</if>
+            <if test="x != null">and page_detail_x = #{x}</if>
+            <if test="y != null">and page_detail_y = #{y}</if>
+            <if test="width != null">and page_detail_width = #{width}</if>
+            <if test="height != null">and page_detail_height = #{height}</if>
+            <if test="style != null">and page_detail_style like "%"#{style}"%"</if>
+            <if test="text != null">and page_detail_text like "%"#{text}"%"</if>
+            <if test="data != null">and page_detail_data like "%"#{data}"%"</if>
+            <if test="action != null">and page_detail_action like "%"#{action}"%"</if>
+            <if test="validator != null">and page_detail_validator like "%"#{validator}"%"</if>
+            <if test="errmsg != null">and page_detail_errmsg like "%"#{errmsg}"%"</if>
+            <if test="visable != null">and page_detail_visable = #{visable}</if>
+            <if test="required != null">and page_detail_required = #{required}</if>
+            <if test="args != null">and page_detail_args like "%"#{args}"%"</if>
+        </where>
+        ORDER BY page_id,page_detail_no
+    </select>
+    
+    <!-- 查询总数，用于页面分页 -->
+    <select id="selectCount" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_page_detail
+        <where>
+            <if test="id != null">and page_detail_id = #{id}</if>
+            <if test="pageid != null">and page_id = #{pageid}</if>
+            <if test="name != null">and page_detail_name like "%"#{name}"%"</if>
+            <if test="type != null">and page_detail_type = #{type}</if>
+            <if test="no != null">and page_detail_no = #{no}</if>
+            <if test="x != null">and page_detail_x = #{x}</if>
+            <if test="y != null">and page_detail_y = #{y}</if>
+            <if test="width != null">and page_detail_width = #{width}</if>
+            <if test="height != null">and page_detail_height = #{height}</if>
+            <if test="style != null">and page_detail_style like "%"#{style}"%"</if>
+            <if test="text != null">and page_detail_text like "%"#{text}"%"</if>
+            <if test="data != null">and page_detail_data like "%"#{data}"%"</if>
+            <if test="action != null">and page_detail_action like "%"#{action}"%"</if>
+            <if test="validator != null">and page_detail_validator like "%"#{validator}"%"</if>
+            <if test="errmsg != null">and page_detail_errmsg like "%"#{errmsg}"%"</if>
+            <if test="visable != null">and page_detail_visable = #{visable}</if>
+            <if test="required != null">and page_detail_required = #{required}</if>
+            <if test="args != null">and page_detail_args like "%"#{args}"%"</if>
+        </where>
+    </select>
+    
+    <!-- 增加 -->
+    <insert id="insert" parameterType="hashMap">
+        INSERT INTO 
+            tm_system_page_detail ( page_id, page_detail_name,  page_detail_type, page_detail_no, page_detail_x, 
+            page_detail_y, page_detail_width, page_detail_height, page_detail_style, page_detail_text,  
+            page_detail_data, page_detail_action, page_detail_validator,page_detail_errmsg,
+            page_detail_visable, page_detail_required, page_detail_args ) 
+        VALUES
+            ( #{pageid}, #{name},
+            #{type}, #{no}, #{x}, #{y},
+            #{width}, #{height}, #{style}, #{text},
+            #{data}, #{action}, #{validator}, #{errmsg}, 
+            #{visable}, #{required}, #{args} )
+    </insert>
+    
+    <!-- 批量增加，用于Tools.html批量插入数据 -->
+    <insert id="insertbatch">
+        INSERT INTO 
+            tm_system_page_detail ( page_id, page_detail_name,  page_detail_type, page_detail_no, page_detail_x, 
+            page_detail_y, page_detail_width, page_detail_height, page_detail_style, page_detail_text,  
+            page_detail_data, page_detail_action, page_detail_validator,page_detail_errmsg,
+            page_detail_visable, page_detail_required, page_detail_args ) 
+        VALUES
+        <foreach collection="dataitems" item="item" separator=",">  
+            ( #{item.pageid}, #{item.name},
+            #{item.type}, #{item.no}, #{item.x}, #{item.y},
+            #{item.width}, #{item.height}, #{item.style}, #{item.text},
+            #{item.data}, #{item.action}, #{item.validator}, #{item.errmsg}, 
+            #{item.visable}, #{item.required}, #{item.args} )
+        </foreach> 
+    </insert>
+    
+    <!-- 修改 -->
+    <update id="update" parameterType="hashMap">
+        UPDATE 
+            tm_system_page_detail
+        SET
+            page_id = #{pageid},
+            page_detail_name = #{name},
+            page_detail_type = #{type},
+            page_detail_no = #{no},
+            page_detail_x = #{x},
+            page_detail_y = #{y},
+            page_detail_width = #{width},
+            page_detail_height = #{height},
+            page_detail_style = #{style},
+            page_detail_text = #{text},
+            page_detail_data = #{data},
+            page_detail_action = #{action},
+            page_detail_validator = #{validator},
+            page_detail_errmsg = #{errmsg},
+            page_detail_visable = #{visable},
+            page_detail_required = #{required},
+            page_detail_args = #{args}
+        WHERE
+            page_detail_id = #{dataitems[0].id}
+    </update>
+    
+    <!-- 修改 -->
+    <update id="updatepageid" parameterType="hashMap">
+        UPDATE 
+            tm_system_page_detail
+        SET
+            page_id = #{id}
+        WHERE
+            page_id = #{oldid}
+    </update>
+
+    <!-- 根据页面ID删除数据,用于工具保存时候删除对应页面下的全部明细 -->
+	<delete id="deleteByPageId" parameterType="int">
+        DELETE FROM
+            tm_system_page_detail
+        WHERE
+            page_id = #{pageid}
+    </delete>
+    
+    <!-- 批量删除 -->
+    <delete id="delete" parameterType="hashMap">
+        DELETE FROM
+            tm_system_page_detail
+        WHERE
+            page_detail_id
+        IN
+            <foreach collection="dataitems" item="item"  open="(" separator="," close=")">  
+                #{item.id}
+            </foreach>
+    </delete>
+</mapper>

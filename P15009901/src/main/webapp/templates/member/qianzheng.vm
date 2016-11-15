@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+	#set($title='签证订单')
+    #parse("member/common/head.vm")
+<body>
+	<div class="indexwrap">
+		#parse("common/head.vm")
+
+
+		<!--dwp html start-->
+		<div class="box_cb mb20"></div>
+        <div class="g_cont">
+        	 #parse("member/common/left.vm")
+			 
+			 <div class="g_fl_lt">
+			 	<div class="g_u_block pb20 mb20">
+
+					<form class="uorder_form">
+						<label>服务地区</label>
+						<span class="select_box">
+							<span class="select_main"><span class="select_txt">全部</span><span class="select_but"><b></b></span></span>
+							<ul class="select_list2" >
+								<li class="selected">全部</li>
+								<li>香港</li>
+								<li>意大利</li>
+							</ul>
+						</span>
+						<label>订单日期</label><input class="form_txt" type="text" value="">——<input class="form_txt" type="text" value="">
+						<label>订单状态</label>
+						<span class="select_box">
+							<span class="select_main"><span class="select_txt">全部</span><span class="select_but"><b></b></span></span>
+							<ul class="select_list2" >
+								<li class="selected">全部</li>
+								<li>已付款</li>
+								<li>未付款</li>
+							</ul>
+						</span>
+						<a href="#" class="u_but">查询</a>
+
+						
+					</form>
+
+					<div class="jd_table">
+						<p class="head_top"><span class="w380">订单信息</span><span>服务地区</span><span>订单日期</span><span>订单金额</span><span>订单状态</span><span>操作</span></p>
+						<p class="tr_cont"><span class="w230">泰国个人旅游签证</span><span>泰国</span><span>2015.09.09</span><span>￥16666</span><span>已付款</span><span><a class="reserve" href="#">再次预订</a></span></p>
+						<p class="tr_cont"><span class="w230">南非个人旅游签证</span><span>南非</span><span>2015.09.09</span><span>￥16666</span><span>未付款</span><span><a class="paid" href="#">马上付款</a></span></p>
+					</div>
+					<div class="no_order_mess">您暂时还没有订单<br><a href="#">去选购</a></div>
+					
+					<div class="box_cb"></div>
+				</div>
+
+				
+			 </div>
+			 <div class="box_cb"></div>
+        </div>
+<!--dwp html end-->
+        
+		 #parse("common/footer.vm")
+	</div>
+	
+	<script>
+        $(".on").removeClass('on');
+        $("#menu_box a").eq(6).attr("class","on");
+    </script>
+</body>
+</html>
+ 

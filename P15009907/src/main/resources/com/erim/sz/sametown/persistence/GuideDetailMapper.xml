@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guidedetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="cpyId != null">                                        				and     cpy_id              		=	#{cpyId}</if>
+			  <if test="gdlName != null                   and gdlName != ''">	                and 	gdl_name 					like "%"#{gdlName}"%"</if>
+			  <if test="gdlServer != null                 and gdlServer != ''">	            and 	gdl_server 				    = 	#{gdlServer}</if>
+		      <if test="gdlSex != null                    and gdlSex != ''">	                and 	gdl_sex 					=	#{gdlSex}</if>
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageGuide" resultType="guideDetailBean">
+		SELECT
+			id,
+			gdl_name                       AS gdlName,
+			gdl_code                       AS gdlCode,
+			gdl_sex                        AS gdlSex,
+			gdl_introduction               AS gdlIntroduction,
+			gdl_server                     AS gdlServer,
+			gdl_img_person                 AS gdlImgPerson,
+			gdl_img_card                   AS gdlImgCard,
+			gdl_price                      AS gdlPrice,
+			gdl_createtime                 AS gdlCreatetime,
+			gdl_createuser                 AS gdlCreateuser,
+			gdl_is_through                 AS gdlIsThrough,
+			gdl_through_time               AS gdlThroughTime,
+			gdl_through_user               AS gdlThroughUser,
+			gdl_stars                      AS gdlStars,
+			gdl_language                   AS gdlLanguage,
+			gdl_property                   AS gdlProperty,
+			gdl_is_del_status              AS gdlIsDelStatus,
+			gdl_pwd                        AS gdlPwd,
+			cpy_id                         AS cpyId,
+			gdl_service_region             AS gdlServiceRegion,
+			gdl_age                        AS gdlAge,
+			gdl_age1                       AS gdlAge1,
+			gdl_local_province             AS gdlLocalProvince,
+			gdl_national_province          AS gdlNationalProvince,
+			gdl_leader_province            AS gdlLeaderProvince,
+			gdl_destination                AS gdlDestination,
+			gdl_gaid_lokal                 AS gdlGaidLokal,
+			gdl_type_service               AS gdlTypeService,
+			gdl_grade                      AS gdlGrade,
+			gdl_company_rating             AS gdlCompanyRating,
+			gdl_local_city                 AS gdlLocalCity,
+			gdl_national_city              AS gdlNationalCity,
+			gdl_leader_city                AS gdlLeaderCity,
+			gdl_destination_country        AS gdlDestinationCountry,
+			gdl_gaid_country               AS gdlGaidCountry,
+			gdl_local                      AS gdlLocal,
+			gdl_national                   AS gdlNational,
+			gdl_leader                     AS gdlLeader,
+			gdl_destination1               AS gdlDestination1,
+			gdl_certificate                AS gdlCertificate,
+			gdl_native_place               AS gdlNativePlace,
+			gdl_rest                       AS gdlRest
+		FROM
+			guide_detail
+			<include refid="sql_query" />
+		ORDER BY 
+			gdl_createtime 
+		DESC 
+	</select>
+	<!-- 查询指定实体 -->
+	<select id="selectBeanByPriId" resultType="guideDetailBean">
+		SELECT
+			id AS id,
+			gdl_name                 AS gdlName,
+			gdl_code                 AS gdlCode,
+			gdl_sex                  AS gdlSex,
+			gdl_introduction         AS gdlIntroduction,
+			gdl_server                     AS gdlServer,
+			gdl_img_person           AS gdlImgPerson,
+			gdl_img_card             AS gdlImgCard,
+			gdl_price                AS gdlPrice,
+			gdl_createtime           AS gdlCreatetime,
+			gdl_createuser           AS gdlCreateuser,
+			gdl_is_through           AS gdlIsThrough,
+			gdl_through_time         AS gdlThroughTime,
+			gdl_through_user         AS gdlThroughUser,
+			gdl_stars                AS gdlStars,
+			gdl_language             AS gdlLanguage,
+			gdl_property             AS gdlProperty,
+			gdl_is_del_status        AS gdlIsDelStatus,
+			gdl_pwd                  AS gdlPwd,
+			cpy_id                   AS cpyId,
+			gdl_service_region       AS gdlServiceRegion,
+			gdl_age                  AS gdlAge,
+			gdl_age1                 AS gdlAge1,
+			gdl_local_province       AS gdlLocalProvince,
+			gdl_national_province    AS gdlNationalProvince,
+			gdl_leader_province      AS gdlLeaderProvince,
+			gdl_destination          AS gdlDestination,
+			gdl_gaid_lokal           AS gdlGaidLokal,
+			gdl_type_service         AS gdlTypeService,
+			gdl_grade                AS gdlGrade,
+			gdl_company_rating       AS gdlCompanyRating,
+			gdl_local_city           AS gdlLocalCity,
+			gdl_national_city        AS gdlNationalCity,
+			gdl_leader_city          AS gdlLeaderCity,
+			gdl_destination_country  AS gdlDestinationCountry,
+			gdl_gaid_country         AS gdlGaidCountry,
+			gdl_local                AS gdlLocal,
+			gdl_national             AS gdlNational,
+			gdl_leader               AS gdlLeader,
+			gdl_destination1         AS gdlDestination1,
+			gdl_certificate          AS gdlCertificate,
+			gdl_native_place         AS gdlNativePlace,
+			gdl_rest                 AS gdlRest
+		FROM
+			guide_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageGuideCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			guide_detail
+		<include refid="sql_query" />
+	</select>
+</mapper>

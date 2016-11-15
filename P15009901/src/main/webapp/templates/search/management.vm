@@ -1,0 +1,48 @@
+<!-- 签证-->
+<div class="tab-right-div">
+	
+    <div class="tab-top">
+        <span class="tab-top-item subline">签证搜索</span>
+    </div>
+    <div class="tab-main">
+        <div class="tab-main-div show pd-top15">
+			<form id="form1" method="post" action="$appRoot/$cpyno/qianzhengxiang.html">
+            <label class="tab-label">
+                <span class="tab-span">签证类型:</span>
+                <select class="tab-select" id="super1" name="mdlNtype"></option>">
+                    <option value=""></option>
+					<option value="01">旅游签证</option>
+					<option value="02">商务签证</option>
+					<option value="03">探亲签证</option>
+					<option value="04">留学签证</option>
+                </select>
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">签证国家:</span>
+                <input type="text" class="tab-input" name="mdlAddress"/>
+            </label>
+			<!--<a href="$appRoot/$cpyno/qianzheng.html" target="_blank">立即搜索</a>-->
+            <button type="submit" class="tab-submit" onclick="$('#form1').submit();">立即搜索</button>
+           </form>
+			<div class="tab-hot">
+    			<form id="form_mdlAddress" method="post" action="$appRoot/$cpyno/qianzhengxiang.html">
+                    <span class="tab-span mt4"><strong>热门签证</strong></span>
+                    <span class="tab-hot-a" onclick="$('#mdlAddress').attr('value','韩国个人旅游签证');$('#mdlNtype').attr('value','');$('#form_mdlAddress').submit();">韩国个人旅游签证</span>
+                    <span class="tab-hot-a" onclick="$('#mdlAddress').attr('value','泰国个人旅游签证');$('#mdlNtype').attr('value','');$('#form_mdlAddress').submit();">泰国个人旅游签证</span>
+                    <span class="tab-hot-a" onclick="$('#mdlAddress').attr('value','美国个人旅游签证');$('#mdlNtype').attr('value','');$('#form_mdlAddress').submit();">美国个人旅游签证</span>
+                    <span class="tab-hot-a" onclick="$('#mdlAddress').attr('value','日本个人旅游签证');$('#mdlNtype').attr('value','');$('#form_mdlAddress').submit();">日本个人旅游签证</span>
+                    <br clear="left">
+                    <span class="tab-span mt4"><strong>签证类型</strong></span>
+                    <span class="tab-hot-a" onclick="$('#mdlNtype').attr('value','01');$('#mdlAddress').attr('value','');$('#form_mdlAddress').submit();">旅游签证</span>
+                    <span class="tab-hot-a" onclick="$('#mdlNtype').attr('value','02');$('#mdlAddress').attr('value','');$('#form_mdlAddress').submit();">商务签证</span>
+                    <span class="tab-hot-a" onclick="$('#mdlNtype').attr('value','03');$('#mdlAddress').attr('value','');$('#form_mdlAddress').submit();">探亲签证</span>
+                    <span class="tab-hot-a" onclick="$('#mdlNtype').attr('value','04');$('#mdlAddress').attr('value','');$('#form_mdlAddress').submit();">留学签证</span>
+    				<input type="hidden" id="mdlNtype" name="mdlNtype"/>
+    				<input type="hidden" id="mdlAddress" name="mdlAddress"/>
+				</form>
+            </div>
+        </div>
+    </div>
+	
+</div>
+<!-- /签证-->

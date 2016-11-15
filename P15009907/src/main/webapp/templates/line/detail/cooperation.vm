@@ -1,0 +1,147 @@
+<div class="rdivv">
+	<!--同城地接社-->
+	<div class="train_local">
+	<p class="tit_1 ml20 pt20 mt18"><img src="$staticRoot/images/ren.png" width="25px" alt="合作管理" title="合作管理">合作管理</p>
+	<div class="g_line"></div>
+    <div class="visaadmin_top">
+    	<form class="form-search" method="post" id="form1">
+				<input type="hidden" name="id" value="$vcompany.linecid"/>
+    			<div  class="doadmin_topl">
+    				<div class="doadmin_toplboxa" style="width:270px;">
+    					<span style="font-weight:400;  width:100px;">公司名称：</span>
+    					<div class="doadmin_toplbra" style="width:160px;">
+        					<input class="input-medium search-query" name="cpyName" value="$!companyDetail.cpyName" style="width:126px; type="text" >
+                         </div>
+    				 </div>
+    				<div class="doadmin_toplboxa" style="width:190px;">
+    					<span style="font-weight:400; width:60px;">品牌名称：</span>
+    					<div class="doadmin_toplbra" style="width:120px;">
+    						<input class="input-medium search-query" name="cpyBrand" value="$!companyDetail.cpyBrand" style="width:126px; type="text" >
+                          </div>
+    				 </div>
+					 <button class="doadmin_see" type="button" onclick="index.searchform('form1','$appRoot/line/detail/cooperation');">查询</button>
+                </div>
+             </form>
+    	  </div>
+    	<div class="cb mb20"></div>
+    	   <div class="g_line">
+       </div>
+     </div>
+</div>
+<div class="doadmin_ct">
+	<div class="trainl_ct" style="margin-top:30px;">
+		<div  class="trainl_cttop" style="width:900px;">
+			<input value="选择全部" style="cursor:pointer;" onclick="cpn.insertAll();" class="dianji_all" type="button"/>
+			<input value="全部取消" style="cursor:pointer;" onclick="cpn.deleteAll();" class="quxiao_all" type="button"/>
+			<input value="返回" style="cursor:pointer;" onclick="page.url=index.pageurl; index.load(page.backurl);"  class="quxiao_all" type="button"/>
+				<!--<ul>
+					<li id="trainl_li">同城组团社</li>
+				</ul>-->
+			<span style="margin-left:30px; margin-top:25px;">此列表为组团社信息,请您在此选择合作伙伴</span>				
+		</div>
+		<div class="doadmin_ct_topr" style="width:130px;">
+        	<span><img src="static/images/htd1.png">已合作</span>
+        	<span><img src="static/images/htd2.png">未合作</span>				
+		</div>
+		<div class="trainl_biger clearfix">
+			<div class="train_box show">
+				<div class="carad_ctrtable">
+					<table cellspacing="0" cellspadding="0">
+						<thead>
+							<tr>
+								##<td class="doadmin_label"><label><input type="checkbox" id="checkAllt">全选</label></td>
+								<td class="doadmin_label"><label>选择</label></td>
+								<td>所在省市</td>
+								<td>公司/品牌</td>
+								<td>公司地址</td>
+								<td>联系人/电话</td>
+								<td>在线交流</td>
+								<td>合作状态</td>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $companyList)
+    							<tr>
+    								<td><input #if($erim.isNotEmpty($!item.zscIsCoopertion)) checked #end type="checkbox" onclick="cpn.update('$!item.id',$(this));" name="subBoxt" value="$!item.id"></td>
+    								<td>$!item.cpyProvinceName  $!item.cpyCityName</td>
+    						    	<td>
+										<a href="http://www.jialvlianhe.com/$item.cpyCode" style="white-space:normal;word-break:break-all;word-wrap:break-word;" target="_blank" title="点击打开外网展示">$!item.cpyName / $!item.cpyBrand</a>
+    								</td>
+									<td>$!item.cpyAddress</td>
+    								<td>$!item.ccpName &nbsp; / $!item.ccpTelephone</td>
+    								<td>
+										#if($erim.isNotEmpty($!item.ccpQq))
+												<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a>
+										#end
+									</td>
+									<td>
+										#if($!item.zscIsCoopertion == '1')
+											<img src="$staticRoot/images/htd1.png">
+										#else
+											<img src="$staticRoot/images/htd2.png">
+										#end
+									</td>	
+    								</tr>
+							#end
+						</tbody>
+					</table>
+					#parse("common/page.vm")
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- /同城地接社 -->
+<script >
+	//专线合作管理
+	var cpn = {
+		//取消全部
+		deleteAll : function(){
+			$.post("$appRoot/zxsell/detail/delete?cid=$!vcompany.linecid",function(data){
+				if(1==data){
+					$("input[name='subBoxt']").prop("checked",false);
+					alert("取消全部!");
+				}else{
+					alert("取消全部失败!");
+				}
+			},'json');
+		},
+		//更新
+		update : function(cpyid,data){
+			//如果选中则新增 否则删除
+			if(data.prop("checked")){ cpn.insertOne(cpyid);}
+			else { cpn.deleteOne(cpyid);}
+		},
+		//插入全部
+		insertAll : function(){
+			$.post("$appRoot/zxsell/detail/insertList?cid=$!vcompany.linecid",function(data){
+				if(1==data){
+					$("input[name='subBoxt']").prop("checked",true);
+					alert("添加成功!");
+				}else{
+					alert("添加失败!");
+				}
+			},'json');
+		},
+		//插入一个
+		insertOne : function(cpyid){
+			$.post("$appRoot/zxsell/detail/insert?sellCpyId="+cpyid+"&cid=$!vcompany.linecid",function(data){
+				if(1==data){
+    				alert("添加成功!");
+				}else{
+					alert("添加失败!");
+				}
+			},'json');
+		},
+		//删除一个
+		deleteOne : function(cpyid){
+			$.post("$appRoot/zxsell/detail/delete?sellCpyId="+cpyid+"&cid=$!vcompany.linecid",function(data){
+    			if(1==data){
+    				alert("删除成功!");
+				}else{
+					alert("删除失败!");
+				}
+			},'json');
+		}
+	}
+</script>

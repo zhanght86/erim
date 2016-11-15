@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="managementprice">
+	
+	<!-- 过滤条件 -->
+	<sql id="sql_query">
+		1 = 1
+		<!-- 日期 -->
+		<if test="mdlDate != null and mdlDate != ''"> AND mdl_date = #{mdlDate}</if>
+		<!-- 产品ID -->
+		<if test="malId != null and mdlId != ''"> AND mdl_id = #{mdlId}</if>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		mdl_id					AS	mdlId,
+		mdl_name				AS	mdlName,
+		mdl_is_open				AS	mdlIsOpen,
+		mdl_date				AS	mdlDate,
+		mdl_week				AS	mdlWeek,
+		mdl_price_same			AS	mdlPriceSame,
+		mdl_price_team			AS	mdlPriceTeam,
+		mdl_price_seal			AS	mdlPriceSeal,
+		mdl_create_time			AS	mdlCreateTime,
+		mdl_create_user			AS	mdlCreateUser,
+		mdl_cost_show           AS  mdlCostShow
+	</sql>
+	
+	<!-- 查询数据列表 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="managementPriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				management_price
+			ORDER BY
+				mdl_create_time
+			DESC
+		) t
+		GROUP BY
+			t.mdlDate,
+			t.mdlId
+		HAVING
+			t.mdlId = #{bean.mdlId}
+			AND t.mdlDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		INSERT INTO 
+			management_price (
+				mdl_id,
+				mdl_name,
+				mdl_is_open,
+				mdl_date,
+				mdl_week,
+				mdl_price_same,
+				mdl_price_team,
+				mdl_price_seal,
+				mdl_create_time,
+				mdl_create_user,
+				mdl_cost_show
+			) VALUES (
+				#{mdlId},
+				#{mdlName},
+				#{mdlIsOpen},
+				#{mdlDate},
+				#{mdlWeek},
+				#{mdlPriceSame},
+				#{mdlPriceTeam},
+				#{mdlPriceSeal},
+				#{mdlCreateTime},
+				#{mdlCreateUser},
+				#{mdlCostShow}
+			)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			management_price
+		SET
+			mdl_price_same		= #{mdlPriceSame},
+			mdl_price_team		= #{mdlPriceTeam},
+			mdl_price_seal		= #{mdlPriceSeal}
+		WHERE
+			id 	= #{id}
+	</update>
+	
+</mapper>

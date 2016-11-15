@@ -1,0 +1,498 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游详情_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+<script src="$staticRoot/js/wxy_pop.js" type="text/javascript" language="javascript"></script>
+</head>
+<body>
+  <div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+		<!--dwp html start-->
+        <div class="g_cont">
+        	<h1 class="g_title_1">【土家蜜月】体验团-双卧7日游</h1>
+                  	
+        	<div class="imgshow_box">
+				<div id="tFocus">
+					<div id="tbox">
+						<div class="prev" id="prev"></div>
+						<div class="next" id="next"></div>
+						<a class="mark_left" href="javascript:;" id="markLeft"></a>
+						<a class="mark_right" href="javascript:;" id="markRight"></a>
+						<ul id="tFocus-pic">
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a1.jpg" alt="" /></a></li>
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a2.jpg" alt="" /></a></li>
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a3.jpg" alt="" /></a></li>
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a4.jpg" alt="" /></a></li>
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a5.jpg" alt=""/></a></li>
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a6.jpg" alt=""/></a></li>
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a7.jpg" alt=""/></a></li>
+							<li><a href="#" target="_blank"><img src="$staticRoot/images/a8.jpg" alt=""/></a></li>
+						</ul>
+					</div>
+					<div id="tFocusBtn">
+						<a href="javascript:void(0);" id="tFocus-leftbtn"></a>
+						<div id="tFocus-btn">
+							<ul>
+								<li class="active"><img src="$staticRoot/images/01.jpg" alt="" /></li>
+								<li><img src="$staticRoot/images/02.jpg" alt="" /></li>
+								<li><img src="$staticRoot/images/03.jpg" alt="" /></li>
+								<li><img src="$staticRoot/images/04.jpg" alt="" /></li>
+								<li><img src="$staticRoot/images/05.jpg" alt="" /></li>
+								<li><img src="$staticRoot/images/06.jpg" alt="" /></li>
+								<li><img src="$staticRoot/images/07.jpg" alt="" /></li>
+								<li><img src="$staticRoot/images/08.jpg" alt="" /></li>
+							</ul>
+						</div>
+						<a href="javascript:void(0);" id="tFocus-rightbtn"></a>
+					</div>
+				</div>
+				<div class="box_cb mb10"></div>
+				<div class="riqi">
+					<table class="xuanze" cellpadding="0" cellspacing="0" border="0">
+						<tbody>
+						<tr>
+							<td class="w200 blue_a white">选择入住日期</td>
+							<td>
+								<span class="sjleft"><img src="$staticRoot/images/sanjiaoleft.jpg"></span>2015年8月<span class="sjright"><img src="$staticRoot/images/sanjiaoright.jpg"></span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tbody>
+						<tr>
+							<th class="red">日</th>
+							<th>一</th>
+							<th>二</th>
+							<th>三</th>
+							<th>四</th>
+							<th>五</th>
+							<th class="borderright red">六</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<p class="shu">1</p><span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="shu">2</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">3</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">4</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">5</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">6</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">7</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">8</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="shu">9</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">10</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">11</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td class="red_bg">
+								<p class="shu">12</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="red">余：3间</span></p></span>
+							</td>
+							<td class="red_bg">
+								<p class="shu">13</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">14</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">15</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="shu">16</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">17</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">18</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td class="yellow_bg">
+								<p class="shu">今</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">20</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">21</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">22</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="shu">23</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">24</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">25</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">26</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">27</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">28</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+							<td>
+								<p class="shu">29</p>
+								<span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="hui">
+								<p class="shu">30</p><span class="jian"><p><span class="white">￥2000</span><br><span class="white">余：30间</span></p></span>
+							</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+            </div>
+            <div class="date_box">
+				<div class="box_scoll">
+					<span class="wxy_span_num"><strong>出发城市：</strong></span>
+					<span class="wxy_span_num"><strong>呼和浩特</strong></span>
+					<span class="wxy_span_num">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产品编号：</span>
+					<span class="wxy_span_num">XD12541566</span>
+					<a class="download" href="#" title=""></a>
+					<br clear="left">
+					<div class="box_cb mb10"></div>
+					<div class="wxy_div_dotted">
+						<label class="wxy_lab"><span class="wxy_span_small">￥</span> <span class="wxy_span_money">999</span>/人起</label>
+						<a href="#" class="wxy_a_show"><span class="wxy_round">?</span>起价说明</a>
+						<div class="wxy_a_hide">
+							12元起包含自费等等用品12元起包含自费等等用品12元起包含自费等等用品12元起包含自费等等用品12元起包含自费等等用品12元起包含自费等等用品12元起包含自费等等用品
+						</div>
+					</div>
+					<br clear="left">
+					<div class="box_cb mb10"></div>
+					<dl class="wxy_dl_hd">
+						<dt>促销活动:</dt><dd><span>1.网站下单满8000返800(仅成人、儿童可享)</span><span>2.10人以上报团每人返1000元(仅有成人可享)</span><span>3.提前15天预订返300元</span></dd>
+					</dl>
+					<div class="box_cb mb10"></div>
+					<dl class="wxy_dl_cpts">
+						<dt>产品特色:</dt>
+						<dd><span>无购物</span><span>无自费</span><span>五大4A景区</span><span>固定发班</span></dd>
+					</dl>
+					<div class="box_cb mb10"></div>
+					<dl class="list_1">
+						<dt>主要景点：</dt>
+						<dd><span>故宫博物院</span> &gt; <span>阳明山国家公园</span> &gt; <span>清境农场日月潭</span> &gt;<span>奋起湖风景区</span> &gt; <span>阿里山六合夜市</span> &gt; <span>D5西子湾风景区</span> &gt; <span>猫鼻头公园</span> &gt; <span>龙磐公园</span><a href="#more">  &gt;  [路线详情]</a></dd>
+					</dl>
+					<div class="box_cb mb10"></div>
+					<div class="wxy_div_cpjl">
+						<h1><img src="$staticRoot/images/btn_hand.png">产品经理推荐：</h1>
+						<div class="box_cb mb10"></div>
+						<span class="wxy_span_cpjlt">1、自驾小飞机，体验在自己掌控之下冲上云霄的心跳感受，实现当飞行员的梦想</span>
+						<span class="wxy_span_cpjlt">1、自驾小飞机，体验在自己掌控之下冲上云霄的心跳感受，实现当飞行员的梦想</span>
+						<span class="wxy_span_cpjlt">1、自驾小飞机，体验在自己掌控之下冲上云霄的心跳感受，实现当飞行员的梦想</span>
+						<span class="wxy_span_cpjlt">1、自驾小飞机，体验在自己掌控之下冲上云霄的心跳感受，实现当飞行员的梦想</span>
+					</div>
+				</div>
+				<div class="box_cb mb10"></div>
+                <p class="tel_p"><img class="wxy_img_phone" src="$staticRoot/images/btn_phone.png" title="" alt="">贵宾热线<strong>400 - 6666 - 666</strong><a href="#" title="">立即预订</a></p>
+            </div>
+            <div class="box_cb mb20"></div>
+          <p class="g_tab"><a class="tab_1 on" href="javascript:void(0);" name="more">行程安排</a><a class="tab_2" href="javascript:void(0);">景点特色</a><a class="tab_3" href="javascript:void(0);">费用包含</a><a class="tab_4" href="javascript:void(0);">预订通知</a><p>
+          <div class="tab_block">
+          	<div class="block_tab_1">
+                <div class="left">
+                    <ul id="menu">
+                        <li class="on"><a href="#1">第1天</a></li>
+                        <li><a href="#2">第2天</a></li>
+                        <li><a href="#3">第3天</a></li>
+                        <li><a href="#4">第4天</a></li>
+                        <li><a href="#5">第5天</a></li>
+                        <li><a href="#6">第6天</a></li>
+                        <li><a href="#7">第7天</a></li>
+                        <li><a href="#8">第8天</a></li>
+                        <li><a href="#9">第9天</a></li>
+                        <li><a href="#10">第10天</a></li>
+                    </ul>
+                </div>
+
+                <div class="right">
+                    <div class="block" id="block_1"><a name="1"></a>
+                        <h3 class="g_title_2">第一天<span class="way_line">上海 &rarr; 苏黎世</span></h3>
+                        <div class="desc_block">
+                        	<div class="txt_desc">
+                            	<p>(0)由于近期台湾入台证配额非常紧张，根据实际情况可能会让您更改通行证上的签注类型，这样有利于最后的成行。敬请谅解。</p><br>
+                            	<p>(1)<strong>飞行时间:</strong> 约2小时<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;航班: 由上海搭乘班机到桃园（具体航班信息请在预订下一步中查看）</p><br>
+                                <p>(2)<strong>前往酒店:</strong> 当地酒店双人标间</p>
+                            </div>
+                      		<div class="img_desc">
+                            	<img src="$staticRoot/images/tem_img/111.jpg">
+                            </div>
+                            <div class="box_cb"></div>
+                        </div>
+                    </div>
+                    <div class="block" id="block_2"><a name="2"></a>
+                        <h3 class="g_title_2">第二天<span class="way_line">苏黎世 &rarr; 琉森</span></h3>
+                        <div class="desc_block">
+                        	<div class="txt_desc">
+                            	<dl>
+                                	<dt>07：00 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">早餐: 酒店内</dd>
+                            		<dt>08：00 行驶时间: 约30分钟 | 游览时间: 约2小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">[台北故宫博物院]<br>
+故宫博物院为中国宫殿式建筑，一、二、三层为展览陈列空间，四楼为休憩茶座——三希堂。其典藏了历代文物艺术精粹，大致可分为青铜器、书画、陶瓷器、图书典籍、工艺品和宫廷类文物等，几乎涵盖了整部五千年的中国历史，数量达65万5千多件。台北故宫博物院因此拥有“中华文化宝库”的美名。</dd>
+                            		<dt>10：30 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">午餐: 中式团餐</dd>
+                            		<dt>13：00 行驶时间: 约2小时30分钟 | 游览时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">[阳明山国家公园]<br>
+阳明山公园原名草山，因盛产茅草得名，后为纪念王阳明先生而改名。它泛指大屯山、七星山、纱帽山、小观音山所构成的山区，范围相当广大，阳明山公园是全台最大、景色最美的郊野公园。</dd>
+
+                            		<dt>16：30 行驶时间: 约30分钟 | 购物时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">美妆<br>彩妆、药妆、护肤品。</dd>
+                            		<dt>18：00 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">晚餐: 中式团餐</dd>
+                            		<dt>19：00行驶时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">前往酒店:<br>当地酒店双人标间</dd>
+                                </dl>
+                            </div>
+                      		<div class="img_desc">
+                            	<img src="$staticRoot/images/tem_img/111.jpg">
+                            </div>
+                            <div class="box_cb"></div>
+                        </div>
+                    </div>
+                    <div class="block" id="block_3"><a name="3"></a>
+                        <h3 class="g_title_2">第三天<span class="way_line">上海 &rarr; 苏黎世</span></h3>
+                        <div class="desc_block">
+                        	<div class="txt_desc">
+                            	<p>(0)由于近期台湾入台证配额非常紧张，根据实际情况可能会让您更改通行证上的签注类型，这样有利于最后的成行。敬请谅解。</p><br>
+                            	<p>(1)<strong>飞行时间:</strong> 约2小时<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;航班: 由上海搭乘班机到桃园（具体航班信息请在预订下一步中查看）</p><br>
+                                <p>(2)<strong>前往酒店:</strong> 当地酒店双人标间</p>
+                            </div>
+                      		<div class="img_desc">
+                            	<img src="$staticRoot/images/tem_img/111.jpg">
+                            </div>
+                            <div class="box_cb"></div>
+                        </div>
+                    </div>
+                    
+                  <div class="block" id="block_4"><a name="4"></a>
+                        <h3 class="g_title_2">第四天<span class="way_line">苏黎世 &rarr; 琉森</span></h3>
+                        <div class="desc_block">
+                        	<div class="txt_desc">
+                            	<dl>
+                                	<dt>07：00 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">早餐: 酒店内</dd>
+                            		<dt>08：00 行驶时间: 约30分钟 | 游览时间: 约2小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">[台北故宫博物院]<br>
+故宫博物院为中国宫殿式建筑，一、二、三层为展览陈列空间，四楼为休憩茶座——三希堂。其典藏了历代文物艺术精粹，大致可分为青铜器、书画、陶瓷器、图书典籍、工艺品和宫廷类文物等，几乎涵盖了整部五千年的中国历史，数量达65万5千多件。台北故宫博物院因此拥有“中华文化宝库”的美名。</dd>
+                            		<dt>10：30 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">午餐: 中式团餐</dd>
+                            		<dt>13：00 行驶时间: 约2小时30分钟 | 游览时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">[阳明山国家公园]<br>
+阳明山公园原名草山，因盛产茅草得名，后为纪念王阳明先生而改名。它泛指大屯山、七星山、纱帽山、小观音山所构成的山区，范围相当广大，阳明山公园是全台最大、景色最美的郊野公园。</dd>
+
+                            		<dt>16：30 行驶时间: 约30分钟 | 购物时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">美妆<br>彩妆、药妆、护肤品。</dd>
+                            		<dt>18：00 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">晚餐: 中式团餐</dd>
+                            		<dt>19：00行驶时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">前往酒店:<br>当地酒店双人标间</dd>
+                                </dl>
+                            </div>
+                      		<div class="img_desc">
+                            	<img src="$staticRoot/images/tem_img/111.jpg">
+                            </div>
+                            <div class="box_cb"></div>
+                        </div>
+                    </div>
+                    <!--<div class="block" id="block_5"><a name="5"></a>
+                        <h3 class="g_title_2">第五天<span class="way_line">上海 &rarr; 苏黎世</span></h3>
+                        <div class="desc_block">
+                        	<div class="txt_desc">
+                            	<p>(0)由于近期台湾入台证配额非常紧张，根据实际情况可能会让您更改通行证上的签注类型，这样有利于最后的成行。敬请谅解。</p><br>
+                            	<p>(1)<strong>飞行时间:</strong> 约2小时<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;航班: 由上海搭乘班机到桃园（具体航班信息请在预订下一步中查看）</p><br>
+                                <p>(2)<strong>前往酒店:</strong> 当地酒店双人标间</p>
+                            </div>
+                      		<div class="img_desc">
+                            	<img src="$staticRoot/images/tem_img/111.jpg">
+                            </div>
+                            <div class="box_cb"></div>
+                        </div>
+                    </div>
+                      <div class="block" id="block_6"><a name="6"></a>
+                        <h3 class="g_title_2">第六天<span class="way_line">上海 &rarr; 苏黎世</span></h3>
+                        <div class="desc_block">
+                        	<div class="txt_desc">
+                            	<p>(0)由于近期台湾入台证配额非常紧张，根据实际情况可能会让您更改通行证上的签注类型，这样有利于最后的成行。敬请谅解。</p><br>
+                            	<p>(1)<strong>飞行时间:</strong> 约2小时<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;航班: 由上海搭乘班机到桃园（具体航班信息请在预订下一步中查看）</p><br>
+                                <p>(2)<strong>前往酒店:</strong> 当地酒店双人标间</p>
+                            </div>
+                      		<div class="img_desc">
+                            	<img src="$staticRoot/images/tem_img/111.jpg">
+                            </div>
+                            <div class="box_cb"></div>
+                        </div>
+                    </div>
+                    <div class="block" id="block_7"><a name="7"></a>
+                        <h3 class="g_title_2">第七天<span class="way_line">苏黎世 &rarr; 琉森</span></h3>
+                        <div class="desc_block">
+                        	<div class="txt_desc">
+                            	<dl>
+                                	<dt>07：00 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">早餐: 酒店内</dd>
+                            		<dt>08：00 行驶时间: 约30分钟 | 游览时间: 约2小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">[台北故宫博物院]<br>
+故宫博物院为中国宫殿式建筑，一、二、三层为展览陈列空间，四楼为休憩茶座——三希堂。其典藏了历代文物艺术精粹，大致可分为青铜器、书画、陶瓷器、图书典籍、工艺品和宫廷类文物等，几乎涵盖了整部五千年的中国历史，数量达65万5千多件。台北故宫博物院因此拥有“中华文化宝库”的美名。</dd>
+                            		<dt>10：30 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">午餐: 中式团餐</dd>
+                            		<dt>13：00 行驶时间: 约2小时30分钟 | 游览时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">[阳明山国家公园]<br>
+阳明山公园原名草山，因盛产茅草得名，后为纪念王阳明先生而改名。它泛指大屯山、七星山、纱帽山、小观音山所构成的山区，范围相当广大，阳明山公园是全台最大、景色最美的郊野公园。</dd>
+
+                            		<dt>16：30 行驶时间: 约30分钟 | 购物时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">美妆<br>彩妆、药妆、护肤品。</dd>
+                            		<dt>18：00 用餐时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">晚餐: 中式团餐</dd>
+                            		<dt>19：00行驶时间: 约1小时</dt>
+                                    <dd style="padding-left:45px;margin-bottom:10px;">前往酒店:<br>当地酒店双人标间</dd>
+                                </dl>
+                            </div>
+                      		<div class="img_desc">
+                            	<img src="$staticRoot/images/tem_img/111.jpg">
+                            </div>
+                            <div class="box_cb"></div>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="box_cb"></div>
+            </div>
+            <div class="block_tab_2">
+				<div class="wxy_jdts">
+					<img src="$staticRoot/images/pic_o1.jpg" alt="" title="">
+					<br clear="left">
+					九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”
+					<br clear="left">
+					<img src="$staticRoot/images/pic_o1.jpg" alt="" title="" class="pic_395_240 mr10">
+					<img src="$staticRoot/images/pic_02.png" alt="" title="" class="pic_395_240">
+					九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”九寨沟是大自然鬼斧神工之杰作。这里四周雪峰高耸，湖水清澈艳丽，飞瀑多姿多彩，急流汹涌湍急，林木青葱婆娑。蓝蓝的天空，
+					明媚的阳光，清新的空气和点缀其 间的古老村寨、栈桥、磨坊，组成了一幅内涵丰富、和谐统一的优美画卷，历来被当地藏族同胞
+					视为“神山圣水”。九寨沟景区开放后，东方人称之为“人间仙 境”，西方人则将之誉为“童话世界”
+				</div>
+            </div>
+            <div class="block_tab_3">
+            <pre>3费用包含
+                    往返经济舱机票、燃油附加费（以实际收费标准为准）、机票税
+                    行程所列酒店住宿费用
+                    行程内所列餐食（飞机餐及行程中注明的自理餐除外）。
+                    领队和当地中文导游服务。
+                    跟团游期间用车费用
+                    行程中所列景点首道大门票，
+                    台湾签发入台许可证费用。</pre>
+
+
+            </div>
+            <div class="block_tab_4">
+                <p><strong>预订限制</strong></p>
+                <p>1. 18岁以下未成年人需要至少一名家长或成年旅客全程陪同。</p>
+                <p>2. 报价是按照2人入住1间房计算的价格，如您的订单产生单房，携程将尽力安排您与其他客人拼房入住，如届时安排不了而产生单房，请您自行承担单房差费用。如您要求享受单房，请在后续附加产品页面中选择单房差可选项。</p><br>
+                <p><strong>产品说明</strong></p>
+                <p>1. 最低成团人数10人，出发前30天如您未收到成团通知，携程会短信询问您是否愿意等待，如您继续等待，携程将于外网披露时间节点通知您是否成团。如已成团，最晚于出发前1-2天直接发送出团通知给您。如您预订时距出发日期已不足30天，携程不保证一定成团，下单后请您耐心等待是否成团的通知，您也可以选择已成团的班期或产品预订，以确保行程。</p>
+                <p>2. 最终的航班信息请以出团说明会或出团通知书为准。</p>
+                <p>3. 此产品使用包位航班，具体航班号及航班时刻待定，请以最终机票上的信息为准，届时我司会通知您，包位航班不接受您的更改及退订要求，敬请谅解。</p>
+                <p>4. 如因航空公司运力调配、航权审核、机场临时关闭、天气原因、航空管制等不可控制或其他不可抗拒力导致航班取消或延期的，携程不承担违约责任，携程将尽最大努力协助您办理变更事宜，如产生差价，多退少补。</p>
+                <p>具体航班号及航班时刻，请以最终机票上的信息为准。</p>
+            </div>
+          </div>
+        </div>
+<!--dwp html end-->
+        #parse("common/footer.vm")
+</body>
+</html>
+<script type="text/javascript">addLoadEvent(Focus());</script>

@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/guide/guide.css">
+<div class="rdivv">
+	<!--预定方式-->
+	<div class="newfood">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/aa_1.png">
+			<span>预约方式</span>
+			<div class="cb"></div>			
+	   	</div>
+		<div class="g_line mb20"></div>
+		<form method="post" id="form1">
+			<input type="hidden" value="$guideDetail.id" name="id"/>
+				<div class="input_block clearfix">
+            		<div class="label_left">预定方式：</div>
+            		<div class="input_right" style="width:500px;">
+            			#foreach($item in $scheduled.keySet())
+						 <label class="w90" > 
+			              <input class="input-xlarge validate[minCheckbox[1]] checkbox" type="checkbox" name="gdlScheduled" value="$item" #if($erim.contains($!guideDetail.gdlScheduled,$item)) checked #end/> $scheduled.get($item)
+    				     </label>
+						#end
+            		</div><span  style=" color:red;margin-left: -130px;float: left; margin-top: 8px;">*</span>
+            	</div>
+				
+		     <div class="newfood_ct">
+              <div class="carinfo_ctbl">
+                <div class="carinfo_ctblrbtn pb80" style="margin-top:10px;">
+                     <button type="button" class="carinfo_sub" id="btn" onclick="subform.sub('form1','$appRoot/guide/detail/scheduled','$appRoot/guide/detail/list');" >提交</button>
+                     <button class="carinfo_qu" type="button" onclick="index.load(page.url);">返回</button>
+                </div>
+		    </div>
+		  </div>
+	  </form>
+	<!--/修改导游-->
+  </div>
+</div>

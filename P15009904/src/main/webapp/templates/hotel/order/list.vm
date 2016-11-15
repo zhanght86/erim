@@ -1,0 +1,128 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="static/images/dd_ci_03.png" alt="酒店订单" title="酒店订单">酒店订单<br>
+	</p>
+	
+	<div class="g_line mb20"></div>
+	<form method="post"  id="form1">
+		<div class="div_search">
+    		<label class="lab_search">
+    			<span class="lab_name">订单编号：</span>
+    			<input type="text" class="lab_input">
+    		</label>
+    		<label class="lab_search">
+    			<span class="lab_name">酒店名称：</span>
+    			<input type="text" class="lab_input">
+    		</label>
+    		<label class="lab_search">
+    			<span class="lab_name">客户类别：</span>
+    			<select name="" class="lab_select">
+    				<option value="">组团社</option>
+    				<option value="">地接社</option>
+    				<option value="">专线商</option>
+    				<option value="">直营</option>
+    			</select>
+    		</label>
+    		<label class="lab_search">
+    			<span class="lab_name">公司名称：</span>
+    			<input type="text" class="lab_input">
+    		</label>
+    		<label class="lab_search">
+    			<span class="lab_name">预定时间：</span>
+    			<input type="text" class="lab_input" name="corCreatetime" onClick="WdatePicker()">
+    		</label>
+    		<label class="lab_search">
+    			<span class="lab_name">支付状态：</span>
+    			<select name="" class="lab_select">
+    				<option value=""></option>
+    				<option value="">已支付</option>
+    				<option value="">窗口付</option>
+    				<option value="">线下协议</option>
+    			</select>
+    		</label>
+    		<label class="lab_search">
+    			<span class="lab_name">入住人：</span>
+    			<input type="text" class="lab_input">
+    		</label>
+    		<label class="lab_search">
+    			<span class="lab_name">处理人：</span>
+    			<input type="text" class="lab_input">
+    		</label>
+    		<button class="btn_search carinfo_sub" type="button" onclick="index.searchform('form1','$appRoot/hotel/order/list');">查询</button>
+    	</div>
+	</form>
+	<div class="cb"></div>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml30" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>订单编号</td>
+					<td>酒店名称</td>
+					<td>客户类别</td>
+					<td>公司/操作人/电话</td>
+					<td>零售单价</td>
+					<td>预定时间</td>
+					<td>预订内容</td>
+					<td>总费用</td>
+					<td>在线交流</td>
+					<td>支付状态</td>
+					<td>订单操作</td>
+					<td>确认状态</td>
+					<td>订单状态</td>
+					<td>处理人</td>
+					<td>备注</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $orderList)
+    				<tr>
+    					<td>$!item.hloNum</td>
+    					<td>$!item.hdlName</td>
+    					<td></td>
+    					<td><a class="dwp_f_a" href="javascript:void(0);" style="text-align:left">李庆旅行社<span>操作人：李庆<br />联系电话：14703315972</span></a></td>
+    					<td></td>
+						<td>$!item.hldCreatetime</td>
+    					<td>租车模式/用车日期/台数/使用人<br>留言：</td>
+    					<td>$!item.hloPriceTotal</td>
+    					<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.ccpQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+    					<td><select><option>已支付</option><option>窗口付</option><option>线下协议</option></select></td>
+    					<td class="click_td_win"><select>
+								<option>--</option>
+								<option name="hldNtype" value="1">接单</option>
+								<option name="hldNtype" value="0">拒单</option>
+						</select>
+						</td>
+    					<td>$!item.hldNtype</td>
+    					<td><select><option>未处理</option></select></td>
+    					<td></td>
+    					<td></td>
+    				</tr>
+				#end
+			</tbody>
+		</table>
+        #parse("common/page.vm")
+	</div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit win_box_edit2">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	
+	<div class="tel_mess_center"><br>
+		<p class="ml35"><strong>短信内容确认</strong></p><br>
+		<div class="tel_con_1 ml35 mb15">
+			<table cellpadding="0" cellspacing="0" border="0"><tr><td>您已成功预定：</td><td><p>预订XXX酒店/XXX房型/入住日期2014-10-21/<br>
+离店日期:2014-11-12/XX间XX夜/入住人</p></td></tr></table>
+			<p>请您到店后告知前台：由XXX代订，订单号:XXX；</p>
+			<p>联系人 : 李三</p>			<p>请您及时于我们联系，合作愉快！</p>
+		</div><br>
+		<div class="button_block clearfix ml35"><button class="y_but ml35">&nbsp;确认&nbsp;</button><button class="b_but ml35">&nbsp;取消&nbsp;</button></div>
+	</div>
+	
+</div>
+	
+<script type="text/javascript">
+$(document).ready(function(){$('.dwp_f_a').mouseover(function(){
+$(this).parent().css('position','relative');$(this).parent().css('z-index','2');$(this).children().show();})
+$('.dwp_f_a').mouseout(function(){$(this).parent().css('position','inherit');$(this).parent().css('z-index','0');$(this).children().hide();})})
+</script>

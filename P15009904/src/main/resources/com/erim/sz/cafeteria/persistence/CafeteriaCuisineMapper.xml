@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriacuisine">
+
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test ="cdlID != null and cdlID != ''"> 	and 	cdl_id = #{cdlID}</if>
+		</where>
+	</sql>
+
+    <!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCuisineCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			cafeteria_cuisine
+			<include refid="sql_query"></include>
+	</select>
+	<!-- 根据套餐ID查询 -->
+	<select id="selectCafeteriaCuisineById" resultType="cafeteriaCuisineBean">
+		SELECT 
+			id 					AS id,
+			cdl_id              AS cdlID,					
+			csl_name 	        AS cslName,
+			csl_price 	        AS cslPrice,
+			csl_introduce       AS cslIntroduce,
+			csl_imag 	        AS cslImag,
+			csl_is_del_status 	AS cslIsDelStatus,
+			csl_createtime      AS cslCreatetime,
+			csl_type            As cslType
+		FROM
+			cafeteria_cuisine
+		WHERE
+			 id = #{id}
+	</select>
+	<!-- 列表分页显示 -->
+	<!-- 
+	<select id="selectPageCuisine" resultType="cafeteriaCuisineBean">
+		SELECT
+			id 					AS id,
+			cdl_id              AS cdlID,					
+			csl_name 	        AS cslName,
+			csl_price 	        AS cslPrice,
+			csl_introduce       AS cslIntroduce,
+			csl_imag 	        AS cslImag,
+			csl_is_del_status 	AS cslIsDelStatus,
+			csl_createtime      AS cslCreatetime,
+			csl_type            As cslType
+		FROM
+			cafeteria_cuisine
+		<include refid="sql_query" />
+		ORDER BY 
+			csl_is_del_status
+		DESC,
+			csl_createtime 
+	  	DESC
+	</select> -->
+	<!-- 列表页(不分页)显示 -->
+	<select id="selectCuisine" resultType="cafeteriaCuisineBean">
+		SELECT
+			id 					AS id,
+			cdl_id              AS cdlID,					
+			csl_name 	        AS cslName,
+			csl_price 	        AS cslPrice,
+			csl_introduce       AS cslIntroduce,
+			csl_imag 	        AS cslImag,
+			csl_is_del_status 	AS cslIsDelStatus,
+			csl_createtime      AS cslCreatetime,
+			csl_type            As cslType
+		FROM
+			cafeteria_cuisine
+		<include refid="sql_query" />
+		ORDER BY 
+			csl_is_del_status
+		DESC,
+			csl_createtime 
+	  	DESC
+	</select>
+	<!-- 增加 -->
+	<insert id="insert">
+
+	INSERT INTO
+			cafeteria_cuisine
+			(
+				csl_name,
+				csl_price,
+				csl_introduce,
+				csl_imag,
+				csl_is_del_status,
+				csl_createtime,
+				csl_type,
+				cdl_id
+	 		      
+			)
+		VALUES
+			(
+				#{cslName},
+				#{cslPrice},
+				#{cslIntroduce},
+				#{cslImag},
+				#{cslIsDelStatus},
+				#{cslCreatetime},
+				#{cslType},
+				#{cdlID}
+				
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			cafeteria_cuisine
+		SET
+			csl_name             = #{cslName},
+			csl_price            = #{cslPrice},
+			csl_introduce        = #{cslIntroduce},
+			csl_imag             = #{cslImag},
+			csl_type             = #{cslType}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 上下架 -->
+	<delete id="delCuisine" parameterType="int">
+		UPDATE
+			cafeteria_cuisine
+		SET
+			csl_is_del_status 	 = #{cslIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<!--删除-->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			cafeteria_cuisine
+		WHERE
+			id=#{id}
+	</delete>
+	
+
+</mapper>

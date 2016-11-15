@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			<div class="about_left">
+            	<a href="$appRoot/$cpyno/abouts.html?searchModel=5&&about=1"><div class="#if($!about == '1' || $!about == 1) about_gs #else about_zx #end ">关于我们</div></a>
+            	<a href="$appRoot/$cpyno/news/news?newType=00"><div class="#if($!newType == '00') about_gs #else about_zx #end " id="gongsi3" onclick="show_about(this.id,'rigrht3')">旅游资讯</div></a>
+                <a href="$appRoot/$cpyno/news/news?newType=01"><div class="#if($!newType == '01') about_gs #else about_zx #end " id="gongsi1" onclick="show_about(this.id,'rigrht1')">出行指南</div></a>
+                <a href="$appRoot/$cpyno/news/news?newType=02"><div class="#if($!newType == '02') about_gs #else about_zx #end " id="gongsi4" onclick="show_about(this.id,'rigrht4')">户外指南</div></a>
+				<a href="$appRoot/$cpyno/news/newsFooter?helpcenter=1"><div class="#if($!helpcenter == '1'  || $!helpcenter == 1) about_gs #else about_zx #end " id="gongsi5" onclick="show_about(this.id,'rigrht5')">帮助中心</div></a>
+            </div>
+			<!--/left-->
+			<!--right-->
+			<!-- 旅游资讯 -->
+			<div id="rigrht1">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">帮助中心</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">帮助中心</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<ul class="gbodyer_rgt_list">
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/ruhechaxun.html" title="如何查询">如何查询</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/yudingliucheng.html" title="预订流程">预订流程</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/gentuanyou.html" title="跟团游是什么？">跟团游是什么？</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/danfangcha.html" title="单房差是什么？">单房差是什么？</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/banzizhu.html" title="半自助游是什么？">半自助游是什么？</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/sirendingzhi.html" title="私人订制旅游是什么？">私人订制旅游是什么？</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/qianhetong.html" title="能传真签合同吗？">能传真签合同吗？</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$staticRoot/images/abroad.pdf" title="出境旅游合同（示范文本）">出境旅游合同（示范文本）</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$staticRoot/images/home.pdf" title="境内旅游合同（示范文本）">境内旅游合同（示范文本）</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/chuxing.html" title="出行安全常识">出行安全常识</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/teshurenqun.html" title="特殊人群安全知识">特殊人群安全知识</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/gaoweihuodong.html" title="高危活动安全知识">高危活动安全知识</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a href="$appRoot/$cpyno/help/vise.html" title="签证常见问题">签证常见问题</a></span>
+							<span class="gbodyer_rgtsj">2015-12-15</span>
+						</li>
+					</ul>
+				<!--	<div class="gbodyer_rgtbot">
+						<ul>
+							<li class="gbodyer_lia">共$pagelink.size页</li>
+							<li class="gbodyer_lia"><a href="javascript:;" text="?p=$pageSizeUp&n=$limit$!pageCondition">上一页</a></li>
+							<li class="gbodyer_lib"><a href="#">1</a></li>
+							<li class="gbodyer_lib"><a href="#">2</a></li>
+							<li class="gbodyer_lia"><a href="javascript:;" text="?p=$pageSizeDown&n=$limit$!pageCondition">下一页</a></li>
+						</ul>
+					</div>-->
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+	<!--中间内容区域 结束-->
+	#parse("common/footer.vm")
+	</div>
+</body>
+</html>

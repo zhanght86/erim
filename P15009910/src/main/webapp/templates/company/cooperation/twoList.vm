@@ -1,0 +1,80 @@
+
+#set($slink={'地接社链接':'http://dj.jialvlianhe.com/company/regedit/info?userCode=',
+             '直营商链接':'http://zy.jialvlianhe.com/company/regedit/info?userCode=',
+			 '专线商链接':'http://zx.jialvlianhe.com/company/regedit/info?userCode=',
+			 '组团社链接':'http://zt.jialvlianhe.com/company/regedit/info?userCode='})
+<div class="g_block_2 mb20">
+		<div class="input_block clearfix mb0">
+			<div class="input_right input_right_wauto">
+				<table>
+					#foreach($link in $slink.keySet())
+						#set($l = $slink.get($link) + $yjUserCode)
+						 <tr>
+    						<td>$link</td>
+    						<td style="text-align:left;">
+    							<a href="#">$l</a>
+    							<input type="button" id="cpybtn$velocityCount"  value="复制"/>
+    						</td>
+    					</tr>
+						
+						<script>
+							 var clip = new ZeroClipboard.Client();
+                              clip.setHandCursor(true); //设置鼠标手型
+                              clip.setText('${l}');  //复制的文本
+							  clip.addEventListener( "mouseUp", function(client) {
+                                    alert("复制${link}成功！");
+                                });
+                              clip.glue( 'cpybtn${velocityCount}' ); //注册id按钮，可以是其它非input元素
+						</script>
+					#end
+                </table>
+			</div>
+		</div>
+	</div>
+	<div class="g_block_2 g_block_7 mb20">
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+						<th>所在省市</th>
+						<th>业务方向</th>
+						<th>公司名称(品牌)</th>
+						<th>负责人/电话</th>
+						<th>计调/电话</th>
+						<th>审核状态</th>
+						<th>服务费状态</th>
+			</tr>
+			#foreach($item in $companyList)
+				<tr>
+                  	  <td>#vregion($!item.cpyProvince) #vregion($!item.cpyCity) #vregion($!item.cpyCounty)</td>
+	                    <td>
+							#vtext($!item.cpyRoe,'C120')
+						</td>
+						<td>$!item.cpyName / $!item.cpyBrand</td>
+	                    <td>$!item.ccpName / $!item.ccpTelephone</td>
+						<td>$!item.cbsOperator / $!item.cbsOperatorPhone</td>
+	                    <td>
+							#if($!item.cpyIsThrough=='01')
+								审核未通过
+							#else
+								 审核通过
+							#end
+						</td>
+						<td>
+							#if($!item.pseIsSx=='1')
+								已付费
+							#else
+								 未付费
+							#end
+						</td>
+                  </tr>
+              #end
+		</table>
+		<div class="g_right mr50 mb20" style="float:left;">
+			<a class="red_a ml25 back" href="javascript:index.load('$appRoot/company/cooperation/list');">返回</a>
+		</div>
+		#parse("common/page.vm")
+	</div>
+<script type="text/javascript">
+	$("table tr:even").each(function(){
+		$(this).css("background-color","#fbfbfb");
+	})
+</script>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelroom">
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectHotelRoomList" resultType="hotelRoomBean">
+		SELECT
+			id ,
+			hdl_id           	AS hdlId,
+			hhe_name         	AS hheName,
+			hhe_presonnum    	AS hhePresonnum,
+			hhe_area         	AS hheArea,
+			hhe_layerstart      AS hheLayerstart,
+			hhe_layerend		AS hheLayerend,
+			hhe_homenum      	AS hheHomenum,
+			hhe_is_addbed    	AS hheIsAddbed,
+			hhe_yes				AS hheYes,
+			hhe_device       	AS hheDevice,
+			cpy_id          	AS cpyId,
+			hhe_is_del_status 	AS hheIsDelStatus,
+			hhe_createtime   	AS hheCreatetime,
+			hhe_createuser   	AS hheCreateuser,
+			hhe_img1   			AS hheImg1,
+			hhe_img1   			AS hheImg2,
+			hhe_img1   			AS hheImg3,
+			hhe_img1   			AS hheImg4,
+			hdl_bedtype			AS hdlBedtype,
+			hhe_balcony         AS hheBalcony
+		FROM
+			hotel_room
+		WHERE
+			hdl_id = #{hdlId}
+		ORDER BY 
+			hhe_is_del_status
+		DESC,
+			hhe_createtime
+		DESC
+	</select>
+	
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriaVoucher">
+	
+	<!-- 根据餐厅ID查询代金券 -->
+	<select id="selectVoucherBycdlId" resultType="cafeteriaVoucherBean">
+		select 
+             a.cdl_id,
+ 			 a.djq_start_date as djqStartDate,
+  			 a.djq_end_date as djqEndDate,
+             b.cvp_price_total,
+             b.cvp_price_total as cvpPriceTotal,
+             b.cvp_price_retail As cvpPriceRetail,
+             b.cvp_price_sale  as cvpPriceSale
+          from cafeteria_voucher a
+          join cafeteria_voucher_price b
+            on a.id=b.djq_id
+            where  
+               a.djq_end_date>CURDATE()
+			   and a.cdl_id= #{cdlID}
+	</select>
+	
+	
+	
+</mapper>

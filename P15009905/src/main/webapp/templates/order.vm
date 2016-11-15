@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>预约管理</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+    <script>
+        $(document).ready(function(){
+            $(".item_btn").click(function () {
+            	$("#detail_popup").show();
+            });
+            var range = 50;             //距下边界长度/单位px
+            var elemt = 500;           //插入元素高度/单位px
+            var maxnum = 10000;            //设置加载最多次数
+            var num = 1;
+            var totalheight = 0; 
+            var main = $("#content");                     //主体元素
+            $(window).scroll(function(){
+            	var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
+            	totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+           		 if(($(document).height()-range) <= totalheight  && num != maxnum) {
+                    main.append("<div class='list_item'>"+"<div class='item_left'>"+"<img src='$staticRoot/img/message.png'/></div>"
+    						   +"<div class='item_center'>"+"<div class='item_title'>"+"您27号有新的预约 请处理！"+"</div>"
+    						   +"<div>"+"用户手机号：13xxxxxxxxx"+"</div>"
+    						   +"<div>"+"用户信息：三亚三日游希望找一当<br>xxxx地的xxxxxxxx限制字段"+num+"</div>"
+    						   +"</div>"
+    						   +"<div class='item_right'>"+'<div class="item_btn">'+"查 看"+"</div>"
+    						   +"</div>"
+    						   +"</div>");
+                    num++;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+	<!-- header -->
+	<div class="header">预约管理</div>
+	<!-- content -->
+	<div>
+		<img style="width:100%" src="$appRoot/static/img/zanbukaifang.jpg" />
+    </div>
+	<div id="content" style="height: 960px">
+		#foreach($item in $guideList)
+    		<div class="list_item">
+    			<div class="item_left">
+    				<img src="$staticRoot/img/message.png" />
+    			</div>
+    			<div class="item_center">
+    				<div class="item_title">您$!date.format('yyyy-MM-dd',$!item.gdlCreatetime)有新的预约 请处理！</div>
+    				<div>用户手机号：$!item.gdlCreateuser</div>
+    				<div>
+    					用户信息：$!item.gorCode
+    				</div>
+    			</div>
+    			<div class="item_right">
+    				<div class="item_btn">查 看</div>
+    			</div>
+    		</div>
+		#end
+	</div>
+	<div id="detail_popup" class="popup_wraper">
+		<div class="tanchu">
+			<div class="biaoti">信息详情</div>
+			<div class="xiangq">
+				<table style="line-height: 40px;">
+					<tr>
+						<td align="right">联系方式：</td>
+						<td>13455453422</td>
+					</tr>
+					<tr>
+						<td align="right">出发地：</td>
+						<td>北京</td>
+					</tr>
+					<tr>
+						<td align="right">目的地：</td>
+						<td>厦门</td>
+					</tr>
+					<tr>
+						<td align="right">预约时间：</td>
+						<td>8月12日至8月30日</td>
+					</tr>
+					<tr>
+						<td align="right">用户留言：</td>
+						<td>厦门相约不见不散</td>
+					</tr>
+				</table>
+			</div>
+			<div class="wenben anniu1">
+				<div class="anniu">
+					<a onclick='$("#detail_popup").hide();' class="shuxian"
+						style="color: #900">确定</a>
+				</div>
+				<div class="anniu">
+					<a onclick='$("#detail_popup").hide();'>取消</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- footer -->
+	<div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2_focus.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5.png"/>
+        </a>
+    </div>
+</body>
+</html>

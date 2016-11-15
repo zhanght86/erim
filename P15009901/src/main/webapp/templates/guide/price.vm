@@ -1,0 +1,246 @@
+<div class="riqi">
+	<form id="form1">
+		<input type="hidden" name="gdlId" value="$!gdlId" />
+		<input type="hidden" name="year" value="$!year" />
+		<input type="hidden" name="month" value="$!month" />
+		<!-- 所有服务类型编码 -->
+		<!--<input type="hidden" name="isInternal" value="$!isInternal" />-->
+		<!-- 当前所选服务类型 -->
+		<input type="hidden" name="gdlServiceCode" value="$!gdlServiceCode" />
+        <table class="xuanze" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+    			<!--<tr style="display:none">
+                    <td class="w200 blue_a white">选择导游类型</td>
+                    <td align="center" class="price-de">
+    					#foreach($item in $!serviceDic)
+							#if($item.gdlServiceCode == $!currService)
+                                <div class="price-wxy">
+            						<input type="hidden" name="gdlServiceCode" value="$item.gdlServiceCode" />
+                                    <a class="liangjiaxiang_service" href="javascript:void(0)">$item.gdlServiceName</a>
+                        		</div>
+							#else
+								<div>
+            						<input type="hidden" name="gdlServiceCode" value="$item.gdlServiceCode" />
+                                    <a class="liangjiaxiang_service" href="javascript:void(0)">$item.gdlServiceName</a>
+                        		</div>
+							#end
+    					#end
+                    </td>
+                </tr>-->
+                <tr>
+                    <td class="w200 blue_a white">选择出游日期</td>
+                    <td>
+                        <span class="sjleft liangjiaxiang_left">
+    					<!--	<a href="javascript:void(0);" class="liangjiaxiang_left">-->
+    							<img src="$staticRoot/images/sanjiaoleft.jpg" />
+    					<!--	</a>-->
+    					</span>
+                        <p class="date-title">$year 年 $month 月</p>
+    					<span class="sjright liangjiaxiang_right">
+    					<!--	<a href="javascript:void(0);" class="liangjiaxiang_right">-->
+    							<img src="$staticRoot/images/sanjiaoright.jpg" />
+    					<!--	</a>-->
+    					</span>
+                    </td>
+                </tr>
+             </tbody>
+    	</table>
+	</form>
+	<table cellpadding="0" cellspacing="0" border="0">
+        <tbody id="price_body">
+            <tr>
+                <th>一</th>
+                <th>二</th>
+                <th>三</th>
+                <th>四</th>
+                <th>五</th>
+                <th class="red">六</th>
+                <th class="borderright red">日</th>
+            </tr>
+            <tr style="cursor:pointer">
+                #foreach($item in $priceList)
+					<!-- 停售 -->
+					#if($!item.gpeIsOpen == '01')
+						<td class="hui price_td">
+							<!-- 是否为今天 -->
+							#if($!item.isUpdate == '02')
+								<span class="shu">今</span>
+								
+							#else
+								<span class="shu">$!item.day</span>
+							#end
+									<span class="b_date_topright white">￥$!item.gpeGuestPrice/天</span><br>
+									<!--<span class="b_date_bottom white">满档</span>-->
+									<span class="b_date_bottom white">满档</span>
+                        </td>
+					<!-- 出售 -->
+					#elseif($!item.gpeIsOpen == '02')
+						<!--已过期-->
+						#if($!item.isPredetermine == '0')
+							<td class="hui price_td">
+    							<!-- 是否为今天 -->
+    							#if($!item.isUpdate == '02')
+    								<span class="shu">今</span>
+    								
+    							#else
+    								<span class="shu">$!item.day</span>
+    							#end
+    									<span class="b_date_topright white">￥$!item.gpeGuestPrice/天</span><br>
+    									<!--<span class="b_date_bottom white">满档</span>-->
+    									<span class="b_date_bottom white">已过期</span>
+                            </td>
+						#else
+    						<!-- 是否为今天 -->
+    						#if($!item.isUpdate == '02')
+    							<td class="yellow_bg price_td">
+                                    <span class="shu">今</span>
+    								<input type="hidden" id="gpeService" value="$!item.gpeService" />
+    								<input type="hidden" id="gpeServiceShow" value="$!item.gpeServiceShow" />
+    								<input type="hidden" id="gpeAppointType" value="$!item.gpeAppointType" />
+    								<input type="hidden" id="gpeAppointNum" value="$!item.gpeAppointNum" />
+    						#else
+    							<td class="price_td">
+                                    <span class="shu">$!item.day</span>
+    						#end
+        							<!-- 被选中的数据  01为未选中 02已选中-->
+        							<input type="hidden" name="isChecked" value="01" />
+        							<input type="hidden" name="gpeIsOpen" value="$!item.gpeIsOpen" />
+        							<input type="hidden" name="gpeService" value="$!item.gpeService" />
+        							<input type="hidden" name="gpeServiceShow" value="$!item.gpeServiceShow" />
+        							<input type="hidden" name="gpeAppointType" value="$!item.gpeAppointType" />
+        							<input type="hidden" name="gpeAppointNum" value="$!item.gpeAppointNum" />
+        							<span class="b_date_topright yellow">￥$!item.gpeGuestPrice/天</span><br>
+        							<span class="b_date_bottom blue">空档</span>
+                                </td>
+						#end 
+					<!-- 无数据 -->
+					#else
+						#if($!item.isUpdate == '02')
+							<td class="yellow_bg price_td">
+							<span class="shu">今</span>
+						#else
+							<td class="price_td">
+							<span class="shu">$!item.day</span>
+						#end
+						</td>
+					#end
+					<!-- 为周日时换行 -->
+					#if($!{velocityCount} == 7 || $!{velocityCount} == 14 || $!{velocityCount} == 21 || $!{velocityCount} == 28 || $!{velocityCount} == 35)
+                        </tr>
+                        <tr style="cursor:pointer">
+					#end
+				#end
+            </tr>
+    	</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		// 时间向后选择
+    	$(".liangjiaxiang_left").click(function() {
+		
+			var gdlId = $("#form1").find("input[name='gdlId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+			// 所有服务类型编码
+			//var isInternal = $("#form1").find("input[name='isInternal']").val();
+			// 当前所选服务类型
+			//var gdlServiceCode = $("#form1").find("input[name='gdlServiceCode']").val();
+    		$(".open_price").load("$appRoot/$cpyno/guide/daoyouxiang/skipDate?gdlId=" + gdlId + "&start=" + year + "&end=" + month + "&portal=01"+"&gdlServiceCode=$!gdlServiceCode");
+    	});
+		// 时间向前选择
+		$(".liangjiaxiang_right").click(function() {
+			var gdlId = $("#form1").find("input[name='gdlId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+			// 所有服务类型编码
+			//var isInternal = $("#form1").find("input[name='isInternal']").val();
+			// 当前所选服务类型
+			//var currService = $("#form1").find("input[name='currService']").val();
+			
+    		$(".open_price").load("$appRoot/$cpyno/guide/daoyouxiang/skipDate?gdlId=" + gdlId + "&start=" + year + "&end=" + month + "&portal=02"+"&gdlServiceCode=$!gdlServiceCode");
+    	});
+		// 服务类型选择
+		$(".liangjiaxiang_service").click(function() {
+			var gdlId = $("#form1").find("input[name='gdlId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+			// 所有服务类型编码
+			var isInternal = $("#form1").find("input[name='isInternal']").val();
+			// 当前所选服务类型
+			var currService = $(this).parent().find("input[name='gdlServiceCode']").val();
+			alert('$!gdlServiceCode');
+			$(".open_price").load("$appRoot/$cpyno/guide/daoyouxiang/skipDate?gdlId=" + gdlId + "&start=" + year + "&end=" + month + "&portal=03&isInternal="+isInternal+"&gdlServiceCode="+currService);
+		});
+		
+		// 点击事件
+		$("#price_body").find("td").click(function() {
+			// 是否出售
+			var gpeIsOpen = $(this).find("input[name='gpeIsOpen']").val();
+			if (gpeIsOpen != '02') {
+				return;
+			}
+			
+			// 是否为已选中
+			var isChecked = $(this).find("input[name='isChecked']").val();
+			
+			if (isChecked == '02') {
+				// 改为未选中
+				$(this).find("input[name='isChecked']").val("01");
+				// 去除颜色的class
+				$(this).removeClass("red_bg");
+			} else {
+				// 改为选中状态
+				$(this).find("input[name='isChecked']").val("02");
+				// 设置颜色的class
+				$(this).addClass("red_bg");
+			}
+			
+			
+			setDisplayCode($(this));
+		});
+		
+	});
+
+$(function(){
+    var gpeService = $("#gpeService").val();
+    var gpeServiceShow = $("#gpeServiceShow").val();
+    var gpeAppointType = $("#gpeAppointType").val();
+    var gpeAppointNum = $("#gpeAppointNum").val();
+	if(gpeService != null){
+		$("#fuwufei").html(gpeService);
+	}else{
+		$("#fuwufei").html("未选择日期");
+	}
+    if(gpeServiceShow != null){
+		$("#fuwushuoming").html(gpeServiceShow);
+	}else{
+		$("#fuwushuoming").html("未选择日期");
+	}
+    
+    if(gpeAppointType == '01'){
+    	$("#yytime").html("空档期随时预约");
+    }else if(gpeAppointType == '02'){
+		$("#yytime").html("提前"+gpeAppointNum+"天接受预约");
+	}else{
+		$("#yytime").html("未填写");
+	}
+});
+function setDisplayCode(obj){
+	var gpeService = $(obj).find("input[name='gpeService']").val();
+	var gpeServiceShow = $(obj).find("input[name='gpeServiceShow']").val();
+	var gpeAppointType = $(obj).find("input[name='gpeAppointType']").val();
+	var gpeAppointNum = $(obj).find("input[name='gpeAppointNum']").val();
+	
+	$("#fuwufei").html(gpeService);
+    $("#fuwushuoming").html(gpeServiceShow);
+    if(gpeAppointType == '01'){
+    	$("#yytime").html("空档期随时预约");
+    }else if(gpeAppointType == '02'){
+		$("#yytime").html("提前"+gpeAppointNum+"天接受预约");
+	}else{
+		$("#yytime").html("未填写");
+	}
+}
+</script>

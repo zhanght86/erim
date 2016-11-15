@@ -1,0 +1,506 @@
+.tour{
+	width: 1200px;
+	clear: both;
+	margin: 25px auto 0px auto;
+}
+.tour_now{
+	width: 1200px;
+	height: 28px;
+	list-style: 28px;
+	font-size: 14px;
+	color: #323232;
+}
+.tour_now span{
+	float: left;
+	font-size: 16px;
+	color: #323232;
+	height: 28px;
+	line-height: 28px;
+	margin-right: 2px;
+}
+.tour_now input{
+	float: left;
+	height: 28px;
+	line-height: 28px;
+	color: #323232;
+	font-size: 16px;
+	padding-left: 10px;
+	background: url("../images/tourtext.jpg") no-repeat;
+	background-position: center;
+	border:none;
+	outline: none;
+	opacity: 0.8;
+}
+.tour_now input:focus{
+	opacity: 1;
+}
+.tour_top{
+	width: 1200px;
+	border-top: 2px solid #faaf4b;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	margin-top: 10px;
+	float:left;
+}
+.trselect .hid{
+	display: none;
+}
+.trselect .show{
+	display: block;
+}
+.trselect{list-style: none;}
+.trselect li{
+	width: 1198px;
+	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+}
+#trselect1{
+	width: 1078px;
+	padding-left: 20px;
+	float: left;
+	line-height: 41px;
+}
+#trselect1 dt{
+	width: 100px;
+	text-align: right;
+	height: 41px;
+	line-height: 41px;
+	float: left;
+}
+#trselect1 dd{
+	float: left;
+	height: 41px;
+	line-height: 41px;
+	margin-right: 5px;
+}
+#trselect1 .trselectdiv{
+	width: 928px;
+	float: right;
+}
+#trselect2{
+	width: 1078px;
+	padding-left: 20px;
+	float: left;
+	line-height: 41px;
+}
+#trselect2 dt{
+	width: 100px;
+	text-align: right;
+	height: 41px;
+	line-height: 41px;
+	float: left;
+}
+#trselect2 dd{
+	float: left;
+	height: 41px;
+	line-height: 41px;
+	margin-right: 5px;
+}
+#trselect2 .trselect2_div{
+	width: 928px;
+	float: right;
+}
+
+
+
+
+
+
+
+
+
+.trselect li dl{
+	width: 1078px;
+	padding-left: 20px;
+
+	float: left;
+	line-height: 41px;
+}
+.trselect li dl dt{
+	width: 100px;
+	text-align: right;
+	height: 41px;
+	line-height: 41px;
+	float: left;
+}
+.trselect li dl dd{
+	float: left;
+	height: 41px;
+	line-height: 41px;
+	margin-right: 5px;
+}
+.trselect li dl dd a{
+	height: 21px;
+	line-height: 21px;
+	padding:1px 10px 0 10px;
+	float: left;
+	margin-top: 10px;
+}
+.trselect li dl dd a:hover{
+	background-color:#f99d23;
+	color: #fff;
+}
+.trselect li p{
+	float: left;
+	background: #faaf4b;
+	width: 50px;
+	height: 20px;
+	color: #fff;
+	margin-top: 10px;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 3px;
+}
+.trselect li p:hover{
+	background: #f99d23;
+	cursor: pointer;
+}
+
+
+.trselect .trselected a{color:#fff;background-color:#faaf4b}
+.trselect-result{
+	background: #fdfdfd;
+	border-bottom:none !important;
+}
+.trselect-result dt{font-weight:bold}
+.trselect-no{color:#999}
+.trselect .trselect-result a{padding-right:20px;background: url("../images/close.gif") right 9px no-repeat #faaf4b;}
+.trselect .trselect-result a:hover{background-position:right -15px}
+.tour_cttop{
+	width: 1200px;
+	height: 38px;
+	line-height: 38px;
+	clear: both;
+	margin-top: 10px;
+	border:1px solid #ccc;
+}
+.tour_cttop a{
+	float: left;
+	width: 100px;
+	height: 38px;
+	text-align: center;
+	line-height: 38px;
+	font-size: 14px;
+	font-weight: bold;
+	border-right: 1px solid #ccc;
+}
+.toura{
+	color: #FAAF4B;
+}
+.tour_cttp{
+	float: right;
+	height: 38px;
+	line-height: 38px;
+	margin-right: 60px;
+}
+.tour_cttp input{
+	float: left;
+	border:1px solid #ccc;
+	height: 15px;
+	margin-top: 12px;
+	width: 15px;
+}
+.tour_cttp span{
+	float: left;
+	height: 38px;
+	line-height: 38px;
+}
+.tour_center{
+	width: 1200px;
+	clear: both;
+}
+.tour_centerl{
+	float: left;
+	width: 930px;
+}
+.tour_ctlbox{
+	width: 910px;
+	height: 164px;
+	float: left;
+	border: 1px solid #ccc;
+	padding: 18px 0px 18px 18px;
+	margin-top: 10px;
+}
+.tour_ctlbox:hover{
+	border: 1px solid #f00;
+}
+.tour_ctlimg{
+	width: 230px;
+	height: 160px;
+	float: left;
+	margin-right: 20px;
+}
+.tour_ctlboxr{
+	float: left;
+	width: 660px;
+	height: 160px;
+}
+.tour_ctlbrl{
+	float: left;
+	width: 430px;
+	height: 160px;
+}
+.tourctlbx_name{
+	width: 430px;
+	height: 23px;
+	float: left;
+	margin-top: 7px;
+}
+.tourctl_nimg1{
+	float: left;
+	width: 18px;
+	height: 23px;
+}
+.tourctl_n{
+	float: left;
+	color: #2c96d4;
+	font-size: 16px;
+	height: 23px;
+	line-height: 23px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.tourctl_w{
+	float: left;
+	color: #eb6464;
+	font-size: 16px;
+	height: 23px;
+	line-height: 23px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.tourctl_n1{
+	float: left;
+	height: 23px;
+	line-height: 23px;
+	font-size: 14px;
+	color: #323232;
+}
+.tourctl_nimg2{
+	float: left;
+	width: 41px;
+	height: 15px;
+	margin-top: 4px;
+	margin-left: 10px;
+}
+.tourctlbx_box{
+	float: left;
+	width: 430px;
+}
+.tourctlbx_boxl{
+	float: left;
+	width: 70px;
+	text-align: left;
+	line-height: 24px;
+	font-size: 14px;
+	color: #323232;
+}
+.tourctlbx_boxr{
+	float: left;
+	width: 355px;
+	text-align: left;
+	padding-left: 5px;
+	line-height: 24px;
+	font-size: 14px;
+	color: #323232;
+}
+.tour_ctlbrr{
+	float: left;
+	width: 230px;
+	height: 160px;
+}
+.tour_ctlbrrbox{
+	float: left;
+	width: 100px;
+	height: 160px;
+	margin-left: 65px;
+}
+.tour_ctlbrrm{
+	margin-top: 25px;
+	float: left;
+	width: 100px;
+	height: 32px;
+	text-align: center;
+}
+.tour_ctlbrrm label{
+	float: left;
+	font-size: 26px;
+	height: 32px;
+	line-height: 32px;
+	color: #eb6464;
+}
+.tour_ctlbrrm span{
+	height: 20px;
+	margin-top: 12px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 12px;
+	color: #323232;
+	float: left;
+}
+.tour_ctlbrrt{
+	float: left;
+	width: 100px;
+	height: 20px;
+	font-size: 14px;
+	color: #323232;
+	text-align: center;
+	line-height: 20px;
+	margin-top: 8px;
+}
+.tour_ctlbrra{
+	float: left;
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 16px;
+	color: #fff;
+	background: #eb6464;
+	border-radius: 3px;
+	margin-top: 10px;
+}
+.tour_ctlbrra:hover{
+	background: #e52828;
+}
+
+.tour_centerr{
+	float: right;
+	width: 250px;
+	margin-top: 10px;
+}
+.tour_scenic{
+	width: 230px;
+	float: left;
+	border:1px solid #ccc;
+	padding: 10px 0px 20px 18px;
+}
+.tour_scenic h1{
+	float: left;
+	width: 230px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+}
+.tour_scbox{
+	float: left;
+	width: 230px;
+	height: 70px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+.tour_scbximg{
+	float: left;
+	width: 92px;
+	height: 70px;
+}
+.tour_scbxfont{
+	float: left;
+	width: 130px;
+	height: 70px;
+}
+.tour_scbxfont span{
+	float: left;
+	height: 15px;
+	text-align: left;
+	line-height: 15px;
+	font-size: 12px;
+	color: #323232;
+	margin-top: 4px;
+	padding-left: 2px;
+}
+.tour_scbxfont label{
+	float: left;
+	width: 130px;
+	height: 20px;
+	margin-top: 10px;
+}
+.tour_scbxfont label h2{
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	font-size: 16px;
+	color: #eb6464;
+	font-weight: bold;
+	margin-left: 20px;
+	margin-right: 2px;
+}
+.tour_scbxfont label p{
+	float:left;
+	font-size: 12px;
+	color: #323232;
+	height: 18px;
+	line-height: 18px;
+	margin-top: 2px;
+}
+.tour_ticket{
+	width: 230px;
+	float: left;
+	border:1px solid #ccc;
+	margin-top: 10px;
+	padding: 10px 0px 20px 18px;
+}
+.tour_ticket h1{
+	float: left;
+	width: 230px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+}
+.tour_ttbox{
+	float: left;
+	width: 230px;
+	height: 70px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+.tour_ttbximg{
+	float: left;
+	width: 95px;
+	height: 70px;margin-right:8px;
+}
+.tour_ttbxfont{
+	float: left;
+	width: 125px;
+	height: 70px;
+}
+.tour_ttbxfont span{
+	float: left;
+	height: 15px;
+	text-align: left;
+	line-height: 15px;
+	font-size: 12px;
+	color: #323232;
+	margin-top: 4px;
+	padding-left: 3px;
+}
+.tour_ttbxfont label{
+	float: left;
+	width: 130px;
+	height: 20px;
+	margin-top: 10px;
+}
+.tour_ttbxfont label h2{
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	font-size: 16px;
+	color: #eb6464;
+	font-weight: bold;
+	margin-right: 2px;
+}
+.tour_ttbxfont label p{
+	float:left;
+	font-size: 12px;
+	color: #323232;
+	height: 18px;
+	line-height: 18px;
+	margin-top: 2px;
+}
+/*闁告帒妫濋妴澶嬬閿濆洨鍨�*/
+.g_xpage{font-size:14px;line-height:24px;color:#323232; text-align:right;margin-top:15px;float:left;width:930px;}
+.g_xpage a{padding:3px 8px;margin-left:10px;border:1px solid #c9c9c9;vertical-align:top;}
+.g_xpage a.on{background-color:#faaf4b;color:#fff;}
+.g_xpage .input_txt{width:20px;height:23px;padding:0 2px;margin:0 5px;}

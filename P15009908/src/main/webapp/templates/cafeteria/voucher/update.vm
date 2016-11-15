@@ -1,0 +1,125 @@
+<script type="text/javascript">
+	//零售价和批发价比较
+	function comparison(field, rules, i, options){
+		// 零售价
+    	var cvpPriceRetail = field.val();
+    	// 批发价
+        var cvpPriceSale   = field.parents(".djj_ctl").find("input[name='cvpPriceSale']").val();
+    		
+    	if(parseInt(cvpPriceSale)*1.05>=parseInt(cvpPriceRetail)){
+        	return '零售价必须大于批发价的5%';
+        }
+	}
+	//批发价和同业价比较
+	function comparison1(field, rules, i, options){
+    	// 批发价
+    	var cvpPriceSale = field.val();
+    	// 同业价
+    	var cvpPriceTown = field.parents(".djj_ctl").find("input[name='cvpPriceTown']").val();
+    		
+		if(parseInt(cvpPriceTown)>parseInt(cvpPriceSale)){
+			return '批发价不能低于同业价';
+		}
+	}
+	//零售价和代金券面额的比较
+	function comparison2(field, rules, i, options){
+		// 代金券面额
+		var cvpPriceTotal = field.val();
+		// 零售价
+    	var cvpPriceRetail = field.parents(".djj_ctl").find("input[name='cvpPriceRetail']").val();
+		
+		if(parseInt(cvpPriceRetail)>parseInt(cvpPriceTotal)){
+			return '代金券面额不能低于零售价';
+		}
+	}
+</script>
+<div class="rdivv">
+	<div class="daijinjuan">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/htfood.png">
+			<span>代金券管理</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<form method="post" id="form1">
+			<input type="hidden" value="$!cafeteriaVoucher.id" name="id" />
+			<input type="hidden" name="cdlID" value="$!cafeteriaVoucher.cdlID" />
+			<div class="djj_ct">
+				#foreach($item in $listVoucherPrice)
+				<div class="djj_ctl">
+					<span style="width:91px;">代金券面额：</span>
+					<input type="hidden" value="$!item.id" name="cvpId"/>
+					<div class="djj_ctlr">
+						<div class="djj_ctlm">
+							<input type="text" name="cvpPriceTotal" class="validate[required,custom[integer],min[1],max[100000],funcCall[comparison2]]" value="$!item.cvpPriceTotal" />
+							<span>元</span>
+							<span style="color:red;margin-left:69px;margin-top:-27px;">*</span>
+						</div>
+						<span>同业价：</span>
+						<div class="djj_ctlm">
+							<input type="text" name="cvpPriceTown" class="validate[required,custom[integer],min[1],max[100000]]" value="$!item.cvpPriceTown" />
+							<span>元</span>
+							<span style="color:red;margin-left:69px;margin-top:-27px;">*</span>
+						</div>
+						<span>批发价：</span>
+						<div class="djj_ctlm">
+							<input type="text" name="cvpPriceSale" class="validate[required,custom[integer],min[1],maxSize[100000],funcCall[comparison1]]" value="$!item.cvpPriceSale" />
+							<span>元</span>
+							<span style="color:red;margin-left:69px;margin-top:-27px;">*</span>
+						</div>
+						<span>零售价：</span>
+						<div class="djj_ctlm">
+							<input type="text" name="cvpPriceRetail" class="validate[required,custom[integer],min[1],max[100000],funcCall[comparison]]"  value="$!item.cvpPriceRetail" />
+							<span>元</span>
+							<span style="color:red;margin-left:69px;margin-top:-27px;">*</span>
+							#if($!{velocityCount} == $!{listVoucherPrice.size()})
+								<a herf="javaScript:void(0)" class="djj_add">添加代金券</a>
+							#else
+								<a herf="javaScript:void(0)" style="background-color:#ccc" class="djj_add">删除代金券</a>
+							#end
+                     	</div>
+				    </div>
+				</div>
+				#end
+			</div>
+			<div class="djj_ctl">
+				<span>有效期：</span>
+				<div class="djj_ctlrq">
+					<input type="text" name="djqStartDate" id="djqStartDate" onclick="WdatePicker({minDate:'%y-%M-%d'})" value="$!cafeteriaVoucher.djqStartDate"  class="validate[required]"><span>至</span>
+					<input type="text" name ="djqEndDate" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'djqStartDate\',{m:1});}'})" value="$!cafeteriaVoucher.djqEndDate" class="validate[required]"><span style="color:red;">*</span>
+				</div>
+			</div>
+			<div class="carinfo_ctbl">
+				<span>包间使用：</span>
+				<div class="newfood_web">
+					#foreach($item in $voucher.keySet())
+						<label class="checkbox inline"> 
+							<input class="input-xlarge" type="radio" #if($erim.contains($!cafeteriaVoucher.djqVoucher,$item)) checked #end  #if ($item == '01')  checked #end name="djqVoucher" value="$item">$voucher.get($item)
+                       	</label>
+					#end
+					<span style="color:red;" >*</span>
+		   		</div>
+			</div>
+			<div class="djj_ctll">
+				<span>购买须知：</span>
+				<div class="djj_ctlrql">
+					<textarea name="djqBuyShow" class="validate[required,maxSize[1000]] " >$!cafeteriaVoucher.djqBuyShow</textarea><span style="color:red;">*</span>
+				</div>
+			</div>
+			<div class="djj_ctll">
+				<span>使用说明：</span>
+				<div class="djj_ctlrql">
+					<textarea name="djqUseShow" class="validate[required,maxSize[1000]] " >$!cafeteriaVoucher.djqUseShow</textarea><span style="color:red;">*</span>
+				</div>
+			</div>
+			<div class="carinfo_ctbl">
+				<span></span>
+				<div class="carinfo_ctblrbtn" style="width:360px;">
+					<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/cafeteria/voucher/update','$appRoot/cafeteria/detail/list');">提交</button>
+                 	<button type="reset" class="carinfo_qu">重置</button>
+					<button type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

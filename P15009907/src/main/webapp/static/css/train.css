@@ -1,0 +1,144 @@
+.font_p{
+	line-height:30px;
+	font-size:12px;
+	color:#323232;
+	float:left;
+}
+.div_rbox{
+	float: left;
+	width: 350px;
+	margin-top: -15px;
+}
+.div_right{
+	float: left;
+	margin-top: 15px;
+}
+.a_add{
+	float: left;
+	width: 15px;
+	height: 15px;
+	background: #faaf4d;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	line-height: 15px;
+	border-radius: 15px;
+	margin: 7px 10px 0 10px;
+}
+.p9696{
+	color: #969696;
+}
+.bg_ccc{
+		background: #CCCCCC;
+}
+.city_big{
+	float: left;
+	width: 370px;
+}
+.nation_box{
+	float: left;
+	background: #fff;
+	margin-left: -10px;
+	padding-left: 10px;
+	padding-bottom: 15px;
+	width: 370px;
+}
+.inter_box{
+	float: left;
+	background: #fff;
+	margin-left: -10px;
+	padding-left: 10px;
+	padding-bottom: 15px;
+	width: 370px;
+}
+.mt15{
+	margin-top: 15px;
+}
+/*
+.mt22{
+	margin-top: 22px;
+}*/
+.city_bigbox{
+	float: left;
+	width: 350px;
+}
+.city_box{
+	float: right;
+	margin-right: 6px;
+}
+.nation_boxa{
+	float: right;
+	margin-right: 6px;
+}
+.yuding_lab_a{
+	height:30px;
+	line-height:30px;
+	font-size:12px;
+	color:#323232;
+	float:left;
+}
+.nation_smallbox{
+	float: left;
+	width: 368px;
+}
+.nation_item{
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #ccc;
+	padding: 0 15px;
+	color: #969696;
+	font-size: 12px;
+	margin-right: 15px;
+	margin-top: 15px;
+}
+.wxy_train_box{
+	float: left;
+	width: 100%;
+}
+.wxy_train_boxl{
+	height: 30px;
+	line-height: 30px;
+	margin-top: 15px;
+	width: 90%;
+	float: left;
+	margin-left: 90px;
+}
+.wxy_train_boxl span{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+	color: #393838;
+	margin: 0 11px;
+	float: left;
+}
+.w100{
+	width: 100px;
+}
+.wxy_train_boxl input{
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	font-size: 12px;
+	color: #393838;
+	margin: 0 10px;
+	float: left;
+	border: 1px solid #ccc;
+}
+.wxy_train_boxl a{
+	float: left;
+	height: 20px;
+	width: 20px;
+	margin-top: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	font-size: 20px;
+	color: #fff;
+	background:#d09e64;
+	line-height: 20px;
+	text-align: center;
+}
+.ml10{
+	margin-left: 10px;
+}

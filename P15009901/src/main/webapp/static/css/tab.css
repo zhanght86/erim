@@ -1,0 +1,235 @@
+@charset "utf-8";
+/* Download : http://www.jb51.net *?
+/* Reset css*/
+*{margin: 0;padding: 0}
+body,h1,h2,h3,h4,h5,h6,div,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+body,button,input,select,textarea{font: 12px/1.5 yahei;}
+body{_overflow:auto;_height:100%;margin:0 auto;}
+html{_overflow:hidden}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+address,cite,dfn,em,var{font-style:normal}
+code,kbd,pre,samp{font-family:courier new,courier,monospace}
+small{font-size:12px}
+ul,ol,li,dl,dt,dd{list-style:none}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+legend{color:#000}
+fieldset,img{border:0}
+button,input,select,textarea{font:12px/1.5 tahoma,arial,sans-serif; vertical-align:middle;cursor:pointer}
+input{
+    padding-left: 5px;
+}
+table{border-collapse:collapse;border-spacing:0}
+.clear{display:block;float:none;clear:both;overflow:hidden;visibility:hidden;width:0;height:0;background:none;border:0;font-size:0}
+img{
+    border: none    ;
+}
+/*a*/
+a{ text-decoration:none; color:#555;}
+
+/*title
+h1 { font-size:50px;}
+h2 { font-size:40px;}
+h3 { font-size:30px;}
+h4 { font-size:14px;}
+h5 { font-size:12px;}
+h6 { font-size:9px;}*/
+
+
+#tab{
+    float: left;
+    width: 720px;
+    height: 314px;
+    border: 1px solid #088cb3;
+}
+/*tab左侧*/
+#tab-left{
+    width: 70px;
+    margin-right: 10px;
+    height: 315px;
+    float: left;
+}
+#tab-left ul li{
+    width: 70px;
+    height: 44px;
+    border-bottom: 1px solid #fff;
+    background: #088cb3;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+}
+#tab-left ul li.last{
+    border-bottom: 1px solid #088cb3;
+}
+.tab-left-hover{
+    background: #fff !important;
+    color: #323232 !important;
+}
+/*tab右侧*/
+#tab-right{
+    float:left;
+    width: 640px;
+    height: 315px;
+}
+/*搜索部分也就是右侧的头部*/
+.tab-right-div .tab-top{
+    height: 44px;
+    width: 640px;
+    border-bottom: 1px solid #088cb3;
+}
+.tab-top .tab-top-item{
+    height: 42px;
+    padding: 0 16px;
+    line-height: 42px;
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+    cursor: pointer;
+}
+.tab-top .subline{
+    border-bottom: 2px solid #088cb3;
+}
+/*右侧的主题部分*/
+.tab-main{
+    width: 640px;
+    height: 315px;
+}
+.tab-main .show{
+    display: block;
+}
+.tab-main-div{
+    display: none;
+}
+.tab-label{
+    width: 296px;
+    float: left;
+}
+.tab-span{
+    height: 30px;
+    line-height: 30px;
+    width: 84px;
+    text-align: right;
+    margin:15px 10px 0 0;
+    float: left;
+}
+.tab-input{
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    color: #323232;
+    width: 193px;
+    border: 1px solid #ccc;
+    float: left;
+    margin-top: 15px;
+}
+
+/*立即搜索按钮*/
+.tab-submit{
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    background: #ff5521;
+    margin: 30px 0 0 468px;
+    float: left;
+    border: none;
+    border-radius: 3px;
+}
+.tab-lab{
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+    margin: 15px 20px 0 0;
+}
+.tab-radio{
+    height: 15px;
+    width: 15px;
+    margin-top: 7px;
+    float: left;
+    margin-right: 5px;
+}
+
+/*租车里面*/
+.tab-main-body{
+    float: left;
+    width: 640px;
+}
+.tab-main-body .show{
+    display: block;
+}
+.tab-body-div{
+    display: none;
+}
+.tab-select{
+    width: 200px;
+    float: left;
+    height: 30px;
+    border: 1px solid #ccc;
+    margin-top: 15px;
+	padding:6px 0;
+    _line-height:26px;
+}
+.pd-top15{
+    padding-top: 15px;
+}
+.tab-top-div{
+    float: left;
+    height: 44px;
+    width: 530px;
+}
+.tickets{
+    color: red;
+    font-size: 12px;
+    height: 22px;
+    float: left;
+    line-height: 22px;
+}
+.tickets img{
+    float: left;
+    width: 12px;
+    height: 14px;
+    margin:4px 5px 0 10px;
+}
+.tab-tips{
+    height: 22px;
+    line-height: 22px;
+    float: left;
+    color: #969696;
+    padding-left: 10px;
+}
+.tab-hot{
+    float: left;
+    width: 640px;
+    margin-top: 10px;
+}
+.tab-hot-a{
+    margin-top: 5px;
+    float: left;
+    color: #969696;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+.tab-hot-a:hover{
+    background: #00AEC7;
+    color: #fff;
+    border-radius: 3px;
+}
+.mt4{
+    margin-top: 4px;
+}
+.list_right{ width:476px; height:315px; float:left;}
+.tab-textarea{
+	width: 200px;
+    float: left;
+    height: 90px;
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    _line-height:26px;
+    text-align:left;
+    resize: none;
+}

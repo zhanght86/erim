@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="planeticketmiddle">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+		</where>
+	</sql>
+	
+	<sql id="sql_column">
+		id 					AS id,
+		pdl_id 				AS pdlId,
+		pdrn_middle_time 	AS pdrnMiddleTime,
+		pdrn_middle_ntype 	AS pdrnMiddleNtype,
+		pdrn_middle_city 	AS pdrnMiddleCity,
+		pdrn_middle_town 	AS pdrnMiddleTown,
+		pdrn_middle_endtime AS pdrnMiddleEndtime,
+		pdrn_middle_stay 	AS pdrnMiddleStay,
+		pdrn_middle_state   AS pdrnMiddleState,
+		pdrn_province       AS pdrnProvince,
+		pdrn_foreign        AS pdrnForeign,
+		pdrn_foreign_city   AS pdrnForeignCity,
+		pdrn_external       AS pdrnExternal
+		
+	</sql>
+	
+	
+	<!-- 根据id查询实体 -->
+	<select id="selectBeanByPriId" resultType="planeticketDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_middle
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 根据pldId查询实体集合 -->
+	<select id="selectBeanByPldId" resultType="planeticketMiddleBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_middle
+		WHERE
+			pdl_id = #{id}
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert">
+		INSERT INTO
+			planeticket_middle
+			(
+				pdl_id,
+				pdrn_middle_time,
+				pdrn_middle_ntype,
+				pdrn_middle_city,
+				pdrn_middle_town,
+				pdrn_middle_endtime,
+				pdrn_middle_stay,
+				pdrn_middle_state,
+				pdrn_province,
+				pdrn_foreign,
+				pdrn_foreign_city,
+				pdrn_external
+			)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(
+				#{item.pdlId},
+				#{item.pdrnMiddleTime},
+				#{item.pdrnMiddleNtype},
+				#{item.pdrnMiddleCity},
+				#{item.pdrnMiddleTown},
+				#{item.pdrnMiddleEndtime},
+				#{item.pdrnMiddleStay},
+				#{item.pdrnMiddleState},
+				#{item.pdrnProvince},
+				#{item.pdrnForeign},
+				#{item.pdrnForeignCity},
+				#{item.pdrnExternal}
+			)
+		</foreach>
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			planeticket_middle
+		SET
+			pdl_id 				= #{pdlId},
+			pdrn_middle_time 	= #{pdrnMiddleTime},
+			pdrn_middle_ntype 	= #{pdrnMiddleNtype},
+			pdrn_middle_city 	= #{pdrnMiddleCity},
+			pdrn_middle_town 	= #{pdrnMiddleTown},
+			pdrn_middle_endtime = #{pdrnMiddleEndtime},
+			pdrn_middle_stay 	= #{pdrnMiddleStay},
+			pdrn_middle_state   = #{pdrnMiddleState},
+			pdrn_province       = #{pdrnProvince},
+			pdrn_foreign        = #{pdrnForeign},
+			pdrn_foreign_city   = #{pdrnForeignCity},
+			pdrn_external       = #{pdrnExternal}
+		WHERE
+			id = #{id}
+	</update>
+    <!-- 更新产品编号 -->
+	<update id="updatecode">
+		UPDATE
+			planeticket_middle
+		SET
+			ptd_no  =  #{ptdNo}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			planeticket_middle
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>

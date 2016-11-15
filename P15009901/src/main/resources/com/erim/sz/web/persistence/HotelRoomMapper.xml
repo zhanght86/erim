@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelroom">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="hdlId != null  and hdlId != ''">	and 	hotel_room.hdl_id 	 =  #{hdlId} </if>
+		</where>
+	</sql>
+	<sql id="sql_column">
+		a.id ,
+		a.hdl_id           	AS hdlId,
+		a.hhe_name         	AS hheName,
+		a.hhe_presonnum    	AS hhePresonnum,
+		a.hhe_area         	AS hheArea,
+		a.hhe_layerstart      AS hheLayerstart,
+		a.hhe_layerend		AS hheLayerend,
+		a.hhe_homenum      	AS hheHomenum,
+		a.hhe_is_addbed    	AS hheIsAddbed,
+		a.hhe_yes				AS hheYes,
+		a.hhe_device       	AS hheDevice,
+		a.cpy_id          	AS cpyId,
+		a.hhe_is_del_status 	AS hheIsDelStatus,
+		a.hhe_createtime   	AS hheCreatetime,
+		a.hhe_createuser   	AS hheCreateuser,
+		a.hdl_bedtype			AS hdlBedtype,
+		a.hhe_img1   			AS hheImg1,
+		a.hhe_img2  			AS hheImg2,
+		a.hhe_img3   			AS hheImg3,
+		a.hhe_img4   			AS hheImg4
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="hotelRoomBean">
+				select <include refid="sql_column" />,b.hnp_retail_price as hnpRetailPrice,b.hnp_date 
+				from 
+					hotel_room a
+				left join 
+				(
+					select c1.*
+					from hotel_room_price c1 
+					join 
+					(
+						select c2.hhe_id,max(c2.hrp_createtime) as hrp_createtime,c2.hnp_date  
+						from hotel_room_price c2 
+						group by c2.hnp_date ,c2.hhe_id
+					) c2
+					on c1.hhe_id = c2.hhe_id
+					and c1.hrp_createtime = c2.hrp_createtime
+					and c1.hnp_date = c2.hnp_date
+					where c1.hnp_date = #{hnpDate}
+					GROUP BY  c1.hhe_id
+		
+				) b
+				on a.id = b.hhe_id
+				where 1=1
+				<if test="hdlId != null  and hdlId != ''">	and 	a.hdl_id 	 =  #{hdlId} </if>
+				group by a.id 
+	</select>
+	
+</mapper>

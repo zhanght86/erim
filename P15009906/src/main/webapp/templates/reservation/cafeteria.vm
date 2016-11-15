@@ -1,0 +1,56 @@
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">联系人信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">姓名：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left w80">手机号码：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+	</div>
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">订单信息</p>
+			<div class="input_block clearfix">
+				<div class="label_left w80">选择套餐：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w200">
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">购买数量：</div>
+				<div class="input_right">
+					<span class="tishi_box w80"><input type="text" class="w60">份</span>
+				</div>
+			</div>
+	</div>
+	<div class="g_block_1 mb20 mr20">
+        <p class="g_tit_1 mb10">备注信息</p>
+        <div class="input_block clearfix">
+            <div class="input_block clearfix">
+                <div class="input_right input_right_wauto">
+                    <div class="label_left w80">预计于：</div>
+                    <input class="w160 hui_zi" value="2015年12月12日，15:00">&nbsp;左右到店
+                </div>
+            </div>
+            <div class="input_block clearfix">
+                <div class="label_left w80">备注：</div>
+                <div class="input_right">
+                    <textarea class="w200" style="height:50px;"></textarea>
+                </div>
+			</div>
+        </div>
+    </div>
+    <div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">发票信息</p>
+		<div class="input_block clearfix">
+			<div class="input_right input_right_wauto">
+				发票有商家提供，请消费时向商家索取
+			</div>
+		</div>
+	</div>
+	<div class="g_right w515"><a class="hui2_a" href="javascript:void(0);">取消</a><a class="red_a ml25" href="javascript:void(0);">提交订单</a></div>

@@ -1,0 +1,119 @@
+<!-- 门票-->
+<div class="tab-right-div">
+    <div class="tab-top">
+        <span class="tab-top-item subline">国内门票</span>
+		<span class="tab-top-item">国际·港澳台门票</span>
+    </div>
+    <div class="tab-main">
+        <div class="tab-main-div show pd-top15">
+			<form id="form1" method="post" action="$appRoot/$cpyno/menpiao.html">
+				 <input type="hidden" name="tdlWithinOrOuter" value="01" />
+                <label class="tab-label">
+                    <span class="tab-span">选择城市:</span>
+                    <input class="tab-input home-city" type="text" name="tdlCityVo">
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span">关键词:</span>
+                    <input class="tab-input" type="text" name="tdlName">
+                </label>
+    			<label class="tab-label">
+                     <span class="tab-span">参观日期:</span>
+                     <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tplDate">
+            	</label>
+    			<!--<a href="$appRoot/$cpyno/menpiao.html" target="_blank">立即搜索</a>-->
+                <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+			</form>
+            <div class="tab-hot">
+				<form id="form_tdlCity" method="post" action="$appRoot/$cpyno/menpiao.html">
+                    <span class="tab-span mt4"><strong>热门城市</strong></span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','北京');$('#form_tdlCity').submit();">北京</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','张家界');$('#form_tdlCity').submit();">张家界</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','桂林');$('#form_tdlCity').submit();">桂林</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','丽江');$('#form_tdlCity').submit();">丽江</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','昆明');$('#form_tdlCity').submit();">昆明</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','大连');$('#form_tdlCity').submit();">大连</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','西安');$('#form_tdlCity').submit();">西安</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','扬州');$('#form_tdlCity').submit();">扬州</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','杭州');$('#form_tdlCity').submit();">杭州</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','广州');$('#form_tdlCity').submit();">广州</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','上海');$('#form_tdlCity').submit();">上海</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','成都');$('#form_tdlCity').submit();">成都</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityVo').attr('value','武汉');$('#form_tdlCity').submit();">武汉</span>
+                    <br clear="left">
+					<input type="hidden" name="tdlCityVo" value="" id="tdlCityVo" />
+				</form>
+				<form id="form_tdlName" method="post" action="$appRoot/$cpyno/menpiao.html">
+					<span class="tab-span mt4"><strong>热门景点</strong></span>
+                    <span class="tab-hot-a" onclick="$('#tdlName').attr('value','张家界国家森林公园');$('#form_tdlName').submit();">张家界国家森林公园</span>
+                    <span class="tab-hot-a" onclick="$('#tdlName').attr('value','凤凰古城长城');$('#form_tdlName').submit();">凤凰古城长城</span>
+                    <span class="tab-hot-a" onclick="$('#tdlName').attr('value','湘西');$('#form_tdlName').submit();">魅力湘西</span>
+                    <span class="tab-hot-a" onclick="$('#tdlName').attr('value','故宫');$('#form_tdlName').submit();">北京故宫</span>
+                    <span class="tab-hot-a" onclick="$('#tdlName').attr('value','丽江古城');$('#form_tdlName').submit();">丽江古城</span>
+                    <span class="tab-hot-a" onclick="$('#tdlName').attr('value','九寨沟');$('#form_tdlName').submit();">九寨沟</span>
+                    <span class="tab-hot-a" onclick="$('#tdlName').attr('value','西安兵马俑');$('#form_tdlName').submit();">西安兵马俑</span>
+                	<br clear="left">
+					<input type="hidden" name="tdlName" value="" id="tdlName" />
+				</form>
+			<!--	<form id="form_tdlAttractions" method="post" action="$appRoot/$cpyno/menpiao.html">
+                    <span class="tab-span mt4"><strong>经典主题</strong></span>
+					#foreach($item in $attractions.keySet())
+						#if($velocityCount<7)
+                        <span class="tab-hot-a" onclick="$('#tdlAttractions').attr('value','$item');$('#form_tdlAttractions').submit();">$attractions.get($item)</span>
+						#end 
+					#end
+                    <span class="tab-hot-a" onclick="$('#tdlAttractions').attr('value','');$('#form_tdlAttractions').submit();">更多</span>
+					<input type="hidden" name="tdlAttractions" value="" id="tdlAttractions" />
+				</form>-->
+           </div>
+			
+        </div>
+		<div class="tab-main-div pd-top15">
+			<form id="form_menpiao_guoji" method="post" action="$appRoot/$cpyno/menpiao.html">
+				<input type="hidden" name="tdlWithinOrOuter" value="02" />
+                <label class="tab-label">
+                    <span class="tab-span">选择城市:</span>
+                    <input class="tab-input foreign-city" type="text" name="tdlCityone">
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span">关键词:</span>
+                    <input class="tab-input" type="text" name="tdlName">
+                </label>
+    			<label class="tab-label">
+                     <span class="tab-span">参观日期:</span>
+                     <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tplDate">
+            	</label>
+    			<!--<a href="$appRoot/$cpyno/menpiao.html" target="_blank">立即搜索</a>-->
+                <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+			</form>
+            <div class="tab-hot">
+				<form id="form_menpiao_tdlCityone_guoji" method="post" action="$appRoot/$cpyno/menpiao.html">
+                    <span class="tab-span mt4"><strong>热门城市</strong></span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','香港');$('#form_menpiao_tdlCityone_guoji').submit();">香港</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','澳门');$('#form_menpiao_tdlCityone_guoji').submit();">澳门</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','台湾');$('#form_menpiao_tdlCityone_guoji').submit();">台湾</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','首尔');$('#form_menpiao_tdlCityone_guoji').submit();">首尔</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','曼谷');$('#form_menpiao_tdlCityone_guoji').submit();">曼谷</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','芭提雅');$('#form_menpiao_tdlCityone_guoji').submit();">芭提雅</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','新加坡');$('#form_menpiao_tdlCityone_guoji').submit();">新加坡</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','巴厘岛');$('#form_menpiao_tdlCityone_guoji').submit();">巴厘岛</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','马尔代夫');$('#form_menpiao_tdlCityone_guoji').submit();">马尔代夫</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','夏威夷');$('#form_menpiao_tdlCityone_guoji').submit();">夏威夷</span>
+                    <span class="tab-hot-a" onclick="$('#tdlCityone').attr('value','澳大利亚');$('#form_menpiao_tdlCityone_guoji').submit();">澳大利亚</span>
+                    <br clear="left">
+					<input type="hidden" name="tdlCityone" value="" id="tdlCityone" />
+				</form>
+				<form id="form_tdlAttractions2" method="post" action="$appRoot/$cpyno/menpiao.html">
+                    <span class="tab-span mt4"><strong>经典主题</strong></span>
+					#foreach($item in $attractions.keySet())
+						#if($velocityCount<7)
+                        <span class="tab-hot-a" onclick="$('#tdlAttractions_guoji').attr('value','$item');$('#form_tdlAttractions2').submit();">$attractions.get($item)</span>
+						#end 
+					#end 
+                    <span class="tab-hot-a" onclick="$('#tdlAttractions_guoji').attr('value','');$('#form_tdlAttractions2').submit();">更多</span>
+					<input type="hidden" name="tdlAttractions" value="" id="tdlAttractions_guoji" />
+				</form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /门票-->

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="malluser">
+	
+	<!-- 根据用户名和密码查询 -->
+	<select id="selectByLogin" resultType="mallUsersBean">
+		SELECT
+			id 				AS id,
+			mlu_loginname   AS mluLoginname,
+			mlu_password    AS mluPassword,
+			mlu_email 		AS mluEmail,
+			mlu_qq 			AS mluQq,
+			mlu_create_ip   AS mluCreateIp,
+			mlu_create_time AS mluCreateTime,
+			mlu_is_live 	AS mluIsLive,
+			mlu_level 		AS mluLevel
+		FROM
+			mall_users
+		<where>
+			1=1
+			<if test="mluLoginname != null and mluLoginname !=''"> and  mlu_loginname =  #{mluLoginname} </if>
+			<if test="mluPassword != null and mluPassword !=''">   and  mlu_password =  #{mluPassword}   </if>
+		</where>
+	</select>
+	
+	<!-- 注册帐号密码 -->
+	<insert id="insert">
+		INSERT INTO
+			mall_users
+		(
+			mlu_loginname,
+			mlu_password,
+			mlu_email,
+			mlu_qq,
+			mlu_create_ip,
+			mlu_create_time,
+			mlu_is_live,
+			mlu_level
+		)
+		VALUES
+		(
+			#{mluLoginname},
+			#{mluPassword},
+			#{mluEmail},
+			#{mluQq},
+			#{mluCreateIp},
+			#{mluCreateTime},
+			#{mluIsLive},
+			#{mluLevel}
+		)
+	</insert>
+	
+	<!-- 修改用户信息 -->
+	<update id="update">
+		UPDATE
+			mall_users
+		SET
+			mlu_loginname = #{mluLoginname},
+			mlu_email     = #{mluEmail},
+			mlu_qq        = #{mluQq},
+			mlu_is_live   = #{mluIsLive},
+			mlu_level     = #{mluLevel}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

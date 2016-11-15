@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/zh.css">
+##<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+
+<div class="zh_block">
+	<ul class="list_main">
+	
+		<li>
+			<dl class="clearfix">
+				<dd>余额</dd>
+				<dt><span>$!data.balance</em>元</span><span><a href="javascript:void(0);" id="a" >申请提现</a></span></dt>
+            
+			</dl>
+		</li>
+	</ul>
+</div>
+<div class="win_box_bg"></div>
+
+</div>
+<script type="text/javascript">
+	$('#a').click( function(){
+		alert('申请成功');
+		$.ajax({url:"$appRoot/data/return/doCash"});
+	
+	} );
+	
+
+
+
+</script>
+

@@ -1,0 +1,87 @@
+<div class="addhotel">
+    <div class="addhltop">
+		<span>查看签证</span>
+	</div>
+       <div class="cb"></div>
+	   <div class="g_line"></div>
+        <form  id="form1"  method="post">
+		<div class="addhotelc">
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">签证名称</label>
+    			<div class="addhotelcboxr">
+    				$!managementDetail.mdlName
+    			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">签证地区</label>
+			<div class="addhotelcboxr">
+				$!managementDetail.mdlAddress
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">办理时长</label>
+			<div class="addhotelcboxr">
+               $!managementDetail.mdlLong天
+			</div>
+		</div>
+		
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">同城同业价</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlPriceSame
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">组团社价格</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlPriceTeam
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">建议销售价</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlPriceSale
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">签证类型</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlNtype
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">签送地区</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlTown
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">最短停留</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlStay天
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">有效期</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlValidity天
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">入境次数</label>
+			<div class="addhotelcboxr">
+                $!managementDetail.mdlNumber
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">签证注意事项</label>
+			<div class="addhotelcboxr">
+               $!managementDetail.mdlMessage
+        	</div>
+		</div>
+		<div class="addsubmit">
+    		<a href="javascript:index.load(page.url);" class="back"></a>
+        </div>
+	</div>
+ </form>
+

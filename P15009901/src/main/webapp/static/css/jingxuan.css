@@ -1,0 +1,283 @@
+* {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+}
+body {
+    font-size: 12px;
+    font-family: '寰蒋闆呴粦';
+    color: #323232;
+}
+li {
+    list-style: none;
+}
+img {
+    border: 0;
+}
+a {
+    text-decoration: none;
+    color: #323232;
+
+}
+ul,
+dt {
+    list-style: url(none) none;
+}
+ul,li,dl,dt,dd,h1,h2,h3,h4 {
+    margin: 0;
+    padding: 0;
+}
+.flt {
+    float: left;
+}
+table {
+    border-collapse: collapse;
+}
+html {
+    overflow: -moz-scrollbars-vertical;
+}
+
+/*jbodyer*/
+div.jbodyer{
+	margin-top:10px;
+    width: 100%;
+    float: left;
+}
+div.jbodyer_cen{
+    width: 1200px;
+    margin: 0 auto;
+}
+div.jbodyer_con{
+    width: 100%;
+}
+
+/*jbodyer_top*/
+ul.jbodyer_top{
+    height: 300px;
+    margin-top: 20px;
+}
+ul.jbodyer_top li{
+    float: left;
+    height: 300px;
+	background: url(../images/banner_bg.png) no-repeat;
+}
+ul.jbodyer_top li img{
+	width:390px;
+	height:208px;
+	display:block;
+	margin-left:3px;
+	}
+.jbodyer_lft{
+	position:relative;
+	left:-50px;
+	top:-170px;
+	}
+.jbodyer_rgt{
+	position:absolute;
+	left:1360px;
+	top:150px;
+	}
+.jbodyer_li1_p{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+	text-align:left;
+	padding-left:15px;
+	padding-right:15px;
+}
+.jbodyer_lib{
+    height: 30px;
+	padding-left:25px;
+    line-height: 30px;
+}
+
+
+.jbodyer_li1>a>img{
+	width:370px;
+	height:208px;
+	}
+
+.jbodyer_lib span{
+    color: #eb6464;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.li1{
+     float: left;
+     width: 60px;
+     margin: 0 5px;
+}
+.jbodyer_lib_men{
+    float: right;
+    height: 30px;
+    margin-right:10px;
+}
+
+div.jbody_center{
+    width: 100%;
+    float: left;
+	
+}
+div.jbodcen_cen{
+    width: 1200px;
+    margin: 0 auto;
+}
+div.jbodcen_con{
+    width: 100%;
+    float: left;
+}
+
+ul.jbodcen_top{
+    height: 38px;
+    width: 1198px;
+    border: 1px solid #c8c8c8;
+	margin-bottom:20px;
+}
+
+ul.jbodcen_top li{
+    float: left;
+    text-align: center;
+    line-height: 38px;
+    font-size: 16px;
+}
+ul.jbodcen_top li{
+	height:38px;
+	line-height:38px;
+    display: block;
+    cursor: pointer;
+}
+.jbodcentop_li1{
+    width: 199px;
+    background: url(../images/nav_fgf.jpg) no-repeat;
+    background-position: right;
+}
+.jbodcentop_li2{
+    width: 269px;
+    background: url(../images/nav_fgf.jpg) no-repeat;
+    background-position: right;
+}
+
+.jbodcentop_li3{
+    width: 289px;
+    background: url(../images/nav_fgf.jpg) no-repeat;
+    background-position: right;
+}
+.jbodcentop_li4{
+    width: 242px;
+}
+
+/*jbodcen_bot*/
+ul.jbodcen_bot{
+    margin-top: 6px;
+}
+ul.jbodcen_bot li{
+    float: left;
+    width: 382px;
+    height:278px;
+    background: #f5f5f5;
+    margin-bottom: 28px;
+}
+ul.jbodcen_bot li p{
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+   
+}
+.jbodcen_span{
+    font-size: 14px;
+    font-weight: bold;
+}
+p.jbodcen_pbot{
+    text-align: right;
+    padding-right: 5px;
+}
+.jbodcen_cor{
+    color: #eb6464;
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+.jbodcen_cor1{
+    color: #afafaf;
+    text-decoration:line-through;
+}
+
+.jbodcen_juli{
+margin-right: 25px;
+}
+.jbodcen_bot div{
+	border:1px solid #fff;
+	
+	}
+.jbodcen_bot div:hover{
+	border:1px solid #f00;
+	
+	}
+/*banner_js*/
+.activej{
+	background:#eb6464;
+	color:#fff;
+	
+	}
+
+#wrapper {
+width: 1200px;
+height:310px;
+}
+
+#carousel {
+width: 1200px;
+}
+#carousel ul {
+list-style: none;
+display: block;
+margin: 0;
+padding: 0;
+}
+#carousel li {
+font-size: 40px;
+color: #999;
+text-align: center;
+display: block;
+width: 397px;
+height:299px;
+margin:0 1.5px;
+padding: 0;
+float: left;
+position: relative;
+}
+#carousel li>img{
+	width:390px;
+	}
+.clearfix {
+float: none;
+clear: both;
+}
+#carousel .prev, #carousel .next {
+text-indent: -999px;
+display: block;
+overflow: hidden;
+width: 15px;
+height: 21px;
+margin-left: 10px;
+}
+#carousel .prev {
+width:50px;
+height:70px;
+background:url(../images/rgt.jpg) no-repeat;
+position: relative;
+top:-180px;
+left:99.9%;
+}
+
+#carousel .next {
+width:50px;
+height:100px;
+background:url(../images/lft.jpg) no-repeat; 
+position: relative; 
+left:-50px; 
+top:-250px;
+}
+.mr0{margin-right:0}

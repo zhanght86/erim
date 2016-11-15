@@ -1,0 +1,140 @@
+	<script type="text/javascript" src="$staticRoot/js/register.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+    		//初始化省市县
+    		regUtil.initProvince(1,'cpyProvince','cpyCity','cpyCounty');
+			
+    		$("#content_nbox1").show();
+    		// 当点击是否国内时
+    		$("input[name='cpyIsInland']").change(function() {
+    			var a = $(this).val();
+    			if (a == '02') {
+        			$("#content_nbox1").show();
+        			$("#content_nbox2").hide();
+    			}
+    			if (a == '01') {
+    				$("#content_nbox1").hide();
+    				$("#content_nbox2").show();
+    			}
+    		});
+			
+			// 当选择国际
+			$("input[name='cpyExternal']").change(function() {
+				var a = $("input[name='cpyExternal']:checked").val();
+				if (a == '04') {
+					$(".content_inter").css("display","inline-block");
+				} else {
+					$(".content_inter").hide();
+				}
+			});
+    	});
+    </script>	
+	<form method="post" id="form1">
+		<div class="clearfix mb10">
+			<div class="content_line" style="width:320px;float:left;">
+                    <span style="width:78px;">所在地区:</span>
+                    <div class="content_liner" style="width:220px;">
+                        <label><input type="radio" name="cpyIsInland" value="02" checked />国内</label>
+                        <label>
+							<input type="radio" name="cpyIsInland" value="01" />国际/港澳台
+						</label>
+                    </div>
+                </div>
+                <div class="content_nation" style="padding-left:0px; width:700px;float:left;">
+                    <div class="content_nbox" id="content_nbox1">
+                        <div class="content_laddre show" style="margin-top:15px;">
+                            <div class="content_address">
+                                <select name="cpyProvince">
+    								#foreach($item in $!provinces.keySet())
+    									<option value="$item">$!provinces.get($item)</option>
+    								#end
+                                </select>
+                                <span>省</span>
+                                <select name="cpyCity"></select>
+                                <span>市</span>
+                                <select name="cpyCounty"></select>
+                                <span>区/县</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_nbox" id="content_nbox2">
+                        <div class="content_laddre">
+							<div class="content_liner" style="width:800px;">
+                                <label><input type="radio" name="cpyExternal" value="01" />香港</label>
+                                <label><input type="radio" name="cpyExternal" value="02" />澳门</label>
+                                <label>
+									<input type="radio" name="cpyExternal" value="03" />台湾
+								</label>
+								<label>
+									<input type="radio" name="cpyExternal" value="04" />国际
+								</label>
+                                <span class="content_inter">
+                                    <span class="content_address">
+										<input type="text" class="gj_d_gj validate[required,maxSize[20]]" name="cpyForeign" />
+                                        <span>国家</span>
+										<input type="text" class="gj_d_gj validate[required,maxSize[20]]" name="cpyForeignCity"/>
+                                        <span>城市</span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+		
+    	<div class="g_block_2 mb20">
+			
+    		<div class="input_block clearfix mb0">
+    			<div class="input_right input_right_wauto">
+    				<label>所在地区：</label>
+    				<input class="w130" name="cdlCity">
+    				<label class="ml34">餐厅名称：</label>
+    				<input class="w130" name="cdlName">
+    				<label class="ml25 pl24">菜系：</label>
+    				<input class="w130" name="">
+                    <label class="ml25">所属商圈：</label>
+					<select class="w130" name="cdlDistrict">
+    					<option value=""></option>
+    					<option value="01">石家庄</option>
+    					<option value="02">石家庄</option>
+    					<option value="03">石家庄</option>
+    				</select>
+    				<span class="red_a ml25"  type="button" onclick="line.searchform('form1','$appRoot/search/cafeteria/list');" >查询</span>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+	</form>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>产品编码</th>
+				<th>所在地区</th>
+				<th>餐厅名称</th>
+				<th>餐厅业务</th>
+				<th>最低正餐标准</th>
+				<th>套餐价格</th>
+				<th>公司/品牌</th>
+                <th>负责人/电话</th>
+                <th>计调/电话</th>
+                <th>在线交谈</th>
+			</tr>
+			#foreach($item in $cafeteriaList)
+				<tr>
+                  	<td>$!item.cdlCode</td>
+                    <td>$!item.cdlCity</td>
+					<td>$!item.cdlName</td>
+                    <td>$!item.cdlBusiness</td>
+					<td>$!item.cdlOrderNormz</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cdlPeopleQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+				</tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>

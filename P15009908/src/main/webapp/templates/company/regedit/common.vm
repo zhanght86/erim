@@ -1,0 +1,179 @@
+    <!--注册页 start-->
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/regedit.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/register.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/houtai.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/js/confirm/css/xcConfirm.css"/>
+		
+	<script type="text/javascript" src="$staticFilePlug/jquery/jquery-1.11.3.min.js"></script>
+	<script src="$staticRoot/js/confirm/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="$staticRoot/js/register/register.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/register/regiArea.js"></script>
+	
+    <!--注册页 end-->
+	
+	<!-- 上传图片 -->
+	<link rel="stylesheet" type="text/css" href="$staticFilePlug/uploadify/uploadify.css"/>
+	<script type="text/javascript" src="$staticFilePlug/uploadify/jquery.uploadify.js"></script>
+	
+	<!--验证框架js-->
+    <link rel="stylesheet" type="text/css" href="$staticFilePlug/jqueryValidationEngine/2.6.2/css/validationEngine.jquery.css"/>
+    <script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine.js"></script>
+    <script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine.min.js"></script>
+    <script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine-zh_CN.js"></script>
+	
+	<script type="text/javascript">
+		var uploadify = function(id,inputid,spanid,fileid) {
+			// 隐藏该标签
+			$("#"+spanid).hide();
+			
+			$("#"+id).uploadify({
+                auto            : true,
+                'swf'		    : '$staticRoot/js/uploadify/uploadify.swf',
+                //后台处理的页面
+                'uploader'      : '$staticFileUpload',
+                queueID         : fileid,//与下面的id对应
+                buttonClass	    :'btn',
+                buttonImage     : null,
+                formData        : {cpyid:"$userCpyId"},
+                buttonText	    :'点击浏览图片',
+                multi           :  false, //多文件上传
+                fileTypeDesc    : '请选择图片，仅支持格式JPG,BMP,PNG,GIF，最大4M',
+                fileTypeExts    : '*.JPG;*.GIF;*.PNG;*.BMP;', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+                buttonText      : '点击上传',
+                fileObjName     : 'file',//服务端File对应的名称。
+            	fileSizeLimit   : '2MB',//文件上传的大小限制，如果是字符串单位可以是B KB MB GB，默认是0，表示无限制
+            	width		    : 65,
+            	height		    : 20,
+            	onUploadSuccess : function(file,data,response) {//上传完成时触发（每个文件触发一次
+            		if(response==true) { // 如果服务器返回200表示成功
+        				data=eval("("+data+")");
+        				var filename = data.filename;
+        				var url   	 = data.url;
+						//全部替换
+					    var html     = "<a href='$staticFileRes"+url+"' target='_blank'>"+filename+"</a> <a href='javascript:;' onclick='uploadDelete(\""+id+"\",\""+spanid+"\",\""+url.replace(new RegExp("/", "g"),"___")+"\",\""+inputid+"\",\"1\");'>删除图片</a>";
+						//上传文件
+						url = url.replace(new RegExp("___", "g"),"/");
+        				$("#"+spanid).html(html);
+						$("#"+spanid).show();
+        				$("#"+inputid).attr("value",url);	
+						$("#"+id).hide();
+            		} else {
+            			wxcalert('上传失败','e');
+            		}
+        		},
+        		onUploadError : function(file,data,response) {
+            		wxcalert('上传失败','e');
+        		}
+         	});
+		};
+		
+		var uploadifydoc = function(id,inputid,spanid,fileid){
+        	 $("#"+id).uploadify({
+                auto            : true,
+                'swf'		    : '$staticRoot/js/uploadify/uploadify.swf',
+                //后台处理的页面
+                'uploader'      : '$staticFileUpload',
+                queueID         : fileid,//与下面的id对应
+                buttonClass	    :'btn',
+                buttonImage     : null,
+                formData        : {cpyid:"$userCpyId"},
+                buttonText	    :'点击浏览图片',
+                multi           :  false, //多文件上传
+                fileTypeDesc    : '请选择图片，仅支持格式doc,xls,xlsx,ppt,txt，最大4M',
+                fileTypeExts    : '*.doc;*.xls;*.xlsx;*.ppt;*.txt;*.zip;', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+                buttonText      : '点击上传',
+                fileObjName     : 'file',//服务端File对应的名称。
+            	fileSizeLimit   : '2MB',//文件上传的大小限制，如果是字符串单位可以是B KB MB GB，默认是0，表示无限制
+            	width		    : 65,
+            	height		    : 20,
+            	onUploadSuccess : function(file,data,response) {//上传完成时触发（每个文件触发一次
+            		if(response==true){//如果服务器返回200表示成功
+        				data=eval("("+data+")");
+        				var filename = data.filename;
+        				var url   	 = data.url;
+						//全部替换
+					    var html     = "<a href='$staticFileRes"+url+"' target='_blank'>"+filename+"</a> <a href='javascript:;' onclick='uploadDelete(\""+id+"\",\""+spanid+"\",\""+url.replace(new RegExp("/", "g"),"___")+"\",\""+inputid+"\",\"1\");'>删除文件</a>";
+						//上传文件
+						url = url.replace(new RegExp("___", "g"),"/");
+        				$("#"+spanid).html(html);
+        				$("#"+inputid).attr("value",url);	
+						$("#"+id).hide();
+            		} else {
+            			wxcalert('上传失败','e');
+            		}
+        		},
+        		onUploadError : function(file,data,response) {
+            		wxcalert('上传失败','e');
+        		}
+         	});
+		};
+		
+		//图片删除
+		function uploadDelete(id,spanid,url,inputid,ntype){
+			url = url.replace(new RegExp("___", "g"),"/");
+			
+			url = "$staticFileDelete?imgUrl=" + url;
+			$.ajax({
+            	url: url,
+            	success: function(data){},
+            	dataType: 'json'
+			});
+				
+			$("#"+id).show();	
+			$("#"+spanid).html("");
+			if(inputid != undefined && inputid != '') {
+			 	$("#"+inputid).attr("value", "");
+			}
+			
+			if("1" != ntype) {
+				$("#"+spanid).prev().hide();
+				$("#"+spanid).prev().prev().hide();
+			}
+			
+			$("#"+spanid).hide();
+		};
+		
+		//弹出内容封装
+    	function wxcalert(txt){
+    		window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.info);
+    	}
+		
+		
+		
+
+        //处理键盘事件 禁止后退键（Backspace）密码或单行、多行文本框除外 
+        function banBackSpace(e){ 
+            var ev = e || window.event;//获取event对象 
+            var obj = ev.target || ev.srcElement;//获取事件源 
+            
+            var t = obj.type || obj.getAttribute('type');//获取事件源类型 
+            
+            //获取作为判断条件的事件类型 
+            var vReadOnly = obj.getAttribute('readonly'); 
+            var vEnabled = obj.getAttribute('enabled'); 
+            //处理null值情况 
+            vReadOnly = (vReadOnly == null) ? false : vReadOnly; 
+            vEnabled = (vEnabled == null) ? true : vEnabled; 
+            
+            //当敲Backspace键时，事件源类型为密码或单行、多行文本的， 
+            //并且readonly属性为true或enabled属性为false的，则退格键失效 
+            var flag1=(ev.keyCode == 8 && (t=="password" || t=="text" || t=="textarea") && (vReadOnly==true || vEnabled!=true))?true:false; 
+            
+            //当敲Backspace键时，事件源类型非密码或单行、多行文本的，则退格键失效 
+            var flag2=(ev.keyCode == 8 && t != "password" && t != "text" && t != "textarea")?true:false; 
+            
+            //判断 
+            if(flag2){ 
+           	 return false; 
+            } 
+            if(flag1){ 
+          	  return false; 
+            } 
+        } 
+        
+        //禁止后退键 作用于Firefox、Opera 
+        document.onkeypress=banBackSpace; 
+        //禁止后退键 作用于IE、Chrome 
+        document.onkeydown=banBackSpace; 
+
+    </script>

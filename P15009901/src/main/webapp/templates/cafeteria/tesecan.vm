@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>特色餐_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit" />  
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+<!--dwp html start-->
+		<div class="box_cb"></div>
+        <div class="g_cont" style="margin-top:20px;">
+			<form id="form1" method="post" action="$appRoot/$cpyno/tesecan.html">
+		<!--导航-->
+            #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+			<div class="search-menu">
+    			#vsearcharea('','cdlProvince',$!tesecan.cdlProvince,'cdlCity',$!tesecan.cdlCity,'cdlExternal',$!tesecan.cdlExternal,'cdlForeignCity',$!tesecan.cdlForeignCity)
+				
+    			<div class="smenu-li">
+        			<label class="search-lab" style="width:280px;">
+        				<span class="smenu-title">关键词：</span>
+        				<input type="text" name="cdlName" value="$!tesecan.cdlName" class="search-input">
+        			</label>
+        			<button class="search-btn" type="submit" onclick="$appRoot/$cpyno/tesecan.html" style="margin-top:4px;">搜索</button>
+        		</div>
+				#* 
+        		<dl class="smenu-li">
+        			<dt class="smenu-title">所在区域：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num #if(($!tesecan.cdlForeignCityVo == '' || !$tesecan.cdlForeignCityVo) && ("" == $!tesecan.cdlProvince || ! $tesecan.cdlProvince))      item-hover #end nation-no"   onclick="$('#cdlProvince').attr('value',''); $('#cdlForeignCityVo').attr('value','');$('#form1').submit();">不限</span>
+        				<div class="smenu-nation">
+        					<span class="item-area">国内<em class="icon-img"></em></span>
+        					<span class="item-area">国际·港澳台<em class="icon-img"></em></span>
+        				</div>
+        				<div class="nations">
+        					<div class="local-city">
+								<span class="no-num #if("" == $!tesecan.cdlProvince || ! $tesecan.cdlProvince)  item-hover  #end" onclick="$('#cdlProvince').attr('value',''); $('#cdlForeignCityVo').attr('value','');$('#form1').submit();">不限</span>
+								#foreach($item in $provinces)
+                					 <span class="smenu-item  #if($!tesecan.cdlProvince == $item.regionNo) item-hover #end" id="a_level_$item.id" onclick="$('#cdlProvince').attr('value','$item.regionNo'); $('#cdlForeignCityVo').attr('value','');$('#form1').submit();">$item.regionName</span>
+                				#end
+        					</div>
+        					<div class="local-city">
+        						<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '')      item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','');     $('#cdlProvince').attr('value',''); $('#form1').submit();">不限</span>
+            					<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '香港')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','香港');   $('#cdlProvince').attr('value',''); $('#form1').submit();">香港</span>
+            					<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '澳门')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','澳门');   $('#cdlProvince').attr('value',''); $('#form1').submit();">澳门</span>
+            					<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '台湾')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','台湾');   $('#cdlProvince').attr('value',''); $('#form1').submit();">台湾</span>
+            					<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '东京')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','东京');   $('#cdlProvince').attr('value',''); $('#form1').submit();">东京</span>
+								<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '首尔')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','首尔');   $('#cdlProvince').attr('value',''); $('#form1').submit();">首尔</span>
+								<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '曼谷')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','曼谷');   $('#cdlProvince').attr('value',''); $('#form1').submit();">曼谷</span>
+								<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '芭提雅')  item-hover #end" onclick="$('#cdlForeignCityVo').attr('value','芭提雅'); $('#cdlProvince').attr('value','');  $('#form1').submit();">芭提雅</span>
+								<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '巴黎')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','巴黎');   $('#cdlProvince').attr('value',''); $('#form1').submit();">巴黎</span>
+								<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '新西兰')  item-hover #end" onclick="$('#cdlForeignCityVo').attr('value','新西兰'); $('#cdlProvince').attr('value','');  $('#form1').submit();">新西兰</span>
+								<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '纽约')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','纽约');   $('#cdlProvince').attr('value',''); $('#form1').submit();">纽约</span>
+								<span class="smenu-item #if($!tesecan.cdlForeignCityVo == '加州')   item-hover #end"  onclick="$('#cdlForeignCityVo').attr('value','加州');   $('#cdlProvince').attr('value',''); $('#form1').submit();">加州</span>
+        					</div>
+        				</div>
+        			</dd>
+        		</dl>
+				*#
+        		<dl class="smenu-li">
+        			<dt class="smenu-title">餐厅价格：</dt>
+        			<dd class="smenu-items">
+						<span  class="smenu-item #if(!$tesecan.cdlPrice1  && !$tesecan.cdlPrice2 ) item-hover #end" onclick="$('#cdlPrice1').attr('value',null); $('#cdlPrice2').attr('value',null);$('#form1').submit();">不限</span>
+            			<span  class="smenu-item #if(!$tesecan.cdlPrice1  && $tesecan.cdlPrice2 == 50) item-hover #end"       onclick="$('#cdlPrice1').attr('value',null); $('#cdlPrice2').attr('value',50);$('#form1').submit();">50元以下</span>
+            			<span  class="smenu-item #if($tesecan.cdlPrice1 == 50  && $tesecan.cdlPrice2 == 100) item-hover #end" onclick="$('#cdlPrice1').attr('value',50); $('#cdlPrice2').attr('value',100);$('#form1').submit();">50-100元</span>
+						<span  class="smenu-item #if($tesecan.cdlPrice1 == 101  && $tesecan.cdlPrice2 == 150) item-hover #end" onclick="$('#cdlPrice1').attr('value',101); $('#cdlPrice2').attr('value',150);$('#form1').submit();">101-150元</span>
+						<span  class="smenu-item #if($tesecan.cdlPrice1 == 151  && $tesecan.cdlPrice2 == 200) item-hover #end" onclick="$('#cdlPrice1').attr('value',151); $('#cdlPrice2').attr('value',200);$('#form1').submit();">151-200元</span>
+						<span  class="smenu-item #if($tesecan.cdlPrice1 == 200  && !$tesecan.cdlPrice2) item-hover #end"       onclick="$('#cdlPrice1').attr('value',200); $('#cdlPrice2').attr('value',null);$('#form1').submit();">200元以上</span>
+        				<label class="item-lab">
+        					<input class="item-input" type="text" id="searchPrice1" value="$!tesecan.cdlPrice1">
+        					<span class="item-span">至</span>
+        					<input class="item-input" type="text" id="searchPrice2" value="$!tesecan.cdlPrice2">
+        					<button type="button" class="item-btn"  onclick="$('#cdlPrice1').attr('value',$('#searchPrice1').val()); $('#cdlPrice2').attr('value',$('#searchPrice2').val());$('#form1').submit();">确定</button>
+        				</label>
+        				<!--<span class="smenu-item-more">更多</span>-->
+        			</dd>
+        		</dl>
+        		<dl class="smenu-li last">
+        			<dt class="smenu-title">餐厅菜系：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num  #if("" == $!tesecan.cdlSort || ! $tesecan.cdlSort) item-hover #end"   onclick="$('#cdlSort').attr('value',''); $('#form1').submit();">不限</span>
+        				<div class="smenu-right">
+							#foreach($item in $sort.keySet())
+								<span class="smenu-item #if($!tesecan.cdlSort == $item) item-hover #end"id="a_level_$item.id" onclick="$('#cdlSort').attr('value','$item'); $('#form1').submit();">$sort.get($item)</span>
+        					#end
+        				</div>
+        				<span class="smenu-item-more">更多</span>
+        			</dd>
+        		</dl>
+        	</div>
+			<input type="hidden" name="cdlSort" id="cdlSort" value="$!tesecan.cdlSort">
+			<!--<input type="hidden" name="cdlProvince" id="cdlProvince" value="$!tesecan.cdlProvince">
+			<input type="hidden" name="cdlForeignCityVo" id="cdlForeignCityVo" value="$!tesecan.cdlForeignCityVo">-->
+			<input type="hidden" name="cdlPrice1" id="cdlPrice1" value="$!tesecan.cdlPrice1">	
+            <input type="hidden" name="cdlPrice2" id="cdlPrice2" value="$!tesecan.cdlPrice2">			
+            </form>
+        	<ul class="g_list_1" style="float:left;">
+				#foreach($item in $cafeteriaList)
+					<li #if($velocityCount  % 4 == 0) class="mr0" #end>
+						<a href="$appRoot/$cpyno/cafeteria/tesecanxiang/$item.id" title="$!item.cdlName" target="_blank">
+							#if($!item.cdlImg1 != '')
+								<img src="$staticFileRes$item.cdlImg1" title="" alt="">
+							#else
+								<img src="$staticRoot/images/isnull.png" title="" alt="">
+							#end
+                            <p class="title">
+								<strong title="$!item.cdlName">$erim.subString($!item.cdlName,10)</strong>
+								<br>
+								<span title="$!item.cdlAddress">$erim.subString($!item.cdlAddress,16)</span> &nbsp;
+							</p>
+                            <p class="price">
+								已售0
+								<span>￥$erim.emptyDefault($item.cpcRetailPrice,'0')元起</span>
+							</p>
+                        </a>
+                	</li>
+				#end
+            </ul>
+            <div class="box_cb"></div>
+
+            #parse("common/page.vm")
+        </div>
+<!--dwp html end-->
+        
+		#parse("common/footer.vm")
+	</div>
+</body>
+</html>
+<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript">
+	$(function(){
+		//所在区域默认展开项
+		if('$!tesecan.cdlForeignCityVo' != ''){
+    		$(".smenu-nation").prev().removeClass("item-hover");
+    		$(".smenu-nation").children().eq(1).addClass("item-hover").siblings().removeClass("item-hover");
+    		$(".nations .local-city").eq(1).show().siblings(".nations .local-city").hide();
+		}else if('$!tesecan.cdlProvince' != ''){
+			$(".smenu-nation").prev().removeClass("item-hover");
+    		$(".smenu-nation").children().eq(0).addClass("item-hover").siblings().removeClass("item-hover");
+    		$(".nations .local-city").eq(0).show().siblings(".nations .local-city").hide();
+		}else{
+			$(".local-city").hide();
+		}
+		
+		//餐厅菜系 更多
+		if('$!tesecan.cdlSort' != ''){
+			$(".smenu-item-more").text("收起");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").show();
+		}else{
+			$(".smenu-item-more").text("更多");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").hide();
+		}	
+		
+	});	
+
+</script>

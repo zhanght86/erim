@@ -1,0 +1,7 @@
+<div class="indexsuperfree">
+	<div class="indexsuperfreetop">
+		<a href="$appRoot/$cpyno/superfree/superfree">超级自由行</a>
+	</div>
+	
+	#parse("search/superfree.vm")
+</div>

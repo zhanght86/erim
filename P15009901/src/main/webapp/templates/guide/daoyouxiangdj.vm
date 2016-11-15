@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>导游详情_$!mallWeb.webCpyname网站</title>
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+    <script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+</head>
+<body>
+    <div class="indexwrap">
+		<!--头部-->
+        #parse("common/head.vm")
+        <!--dwp html start-->
+        <div class="g_cont">
+			<div class="g_crumbs">
+                <a href="$appRoot/$cpyno/superfree.html">超级自由行</a><a href="$appRoot/$cpyno/daoyou.html">导游</a>&gt;$!guide.gdlName
+            </div>
+            <h1 class="g_title_1 pl10" style="margin-top:-10px;">$!guide.gdlName #if($!guide.gdlSex == '01') (男)#else (女) #end<span class="cheng_lx">【$!guide.gdlCompanyRating】</span>
+                <span class="g_star"></span>
+            </h1>
+            <div class="imgshow_box_a">
+                <div id="imageShow">
+                    <div id="imgshow_mask" style="width:100px;"></div>
+                    <ul class="imagebg" id="imagebg">
+						#foreach($item in $guidePhoto) 
+                            <li data-sPic="$guideRoot$item.gptImgUrl">
+                                <a href="#" class="bannerbg_main">
+                                    <img src="$guideRoot$item.gptImgUrl" />
+                                </a>
+                            </li>
+						#end 
+                    </ul>
+                    <div class="scrollbg">
+                        <div class="scroll">
+                            <a id="left_img_btn" class="s_pre" href="javascript:void(0)"></a>
+                            <div class="current" id="current"></div>
+                            <div class="outScroll_pic">
+                                <ul class="scroll_pic cls" id="small_pic"></ul>
+                            </div>
+                            <a id="right_img_btn" class="s_next" href="javascript:void(0)"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="date_box_a">
+                ##<h2 class="g_title_4">导游资料<span class="b_bianhao">编号：$!guide.gdlCode</span></h2>
+				 <h2 class="g_title_4">导游/领队资料<span class="b_bianhao">编码：$!guide.gdlCode</span></h2>
+				 
+				<div class="b_table"><!--11.26-bai-->
+					<ul class="b_table1">
+						<!--<li><span>编号：$!guide.gdlCode</span></li>-->	
+						<li style="width:600px">
+							<span>服务类型：</span>
+							#vtextarray($!guide.gdlServer,'C101')
+						</li>
+						<li><span>从业时间：</span>#vtext($!guide.gdlAge,'C114')</li>
+						<li><span>导游/领队等级：</span>$!guide.gdlGrade</li>
+						<li style="width:600px"><span>语种：</span>$!guide.gdlLanguage</li>
+					</ul>
+					<ul class="b_table2">
+						<!--<li><span>导游类型：</span>$!guide.gdlServer</li>-->
+						<li>
+							#if($!gdlServer == '01')
+								<span>服务城市：</span>
+                            	$!guide.gdlLocalCity 
+                            #elseif($!gdlServer == '02')
+								<span>服务城市：</span>
+                            	$!guide.gdlNationalCity 
+                            #elseif($!gdlServer == '03')
+								<span>出发地：</span>
+                            	$!guide.gdlLeaderCity 
+								<span>目的地：</span>
+								#vtextarray($!guide.gdlDestination,'C108')
+								#foreach($item in $!guojild)
+    								$item
+    							#end
+                            #elseif($!gdlServer == '04')
+								<span>服务地区：</span>
+                            	#vtextarray($!guide.gdlGaidLokal,'C108')
+    							#foreach($item in $!guojidp)
+    								$item
+    							#end
+                            #end
+							
+						</li>
+						<!--<li><span>导游/领队等级：</span>$!guide.gdlGrade</li>-->
+					</ul>
+				</div>
+				#* 
+                <table class="g_table_2" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+						<td width="80">导游类型：</td>
+                        <td>$!guide.gdlServer</td>
+                        <td width="80">服务城市：</td>
+						<td>$!guide.gdlLocalCity</td>
+						
+						#if($!guide.gdlServer == '01')
+							<td>$!guide.gdlLocalCity</td>
+						#elseif($!guide.gdlServer == '02')
+							<td>$!guide.gdlNationalCity</td>
+						#elseif($!guide.gdlServer == '03')
+							<td>$!guide.gdlNationalCity,$!guide.gdlDestination,$!guide.gdlDestinationCountry</td>
+						#elseif($!guide.gdlServer == '04')
+							<td>$!guide.gdlGaidLokal,$!guide.gdlGaidCountry</td>
+							#else
+							<td></td>
+						#end
+						-->
+                        <td width="70">语种：</td>
+                        <td>$!guide.gdlLanguage</td>
+                    </tr>
+                    <tr>
+                        <td width="110">导游/领队等级：</td>
+                        <td>$!guide.gdlGrade</td>
+                        <td>从业时人：</td>
+                        <td>$!guide.gdlAge</td>
+                        <td >导游证号：</td>
+                        <td>$!guide.gdlCertificate</td>
+                    </tr>
+                </table>
+				*#
+                <div class="box_cb mb10"></div>
+				<!-- 量价 -->
+				<div class="open_price">
+                </div>
+                <div class="box_cb mb10"></div>
+				<p class="tel_p"><a href="javascript:void(0)" onclick="ordertips()" title="" class="wxy_ljyd">立即预订</a>	
+                </p>
+		</div>
+		<div class="box_cb mb10"></div>
+		<span class="b_daoyou" style="margin-top:10px;display:block;margin-left:0;color:#323232;font-size:14px;">
+			<strong>个性签名：</strong>
+			$!guide.gdlSignature
+		</span>
+		<span class="b_daoyou" style="margin-top:10px;display:block;margin-left:0;color:#323232;font-size:14px;">
+			<strong>自我介绍：</strong>
+			$!guide.gdlIntroduction
+		</span>
+		<div class="box_cb mb20"></div>
+        <p class="g_tab">
+            <a class="tab_1 on" href="javascript:void(0);" name="more">他/她的动态</a>
+            <a class="tab_2" href="javascript:void(0);">预约须知</a>
+		<p>
+        <div class="tab_block" style="float:left; width:1198px;">
+            <div class="block_tab_1">
+                <ul class="b_dongtai">
+					#foreach($item in $guideRecord)
+                    <li class="b_b">
+                        <span class="b_date">$item.dateStr</span>
+                        <span class="b_zhushi">$item.grdRemark</span>
+                    </li>
+                    <li class="b_pl">
+						#if($item.grdImg1 != '')
+							<img src="$guideRoot$item.grdImg1" style="width:367px;padding:20px 0 0;height:300px;">
+						#end
+						#if($item.grdImg2 != '')
+							<img src="$guideRoot$item.grdImg2" style="width:367px;padding:20px 0 0;height:300px;">
+						#end
+						#if($item.grdImg3 != '')
+							<img src="$guideRoot$item.grdImg3" style="width:367px;padding:20px 0 0;height:300px;">
+						#end
+                    </li>
+                    <li class="mt10"></li>
+					#end
+            	</ul>
+            </div>
+            <div class="block_tab_2" style="float:left;padding:20px 46px 40px 44px;width:1108px;">
+                <h2 class="notes-title">
+					服务费包括
+                </h2>
+				<pre><span id="fuwufei"></span></pre>
+				 <h2 class="notes-title">
+					服务说明
+                </h2>
+				<pre><span id="fuwushuoming"></span></pre>
+				<h2 class="notes-title">
+					预约有效时间
+                </h2>
+				<pre><span id="yytime"></span></p>
+				<!--  开始
+				<h2 class="notes-title">
+					景点特色
+                </h2>
+				<div class="notes-line">
+					<span class="notes-stitle">景点特色</span>
+					<span class="notes-stext">有可无线上网的公共区域 免费有可无线上网的公共区区域</span>
+				</div>
+				-->
+           </div>
+	   	</div>
+	</div>
+</div>
+<!--dwp html end-->
+#parse("common/footer.vm")
+<script type="text/javascript" src="$staticRoot/js/imgSlider.js"></script>
+<script type="text/javascript">
+    img.init();
+    img.play(0);
+    //阻止事件冒泡
+    function estop(e){
+    	var e=arguments.callee.caller.arguments[0]||event;
+    	if (e && e.stopPropagation){
+    	//因此它支持W3C的stopPropagation()方法
+    	   e.stopPropagation();
+    	}else{
+    	//否则，我们需要使用IE的方式来取消事件冒泡
+    	   window.event.cancelBubble = true;
+    	   return false;
+    	}
+    }
+	
+	$(document).ready(function(){
+		// 加载日历
+		var gdlId = '$!guide.id';
+		$(".open_price").load("$appRoot/$cpyno/guide/daoyouxiang/pricedj?gdlId="+gdlId+"&gdlServiceCode=$!gdlServer");
+	});
+	
+    function ordertips(){
+    	alert('对不起，预定功能暂不开放');
+    }
+</script>
+</body>
+</html>

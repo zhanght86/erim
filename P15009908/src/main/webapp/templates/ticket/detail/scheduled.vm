@@ -1,0 +1,32 @@
+<!-- 预定方式 -->
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ticket/ticket.css">
+<div class="newline">
+    <div class="newline_suptop">
+        <img src="$staticRoot/images/htj.png">
+        <span>预定方式</span>
+        <div class="cb"></div>
+		<div class="g_line"></div>
+    </div>
+    <div class="newline_ct">
+		<form method="post" id="form1">
+			<input type="hidden" value="$ticketDetail.id" name="id"/>
+			<div class="newline_ctlla">
+                <span>预定方式：</span>
+                <div class="newline_ctllra" style="width:425px;">
+    				#foreach($item in $scheduled.keySet())
+            			<label class="w90"> 
+            				<input type="checkbox" class="validate[required] checkbox" #if($erim.contains($!ticketDetail.tdlScheduled,$item)) checked #end name="tdlScheduled" value="$item"> $scheduled.get($item)
+            			</label>
+					#end
+                </div><span  style=" color:red;float: left; margin-top: 4px;width:10px;">*</span>
+            </div>
+            <div class="carinfo_ctbl">
+                <span></span>
+                <div class="carinfo_ctblrbtn pb80">
+                    <button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/ticket/detail/scheduled','$appRoot/ticket/detail/list');">提交</button>
+                    <button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                </div>
+            </div>
+		</form>
+	</div>
+</div>

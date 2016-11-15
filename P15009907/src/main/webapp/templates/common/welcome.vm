@@ -1,0 +1,163 @@
+<div class="hlindex">
+	<div class="hti_top">
+		<span class="person">个人中心</span>
+	</div>
+    <div class="hti_center">
+    	<div class="hti_centerbig">
+    		<div class="hti_centerl">
+    			<div class="hti_ctlline line_top">
+    				<img src="$staticRoot/images/hti1.png">
+    				<span class="hti_ctllname">账号权限：</span>
+    				<span class="hti_ctlltxt">$userRoleName</span>
+    				<!--[<a href="#">权限管理</a>]-->
+    			</div>
+    			<div class="hti_ctlline ">
+    				<img src="$staticRoot/images/hti2.png">
+    				<span class="hti_ctllname">您上次登录：</span>
+    				<span class="hti_ctlltxt">$!userBean.zxLastLoginIp &nbsp;$!date.format('yyyy年MM月dd日 HH:mm:ss',$!userBean.zxLastLoginTime)</span>
+    			</div>
+				#if($erim.isNotEmpty($!userBean.zxLastLoginAddress))
+        			<div class="hti_ctllinea">
+						($!userBean.zxLastLoginAddress)
+        			</div>
+				#end
+    			<div class="hti_ctllinea">
+    				[如果不是您登录，点击这里<a href="javascript:index.load('$appRoot/zx/user/updatePadPage');">修改密码</a>]
+    			</div>
+    			<div class="hti_ctlline">
+    				<img src="$staticRoot/images/hti3.png">
+    				<span class="hti_ctllname">公司名称：</span>
+    				<span class="hti_ctlltxt" style="height: auto;">$!userCpyName</span>
+    			</div>
+				<div class="hti_ctlline" style="clear:both;">
+					<img src="$staticRoot/images/hti3.png">
+    				<span class="hti_ctllname">公司品牌：</span>
+    				<span class="hti_ctlltxt" style="height: auto;">$!userCpyBrand</span>
+    			</div>
+				<div class="hti_ctlline" style="clear:both;">
+					<img src="$staticRoot/images/hti7.png">
+    				<span class="hti_ctllname">所属专线：</span>
+    				<span class="hti_ctlltxt">
+						##所属专线
+						#vtextarray($!userBussiness.cbsServiceInside,'C116')
+						##专线其它
+						$!userBussiness.cbsServiceAdd
+						##港澳台
+						#vtextarray($!userBussiness.cbsSerInterna,'C108')
+						##国际
+						#vtextarray($!userBussiness.cbsServiceOuter,'C118')
+						##国际其它
+						$!userBussiness.cbsServiceRest
+					</span>
+    			</div>
+				<div class="hti_ctlline" style="clear:both;">
+    				<img src="$staticRoot/images/hti7.png">
+    				<span class="hti_ctllname">服务区域：</span>
+    			</div>
+				##省市区县
+				#foreach($item in $listRegion)
+					#if($item.cbrBusType=='02')
+						<div class="hti_ctllinea">
+							#vregion($!item.cbrProvince) #vregion($!item.cbrCity) #vregion($!item.cbrCounty)
+						</div>
+					#end
+				#end
+				##港澳台
+				#if($erim.isNotEmpty($!userBussiness.cbsSrlInterna))
+    				<div class="hti_ctllinea">
+						#vtext($!userBussiness.cbsSrlInterna,'C108')
+    				</div>
+				#end
+				##国际其它
+				#if($erim.isNotEmpty($!userBussiness.cbsSrlRest))
+    				<div class="hti_ctllinea">
+    					$!userBussiness.cbsSrlRest
+    				</div>
+				#end
+				##国家
+				#if($erim.isNotEmpty($!userBussiness.cbsSrlDir))
+    				<div class="hti_ctllinea">
+						#vtextarray($!userBussiness.cbsSrlDir,'C118')
+    				</div>
+				#end
+				
+    			<div class="hti_ctlline" style="clear:both;">
+    				<img src="$staticRoot/images/hti7.png">
+    				<span class="hti_ctllname">地接涉及区域：</span>
+    			</div>
+				##省市区县
+				#foreach($item in $listRegion)
+					#if($item.cbrBusType=='01')
+						<div class="hti_ctllinea">
+							#vregion($!item.cbrProvince) #vregion($!item.cbrCity) #vregion($!item.cbrCounty)
+						</div>
+					#end
+				#end
+				##港澳台
+				#if($erim.isNotEmpty($!userBussiness.cbsNurInterna))
+    				<div class="hti_ctllinea">
+						##港澳台
+						#vtextarray($!userBussiness.cbsNurInterna,'C108')
+    				</div>
+				#end
+				##国际其它
+				#if($erim.isNotEmpty($!userBussiness.cbsNurRest))
+    				<div class="hti_ctllinea">
+    					$!userBussiness.cbsNurRest
+    				</div>
+				#end
+				##地接国家 
+				#if($erim.isNotEmpty($!userBussiness.cbsServiceOuter))
+    				<div class="hti_ctllinea">
+						#vtextarray($!userBussiness.cbsServiceOuter,'C118')
+    				</div>
+				#end
+				<div class="hti_ctlline" style="clear:both;">
+    				<img src="$staticRoot/images/hti8.png">
+    				<span class="hti_ctllname hti_ctlltxt-width360">现办公地址：</span>
+					<span class="hti_ctlltxt" style="height: auto;">$!userBussiness.cbsCurrAddress</span>
+    			</div>
+    			<div class="hti_ctlline" style="clear:both;">
+    				<img src="$staticRoot/images/hti8.png">
+    				<span class="hti_ctllname hti_ctlltxt-width360">公司地址：</span>
+					<span class="hti_ctlltxt" style="height: auto;">
+    					##国内
+    					#if("02" == $!userCommpany.cpyIsInland)
+							#vregion($!userCommpany.cpyProvince) 
+							#vregion($!userCommpany.cpyCity) 
+							#vregion($!userCommpany.cpyCounty)
+    					#else
+    						#vtextarray($!userCommpany.cpyExternal"C108")
+						#end
+						$!userCommpany.cpyAddress
+					</span>
+    			</div>
+    			<div class="hti_ctlline" style="clear:both;">
+    				<img src="$staticRoot/images/hti9.png">
+    				<span class="hti_ctllname">公司电话：</span>
+    				<span class="hti_ctlltxt">$!userCommpany.cpyTelephone</span>
+    			</div>
+    			<div class="hti_ctlline">
+    				<img src="$staticRoot/images/hti10.png">
+    				<span class="hti_ctllname">公司邮箱：</span>
+    				<span class="hti_ctlltxt">$!userCommpany.cpyEmail</span>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="hti_centerr">
+    		<h2>系统通知</h2>
+			#foreach($item in $noticeList)
+    		<div class="hti_ctrline">
+    			<a href="javascript:index.load('$appRoot/notice/detail/view?id=$item.id');" class="hti_ctrlnew">$item.pneTitle！</a>
+    			<span class="hti_ctrln">
+    				new
+    			</span>
+    			<span class="hti_ctrlr">
+					$date.format('yyyy年MM月dd日',$!item.pneCreatetime)
+    			</span>
+    		</div>
+			#end
+    	</div>
+    </div>
+</div>
+<!--/个人中心-->

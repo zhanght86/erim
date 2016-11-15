@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guiderecord">
+
+	<!-- 查询所有数据 -->
+	<select id="selectGuideRecordByRecord" resultType="guideRecordBean">
+		SELECT
+			id             AS id,
+			gdl_id         AS gdlId,
+			grd_remark     AS grdRemark,
+			grd_img1       AS grdImg1,
+			grd_img2       AS grdImg2,
+			grd_img3       AS grdImg3,
+			grd_img4       AS grdImg4,
+			grd_createtime AS grdCreatetime
+		FROM
+			guide_record
+		WHERE
+			gdl_id = #{gdlId}
+		ORDER BY
+			grd_createtime desc
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			guide_record
+		(
+			gdl_id,
+			grd_remark,
+			grd_img1,
+			grd_img2,
+			grd_img3,
+			grd_img4,
+			grd_createtime
+		)
+		VALUES
+		(
+			#{gdlId},
+			#{grdRemark},
+			#{grdImg1},
+			#{grdImg2},
+			#{grdImg3},
+			#{grdImg4},
+			#{grdCreatetime}
+		)
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+			guide_record
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>

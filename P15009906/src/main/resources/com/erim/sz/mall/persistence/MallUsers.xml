@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mallusers">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="mluLevel != null and mluLevel != ''">            and mlu_level        = #{mluLevel}   </if>
+		   <if test="mluLoginname != null and mluLoginname != ''">	   and mlu_loginname 	like "%"#{mluLoginname}"%"</if>
+		   <if test="mluCreateTime != null and mluCreateTime != ''">   and mlu_create_time 	like "%"#{mluCreateTime}"%"</if>
+		   <if test="mluEmail != null and mluEmail != ''">             and mlu_email 	    like "%"#{mluEmail}"%"</if>
+		   <if test="mluQq != null and mluQq != ''">                   and mlu_qq 	        like "%"#{mluQq}"%"</if>
+			
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageMallUsers" resultType="mallUsersBean">
+		SELECT
+			id 				AS id,
+			mlu_loginname 	AS mluLoginname,
+			mlu_password 	AS mluPassword,
+			mlu_email 		AS mluEmail,
+			mlu_qq 			AS mluQq,
+			mlu_create_ip 	AS mluCreateIp,
+			mlu_create_time AS mluCreateTime,
+			mlu_is_live 	AS mluIsLive,
+			mlu_level 		AS mluLevel
+		FROM
+			mall_users
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageMallUsersCount" resultType="int">
+		SELECT
+		   count(1)
+		FROM
+		   mall_users
+		<include refid="sql_query" />
+	</select>
+	<!-- 会员升级 -->
+	<update id="upgrade">
+	       UPDATE
+				mall_users
+			SET
+				mlu_level	= #{mluLevel}
+			WHERE
+				id			= #{id}
+	
+	</update>
+</mapper>

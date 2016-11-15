@@ -1,0 +1,171 @@
+<form method="post" class="mb10" id="form1" action="$appRoot/search/management/list">
+	<div class="search_block clearfix" class="mb10">
+			<div class="input_bg">
+				<div class="input_block clearfix" style="margin-bottom:0;">
+					<div class="input_right input_right_wauto">
+						<label class="ml25 pl10">目的国家：</label>
+						<input class="w130" id="mdlAddress" name="mdlAddress" value="$!managementDetail.mdlAddress">
+						<label class="ml35">产品编码：</label>
+						<input class="w130" name="mdlCode" value="$!managementDetail.mdlCode">
+						<span class="red_a ml25" type="button" onclick="index.searchform('form1','$appRoot/search/management/list');">查询</span>
+					</div>
+				</div>
+			</div>
+			<div class="select_block">
+				<ul class="select_cont clearfix">
+					<li class="first"><span class="span_tit">热门国家</span></li>
+					
+					<li class="second bx"><a class="smenu-item item-hover #if("美国" != $!managementDetail.mdlAddress && "英国" != $!managementDetail.mdlAddress && "加拿大" != $!managementDetail.mdlAddress && "澳大利亚" != $!managementDetail.mdlAddress && "印度" != $!managementDetail.mdlAddress)  on  #end" onclick="$('#mdlAddress').attr('value','');index.searchform('form1','$appRoot/search/management/list');">不限</a></li>
+					<li><a class="smenu-item item-hover #if("美国" == $!managementDetail.mdlAddress )  on  #end" onclick="$('#mdlAddress').attr('value','美国');index.searchform('form1','$appRoot/search/management/list');">美国</a></li>
+					<li><a class="smenu-item item-hover #if("英国" == $!managementDetail.mdlAddress )  on  #end" onclick="$('#mdlAddress').attr('value','英国');index.searchform('form1','$appRoot/search/management/list');">英国</a></li>
+					<li><a class="smenu-item item-hover #if("加拿大" == $!managementDetail.mdlAddress )  on  #end" onclick="$('#mdlAddress').attr('value','加拿大');index.searchform('form1','$appRoot/search/management/list');">加拿大</a></li>
+					<li><a class="smenu-item item-hover #if("澳大利亚" == $!managementDetail.mdlAddress )  on  #end" onclick="$('#mdlAddress').attr('value','澳大利亚');index.searchform('form1','$appRoot/search/management/list');">澳大利亚</a></li>
+					<li><a class="smenu-item item-hover #if("印度" == $!managementDetail.mdlAddress )  on  #end" onclick="$('#mdlAddress').attr('value','印度');index.searchform('form1','$appRoot/search/management/list');">印度</a></li>
+					
+				</ul>
+				<a class="more_a"></a>
+			</div>
+		
+			<div class="select_block">
+				<ul class="select_cont">
+					<li class="first"><span class="span_tit">签证类型</span></li>
+					<li class="second bx"><a class="smenu-item item-hover #if("" == $!managementDetail.mdlNtype || ! $managementDetail.mdlNtype)  on  #end" onclick="$('#mdlNtype').attr('value','');index.searchform('form1','$appRoot/search/management/list');">不限</a></li>
+					<li>
+						#foreach($item in $models.keySet())
+						   <a class="smenu-item item-hover #if($!managementDetail.mdlNtype == $item) on #end" id="a_level_$item.id" onclick="$('#mdlNtype').attr('value','$item');index.searchform('form1','$appRoot/search/management/list');">$models.get($item)</a>
+        				#end
+					</li>
+				</ul>
+				<a class="more_a"></a>
+			</div>
+				<div class="select_block">
+				<ul class="select_cont">
+					<li class="first"><span class="span_tit">送签领馆</span></li>
+					<li class="second bx"><a class="smenu-item item-hover #if("" == $!managementDetail.mdlSend || ! $managementDetail.mdlSend)  on  #end" onclick="$('#mdlSend').attr('value','');index.searchform('form1','$appRoot/search/management/list');">不限</a></li>
+					<li>
+						#foreach($item in $send.keySet())
+						   <a class="smenu-item item-hover #if($!managementDetail.mdlSend == $item) on #end" id="a_level_$item.id" onclick="$('#mdlSend').attr('value','$item');index.searchform('form1','$appRoot/search/management/list');">$send.get($item)</a>
+        				#end
+					</li>
+				</ul>
+				<a class="more_a"></a>
+			</div>
+				<div class="select_block">
+				<ul class="select_cont clearfix">
+					<li class="first"><span class="span_tit">是否面签</span></li>
+					<li class="second bx"><a class="smenu-item item-hover #if("" == $!managementDetail.mdlInterview || ! $managementDetail.mdlInterview)  on  #end" onclick="$('#mdlInterview').attr('value','');index.searchform('form1','$appRoot/search/management/list');">不限</a></li>
+					<li>
+						#foreach($item in $face.keySet())
+						   <a class="smenu-item item-hover #if($!managementDetail.mdlInterview == $item) on #end" id="a_level_$item.id" onclick="$('#mdlInterview').attr('value','$item');index.searchform('form1','$appRoot/search/management/list');">$face.get($item)</a>
+        				#end
+					</li>
+				</ul>
+				<a class="more_a"></a>
+			</div>
+		</div>
+<a class="big_more_a" style="display: none;">更多查询项</a>
+<input type="hidden" name="mdlSend" id="mdlSend" value="$!managementDetail.mdlSend"/>
+<input type="hidden" name="mdlNtype" id="mdlNtype" value="$!managementDetail.mdlNtype"/>
+<input type="hidden" name="mdlInterview" id="mdlInterview" value="$!managementDetail.mdlInterview"/>
+</form>
+<div class="g_block_2 g_block_7 mb20">
+	
+	<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<th style="width:80px">产品编码</th>
+			<th style="width:200px">签证名称</th>
+			<th style="width:75px">签证国家</th>
+			<th style="width:80px">送签领馆</th>				
+			<th style="width:80px">签证类型</th>
+			<th style="width:200px">公司/品牌</th>
+			<!--<th>负责人/电话</th> -->
+			<th style="width:100px">计调/电话</th>
+            <th style="width:80px">在线交谈</th>
+			<th style="width:70px">预定</th>
+		</tr>
+		#foreach($item in $managementList)
+			<tr>
+              	<td>$!item.mdlCode</td>
+				<td>$!item.mdlName</td>
+                <td>$!item.mdlAddress</td>
+				<td><a class="clistctma_ctl" href="javascript:void(0);">#vtext($!item.mdlSend,'C083')</a></td>
+                <td>#vtext($!item.mdlNtype,'C017')</td>
+				<td>$!item.cpyName</td>
+			<!--	<td>$!item.cpyTelephone</td> -->
+				<td>$!item.ccpName / $!item.ccpTelephone</td>
+				<td>
+					#if($erim.isNotEmpty($!item.cbsOperatorQq))
+						<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cbsOperatorQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a>
+					#else
+						无
+					#end
+				</td>
+				<!--<td><a href="javascript:index.load('$appRoot/reservation/management/page')">预订</a></td>-->
+				<td><a class="chakan_a" href="javascript:void(0);">查看</a></td>
+			</tr>
+			<tr style="display:none;" tid="tr_detail">
+				<td colspan = '9' style='height:0;'>
+					<div class='chakan_block1'>
+						<div class="chakan_jdxx clearfix">
+                        	 	<div class="b_div_h35">
+                                    <ul style="margin:0px;padding:0px;clear:both">
+                                        <li><span class="mr20" style="font-size:16px;">$!item.mdlName</span></li>
+                                    </ul>
+                                    <a class="close_a" href="javascript:void(0);"></a>
+                                </div>
+                                <div class="b_div_h270 pl24" style="text-align:left;">
+                        			<br>#if($erim.isNotEmpty($!item.mdlProvince))
+										<span>领馆受理范围：</span>
+										<pre style="white-space: pre-wrap;word-wrap: break-word;">$!item.mdlProvince</pre>
+										#end
+                        			<br>
+                                </div>
+                        </div>
+					</div>	
+				</td>
+			 </tr>
+			 <tr tid="tr_list" style="display:none;">
+				<td colspan = '9'>
+					<div class='chakan_block'>
+						<div class="chakan_cont clearfix">
+                            <table class="fl_list_g" cellpadding="0" cellspacing="0">
+                				<tr class="fl_list_t">
+                                	<td class="w200">签证有效期</td>
+                					<td class="w150">办理时长</td>
+                					<td class="w150">面签</td>
+                					<td class="w150">停留天数</td>
+                					<td class="w150">入境次数</td>
+                					<td colspan="6" class="date_td">
+										<img width="10" class="first" cid="-1" src="$staticRoot/images/aas_03.png" onclick="search.fiveDate('span_month_${velocityCount}','0','$!{item.id}',$(this).attr('cid'),'MANAGEMENT');">
+										<span class="date_cont" date="$nowDate" id="span_month_$velocityCount"></span>
+										<script>
+											search.fiveDate('span_month_${velocityCount}','0','$!{item.id}',0,'MANAGEMENT');
+										</script>
+										<img width="10" class="last" cid="1" src="$staticRoot/images/aas_05.png" onclick="search.fiveDate('span_month_${velocityCount}','0','$!{item.id}',$(this).attr('cid'),'MANAGEMENT');">
+										##<img width="10" class="first" src="$staticRoot/images/aas_03.png"><span class="date_cont"><a class="jin" href="javascript:;">11/23</a><a href="#">11/24</a><a href="javascript:;">11/25</a><a href="javascript:;">11/26</a><a class="on" href="javascript:;">11/27</a><a href="javascript:;">11/28</a></span><img width="10" class="last" src="$staticRoot/images/aas_05.png">
+									</td>
+                				</tr>
+                				<tr>
+                                	<td class="w200">$!item.mdlValidity月</td>
+                					<td class="w150">$!item.mdlLong个工作日</td>
+                					<td class="w150">#vtext($!item.mdlInterview,'C063')</td>
+                					<td class="w150">$!item.mdlStay天</td>
+                					<td class="w150">#vtext($!item.mdlNum,'C090')</td>
+                					<td class="w90" id="w90_$!{item.id}_0_0"></td>
+									<td class="w90" id="w90_$!{item.id}_0_1"></td>
+									<td class="w90" id="w90_$!{item.id}_0_2"></td>
+									<td class="w90" id="w90_$!{item.id}_0_3"></td>
+									<td class="w90" id="w90_$!{item.id}_0_4"></td>
+									<td class="w90" id="w90_$!{item.id}_0_5"></td>
+                				</tr>
+                            </table>              
+                			<a class="a_zhifu" href="#">预订</a><br><br><br>
+               			 </div>
+					</div>
+				</td>
+			 </tr>
+          #end
+	</table>
+	
+	#parse("common/page.vm")
+</div>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>user index</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/dingdan.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/h5.js"></script>
+</head>
+<body>
+
+	<header class="mb10">
+		<div class="head_cont clearfix">
+			<a href="#"><img class="img_block" src="images/step_03.jpg" title="" alt=""></a>
+			<span class="nav_mini"><a href="#">会员中心</a>|<a href="#">网站首页</a></span>
+		</div>
+	</header>
+	<div class="g_cont">
+		<img class="mb10" src="images/step_05.jpg" title="进度：填写信息" alt="进度：填写信息">
+		<div class="g_lt_l">
+        <div class="g_block_2 mb10">
+				<h3 class="g_tit_1 mb20">联系人信息<span class="sec_inf">登录一键设置联系人信息，<a href="#">立即注册</a>，已是佳佳会员，<a href="#">立即登录</a></span></h3>
+				<div class="form_block pl90"><label>姓名：</label><input class="select_1" type="text" placeholder="联系人姓名"></div>
+				<div class="form_block pl90"><label>手机号码：</label><input type="text" placeholder="接受验证信息和订单号码">
+						 <input type="button" id="btn" class="ml20" value="发送验证码" /> <span class="error">*</span>
+							<script type="text/javascript">
+var wait=60;
+document.getElementById("btn").disabled = false;  
+function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");  
+			o.style.cssText="background-color:#FAAF4B;";        
+            o.value="发送验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+			o.style.cssText="background-color:#c8c8c8;";
+            o.value= "("+ wait + ")重新发送";
+            wait--;
+            setTimeout(function() {
+                time(o)
+            },
+            1000)
+        }
+}
+document.getElementById("btn").onclick=function(){time(this);}
+</script></div>
+				<div class="form_block pl90 mb20 on_error"><label>验证码：</label><input type="text"/> <span class="error">验证码错误请重新输入</span></div>
+			</div>
+                  <div class="g_block_2 mb10">
+            <h3 class="g_tit_1 mb20">订单信息</h3>
+
+            <div class="form_block pl90"><label>入离日期：</label>
+            <input style="margin-left:-6px;" type="text" class="select_2" value="2015-9-10"> 至 <input type="text" class="select_2" value="2015-9-18"></div>
+            <div class="form_block pl90"><label>房间类型：</label>标准房（不含早）</div>
+            <div class="form_block pl90"><label>房间数量：</label><select class="select_3">
+							<option value ="">5</option>
+						</select></div>
+            <div class="g_txt_1 mb10"><label style="margin-right:-86px; margin-left:86px;">入住人姓名：</label>
+            <input style="margin-right:-88px; margin-left:88px;" type="text" class="select_2" placeholder="房间1">
+            <input style="margin-right:-88px; margin-left:88px;" type="text" class="select_2" placeholder="房间2">
+            <input style="margin-right:-88px; margin-left:88px;" type="text" class="select_2" placeholder="房间2"><br>
+            <input style="margin-right:-179px; margin-left:179px; margin-bottom:-10px; margin-top:10px;" type="text" class="select_2" placeholder="房间2">
+            <input style="margin-right:-179px; margin-left:179px; margin-bottom:-10px; margin-top:10px;" type="text" class="select_2" placeholder="房间2">
+            <input style="margin-right:-179px; margin-left:179px; margin-bottom:-10px; margin-top:10px;" type="text" class="select_2" placeholder="房间2">
+           </div>
+           <div class="form_block pl90" style="margin-top:15px; margin-bottom:60px;">
+           <span class="add_mon" style="color:#999; font-size:12px; margin-left:83px;">（请填写实际入住人姓名，每个房间只需填1位）</span></div>       
+            </div>
+            </div>
+            <div class="g_lt_r">
+                <div class="g_block_2 mb10">
+                <h3 class="g_tit_1 mb20">结算详情</h3>
+                <div class="g_txt_1 mb10">
+                <img class="img_block;" style="margin-left:24px;" src="images/tt_1.jpg"></div>
+                <div class="g_txt_1 mb10">
+                <p style="font-size:12px; margin-left:24px;"><a href="#">张家界大峡谷滨海酒店</a>
+                <a href="#" style="margin-left:60px;">修改></a>
+                <br>
+                	床型：双床<br>
+                    楼层：2-8楼<br>
+                    面积：20平米<br>
+                    宽带：免费无线宽带<br>
+                    加床：请提前咨询酒店前台。<br>
+                    地址：金山石化金一东路1号</p>
+                    </div>
+               </div>
+                  <div class="g_block_5 pl18 pr18">
+                    <h3 class="g_tit_2 mb10">结算信息</h3>
+                    <ul class="g_list_1">
+                        <li>成人票<span>188×5×2天</span></li>
+                    </ul>
+                      <p class="add_mon" style="margin-top:30px;"><strong>支付总额</strong><span><em>￥</em>29.9</span></p>
+              </div>
+            </div>
+            <div class="form_block2 pl90 mb50">
+				<p class="g_txt_1"><label><input name="Fruit" type="checkbox" />&nbsp;&nbsp;&nbsp;同意佳佳旅行网服务条款 <a href="#">查看条款</a> 并核实你所填写信息无误 </label></p><br>
+				<input style="margin-right:-150px; margin-left:150px;" type="submit" value="提交信息">
+			</div>
+		</div>
+		<div class="cb"></div>
+		<footer>
+			<p>Copyright © 2002-2014  版权所有  北京佳旅联合国际旅行社有限公司   苏ICP证B2-20100204  旅行社业务许可证：L-JS-CJ00070	</p>
+		</footer>
+	</div>
+	
+</body>
+</html>
+ 

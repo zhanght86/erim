@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>我的动态</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        <a class="left_btn">&nbsp;</a>
+        我的动态
+        <a class="right_btn" href="$appRoot/addRecordsPage">
+            <img src="$staticRoot/img/add_btn.png"/>
+        </a>
+    </div>
+    <!-- content -->
+    <div class="content">
+        <div class="record_top">
+			<!--
+            <img src="$staticRoot/img/photo.png"/> -->
+			<span style="margin:20px 0 0 30px;font-size:20px;">$userRealName</span>
+        </div>
+        <div>
+			<!-- 设置当前月 -->
+			#set($mm=0)
+			#foreach($item in $guideRecord)
+				<div class="record">
+                    <div class="record_left_padding_1">
+						#if($mm!=$date.format('MM',$!item.grdCreatetime))
+                            <div class="month">
+                                <span style="font-size: 20px;">$!date.format('MM',$!item.grdCreatetime)</span>
+                                <span style="font-size: 12px;">月</span>
+                            </div>
+    						#set($mm=$date.format('MM',$!item.grdCreatetime))
+    					#end
+                    </div>
+                    <div class="record_split_1"></div>
+                    <div class="record_right_1">
+                        <div class="day">
+                            <span style="font-size: 12px;">$!date.format('dd',$!item.grdCreatetime)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="record">
+                    <div class="record_left_padding_2"></div>
+                    <div class="record_split_2"></div>
+                    <div class="record_right_2">
+                        <div class="record_card">
+                            <div class="record_content">$item.grdRemark</div>
+                            <div class="record_main">
+								#if($item.grdImg1 != '')
+									<img class="record_pic" src="$staticRoot$item.grdImg1" />
+								#end
+								#if($item.grdImg2 != '')
+									<img class="record_pic" src="$staticRoot$item.grdImg2" />
+								#end
+								#if($item.grdImg3 != '')
+									<img class="record_pic" src="$staticRoot$item.grdImg3" style="margin-right:0;"/>
+								#end
+                            </div>
+                            <div class="record_time">
+                                <a>
+                                    <img class="remove_btn" id="$item.id" src="$staticRoot/img/remove.png" />
+                                </a>
+                                $!date.format('HH:mm',$!item.grdCreatetime)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			#end
+            <div class="record_bottom_padding"></div>
+        </div>
+    </div>
+    <div id="remove_popup" class="popup_wraper">
+        <div class="tanchu">
+            <div class="biaoti">是否删除？</div>
+            <div class="wenben anniu1">
+                <div class="anniu">
+                    <a onclick='$("#remove_popup").hide();' class="shuxian" style="color:#900">确定</a>
+                </div>
+                <div class="anniu">
+                    <a onclick='$("#remove_popup").hide();'>取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3_focus.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5.png"/>
+        </a>
+    </div>
+	<script>
+		guide.records.init();
+		guide.records.dele();
+    </script>
+</body>
+</html>

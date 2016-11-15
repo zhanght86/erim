@@ -1,0 +1,411 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+<script type="text/javascript">
+	function tooltip() { 
+ 		/* CONFIG */  
+  		xOffset = 100;
+      	yOffset = 20;  
+ 		/* END CONFIG */  
+ 		$("img[cid='bigger']").hover(function(e) {     //鼠标要移动的图片        
+  			this.t = this.src;          
+  			$("body").append("<div id='tooltip'>" +"</div>");
+  			$("#tooltip")
+   			.css("top",(e.pageY - xOffset) + "px")
+           	.css("left",(e.pageX + yOffset) + "px")
+           	.css("background-image","url("+this.t+")")
+           	.css("-moz-background-size","100% 100%")
+           	.css("background-size","100% 100%")
+           	.css("height","260px")
+   			.css("padding-left","50px")
+           	.css("border","2px solid #696")
+           	.css("width","310px")
+           	.css("position","absolute")
+           	.fadeIn("fast");  
+    	}, function() {
+      		this.title = this.t;  
+      		$("#tooltip").remove();
+        }); 
+	
+ 		$("img[cid='bigger']").mousemove(function(e){
+  			$("#tooltip")
+   			.css("top",(e.pageY - xOffset) + "px")
+   			.css("left",(e.pageX + yOffset) + "px")
+   			.fadeIn("slow");
+ 		});   
+	};
+	
+	$(document).ready(function(){
+ 		tooltip();
+	});
+</script>
+<div class="rdivv">
+	<div class="newadd">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/htfood.png">
+			<span>修改套餐</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<form method="post" id="form1">
+			<input type="hidden" value="$cafeteriaPackage.id" name="id" />
+			<div class="newadd_ct">
+				<div class="newadd_ctl">
+					<span>套餐编号：</span>
+					<div class="newadd_ctlr">
+						$!cafeteriaPackage.cpeCode
+					</div>
+				</div>
+				<div class="newadd_ctl">
+					<span>套餐名称：</span>
+					<div class="newadd_ctlr">
+						<input type="text" name="cpeName" class="validate[required,maxSize[80]]"  value="$!cafeteriaPackage.cpeName"><span style="color:red;margin-left:10px;">*</span>
+					</div>
+				</div>
+				<div class="newadd_ctl">
+					<span>适用人数：</span>
+					<div class="newadd_ctlp">
+						<div class="newadd_ctlpb">
+							<input ty pe="text" name="cpePersonMin"  class="validate[required,custom[integer],max[100000]]" value="$!cafeteriaPackage.cpePersonMin">
+							<span>人</span>
+						</div>
+						<span>至</span>
+						<div class="newadd_ctlpb">
+							<input type="text" name="cpePersonMax" class="validate[required,custom[integer],min[1],max[100000],funcCall[comparison]]" value="$!cafeteriaPackage.cpePersonMax">
+							<span>人</span>
+						</div>
+						<span style="color:red">*</span>
+					</div>
+				</div>
+				<div class="djj_ctl">
+					<span>有效期：</span>
+					<div class="djj_ctlrq">
+						<input type="text" name="cpeStartTime"  value="$!cafeteriaPackage.cpeStartTime" id="cpeStartTime" onclick="WdatePicker({minDate:'%y-%M-%d'})" class="validate[required]"><span>至</span>
+						<input type="text" name="cpeEndTime"   value="$!cafeteriaPackage.cpeEndTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'cpeStartTime\',{m:1});}'})" class="validate[required]"><span style="color:red">*</span>
+					</div>
+				</div>
+				<div class="carinfo_ctbl" style="margin-bottom:-10px;">
+        			<span></span>
+        			<div class="carinfo_ctblra" style="width:390px;">
+        				<span style="margin-left:-72px;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该套餐将会下线</span>
+        			</div>
+				</div>
+				<div class="djj_ctll">
+					<span>套餐内容：</span>
+					<div class="zcp_box">
+						<!-- 菜品 -->
+						#set($iiii = 0)
+						<!-- 循环开始 -->
+						#foreach($item in $dishesList)
+						<div class="ncp_box clearfix">
+							<input type="hidden" name="cpdId" value="$!item.id"/>
+							<div class="cp_num">菜品<span>$!{velocityCount}</span>：</div>
+							<div class="cp_box">
+								<input type="hidden" name="number" value="$item.foodList.size()"/>
+								<table id="tableid" class="cp_list" cellpadding="0" cellspacing="0">
+									<tr>
+										<th width="85">菜品类型</th>
+										<th width="108">菜品名称</th>
+										<th width="107">数量/规格</th>
+										<th width="104">菜品图片</th>
+									</tr>
+									#foreach($foodItem in $item.foodList)
+									#set($iiii = $iiii+1)
+									<tr>
+										<td><input type="hidden" name="cpfId" value="$!foodItem.id"/><input type="text" name="cpfNtype" value="$!foodItem.cpfNtype" class="validate[required,maxSize[30]]"></td>
+										<td><input type="text" name="cpfName" value="$!foodItem.cpfName" class="validate[required,maxSize[30]]"></td>
+										<td><input type="text" name="cpfNumber" placeholder = '单位：份/碗/杯' value="$!foodItem.cpfNumber" class="validate[required,maxSize[30],max[100000]]"></td>
+										<td><span class="tu_f"><center>
+											#if("$!foodItem.cpfImg1" != "")
+												<input type="hidden" name="cpfImg1" value="$!foodItem.cpfImg1" id="cpeCafeteriaImg$iiii"/>
+                            					<input type="file" name="file" id="uploadify$iiii" contenteditable="false" size="30"/>
+                            					<img cid="bigger" class="img200" style="width:40px;height:26px;" src="$staticFileRes$!foodItem.cpfImg1" />
+												<a href="javascript:uploadDelete('uploadify$iiii','filespan$iiii','$foodItem.cpfImg1','cpeCafeteriaImg$iiii');">删除图片</a>
+                            				#else
+                                    			<input name="cpfImg1" type="hidden" id="cpeCafeteriaImg$iiii"/>
+                            					<input type="file" name="file" id="uploadify$iiii" contenteditable="false" size="30" />
+                            				#end
+                                				<span id="filespan$iiii"></span>
+                                				<div id="fileQueue$iiii"></div>
+											</center></span>
+											#if($!{velocityCount} == $!{item.foodList.size()})
+												<a class="c_add" href="javascript:void(0);">+</a>
+											#else
+												<a class="c_add" cid="$!foodItem.id" style="border:1px solid #ccc;color:#ccc" href="javascript:void(0);">-</a>
+											#end
+										</td>
+									</tr>
+									<script>
+										uploadify('uploadify$iiii','cpeCafeteriaImg$iiii','filespan$iiii','fileQueue$iiii');
+                                    	#if("$!foodItem.cpfImg1" != "")
+                                    		$("#uploadify$iiii").hide();
+                                    	#end
+									</script>
+									#end
+								</table>
+								<div class="cp_top  clearfix">
+									<div class="cp_select">
+										可选<span class="cp_sele_sr mr20 ">
+											<input type="text" name="cpdAvenue" value="$!item.cpdAvenue" class="gs_num validate[required,custom[integer],min[1],max[100000],funcCall[comparisonCai]]" />道
+										</span>
+										单价<span class="cp_sele_sr cp_sele_sr_w100">
+											<input type="text" name="cpdPrice" value="$!item.cpdPrice" class="prce_num  validate[required,custom[integer],min[1],max[100000]]" />元/道
+										</span>
+									</div>
+									#if($!{velocityCount} == $!{dishesList.size()})
+										<a class="cp_add" href="javascript:void(0);">添加菜品</a>
+									#else
+										<a class="cp_add" style="background:#ccc" cid="$!item.id" href="javascript:void(0);">删除菜品</a>
+									#end
+								</div>
+							</div>
+						</div>
+						#end
+    					<!-- 循环结束 -->
+    					<!--其他-->
+						<div class="cp_num">其他：</div>
+						<div class="cp_box">
+							<table class="cp_list qt_list" cellpadding="0" cellspacing="0">
+								<tr>
+									<th width="85">名称</th>
+									<th width="108">数量/规格</th>
+									<th width="107">价格(元)</th>
+								</tr>
+								<!-- 循环其它菜品 -->
+								#foreach($item in $qitaList)
+									<input type="hidden" name="cpfId" value="$!item.id">
+									<input type="hidden" value="其它" name="cpfNtype">
+									<tr>
+										<td><input type="text" name="cpfName" value="$!item.cpfName" class="validate[maxSize[30]]"></td>
+										<td><input type="text" name="cpfNumber" placeholder = '单位：份/碗/杯' value="$!item.cpfNumber" class="validate[maxSize[30],max[100000]]"></td>
+										<td><input type="text" name="cpfPrice" value="$!item.cpfPrice" class="qt_price validate[maxSize[30],max[100000]]">
+											#if($!{velocityCount} == $!{qitaList.size()})
+												<a class="qt_add" href="javascript:void(0);">+</a>
+											#else
+												<a class="qt_add" cid="$!item.id" style="border:1px solid #ccc;color:#ccc" href="javascript:void(0);">-</a>
+											#end
+										</td>
+									</tr>
+								#end
+								<!-- 循环其它菜品 -->
+							</table>
+						</div>
+						<p class="zprice_txt mr35" >套餐单点总价：<span>$!cafeteriaPackage.cpeContentPrice</span>元</p>
+						<input type="hidden" name="cpeContentPrice" value="$!cafeteriaPackage.cpeContentPrice" />
+					</div>
+    			</div>
+				<div class="newfood_ctrbl" style="width:795px;">
+        			<span class="newfood_ctrbll">套餐推广图：</span>
+        			<div class="input_right" style="margin-left:117px;margin-top:1px;">
+						#vfile('cpeImg5','cpeImg5',$!cafeteriaPackage.cpeImg5)
+        			</div>
+        		</div>
+				<div class="djj_ctll">
+					<span>套餐说明：</span>
+					<div class="djj_ctlrql">
+						<textarea name="cpeIntroduction" class="validate[required,maxSize[1000]] ">$!cafeteriaPackage.cpeIntroduction</textarea><span style="color:red;margin-left:10px;">*</span>
+					</div>
+				</div>
+				<div class="djj_ctll">
+					<span>购买须知：</span>
+					<div class="djj_ctlrql">
+						<textarea name="cpeBuyKnow" class="validate[maxSize[1000]] ">$!cafeteriaPackage.cpeBuyKnow</textarea>
+					</div>
+				</div>
+				<div class="djj_ctll">
+					<span>温馨提示：</span>
+					<div class="djj_ctlrql">
+						<textarea name="cpeFriendlyTips" class="validate[maxSize[1000]] ">$!cafeteriaPackage.cpeFriendlyTips</textarea>
+					</div>
+				</div> 
+				<!--
+				<div class="djj_ctll">
+					<span>预约提醒：</span>
+					<div class="djj_ctlrql">
+						<textarea name="cpeMessage" class="validate[maxSize[200]] ">$!cafeteriaPackage.cpeMessage</textarea>
+					</div>
+				</div>
+				
+				<div class="djj_ctll">
+					<span>商家其他服务：</span>
+					<div class="djj_ctlrql">
+						<textarea name="cpeService" class="validate[maxSize[500]] ">$!cafeteriaPackage.cpeService</textarea>
+					</div>
+				</div> -->
+				<div class="carinfo_ctbl">
+					<span></span>
+					<div class="carinfo_ctblrbtn pb80">
+						<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/cafeteria/package/update','$appRoot/cafeteria/package/list');">提交</button>
+						<button type="button" class="carinfo_qu" onclick="index.load('$appRoot/cafeteria/package/list');">返回</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		var i_index = $iiii +  1;
+		
+		// 当点击添加菜品时
+    	$(".zcp_box").on("click",".cp_add",function(){
+    		if($(this).text()=="添加菜品"){
+    			$(this).text('删除菜品').css("background-color","#ccc");
+    			$(this).parent().parent().parent().after("<div class='ncp_box clearfix'><div class='cp_num'>菜品<span>1</span>：</div><div class='cp_box'><input type='hidden' name='cpdId' value=''/><input type='hidden' name='number' value='1'/><table class='cp_list' cellpadding='0' cellspacing='0'><tr><th width='85'>菜品类型</th><th width='108'>菜品名称</th><th width='107'>数量/规格</th><th width='104'>菜品图片</th></tr><tr><td><input type='hidden' name='cpfId' value=''/><input type='text' name='cpfNtype' class='validate[required,maxSize[30]]'></td><td><input type='text' name='cpfName' class='validate[required,maxSize[30]]'></td><td><input type='text' name='cpfNumber' class='validate[required,maxSize[30],max[100000]]'></td><td><div class='tu_f'><center><input name='cpfImg1' type='hidden' id='cpeCafeteriaImg"+i_index+"'/><input name='file' id='uploadify"+i_index+"' contenteditable='false' size='30' type='file' /><span id='filespan"+i_index+"'></span><div id='fileQueue"+i_index+"'></div></center></div><a class='c_add' href='javascript:void(0);'>+</a></td></tr></table><div class='cp_top  clearfix'><div class='cp_select'>可选<span class='cp_sele_sr mr20'><input class='gs_num' name='cpdAvenue' type='text'>道</span>单价<span class='cp_sele_sr cp_sele_sr_w100'><input class='prce_num' name='cpdPrice' type='text'>元/道</span></div><a class='cp_add' href='javascript:void(0);'>添加菜品</a></div></div></div>");
+    			lengthnum();
+    			addnum();
+				
+				//上传图片
+    			uploadify('uploadify'+i_index,'cpeCafeteriaImg'+i_index,'filespan'+i_index,'fileQueue'+i_index);
+    			i_index ++;
+    		}else{
+				var id = $(this).attr("cid");
+				if(id != undefined){
+					var url = "$appRoot/cafeteria/package/deleteDishes?id="+id;
+					//删除
+					$.post(url,function(){},'json');
+				}
+			
+    			$(this).parent().parent().parent().remove();lengthnum();
+    			addnum();
+    		}
+    	})
+		
+		//添加菜
+    	$(".zcp_box").on("click",".c_add",function(){
+			var number = $(this).parents(".cp_box").find("table tr").length;
+    		if($(this).text()=="+"){
+    			$(this).text('-').css("color","#ccc");
+    			$(this).css("border-color","#ccc");
+    			$(this).parent().parent().after("<tr><td><input type='hidden' name='cpfId' value=''/><input type='text' name='cpfNtype' class='validate[required,maxSize[30]]'></td><td><input type='text' name='cpfName' class='validate[required,maxSize[30]]'></td><td><input type='text' name='cpfNumber' placeholder = '单位：份/碗/杯' class='validate[required,maxSize[30],max[100000]]'></td><td><div class='tu_f'><center><input name='cpfImg1' type='hidden' id='cpeCafeteriaImg"+i_index+"'/><input name='file' id='uploadify"+i_index+"' contenteditable='false' size='30' type='file' /><span id='filespan"+i_index+"'></span><div id='fileQueue"+i_index+"'></div></center></div><a class='c_add' href='javascript:void(0);'>+</a></td></tr>");
+    			//上传图片
+    			uploadify('uploadify'+i_index,'cpeCafeteriaImg'+i_index,'filespan'+i_index,'fileQueue'+i_index);
+    			i_index ++;
+				$(this).parents(".cp_box").find("input[name='number']").attr("value",number);
+    		}else{
+				var id = $(this).attr("cid");
+				if(id != undefined){
+					var url = "$appRoot/cafeteria/package/deleteDishesFood?id="+id;
+					//删除
+					$.post(url,function(){},'json');
+				}
+				number = number - 2;
+				$(this).parents(".cp_box").find("input[name='number']").attr("value",number);
+				$(this).parent().parent().remove();
+			}
+    	})
+		
+    	$(".zcp_box").on("click",".qt_add",function(){
+    		if($(this).text()=="+"){
+    			$(this).text('-').css("color","#ccc");
+    			$(this).css("border-color","#ccc");
+    			$(this).parent().parent().after("<tr><td><input type='hidden' name='cpfId' value=''><input type='hidden' value='其它' name='cpfNtype'><input type='text' name='cpfName' class='validate[maxSize[30]]'></td><td><input type='text' name='cpfNumber' placeholder = '单位：份/碗/杯' class='validate[maxSize[30],max[100000]]'></td><td><input class='qt_price' name='cpfPrice' class='validate[maxSize[30],max[100000]]' type='text'><a class='qt_add' href='javascript:void(0);'>+</a></td></tr>");
+    		}else{
+				var id = $(this).attr("cid");
+				if(id != undefined){
+					var url = "$appRoot/cafeteria/package/deleteDishesFood?id="+id;
+					//删除
+					$.post(url,function(){},'json');
+				}
+				
+    			$(this).parent().parent().remove();
+    			addnum();
+    		}
+    	})
+	
+    	function lengthnum(){
+			var n=$(".ncp_box").length;
+    		if(n > 1) {
+				for(var i = 1; i < n; i++) {
+    				$(".ncp_box").each(function() {
+    					var ni=$(this).index() + 1;
+    					$(this).children(".cp_num").children("span").html(ni);
+    				});
+				}
+			} else {
+				$(".cp_num").children("span").html(1);
+			}
+    	}
+
+    	$(".zcp_box").on("input propertychange",".cp_sele_sr input",function(){
+    		addnum();
+    	})
+    	$(".zcp_box").on("input propertychange",".qt_price",function(){
+    		addnum();
+    	})
+    })
+	
+	function addnum(){
+		a=0;
+		b=0;
+		c=0;
+		nn=0;
+		
+		for(var ii=0;ii<$(".ncp_box").length;ii++) {
+			if($(".ncp_box").eq(ii).find(".gs_num").val() == ""){
+				a=0;
+			} else {
+				a=$(".ncp_box").eq(ii).find(".gs_num").val();
+			}
+			if($(".ncp_box").eq(ii).find(".prce_num").val() == "") {
+				b=0;
+			} else {
+				b=$(".ncp_box").eq(ii).find(".prce_num").val();
+			}
+			nn=a*b;
+			c+=nn;
+		}
+		
+		var aa=0;
+		for(var dd=0;dd<$(".qt_price").length;dd++) {
+			if($(".qt_price").val() == "") {
+				aa=0;
+			} else {
+				aa=parseInt($(".qt_price").eq(dd).val());
+			}
+			c+=aa;
+		}
+		
+		$(".zprice_txt span").text(c);
+		$("input[name='cpeContentPrice']").val(c);
+	}
+	
+    $(".newadd_box .newadd_boxl a").live("click",function(){
+    	if($(this).text()=="+"){
+        	$(this).text('-').css("background-color","#ccc");
+            var objn=$(this).parent().children().length;
+            $(this).parent().after("<div class='newadd_boxl'><input type='text' class='newadd_boxla validate[required]'><input type='text' class='newadd_boxla validate[required]'><input type='text' class='newadd_boxlc validate[required,maxSize[5]]'><div class='newadd_boxld'><input type='text'><span>浏览图片</span></div><a href='javascript:void(0)' title=''>+</a></div>");
+        }else{
+        	$(this).parent().remove();
+        }
+	});
+	
+	//比较
+	function comparison(field, rules, i, options){
+        var cpePersonMin    = $("input[name='cpePersonMin']").val();
+		var cpePersonMax = $("input[name='cpePersonMax']").val();
+		if(parseInt(cpePersonMin)>=parseInt(cpePersonMax)){
+            return '适用人数，最多不能小于最少人数';
+        }
+    }
+	
+	function comparisonCai(field, rules, i, options) {
+		//var a =$("#tableid tr").length;
+		var a =  field.parents(".cp_box").find("table tr").length;
+		//获取几道菜
+		var b= field.val();
+		if(a-1 < b) {
+			return '输入的道数超过了添加菜的数量';
+		}
+	}
+	
+	/*$("input[name=cpeContentNum]").blur(function(){
+		//获取+的行数	
+		var a =$("#tableid tr").length;
+		//获取几道菜
+		var b=$("input[name=cpeContentNum]").val();
+		if(a-1<b)
+		{
+			return "输入的道数超过了添加菜的数量";
+		}
+	})*/
+</script>				

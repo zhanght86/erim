@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+
+	<!-- 打开aop 注解 -->
+    <aop:aspectj-autoproxy/>
+    <bean id="logAspect" class="com.erim.sz.system.aspect.SellSystemLogAspect" />  
+    
+    <!-- 加入Spring注解自动装配管理 -->
+    <context:component-scan base-package="com.erim.sz.*" />
+
+    <!-- 加入SpringMVC注解管理 -->
+    <mvc:annotation-driven />
+
+    <!-- 可以使用URL请求资源，防止web.xml中servlet-mapping过滤 -->
+    <bean id="spe" class="com.erim.utils.spring.StaticPathExposer" init-method="init" />
+    <mvc:resources mapping="#{spe.staticMapping}/**" location="/static/" />
+    <mvc:resources mapping="/crossdomain.xml" location="/crossdomain.xml" />
+
+    <!-- 全局拦截器,返回staticRoot -->
+    <mvc:interceptors>
+        <bean class="com.erim.sz.web.filter.MyFilter" />
+    </mvc:interceptors>
+    
+    <!-- 视图控制器VM，不需要prefix，于velocityConfigurer中设置 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+    	<!-- 加载 toolbox配置文件 -->
+        <property name="toolboxConfigLocation" value="/WEB-INF/velocityToolBox.xml" />
+	
+        <property name="suffix"><value>.vm</value></property>
+        <property name="contentType"><value>text/html;charset=utf-8</value></property>
+    </bean>
+    
+    <!-- Use the LocalValidatorFactoryBean to configure a default JSR-303 Validator as a Spring bean -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+    
+    <!-- 使用hibernate的ValidationMessages配置文件作为properties文件的位置 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames" value="ValidationMessages" />
+    </bean>
+    
+	<!-- 更改@ResponseBody默认编码为utf8，原默认编码为iso-8859-1-->
+	<bean class="com.erim.utils.spring.UTF8StringBeanPostProcessor" />
+</beans>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="companydetail">
+	<sql id="sql_query">
+		<where>
+			1=1
+			<if test="cpyRoe != null   and cpyRoe != ''">               and cpy_roe            like 	"%"#{cpyRoe}"%"</if>
+			<if test="cpyBrand != null and cpyBrand != ''">            and cpy_brand            like  	"%"#{cpyBrand}"%"</if>
+			<if test="cpyName != null  and cpyName != ''">             and cpy_name             like 	"%"#{cpyName}"%"</if>
+		</where>
+	</sql>
+	
+	<select id="selectPageSell" resultType="companyDetailBean">
+		SELECT
+			id 					  AS id,
+			cpy_code		      AS cpyCode,
+			cpy_name 			  AS cpyName,
+			cpy_telephone		  AS cpyTelephone,
+			cpy_fax 			  AS cpyFax,
+			cpy_email 			  AS cpyEmail,
+			cpy_province		  AS cpyProvince,
+			cpy_city 			  AS cpyCity,
+			cpy_county			  AS cpyCounty,
+			cpy_address			  AS cpyAddress,
+			cpy_nature			  AS cpyNature,
+			cpy_x 				  AS cpyX,
+			cpy_y 				  AS cpyY,
+			cpy_img_permit1       AS cpyImgPermit1,
+			cpy_img_permit2		  AS cpyImgPermit2,
+			cpy_img_permit3 	  AS cpyImgPermit3,
+			cpy_custom_id 		  AS cpyCustomId,
+			cpy_createdate 		  AS cpyCreatedate,
+			cpy_createip		  AS cpyCreateip,
+			cpy_roe 			  AS cpyRoe,
+			cpy_ntype 			  AS cpyNtype,
+			cpy_is_through		  AS cpyIsThrough,
+			cpy_brand			  AS cpyBrand,
+			cpy_is_people 		  AS cpyIsPeople,
+			cpy_is_phone 		  AS cpyIsPhone,
+			cpy_is_operation 	  AS cpyIsOperation,
+			cpy_is_operationphone AS cpyIsOperationphone,
+			cpy_is_qq 			  AS cpyIsQq,
+			cpy_is_inland 		  AS cpyIsInland,
+			cpy_external 		  AS cpyExternal,
+			cpy_foreign			  AS cpyForeign,
+			cpy_foreign_city 	  AS cpyForeignCity
+		FROM
+			company_detail
+		
+		<include refid="sql_query" />
+	</select>
+	
+	<select id="selectPageSellCount" resultType="int">
+		SELECT
+			count(1)
+		FROM	
+			company_detail
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 锁定公司 -->
+	<update id="lockCpy">
+		UPDATE 
+			company_detail
+		SET
+			cpy_is_lock  = '1'
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 支付完成后 解除公司锁定 -->
+	<update id="unlock">
+		UPDATE 
+			company_detail
+		SET
+			cpy_is_lock = ''
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 增加企业基础信息 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO 
+			company_detail (
+				cpy_name,
+				cpy_brand,
+				cpy_telephone,
+				cpy_fax,
+				cpy_email,
+				cpy_is_inland,
+				cpy_province,
+				cpy_city,
+				cpy_county,
+				cpy_external,
+				cpy_foreign,
+				cpy_foreign_city,
+				cpy_address,
+				cpy_img,
+				cpy_x,
+				cpy_y,
+				cpy_createdate,
+				cpy_createip,
+				cpy_roe,
+				cpy_ntype,
+				cpy_is_through,
+				yj_user_code
+			) VALUES (
+				#{cpyName},
+				#{cpyBrand},
+				#{cpyTelephone},
+				#{cpyFax},
+				#{cpyEmail},
+				#{cpyIsInland},
+				#{cpyProvince},
+				#{cpyCity},
+				#{cpyCounty},
+				#{cpyExternal},
+				#{cpyForeign},
+				#{cpyForeignCity},
+				#{cpyAddress},
+				#{cpyImg},
+				#{cpyX},
+				#{cpyY},
+				#{cpyCreatedate},
+				#{cpyCreateip},
+				#{cpyRoe},
+				#{cpyNtype},
+				#{cpyIsThrough},
+				#{yjUserCode}
+			)
+	</insert>
+	
+	<!-- 修改酒店基础信息 -->
+	<update id="update">
+		UPDATE
+			company_detail
+		SET
+			cpy_name 			= #{cpyName},
+			cpy_brand 			= #{cpyBrand},
+			cpy_telephone 		= #{cpyTelephone},
+			cpy_fax 			= #{cpyFax},
+			cpy_email 			= #{cpyEmail},
+			cpy_is_inland 		= #{cpyIsInland},
+			cpy_province 		= #{cpyProvince},
+			cpy_city 			= #{cpyCity},
+			cpy_county 			= #{cpyCounty},
+			cpy_external 		= #{cpyExternal},
+			cpy_foreign 		= #{cpyForeign},
+			cpy_foreign_city 	= #{cpyForeignCity},
+			cpy_address 		= #{cpyAddress},
+			cpy_img 			= #{cpyImg},
+			cpy_x 				= #{cpyX},
+			cpy_y 				= #{cpyY}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 根据ID查询一条信息 -->
+	<select id="selectBeanById" resultType="companyDetailBean">
+		SELECT
+			company_detail.id       AS id,
+			cpy_code        		AS cpyCode,
+			cpy_name        		AS cpyName,
+			cpy_brand       		AS cpyBrand,
+			cpy_telephone   		AS cpyTelephone,
+			cpy_fax         		AS cpyFax,
+			cpy_email       		AS cpyEmail,
+			cpy_is_inland			AS cpyIsInland,
+			cpy_province    		AS cpyProvince,
+			cpy_city        		AS cpyCity,
+			cpy_county      		AS cpyCounty,
+			cpy_address     		AS cpyAddress,
+			cpy_nature      		AS cpyNature,
+			cpy_img         		AS cpyImg,
+			cpy_x           		AS cpyX,
+			cpy_y           		AS cpyY,
+			cpy_img_permit1 		AS cpyImgPermit1,
+			cpy_img_permit2 		AS cpyImgPermit2,
+			cpy_img_permit3 		AS cpyImgPermit3,
+			cpy_custom_id   		AS cpyCustomId,
+			cpy_createdate  		AS cpyCreatedate,
+			cpy_createip    		AS cpyCreateip,
+			cpy_roe         		AS cpyRoe,
+			cpy_ntype       		AS cpyNtype,
+			cpy_is_through  		AS cpyIsThrough,
+		   	cpy_through_time 		AS cpyThroughTime,
+		   	cpy_is_lock				AS cpyIsLock,
+        	price_service.pse_is_sx AS pseIsSx,
+        	person.ccp_name			AS ccpName,
+			person.ccp_telephone	AS ccpTelephone,
+			person.ccp_qq			AS ccpQq
+		FROM
+			company_detail
+		LEFT JOIN
+			price_service
+		ON
+			price_service.cpy_id = company_detail.id
+		LEFT JOIN
+			company_contact_person person
+		ON	
+			company_detail.id = person.cpy_id
+		WHERE
+			company_detail.id = #{id}
+	</select>
+	
+	
+	<select id="selectPageCafeteria" resultType="companyDetailBean">
+		SELECT
+			id,
+			cpy_code        AS cpyCode,
+			cpy_name        AS cpyName,
+			cpy_telephone   AS cpyTelephone,
+			cpy_fax         AS cpyFax,
+			cpy_email       AS cpyEmail,
+			cpy_province    AS cpyProvince,
+			cpy_city        AS cpyCity,
+			cpy_county      AS cpyCounty,
+			cpy_address     AS cpyAddress,
+			cpy_nature      AS cpyNature,
+			cpy_x           AS cpyX,
+			cpy_y           AS cpyY,
+			cpy_img_permit1 AS cpyImgPermit1,
+			cpy_img_permit2 AS cpyImgPermit2,
+			cpy_img_permit3 AS cpyImgPermit3,
+			cpy_custom_id   AS cpyCustomId,
+			cpy_createdate  AS cpyCreatedate,
+			cpy_createip    AS cpyCreateip,
+			cpy_roe         AS cpyRoe,
+			cpy_ntype       AS cpyNtype,
+			cpy_is_through  AS cpyIsThrough
+		FROM
+			company_detail
+		WHERE
+			cpy_ntype = #{cpyCity}
+	</select>
+	
+	<select id="selectPageCafeteriaCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			company_detail
+		WHERE
+			cpy_ntype = #{cpyCity}
+	</select>
+</mapper>

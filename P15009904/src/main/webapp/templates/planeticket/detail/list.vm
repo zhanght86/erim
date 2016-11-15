@@ -1,0 +1,252 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/planeticket/planeticket.css">
+<script type="text/javascript">
+	//初始化出发省市县
+	regUtil.initProvince(0,'ptdStartProvince','ptdStartCity','');
+	
+	/*---------搜索项留下输入内容---------*/
+	//出发是否为国际和国内
+	var a = $("input[name='ptdStartState']:checked").val();
+	//为国内时
+	if(a == '01'){
+		$('#start_gn').show();//国内显示
+		$('#start_gj').hide();//国际/港澳台隐藏
+		var prive = $("select[name='ptdStartProvince']").val();//获取省的值
+		var city = $("input[name='start_city']").val();//获取市的值
+		//如果省不为空，初始化省市
+		if(prive != ''){
+			regUtil.initProvince(prive,'ptdStartProvince','ptdStartCity','',city,0);
+		}else{
+		//如果为空，初始化省市
+			regUtil.initProvince(0,'ptdStartProvince','ptdStartCity','');
+		}
+	//为国际时
+	}else if(a == '02'){
+		$('#start_gn').hide();//国内隐藏
+		$('#start_gj').show();//国际/港澳台显示
+		//初始化省市
+		regUtil.initProvince(0,'ptdStartProvince','ptdStartCity','');
+	}else{
+		$('#start_gn').show();//国内显示
+		$('#start_gj').hide();//国际/港澳台隐藏
+		var prive = $("select[name='ptdStartProvince']").val();//获取省的值
+		var city = $("input[name='start_city']").val();//获取市的值
+		//如果省不为空，初始化省市
+		if(prive != ''){
+			regUtil.initProvince(prive,'ptdStartProvince','ptdStartCity','',city,0);
+		}else{
+		//如果省为空，初始化省市
+			regUtil.initProvince(0,'ptdStartProvince','ptdStartCity','');
+		}
+	}
+	//获取国际港澳台的值
+	var c = $("input[name='ptdStartTown']:checked").val();
+	//如果为国际的话
+	if(c == '04'){
+		$('#county').show();//国家城市显示
+	}else{
+	//如果不为空的话
+		$('#county').hide();//国家城市显示
+	}
+	/*-----出发国内国际港澳台显示------*/
+	$('#start_gj').hide();//默认国际/港澳台隐藏
+	$('#county').hide();//默认国家和城市隐藏
+	//国内时候
+	$('#ptdStartState01').click(function() {
+		$('#start_gn').show();//国内显示
+		$('#start_gj').hide();//国际/港澳台隐藏
+		$('#county').hide();//默认国家和城市隐藏
+	});
+	//国际时候
+	$('#ptdStartState02').click(function() {
+		$('#start_gn').hide();//国内隐藏
+		$('#start_gj').show();//国际/港澳台显示
+	});
+	//国家和城市的隐藏和切换
+	$("input[name='ptdStartTown']").change(function() {
+	var a = $("input[name='ptdStartTown']:checked").val();
+		if (a == '04') {
+    		$('#county').show();
+		}else{	
+			$('#county').hide();
+		}
+	});
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+   autoquery();
+});
+function autoquery(){
+ 	var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jp_03.png" alt="机票管理" title="机票管理">机票管理</p>
+	<div class="g_line mb20"></div>
+	<input type="hidden" name="start_city" value="$!planeticketDetail.ptdStartCity" />
+	<form method="post" id="form1">
+		<div class="input_block clearfix">
+			<div class="label_left b_label_left"><b style="font-weight:400">航程类型：</b></div>
+    		<div class="input_right">
+    			<b style="font-weight:400">
+        			<label class="w130"><input type="radio" name="hcType" value="01" checked /> 单程-直飞航班</label>
+        			<label class="w130"><input type="radio" name="hcType" value="02" /> 单程-中转航班</label>
+        			<label class="w130"><input type="radio" name="hcType" value="03" /> 往返-直飞/中转</label>
+				</b>
+    		</div>
+    	</div>
+		<div class="g_line mb20"></div>
+		<div class="input_block clearfix">
+			<div class="label_left b_label_left" style="font-weight:400">出发城市：</div>
+			<div class="input_right input_right_wauto">
+				<label>
+    			    <input type="radio" name="ptdStartState" id="ptdStartState01" value="01" #if($planeticketDetail.ptdStartState == '01') checked #end> 国内
+                </label>
+				<label>
+    			    <input type="radio" name="ptdStartState" id="ptdStartState02" value="02" #if($planeticketDetail.ptdStartState == '02') checked #end> 国际/港澳台
+                </label>
+			</div>
+        </div>
+        <div class="input_block clearfix">
+			<div class="input_right input_right_wauto" id="start_gn" >
+				<!--<span style="margin-left:1px;">出发地：</span>-->
+				<div class="label_left b_label_left" style="font-weight:400">出发地：</div>
+    			<select class="w90" name="ptdStartProvince">
+					<option value=""></option>
+    				#foreach($item in $provinces)
+						<option value="$item.regionNo" #if($planeticketDetail.ptdStartProvince == $item.regionNo) selected #end>$item.regionName</option> 
+					#end
+    			</select>
+				<em class="w20">省</em>
+				<select type="text" class="w90" name="ptdStartCity" style="float: none;width:120px;"></select> 市
+			</div>
+			<div class="input_right input_right_wauto" id="start_gj" style="margin-left:85px;">
+				<span>出发地：</span>
+    			<label>
+    			    <input  style="margin-left:5px;" type="radio" name="ptdStartTown" value="01" #if($planeticketDetail.ptdStartTown == '01') checked #end> 香港
+                </label>
+				<label>
+    			    <input type="radio" name="ptdStartTown" value="02" #if($planeticketDetail.ptdStartTown == '02') checked #end> 澳台
+                </label>
+				<label>
+				    <input type="radio" name="ptdStartTown" value="03" #if($planeticketDetail.ptdStartTown == '03') checked #end> 台湾
+    		    </label>
+				<label>
+    			    <input type="radio" name="ptdStartTown" value="04" #if($planeticketDetail.ptdStartTown == '04') checked #end> 国际
+                </label>
+			</div>
+			<div class="input_right input_right_wauto" id="county" style="margin-left:25px;">
+    			<input class="w150 autoquerycountry" name="ptdForeign" value="$!planeticketDetail.ptdForeign"> 国家
+				<input class="w150" name="ptdForeigncity" value="$!planeticketDetail.ptdForeigncity"> 城市
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left b_label_left" style="font-weight:400">产品编码：</div>
+			<div class="input_right input_right_wauto">
+    			<input class="w150" name="ptdNo" value="$!planeticketDetail.ptdNo">
+			</div>
+			<div class="label_left b_label_left" style="font-weight:400;margin-left:-23px;">航班号：</div>
+			<div class="input_right input_right_wauto" style="margin_left:-35px;">
+    			<input class="w150" name="ptdNumber" value="$!planeticketDetail.ptdNumber">
+			</div>
+		</div>
+		<div class="input_block clearfix mb20">
+    		<div class="label_left b_label_left" style="font-weight:400">航空公司：</div>
+    		<div class="input_right input_right_wauto">
+				<input class="w150" name="ptdCompany" value="$!planeticketDetail.ptdCompany">
+				<label class="ml35" style="margin:0 5px 0 34px;">上架状态：</label>
+				<select class="w200" name="ptdIsDelStatus" value="$!planeticketDetail.ptdIsDelStatus" style="width:150px;">
+    				<option value=""></option>
+    				<option value="1" #if($planeticketDetail.ptdIsDelStatus == '1') selected #end>上架</option>
+    				<option value="0" #if($planeticketDetail.ptdIsDelStatus == '0') selected #end>下架</option>
+				</select>
+				
+				<button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/planeticket/detail/list');">查 询</button>
+			</div>
+	 	</div>
+	</form>
+	<div class="g_line mb15"></div>
+	<div class="carad_ct">
+		<div class="carad_ctbtn" style="margin-left:0px;">
+			<button class="y_but ml72 pl0" style="width:150px; margin-left:60px;" type="button" onclick="index.load('$appRoot/planeticket/detail/insertPage');">+ 新增单程直飞航班</button>
+		</div>
+	</div>
+	<div class="carad_ctrtable" style="width:90%;margin-left:30px;">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>产品编码</td>
+					<td>航空公司</td>
+					<td>航班号</td>
+					<td>出发城市</td>
+					<td>起飞机场</td>
+					<td>起飞时间</td>
+					<td>到达城市</td>
+					<td>落地机场</td>
+					<td>落地时间</td>
+					<td>机票管理</td>
+					<td>上架状态</td>
+				</tr>
+			</thead>
+			<tbody>
+    			#foreach($item in $planeticketList)	
+    				<tr>
+    					<td>$!item.ptdNo</td>
+    					<td>$!item.ptdCompany</td>
+    					<td>$!item.ptdNumber</td>
+						#if($!item.ptdStartState == '01')
+    					   <td>$!item.ptdStartCity</td>
+						#elseif($!item.ptdStartState == '02')
+							#if($!item.ptdStartTown == '04')
+							<td>$!item.ptdForeigncity</td>
+							#else
+							<td>$!item.ptdStartTown</td>
+							#end
+						#else
+							<td></td>
+						#end
+                        <td>$!item.ptdStartTerminal</td>
+                        <td>$!item.ptdStartTime</td>
+						#if($!item.ptdEndState == '01')
+							<td>$!item.ptdEndCity</td>
+						#elseif($!item.ptdEndState == '02')
+							#if($!item.ptdEndTown == '04')
+							<td>$!item.ptdEndforeigncity</td>
+							#else
+							<td>$!item.ptdEndTown</td>
+							#end
+						#else
+							<td></td>
+						#end
+    					<td>$!item.ptdEndTerminal</td>
+    					<td>$!item.ptdEndTime</td>
+    					<td class="carad_a">
+							<a href="javascript:index.load('$appRoot/planeticket/detail/updatePage?id=$item.id');">查看/修改</a>
+							<a href="javascript:index.load('$appRoot/planeticket/detail/scheduledPage?id=$item.id');">预定方式</a>
+							<a href="javascript:index.load('$appRoot/planeticket/price/list?gdlId=$!item.id&portal=01');">量/价管理</a>
+							<a href="javascript:index.nextPage('$appRoot/town/detail/setsametown?ntype=$sametownntype&cid=$item.id');">同业管理</a>
+							##<a href="">短信内容</a>
+						</td>
+    					<td>
+							<span>
+    							#if($!item.ptdIsDelStatus == '1')
+                                    <img src="$staticRoot/images/lvdui.png"/>&nbsp;
+                                    <a href="javascript:index.load('$appRoot/planeticket/detail/deletebean?id=$item.id&ptdIsDelStatus=0');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+    							#end
+    							#if($!item.ptdIsDelStatus == '0')
+    								<a href="javascript:index.load('$appRoot/planeticket/detail/deletebean?id=$item.id&ptdIsDelStatus=1');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+    								&nbsp;<img src="$staticRoot/images/hongcuo.png"/>
+    							#end
+                            </span>       
+    					</td>
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>
+#parse("planeticket/common/js.vm")
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

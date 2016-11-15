@@ -1,0 +1,82 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hezuoguanli.css">
+<!--同城地接社-->
+<div class="train_local">
+	<div class="train_local_suptop">
+		<img src="$staticRoot/images/ren.png" />
+		<span>专线资源</span>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+	</div>
+	<form id="form1" method="post">
+    	<div class="setfood_top" style="min-width:1000px;">
+    		<div class="setfood_topbox" style="width:220px; margin-left:30px;">
+    			<span style="width:70px;">公司名称：</span>
+    			<input type="text" name="cpyName" value="$!companyList.cpyName" style="width:130px;">
+    		</div>
+    		<div class="setfood_topbox" style="width:220px;">
+    			<span style="width:70px;">品牌名称：</span>
+    			<input type="text" name="cpyBrand" value="$!companyList.cpyBrand" style="width:130px;">
+    		</div>
+    		<div class="setfood_topbox" style="width:220px;">
+    			<span style="width:70px;">负责人：</span>
+    			<input type="text" name="ccpName" value="$!companyList.ccpName" style="width:130px;">
+    		</div>
+    		<!-- 
+    		<div class="setfood_topbox" style="width:220px;">
+    			<span style="width:70px;">计调：</span>
+    			<input type="text" name="cpyOperate" vlaue="$!companyList.cpyOperate" style="width:130px;">
+    		</div> -->
+    		<button class="setfood_see" type="button" onclick="javascript:index.searchform('form1','$appRoot/company/detail/line');">查询</button>
+    	</div>
+    </form>
+	<div class="trainl_cttop">
+		<div class="trainl_biger">
+			<div class="train_box show">
+				<div class="carad_ctrtable">
+					<table cellspacing="0" cellspadding="0" style="margin-left:0;">
+						<thead>
+							<tr>
+								<td style="min-width:65px">所属专线</td>
+								<td style="min-width:100px">所在省市</td>
+								<td style="min-width:200px">公司名称/品牌名称</td>
+								<td style="min-width:200px">公司地址</td>
+								<td style="min-width:100px">负责人/电话</td>
+								<td style="min-width:100px">计调/电话</td>
+								<td style="min-width:85px">在线交流</td>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $lineList)
+								<tr>
+									<td>
+										#vtextarray($!item.cbsServiceInside,'C116') 
+										$!item.cbsServiceAdd
+										#vtextarray($!item.cbsSerInterna,'C108') 
+										#vtextarray($!item.cbsServiceOuter,'C118') 
+										$!item.cbsServiceRest
+										##vtext('01','C116')
+										##$!item.cbsServiceInside
+									</td>
+									<td>#vregion($!item.cbsSerProvince) #vregion($!item.cbsSerCity)</td>
+									<td>$!item.cpyName / $!item.cpyBrand</td>
+									<td>$!item.cbsCurrAddress</td>
+									<td>$!item.ccpName &nbsp;/&nbsp;$!item.ccpTelephone</td>
+									<td>$!item.cbsOperator &nbsp;/&nbsp;$!item.cbsOperatorPhone</td>
+									<td>
+										<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cbsOperatorQq&site=qq&menu=yes">
+											<img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流">
+										</a>
+									</td>
+								</tr>
+							#end
+						</tbody>
+					</table>
+					<div style="margin-left:-30px;">
+					#parse("common/page.vm")
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /同城地接社 -->

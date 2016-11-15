@@ -1,0 +1,541 @@
+@charset "UTF-8";
+
+/* golbal */
+body {
+    padding: 50px 0 50px 0;
+    margin: 0;
+    font-family: '微软雅黑';
+    background-color: #eeeeee;
+}
+
+/* header */
+.header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 49px;
+    line-height: 50px;
+    background-color: #7c9bf4;
+    border-bottom: solid #6489f3 1px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+}
+
+.left_btn {
+    display: block;
+    float: left;
+    width: 50px;
+    margin-left: 15px;
+}
+
+.right_btn {
+    display: block;
+    float: right;
+    width: 50px;
+    margin-right: 15px;
+}
+
+.header img {
+    height: 24px;
+    vertical-align: middle;
+}
+
+/* footer */
+.footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 49px;
+    line-height: 50px;
+    background-color: white;
+    border-top: solid #646464 1px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+}
+
+.footer a {
+    display: block;
+    float: left;
+    width: 20%;
+    height: 49px;
+}
+
+.footer a img {
+    width: 40px;
+    vertical-align: middle;
+}
+
+/* content */
+.content img {
+    max-width: 100%;
+}
+
+.date {
+    background-color: #f6f5f5;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.date_left {
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.date_right {
+    display: block;
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+
+.date_right_top {
+    width: 100%;
+    border-left: solid #dedddd 1px;
+    height: 60px;
+    margin-top: 10px;
+    text-align: center;
+    color: #939292;
+    padding-top: 10px;
+}
+
+.date_right_bottom {
+    width: 100%;
+    border-left: solid #dedddd 1px;
+    height: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #939292;
+    padding-top: 20px;
+}
+
+.date_left_top {
+    height: 60px;
+    margin: 20px 0 0 30px;
+    color: #939292;
+}
+
+.date_left_bottom {
+    line-height: 30px;
+    margin: 20px 0 20px 10px;
+    color: #939292;
+}
+
+.date_right_split {
+    width: 85%;
+    border-top: solid #dedddd 1px;
+    margin: 0 auto;
+}
+
+.list_item {
+    width: 90%;
+    margin: 15px auto 0;
+    background-color: white;
+    height: 85px;
+}
+
+.item_left {
+    float: left;
+    height: 85px;
+    width: 17%;
+}
+
+.item_left img {
+    width: 20px;
+    margin: 30px 0 0 15px;
+}
+
+.item_center {
+    float: left;
+    height: 85px;
+    width: 63%;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.item_title {
+    font-size: 15px;
+    margin: 10px 0 5px;
+}
+
+.item_right {
+    float: left;
+    height: 85px;
+    width: 20%;
+}
+
+.item_btn {
+    width: 50px;
+    background-color: #7c9bf4;
+    color: #eeeeee;
+    font-size: 12px;
+    text-align: center;
+    height: 24px;
+    line-height: 24px;
+    margin-top: 30px;
+}
+
+.record_top {
+    margin: 10px 0 3px 0;
+    color: #868686;
+    font-size: 14px;
+}
+
+.record {
+    width: 100%;
+    float: left;
+    margin-top:-10px;
+}
+
+.record_top img {
+    width: 50px;
+    margin: 0 10px 0 40px;
+    vertical-align: middle;
+}
+
+.record_left_padding_1 {
+    width: 65px;
+    float: left;
+    height: 30px;
+    color: #91aaf2;
+}
+
+.month {
+    float: right;
+    display: block;
+    height: 30px;
+    border-bottom: solid #91aaf2 1px;
+    line-height: 38px;
+}
+
+.record_split_1 {
+    width: 2px;
+    float: left;
+    height: 30px;
+    background-color: #91aaf2;
+    border-bottom: solid #91aaf2 1px;
+}
+
+.day {
+    float: left;
+    display: block;
+    height: 30px;
+    border-bottom: solid #91aaf2 1px;
+    line-height: 41px;
+    color: #91aaf2;
+}
+
+.record_left_padding_2 {
+    width: 65px;
+    float: left;
+    height: 100px;
+    color: #91aaf2;
+}
+
+.record_split_2 {
+    width: 2px;
+    float: left;
+    height: 100px;
+    background-color: #91aaf2;
+    border-bottom: solid #91aaf2 1px;
+}
+
+.record_right_2 {
+    width: 100%;
+}
+.record_card {
+    width: 73%;
+    background-color: white;
+    margin-left: 90px;
+}
+
+.record_main {
+    height: 70px;
+}
+
+.record_pic {
+    float: left;
+    width: 60px;
+    height: 50px;
+    margin: 10px 10px 0 10px;
+}
+
+.record_content {
+
+    color: #7c7d7e;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.remove_btn {
+    width: 10px;
+    float: right;
+    margin: 4px 10px 0 5px;
+}
+
+.remove_btn_photo {
+    width: 10px;
+    float: left;
+    margin: 10px 10px 0 0;
+}
+.remove_btn_photo_div {
+    width: 20px;
+    float: left;
+    margin: 0px 10px 0 0px;
+}
+
+.record_time {
+    color: #dcdddd;
+    font-size: 12px;
+    margin-left: 10px;
+    padding-bottom: 10px;
+}
+
+.record_bottom_padding {
+    float: left;
+    width: 100%;
+    height: 50px;
+}
+
+.edit_wraper {
+    height: 300px;
+    background-color: white;
+    padding: 15px 40px;
+}
+
+.textarea {
+    width: 100%;
+    height: 200px;
+    display: block;
+    border: 0;
+    border-bottom: solid #b9b9b9 1px;
+}
+
+.photo_add_btn {
+    width: 40px;
+    height:40px;
+}
+
+.gallery_wraper {
+    padding: 15px;
+}
+
+.gallery_big {
+}
+
+.gallery_big img {
+    width: 100%;
+}
+
+.gallery_split {
+    height: 3px;
+    background-color: #d3d1d1;
+    margin: 12px 0;
+}
+
+.gallery .photo_count img {
+    width: 22%;
+    margin: 5px;
+    display: block;
+    float: left;
+}
+
+.gallery_index {
+    float: right;
+    color: #7C9BF4;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.userinfo_top {
+    background-color: #7c9bf4;
+    height: 140px;
+    margin: -50px 0 0px 0;
+    color: white;
+    font-size: 14px;
+    padding-top: 40px;
+}
+
+.userinfo_head {
+    width: 50px;
+    margin: 0 10px 0 40px;
+    vertical-align: middle;
+}
+
+.mail_btn {
+    width: 30px;
+    float: right;
+    margin-right: 50px;
+}
+
+.sign {
+    margin: 20px 10px 0 45px;
+}
+
+.edit_btn img {
+    width: 50px;
+    float: right;
+    margin: 5px 10px;
+}
+
+.info_table {
+    width: 100%;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.info_table th {
+    text-align: right;
+    width: 40%;
+    font-weight: normal;
+}
+
+.info_table td {
+    padding-left: 5px;
+}
+
+.profile_table {
+    width: 100%;
+    font-size: 14px;
+    line-height: 30px;
+    background-color: white;
+    margin: 20px 0;
+    border-bottom: solid #ddd 1px;
+}
+
+.profile_table td {
+    border-top: solid #ddd 1px;
+}
+
+.profile_table th {
+    border-top: solid #ddd 1px;
+    width: 35%;
+    color: #191919;
+    font-weight: normal;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.profile_table input {
+    width: 100%;
+    border: 0;
+}
+
+.guide_card {
+    width: 200px;
+    margin-top: 10px;
+}
+
+.auth_tag {
+    position: absolute;
+    left: 175px;
+    width: 40px;
+    top: 20px;
+}
+
+.touxiang {
+    background: #7c9bf4;
+    height: 267px;
+    width: 100%;
+}
+
+.login {
+    width: 80%;
+
+    margin: 0 auto;
+}
+
+.toux {
+    width: 100%;
+    vertical-align: middle;
+    margin: 0px auto;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.jianju {
+    margin-top: 20px;
+}
+
+.wenben1 {
+    border: 0px;
+    font-family: "微软雅黑";
+    font-size: 16px;
+    width: 70%;
+    height: 42px;;
+    float: left;
+    padding-left: 10px;
+}
+
+.tishi {
+    color: #901515;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0px 30px 0px;
+}
+
+.anniu3 {
+    background: #557cec;
+    width: 80%;
+    margin: 20px auto;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 6px;
+}
+
+.zmm {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.zmm a {
+    color: #c9c3c3;
+}
+
+.shezhi {
+    width: 100%;
+    background: #ffffff;
+}
+
+.shezhi ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.shezhi ul li {
+    border-bottom: 1px #c8c8c8 solid;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 30px;
+    list-style: none;
+}
+
+.shezhi ul li a {
+    text-decoration: none;
+    color: #666666;
+}
+
+.wenben2 {
+    border: 0px;
+    font-family: "微软雅黑";
+    font-size: 16px;
+    width: 90%;
+    height: 36px;;
+    float: left;
+    padding-left: 10px;
+}
+
+.popup_wraper {
+    position: fixed;
+    width: 100%;
+    bottom: 100px;
+    display: none;
+}

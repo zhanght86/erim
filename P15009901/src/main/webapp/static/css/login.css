@@ -1,0 +1,43 @@
+*,body{margin:0;padding:0;}
+body{background-color:#fff;font-size:14px;line-height:1.3em;color:#323232;}
+table{border-collapse:collapse;border-spacing:0;empty-cells:show;}
+th,td{border-collapse:collapse;}
+img,a img,a:hover img{border:0;}
+strong,th,optgroup{font-style:inherit;}
+ol,ul,dl,li,dt,dd{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}
+:focus{outline:0;}em{font-style:none;}
+a{text-decoration:none;color:#2da0e6;}
+a:hover{text-decoration:none;}
+input,checkbox,button{vertical-align:middle;}
+button{cursor:pointer;}
+div,p,a,h1,h2,h3,h4,h5,h6,ol,ul,li{border:0;text-align:left;vertical-align:bottom;}
+fieldset{border-width:0px;border-style:none;margin:0;padding:0}
+legend{display:none;}
+.clearfix:after{content:"";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;}
+* html .clearfix{height:1%;}
+.clearfix{display:block;}
+.cb{height:0;font-size:0px;overflow:hidden;clear:both;float:none;}
+
+header{display:block;width:1020px;height:117px;margin:0 auto;position:relative;}
+header .img_logo{margin-top:12px;}
+header .p_login{text-align:right;position:absolute;right:0;top:40px;font-size:14px;color:#323232;}
+header .p_login a{}
+.g_cont{height:555px;background:#1aa8f2 url(../images/as_07.jpg) no-repeat center top;}
+.login_block{position:absolute;left:50%;margin-top:52px;margin-left:116px;}
+.title_p{font-size:20px;color:#fff;margin-bottom:64px;margin-left:120px;font-weight:lighter;}
+.input_box{margin-bottom:28px;padding-left:45px;}
+.input_box2{margin-bottom:25px;}
+.input_box input{height:20px;line-height:20px;width:250px;font-size:14px;border-style:none;}
+.yz_b{padding-left:11px;margin-bottom:12px;}
+.yz_b input{height:20px;line-height:20px;width:180px;font-size:14px; vertical-align:top;margin-top:5px;margin-right:14px;border-style:none;}
+.yz_b img{width:85px;height:27px;border:1px solid #d0d0d0;}
+.txt_box{font-size:14px;margin-bottom:16px;}
+.txt_box input{margin-right:8px;margin-bottom:4px;}
+.txt_box label{margin-right:113px;color:#666;}
+.submit_box{margin-bottom:18px;}
+.submit_box input{width:300px;height:48px;font-size:18px;color:#fff;background:none;border:0;}
+.txt_box2{color:#999;font-size:14px;}
+footer{font-size:12px;color:#333;line-height:78px;text-align:center;display:block;}

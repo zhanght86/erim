@@ -1,0 +1,44 @@
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/user1.png">修改用户
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		<input type="hidden" value="$!zxSystemUser.id" name="id"/>
+		<div class="input_block clearfix">
+    		<div class="label_left">登录名：</div>
+    		<div class="input_right">
+                <input type="text" class="w200 validate[required,maxSize[100]]" readonly  value="$!zxSystemUser.zxUserLoginname" name="zxUserLoginname" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">真实姓名：</div>
+    		<div class="input_right">
+    			<input type="text" class="w200 validate[required,maxSize[150]]" value="$!zxSystemUser.zxUserRealname" name="zxUserRealname" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">联系方式：</div>
+    		<div class="input_right">
+    			<input type="text" class="w200 validate[maxSize[150]]" value="$!zxSystemUser.zxUserTel" name="zxUserTel" />
+    		</div>
+    	</div>
+		<div class="input_block clearfix" id="div_role">
+    		<div class="input_block clearfix">
+        		<div class="label_left">角色：</div>
+        		<div class="input_right">
+        			<select class="w200" name="zxRoleId">
+        				#foreach($item in $roleList)
+                            <option value="$item.id"  #if($item.id == $!zxSystemUser.zxRoleId) selected #end>$item.zxRoleName</option>
+    					#end
+        			</select>
+        		</div>
+        	</div>
+    	</div>
+    	<div class="button_block clearfix">
+    		<button class="y_but ml35" type="button" onclick="subform.update('form1', '$appRoot/zx/user/update');">提交</button>
+			<button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+    	</div>
+	</form>
+</div>
+

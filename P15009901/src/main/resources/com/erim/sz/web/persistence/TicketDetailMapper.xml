@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ticketdetail">
+	
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			and tdl_is_del_status = '1'
+			<if test="tdlAttractions != null and tdlAttractions != ''">			and ticket_detail.tdl_attractions 		like "%"#{tdlAttractions}"%"</if>
+			<if test="tdlScenicLevel != null and tdlScenicLevel != ''">			and ticket_detail.tdl_scenic_level 		like "%"#{tdlScenicLevel}"%"</if>
+			<if test="tdlName != null and tdlName != ''">		                and 		(tdl_name like "%"#{tdlName}"%"   or   tdl_address like "%"#{tdlName}"%")</if>	
+			<if test="tdlProvince != null and tdlProvince != ''">		        and ticket_detail.tdl_province          like "%"#{tdlProvince}"%"</if>	
+			<if test="tdlCity != null and tdlCity != ''">		                and ticket_detail.tdl_city              like "%"#{tdlCity}"%"</if>
+			<!-- 国际港澳台国家和城市字段页面传值过来为tdlCityone-->
+			<if test="tdlCityone != null and tdlCityone != ''">		            and (ticket_detail.tdl_ciityone  like "%"#{tdlCityone}"%" or ticket_detail.tdl_countyone like "%"#{tdlCityone}"%")</if>	
+			<if test="tdlNation != null and tdlNation != ''">		            and ticket_detail.tdl_nation            like "%"#{tdlNation}"%"</if>
+			<if test="tdlWithinOrOuter != null and tdlWithinOrOuter != ''">		and ticket_detail.tdl_within_or_outer   like "%"#{tdlWithinOrOuter}"%" </if>
+			<!--<if test="tdlCountyone != null and tdlCountyone != ''">		        and ticket_detail.tdl_countyone   like "%"#{tdlCountyone}"%"</if>-->			
+			<!--<if test="tplDate != null and tplDate != ''">		                and ticket_price.tpl_date                = #{tplDate} </if>	-->		
+		</where>
+	</sql>
+	
+	<sql id="sql_column">
+		ticket_detail.id 						  AS id,
+		ticket_detail.tdl_name 				  AS tdlName,
+		ticket_detail.tdl_key 				  AS tdlKey,
+		ticket_detail.tdl_address 			  AS tdlAddress,
+		ticket_detail.tdl_nearby_spots 		  AS tdlNearbySpots,
+		ticket_detail.tdl_nearby_hotel		  AS tdlNearbyHotel,
+		ticket_detail.tdl_nearby_architecture   AS tdlNearbyArchitecture,
+		ticket_detail.tdl_position 			  AS tdlPosition,
+		ticket_detail.tdl_is_credit 			  AS tdlIsCredit,
+		ticket_detail.tdl_time_open 			  AS tdlTimeOpen,
+		ticket_detail.tdl_time_close			  AS tdlTimeClose,
+		ticket_detail.tdl_comment 			  AS tdlComment,
+		ticket_detail.tdl_visit 				  AS tdlVisit,
+		ticket_detail.tdl_message 			  AS tdlMessage,
+		ticket_detail.tdl_img1 				  AS tdlImg1,
+		ticket_detail.tdl_img2 				  AS tdlImg2,
+		ticket_detail.tdl_img3 			      AS tdlImg3,
+		ticket_detail.tdl_img4 			      AS tdlImg4,
+		ticket_detail.tdl_createtime 			  AS tdlCreatetime,
+		ticket_detail.tdl_createuser 			  AS tdlCreateuser,
+		ticket_detail.tdl_maintenance_time 	  AS tdlMaintenanceTime,
+		ticket_detail.tdl_is_through 			  AS tdlIsThrough,
+		ticket_detail.tdl_through_time 		  AS tdlThroughTime,
+		ticket_detail.tdl_through_user 		  AS tdlThroughUser,
+		ticket_detail.cpy_id 					  AS cpyId,
+		ticket_detail.tdl_city 				  AS tdlCity,
+		ticket_detail.tdl_province			  AS tdlProvince,
+		ticket_detail.tdl_min 			      AS tdlMin,
+		ticket_detail.tdl_server 				  AS tdlServer,
+		ticket_detail.tdl_in_the_park			  AS tdlInThePark,
+		ticket_detail.tdl_in_the_address 		  AS tdlInTheAddress,
+		ticket_detail.tdl_cash_cvoucher 		  AS tdlCashCvoucher,
+		ticket_detail.tdl_using_this_dictionary AS tdlUsingThisDictionary,
+		ticket_detail.tdl_fee_description 	  AS tdlFeeDescription,
+		ticket_detail.tdl_contact_person 		  AS tdlContactPerson,
+		ticket_detail.tdl_validity 			  AS tdlValidity,
+		ticket_detail.tdl_in_security 		  AS tdlInSecurity,
+		ticket_detail.tdl_state_price 		  AS tdlStatePrice,
+		ticket_detail.tdl_refund_instructions   AS tdlRefundInstructions,
+		ticket_detail.tdl_is_del_status 		  AS tdlIsDelStatus,
+		ticket_detail.tdl_referential_policies  AS tdlReferentialPolicies,
+		ticket_detail.tdl_set_reservation		  AS tdlSetReservation,
+		ticket_detail.tdl_security_guide 		  AS tdlSecurityGuide,
+		ticket_detail.tdl_iphone 				  AS tdlIphone,
+		ticket_detail.tdl_qq 					  AS tdlQq,
+		ticket_detail.tdl_email 				  AS tdlEmail,
+		ticket_detail.tdl_state 				  AS tdlState,
+		ticket_detail.tdl_within_or_outer 	  AS tdlWithinOrOuter,
+		ticket_detail.tdl_longitude 			  AS tdlLongitude,
+		ticket_detail.tdl_latitude 			  AS tdlLatitude,
+		ticket_detail.tdl_cash_fare 			  AS tdlCashFare,
+		ticket_detail.tdl_vip_ticket 			  AS tdlVipTicket,
+		ticket_detail.tdl_scenic_level 		  AS tdlScenicLevel,
+		ticket_detail.tdl_theme			      AS tdlTheme,
+		ticket_detail.tdl_cash_type 			  AS tdlCashType,
+		ticket_detail.tdl_county 				  AS tdlCounty,
+		ticket_detail.tdl_attractions 		  AS tdlAttractions,
+		ticket_detail.tdl_nation				  AS tdlNation,
+		ticket_detail.tdl_code 				  AS tdlCode,
+		ticket_detail.tdl_num 				  AS tdlNum,
+		ticket_detail.tdl_countyone 		      AS tdlCountyone,
+		ticket_detail.tdl_ciityone 			  AS tdlCiityone,
+		ticket_detail.tdl_majorcountries		  AS tdlMajorcountries,
+		ticket_detail.tdl_majorcity 			  AS tdlMajorcity,
+		ticket_detail.tdl_addtheme         AS tdlAddtheme
+	</sql>
+	
+	<!-- 热门门票 -->
+	<select id="selectHoteTicket" resultType="ticketDetailBean">
+		select 
+			<include refid="sql_column"/>,
+			min(tplRetailPrice) as tplRetailPrice 
+		from ticket_detail 
+		left join 
+			(
+			SELECT
+						ticket_class.tdl_id
+						, 
+							(SELECT
+								a.tpl_retail_price
+								FROM
+									(
+										SELECT
+											tdl_id,
+											tcl_id,
+											tpl_retail_price,
+											tpl_create_time
+										FROM
+											ticket_price
+										WHERE tpl_date = date_format(now(),'%Y-%m-%d')
+										ORDER BY
+											tpl_create_time DESC
+									) a
+								WHERE
+									a.tcl_id = ticket_class.id
+								ORDER BY
+									a.tpl_create_time desc
+								LIMIT 1
+							)  AS  tplRetailPrice
+						
+					FROM
+						ticket_class
+					having tplRetailPrice is not null
+			) b
+		on ticket_detail.id = b.tdl_id
+		group by ticket_detail.id 
+		having tplRetailPrice is not null
+		LIMIT
+			4
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTicket" resultType="ticketDetailBean">
+		select 
+			<include refid="sql_column"/>,
+			min(tplRetailPrice) as tplRetailPrice 
+		from ticket_detail 
+		left join 
+			(
+			SELECT
+						ticket_class.tdl_id
+						, 
+							(SELECT
+								a.tpl_retail_price
+								FROM
+									(
+										SELECT
+											tdl_id,
+											tcl_id,
+											tpl_retail_price,
+											tpl_create_time
+										FROM
+											ticket_price
+										WHERE tpl_date = #{tplDate}
+										ORDER BY
+											tpl_create_time DESC
+									) a
+								WHERE
+									a.tcl_id = ticket_class.id
+								ORDER BY
+									a.tpl_create_time desc
+								LIMIT 1
+							)  AS  tplRetailPrice
+						
+					FROM
+						ticket_class
+					having tplRetailPrice is not null
+			) b
+		on ticket_detail.id = b.tdl_id
+		<include refid="sql_query" />
+		group by ticket_detail.id 
+		having tplRetailPrice is not null
+	</select>
+	
+	<select id="selectBeanByPriId" resultType="ticketDetailBean">
+		SELECT
+			<include refid="sql_column"/>
+		FROM
+			ticket_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTicketCount" resultType="int">
+		select count(1) from 
+		(
+			select 
+				min(tplRetailPrice) as tplRetailPrice 
+			from ticket_detail 
+			left join 
+				(
+				SELECT
+							ticket_class.tdl_id
+							, 
+								(SELECT
+									a.tpl_retail_price
+									FROM
+										(
+											SELECT
+												tdl_id,
+												tcl_id,
+												tpl_retail_price,
+												tpl_create_time
+											FROM
+												ticket_price
+											WHERE tpl_date = #{tplDate}
+											ORDER BY
+												tpl_create_time DESC
+										) a
+									WHERE
+										a.tcl_id = ticket_class.id
+									ORDER BY
+										a.tpl_create_time desc
+									LIMIT 1
+								)  AS  tplRetailPrice
+							
+						FROM
+							ticket_class
+						having tplRetailPrice is not null
+				) b
+			on ticket_detail.id = b.tdl_id
+			<include refid="sql_query" />
+			group by ticket_detail.id 
+			having tplRetailPrice is not null
+		) a
+	</select>
+</mapper>

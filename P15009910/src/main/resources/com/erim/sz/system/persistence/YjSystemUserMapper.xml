@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="yjsystemuser">
+	<!-- 根据登录名查询对象 -->
+	<select id="selectUserByLoginname" resultType="yjSystemUserBean">
+		
+		SELECT
+			users.id               AS    id,
+			yj_user_loginname    AS    yjUserLoginname,
+			yj_user_password     AS    yjUserPassword,
+			yj_user_realname     AS    yjUserRealname,
+			yj_user_tel          AS    yjUserTel,
+			yj_role_id           AS    yjRoleId,
+			yj_last_login_time   AS    yjLastLoginTime,
+			yj_last_login_ip     AS    yjLastLoginIp,
+			yj_is_through        AS    yjIsThrough,
+
+			roles.yj_role_name   AS    yjRoleName,
+			roles.cpy_id           AS    cpyId,
+			company.cpy_name       AS    cpyName,
+			users.yj_user_code as  yjUserCode
+		FROM
+			yj_system_user users
+		LEFT JOIN
+			yj_system_role roles
+		ON
+			users.yj_role_id = roles.id
+		LEFT JOIN
+			company_detail  company
+		ON
+			company.id = roles.cpy_id
+		WHERE 
+			yj_user_loginname = #{yjUserLoginname} 
+	</select>
+	
+	<select id="selectUserById" resultType="yjSystemUserBean">
+		SELECT
+			id                     AS    id,
+			yj_user_loginname    AS    yjUserLoginname,
+			yj_user_password     AS    yjUserPassword,
+			yj_user_realname     AS    yjUserRealname,
+			yj_user_tel          AS    yjUserTel,
+			yj_role_id           AS    yjRoleId,
+			yj_last_login_time   AS    yjLastLoginTime,
+			yj_last_login_ip     AS    yjLastLoginIp,
+			yj_is_through        AS    yjIsThrough
+		FROM
+			yj_system_user
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="selectPage" resultType="yjSystemUserBean">
+		
+		SELECT
+			id                     AS    id,
+			yj_user_loginname    AS    yjUserLoginname,
+			yj_user_password     AS    yjUserPassword,
+			yj_user_realname     AS    yjUserRealname,
+			yj_user_tel          AS    yjUserTel,
+			yj_role_id           AS    yjRoleId,
+			yj_last_login_time   AS    yjLastLoginTime,
+			yj_last_login_ip     AS    yjLastLoginIp,
+			yj_is_through        AS    yjIsThrough,
+			cpy_id				   AS    cpyId
+		FROM
+			yj_system_user
+		
+		<include refid="sql_column" />
+	</select>
+	
+	<sql id="sql_column">
+		<where>
+			1=1
+			<if test="cpyId != null and cpyId != '' "> and cpy_id = #{cpyId} </if>
+		</where>
+	</sql>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			yj_system_user
+			
+		<include refid="sql_column" />
+	</select>
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE 
+			yj_system_user
+		SET
+			yj_user_realname  = #{yjUserRealname},
+			yj_user_tel       = #{yjUserTel},
+			yj_role_id        = #{yjRoleId}
+		WHERE
+			id = #{id}
+	</update>
+
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			yj_system_user
+			(
+				yj_user_loginname,
+				yj_user_password,
+				yj_user_realname,
+				yj_user_tel,
+				yj_role_id,
+				yj_last_login_time,
+				yj_last_login_ip,
+				yj_is_through,
+				cpy_id,
+				yj_user_code,
+				yj_parent_login_name
+			)
+			VALUES
+			(
+				#{yjUserLoginname},
+				#{yjUserPassword},
+				#{yjUserRealname},
+				#{yjUserTel},
+				#{yjRoleId},
+				#{yjLastLoginTime},
+				#{yjLastLoginIp},
+				#{yjIsThrough},
+				#{cpyId},
+				#{yjUserCode},
+				#{yjParentLoginname}
+			)
+	</insert>
+	
+	<update id="updateLogin">
+		UPDATE 
+			yj_system_user
+		SET
+			yj_last_login_time	 = #{yjLastLoginTime},
+			yj_last_login_ip       = #{yjLastLoginIp},
+			yj_last_login_address  = #{yjLastLoginAddress}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<select id="selectByOldPwd" resultType="yjSystemUserBean">
+	  SELECT
+			yj_user_loginname    AS    yjUserLoginname,
+			yj_user_password     AS    yjUserPassword
+		FROM
+			yj_system_user
+		WHERE
+			id = #{id}
+	</select>
+	<!-- 修改密码 -->
+	<update id="updatePsd">
+		UPDATE 
+			yj_system_user
+		SET
+			yj_user_password = #{yjUserPassword}
+		WHERE
+			id = #{id}
+	</update>
+	<select id="selectYjSystemUserByCpyId" resultType="yjSystemUserBean">
+		SELECT
+			id 			    AS id,
+			yj_user_loginname  AS  yjUserLoginname
+		FROM
+			yj_system_user
+		WHERE
+			cpy_id = #{cpyId}
+	</select>
+</mapper>

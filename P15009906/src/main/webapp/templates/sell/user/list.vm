@@ -1,0 +1,57 @@
+<form method="post" id="form1" class="mb10" action="$appRoot/sell/user/list">	
+	<div class="g_block_2 mb20">
+		<div class="input_block clearfix mb0">
+			<div class="input_right input_right_wauto">
+				<label>登录账号：</label>
+				<input class="w130" name="sellUserLoginname" value="$!cmsSystemUser.sellUserLoginname"/>
+				<span class="red_a ml25" href="javascript:void(0);" onclick="index.searchform('form1','$appRoot/sell/user/list');">查询</span>
+			</div>
+		</div>
+	</div>
+</form>
+	<div class="g_block_2 g_block_7 mb20">
+		<p class="g_tit_1 mb10"><a href="javascript:;" onclick="index.load('$appRoot/sell/user/insertPage');" class="xz">新增</a></p>
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>序号</th>
+				<th>登录账号</th>
+				<th>真实姓名</th>
+				<th>联系方式</th>
+				<th>所属角色</th>
+				<th>操作</th>
+                <th>是否停用</th>
+			</tr>
+			#foreach($item in $userList)
+				<tr>
+                  	<td>$item.id</td>
+					<td>$item.sellUserLoginname</td>
+					<td>$!item.sellUserRealname</td>
+					<td>$!item.sellUserTel</td>
+					<td>$!item.sellRoleName</td>
+					<td>
+						<a href="javascript:index.load('$appRoot/sell/user/updatePage?id=$item.id');">查看/修改</a>
+					</td>
+				<td>
+				<span>
+					#if($!item.sellIsDelStatus==0)
+                        <img src="$staticRoot/images/lvdui.png"/>&nbsp;
+                        <a href="javascript:index.load('$appRoot/sell/user/delete?id=$item.id&sellIsDelStatus=1');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+					#end
+					#if($!item.sellIsDelStatus==1)
+						<a href="javascript:index.load('$appRoot/sell/user/delete?id=$item.id&sellIsDelStatus=0');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+						&nbsp;<img src="$staticRoot/images/hongcuo.png"/>
+					#end
+                </span>
+				</td>
+                  </tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>
+<script type="text/javascript">
+	$("table tr:even").each(function(){
+		$(this).css("background-color","#fbfbfb");
+	})
+</script>

@@ -1,0 +1,470 @@
+<script type="text/javascript" src="$staticRoot/js/price.js"></script>
+<script>
+	//成人零售价和批发价比较
+	function comparison(field, rules, i, options){
+		//成人批发价
+    	var gpeWholesaleAdult    = $("input[name='gpeWholesaleAdult']").val();
+		//成人零售价	
+		var gpeRetailAdult = $("input[name='gpeRetailAdult']").val();
+		if(parseInt(gpeWholesaleAdult) * 1.05 >= parseInt(gpeRetailAdult)){
+            return '成人零售价必须大于批发价的5%';
+        }
+	}
+	//成人批发价和同业价比较
+	function comparisonpf(field, rules, i, options){
+		//成人同业价
+    	var gpeTradeAdult    = $("input[name='gpeTradeAdult']").val();
+		//成人批发价	
+		var gpeWholesaleAdult = $("input[name='gpeWholesaleAdult']").val();
+		if(parseInt(gpeTradeAdult)>parseInt(gpeWholesaleAdult)){
+            return '成人批发价必须大于或等于同业价';
+        }
+	}
+	//儿童批发价和同业价比较
+	function comparisonpf1(field, rules, i, options){
+		var gpeTradeChild = $("input[name='gpeTradeChild']").val();
+		var gpeWholesaleChild = $("input[name='gpeWholesaleChild']").val();
+		if(parseInt(gpeTradeChild)>parseInt(gpeWholesaleChild)){
+            return '儿童批发价必须大于或等于同业价';
+    	}
+	}
+	//儿童零售价和同业价比较
+	function comparison1(field, rules, i, options){
+		var gpeWholesaleChild = $("input[name='gpeWholesaleChild']").val();
+		var gpeRetailChild = $("input[name='gpeRetailChild']").val();
+		if(parseInt(gpeWholesaleChild) * 1.05 >= parseInt(gpeRetailChild)){
+            return '儿童零售价必须大于批发价的5%';
+    	}
+	}
+	//成人批发价和零售价的比较
+	function comparisonMin(field, rules, i, options){
+		//批发价
+    	var gpeWholesaleAdult    = $("#update_gpeWholesaleAdult").val();
+		//零售价
+		var gpeRetailAdult = $("#update_gpeRetailAdult").val();
+		if(parseInt(gpeWholesaleAdult) * 1.05 >= parseInt(gpeRetailAdult)){
+            return '成人零售价必须大于批发价的5%';
+        }
+	}
+	//儿童批发价和零售价的比较
+	function comparisonMin1(field, rules, i, options){
+		//批发价
+		var gpeWholesaleChild = $("#update_gpeWholesaleChild").val();
+		//零售价
+		var gpeRetailChild = $("#update_gpeRetailChild").val();
+		if(parseInt(gpeWholesaleChild) * 1.05 >= parseInt(gpeRetailChild)){
+            return '儿童零售价必须大于儿童批发价的5%';
+    	}
+	}
+	//成人批发价和同业价比较
+	function comparisonMinpf(field, rules, i, options){
+		//同业价
+    	var gpeTradeAdult    = $("#update_gpeTradeAdult").val();
+		//批发价
+		var gpeWholesaleAdult = $("#update_gpeWholesaleAdult").val();
+		if(parseInt(gpeTradeAdult)>parseInt(gpeWholesaleAdult)){
+            return '成人批发价必须大于或等于同业价';
+        }
+	}
+	//儿童批发价和同业价比较
+	function comparisonMinpf1(field, rules, i, options){
+		//同业价
+		var gpeTradeChild = $("#update_gpeTradeChild").val();
+		//批发价
+		var gpeWholesaleChild = $("#update_gpeWholesaleChild").val();
+		if(parseInt(gpeTradeChild)>parseInt(gpeWholesaleChild)){
+            return '儿童批发价必须大于或等于同业价';
+    	}
+	}
+	
+</script>
+<style type="text/css">
+    .fangliang_date ul li .mess_box .sj_j {
+        color: #32c832;
+    }
+    .input_block .w190 {
+        width: 190px;
+    }
+    .win_box_edit2 {
+        width: 500px;
+        height: 400px;
+        margin-left: -250px;
+        margin-top: -185px;
+    }
+    .win_box_edit2 .input_block .label_left {
+        width: 80px;
+    }
+    .win_box_edit2 .input_block .input_right {
+        width: auto;
+    }
+</style>
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jd_3.png" alt="量/价管理" title="量/价管理" />量/价管理
+	</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/ground/price/list?portal=03');">
+				<img src="$staticRoot/images/jd_7.png"/>
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/ground/price/list?portal=02');">
+				<img src="$staticRoot/images/jd_9.png" />
+			</a>
+		</div>
+		<div class="date_close pt10">
+			<form method="post" id="form3">
+				<input type="text" class="validate[required]" name="start" id="start" onclick="WdatePicker({minDate:'%y-%M-%d'})"  />&nbsp; 至 &nbsp;
+				<input type="text" class="validate[required]" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start\',{m:1});}'})" />
+				<button type="button" id="btn" class="carinfo_sub" onclick="javascript:price.batchStop('form3','$appRoot/ground/price/updateBatchIsOpen');" >批量停售</button>
+            </form>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7"> 线路名称：$!gdlName </td>
+		</tr>
+		<tr>
+            <th>周一</th>
+            <th>周二</th>
+            <th>周三</th>
+            <th>周四</th>
+            <th>周五</th>
+            <th>周六</th>
+            <th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="gpc_date_d">
+                    #foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.gpeSign == '0')
+								<li class="finish_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_gpeSign" value="$!item.gpeSign">
+									<input type="hidden" name="date_gpeTradeAdult" value="$!item.gpeTradeAdult">
+									<input type="hidden" name="date_gpeTradeChild" value="$!item.gpeTradeChild">
+									<input type="hidden" name="date_gpeRetailAdult" value="$!item.gpeRetailAdult">
+									<input type="hidden" name="date_gpeRetailChild" value="$!item.gpeRetailChild">
+									<input type="hidden" name="date_gpeSinglePrice" value="$!item.gpeSinglePrice">
+									<input type="hidden" name="date_gpeSingleShow" value="$!item.gpeSingleShow">
+									<input type="hidden" name="date_gpeInsurePrice" value="$!item.gpeInsurePrice">
+									<input type="hidden" name="date_gpeInsureShow" value="$!item.gpeInsureShow">
+									<input type="hidden" name="date_gpeIsUpgrade" value="$!item.gpeIsUpgrade">
+									<input type="hidden" name="date_gpeUpgradeCont" value="$!item.gpeUpgradeCont">
+									<input type="hidden" name="date_gpeUpgradeAdult" value="$!item.gpeUpgradeAdult">
+									<input type="hidden" name="date_gpeWholesaleAdult" value="$!item.gpeWholesaleAdult">
+									<input type="hidden" name="date_gpeWholesaleChild" value="$!item.gpeWholesaleChild">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									余：$!item.gpeSign 位<br>
+    									同：$!item.gpeTradeAdult 元<br>
+    									批：$!item.gpeWholesaleAdult 元<br>
+    									零：$!item.gpeRetailAdult 元<br>
+									</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.gpeIsOpen == '01')
+    							<li class="close_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_gpeSign" value="$!item.gpeSign">
+									<input type="hidden" name="date_gpeTradeAdult" value="$!item.gpeTradeAdult">
+									<input type="hidden" name="date_gpeTradeChild" value="$!item.gpeTradeChild">
+									<input type="hidden" name="date_gpeRetailAdult" value="$!item.gpeRetailAdult">
+									<input type="hidden" name="date_gpeRetailChild" value="$!item.gpeRetailChild">
+									<input type="hidden" name="date_gpeSinglePrice" value="$!item.gpeSinglePrice">
+									<input type="hidden" name="date_gpeSingleShow" value="$!item.gpeSingleShow">
+									<input type="hidden" name="date_gpeInsurePrice" value="$!item.gpeInsurePrice">
+									<input type="hidden" name="date_gpeInsureShow" value="$!item.gpeInsureShow">
+									<input type="hidden" name="date_gpeIsUpgrade" value="$!item.gpeIsUpgrade">
+									<input type="hidden" name="date_gpeUpgradeCont" value="$!item.gpeUpgradeCont">
+									<input type="hidden" name="date_gpeUpgradeAdult" value="$!item.gpeUpgradeAdult">
+									<input type="hidden" name="date_gpeWholesaleAdult" value="$!item.gpeWholesaleAdult">
+									<input type="hidden" name="date_gpeWholesaleChild" value="$!item.gpeWholesaleChild">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									余：$!item.gpeSign 位<br>
+    									同：$!item.gpeTradeAdult 元<br>
+										批：$!item.gpeWholesaleAdult 元<br>
+    									零：$!item.gpeRetailAdult 元<br>
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_gpeSign" value="$!item.gpeSign">
+									<input type="hidden" name="date_gpeTradeAdult" value="$!item.gpeTradeAdult">
+									<input type="hidden" name="date_gpeTradeChild" value="$!item.gpeTradeChild">
+									<input type="hidden" name="date_gpeRetailAdult" value="$!item.gpeRetailAdult">
+									<input type="hidden" name="date_gpeRetailChild" value="$!item.gpeRetailChild">
+									<input type="hidden" name="date_gpeSinglePrice" value="$!item.gpeSinglePrice">
+									<input type="hidden" name="date_gpeSingleShow" value="$!item.gpeSingleShow">
+									<input type="hidden" name="date_gpeInsurePrice" value="$!item.gpeInsurePrice">
+									<input type="hidden" name="date_gpeInsureShow" value="$!item.gpeInsureShow">
+									<input type="hidden" name="date_gpeIsUpgrade" value="$!item.gpeIsUpgrade">
+									<input type="hidden" name="date_gpeUpgradeCont" value="$!item.gpeUpgradeCont">
+									<input type="hidden" name="date_gpeUpgradeAdult" value="$!item.gpeUpgradeAdult">
+									<input type="hidden" name="date_gpeWholesaleAdult" value="$!item.gpeWholesaleAdult">
+									<input type="hidden" name="date_gpeWholesaleChild" value="$!item.gpeWholesaleChild">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										余：$!item.gpeSign 位<br>
+    									同：$!item.gpeTradeAdult 元<br>
+										批：$!item.gpeWholesaleAdult 元<br>
+    									零：$!item.gpeRetailAdult 元<br>
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+        </tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load('$appRoot/ground/detail/list');">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png"> 正常出售 
+			<img src="$staticRoot/images/ljgl_01.png"> 暂不出售
+			<img src="$staticRoot/images/ljgl_02.png"> 已售完
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+		<span><b>余位/价格管理:</b></span>
+		<div class="cb"></div>
+		<div class="bg_block nobg_block">
+			<form method="post" id="form1">
+				<div class="cb"></div>
+				<div class="input_block clearfix">
+    				<div class="label_left"> 日期：</div>
+    				<div class="input_righted11">
+						<input type="text" class="w80 validate[required]" name="start" id="start1" onClick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+						<input type="text" class="w80 validate[required]" name="end" onClick="WdatePicker({minDate:'#F{$dp.$D(\'start1\',{m:1});}'})">
+						<span style="color:red;margin-top:-25px;">*</span>
+                    </div>
+                </div>
+                <div class="input_block clearfix">
+                    <div class="label_left">按周选择：</div>
+                    <div class="input_right">
+                        <label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="0">全选</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="1">周一</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="2">周二</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="3">周三</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="4">周四</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="5">周五</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="6">周六</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="7">周日</label>
+						<span style="color:red;margin-top:-25px;">*</span>
+					</div>
+                </div>
+                <div class="input_block clearfix">
+                    <div class="label_left">可报团人数：</div>
+                    <div class="input_right">
+                        <span class="tishi_box w110">
+                            <input type="text" class="w90 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" name="gpeSign" placeholder="0">人
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+                    </div>
+                </div>
+                <div class="input_block clearfix">
+                    <div class="label_left"> 同业：</div>
+                    <div class="input_right">
+                        <label class="ml15">成人价：</label><span class="tishi_box w110">
+                            <input type="text" name="gpeTradeAdult" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" placeholder="0">元/人
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+                        <label class="ml15">儿童价：</label><span class="tishi_box w110">
+                            <input type="text" name="gpeTradeChild" class="w65 validate[custom[integer],max[100000],maxSize[6]]" placeholder="0">元/人
+						</span>
+                    </div>
+                </div>
+				<div class="input_block clearfix">
+                    <div class="label_left"> 批发：</div>
+                    <div class="input_right">
+                        <label class="ml15">成人价：</label><span class="tishi_box w110">
+                            <input type="text" name="gpeWholesaleAdult" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6],funcCall[comparisonpf]]" placeholder="0">元/人
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+                        <label class="ml15">儿童价：</label><span class="tishi_box w110">
+                            <input type="text" name="gpeWholesaleChild" class="w65 validate[custom[integer],max[100000],maxSize[6],funcCall[comparisonpf1]]" placeholder="0">元/人
+						</span>
+                    </div>
+                </div>
+                <div class="input_block clearfix">
+                    <div class="label_left"> 零售：</div>
+                    <div class="input_right" style="margin-left:-2px;">
+                        <label class="ml15">成人价：</label>
+						<span class="tishi_box w110">
+                            <input type="text" name="gpeRetailAdult" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6],funcCall[comparison]]" placeholder="0">元/人
+						</span>
+						<span style="color:red;margin-top:-25px; ">*</span>
+                        <label class="ml15" style="margin-left:19px;" >儿童价：</label>
+						<span class="tishi_box w110">
+                            <input type="text" name="gpeRetailChild" class="w65 validate[custom[integer],max[100000],maxSize[6],funcCall[comparison1]]" placeholder="0">元/人
+						</span>
+                    </div>
+                </div>
+                <div class="input_block clearfix">
+                    <div class="label_left">可选服务：</div>
+                    <div class="input_right">
+                        <label class="ml15">单房差：</label>
+						<span class="tishi_box w110">
+                            <input type="text" class="w65 validate[custom[integer],maxSize[6]]" name="gpeSinglePrice" placeholder="0">元/人
+						</span>
+						<span class="tishi_box w200 ml15">
+                            <input type="text" class="w190 validate[maxSize[40]]" name="gpeSingleShow" placeholder="说明：限40字以内">
+                        </span>
+                    </div>
+                </div>
+                <div class="input_block clearfix">
+                    <div class="label_left">&nbsp;</div>
+                    <div class="input_right" style="margin-left:4px;">
+                        <label class="ml15">&nbsp;&nbsp;保险：</label>
+                        <span class="tishi_box w110">
+                            <input type="text" class="w65 validate[custom[integer],maxSize[6],min[0]]" name="gpeInsurePrice" placeholder="0">元/人
+						</span>
+						<span class="tishi_box w200 ml15">
+                            <input type="text" class="w190 validate[maxSize[40]]" name="gpeInsureShow" placeholder="说明：限40字以内">
+                        </span>
+                    </div>
+                </div>
+                <div class="input_block clearfix">
+					<div class="label_left">升级服务：</div>
+					<div class="input_right">
+						<label class="w80">
+							<input type="radio" name="gpeIsUpgrade" value="01">不可升级
+						</label><br>
+							<label class="w80">
+							<input type="radio" name="gpeIsUpgrade" value="02" checked/>
+								可升级至 
+                            </label>
+						<input type="text" class="w100 mb16 validate[required,maxSize[10]]" name="gpeUpgradeCont" placeholder="如：5星/豪华"/>
+						<label class="ml35">费用 </label>
+						<span class="tishi_box w110">
+							<input type="text" class="w108 validate[required,custom[integer],maxSize[6],min[1]]" name="gpeUpgradeAdult" placeholder="0" />
+						</span>
+                        <span style="margin-left:-40px;">元/人</span>
+					</div>
+				</div>
+                <div class="input_block clearfix">
+                    <div class="label_left"> 接受报团截止：</div>
+                    <div class="input_right">出发前 <span class="tishi_box w90">
+						<input type="text" class="w65 validate[custom[integer],maxSize[3]]" name="gpeRestrict" placeholder="0" />天</span> 以内不接受预定（非必填项）
+                    </div>
+                </div>
+                <div class="button_block clearfix">
+                    <button class="y_but ml35" id="btn" type="button" onclick="javascript:price.sub('btn', 'form1','$appRoot/ground/price/insert','$appRoot/ground/price/list?portal=04');">&nbsp;提交&nbsp;</button>
+                    <button class="b_but ml35" type="button" onclick="index.load('$appRoot/ground/price/list?portal=04');">&nbsp;重 置&nbsp;</button>
+                </div>
+  			</form>
+        </div>
+    </div>
+    <div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit win_box_edit2">
+    <a class="esc_a" href="javascript:void(0);">&times;</a>
+	<form method="post" id="form2">
+        <input type="hidden" name="id" id="update_id" />
+        <div class="input_block clearfix">
+            <div class="label_left">余位：</div>
+            <div class="input_right">
+                <span class="tishi_box w110">
+                    <input type="text" class="w90 validate[required,custom[integer],maxSize[4]]" name="gpeSign" id="update_gpeSign" />位
+				</span>
+            </div>
+        </div>
+        <div class="input_block clearfix">
+            <div class="label_left">同业：</div>
+            <div class="input_right">
+                <label class="ml15">成人价：</label>
+				<span class="tishi_box w110">
+                    <input type="text" class="w65 validate[required,custom[integer],maxSize[6],min[1]]" name="gpeTradeAdult" id="update_gpeTradeAdult" />元/人
+				</span>
+                <label class="ml15">儿童价：</label><span class="tishi_box w110">
+                    <input type="text" class="w65 validate[custom[integer],maxSize[6]]" name="gpeTradeChild" id="update_gpeTradeChild" />元/人
+				</span>
+            </div>
+        </div>
+		<div class="input_block clearfix">
+            <div class="label_left">批发价：</div>
+            <div class="input_right">
+                <label class="ml15">成人价：</label>
+				<span class="tishi_box w110">
+                    <input type="text" class="w65 validate[required,custom[integer],maxSize[6],min[1],funcCall[comparisonMinpf]]" name="gpeWholesaleAdult" id="update_gpeWholesaleAdult" />元/人
+				</span>
+                <label class="ml15">儿童价：</label>
+				<span class="tishi_box w110">
+                    <input type="text" class="w65 validate[custom[integer],maxSize[6],funcCall[comparisonMinpf1]]" name="gpeWholesaleChild" id="update_gpeWholesaleChild"  />元/人
+				</span>
+            </div>
+        </div>
+        <div class="input_block clearfix">
+            <div class="label_left">零售：</div>
+            <div class="input_right">
+                <label class="ml15">成人价：</label><span class="tishi_box w110">
+                    <input type="text" class="w65 validate[required,custom[integer],maxSize[6],min[1],funcCall[comparisonMin]]" name="gpeRetailAdult" id="update_gpeRetailAdult" />元/人
+				</span>
+                <label class="ml15" style="margin-left:19px;">儿童价：</label><span class="tishi_box w110">
+                    <input type="text" class="w65 validate[custom[integer],maxSize[6],funcCall[comparisonMin1]]" name="gpeRetailChild" id="update_gpeRetailChild" />元/人
+				</span>
+            </div>
+        </div>
+        <div class="input_block clearfix">
+            <div class="label_left">可选服务：</div>
+            <div class="input_right">
+                <label class="ml15">单房差：</label><span class="tishi_box w110">
+                    <input type="text" class="w65 validate[custom[integer],maxSize[6],min[1]]" name="gpeSinglePrice" id="update_gpeSinglePrice" />元/人
+				</span>
+				<span class="tishi_box w200 ml15">
+                    <input type="text" class="w190 validate[maxSize[40]]" name="gpeSingleShow" id="update_gpeSingleShow" placeholder="说明：限40字以内" />
+                </span>
+            </div>
+        </div>
+        <div class="input_block clearfix">
+            <div class="label_left">&nbsp;</div>
+            <div class="input_right">
+                <label class="ml15">&nbsp;&nbsp;保险：</label>
+                <span class="tishi_box w110">
+                    <input type="text" class="w65 validate[custom[integer],maxSize[6],min[1]]" name="gpeInsurePrice" id="update_gpeInsurePrice" />元/人
+				</span>
+				<span class="tishi_box w200 ml15">
+                    <input type="text" class="w190 validate[maxSize[40]]" name="gpeInsureShow" id="update_gpeInsureShow" placeholder="说明：限40字以内" />
+                </span>
+            </div>
+        </div>
+        <div class="input_block clearfix mb25">
+            <div class="label_left">升级服务：</div>
+            <div class="input_right">
+                <label class="w80">
+                    <input type="radio" name="gpeIsUpgrade" id="update_gpeIsUpgrade1" value="01">不可升级
+				</label><br>
+					<input type="radio" name="gpeIsUpgrade" id="update_gpeIsUpgrade2" value="02">可升级至
+				<input type="text" class="w100 mb16 validate[required,maxSize[10]]" name="gpeUpgradeCont" id="update_gpeUpgradeCont" placeholder="如：5星/豪华">
+                <span class="ml35">费用 </span>
+				<span class="tishi_box w110">
+					<input type="text" class="w108 validate[required,custom[integer],maxSize[6],min[1]]" name="gpeUpgradeAdult" id="update_gpeUpgradeAdult" />
+                </span>
+				<span >元/人</span>
+            </div>
+        </div>
+        <div class="cb mb25"></div>
+        <div class="button_block button_block_wauto clearfix">
+            <button class="y_but ml15 mr20" type="button" id="gpcQueding">提交</button>
+            <button class="b_but" type="button" id="gpcQuxiao">取 消</button>
+		</div>
+	</form>	
+</div>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="texidrive">
+
+	<!-- 根据车辆ID查询 -->
+	<select id="getTextDriveById" resultType="texiDriveBean">
+		SELECT
+			id,
+			tdl_id 							    AS tdlId,
+			zjl_type 							AS zjlType,
+			zjl_place_car 	                    AS zjlPlaceCar,
+			zjl_province 	                    AS zjlProvince,
+			zjl_city 	                    	AS zjlCity,
+			zjl_place_car 	                    AS zjlPlaceCar,
+			zjl_hf_limit                        AS zjlHfLimit,
+			zjl_hf_limit_km                    	AS zjlHfLimitKm,
+			zjl_hf_take_place 		            AS zjlHfTakePlace,
+			zjl_hf_take_address                	AS zjlHfTakeAddress,
+			zjl_hf_back_place 					AS zjlHfBackPlace,
+			zjl_hf_back_address 			    AS zjlHfBackAddress,
+			zjl_hf_cost_show           			AS zjlHfCostShow,
+			zjl_hf_back_notice             		AS zjlHfBackNotice,
+			zjl_hf_breach_notice          		AS zjlHfBreachNotice,
+			zjl_hf_insurance_notice  			AS zjlHfInsuranceNotice,
+			zjl_hf_update_notice 			    AS zjlHfUpdateNotice,
+			zjl_hf_special_note 		        AS zjlHfSpecialNote,
+			zjl_limit            		        AS zjlLimit,
+			Zjl_take_place      			    AS ZjlTakePlace,
+			zjl_take_address                    AS zjlTakeAddress,
+			zjl_back_place                      AS zjlBackPlace,
+			zjl_back_address                    AS zjlBackAddress,
+			zjl_cost_show 		            	AS zjlCostShow,
+			zjl_back_show           			AS zjlBackShow,
+			zjl_breach_notice        			AS zjlBreachNotice,
+			zjl_insurance_notice 		        AS zjlInsuranceNotice,
+			zjl_update_notice 		            AS zjlUpdateNotice,
+			zjl_special_notice 		            AS zjlSpecialNotice,
+			zjl_day								AS zjlDay
+		FROM
+			texi_drive
+		WHERE
+			tdl_id = #{tdlId}
+		LIMIT 1
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert">
+  		INSERT INTO
+			texi_drive
+			(
+				tdl_id,
+				zjl_type,
+				zjl_province,
+				zjl_city,
+				zjl_place_car,
+				zjl_hf_limit,
+				zjl_hf_limit_km,
+				zjl_hf_take_place,
+				zjl_hf_take_address,
+				zjl_hf_back_place,
+				zjl_hf_back_address,
+				zjl_hf_cost_show,
+				zjl_hf_back_notice,
+				zjl_hf_breach_notice,
+				zjl_hf_insurance_notice,
+				zjl_hf_update_notice,
+				zjl_hf_special_note,
+				zjl_limit,
+				Zjl_take_place,
+				zjl_take_address,
+				zjl_back_place,
+				zjl_back_address,
+				zjl_cost_show,
+				zjl_back_show,
+				zjl_breach_notice,
+				zjl_insurance_notice,
+				zjl_update_notice,
+				zjl_special_notice,
+				zjl_day
+			)
+			VALUES
+			(
+				#{tdlId},
+				#{zjlType},
+				#{zjlProvince},
+				#{zjlCity},
+				#{zjlPlaceCar},
+				#{zjlHfLimit},
+				#{zjlHfLimitKm},
+				#{zjlHfTakePlace},
+				#{zjlHfTakeAddress},
+				#{zjlHfBackPlace},
+				#{zjlHfBackAddress},
+				#{zjlHfCostShow},
+				#{zjlHfBackNotice},
+				#{zjlHfBreachNotice},
+				#{zjlHfInsuranceNotice},
+				#{zjlHfUpdateNotice},
+				#{zjlHfSpecialNote},
+				#{zjlLimit},
+				#{ZjlTakePlace},
+				#{zjlTakeAddress},
+				#{zjlBackPlace},
+				#{zjlBackAddress},
+				#{zjlCostShow},
+				#{zjlBackShow},
+				#{zjlBreachNotice},
+				#{zjlInsuranceNotice},
+				#{zjlUpdateNotice},
+				#{zjlSpecialNotice},
+				#{zjlDay}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			texi_drive
+		SET
+			zjl_type 							= #{zjlType},
+			zjl_province 						= #{zjlProvince},
+			zjl_city 							= #{zjlCity},
+			zjl_place_car 	                    = #{zjlPlaceCar},
+			zjl_hf_limit                        = #{zjlHfLimit},
+			zjl_hf_limit_km                    	= #{zjlHfLimitKm},
+			zjl_hf_take_place 		            = #{zjlHfTakePlace},
+			zjl_hf_take_address                	= #{zjlHfTakeAddress},
+			zjl_hf_back_place 					= #{zjlHfBackPlace},
+			zjl_hf_back_address 			    = #{zjlHfBackAddress},
+			zjl_hf_cost_show           			= #{zjlHfCostShow},
+			zjl_hf_back_notice             		= #{zjlHfBackNotice},
+			zjl_hf_breach_notice          		= #{zjlHfBreachNotice},
+			zjl_hf_insurance_notice  			= #{zjlHfInsuranceNotice},
+			zjl_hf_update_notice 			    = #{zjlHfUpdateNotice},
+			zjl_hf_special_note 		        = #{zjlHfSpecialNote},
+			zjl_limit            		        = #{zjlLimit},
+			Zjl_take_place      			    = #{ZjlTakePlace},
+			zjl_take_address                    = #{zjlTakeAddress},
+			zjl_back_place                      = #{zjlBackPlace},
+			zjl_back_address                    = #{zjlBackAddress},
+			zjl_cost_show 		            	= #{zjlCostShow},
+			zjl_back_show           			= #{zjlBackShow},
+			zjl_breach_notice        			= #{zjlBreachNotice},
+			zjl_insurance_notice 		        = #{zjlInsuranceNotice},
+			zjl_update_notice 		            = #{zjlUpdateNotice},
+			zjl_special_notice 		            = #{zjlSpecialNotice},
+			zjl_day								= #{zjlDay}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

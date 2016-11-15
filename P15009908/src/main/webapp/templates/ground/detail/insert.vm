@@ -1,0 +1,446 @@
+<!-- 当地旅游 -->
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ground/ground.css">
+<script type="text/javascript"> 
+
+	#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+		$('#szd02').hide();
+    	$('#county').hide();
+	#else
+    	$('#szd01').hide();
+    	$('#county').hide();
+	#end
+	
+	//点击国内时国际/港澳台隐藏
+	$('#gddInland01').click(function() {
+		$('#szd02').hide();
+		$('#szd01').show();
+	});
+	
+	//点击国际港澳台时国内隐藏主要国家和出发城市隐藏
+	$('#gddInland02').click(function() {
+		$('#szd01').hide();
+		$('#szd02').show();
+	});
+	
+	//点击港澳台国际时主要国家和出发城市隐藏于展示
+	$("input[name='gddCountylocation']").change(function() {
+		var a = $("input[name='gddCountylocation']:checked").val();
+		if (a == '04') {
+			$('#county').show(); // 国家显示
+    		$("#guide_localwide").hide(); // 是否属于周边隐藏
+		} else {
+			$('#county').hide(); // 国家隐藏
+    		$("#guide_localwide").show(); // 是否属于周边显示
+		}
+	});
+	
+	//点击是否
+	$('#student').hide();
+	$('#YES').click(function(){
+		$('#student').show();
+		$('#theme').hide();
+	});
+	$('#NO').click(function(){
+		$('#student').hide();
+		$('#theme').show();
+	});
+	
+	//其他产品主题添加隐藏
+	$('#standard').hide();
+	
+	$("input[name='gddAddstandard']").change(function() {
+		var a = $("input[name='gddAddstandard']:checked").val();
+		if (a == '01') {
+    		$('#standard').show();
+		} else {
+		  	$('#standard').hide();
+		  	$('#standarda').remove();
+		  	$("input[name='gddAddstandards']").val("");
+		}
+	});
+	
+	//wxy12-1学生活动增加
+	//其他的文本框和加号隐藏
+	$("#stu-other").hide();
+	$("#stu-other-div").hide();
+	
+	//点击其他如果是选中状态文本框和加号显示，否则隐藏
+	$("#stu_add label input[name='gddGame'][value='10']").click(function() {
+		if($(this).is(':checked')){
+			$("#stu-other").show();
+    		//点击加号添加文本框和减号
+    		$("#stu_add .add_key_word").live("click",function(){
+    			$(".stu-other-div").show();
+    			var otherlen= $("#stu_add .input_right").length;
+    			if($(this).text()=="-"){
+    				$(this).parent().remove();
+    			}
+    			if(otherlen>1){
+    				return false;
+    			}
+    			if($(this).text()=="+"){
+    				$('<div class="input_right newline_ctllr4 mt15" id="stu-other"><input type="text" class="w200 lab_input validate[maxSize[10]]" name="gddAddgame" style="width:100px;"/><a href="javascript:void(0)" class="add_key_word">-</a></div>').appendTo(".stu-other-div");
+    			}
+    		});
+		} else {
+    		$("#stu-other").hide();
+    		$("input[name='gddAddgame']").val("");
+    		$(".stu-other-div .input_right").remove();
+		}
+	});
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+    $(function() {
+       	var guojiastr = $("#guojiaforqueryId").html();
+        var arr = guojiastr.split(",");
+        $(".autoquerycountry").autocomplete(arr);
+    });
+</script>
+<div class="newline">
+    <div class="newline_suptop">
+        <img src="$staticRoot/images/ddy.png">
+        <span>当地游</span>
+        <div class="cb"></div>
+		<div class="g_line"></div>
+    </div>
+    <div class="newline_ct">
+		<form method="post" id="form1" style="min-width:800px;">
+			<!--左边-->
+            <div class="newline_ctll">
+                <span style="width:121px;">
+					<strong>当地游信息</strong>
+				</span>
+            </div>
+			<div class="newline_ctll">
+				<span style="width:121px;">产品编号：</span>
+                <div class="newline_ctllr">
+                    <input type="text" name="gddCodeone" class="validate[maxSize[8],custom[onlyLetterNumber]]" style="width:200px;">
+                </div>
+            </div>
+            <div class="newline_ctll">
+                <span style="width:121px;">线路名称：</span>
+                <div class="newline_ctllr">
+                    <input type="text" name="gddName" class="validate[required,maxSize[120]]" style="width:200px;">&nbsp;
+					<span style="color:red;">*</span>
+                </div>
+            </div>
+			<div class="newline_ctll">
+                <span style="width:121px;">推广图：</span>
+                <div class="newline_ctllr">
+					#vfile('gddImg1','gddImg1','')
+                    ##<input type="text" name="gddName" class="validate[required,maxSize[120]]" style="width:200px;">&nbsp;
+                </div>
+            </div>
+            <div class="newline_ctll">
+                <span style="width:121px;">产品分类：</span>
+                <div class="localt_ctllra">
+					#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+                        <label>
+                            <input type="radio" name="gddProductType" value="02" checked="checked" /> 国内
+    					</label>
+					#end
+					#if($erim.isNotEmpty($!userBussiness.cbsRanInterna))
+                        <label>
+                            <input type="radio" name="gddProductType" value="01"   #if($erim.isEmpty($!userBussiness.cbsRanProvince1)) checked  #end/> 国际/港澳台
+    					</label>
+					#end
+                </div><span style="width:5px;color:red;">*</span>
+            </div>
+            <div class="newline_ctll">
+                <span style="width:121px;">出发城市：</span>
+                <div class="localt_ctllra">
+					#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+                        <label>
+                            <input type="radio" id="gddInland01" name="gddInternation" value="1" checked="checked" /> 国内
+    					</label>
+					#end
+					#if($erim.isNotEmpty($!userBussiness.cbsRanInterna))
+                        <label>
+                            <input type="radio" id="gddInland02" name="gddInternation" value="2"   #if($erim.isEmpty($!userBussiness.cbsRanProvince1)) checked  #end/> 国际/港澳台
+    					</label>
+					#end
+                </div><span style="width:5px;color:red;">*</span>
+            </div>
+            <div class="localt_ctlla" id="szd02">
+                <span style="width:121px;"></span>
+                <div class="localt_ctllraa">
+                    <label style="width:55px">
+                        <input type="radio" name="gddCountylocation" value="01" checked="checked">香港
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="gddCountylocation" value="02"> 澳门
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="gddCountylocation" value="03">台湾
+					</label>
+					<label style="width:55px">
+                        <input type="radio" name="gddCountylocation" value="04">国际
+					</label>
+				</div><span style="color:red;width:5px;">*</span>
+				<div class="localt_ctllraa" id="county">
+					<span>国家</span><input type="text" name="gddMajorcountries" class="validate[required,maxSize[15]] autoquerycountry" style="width:108px;">
+					<span>城市</span><input type="text" name="gddDeparturecity" class="validate[maxSize[10]]" style="width:108px;">
+				</div>
+            </div>
+			#*
+				<input type="radio" name=""/>$busbean.cbsRanProvince1 省$busbean.cbsRanCity1 市 $busbean.cbsRanCounty1 县
+				<input type="radio" name=""/>$busbean.cbsRanProvince2 省$busbean.cbsRanCity2 市 $busbean.cbsRanCounty2 县
+				<input type="radio" name=""/>$busbean.cbsRanProvince3 省$busbean.cbsRanCity3 市 $busbean.cbsRanCounty3 县
+				<input type="radio" name=""/>$busbean.cbsRanProvince4 省$busbean.cbsRanCity4 市 $busbean.cbsRanCounty4 县
+				<input type="radio" name=""/>$busbean.cbsRanProvince5 省$busbean.cbsRanCity5 市 $busbean.cbsRanCounty5 县
+			*#
+			<div class="localt_ctlla" id="szd01">
+                <span style="width:121px;"></span>
+                <div class="localt_ctllraa">
+                    #customProvince('gddProvice','gddProvice','','1','','gddCity','gddCounty','','')
+					<span>省</span>
+					<select name="gddCity" id="gddCity" style="width:103px;" onchange="custom.town($(this),'gddCounty');"></select>
+					<span>市</span>
+					<select name="gddCounty" id="gddCounty" style="width:103px;"></select>
+					<span>区/县</span>
+					<font color="red">*</font>
+                </div>
+            </div>
+			<div class="newline_ctlla2" id="Characteristic">
+                <span style="width:121px;">主要景点/城市/国家：</span>
+				<div class="newline_ctllr4" style="float:left;width:auto;max-width:600px;" id="zyjd_add">
+					<div class="newline_ctllr2">
+                        <input type="text" name="gddCharacteristic" class="validate[required,maxSize[30]]" style="width:108px;">
+                        <a href="javascript:void(0)" class="add_key_word">+</a>
+                    </div>
+					
+                </div>
+				<p class="pred">*</p>
+            </div>
+			<div class="newline_ctlla2" id="Productine">
+                <span style="width:121px;">线路玩法：</span>
+				<div class="newline_ctllr4" style="float:left;width:600px;" id="xl_divadd">
+					<div class="newline_ctllr2">
+                        <input type="text" name="gddProductine" placeholder="例如：香港＋澳门＋台湾" class="validate[required,maxSize[50]]" style="width:200px;">
+                    </div>
+					<p class="pred">*</p>
+                </div>
+            </div>
+			<div class="newline_ctll" id="guide_localwide">
+                <span style="width:121px;">是否属于周边：</span>
+                <div class="newline_ctllr">
+        			#foreach($item in $perimeter.keySet())
+        				<label> 
+        					<input type="radio" name="gddLocalwide" #if($item  == '01') checked #end value="$item"/> $perimeter.get($item)
+        				</label>
+					#end
+					<span style="color:red;">*</span>
+                </div>
+            </div>
+			<div class="newline_ctll">
+                <span style="width:121px;">同业识别：</span>
+                <div class="newline_ctllr"><span style="margin-left:-133px;color:red;margin-top:1px;">*<span style="color:#969696">&nbsp;&nbsp;此项为同行识别所提供，不在外网展示</span></span>
+					#foreach($item in $town.keySet())
+        				<label style="width:300px;"> 
+        					<input type="radio" name="gddIsSurrounding" #if($item == '06') checked #end value="$item" /> $town.get($item)
+        				</label><br clear="left">
+				    #end
+                </div>
+            </div>
+			<div class="newline_ctll">
+                <span style="width:121px;">产品形态：</span>
+                <div class="newline_ctllr" style="width:425px;">
+        			#foreach($item in $product.keySet())
+        				<label class="w90"> 
+        					<input type="radio" name="gddProduct" #if($item == '01') checked #end value="$item" /> $product.get($item)
+        				</label>
+                    #end
+                </div>
+				<span style="width:5px; color:red;">*</span>
+				<!--
+				<span style="margin-left:-100px;color:red">*</span>-->
+            </div>
+			<div class="newline_ctll">
+                <span style="width:121px;">是否为学生活动：</span>
+                <div class="newline_ctllr" style="width:425px;">
+    				<label> 
+    					<input type="radio" name="gddYesno" id="NO" value="01" checked />否
+    				</label>
+					<label> 
+    					<input type="radio" name="gddYesno" id="YES" value="02"/>是
+    				</label>
+                </div>
+            </div>
+			<div class="newline_ctll" id="student">
+				<span style="width:121px;">学生活动：</span>
+                <div class="newline_ctllr" style="width:425px;" id="stu_add">
+					#foreach($item in $game.keySet())
+            			<label class="w90"> 
+            				<input type="checkbox" class="validate[required] checkbox" name="gddGame" value="$item"> $game.get($item)
+            			</label>
+					#end
+					<div class="input_right newline_ctllr4" id="stu-other">
+            			<input type="text" class="w200 lab_input validate[maxSize[10]]" name="gddAddgame" style="width:100px;"/>
+        				<a href='javascript:void(0)' class="add_key_word">+</a>
+            		</div>
+					<div style="float:left" class="stu-other-div"></div>
+                </div>
+            </div>
+			<div class="newline_ctllal" style="float:left;" id="theme">
+            <span style="width:155px;">产品主题：</span>
+                <div class="newline_ctllra" style="width:442px;" id="standards_add"> 
+    				#foreach($item in $theme.keySet())
+            			<label class="w90"> 
+            				<input type="checkbox" class="validate[maxCheckbox[3]] checkbox" name="gddStandards" value="$item"> $theme.get($item)
+            			</label>
+					#end
+					<label class="w90" >
+						<input type="checkbox" name="gddAddstandard" value="01" #if($erim.contains($!groundDetail.gddAddstandard,'01')) checked #end />其他
+					</label>
+					<div class="input_right newline_ctllr4" id="standard" style="width:170px;float:left">
+            			<input type="text" class="w200 lab_input validate[maxSize[10]]" name="gddAddstandards" style="width:100px;"/>
+        				<a href='javascript:void(0)' class="add_key_word">+</a>
+            		</div>
+                </div>
+			</div>
+            <div style="clear:both;"></div>
+			<div class="newline_ctllal">
+				<span style="width:157px;">产品标准：</span>
+                <div class="newline_ctllra">
+                    #foreach($item in $standards.keySet())
+        				<label class="w90"> 
+        					<input type="radio" name="gddThemeone" #if($item == '01') checked #end class="validate[required] checkbox" value="$item"> $standards.get($item)
+        				</label>
+					#end
+                 </div>
+            </div>
+			<!--<div style="clear:both;"></div>
+			<div class="newline_ctllal">
+				<span>预定方式：</span>
+                <div class="newline_ctllra">
+                    #foreach($item in $scheduled.keySet())
+        				<label class="w90"> 
+            				<input type="checkbox" class="validate[required] checkbox" name="gddScheduled" value="$item"> $scheduled.get($item)
+        				</label>
+					#end
+                 </div><span style=" color:red;margin-left:-705px;float: left; margin-top:8px;">*</span>
+            </div>-->
+			#* 
+			<div class="newline_ctll">
+                <span>集合地点：</span>
+                <div class="newline_ctllr">
+                    <input type="text" name="gddSet" class="validate[required,maxSize[200]]" style="width:230px;">
+					&nbsp;<span style="color:red;">*</span>
+                </div>
+            </div>
+			<div class="newline_ctll">
+                <span>集合时间：</span>
+                <div class="newline_ctllr">
+                    <input type="text" name="gddStarttime" class="validate[required,maxSize[200]]"  style="width:230px;" >
+	         &nbsp;<span style="color:red;">*</span>
+                </div>
+            </div>
+			<div class="newline_ctll">
+                <span >集合标志：</span>
+                <div class="newline_ctllr">
+                    <input type="text" name="gddMark" class="validate[maxSize[200]]" style="width:230px;">
+                </div>
+            </div>
+			*#
+			
+			## 行程管理入口 ---------------------------------------------------------------------------------------
+			<div class="djj_ctl">
+                <div class="djj_ctlrq" style="width:500px;float:left;margin-bottom:50px;margin-left:50px;">
+                <button type="button" class="djj_sub carinfo_sub" onclick="insertXc();">行程管理</button>                    
+				</div>
+            </div>
+			<!-- 
+			
+				行程管理入口   ---------------------------------------------------------------------------------------
+				
+			-->
+            <div class="newline_ctlla2">
+                <span style="width:121px;">费用包含：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddCostContains" class="validate[maxSize[2000]]"></textarea><p class="pred">*</p> 
+                </div>
+            </div>
+            <div class="newline_ctlla2">
+                <span style="width:121px;">费用不含：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddNomoney" class="validate[maxSize[2000]]"></textarea>
+                </div>
+            </div>
+            <div class="newline_ctlla2">
+                <span style="width:121px;">其他费用：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddExpense" class="validate[maxSize[2000]]"></textarea>
+                </div>
+            </div>
+			#*
+			<div class="newline_ctlla2">
+                <span>产品特色:</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限200字以内" name="gddProject" class="validate[maxSize[500]]"></textarea>
+                </div>
+            </div>
+			*#
+			<div class="newline_ctlla2">
+                <span style="width:121px;">退改规则：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddRule" class="validate[maxSize[2000]]"></textarea>
+                </div>
+            </div>
+            <div class="newline_ctlla2">
+                <span style="width:121px;">预订限制：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddIsbookinglimit" class="validate[maxSize[2000]]"></textarea> 
+                </div>
+            </div>
+            <div class="newline_ctlla2">
+                <span style="width:121px;">出行须知：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限2000字以内" name="gddTravelinformation" class="validate[maxSize[4000]]"></textarea>
+                </div>
+            </div>	
+            <div class="newline_ctlla2">
+                <span style="width:121px;">违约责任：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddDefault" class="validate[maxSize[2000]]"></textarea>
+                </div>
+            </div>
+            <div class="newline_ctlla2">
+                <span style="width:121px;">补充说明：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddSupplement" class="validate[maxSize[2000]]"></textarea>
+                </div>
+            </div>
+            <div class="newline_ctlla2">
+                <span style="width:121px;">特别提醒：</span>
+                <div class="newline_ctllra">
+                    <textarea placeholder="内容限1000字以内" name="gddRemind" class="validate[maxSize[1000]]"></textarea>
+                </div>
+            </div>
+			<div class="carinfo_ctbl">
+                <div class="carinfo_ctblrbtn" style="width:490px; margin-bottom:50px;">
+					<button type="button" class="carinfo_sub" onclick="subform.update('form1','$appRoot/ground/detail/insert');">提交</button>
+					<button type="reset" class="carinfo_qu">重置</button>
+                    <button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                </div>
+            </div>
+		</form>
+	</div>
+</div>
+<script>
+	function insertXc(){
+		var data = "form1";
+		$('#'+data).validationEngine({   
+            scroll       			: true,
+            showOneMessage			: true,
+            focusFirstField			: true   
+        });
+		//如果验证通过则提交
+		if($('#'+data).validationEngine('validate')) {
+			var data = $("#" + data).serialize()
+			index.load('$appRoot/ground/detail/skipTrip?' + data);
+		}
+	}
+</script>
+<!-- /新增线路 -->
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

@@ -1,0 +1,10 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/welcome.css">
+	
+	<div class="hti_top">
+        <p>
+            合作推广
+        </p>
+    </div>
+    <div class="hti_center">
+		<img src="$staticRoot/images/welcome.png"/>
+	</div>

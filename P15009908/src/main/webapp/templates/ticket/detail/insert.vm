@@ -1,0 +1,326 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ticket/ticket.css">
+<script type="text/javascript"> 
+	
+	/*人数控制*/
+	$("#buxian").click(function(){
+		if($("#buxian").is(':checked')) {
+			$("#tdlNum").attr("value","");
+			$("#tdlNum").attr("disabled",true);
+			return 0;
+		}else{
+			$("#tdlNum").attr("disabled",false);
+		}
+	});
+	
+	#if($erim.isEmpty($!userBussiness.cbsRanProvince1))
+	 	$('#szd01').hide();
+		$('#szd02').show();
+	#else
+		$('#szd02').hide();
+	#end
+
+	//点击国内隐藏国际港澳台、隐藏国家城市文本框
+	$('#gddInland01').click(function() {
+		$('#szd02').hide();
+		$('#szd01').show();
+	});
+	
+	//点击国际港澳台隐藏国内
+	$('#gddInland02').click(function() {
+		$('#szd01').hide();
+		$('#szd02').show();
+	});
+	
+	//点击国际显示国家城市
+	$('#county01').hide();
+	
+	$('#county').click(function(){
+		$('#county01').toggle();
+	});
+	
+	// 港澳台国际切换
+	$("input[name='tdlNation']").change(function() {
+		var nation = $(this).val();
+		if (nation == '04') {
+			$('#county01').show();
+		} else {
+			$('#county01').hide();
+		}
+	});
+	
+	//景点主题
+	/* $(".newline_ctllra .newline_ctllr4 .lab_a").live("click",function(){
+        var objn = $(this).parent().parent().find(".newline_ctllr4").length;
+        if($(this).text()=="-"){
+            $(this).parent().remove();
+        }
+        if (objn > 1) {return;}
+        if($(this).text()=="+") {
+            $(this).parent().after("<div class='input_right newline_ctllr4 mt15'><input type='text' class='w200 lab_input validate[maxSize[10]]' style='width:150px;margin-right:10px;' name='tdlAddtheme' /><a href='javascript:void(0)' class='lab_a'>-</a></div>");
+        }
+    }); */
+	
+	//wxy12-1门票景点主题
+	//其他的文本框和加号隐藏
+	$("#ticket-theme-other").hide();
+	
+	//隐藏
+	$(".ticket-div").hide();
+	
+	//点击其他如果是选中状态文本框和加号显示，否则隐藏
+	$("#ticket-theme label input[name='tdlAttractions'][value='21']").click(function() {
+		if($(this).is(':checked')) {
+			$("#ticket-theme-other").show();
+    		//点击加号添加文本框和减号
+    		$("#ticket-theme-other .add_key_word").live("click",function(){
+    			$(".ticket-div").show();
+    			var otherlen= $("#ticket-theme .input_right").length;
+    			if($(this).text() == "-") {
+    				$(this).parent().remove();
+    			}
+    			if(otherlen > 1) {
+    				return false;
+    			}
+    			if($(this).text() == "+") {
+    				$('<div class="input_right newline_ctllr4 mt15" id="ticket-theme-other" style="float:left"><input placeholder="请符合实际编写" type="text" class="w200 lab_input validate[maxSize[30]]" style="width:150px;" name="tdlAddtheme" /><a href="javascript:void(0)" class="add_key_word">-</a></div>').appendTo(".ticket-div");
+    			}
+    		});
+		} else {
+    		$("#ticket-theme-other").hide();
+    		$("input[name='tdlAddtheme']").val("");
+    		$(".ticket-div .input_right").remove();
+    	}
+	});
+	
+	//上传图片
+	uploadify('uploadify1','tdlImg1','filespan1','fileQueue1');
+	uploadify('uploadify2','tdlImg2','filespan2','fileQueue2');
+	uploadify('uploadify3','tdlImg3','filespan3','fileQueue3');
+	uploadify('uploadify4','tdlImg4','filespan4','fileQueue4');
+	
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+    $(function() {
+       	var guojiastr = $("#guojiaforqueryId").html();
+        var arr = guojiastr.split(",");
+        $(".autoquerycountry").autocomplete(arr);
+    });
+</script>
+<div class="newline">
+    <div class="newline_suptop">
+        <img src="$staticRoot/images/htj.png">
+        <span>添加景点</span>
+       <div class="cb"></div>
+	   <div class="g_line"></div>
+    </div>
+    <div class="newline_ct">
+		<form method="post" id="form1">
+            <div class="newline_ctll">
+                <span>景点名称：</span>
+                <div class="newline_ctllr">
+                    <input type="text" style="width:230px;padding:0 5px;" name="tdlName" class="validate[required,maxSize[80]]" placeholder="请准确填写景点全称或常用名称">&nbsp;<span style="color:red;">*</span>
+                </div>
+            </div>
+			<div class="newline_ctll">
+                <span>景点级别：</span>
+                <div class="newline_ctllr">
+        			#foreach($item in $level.keySet())
+        				<label> 
+        					<input type="radio" #if($item == '01') checked #end name="tdlScenicLevel" value="$item"> $level.get($item)
+        				</label>
+				    #end
+                </div>
+            </div>
+            <div class="newline_ctll">
+                <span>景点区域：</span>
+                <div class="localt_ctllra">
+					#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+                        <label>
+                            <input type="radio" id="gddInland01" name="tdlWithinOrOuter" value="01" checked="checked"> 国内</label>
+					#end
+					#if($erim.isNotEmpty($!userBussiness.cbsRanInterna))
+                        <label>
+                            <input type="radio" id="gddInland02" name="tdlWithinOrOuter" value="02" #if($erim.isEmpty($!userBussiness.cbsRanProvince1)) checked  #end> 国际/港澳台<span style="color:red;margin-left:5px;">*</span></label>
+					#end
+                </div>
+            </div>
+            <div class="localt_ctlla" id="szd02" style="width:95%; height:auto;">
+                <span>所在城市：</span>
+                <div class="localt_ctllraa">
+					<label> 
+    					<input class="w100" type="radio" name="tdlNation" value="01" checked="checked">香港
+    				</label>
+					<label> 
+    					<input class="w100" type="radio" name="tdlNation" value="02">澳门
+    				</label>
+					<label> 
+    					<input class="w100" type="radio" name="tdlNation" value="03">台湾
+    				</label>
+					<label> 
+    					<input class="w100" type="radio" name="tdlNation" value="04">国际
+    				</label>
+                </div>
+				<span style="width:5px; color:red; margin-left:-30px;">*</span>
+				<div class="co_nationdiv01" id="county01" style="line-height:30px;">
+					<span style="font-size:12px;color:#393838; margin-right:5px;">国家</span>
+					<input type="text" name="tdlCountyone" class="validate[required,maxSize[15]] autoquerycountry" style="width:110px;height:25px;border: 1px solid #ccc;">
+					<span style="font-size:12px;color:#393838; margin:0 5px;">城市</span>
+					<input type="text" name="tdlCityone" class="validate[required,maxSize[10]]" style="width:100px;height:25px;border:1px solid #ccc;">
+				</div>
+            </div>
+			<div class="localt_ctlla" id="szd01">
+                <span>所在城市：</span>
+                <div class="localt_ctllraa">
+					#customProvince('tdlProvince','tdlProvince','w80 validate[required]','1','','tdlCity','tdlCounty','','')
+				    <span>省</span><select name='tdlCity' id='tdlCity' class='w90' onchange="custom.town($(this),'tdlCounty');"></select>
+				    <span>市</span><select name='tdlCounty' id='tdlCounty' class='w100'></select><span>区/县</span>
+					<span style="margin-left:-8px;color:red;">*</span>
+                </div>
+            </div>
+			
+            <div class="newline_ctlla2">
+                <span>详细地址：</span>
+				<div class="newline_ctllr3">
+					<div class="newline_ctllr2">
+                        <input type="text" name="tdlAddress" class="validate[required,maxSize[100]]" style="width:230px;">&nbsp;<span style="color:red;">*</span>
+                    </div>
+                </div>
+            </div>
+			<!-- 
+			<div class="newline_ctlla2">
+				<span>纬度:</span>
+				<div class="newline_ctllr3">
+					<input type="text"  name="tdlLongitude" class="validate[required,custom[number],maxSize[10]" style="width:87px;height:25px;margin-top:20px;"><span style="color:red;">*</span>
+					<span  style="color:#000;font-size:12px;margin-top:5px">经度:</span>
+					<input type="text" name="tdlLatitude" class="validate[required,custom[number],maxSize[10]" style="width:88px;height:25px;margin-top:20px;"><span style="color:red;">*</span>
+					<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank"><span style="color:#0251B9;font-size:12px;">经纬度获取方法</span></a>
+				</div>
+			</div>-->
+			<!--<div class="newline_ctlla2">
+				<span>开放时间：</span>
+				<div class="newline_ctllr3">
+					<input type="text"  name="tdlTimeOpen" id="tdlTimeOpen" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" style="width:98px;height:24px;margin-top:17px;border:1px solid #ccc;" class="validate[required]">
+					<span  style="color:#000;font-size:12px;margin:5px 5px 0px 5px">到</span>
+					<input type="text" name="tdlMaintenanceTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm',minDate:'#F{$dp.$D(\'tdlTimeOpen\',{m:1});}'})" style="width:96px;height:24px;margin-top:17px;border:1px solid #ccc;" class="validate[required]"><span style="color:red;margin-left:5px;">*</span>
+				</div>
+			</div> -->
+			<div class="newline_ctlla2">
+                <span>开放时间：</span>
+				<div class="newline_ctllr3">
+					<div class="newline_ctllr2">
+                        <input type="text" placeholder="旺季：08:30-17:30;淡季：09:00-16:30。" name="tdlTimeOpen" class="validate[maxSize[80]]" style="width:230px;">
+                    </div>
+                </div>
+            </div>
+            <div class="newline_ctlla2">
+                <span>封闭维护说明：</span>
+				<div class="newline_ctllr3">
+					<div class="newline_ctllr2">
+                        <input type="text" placeholder="例如:每周一闭馆;每年2-4月封山维护" name="tdlUsingThisDictionary" class="validate[maxSize[80]]" style="width:230px;">
+                    </div>
+                </div>
+            </div>
+			<div class="newline_ctlla2">
+                <span>容纳参观人数：</span>
+				<div class="newline_ctllr3">
+					<div class="newline_ctllr2">
+                        <input type="text" id="tdlNum" name="tdlNum" placeholder="例如:xx人" class="validate[custom[integer],min[1],maxSize[6]]" style="width:170px;">
+                       	<label>
+							<input style="width:15px;margin-left:5px;" type="checkbox" id="buxian" name="buxian" value="0">不限
+						</label>
+						<span style="color:red;">*</span>
+                    </div>
+                </div>
+            </div>
+			<div class="newline_ctlla" >
+                <span>景点主题：</span>
+                <div class="newline_ctllra" style="width:425px;" id="ticket-theme">
+    				#foreach($item in $attractions.keySet())
+            			<label class="w90"> 
+            				<input type="checkbox" class="validate[required,maxCheckbox[3]] checkbox" name="tdlAttractions" value="$item"> $attractions.get($item)
+            			</label>
+					#end
+					<div class="input_right newline_ctllr4" id="ticket-theme-other" style="float:left">
+            			<input placeholder="请符合实际编写" type="text" class="w200 lab_input validate[maxSize[30]]" style="width:150px;" name="tdlAddtheme" />
+        				<a href='javascript:void(0)' class="add_key_word">+</a>
+            		</div>
+					<div class="ticket-div" style="float:left;"></div>
+                </div>
+            </div>
+			<!-- <div class="newline_ctlla" >
+                <span>预定方式：</span>
+                <div class="newline_ctllra" style="width:425px;">
+    				#foreach($item in $scheduled.keySet())
+            			<label class="w90"> 
+            				<input type="checkbox" class="validate[required] checkbox" name="tdlScheduled" value="$item"> $scheduled.get($item)
+            			</label>
+					#end
+                </div><span  style=" color:red;margin-left:-130px;float: left; margin-top: 4px;">*</span>
+				</div>-->
+			<div class="newline_ctll" style="margin-bottom:5px;">
+                <span atyle="width:150px;"></span>
+                <div class="newline_ctllr">
+                   <span style="color:red;margin-left:-72px;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该景点将会下线</span>
+                </div>
+            </div>
+    		<div class="input_block clearfix" style="clear:both;">
+        		<div class="label_left">景点图片：</div>
+        		<div class="input_right position_re">
+					<input name="tdlImg1" value="" type="hidden" id="tdlImg1"/>
+                	<input name="file" id="uploadify1" contenteditable="false" size="30" type="file"/>
+    				<span id="filespan1"></span>
+    				<div id="fileQueue1"></div>
+        		</div>
+        	</div>
+        	<div class="input_block clearfix">
+        		<div class="label_left">景点图片：</div>
+        		<div class="input_right position_re">
+        			<input name="tdlImg2" value="" type="hidden" id="tdlImg2"/>
+                	<input name="file" id="uploadify2" contenteditable="false" size="30" type="file" />
+    				<span id="filespan2"></span>
+    				<div id="fileQueue2"></div>
+        		</div>
+        	</div>
+        	<div class="input_block clearfix">
+        		<div class="label_left">景点图片：</div>
+        		<div class="input_right position_re">
+        			<input name="tdlImg3" value="" type="hidden" id="tdlImg3"/>
+                	<input name="file" id="uploadify3" contenteditable="false" size="30" type="file" />
+    				<span id="filespan3"></span>
+    				<div id="fileQueue3"></div>
+        		</div>
+        	</div>
+    		<div class="input_block clearfix">
+        		<div class="label_left">景点图片：</div>
+        		<div class="input_right position_re">
+        			<input name="tdlImg4" value="" type="hidden" id="tdlImg4"/>
+                	<input name="file" id="uploadify4" contenteditable="false" size="30" type="file" />
+    				<span id="filespan4"></span>
+    				<div id="fileQueue4"></div>
+        		</div>
+        	</div>
+            <div class="newline_ctlla" style="margin-top:0px;">
+                <span>景点简介：</span>
+                <div class="newline_ctllra2">
+                    <textarea placeholder="内容限1000字以内" name="tdlFeeDescription" class="validate[maxSize[2000]]"></textarea>
+                </div>
+            </div>
+            <div class="newline_ctlla">
+                <span>友情提示：</span>
+                <div class="newline_ctllra2">
+                    <textarea placeholder="内容限500字以内" name="tdlInSecurity" class="validate[maxSize[1000]]"></textarea>
+                </div>
+            </div>
+            <div class="carinfo_ctbl">
+                <span></span>
+                <div class="carinfo_ctblrbtn" style="width:360px;margin-bottom:80px;">
+                    <button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/ticket/detail/insert','$appRoot/ticket/detail/list');">提交</button>
+					<button type="reset" class="carinfo_qu">重置</button>
+                    <button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                </div>
+            </div>
+		</form>
+	</div>
+</div>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

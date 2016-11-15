@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticketclass">
+
+	<!-- 查询条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test ="tdlId != null and tdlId != ''"> 	and 	tdl_id = #{tdlId}</if>
+		</where>
+	</sql>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTicketclassCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			ticket_class
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 显示当前页 
+	<select id="selectPageTicket" resultType="ticketClassBean">
+		SELECT
+			id,
+			tdl_id						AS tdlId,
+			tdl_ticket					AS tdlTicket,
+			tdl_moneyshow			    AS tdlMoneyshow,
+			tdl_expiry					AS tdlExpiry,
+			tdl_limited					AS tdlLimited,
+			tdl_change					AS tdlChange,
+			tdl_supplement				AS tdlSupplement,
+			tdl_del_status				AS tdlDelStatus,
+			tdl_creattime				AS tdlCreattime
+		FROM
+			ticket_class
+	  	<include refid="sql_query" />
+	  	ORDER BY 
+	  		tdl_del_status
+	    ASC,
+			tdl_creattime 
+	  	DESC
+	</select>
+	-->
+	<!-- 不显示分页 -->
+	<select id="selectTicket" resultType="ticketClassBean">
+		SELECT
+			id,
+			tdl_id						AS tdlId,
+			tdl_ticket					AS tdlTicket,
+			tdl_moneyshow			    AS tdlMoneyshow,
+			tdl_expiry					AS tdlExpiry,
+			tdl_limited					AS tdlLimited,
+			tdl_change					AS tdlChange,
+			tdl_supplement				AS tdlSupplement,
+			tdl_del_status				AS tdlDelStatus,
+			tdl_creattime				AS tdlCreattime
+		FROM
+			ticket_class
+	  	<include refid="sql_query" />
+	  	ORDER BY 
+	  		tdl_del_status
+	    DESC,
+			tdl_creattime 
+	  	DESC
+	</select>
+	
+	<!-- 根据票类ID查询 -->
+	<select id="getTicketClassById" resultType="ticketClassBean">
+		SELECT
+			id,
+			tdl_id						AS tdlId,
+			tdl_ticket					AS tdlTicket,
+			tdl_moneyshow			    AS tdlMoneyshow,
+			tdl_expiry					AS tdlExpiry,
+			tdl_limited					AS tdlLimited,
+			tdl_change					AS tdlChange,
+			tdl_supplement				AS tdlSupplement,
+			tdl_del_status				AS tdlDelStatus,
+			tdl_creattime				AS tdlCreattime
+		FROM
+			ticket_class
+		WHERE
+		    id = #{id}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert">
+  		INSERT INTO
+			ticket_class
+		(
+			tdl_id,
+			tdl_ticket,
+			tdl_moneyshow,
+			tdl_expiry,
+			tdl_limited,
+			tdl_change,
+			tdl_supplement,
+			tdl_del_status,
+			tdl_creattime
+		)
+		VALUES
+		(
+			#{tdlId},
+			#{tdlTicket},
+			#{tdlMoneyshow},
+			#{tdlExpiry},
+			#{tdlLimited},
+			#{tdlChange},
+			#{tdlSupplement},
+			#{tdlDelStatus},
+			#{tdlCreattime}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			ticket_class
+		SET
+			tdl_ticket				= #{tdlTicket},
+			tdl_moneyshow			= #{tdlMoneyshow},
+			tdl_expiry			    = #{tdlExpiry},
+			tdl_limited				= #{tdlLimited},
+			tdl_change				= #{tdlChange},
+			tdl_supplement			= #{tdlSupplement}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 上下架 -->
+	<delete id="delete" parameterType="int">
+		UPDATE
+			ticket_class
+		SET
+			tdl_del_status 	 = #{tdlDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	
+</mapper>

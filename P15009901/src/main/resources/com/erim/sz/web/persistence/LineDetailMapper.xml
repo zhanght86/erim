@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="linedetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			and ldl_is_del_status = '1'
+			<if test="ldlProductine !=null and ldlProductine != ''">        		 and     ldl_productine             like "%${ldlProductine}%"</if>
+			<if test="ldlProductForm !=null and ldlProductForm != ''">       		 and     ldl_product_form           like "%${ldlProductForm}%"</if>
+			<if test="ldlProductStandard !=null and ldlProductStandard != ''">       and     ldl_product_standard       like "%${ldlProductStandard}%"</if>
+			<if test="ldlProType1 !=null and ldlProType1 != ''">       				 and     ldl_pro_type1              like "%${ldlProType1}%"</if>
+			<if test="ldlGame !=null and ldlGame != ''">       						 and     ldl_game                   like "%${ldlGame}%"</if>
+			<if test="ldlName != null and ldlName != ''">						     and     ldl_name 		            like "%"#{ldlName}"%"</if>
+			<if test="ldlProvince != null and ldlProvince != ''">					 and     ldl_province 		        = #{ldlProvince}</if>
+			<if test="ldlCity != null and ldlCity != ''">					         and     ldl_city 		    		= #{ldlCity}</if>
+			<if test="ldlCountylocation != null and ldlCountylocation != ''">		 and     ldl_countylocation 		= #{ldlCountylocation}</if>
+			<if test="ldlSpecialLine != null and ldlSpecialLine != ''">		         and     ldl_special_line 		    like "%"#{ldlSpecialLine}"%"</if>
+			<if test="ldlMajorcountries != null and ldlMajorcountries != ''">		 and     ldl_majorcountries 		like "%"#{ldlMajorcountries}"%"</if>
+			<if test="ldlPerimeterIs != null and ldlPerimeterIs != ''">		 		 and     ldl_perimeter_is 		    = #{ldlPerimeterIs}</if>
+		</where>
+	</sql>
+	<sql id="sql_column">
+			line_detail.id ,
+			ldl_name                 AS ldlName,
+			ldl_keyword              AS ldlKeyword,
+			ldl_keyword1             AS ldlKeyword1,
+			ldl_province             AS ldlProvince,
+			ldl_city                 AS ldlCity,
+			ldl_county               AS ldlCounty,
+			ldl_startplace_address   AS ldlStartplaceAddress,
+			ldl_features             AS ldlFeatures,
+			ldl_feature              AS ldlFeature,
+			ldl_preferential         AS ldlPreferential,
+			ldl_startdate            AS ldlStartdate,
+			ldl_enddate              AS ldlEnddate,
+			ldl_attribute1           AS ldlAttribute1,
+			ldl_perimeter_is         AS ldlPerimeterIs,
+			ldl_perimeter_detail     AS ldlPerimeterDetail,
+			ldl_starttime            AS ldlStarttime,
+			ldl_starttime1           AS ldlStarttime1,
+			ldl_startaddress         AS ldlStartaddress,
+			ldl_notes                AS ldlNotes,
+			ldl_characteristic       AS ldlCharacteristic,
+			ldl_money_men            AS ldlMoneyMen,
+			ldl_money_student        AS ldlMoneyStudent,
+			ldl_money_oldmen         AS ldlMoneyOldmen,
+			ldl_money_contain        AS ldlMoneyContain,
+			ldl_money_contain_off    AS ldlMoneyContainOff,
+			ldl_special_line         AS ldlSpecialLine,
+			ldl_project              AS ldlProject,
+			ldl_schedule_limit       AS ldlScheduleLimit,
+			ldl_schedule_break       AS ldlScheduleBreak,
+			ldl_schedule_break1      AS ldlScheduleBreak1,
+			ldl_schedule_travel      AS ldlScheduleTravel,
+			ldl_recommend            AS ldlRecommend,
+			ldl_price_wholesale      AS ldlPriceWholesale,
+			ldl_price_sell           AS ldlPriceSell,
+			ldl_createdate           AS ldlCreatedate,
+			ldl_createuser           AS ldlCreateuser,
+			ldl_price_sametown       AS ldlPriceSametown,
+			ld_is_through            AS ldIsThrough,
+			ld_through_time          AS ldThroughTime,
+			ld_through_user          AS ldThroughUser,
+			ldl_money_children       AS ldlMoneyChildren,
+			ldl_ntype			     AS ldlNtype,
+			ldl_pro_type1			 AS ldlProType1,
+			ldl_pro_type2			 AS ldlProType2,
+			ldl_pro_type3			 AS ldlProType3,
+			ldl_code                 AS ldlCode,
+			ldl_big_traffic          AS ldlBigTraffic,
+			ldl_big_traffic1          AS ldlBigTraffic1,
+			ldl_is_del_status        AS ldlIsDelStatus,
+			ldl_minute               AS ldlMinute,
+line_detail.cpy_id				     AS cpyId,
+			ldl_picture              AS ldlPicture,
+			ldl_productine           AS ldlProductine,
+			ldl_internation          AS ldlInternation,
+			ldl_countylocation       AS ldlCountylocation,
+			ldl_departurecity        AS ldlDeparturecity,
+			ldl_product_standard     AS ldlProductStandard,
+			ldl_product_form         AS ldlProductForm,
+			ldl_attraction           AS ldlAttraction,
+			ldl_expense              AS ldlExpense,
+			ldl_guest                AS ldlGuest,
+			ldl_remind               AS ldlRemind,
+			ldl_game                 AS ldlGame,
+			ldl_addgame              AS ldlAddgame,
+			ldl_yesno              AS ldlYesno
+	</sql>
+	
+	<!-- 根据企业id查询所有专线 -->
+	<select id="selectLineByaCpyid" resultType="lineDetailBean">
+		SELECT
+			<include refid="sql_column" />
+			,cpy.cpy_name 	         AS cpyName,
+			cpy.cpy_telephone        AS cpyTelephone,
+			cpy.cpy_brand 	  		 AS cpyBrand,
+			ccp.cbs_operator         AS ccpName,
+			ccp.cbs_operator_phone   AS ccpTelephone,
+			cpy.cpy_email 	         AS ccpEmail,
+			ccp.cbs_operator_qq      AS ccpQq
+ 		FROM
+			line_detail
+		LEFT JOIN
+			company_detail cpy
+		ON 
+			line_detail.cpy_id = cpy.id
+		LEFT JOIN
+			company_business ccp
+		on 
+			ccp.cpy_id = line_detail.cpy_id
+		WHERE
+			line_detail.cpy_id in 
+			<foreach item="item" index="index" collection="astrcpyId" open="(" separator="," close=")">  
+			  #{item}  
+			</foreach>
+		and 
+			line_detail.id in (
+	        		SELECT 
+	        			zx_sell_cooperation.cid	
+	        		FROM
+	        			zx_sell_cooperation
+	        		WHERE
+	        			zx_sell_cooperation.cpy_id      = line_detail.cpy_id
+	        		AND
+	        			zx_sell_cooperation.sell_cpy_id = #{sellId}
+	        			
+	        		<if test="zscIsCoopertion != null and zscIsCoopertion != ''">
+	        			AND zx_sell_cooperation.zsc_is_coopertion = '1'
+	        		</if>
+	        	)
+	     <if test="ldlProType1 != null and ldlProType1 != ''">
+	     	and ldl_pro_type1  like  '%${ldlProType1}%'
+	     </if>
+	     
+	     <if test="ldlPerimeterIs != null and ldlPerimeterIs !=''">
+	     	and ldl_perimeter_is = #{ldlPerimeterIs}
+	     </if>
+	     
+	     <if test="ldlSpecialLine != null and ldlSpecialLine !=''">
+	     	and ldl_special_line     = #{ldlSpecialLine}
+	     </if>
+	     
+	     <if test="ldlGame != null and ldlGame !=''">
+	     	and ldl_game         = #{ldlGame}
+	     </if>
+	     group by 
+	     	line_detail.id
+	</select>
+	
+	<select id="selectBeanByLineId" resultType="lineDetailBean">
+		SELECT
+			<include refid="sql_column" />,
+			
+			cpy_img			    AS cpyImg,
+			cpy_name        	AS cpyName,
+			cpy_address        	AS cpyAddress,
+			cpy_brand        	AS cpyBrand,
+			cpy_telephone   	AS cpyTelephone,
+			ccp_name			AS ccpName,
+			ccp_telephone		AS ccpTelephone,
+			ccp_qq				AS ccpQq,
+			cbs_operator		AS cbsOperator,
+			cbs_operator_phone	AS cbsOperatorPhone,
+			cbs_operator_qq		AS cbsOperatorQq
+ 		FROM
+			line_detail
+		LEFT JOIN
+			company_detail
+		ON 
+			company_detail.id = line_detail.cpy_id
+		LEFT JOIN
+			company_contact_person
+		ON
+			company_contact_person.cpy_id = line_detail.cpy_id
+		LEFT JOIN
+			company_business
+		ON
+			company_business.cpy_id = line_detail.cpy_id
+		WHERE
+			line_detail.id = #{id}
+		group by
+			line_detail.cpy_id
+	</select>
+	
+	<!-- 数组in  -->
+	<select id="selectListById" resultType="lineDetailBean">
+		SELECT
+			<include refid="sql_column" />,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+ 		FROM
+			line_detail
+		WHERE
+			id in 
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+			  #{item}  
+			</foreach>
+	</select>
+	
+	<select id="selectHotLine" resultType="lineDetailBean">
+		select <include refid="sql_column" /> ,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_is_open = '02'
+				and lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+		from line_detail
+		where ldl_is_del_status = '1'
+		having lpeRetailAdult is not null
+		ORDER by
+			ldl_createdate desc		
+		LIMIT
+			4
+	</select>
+	<!-- 根据特色餐ID查询 -->
+	<select id="selectLineDetialById" resultType="lineDetailBean">
+		SELECT
+			<include refid="sql_column" />
+ 		FROM
+			line_detail
+		WHERE
+			id = #{id}
+	</select>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageLine" resultType="lineDetailBean">
+		SELECT
+			<include refid="sql_column" />,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_is_open = '02'
+				and lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+		,(select count(1) from line_trip where tdl_id = line_detail.id ) as countDay
+		from line_detail
+		<include refid="sql_query" />
+		having lpeRetailAdult is not null
+		<if test="countDay != null and countDayCompare != 1">	and 	countDay 	  =        #{countDay}</if>
+		<if test="countDay != null and countDayCompare == 1">	and 	countDay 	 &gt;=     #{countDay}</if>
+	</select>
+	
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageLineCount" resultType="int">
+		select count(1) from 
+		(
+			SELECT
+			(
+				select a.lpe_retail_adult 
+				from 
+				(	select tdl_id,lpe_retail_adult,lpe_create_date
+					from line_price 
+					where lpe_is_open = '02'
+					and lpe_date = date_format(now(),'%Y-%m-%d')
+					order by lpe_create_date desc
+				) a
+				where a.tdl_id = line_detail.id
+				order by a.lpe_create_date desc
+				limit 1
+			) as lpeRetailAdult
+			,(select count(1) from line_trip where tdl_id = line_detail.id ) as countDay
+			from line_detail
+			<include refid="sql_query" />
+			having lpeRetailAdult is not null
+			<if test="countDay != null and countDayCompare != 1">	and 	countDay 	  =        #{countDay}</if>
+			<if test="countDay != null and countDayCompare == 1">	and 	countDay 	 &gt;=     #{countDay}</if>
+		) a
+	</select>
+	
+	<select id="selectZb" resultType="lineDetailBean">
+		select <include refid="sql_column" /> ,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_is_open = '02'
+				and lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+		from line_detail
+		where ldl_ntype = '01'
+		and ldl_perimeter_is = '02'
+		and ldl_is_del_status = '1'
+		having lpeRetailAdult is not null	
+		ORDER by
+			ldl_createdate desc		
+		LIMIT
+			9
+	</select>
+	<select id="selectGn" resultType="lineDetailBean">
+			
+		select <include refid="sql_column" /> ,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_is_open = '02'
+				and lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+		from line_detail
+		where ldl_ntype = '01'
+		and ldl_perimeter_is = '01'
+		and ldl_is_del_status = '1'
+		having lpeRetailAdult is not null	
+		ORDER by
+			ldl_createdate desc		
+		LIMIT
+			9
+	</select>
+	<select id="selectGw1" resultType="lineDetailBean">
+		select <include refid="sql_column" /> ,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_is_open = '02'
+				and lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+		from line_detail
+		where (ldl_special_line like "%香港%"
+		or ldl_special_line like "%澳门%"
+		or ldl_special_line like "%台湾%"
+		or ldl_special_line like "%日本%"
+		or ldl_special_line like "%韩国%"
+		or ldl_special_line like "%东南亚%")
+		and ldl_is_del_status = '1'
+		having lpeRetailAdult is not null	
+		ORDER by
+			ldl_createdate desc		
+		LIMIT
+			9	
+	</select>
+	<select id="selectGw2" resultType="lineDetailBean">
+			
+		select <include refid="sql_column" /> ,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_is_open = '02'
+				and lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+		from line_detail
+		where 
+		(ldl_special_line like "%朝鲜%"
+		or ldl_special_line like "%俄罗斯%"
+		or ldl_special_line like "%欧洲%"
+		or ldl_special_line like "%美洲%")
+		and ldl_is_del_status = '1'
+		having lpeRetailAdult is not null	
+		ORDER by
+			ldl_createdate desc		
+		LIMIT
+			9	
+	</select>
+	<select id="selectGw3" resultType="lineDetailBean">
+		select <include refid="sql_column" /> ,
+		(
+			select a.lpe_retail_adult 
+			from 
+			(	select tdl_id,lpe_retail_adult,lpe_create_date
+				from line_price 
+				where lpe_is_open = '02'
+				and lpe_date = date_format(now(),'%Y-%m-%d')
+				order by lpe_create_date desc
+			) a
+			where a.tdl_id = line_detail.id
+			order by a.lpe_create_date desc
+			limit 1
+		) as lpeRetailAdult
+		from line_detail
+		where 
+		(ldl_special_line like "%澳洲%"
+		or ldl_special_line like "%中东%"
+		or ldl_special_line like "%非洲%")
+		and ldl_is_del_status = '1'
+		having lpeRetailAdult is not null	
+		ORDER by
+			ldl_createdate desc		
+		LIMIT
+			9	
+	</select>
+</mapper>

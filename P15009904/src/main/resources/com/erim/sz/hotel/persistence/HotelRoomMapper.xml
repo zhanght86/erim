@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelroom">
+	
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="hdlId 			!= null and hdlId != ''"> 			   and hdl_id 				    = 		#{hdlId}</if>
+			<if test="cpyId 			!= null and cpyId != ''"> 			   and cpy_id 				    = 		#{cpyId}</if>
+			<if test="hheName 			!= null and hheName != ''"> 		   and hhe_name 			    like 	"%"#{hheName}"%"	</if>
+			<if test="hhePresonnum 		!= null and hhePresonnum != ''">   and hhe_presonnum 			=        #{hhePresonnum}	</if>
+			<if test="hheIsDelStatus 	!= null and hheIsDelStatus != ''"> 	   and hhe_is_del_status 	     = 		#{hheIsDelStatus}	</if>
+		</where>
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageHotelRoomList" resultType="hotelRoomBean">
+		SELECT
+			id ,
+			hdl_id           	AS hdlId,
+			hhe_name         	AS hheName,
+			hhe_presonnum    	AS hhePresonnum,
+			hhe_area         	AS hheArea,
+			hhe_layerstart      AS hheLayerstart,
+			hhe_layerend		AS hheLayerend,
+			hhe_homenum      	AS hheHomenum,
+			hhe_is_addbed    	AS hheIsAddbed,
+			hhe_yes				AS hheYes,
+			hhe_device       	AS hheDevice,
+			cpy_id          	AS cpyId,
+			hhe_is_del_status 	AS hheIsDelStatus,
+			hhe_createtime   	AS hheCreatetime,
+			hhe_createuser   	AS hheCreateuser,
+			hhe_img1   			AS hheImg1,
+			hhe_img1   			AS hheImg2,
+			hhe_img1   			AS hheImg3,
+			hhe_img1   			AS hheImg4,
+			hdl_bedtype			AS hdlBedtype,
+			hhe_balcony         AS hheBalcony
+		FROM
+			hotel_room
+		<include refid="sql_query" />
+		ORDER BY 
+			hhe_is_del_status
+		DESC,
+			hhe_createtime
+		DESC
+	</select>
+	
+   	<!-- 根据房型id查询 -->
+   	<select id="getRoomById" resultType="hotelRoomBean">
+	   	SELECT
+			id,
+			hdl_id           	AS hdlId,
+			hhe_name         	AS hheName,
+			hhe_presonnum    	AS hhePresonnum,
+			hhe_area         	AS hheArea,
+			hhe_layerstart      AS hheLayerstart,
+			hhe_layerend		AS hheLayerend,
+			hhe_homenum      	AS hheHomenum,
+			hhe_is_addbed    	AS hheIsAddbed,
+			hhe_yes				AS hheYes,
+			hhe_is_window		AS hheIsWindow,
+			hhe_device       	AS hheDevice,
+			cpy_id          	AS cpyId,
+			hhe_is_del_status   AS hheIsDelStatus,
+			hhe_createtime   	AS hheCreatetime,
+			hhe_createuser   	AS hheCreateuser,
+			hhe_img1 			AS hheImg1,
+			hhe_img2    		AS hheImg2,
+			hhe_img3      		AS hheImg3,
+			hhe_img4          	AS hheImg4,
+			hdl_bedtype			AS hdlBedtype,
+			hhe_balcony         AS hheBalcony
+		FROM
+			hotel_room
+	   WHERE
+			id = #{id}
+   	</select>
+   	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageHotelRoomListCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			hotel_room
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insertRoom">
+		INSERT INTO
+			hotel_room
+			(
+				hdl_id,
+				hhe_name,
+				hhe_presonnum,
+				hhe_area,
+				hhe_layerstart,
+				hhe_layerend,
+				hhe_homenum,
+				hhe_is_addbed,
+				hhe_yes,
+				hhe_is_window,
+				hhe_device,
+				cpy_id,
+				hhe_is_del_status,
+				hhe_createtime,
+				hhe_createuser,
+				hhe_img1,
+				hhe_img2,
+				hhe_img3,
+				hhe_img4,
+				hdl_bedtype,
+				hhe_balcony
+			)
+			VALUES
+			(
+				#{hdlId},
+				#{hheName},
+				#{hhePresonnum},
+				#{hheArea},
+				#{hheLayerstart},
+				#{hheLayerend},
+				#{hheHomenum},
+				#{hheIsAddbed},
+				#{hheYes},
+				#{hheIsWindow},
+				#{hheDevice},
+				#{cpyId},
+				#{hheIsDelStatus},
+				#{hheCreatetime},
+				#{hheCreateuser},
+				#{hheImg1},
+				#{hheImg2},
+				#{hheImg3},
+				#{hheImg4},
+				#{hdlBedtype},
+				#{hheBalcony}
+			)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateRoom">
+		UPDATE
+			hotel_room
+		SET
+			hhe_name 		 	= #{hheName},
+			hhe_presonnum 	 	= #{hhePresonnum},
+			hhe_area 		 	= #{hheArea},
+			hhe_layerstart 		= #{hheLayerstart},
+			hhe_layerend		= #{hheLayerend},
+			hhe_homenum			= #{hheHomenum},
+			hhe_is_addbed 	 	= #{hheIsAddbed},
+			hhe_yes				= #{hheYes},
+			hhe_is_window		= #{hheIsWindow},
+			hhe_device 		 	= #{hheDevice},
+			cpy_id          	= #{cpyId},
+			hhe_img1    		= #{hheImg1},
+			hhe_img2		 	= #{hheImg2},
+			hhe_img3       		= #{hheImg3},
+			hhe_img4			= #{hheImg4},
+			hdl_bedtype			= #{hdlBedtype},
+			hhe_balcony         = #{hheBalcony}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 更改上下架状态 -->
+	<update id="updateStatus" parameterType="int">
+		UPDATE
+			hotel_room
+		SET
+			hhe_is_del_status 	= #{hheIsDelStatus}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			hotel_room
+		WHERE
+			id = #{id}
+	</delete>
+	
+</mapper>

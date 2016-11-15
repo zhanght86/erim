@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guidedetail">
+	
+	<!-- 查询条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="cpyId != null">                                        				    and     cpy_id              		=	    #{cpyId}</if>
+			<if test="id != null                        and id !=''">                          and     id              		        =	    #{id}</if>
+		    <if test="gdlSex != null                    and gdlSex != ''">	                   	and 	gdl_sex 					=	    #{gdlSex}</if>
+		    <if test="gdlIsDelStatus != null            and gdlIsDelStatus != ''">	   			and 	gdl_is_del_status 			=	    #{gdlIsDelStatus}</if>
+		    <if test="gdlLocalProvince != null          and gdlLocalProvince != ''">	   	    and 	gdl_local_province 		    =	    #{gdlLocalProvince}</if>
+		    <if test="gdlLocalCity != null              and gdlLocalCity != ''">	            and 	gdl_local_city 	            =	    #{gdlLocalCity}</if>
+		    <if test="gdlLocalCounty != null           and gdlLocalCounty != ''">	            and 	gdl_local_county 	        =	    #{gdlLocalCounty}</if>
+		    <if test="gdlNationalProvince != null       and gdlNationalProvince != ''">	   	    and 	gdl_national_province 		=      	#{gdlNationalProvince}</if>
+		    <if test="gdlNationalCity != null           and gdlNationalCity != ''">	            and 	gdl_national_city 	        =	    #{gdlNationalCity}</if>
+		    <if test="gdlNationalCounty != null         and gdlNationalCounty!= ''">	        and 	gdl_national_county 	    =	    #{gdlNationalCounty}</if>
+		    <if test="gdlLeaderProvince != null         and gdlLeaderProvince != ''">	   	    and 	gdl_leader_province 		=    	#{gdlLeaderProvince}</if>
+		    <if test="gdlLeaderCity != null             and gdlLeaderCity != ''">	            and 	gdl_leader_city 	        =	    #{gdlLeaderCity}</if>
+		    <if test="gdlLeaderCounty != null          and gdlLeaderCounty != ''">	            and 	gdl_leader_county 	        =	    #{gdlLeaderCounty}</if>
+		    <if test="gdlDestination != null   			and gdlDestination != ''">	   	        and 	gdl_destination 			like    "%"#{gdlDestination}"%"</if>
+	    	<if test="gdlDestinationCountry != null		and gdlDestinationCountry != ''">	    and 	gdl_destination_country 	like    "%"#{gdlDestinationCountry}"%"</if>
+		    <if test="gdlGaidLokal != null        		and gdlGaidLokal != ''">	   	        and 	gdl_gaid_lokal 		        like    "%"#{gdlGaidLokal}"%"</if>
+		    <if test="gdlGaidCountry != null      		and gdlGaidCountry != ''">	            and 	gdl_gaid_country 	        like    "%"#{gdlGaidCountry}"%"</if>
+		    <if test="gdlName != null                   and gdlName != ''">	                	and 	gdl_name 					like    "%"#{gdlName}"%"</if>
+			<if test="gdlServer != null                 and gdlServer != ''">	                and 	gdl_server 				    like    "%"#{gdlServer}"%"</if>
+			<if test="gdlLanguage != null               and gdlLanguage != ''">	       	    	and 	gdl_language 				like    "%"#{gdlLanguage}"%"</if>
+			<if test="gdlLanguag != null                and gdlLanguag != ''">	       	    	and 	gdl_languag 				like    "%"#{gdlLanguag}"%"</if>
+		   	<if test="gdlCode != null                   and gdlCode != ''">	       	    	    and 	gdl_code 				    like    "%"#{gdlCode}"%"</if>
+		</where>
+	</sql>
+	
+	<!-- 查询同城同业 -->
+	<sql id="sql_query_guide">
+		1 = 1
+	   	<if test="gdlSex != null                    and gdlSex != ''">	                   	and 	gdl_sex 					=	    #{gdlSex}</if>
+	   	<if test="gdlAge != null                    and gdlAge != ''">	                   	and 	gdl_age 					=	    #{gdlAge}</if>
+	    <if test="gdlIsDelStatus != null            and gdlIsDelStatus != ''">	   			and 	gdl_is_del_status 			=	    #{gdlIsDelStatus}</if>
+	    <if test="gdlLocalProvince != null          and gdlLocalProvince != ''">	   	    and 	gdl_local_province 		    =	    #{gdlLocalProvince}</if>
+	    <if test="gdlLocalCity != null              and gdlLocalCity != ''">	            and 	gdl_local_city 	            =	    #{gdlLocalCity}</if>
+	    <if test="gdlLocalCounty != null           	and gdlLocalCounty != ''">	            and 	gdl_local_county 	        =	    #{gdlLocalCounty}</if>
+	    <if test="gdlNationalProvince != null       and gdlNationalProvince != ''">	   	    and 	gdl_national_province 		=      	#{gdlNationalProvince}</if>
+	    <if test="gdlNationalCity != null           and gdlNationalCity != ''">	            and 	gdl_national_city 	        =	    #{gdlNationalCity}</if>
+	    <if test="gdlNationalCounty != null         and gdlNationalCounty!= ''">	        and 	gdl_national_county 	    =	    #{gdlNationalCounty}</if>
+	    <if test="gdlLeaderProvince != null         and gdlLeaderProvince != ''">	   	    and 	gdl_leader_province 		=    	#{gdlLeaderProvince}</if>
+	    <if test="gdlLeaderCity != null             and gdlLeaderCity != ''">	            and 	gdl_leader_city 	        =	    #{gdlLeaderCity}</if>
+	    <if test="gdlLeaderCounty != null          	and gdlLeaderCounty != ''">	            and 	gdl_leader_county 	        =	    #{gdlLeaderCounty}</if>
+	    <if test="gdlDestination != null   			and gdlDestination != ''">	   	        and 	gdl_destination 			like    "%"#{gdlDestination}"%"</if>
+    	<if test="gdlDestinationCountry != null		and gdlDestinationCountry != ''">	    and 	gdl_destination_country 	like    "%"#{gdlDestinationCountry}"%"</if>
+	    <if test="gdlGaidLokal != null        		and gdlGaidLokal != ''">	   	        and 	gdl_gaid_lokal 		        like    "%"#{gdlGaidLokal}"%"</if>
+	    <if test="gdlGaidCountry != null      		and gdlGaidCountry != ''">	            and 	gdl_gaid_country 	        like    "%"#{gdlGaidCountry}"%"</if>
+	    <if test="gdlName != null                   and gdlName != ''">	                	and 	gdl_name 					like    "%"#{gdlName}"%"</if>
+		<if test="gdlServer != null                 and gdlServer != ''">	                and 	gdl_server 				    like    "%"#{gdlServer}"%"</if>
+		<if test="gdlLanguag != null                and gdlLanguag != ''">	       	    	and 	gdl_languag 				like    "%"#{gdlLanguag}"%"</if>
+	   	<if test="gdlCode != null                   and gdlCode != ''">	       	    	    and 	gdl_code 				    like    "%"#{gdlCode}"%"</if>
+		<if test="gdlLanguage != null 				and gdlLanguage != ''">	 				and 	gdl_language 				like    "%"#{gdlLanguage}"%"</if>
+	   	<if test="gdlGrade != null 					and gdlGrade != ''"> 					and 	gdl_grade = #{gdlGrade} 								</if>
+		<if test="cpyName != null 					and cpyName != ''">						and 	( cpy_Name like "%"#{cpyName}"%" or cpy_brand like "%"#{cpyName}"%" )</if>
+	</sql>
+	
+	<sql id="COMPANYDETAIL">
+			cpy.cpy_name 	  		AS cpyName,
+			cpy.cpy_telephone 		AS cpyTelephone,
+			cpy.cpy_brand 	  		AS cpyBrand,
+			ccp.cbs_operator        AS ccpName,
+			ccp.cbs_operator_phone  AS ccpTelephone,
+			cpy.cpy_email 	        AS ccpEmail,
+			ccp.cbs_operator_qq     AS ccpQq
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageGuide" resultType="guideDetailBean">
+		SELECT
+			id,
+			gdl_name                       AS gdlName,
+			gdl_code                       AS gdlCode,
+			gdl_sex                        AS gdlSex,
+			gdl_introduction               AS gdlIntroduction,
+			gdl_server                     AS gdlServer,
+			gdl_img_person                 AS gdlImgPerson,
+			gdl_img_card                   AS gdlImgCard,
+			gdl_price                      AS gdlPrice,
+			gdl_createtime                 AS gdlCreatetime,
+			gdl_createuser                 AS gdlCreateuser,
+			gdl_is_through                 AS gdlIsThrough,
+			gdl_through_time               AS gdlThroughTime,
+			gdl_through_user               AS gdlThroughUser,
+			gdl_stars                      AS gdlStars,
+			gdl_language                   AS gdlLanguage,
+			gdl_languag                    AS gdlLanguag,
+			gdl_property                   AS gdlProperty,
+			gdl_is_del_status              AS gdlIsDelStatus,
+			gdl_pwd                        AS gdlPwd,
+			cpy_id                         AS cpyId,
+			gdl_service_region             AS gdlServiceRegion,
+			gdl_age                        AS gdlAge,
+			gdl_age1                       AS gdlAge1,
+			gdl_local_province             AS gdlLocalProvince,
+			gdl_national_province          AS gdlNationalProvince,
+			gdl_leader_province            AS gdlLeaderProvince,
+			gdl_destination                AS gdlDestination,
+			gdl_gaid_lokal                 AS gdlGaidLokal,
+			gdl_type_service               AS gdlTypeService,
+			gdl_grade                      AS gdlGrade,
+			gdl_company_rating             AS gdlCompanyRating,
+			gdl_local_city                 AS gdlLocalCity,
+			gdl_national_city              AS gdlNationalCity,
+			gdl_leader_city                AS gdlLeaderCity,
+			gdl_destination_country        AS gdlDestinationCountry,
+			gdl_gaid_country               AS gdlGaidCountry,
+			gdl_local                      AS gdlLocal,
+			gdl_national                   AS gdlNational,
+			gdl_leader                     AS gdlLeader,
+			gdl_destination1               AS gdlDestination1,
+			gdl_certificate                AS gdlCertificate,
+			gdl_native_place               AS gdlNativePlace,
+			gdl_rest                       AS gdlRest,
+			gdl_local_county               AS gdlLocalCounty,
+			gdl_national_county            AS gdlNationalCounty,
+			gdl_leader_county              AS gdlLeaderCounty,
+			gdl_scheduled                  AS gdlScheduled   
+		FROM
+			guide_detail
+			<include refid="sql_query" />
+		ORDER BY 
+			gdl_is_del_status
+		DESC,
+			gdl_createtime 
+		DESC 
+	</select>
+	<!-- 根据登录名查询对象 -->
+	<select id="selectUserByUsers" resultType="guideDetailBean">
+		SELECT
+			id AS id,
+			gdl_name                 AS gdlName,
+			gdl_mobile_users         AS gdlMobileUsers,
+			gdl_code                 AS gdlCode,
+			gdl_sex                  AS gdlSex,
+			gdl_introduction         AS gdlIntroduction,
+			gdl_server               AS gdlServer,
+			gdl_img_person           AS gdlImgPerson,
+			gdl_img_card             AS gdlImgCard,
+			gdl_price                AS gdlPrice,
+			gdl_createtime           AS gdlCreatetime,
+			gdl_createuser           AS gdlCreateuser,
+			gdl_is_through           AS gdlIsThrough,
+			gdl_through_time         AS gdlThroughTime,
+			gdl_through_user         AS gdlThroughUser,
+			gdl_stars                AS gdlStars,
+			gdl_language             AS gdlLanguage,
+			gdl_languag              AS gdlLanguag,
+			gdl_property             AS gdlProperty,
+			gdl_is_del_status        AS gdlIsDelStatus,
+			gdl_pwd                  AS gdlPwd,
+			cpy_id                   AS cpyId,
+			gdl_service_region       AS gdlServiceRegion,
+			gdl_age                  AS gdlAge,
+			gdl_age1                 AS gdlAge1,
+			gdl_local_province       AS gdlLocalProvince,
+			gdl_national_province    AS gdlNationalProvince,
+			gdl_leader_province      AS gdlLeaderProvince,
+			gdl_destination          AS gdlDestination,
+			gdl_gaid_lokal           AS gdlGaidLokal,
+			gdl_type_service         AS gdlTypeService,
+			gdl_grade                AS gdlGrade,
+			gdl_company_rating       AS gdlCompanyRating,
+			gdl_local_city           AS gdlLocalCity,
+			gdl_national_city        AS gdlNationalCity,
+			gdl_leader_city          AS gdlLeaderCity,
+			gdl_destination_country  AS gdlDestinationCountry,
+			gdl_gaid_country         AS gdlGaidCountry,
+			gdl_local                AS gdlLocal,
+			gdl_national             AS gdlNational,
+			gdl_leader               AS gdlLeader,
+			gdl_destination1         AS gdlDestination1,
+			gdl_certificate          AS gdlCertificate,
+			gdl_native_place         AS gdlNativePlace,
+			gdl_rest                 AS gdlRest,
+			gdl_local_county         AS gdlLocalCounty,
+			gdl_national_county      AS gdlNationalCounty,
+			gdl_leader_county        AS gdlLeaderCounty,
+			gdl_scheduled            AS gdlScheduled 
+		FROM
+			guide_detail
+		WHERE
+			gdl_mobile_users = #{gdlMobileUsers}
+	</select>
+	<!-- 查询指定实体 -->
+	<select id="selectBeanByPriId" resultType="guideDetailBean">
+		SELECT
+			id AS id,
+			gdl_name                 AS gdlName,
+			gdl_code                 AS gdlCode,
+			gdl_sex                  AS gdlSex,
+			gdl_introduction         AS gdlIntroduction,
+			gdl_server               AS gdlServer,
+			gdl_img_person           AS gdlImgPerson,
+			gdl_img_card             AS gdlImgCard,
+			gdl_price                AS gdlPrice,
+			gdl_createtime           AS gdlCreatetime,
+			gdl_createuser           AS gdlCreateuser,
+			gdl_is_through           AS gdlIsThrough,
+			gdl_through_time         AS gdlThroughTime,
+			gdl_through_user         AS gdlThroughUser,
+			gdl_stars                AS gdlStars,
+			gdl_language             AS gdlLanguage,
+			gdl_languag              AS gdlLanguag,
+			gdl_property             AS gdlProperty,
+			gdl_is_del_status        AS gdlIsDelStatus,
+			gdl_pwd                  AS gdlPwd,
+			cpy_id                   AS cpyId,
+			gdl_service_region       AS gdlServiceRegion,
+			gdl_age                  AS gdlAge,
+			gdl_age1                 AS gdlAge1,
+			gdl_local_province       AS gdlLocalProvince,
+			gdl_national_province    AS gdlNationalProvince,
+			gdl_leader_province      AS gdlLeaderProvince,
+			gdl_destination          AS gdlDestination,
+			gdl_gaid_lokal           AS gdlGaidLokal,
+			gdl_type_service         AS gdlTypeService,
+			gdl_grade                AS gdlGrade,
+			gdl_company_rating       AS gdlCompanyRating,
+			gdl_local_city           AS gdlLocalCity,
+			gdl_national_city        AS gdlNationalCity,
+			gdl_leader_city          AS gdlLeaderCity,
+			gdl_destination_country  AS gdlDestinationCountry,
+			gdl_gaid_country         AS gdlGaidCountry,
+			gdl_local                AS gdlLocal,
+			gdl_national             AS gdlNational,
+			gdl_leader               AS gdlLeader,
+			gdl_destination1         AS gdlDestination1,
+			gdl_certificate          AS gdlCertificate,
+			gdl_native_place         AS gdlNativePlace,
+			gdl_rest                 AS gdlRest,
+			gdl_local_county         AS gdlLocalCounty,
+			gdl_national_county      AS gdlNationalCounty,
+			gdl_leader_county        AS gdlLeaderCounty,
+			gdl_scheduled            AS gdlScheduled 
+		FROM
+			guide_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTown" resultType="guideDetailBean">
+		SELECT
+			guide.id                       AS id,
+			gdl_name                       AS gdlName,
+			gdl_code                       AS gdlCode,
+			gdl_sex                        AS gdlSex,
+			gdl_introduction               AS gdlIntroduction,
+			gdl_server                     AS gdlServer,
+			gdl_img_person                 AS gdlImgPerson,
+			gdl_img_card                   AS gdlImgCard,
+			gdl_price                      AS gdlPrice,
+			gdl_createtime                 AS gdlCreatetime,
+			gdl_createuser                 AS gdlCreateuser,
+			gdl_is_through                 AS gdlIsThrough,
+			gdl_through_time               AS gdlThroughTime,
+			gdl_through_user               AS gdlThroughUser,
+			gdl_stars                      AS gdlStars,
+			gdl_language                   AS gdlLanguage,
+			gdl_languag                    AS gdlLanguag,
+			gdl_property                   AS gdlProperty,
+			gdl_is_del_status              AS gdlIsDelStatus,
+			gdl_pwd                        AS gdlPwd,
+			guide.cpy_id                   AS cpyId,
+			gdl_service_region             AS gdlServiceRegion,
+			gdl_age                        AS gdlAge,
+			gdl_age1                       AS gdlAge1,
+			gdl_local_province             AS gdlLocalProvince,
+			gdl_national_province          AS gdlNationalProvince,
+			gdl_leader_province            AS gdlLeaderProvince,
+			gdl_destination                AS gdlDestination,
+			gdl_gaid_lokal                 AS gdlGaidLokal,
+			gdl_type_service               AS gdlTypeService,
+			gdl_grade                      AS gdlGrade,
+			gdl_company_rating             AS gdlCompanyRating,
+			gdl_local_city                 AS gdlLocalCity,
+			gdl_national_city              AS gdlNationalCity,
+			gdl_leader_city                AS gdlLeaderCity,
+			gdl_destination_country        AS gdlDestinationCountry,
+			gdl_gaid_country               AS gdlGaidCountry,
+			gdl_local                      AS gdlLocal,
+			gdl_national                   AS gdlNational,
+			gdl_leader                     AS gdlLeader,
+			gdl_destination1               AS gdlDestination1,
+			gdl_certificate                AS gdlCertificate,
+			gdl_native_place               AS gdlNativePlace,
+			gdl_rest                       AS gdlRest,
+			gdl_local_county               AS gdlLocalCounty,
+			gdl_national_county            AS gdlNationalCounty,
+			gdl_leader_county              AS gdlLeaderCounty,
+			<if test="gpeDate != null and gpeDate!= ''">
+				(SELECT
+					a.gpe_floor_price
+					FROM
+						(
+							SELECT
+								gdl_id,
+								gpe_floor_price
+							FROM
+								guide_price
+							WHERE 
+								gpe_date = #{gpeDate}
+							AND
+								gpe_is_open = '02'
+							ORDER BY
+								gpe_create_time DESC
+						) a
+					WHERE
+						a.gdl_id = guide.id
+					ORDER BY
+						a.gpe_floor_price
+					LIMIT 1
+				)  AS  gpeFloorPrice,
+			</if>
+			gdl_scheduled                  AS gdlScheduled,
+			<include refid = "COMPANYDETAIL" />
+		FROM
+			guide_detail guide
+		LEFT JOIN
+			company_detail cpy
+		ON 
+			guide.cpy_id = cpy.id
+		LEFT JOIN
+			company_business ccp
+		on 
+			ccp.cpy_id = guide.cpy_id
+		WHERE
+			gdl_is_del_status = '1'
+		AND
+			guide.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'GUIDE' 
+			)
+			AND
+			<include refid = "sql_query_guide"/>
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTownCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			guide_detail guide
+		WHERE
+			gdl_is_del_status = '1'
+		AND
+			guide.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'GUIDE' 
+			)
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageGuideCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			guide_detail
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="guideDetailBean">
+		INSERT INTO
+			guide_detail
+			(
+				cpy_id,
+				gdl_name,
+				gdl_sex,
+				gdl_introduction,
+				gdl_server,
+				gdl_img_person,
+				gdl_img_card,
+				gdl_price,
+				gdl_createtime,
+				gdl_createuser,
+				gdl_is_through,
+				gdl_through_time,
+				gdl_through_user,
+				gdl_stars,
+				gdl_language,
+				gdl_languag,
+				gdl_property,
+				gdl_pwd,
+				gdl_service_region,
+				gdl_age,
+				gdl_age1,
+				gdl_local_province,
+				gdl_national_province,
+				gdl_leader_province,
+				gdl_destination,
+				gdl_gaid_lokal,
+				gdl_type_service,
+				gdl_grade,
+				gdl_company_rating,
+				gdl_local_city,
+				gdl_national_city,
+				gdl_leader_city,
+				gdl_destination_country,
+				gdl_gaid_country,
+				gdl_local,
+				gdl_national,
+				gdl_leader,
+				gdl_destination1,
+				gdl_certificate,
+				gdl_native_place,
+				gdl_rest,
+				gdl_local_county,
+			    gdl_national_county,
+			    gdl_leader_county,
+			    gdl_is_del_status,
+			    gdl_scheduled
+			)
+		VALUES
+			(
+				#{cpyId},
+				#{gdlName},
+				#{gdlSex},
+				#{gdlIntroduction},
+				#{gdlServer},
+				#{gdlImgPerson},
+				#{gdlImgCard},
+				#{gdlPrice},
+				#{gdlCreatetime},
+				#{gdlCreateuser},
+				#{gdlIsThrough},
+				#{gdlThroughTime},
+				#{gdlThroughUser},
+				#{gdlStars},
+				#{gdlLanguage},
+				#{gdlLanguag},
+				#{gdlProperty},
+				#{gdlPwd},
+				#{gdlServiceRegion},
+				#{gdlAge},
+				#{gdlAge1},
+				#{gdlLocalProvince},
+				#{gdlNationalProvince},
+				#{gdlLeaderProvince},
+				#{gdlDestination},
+				#{gdlGaidLokal},
+				#{gdlTypeService},
+				#{gdlGrade},
+				#{gdlCompanyRating},
+				#{gdlLocalCity},
+				#{gdlNationalCity},
+				#{gdlLeaderCity},
+				#{gdlDestinationCountry},
+				#{gdlGaidCountry},
+				#{gdlLocal},
+				#{gdlNational},
+				#{gdlLeader},
+				#{gdlDestination1},
+				#{gdlCertificate},
+				#{gdlNativePlace},
+				#{gdlRest},
+				#{gdlLocalCounty},
+			    #{gdlNationalCounty},
+			    #{gdlLeaderCounty},
+			    #{gdlIsDelStatus},
+			    #{gdlScheduled}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			guide_detail
+		SET
+			gdl_name                  = #{gdlName},
+			gdl_sex                   = #{gdlSex},
+			gdl_introduction          = #{gdlIntroduction},
+			gdl_server                = #{gdlServer},
+			gdl_img_person            = #{gdlImgPerson},
+			gdl_img_card              = #{gdlImgCard},
+			gdl_price                 = #{gdlPrice},
+			gdl_createuser            = #{gdlCreateuser},
+			gdl_is_through            = #{gdlIsThrough},
+			gdl_through_time          = #{gdlThroughTime},
+			gdl_through_user          = #{gdlThroughUser},
+			gdl_stars                 = #{gdlStars},
+			gdl_language              = #{gdlLanguage},
+			gdl_languag               = #{gdlLanguag},
+			gdl_property              = #{gdlProperty},
+			gdl_service_region        = #{gdlServiceRegion},
+			gdl_age                   = #{gdlAge},
+			gdl_age1                  = #{gdlAge1},
+			gdl_local_province        = #{gdlLocalProvince},
+			gdl_national_province     = #{gdlNationalProvince},
+			gdl_leader_province       = #{gdlLeaderProvince},
+			gdl_destination           = #{gdlDestination},
+			gdl_gaid_lokal            = #{gdlGaidLokal},
+			gdl_type_service          = #{gdlTypeService},
+			gdl_grade                 = #{gdlGrade},
+			gdl_company_rating        = #{gdlCompanyRating},
+			gdl_local_city            = #{gdlLocalCity},
+			gdl_national_city         = #{gdlNationalCity},
+			gdl_leader_city           = #{gdlLeaderCity},
+			gdl_destination_country   = #{gdlDestinationCountry},
+			gdl_gaid_country          = #{gdlGaidCountry},
+			gdl_local                 = #{gdlLocal},
+			gdl_national              = #{gdlNational},
+			gdl_leader                = #{gdlLeader},
+			gdl_destination1          = #{gdlDestination1},
+			gdl_certificate           = #{gdlCertificate},
+			gdl_native_place          = #{gdlNativePlace},
+			gdl_rest                  = #{gdlRest},
+			gdl_createtime            = #{gdlCreatetime},
+			gdl_local_county          = #{gdlLocalCounty},
+			gdl_national_county       = #{gdlNationalCounty},
+			gdl_leader_county         = #{gdlLeaderCounty},
+			gdl_scheduled             = #{gdlScheduled}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 更新编码 -->
+	<update id="Guideupdatecode">
+		UPDATE
+			guide_detail
+		SET
+			gdl_code	= #{gdlCode}
+		WHERE
+			id			= #{id}
+	</update>
+	
+	<!-- 上下架 -->
+	<delete id="deletebean" parameterType="int">
+		UPDATE
+			guide_detail
+		SET
+			gdl_is_del_status 	 = #{gdlIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			guide_detail
+		WHERE
+			id=#{id}
+	</delete>
+	<!-- 预定方式 -->
+	<update id="update1">
+		UPDATE
+			guide_detail
+		SET
+			gdl_scheduled             = #{gdlScheduled}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

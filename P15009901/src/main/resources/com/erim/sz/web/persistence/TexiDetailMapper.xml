@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="texidetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="tdlType != null	and tdlType != ''">			     and 	tdl_type 				    =   #{tdlType} </if>
+			<if test="tdlTexttype != null	and tdlTexttype != ''">	     and 	tdl_text_type 		        =   #{tdlTexttype} </if>
+			<if test="gdlStart != null	and gdlStart != ''">	         and 	texi_send.gdl_start 	    like  "%"#{gdlStart}"%" </if>
+			<if test="gdlEnd != null	and gdlEnd != ''">	             and 	texi_send.gdl_end 		    like  "%"#{gdlEnd}"%" </if>
+			<if test="gdlMachine != null	and gdlMachine != ''">	     and 	texi_send.gdl_machine 	    like  "%"#{gdlMachine}"%" </if>
+			<if test="gdlMachineback != null and gdlMachineback != ''">	 and 	texi_send.gdl_machineback 	like  "%"#{gdlMachineback}"%" </if>
+			<if test="gdlStation != null	and gdlStation != ''">	     and 	texi_send.gdl_station 	    like  "%"#{gdlStation}"%" </if>
+			<if test="gdlStationup != null and gdlStationup != ''">	     and 	texi_send.gdl_stationup 	like  "%"#{gdlStationup}"%" </if>
+			<if test="gdlStationback != null and gdlStationback != ''">	 and 	texi_send.gdl_stationback 	like  "%"#{gdlStationback}"%" </if>
+			<if test="gdlStationnup != null and gdlStationnup != ''">	 and 	texi_send.gdl_stationnup    like  "%"#{gdlStationnup}"%" </if>
+			<if test="gdlStartcity != null and gdlStartcity != ''">	     and 	texi_send.gdl_startcity 	like  "%"#{gdlStartcity}"%" </if>
+			<if test="gdlEndcity != null and gdlEndcity != ''">	         and 	texi_send.gdl_endcity       like  "%"#{gdlEndcity}"%" </if>
+			<if test="tspDate1 != null and tspDate1 != ''">	             and 	texi_send_price.tsp_date    like  "%"#{tspDate1}"%" </if>
+			<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 0">	 
+				and 	CAST(tdl_num  AS SIGNED)   = CAST(#{tdlNum} AS SIGNED)
+			</if>
+			<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 1">	 
+				and 	CAST(tdl_num  AS SIGNED)   &gt;=  CAST(#{tdlNum} AS SIGNED)
+			</if>
+			<if test="zjlHfTakeAddress != null and zjlHfTakeAddress != ''">	  and 	texi_drive.zjl_hf_take_address    like  "%"#{zjlHfTakeAddress}"%" </if>
+			<if test="zjlTakeAddress != null and zjlTakeAddress != ''">	      and 	texi_drive.zjl_take_address       like  "%"#{zjlTakeAddress}"%" </if>
+			<if test="zjlPlaceCar != null and zjlPlaceCar != ''">	          and 	texi_drive.zjl_place_car       like  "%"#{zjlPlaceCar}"%" </if>
+			<!--自驾游取车方式 -->
+			<if test="zjlHfTakePlace != null and zjlHfTakePlace != '' and ZjlTakePlace != null and ZjlTakePlace != ''">	
+				and 	(texi_drive.zjl_hf_take_place       like  "%"#{zjlHfTakePlace}"%" 
+				or 	texi_drive.Zjl_take_place          like  "%"#{ZjlTakePlace}"%" )
+			</if>
+			<if test="zjlHfTakePlace != null and zjlHfTakePlace != '' and (ZjlTakePlace == null or ZjlTakePlace == '')">	
+				and 	texi_drive.zjl_hf_take_place       like  "%"#{zjlHfTakePlace}"%" 
+			</if>
+			<if test="(zjlHfTakePlace == null or zjlHfTakePlace == '') and ZjlTakePlace != null and ZjlTakePlace != ''">	
+				and 	texi_drive.Zjl_take_place          like  "%"#{ZjlTakePlace}"%" 
+			</if>
+			<!--自驾游还车方式-->
+			<if test="zjlHfBackPlace != null and zjlHfBackPlace != '' and zjlBackPlace != null and zjlBackPlace != ''">	
+				and 	(texi_drive.zjl_hf_back_place       like  "%"#{zjlHfBackPlace}"%" 
+				or 	texi_drive.zjl_back_place          like  "%"#{zjlBackPlace}"%" )
+			</if>
+			<if test="zjlHfBackPlace != null and zjlHfBackPlace != '' and (zjlBackPlace == null or zjlBackPlace == '')">	
+				and 	texi_drive.zjl_hf_back_place       like  "%"#{zjlHfBackPlace}"%" 
+			</if>
+			<if test="(zjlHfBackPlace == null or zjlHfBackPlace == '') and zjlBackPlace != null and zjlBackPlace != ''">	
+				and 	texi_drive.zjl_back_place          like  "%"#{zjlBackPlace}"%" 
+			</if>
+			<if test="zjlType != null and zjlType != ''">                     and 	texi_drive_price.zjl_type       like  "%"#{zjlType}"%" </if>
+			<!--自驾游起止日期-->
+			<if test="tdpDate1 != null and tdpDate1 != ''">                   and 	texi_drive_price.tdp_date     like  "%"#{tdpDate1}"%" </if>
+			<!--包车-->
+			<if test="bclType != null and bclType != ''">                     and 	texi_car_price.bcl_type       like  "%"#{bclType}"%" </if>
+			<if test="tcpDate1 != null and tcpDate1 != ''">                   and 	texi_car_price.tcp_date       like  "%"#{tcpDate1}"%" </if>
+			
+		
+		</where>
+	</sql>
+	<sql id="sql_query_send">
+		<where>
+			1=1
+			<if test="gdlStart != null	and gdlStart != ''">	         and 	texi_send.gdl_start 	    like  "%"#{gdlStart}"%" </if>
+			<if test="gdlEnd != null	and gdlEnd != ''">	             and 	texi_send.gdl_end 		    like  "%"#{gdlEnd}"%" </if>
+			<if test="gdlMachine != null	and gdlMachine != ''">	     and 	texi_send.gdl_machine 	    like  "%"#{gdlMachine}"%" </if>
+			<if test="gdlMachineback != null and gdlMachineback != ''">	 and 	texi_send.gdl_machineback 	like  "%"#{gdlMachineback}"%" </if>
+			<if test="gdlStation != null	and gdlStation != ''">	     and 	texi_send.gdl_station 	    like  "%"#{gdlStation}"%" </if>
+			<if test="gdlStationup != null and gdlStationup != ''">	     and 	texi_send.gdl_stationup 	like  "%"#{gdlStationup}"%" </if>
+			<if test="gdlStationback != null and gdlStationback != ''">	 and 	texi_send.gdl_stationback 	like  "%"#{gdlStationback}"%" </if>
+			<if test="gdlStationnup != null and gdlStationnup != ''">	 and 	texi_send.gdl_stationnup    like  "%"#{gdlStationnup}"%" </if>
+			<if test="gdlStartcity != null and gdlStartcity != ''">	     and 	texi_send.gdl_startcity 	like  "%"#{gdlStartcity}"%" </if>
+			<if test="gdlEndcity != null and gdlEndcity != ''">	         and 	texi_send.gdl_endcity       like  "%"#{gdlEndcity}"%" </if>
+		</where>
+	</sql>	
+	<sql id="sql_query_drive">
+		<where>
+			1=1
+			<if test="zjlHfTakeAddress != null and zjlHfTakeAddress != ''">	  and 	texi_drive.zjl_hf_take_address    like  "%"#{zjlHfTakeAddress}"%" </if>
+			<if test="zjlTakeAddress != null and zjlTakeAddress != ''">	      and 	texi_drive.zjl_take_address       like  "%"#{zjlTakeAddress}"%" </if>
+			<if test="zjlPlaceCar != null and zjlPlaceCar != ''">	          and 	texi_drive.zjl_place_car       like  "%"#{zjlPlaceCar}"%" </if>
+			<!--自驾游取车方式 -->
+			<if test="zjlHfTakePlace != null and zjlHfTakePlace != '' and ZjlTakePlace != null and ZjlTakePlace != ''">	
+				and 	(texi_drive.zjl_hf_take_place       like  "%"#{zjlHfTakePlace}"%" 
+				or 	texi_drive.Zjl_take_place          like  "%"#{ZjlTakePlace}"%" )
+			</if>
+			<if test="zjlHfTakePlace != null and zjlHfTakePlace != '' and (ZjlTakePlace == null or ZjlTakePlace == '')">	
+				and 	texi_drive.zjl_hf_take_place       like  "%"#{zjlHfTakePlace}"%" 
+			</if>
+			<if test="(zjlHfTakePlace == null or zjlHfTakePlace == '') and ZjlTakePlace != null and ZjlTakePlace != ''">	
+				and 	texi_drive.Zjl_take_place          like  "%"#{ZjlTakePlace}"%" 
+			</if>
+			<!--自驾游还车方式-->
+			<if test="zjlHfBackPlace != null and zjlHfBackPlace != '' and zjlBackPlace != null and zjlBackPlace != ''">	
+				and 	(texi_drive.zjl_hf_back_place       like  "%"#{zjlHfBackPlace}"%" 
+				or 	texi_drive.zjl_back_place          like  "%"#{zjlBackPlace}"%" )
+			</if>
+			<if test="zjlHfBackPlace != null and zjlHfBackPlace != '' and (zjlBackPlace == null or zjlBackPlace == '')">	
+				and 	texi_drive.zjl_hf_back_place       like  "%"#{zjlHfBackPlace}"%" 
+			</if>
+			<if test="(zjlHfBackPlace == null or zjlHfBackPlace == '') and zjlBackPlace != null and zjlBackPlace != ''">	
+				and 	texi_drive.zjl_back_place          like  "%"#{zjlBackPlace}"%" 
+			</if>
+		</where>
+	</sql>	
+	<select id="selectById" resultType="texiDetailBean">
+		SELECT
+			id ,
+			tdl_code		   AS tdlCode,
+			tdl_brand          AS tdlBrand,
+			tdl_name           AS tdlName,
+			tdl_type           AS tdlType,
+			tdl_ntype          AS tdlNtype,
+			tdl_num            AS tdlNum,
+			tdl_img_appearance AS tdlImgAppearance,
+			tdl_img_bosom      AS tdlImgBosom,
+			tdl_province       AS tdlProvince,
+			tdl_city           AS tdlCity,
+			tdl_createcardate  AS tdlCreatecardate,
+			tdl_createuser     AS tdlCreateuser,
+			tdl_createdate     AS tdlCreatedate,
+			tdl_is_through     AS tdlIsThrough,
+			tdl_through_time   AS tdlThroughTime,
+			tdl_through_user   AS tdlThroughUser,
+			tdl_is_del_status  AS tdlIsDelStatus,
+			tdl_age            AS tdlAge,
+			tdl_text_type	   AS tdlTexttype,
+			tdl_text_pail	   AS tdlTextpail,
+			tdl_text_gear	   AS tdlTextgear,
+			tdl_jiedan		   AS tdlJiedan,
+			tdl_level          AS tdlLevel
+ 		FROM
+			texi_detail
+		WHERE
+			id = #{id}
+	</select>
+	<sql id="sql_column_send_price">
+		tsp_date               AS tspDate,
+		tsp_retail_price       AS tspRetailPrice,
+		tsp_price_show     	   AS tspPriceShow,
+		tsp_cancel_indent 	   AS tspCancelIndent
+	</sql>
+	<sql id="sql_column_send">
+		gdl_start               AS gdlStart,
+		gdl_end                 AS gdlEnd,
+		gdl_machine             AS gdlMachine,
+		gdl_machineback         AS gdlMachineback,
+		gdl_station             AS gdlStation,
+		gdl_stationup           AS gdlStationup,
+		gdl_stationback         AS gdlStationback,
+		gdl_stationnup          AS gdlStationnup,
+		gdl_startcity           AS gdlStartcity,
+		gdl_endcity             AS gdlEndcity,
+		gdl_money               AS gdlMoney,
+		gdl_show                AS gdlShow,
+		gdl_machinemoney        AS gdlMachinemoney,
+		gdl_machineshow         AS gdlMachineshow,
+		gdl_stationmoney        AS gdlStationmoney,
+		gdl_stationshow         AS gdlStationshow,
+		gdl_stationbackmoney    AS gdlStationbackmoney,
+		gdl_stationbackshow     AS gdlStationbackshow,
+		gdl_citymoney           AS gdlCitymoney,
+		gdl_cityshow            AS gdlCityshow
+	</sql>
+	<sql id="sql_column_car_price">
+		tcp_retail_price               AS tcpRetailPrice
+	</sql>
+	<sql id="sql_column_drive_price">
+		tdp_retail_price               AS tdpRetailPrice
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTexi" resultType="texiDetailBean">
+		SELECT
+			texi_detail.id ,
+			texi_detail.tdl_code		   			 AS tdlCode,
+			texi_detail.tdl_brand                    AS tdlBrand,
+			texi_detail.tdl_name                     AS tdlName,
+			texi_detail.tdl_type                     AS tdlType,
+			texi_detail.tdl_ntype                    AS tdlNtype,
+			texi_detail.tdl_num                      AS tdlNum,
+			texi_detail.tdl_img_appearance           AS tdlImgAppearance,
+			texi_detail.tdl_img_bosom                AS tdlImgBosom,
+			texi_detail.tdl_province                 AS tdlProvince,
+			texi_detail.tdl_city                     AS tdlCity,
+			texi_detail.tdl_createcardate            AS tdlCreatecardate,
+			texi_detail.tdl_createuser               AS tdlCreateuser,
+			texi_detail.tdl_createdate               AS tdlCreatedate,
+			texi_detail.tdl_is_through               AS tdlIsThrough,
+			texi_detail.tdl_through_time             AS tdlThroughTime,
+			texi_detail.tdl_through_user             AS tdlThroughUser,
+			texi_detail.tdl_is_del_status            AS tdlIsDelStatus,
+			texi_detail.tdl_age                      AS tdlAge,
+			texi_detail.tdl_level                    AS tdlLevel,
+			tdl_referential_policies     AS tdlReferentialPolicies,
+			texi_detail.tdl_set_reservation          AS tdlSetReservation,
+			texi_detail.tdl_security_guide           AS tdlSecurityGuide,
+			texi_detail.tdl_text_type	   			 AS tdlTexttype,
+			texi_detail.tdl_text_pail	   			 AS tdlTextpail,
+			texi_detail.tdl_text_gear	   			 AS tdlTextgear,
+			<include refid="sql_column_send_price" />,
+			<include refid="sql_column_send" />,
+			<include refid="sql_column_car_price" />,
+			<include refid="sql_column_drive_price" />
+ 		FROM
+			texi_detail
+		LEFT JOIN
+			texi_send
+		ON
+			texi_detail.id = texi_send.tdl_id 
+	    LEFT JOIN
+			texi_drive
+		ON
+			texi_detail.id = texi_drive.tdl_id 
+		LEFT JOIN
+			texi_drive_price
+		ON
+			texi_drive.id = texi_drive_price.zjl_id 
+		LEFT JOIN
+			texi_send_price
+		ON
+			texi_send.id = texi_send_price.send_id 
+		LEFT JOIN
+			texi_car
+		ON
+			texi_detail.id = texi_car.tdl_id 		
+		LEFT JOIN
+			texi_car_price
+		ON
+			texi_car.id = texi_car_price.bcl_id 			
+		<include refid="sql_query" />
+		 group by
+			texi_detail.id
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTexiCount" resultType="int">
+		SELECT
+			count(distinct texi_detail.id)
+		FROM
+			texi_detail
+		LEFT JOIN
+			texi_send
+		ON
+			texi_detail.id = texi_send.tdl_id 
+	    LEFT JOIN
+			texi_drive
+		ON
+			texi_detail.id = texi_drive.tdl_id 
+		LEFT JOIN
+			texi_drive_price
+		ON
+			texi_drive.id = texi_drive_price.zjl_id 
+		LEFT JOIN
+			texi_send_price
+		ON
+			texi_send.id = texi_send_price.send_id 
+		LEFT JOIN
+			texi_car
+		ON
+			texi_detail.id = texi_car.tdl_id 		
+		LEFT JOIN
+			texi_car_price
+		ON
+			texi_car.id = texi_car_price.bcl_id 		
+
+		<include refid="sql_query" />
+	</select>
+	
+	
+	<!-- 查询总数，用于页面分页  send_type='01' 接机-->
+	<select id="selectPageTexiSend1" resultType="texiDetailBean">
+		select 
+			texi_detail.id ,
+			texi_detail.tdl_code		   			 AS tdlCode,
+			texi_detail.tdl_brand                    AS tdlBrand,
+			texi_detail.tdl_name                     AS tdlName,
+			texi_detail.tdl_type                     AS tdlType,
+			texi_detail.tdl_ntype                    AS tdlNtype,
+			texi_detail.tdl_num                      AS tdlNum,
+			texi_detail.tdl_img_appearance           AS tdlImgAppearance,
+			texi_detail.tdl_img_bosom                AS tdlImgBosom,
+			texi_detail.tdl_province                 AS tdlProvince,
+			texi_detail.tdl_city                     AS tdlCity,
+			texi_detail.tdl_createcardate            AS tdlCreatecardate,
+			texi_detail.tdl_createuser               AS tdlCreateuser,
+			texi_detail.tdl_createdate               AS tdlCreatedate,
+			texi_detail.tdl_is_through               AS tdlIsThrough,
+			texi_detail.tdl_through_time             AS tdlThroughTime,
+			texi_detail.tdl_through_user             AS tdlThroughUser,
+			texi_detail.tdl_is_del_status            AS tdlIsDelStatus,
+			texi_detail.tdl_age                      AS tdlAge,
+			texi_detail.tdl_level                    AS tdlLevel,
+			tdl_referential_policies                 AS tdlReferentialPolicies,
+			texi_detail.tdl_set_reservation          AS tdlSetReservation,
+			texi_detail.tdl_security_guide           AS tdlSecurityGuide,
+			texi_detail.tdl_text_type	   			 AS tdlTexttype,
+			texi_detail.tdl_text_pail	   			 AS tdlTextpail,
+			texi_detail.tdl_text_gear	   			 AS tdlTextgear,
+			min(a.tspRetailPrice)          			 AS tspRetailPrice,
+			a.gdl_money                              as gdlMoney,
+			a.gdl_show                               as gdlShow,
+			a.gdl_start                              as gdlStart,
+			a.gdl_end                                as gdlEnd,
+			a.gdl_machine                              as gdlMachine,
+			a.gdl_machineback                          as gdlMachineback,
+			a.gdl_machinemoney                         as gdlMachinemoney,
+			a.gdl_machineshow                          as gdlMachineshow,
+			a.gdl_station as gdlStation,
+			a.gdl_stationup as gdlStationup,
+			a.gdl_stationmoney as gdlStationmoney,
+			a.gdl_stationshow as gdlStationshow,
+			a.gdl_stationback as gdlStationback,
+			a.gdl_stationnup as gdlStationnup,
+			a.gdl_stationbackmoney as gdlStationbackmoney,
+			a.gdl_stationbackshow as gdlStationbackshow,
+			a.gdl_startcity as gdlStartcity,
+			a.gdl_endcity as gdlEndcity,
+			a.gdl_citymoney as gdlCitymoney,
+			a.gdl_cityshow as gdlCityshow,
+			a.priceId as priceId
+		from texi_detail
+		left join 
+		(
+				select texi_send.id,tdl_id,gdl_start,gdl_end,gdl_money,gdl_show,gdl_machine,gdl_machineback,gdl_machinemoney,gdl_machineshow,
+				gdl_station,gdl_stationup,gdl_stationmoney,gdl_stationshow,gdl_stationback,gdl_stationnup,gdl_stationbackmoney,gdl_stationbackshow,
+				gdl_startcity,gdl_endcity,gdl_citymoney,gdl_cityshow,
+				(
+					select a.tsp_retail_price from 
+					(
+						select send_id,send_type,tsp_date,tsp_retail_price,tsp_create_time
+						from texi_send_price
+						where tsp_is_open = '02'
+						and tsp_date = #{tspDate}
+						order by tsp_create_time desc 
+		
+					) a
+					where a.send_id = texi_send.id
+					and send_type= #{sendType}
+					ORDER BY a.tsp_create_time desc
+					limit 1
+				) as tspRetailPrice,
+				(
+					select a.id from 
+					(
+						select id,send_id,send_type,tsp_date,tsp_retail_price,tsp_create_time
+						from texi_send_price
+						where tsp_is_open = '02'
+						and tsp_date = #{tspDate}
+						order by tsp_create_time desc 
+		
+					) a
+					where a.send_id = texi_send.id
+					and send_type= #{sendType}
+					ORDER BY a.tsp_create_time desc
+					limit 1
+				) as priceId
+				from texi_send
+				<include refid="sql_query_send" />
+				HAVING tspRetailPrice is not null 
+		) a
+		on texi_detail.id = a.tdl_id
+		where 
+			texi_detail.tdl_is_del_status = '02'
+			<if test="tdlType != null	and tdlType != ''">			     and 	tdl_type 				    =   #{tdlType} </if>
+			<if test="tdlTexttype != null	and tdlTexttype != ''">	     and 	tdl_text_type 		        =   #{tdlTexttype} </if>
+			<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 0">	 
+				and 	CAST(tdl_num  AS SIGNED)   = CAST(#{tdlNum} AS SIGNED)
+			</if>
+			<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 1">	 
+				and 	CAST(tdl_num  AS SIGNED)   &gt;=  CAST(#{tdlNum} AS SIGNED)
+			</if>
+			<if test="tdlInland != null and tdlInland != ''"> and 	tdl_inland  = #{tdlInland}  </if>
+				<if test="tdlExternal != null and tdlExternal != ''"> and 	tdl_external  = #{tdlExternal}  </if>
+				<if test="tdlForeign != null and tdlForeign != ''"> and 	tdl_foreign  = #{tdlForeign}  </if>
+				<if test="tdlForeignCity != null and tdlForeignCity != ''"> and 	tdl_foreign_city  = #{tdlForeignCity}  </if>
+				<if test="tdlCity != null and tdlCity != ''"> and 	tdl_city  = #{tdlCity}  </if>
+		group by  texi_detail.id  
+		HAVING tspRetailPrice is not null 
+	</select>
+	<select id="selectPageTexiSend1Count" resultType="int">
+		select count(1) from 
+		(
+			select 
+				min(a.tspRetailPrice)          			 AS tspRetailPrice
+			from texi_detail
+			left join 
+			(
+					select texi_send.id,tdl_id,gdl_start,gdl_end,
+					(
+						select a.tsp_retail_price from 
+						(
+							select send_id,send_type,tsp_date,tsp_retail_price,tsp_create_time
+							from texi_send_price
+							where tsp_is_open = '02'
+							and tsp_date = #{tspDate}
+							order by tsp_create_time desc 
+			
+						) a
+						where a.send_id = texi_send.id
+						and send_type= #{sendType}
+						ORDER BY a.tsp_create_time desc
+						limit 1
+					) as tspRetailPrice
+					from texi_send
+					<include refid="sql_query_send" />
+					HAVING tspRetailPrice is not null 
+			) a
+			on texi_detail.id = a.tdl_id
+			where texi_detail.tdl_is_del_status = '02'
+				<if test="tdlType != null	and tdlType != ''">			     and 	tdl_type 				    =   #{tdlType} </if>
+				<if test="tdlTexttype != null	and tdlTexttype != ''">	     and 	tdl_text_type 		        =   #{tdlTexttype} </if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 0">	 
+					and 	CAST(tdl_num  AS SIGNED)   = CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 1">	 
+					and 	CAST(tdl_num  AS SIGNED)   &gt;=  CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlInland != null and tdlInland != ''"> and 	tdl_inland  = #{tdlInland}  </if>
+				<if test="tdlExternal != null and tdlExternal != ''"> and 	tdl_external  = #{tdlExternal}  </if>
+				<if test="tdlForeign != null and tdlForeign != ''"> and 	tdl_foreign  = #{tdlForeign}  </if>
+				<if test="tdlForeignCity != null and tdlForeignCity != ''"> and 	tdl_foreign_city  = #{tdlForeignCity}  </if>
+				<if test="tdlCity != null and tdlCity != ''"> and 	tdl_city  = #{tdlCity}  </if>
+			group by  texi_detail.id  
+			HAVING tspRetailPrice is not null 
+		) a
+	</select>
+	<select id="selectPageTexiCar1" resultType="texiDetailBean">	
+		select 
+			texi_detail.id ,
+			texi_detail.tdl_code		   			 AS tdlCode,
+			texi_detail.tdl_brand                    AS tdlBrand,
+			texi_detail.tdl_name                     AS tdlName,
+			texi_detail.tdl_type                     AS tdlType,
+			texi_detail.tdl_ntype                    AS tdlNtype,
+			texi_detail.tdl_num                      AS tdlNum,
+			texi_detail.tdl_img_appearance           AS tdlImgAppearance,
+			texi_detail.tdl_img_bosom                AS tdlImgBosom,
+			texi_detail.tdl_province                 AS tdlProvince,
+			texi_detail.tdl_city                     AS tdlCity,
+			texi_detail.tdl_createcardate            AS tdlCreatecardate,
+			texi_detail.tdl_createuser               AS tdlCreateuser,
+			texi_detail.tdl_createdate               AS tdlCreatedate,
+			texi_detail.tdl_is_through               AS tdlIsThrough,
+			texi_detail.tdl_through_time             AS tdlThroughTime,
+			texi_detail.tdl_through_user             AS tdlThroughUser,
+			texi_detail.tdl_is_del_status            AS tdlIsDelStatus,
+			texi_detail.tdl_age                      AS tdlAge,
+			texi_detail.tdl_level                    AS tdlLevel,
+			tdl_referential_policies                 AS tdlReferentialPolicies,
+			texi_detail.tdl_set_reservation          AS tdlSetReservation,
+			texi_detail.tdl_security_guide           AS tdlSecurityGuide,
+			texi_detail.tdl_text_type	   			 AS tdlTexttype,
+			texi_detail.tdl_text_pail	   			 AS tdlTextpail,
+			texi_detail.tdl_text_gear	   			 AS tdlTextgear,
+			a.tcpRetailPrice         			     AS tcpRetailPrice
+		from texi_detail 
+		left join 
+		(
+			select texi_car.id,tdl_id,
+				(
+					select a.tcp_retail_price from 
+					(
+						select bcl_id,bcl_type,tcp_date,tcp_retail_price,tcp_create_time
+						from texi_car_price
+						where tcp_is_open = '02'
+						and tcp_date = #{tcpDate1}
+						order by tcp_create_time desc 
+		
+					) a
+					where a.bcl_id = texi_car.id
+		  			and bcl_type= #{bclType}
+					ORDER BY a.tcp_create_time desc 
+					limit 1
+				) as tcpRetailPrice
+				from texi_car
+				HAVING tcpRetailPrice is not null 
+		) a
+		on texi_detail.id = a.tdl_id
+		where texi_detail.tdl_is_del_status = '02'
+				<if test="tdlType != null	and tdlType != ''">			     and 	tdl_type 				    =   #{tdlType} </if>
+				<if test="tdlTexttype != null	and tdlTexttype != ''">	     and 	tdl_text_type 		        =   #{tdlTexttype} </if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 0">	 
+					and 	CAST(tdl_num  AS SIGNED)   = CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 1">	 
+					and 	CAST(tdl_num  AS SIGNED)   &gt;=  CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlInland != null and tdlInland != ''"> and 	tdl_inland  = #{tdlInland}  </if>
+				<if test="tdlExternal != null and tdlExternal != ''"> and 	tdl_external  = #{tdlExternal}  </if>
+				<if test="tdlForeign != null and tdlForeign != ''"> and 	tdl_foreign  = #{tdlForeign}  </if>
+				<if test="tdlForeignCity != null and tdlForeignCity != ''"> and 	tdl_foreign_city  = #{tdlForeignCity}  </if>
+				<if test="tdlCity != null and tdlCity != ''"> and 	tdl_city  = #{tdlCity}  </if>
+		HAVING tcpRetailPrice is not null 
+	</select>
+	<select id="selectPageTexiCar1Count" resultType="int">	
+		select count(1) from 
+		(
+			select 
+				a.tcpRetailPrice         			     AS tcpRetailPrice
+			from texi_detail 
+			left join 
+			(
+				select texi_car.id,tdl_id,
+					(
+						select a.tcp_retail_price from 
+						(
+							select bcl_id,bcl_type,tcp_date,tcp_retail_price,tcp_create_time
+							from texi_car_price
+							where tcp_is_open = '02'
+							and tcp_date = #{tcpDate1}
+							order by tcp_create_time desc 
+			
+						) a
+						where a.bcl_id = texi_car.id
+			  			and bcl_type= #{bclType}
+						ORDER BY a.tcp_create_time desc 
+						limit 1
+					) as tcpRetailPrice
+					from texi_car
+					HAVING tcpRetailPrice is not null 
+			) a
+			on texi_detail.id = a.tdl_id
+			where texi_detail.tdl_is_del_status = '02'
+				<if test="tdlType != null	and tdlType != ''">			     and 	tdl_type 				    =   #{tdlType} </if>
+				<if test="tdlTexttype != null	and tdlTexttype != ''">	     and 	tdl_text_type 		        =   #{tdlTexttype} </if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 0">	 
+					and 	CAST(tdl_num  AS SIGNED)   = CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 1">	 
+					and 	CAST(tdl_num  AS SIGNED)   &gt;=  CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlInland != null and tdlInland != ''"> and 	tdl_inland  = #{tdlInland}  </if>
+				<if test="tdlExternal != null and tdlExternal != ''"> and 	tdl_external  = #{tdlExternal}  </if>
+				<if test="tdlForeign != null and tdlForeign != ''"> and 	tdl_foreign  = #{tdlForeign}  </if>
+				<if test="tdlForeignCity != null and tdlForeignCity != ''"> and 	tdl_foreign_city  = #{tdlForeignCity}  </if>
+				<if test="tdlCity != null and tdlCity != ''"> and 	tdl_city  = #{tdlCity}  </if>
+			HAVING tcpRetailPrice is not null 
+		) a
+		
+	</select>
+	
+	<select id="selectPageTexiDrive1" resultType="texiDetailBean">
+		select 
+			texi_detail.id ,
+			texi_detail.tdl_code		   			 AS tdlCode,
+			texi_detail.tdl_brand                    AS tdlBrand,
+			texi_detail.tdl_name                     AS tdlName,
+			texi_detail.tdl_type                     AS tdlType,
+			texi_detail.tdl_ntype                    AS tdlNtype,
+			texi_detail.tdl_num                      AS tdlNum,
+			texi_detail.tdl_img_appearance           AS tdlImgAppearance,
+			texi_detail.tdl_img_bosom                AS tdlImgBosom,
+			texi_detail.tdl_province                 AS tdlProvince,
+			texi_detail.tdl_city                     AS tdlCity,
+			texi_detail.tdl_createcardate            AS tdlCreatecardate,
+			texi_detail.tdl_createuser               AS tdlCreateuser,
+			texi_detail.tdl_createdate               AS tdlCreatedate,
+			texi_detail.tdl_is_through               AS tdlIsThrough,
+			texi_detail.tdl_through_time             AS tdlThroughTime,
+			texi_detail.tdl_through_user             AS tdlThroughUser,
+			texi_detail.tdl_is_del_status            AS tdlIsDelStatus,
+			texi_detail.tdl_age                      AS tdlAge,
+			texi_detail.tdl_level                    AS tdlLevel,
+			tdl_referential_policies                 AS tdlReferentialPolicies,
+			texi_detail.tdl_set_reservation          AS tdlSetReservation,
+			texi_detail.tdl_security_guide           AS tdlSecurityGuide,
+			texi_detail.tdl_text_type	   			 AS tdlTexttype,
+			texi_detail.tdl_text_pail	   			 AS tdlTextpail,
+			texi_detail.tdl_text_gear	   			 AS tdlTextgear,
+			a.tdpRetailPrice         			     AS tdpRetailPrice
+		from texi_detail 
+		left join 
+		(
+			select texi_drive.id,tdl_id,
+				(
+					select a.tdp_retail_price from 
+					(
+						select zjl_id,zjl_type,tdp_date,tdp_retail_price,tdp_create_time
+						from texi_drive_price
+						where tdp_is_open = '02'
+						and tdp_date = #{tdpDate1}
+						order by tdp_create_time desc 
+		
+					) a
+					where 
+						a.zjl_id = texi_drive.id
+		  				and zjl_type = #{zjlType}
+					ORDER BY a.tdp_create_time desc 
+					limit 1
+				) as tdpRetailPrice
+				from texi_drive
+				<include refid="sql_query_drive" />
+				HAVING tdpRetailPrice is not null 
+		) a
+		on texi_detail.id = a.tdl_id
+		where texi_detail.tdl_is_del_status = '02'
+			<if test="tdlType != null	and tdlType != ''">			     and 	tdl_type 				    =   #{tdlType} </if>
+			<if test="tdlTexttype != null	and tdlTexttype != ''">	     and 	tdl_text_type 		        =   #{tdlTexttype} </if>
+			<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 0">	 
+				and 	CAST(tdl_num  AS SIGNED)   = CAST(#{tdlNum} AS SIGNED)
+			</if>
+			<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 1">	 
+				and 	CAST(tdl_num  AS SIGNED)   &gt;=  CAST(#{tdlNum} AS SIGNED)
+			</if>
+			<if test="tdlInland != null and tdlInland != ''"> and 	tdl_inland  = #{tdlInland}  </if>
+				<if test="tdlExternal != null and tdlExternal != ''"> and 	tdl_external  = #{tdlExternal}  </if>
+				<if test="tdlForeign != null and tdlForeign != ''"> and 	tdl_foreign  = #{tdlForeign}  </if>
+				<if test="tdlForeignCity != null and tdlForeignCity != ''"> and 	tdl_foreign_city  = #{tdlForeignCity}  </if>
+				<if test="tdlCity != null and tdlCity != ''"> and 	tdl_city  = #{tdlCity}  </if>
+		HAVING tdpRetailPrice is not null 
+	</select>
+	
+	<select id="selectPageTexiDrive1Count" resultType="int">
+		select count(1) from 
+		(
+			select 
+				a.tdpRetailPrice         			     AS tdpRetailPrice
+			from texi_detail 
+			left join 
+			(
+				select texi_drive.id,tdl_id,
+					(
+						select a.tdp_retail_price from 
+						(
+							select zjl_id,zjl_type,tdp_date,tdp_retail_price,tdp_create_time
+							from texi_drive_price
+							where tdp_is_open = '02'
+							and tdp_date = #{tdpDate1}
+							order by tdp_create_time desc 
+			
+						) a
+						where 
+							a.zjl_id = texi_drive.id
+			  				and zjl_type = #{zjlType}
+						ORDER BY a.tdp_create_time desc 
+						limit 1
+					) as tdpRetailPrice
+					from texi_drive
+					<include refid="sql_query_drive" />
+					HAVING tdpRetailPrice is not null 
+			) a
+			on texi_detail.id = a.tdl_id
+			where texi_detail.tdl_is_del_status = '02'
+				<if test="tdlType != null	and tdlType != ''">			     and 	tdl_type 				    =   #{tdlType} </if>
+				<if test="tdlTexttype != null	and tdlTexttype != ''">	     and 	tdl_text_type 		        =   #{tdlTexttype} </if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 0">	 
+					and 	CAST(tdl_num  AS SIGNED)   = CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlNum != null and tdlNum != '' and tdlNumCompare != null and tdlNumCompare == 1">	 
+					and 	CAST(tdl_num  AS SIGNED)   &gt;=  CAST(#{tdlNum} AS SIGNED)
+				</if>
+				<if test="tdlInland != null and tdlInland != ''"> and 	tdl_inland  = #{tdlInland}  </if>
+				<if test="tdlExternal != null and tdlExternal != ''"> and 	tdl_external  = #{tdlExternal}  </if>
+				<if test="tdlForeign != null and tdlForeign != ''"> and 	tdl_foreign  = #{tdlForeign}  </if>
+				<if test="tdlForeignCity != null and tdlForeignCity != ''"> and 	tdl_foreign_city  = #{tdlForeignCity}  </if>
+				<if test="tdlCity != null and tdlCity != ''"> and 	tdl_city  = #{tdlCity}  </if>
+			HAVING tdpRetailPrice is not null 
+		) a
+	</select>
+</mapper>

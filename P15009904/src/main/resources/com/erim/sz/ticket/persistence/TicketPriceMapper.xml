@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ticketprice">
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		tcl_id					AS	tclId,
+		tcl_type				AS	tclType,
+		tpl_date				AS	tplDate,
+		tpl_is_open				AS	tplIsOpen,
+		tpl_week				AS	tplWeek,
+		tpl_sign				AS	tplSign,
+		tpl_is_sign				AS	tplIsSign,
+		tpl_trade_price			AS	tplTradePrice,
+		tpl_combination_price	AS	tplCombinationPrice,
+		tpl_retail_price		AS	tplRetailPrice,
+		tpl_insure_price		AS	tplInsurePrice,
+		tpl_Explain				AS	tplExplain,
+		tpl_date_type			AS	tplDateType,
+		tpl_same_h				AS	tplSameH,
+		tpl_same_m				AS	tplSameM,
+		tpl_forward_d			AS	tplForwardD,
+		tpl_forward_h			AS	tplForwardH,
+		tpl_forward_m			AS	tplForwardM,
+		tpl_create_time			AS	tplCreateTime,
+		tpl_create_user			AS	tplCreateUser,
+		cpy_id					AS	cpyId
+	</sql>
+	
+	<!-- 根据票类ID和录入时间 获取最新的一条信息 -->
+	<select id = "getPriceByClassDate" parameterType="ticketPriceBean" resultType="ticketPriceBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			ticket_price
+		WHERE
+			tpl_date	 = #{tplDate}
+		AND
+			tcl_id		 = #{tclId}
+		ORDER BY 
+			tpl_create_time
+		DESC
+		LIMIT 1
+	</select>
+	
+	<!-- 查询 -->
+	<select id="selectTicketPriceList" parameterType="java.util.Map" resultType="ticketPriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				ticket_price
+			ORDER BY 
+				tpl_create_time
+			DESC
+		) t
+		GROUP BY
+			t.tplDate,
+			t.tclId
+		HAVING
+			t.tclId = #{bean.tclId}
+			<!-- 日期 -->
+			AND t.tplDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 保存量价 - 量价都不存在 则新增 -->
+	<insert id="insert">
+		INSERT INTO
+			ticket_price (
+				tdl_id,
+				tcl_id,
+				tcl_type,
+				tpl_date,
+				tpl_is_open,
+				tpl_week,
+				tpl_sign,
+				tpl_is_sign,
+				tpl_trade_price,
+				tpl_combination_price,
+				tpl_retail_price,
+				tpl_insure_price,
+				tpl_explain,
+				tpl_date_type,
+				tpl_same_h,
+				tpl_same_m,
+				tpl_forward_d,
+				tpl_forward_h,
+				tpl_forward_m,
+				tpl_create_time,
+				tpl_create_user,
+				cpy_id
+			) VALUES (
+				#{tdlId},
+				#{tclId},
+				#{tclType},
+				#{tplDate},
+				#{tplIsOpen},
+				#{tplWeek},
+				#{tplSign},
+				#{tplIsSign},
+				#{tplTradePrice},
+				#{tplCombinationPrice},
+				#{tplRetailPrice},
+				#{tplInsurePrice},
+				#{tplExplain},
+				#{tplDateType},
+				#{tplSameH},
+				#{tplSameM},
+				#{tplForwardD},
+				#{tplForwardH},
+				#{tplForwardM},
+				#{tplCreateTime},
+				#{tplCreateUser},
+				#{cpyId}
+			)
+	</insert>
+	
+	<!-- 保存量价 - 量价已存在量或者价  则修改-->
+	<update id="updatePrice">
+		update
+			ticket_price
+		SET
+			<if test = "tplSign != null or tplIsSign != null">
+				tpl_sign				= #{tplSign},
+				tpl_is_sign				= #{tplIsSign}
+			</if>
+			<if test = "tplTradePrice != null or tplCombinationPrice != null or tplRetailPrice != null or tplInsurePrice != null">
+				<if test = "tplSign != null or tplIsSign != null">,</if>
+				tpl_trade_price			= #{tplTradePrice},
+				tpl_combination_price	= #{tplCombinationPrice},
+				tpl_retail_price		= #{tplRetailPrice},
+				tpl_insure_price		= #{tplInsurePrice},
+				tpl_explain				= #{tplExplain},
+				tpl_date_type			= #{tplDateType},
+				tpl_same_h				= #{tplSameH},
+				tpl_forward_h			= #{tplForwardH}
+			</if>
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 修改 -->
+	<update id="update">
+		update
+			ticket_price
+		SET
+			<if test = "tplSign != null or tplIsSign != null">
+			tpl_sign					= #{tplSign},
+			tpl_is_sign					= #{tplIsSign},
+			</if>
+			<if test = "tplTradePrice != null or tplCombinationPrice != null or tplRetailPrice != null or tplInsurePrice != null">
+			tpl_trade_price				= #{tplTradePrice},
+			tpl_combination_price		= #{tplCombinationPrice},
+			tpl_retail_price			= #{tplRetailPrice},
+			</if>
+			tpl_is_open					= '02'
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 更改是否出售状态 -->
+	<update id="updateIsOpen">
+		UPDATE
+			ticket_price
+		SET
+			tpl_is_open		= #{tplIsOpen}
+		WHERE
+			id 	= #{id}
+	</update>
+	
+	<!-- 批量修改是否出售状态 -->
+	<update id="updateBatchIsOpen" parameterType="java.util.Map">
+		UPDATE
+			ticket_price
+		SET
+			tpl_is_open		= #{bean.tplIsOpen}
+		WHERE
+			tcl_id 			= #{bean.tclId}
+			AND	
+			tpl_date		IN
+			<foreach collection="count" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</update>
+</mapper>

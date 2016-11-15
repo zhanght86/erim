@@ -1,0 +1,307 @@
+<script type="text/javascript">
+	regUtil.initProvince(0,'ldlProvince','ldlCity','ldlCounty');
+	//搜索项留下输入内容
+	// 是否为港澳台/国际
+	var a = $("input[name='ldlCountylocation']:checked").val();
+	if (a == '04') {
+		$('#county01').show();//主要国家显示
+	}else{
+		$('#county01').hide();//主要国家隐藏
+	}
+	
+	//点击事件
+	//点击港澳台国际时主要国家和出发城市的隐藏和切换
+	$("input[name='ldlInternation']").change(function() {
+		var a = $("input[name='ldlInternation']:checked").val();
+		if (a == '1') {
+			//国际港澳台隐藏
+    		$('#szd02').hide();
+			//国内显示
+    		$('#szd01').show();
+		}else if (a == '2'){
+			//国际港澳台显示
+			$('#szd02').show();
+			//国内显示
+    		$('#szd01').hide();
+		}
+	});
+	//点击港澳台国际时主要国家和出发城市的隐藏和切换
+	
+	//点击香港和澳门的时候国家和城市隐藏
+	$('#nation01').click(function() {
+		$('#county01').hide();
+	});
+	$('#nation02').click(function() {
+		$('#county01').hide();
+	});
+	//点击台湾的时候城市出现国家隐藏
+	$('#nation03').click(function() {
+		$('#county01').hide();
+	});
+	//点击国际时国家出现城市隐藏
+	$('#nation04').click(function() {
+		$('#county01').toggle();
+	});
+	//国内和国际.港澳台切换
+	$('#gddInland01').click(function() {
+		$('#szd02').hide();
+		$('#szd01').show();
+		$('#county01').hide();
+		$("input[name='ldlCountylocation'][value='01']").attr("checked",true);
+	});
+	$('#gddInland02').click(function() {
+		$('#szd01').hide();
+		$('#szd02').show();
+		$('#county01').hide();
+	});
+	
+	//搜索项停留内容
+	// 是否国内
+	var a = $("input[name='ldlInternation']:checked").val();	
+	if (a == '1') {
+		// 国内显示
+		$('#szd01').show();
+		// 国际隐藏
+		$('#szd02').hide();
+		var b = $("select[name='ldlProvince']").val();
+		var city = $("input[name='dis_city']").val();
+		var county = $("input[name='dis_county']").val();
+		if(b != '') {
+    		//初始化省市县
+    		regUtil.initProvince(b,'ldlProvince','ldlCity','ldlCounty',city,county);
+		}
+	} else if (a == '2') {
+		// 国内隐藏
+		$('#szd01').hide();
+		// 国际展示
+		$('#szd02').show();
+		//初始化省市县
+		regUtil.initProvince(0,'ldlProvince','ldlCity','ldlCounty');
+	} else {
+		// 国内显示
+		$('#szd01').show();
+		// 国际隐藏
+		$('#szd02').hide();
+		// 省市县
+		var b = $("select[name='ldlProvince']").val();
+		var city = $("input[name='dis_city']").val();
+		var county = $("input[name='dis_county']").val();
+		if(b != '') {
+    		//初始化省市县
+    		regUtil.initProvince(b,'ldlProvince','ldlCity','ldlCounty',city,county);
+		}
+	}
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+    $(function() {
+      	var guojiastr = $("#guojiaforqueryId").html();
+        var arr = guojiastr.split(",");
+        $(".autoquerycountry").autocomplete(arr);
+    });
+</script>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>
+<!-- 专线管理 -->
+<div class="visaadmin">
+	<p class="tit_1 ml20 pt20 mt18"><img src="$staticRoot/images/htz2.png" width="25px" alt="专线管理" title="专线管理">专线管理</p>
+	<div class="g_line"></div>
+	<div class="visaadmin_top" style="margin-bottom: 20px;">
+		<form class="form-search" method="post" id="form1">
+            <div class="doadmin_topl">
+				<div class="doadmin_toplbox">
+                    <span>产品分类：</span>
+                    <label>
+                        <input type="radio" id="gddInland01" name="ldlInternation" #if($lineDetail.ldlInternation == '1') checked #end value="1" /> 国内
+    				</label>
+                    <label>
+                        <input type="radio" id="gddInland02" name="ldlInternation" #if($lineDetail.ldlInternation == '2') checked #end value="2" /> 国际/港澳台
+    				</label>
+                </div>
+			</div>
+            <div class="doadmin_topl">
+				<div class="doadmin_toplbox">
+					<span> 产品编码：</span>
+					<div class="doadmin_toplbra">
+    					<input type="text" value="$!lineDetail.ldlCode" name="ldlCode" style="height:28px;width:126px;margin-left:2px;"/>
+    				</div>
+				</div>
+				<div class="doadmin_toplbox" id="szd01" style="margin-left:-139px;width:480px;">
+					<span style="width:70px;">出发城市：</span>
+					<!--<div class="doadmin_toplbrb" style="width:360px;">
+                        <select name="ldlProvince" style="width:100px;height:30px;float:left">
+							<option value=""></option>
+							#foreach($item in $provinces)
+                                <option value="$item.regionNo" #if($lineDetail.ldlProvince == $item.regionNo) selected #end>$item.regionName</option>
+        					#end
+                        </select>
+						<span style="float:left;margin:0 3px 0 3px;color:black;line-height:30px;height:30px;font-size:12px;">省</span>
+                        <select type="text" class="w90" name="ldlCity" style="width:100px;height:30px;float:left;">
+						</select>
+						<span style="float:left;margin:0 3px 0 3px;color:black;">市</span>
+						<select type="text" class="w90" name="ldlCounty" style="width:100px;height:30px;float:left;">
+						</select>
+						<span style="float:left;margin:0 3px 0 3px;color:black;">区/县</span>
+					</div>-->
+					<div class="doadmin_toplbrb" style="width:360px;">
+						#lockProvince('ldlProvince','ldlProvince','','1',$!lineDetail.ldlProvince,'ldlCity','ldlCounty',$!lineDetail.ldlCity,$!lineDetail.ldlCounty)
+						<select name='ldlCity' id='ldlCity' class='w80' onchange="lock.town($(this),'ldlCounty');"></select>
+						<select name='ldlCounty' id='ldlCounty' class='w80'></select>
+					</div>
+				</div>
+				<div class="doadmin_toplbox" id="szd02" style="width: 390px;margin-left:-139px;">
+					<span style="width:70px;">出发城市：</span>
+					<div class="doadmin_toplbrb" style="width:300px;">
+        				<label>
+                            <input type="radio" name="ldlCountylocation" id="nation01" value="01" #if($lineDetail.ldlCountylocation == '01') checked #end/>香港&nbsp;
+						</label>
+						<label>
+							<input type="radio" name="ldlCountylocation" id="nation02" value="02" #if($lineDetail.ldlCountylocation == '02') checked #end/>澳门&nbsp;
+						</label>
+                        <label>
+							<input type="radio" name="ldlCountylocation" id="nation03" value="03" #if($lineDetail.ldlCountylocation == '03') checked #end/>台湾&nbsp;
+						</label>
+                        <label>
+							<input type="radio" name="ldlCountylocation" id="nation04" value="04" #if($lineDetail.ldlCountylocation == '04') checked #end/>国际&nbsp;
+        				</label>
+                    </div>
+            	</div>
+				<div class="co_nationdiv" id="county01">
+					<span>国家：</span>
+					<input type="text" name="ldlMajorcountries" value="$!lineDetail.ldlMajorcountries" class="autoquerycountry" style="width:120px;height:25px;">
+					<span>城市：</span>
+					<input type="text" name="ldlDeparturecity" value="$!lineDetail.ldlDeparturecity" style="width:120px;height:25px">
+				</div>
+			</div>
+			<div  class="doadmin_topl">
+				<div class="doadmin_toplboxa" style="width:270px;">
+					<span style="font-weight:400;  width:100px;">产品编号：</span>
+					<div class="doadmin_toplbra" style="width:160px;">
+						<input class="input-medium search-query" name="ldlCode1" value="$!lineDetail.ldlCode1" style="width:126px; type="text" >
+						</div>
+                   </div>
+					<div class="doadmin_toplboxa" style="width:204px;">
+						<span style="font-weight:400; width:67px;">产品形态：</span>
+						<div class="doadmin_toplbra" style="width:120px;">
+							<select name="ldlProductForm" style="width:100px;">
+								<option value=""></option>
+								#foreach($item in $product.keySet())
+									<option value="$item" #if($lineDetail.ldlProductForm == $item) selected #end>$product.get($item)</option>
+								#end
+								</select>
+						</div>
+					</div>
+					<div class="visaadmin_toplb">
+						<span style="width:74px;padding:0;" >线路名称：</span>
+						<input class="input-medium search-query" name="ldlName" value="$!lineDetail.ldlName" style="width:135px; type="text" >
+					</div>
+					<div class="visaadmin_toplb">
+						<span>上架状态：</span>
+						<select name="ldlIsDelStatus" style="width:100px;" value="$!lineDetail.ldlIsDelStatus">
+							 <option value=""  #if($lineDetail.ldlIsDelStatus == '') selected #end ></option>
+        					 <option value="1" #if($lineDetail.ldlIsDelStatus == '1') selected #end>上架</option>
+        					 <option value="0" #if($lineDetail.ldlIsDelStatus == '0') selected #end>下架</option>
+        				</select>
+        			   </div>
+					   <button class="doadmin_see" type="button" onclick="index.searchform('form1','$appRoot/line/detail/list');">查询</button>
+					</div>
+                </form>
+			</div>
+			<div class="cb mb20"></div>
+			<div class="g_line">
+			</div>
+			#if($shiro.hasPermission("LINE_DETIAL_INSERT"))
+				<div class="carad_ct">
+					<div class="carad_ctbtn" style="width:50%;">
+						<button type="button" onclick="index.load('$appRoot/line/detail/insertPage');" >+新增线路</button>
+					</div>
+				</div>
+			#end
+			<div class="carad_ctrtable" style="width:95%">
+				<table cellspacing="0" cellspadding="0" style="min-width:1100px;">
+					<thead>
+						<tr>
+							<td style="min-width:90px;">产品编码</td>
+        					<td style="min-width:80px;">产品编号</td>
+        					<td style="min-width:80px;">出发城市</td>
+        					<td style="min-width:200px;">线路名称</td>
+        					<td style="min-width:90px;">产品主题</td>
+        					<td style="min-width:80px;">大交通</td>
+        					<td style="min-width:80px;">产品形态</td>
+        					<td style="min-width:90px;">产品标准</td>
+        					<td style="min-width:270px;">线路管理</td>
+							#if($shiro.hasPermission("LINE_DETIAL_DELET"))
+								<td style="min-width:70px;">上架状态</td>
+							#end
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($item in $lineList)
+							<tr class="lie1">
+								<td>$!item.ldlCode</td>
+								<td>$!item.ldlCode1</td>
+								#if($!item.ldlInternation == '2')
+									#if($!item.ldlCountylocation == '04')
+										<td>$!item.ldlDeparturecity</td>
+										#else
+											<td>$!item.ldlCountylocation</td>
+									#end
+									#elseif($!item.ldlInternation == '1')
+										<td>$!item.ldlCity</td>
+										#else
+											<td></td>
+								#end
+								<td style="width:200px;"><a style="white-space:normal;word-break:break-all;word-wrap:break-word;" href="$webRoot/line/tejiaxiang/$item.id" target="_blank" title="点击打开外网展示">$!item.ldlName</a></td>
+								#if($!item.ldlYesno == '02')
+									<td width="15%">学生活动：$!item.ldlGame,$!item.ldlAddgame</td>
+									#elseif($!item.ldlYesno == '01')
+										<td>$!item.ldlProType1 $item.ldlProType2</td>
+										#else
+											<td></td>
+								#end
+								<td>$!item.ldlBigTraffic + $!item.ldlBigTraffic1</td>
+								<td>$!item.ldlProductForm</td>
+								<td>$!item.ldlProductStandard</td>
+								<td class="carad_a">
+									#if($shiro.hasPermission("LINE_DETIAL_UPDATE"))
+										<a href="javascript:index.load('$appRoot/line/detail/updatePage?id=$item.id');">查看/修改</a>
+									#end
+									
+									<!--<a href="javascript:subform.suburl('$appRoot/line/detail/copy?id=$item.id','$appRoot/line/detail/list');">复制</a>-->						
+									#if($shiro.hasPermission("LINE_DETIAL_PRICE"))
+										<a href="javascript:index.load('$appRoot/line/price/list?tdlId=$item.id&portal=01&tdlName=$item.ldlName');">量价管理</a>
+									#end
+									#if($shiro.hasPermission("LINE_DETIAL_COOPERATION"))
+										<a href="javascript:index.nextPage('$appRoot/line/detail/cooperation?linecid=$item.id');">合作管理</a>
+									#end
+									#if($shiro.hasPermission("LINE_DETIAL_SCHEDULED"))
+										<a href="javascript:index.load('$appRoot/line/detail/scheduledPage?id=$!item.id');">预定方式</a>
+									#end
+								</td>
+								#if($shiro.hasPermission("LINE_DETIAL_DELET"))
+								<td>
+									#if($!item.ldlIsDelStatus == '1')
+										<span><img src="$staticRoot/images/lvdui.png"/></span>
+										<a href="javascript:index.load('$appRoot/line/detail/delet?id=$item.id&ldlIsDelStatus=0');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+									#end
+									#if($!item.ldlIsDelStatus == '0')
+										<a href="javascript:index.load('$appRoot/line/detail/delet?id=$item.id&ldlIsDelStatus=1');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+										<span><img src="$staticRoot/images/hongcuo.png"/></span>
+									#end
+									</td>
+								#end
+							</tr>
+						#end
+						</tbody>
+				</table>
+				#parse("common/page.vm")
+			</div>
+		</div>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+  var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+});
+</script>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

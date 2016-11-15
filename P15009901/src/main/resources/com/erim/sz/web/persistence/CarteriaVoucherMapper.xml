@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cafeteriaVoucher">	
+	<!-- 代金券查询 -->
+	<select id="selectVoucherByCdlId" resultType="cafeteriaVoucherBean">
+		select 		
+					a.id							AS id,
+					a.djq_start_date              AS djqStartDate,
+					a.djq_end_date 	            AS djqEndDate,
+					a.djq_buy_show 	            AS djqBuyShow,
+					a.djq_order_remind            AS djqOrderRemind,
+					a.djq_use_show                AS djqUseShow,
+					a.djq_voucher                 AS djqVoucher,
+					a.cdl_ID                      AS cdlID ,
+					
+					b.djq_id           AS djqId,
+					b.cvp_price_total  AS cvpPriceTotal,
+					b.cvp_price_town   AS cvpPriceTown,
+					b.cvp_price_sale   AS cvpPriceSale,
+					b.cvp_price_retail AS cvpPriceRetail
+		from 
+			cafeteria_voucher a
+		left join 
+			cafeteria_voucher_price b 
+		on  a.id = b.djq_id
+		where a.cdl_id = #{cdlID}
+		and a.djq_end_date >= date_format(now(),'%Y-%m-%d')
+   </select>
+</mapper>

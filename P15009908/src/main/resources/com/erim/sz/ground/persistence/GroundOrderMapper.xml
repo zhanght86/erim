@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="groundorder">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="gdoNo != null">				and 	gdo_no 				like "%"#{gdoNo}"%"</if>
+			<if test="cpyId != null">			    and 	cpy_id		 		    =   #{cpyId}</if>
+			<if test="gdoNtp != null">		    	and 	gdo_ntp 		    like "%"#{gdoNtp}"%"</if>
+	  <!--  <if test="gdoService != null">			and 	gdo_service 		like "%"#{gdoService}"%"</if>
+			<if test="gdoContent != null">			and 	gdo_content 		like "%"#{gdoContent}"%"</if>
+			<if test="gdoTel != null">				and 	gdo_tel 			like "%"#{gdoTel}"%"</if>
+			<if test="gdoPrice != null">			and 	gdo_price 			like "%"#{gdoPrice}"%"</if>
+			<if test="gdoPriceOnline != null">		and 	gdo_price_online 	like "%"#{gdoPriceOnline}"%"</if>
+			<if test="gdoPriceOffline != null">		and 	gdo_price_offline 	like "%"#{gdoPriceOffline}"%"</if>
+			<if test="gdoPriceTotal != null">		and 	gdo_price_total 	like "%"#{gdoPriceTotal}"%"</if>
+			<if test="gdoCreateuser != null">		and 	gdo_createuser 		like "%"#{gdoCreateuser}"%"</if>
+			<if test="gdoCreatetime != null">		and 	gdo_createtime 		like "%"#{gdoCreatetime}"%"</if>
+			<if test="gdoIsThrough != null">		and 	gdo_is_through 		like "%"#{gdoIsThrough}"%"</if>-->
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageGround" resultType="groundOrderBean">
+		SELECT
+			id ,
+			gdo_no             AS 	gdoNo,
+			gdo_service        AS 	gdoService,
+			gdo_content        AS 	gdoContent,
+			cpy_id             AS 	cpyId,
+			gdo_tel            AS 	gdoTel,
+			gdo_price          AS 	gdoPrice,
+			gdo_price_online   AS 	gdoPriceOnline,
+			gdo_price_offline  AS 	gdoPriceOffline,
+			gdo_price_total    AS 	gdoPriceTotal,
+			gdo_createuser     AS 	gdoCreateuser,
+			gdo_createtime     AS 	gdoCreatetime,
+			gdo_is_through     AS 	gdoIsThrough,
+			gdo_ntp		  	   AS 	gdoNtp
+		FROM
+			ground_order
+		<include refid="sql_query" />
+	</select>
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageGroundCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			ground_order
+		<include refid="sql_query" />
+	</select>
+	<!-- 接单/拒接 -->
+	<update id="receiveOrRefuse" parameterType="GroundOrderBean">
+		UPDATE
+			ground_order
+		SET
+			gdo_ntp = #{gdoNtp}
+		WHERE
+			id =#{id}
+	</update>
+</mapper>

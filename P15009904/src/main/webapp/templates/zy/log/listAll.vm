@@ -1,0 +1,54 @@
+<div class="rdivv">
+	<div class="lineadmin">
+		<div class="newfood_suptop mb20">
+			<img src="$staticRoot/images/rizhi.png">
+			<span>操作日志</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<div class="admin_div">
+			<div class="doadmin_topl" style="margin-top:0;margin-bottom:20px;">
+				<div class="doadmin_toplboxa" style="width:240px;">
+					<span style="width:88px;">操作用户:</span>
+					<div class="doadmin_toplbra" style="width:130px;">
+						<input type="text" value=""/>
+					</div>
+				</div>
+				<button class="doadmin_see">查询</button>
+			</div>
+		</div>
+		<div class="cb"></div>
+		<div class="g_line mb20"></div>
+		<div class="carad_ct">
+			<div class="carad_ctrtable">
+				<table cellspacing="0" cellspadding="0">
+					<thead>
+						<tr>
+							<td>序号</td>
+							<td>操作IP</td>
+    						<td>操作用户</td>
+    						<td>操作时间</td>
+    						<td>操作模块</td>
+							<td>操作路径</td>
+    						<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($item in $logList)
+						<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+							<td>$item.id</td>
+							<td>$item.logIp</td>
+    						<td>$item.logUsername</td>
+    						<td>$!date.format('yyyy-MM-dd HH:mm:ss',$!item.logCreatedate)</td>
+    						<td>$!item.logResourceName</td>
+							<td>$item.logUrl</td>
+    						<td>$item.logOperation</td>
+						</tr>
+						#end
+					</tbody>
+				</table>
+				#parse("common/page.vm")
+			</div>
+		</div>
+	</div>
+</div>

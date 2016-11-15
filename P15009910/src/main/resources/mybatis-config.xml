@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+
+    <!-- 基础设置 -->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false" />
+    </settings>
+    
+    <!-- 类缩写 -->
+    <typeAliases>
+		<!-- java base -->
+		<typeAlias alias="hashMap"                  	type="java.util.HashMap"/>
+        
+        <!-- erim web common -->
+        <typeAlias alias="codeBean"                     type="com.erim.web.bean.CodeBean" />
+		
+		<!-- 企业-->
+		<typeAlias alias="vCompanyDetailBean"           type="com.erim.sz.price.bean.VCompanyDetailChildBean" />
+		
+		<typeAlias alias="companyDetailBean"            type="com.erim.sz.common.bean.CompanyDetailBean" />
+		<typeAlias alias="companyContactPersonBean"     type="com.erim.sz.common.bean.CompanyContactPersonBean" />
+		<typeAlias alias="companyDirectionBean"         type="com.erim.sz.common.bean.CompanyDirectionBean" />
+		<typeAlias alias="companyBusinessBean"          type="com.erim.sz.common.bean.CompanyBusinessBean" />
+		
+		<!-- 系统 -->
+		<typeAlias alias="yjSystemUserBean"          	type="com.erim.sz.common.bean.YjSystemUserBean" />
+		<typeAlias alias="yjSystemRoleBean"             type="com.erim.sz.system.bean.YjSystemRoleBean" />
+		<typeAlias alias="yjSystemFuncBean"             type="com.erim.sz.system.bean.YjSystemFuncBean" />
+		<typeAlias alias="yjSystemFuncRescourceBean"    type="com.erim.sz.system.bean.YjSystemFuncRescourceBean" />
+		<typeAlias alias="yjSystemRoleFuncBean"    	    type="com.erim.sz.system.bean.YjSystemRoleFuncBean" />
+		<typeAlias alias="yjSystemRescourceBean"        type="com.erim.sz.system.bean.YjSystemRescourceBean" />
+		<typeAlias alias="yjSystemLogBean"              type="com.erim.sz.system.bean.YjSystemLogBean" />
+		
+		<!-- 字典 -->
+		<typeAlias alias="tmSystemRegionBean"           type="com.erim.sz.tm.bean.TmSystemRegionBean" />
+	
+		<!-- 通知通告 -->
+		<typeAlias alias="PubNoticeBean"                type="com.erim.sz.common.bean.PubNoticeBean" />
+		<!-- 组团社相关 -->
+		<typeAlias alias="sellSystemTeamBean"           type="com.erim.sz.common.bean.SellSystemTeamBean" />
+		
+		<!-- 返利相关 -->
+		<typeAlias alias="priceBackYjBean"              type="com.erim.sz.common.bean.PriceBackYjBean" />
+		<typeAlias alias="priceBackYwBean"          	type="com.erim.sz.common.bean.PriceBackYwBean" />
+		
+    </typeAliases>
+    
+    <!-- 分页插件 -->
+    <plugins>
+        <plugin interceptor="com.erim.utils.mybatis.OffsetLimitInterceptor">
+            <property name="dialectClass" value="com.erim.utils.jdbc.dialect.MySQLDialect"/>
+        </plugin>
+    </plugins>
+    
+    <!-- 映射文件 -->
+    <mappers>
+        <!-- erim web -->
+        <mapper resource="com/erim/web/persistence/CodeMapper.xml"/>
+        <!-- erim sz -->
+        
+        <!-- 企业 -->
+        <mapper resource="com/erim/sz/company/persistence/VCompanyDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/company/persistence/CompanyDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/company/persistence/CompanyContactPersonMapper.xml"/>
+        <mapper resource="com/erim/sz/company/persistence/CompanyDirectionMapper.xml"/>
+        <mapper resource="com/erim/sz/company/persistence/CompanyBusinessMapper.xml"/>
+        
+		<!-- 系统 -->
+		<mapper resource="com/erim/sz/system/persistence/YjSystemUserMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/YjSystemRoleMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/YjSystemRoleFuncMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/YjSystemFuncMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/YjSystemFuncRescourceMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/YjSystemRescourceMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/YjSystemLogMapper.xml"/>
+		
+		<!-- 字典 -->
+		<mapper resource="com/erim/sz/web/persistence/TmSystemRegionMapper.xml"/>
+		
+        <!-- 通知通告 -->
+        <mapper resource="com/erim/sz/pub/persistence/PubNoticeMapper.xml"/>
+        
+        <!-- 组团社相关 -->
+		<mapper resource="com/erim/sz/data/persistence/SellSystemTeamMapper.xml"/>
+		
+		<!-- 返利相关 -->
+		<mapper resource="com/erim/sz/price/persistence/PriceBackYjMapper.xml"/>
+		<mapper resource="com/erim/sz/price/persistence/PriceBackYwMapper.xml"/>
+    </mappers>
+    
+</configuration>

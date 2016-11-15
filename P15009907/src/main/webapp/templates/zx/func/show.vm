@@ -1,0 +1,120 @@
+<form method="post" id="form1">
+    <div class="rdivv">
+    	<!--合作管理-->
+    		<div class="doadmin">
+    			<div class="newfood_suptop mb20">
+    				<img src="$staticRoot/images/aa_4.png">
+    				<span>权限管理</span>
+    				<div class="cb"></div>
+    				<div class="g_line"></div>
+    			</div>
+    			<div class="admin_div">
+    				<div class="doadmin_topl" style="margin-top:0;margin-bottom:20px;">
+    					<div class="doadmin_toplboxb">
+    						<span>角色:</span>
+    						<div class="doadmin_toplbrb">
+    							<select name="roleid">
+    								<option value=""></option>
+    								#foreach($item in $listRole)
+    									<option value="$item.id">$item.zxRoleName</option>
+    								#end
+    							</select>
+    						</div>
+    					</div>
+    					##<button type="button" class="doadmin_see" style="cursor:pointer;">查询</button>
+    				</div>
+    			</div>
+    			<div class="cb"></div>
+    			<div class="g_line mb20"></div>
+    					<div class="carad_ct">
+    						<div class="carad_ctrtable">
+    							<table cellspacing="0" cellspadding="0">
+    								<thead>
+    									<tr>
+    										<td>模块</td>
+    										<td>子模块</td>
+    										<td>子模块</td>
+    									</tr>
+    								</thead>
+    								<tbody>
+    									#foreach($item in $listFunc)
+                    	    				#foreach($childitem in $item.childListZxSystemFuncBean)
+												##如果不是国际线 隐藏qian z
+												#if($!userIsManagement == '0')
+													<tr>
+                        								#if($velocityCount == 1)
+															#if($item.zxFuncCode == 'MANAGEMENT_DETIAL' && $rescource.zxFuncCode != 'SAMETOWN_MANAGEMENT')
+																<td rowspan="${item.childSize-1}">$item.zxFuncName</td>
+															#else
+																<td rowspan="$item.childSize">$item.zxFuncName</td>
+															#end
+                        		    					#end
+                        								<td>$childitem.zxFuncName</td>
+                        								<td><p>
+                        		    						#foreach($rescource in $childitem.childListZxSystemFuncRescourceBean)
+																#if($rescource.zxFuncCode != 'MANAGEMENT_DETIAL' && $rescource.zxFuncCode != 'SAMETOWN_MANAGEMENT')
+																	<label class="right_control"><input type="checkbox" class="right_controli" name="rescourceCode" value="$rescource.zxFuncRescourceCode"/>$rescource.zxFuncRescourceName</label> 
+																#end
+                    										#end</p>
+                        		    					</td>
+                        							</tr>
+												#else
+                        							<tr>
+                        								#if($velocityCount == 1)
+                        		    						<td rowspan="$item.childSize">$item.zxFuncName</td>
+                        		    					#end
+                        								<td>$childitem.zxFuncName</td>
+                        								<td><p>
+                        		    						#foreach($rescource in $childitem.childListZxSystemFuncRescourceBean)
+                                                                <label class="right_control"><input type="checkbox" class="right_controli" name="rescourceCode" value="$rescource.zxFuncRescourceCode"/>$rescource.zxFuncRescourceName</label> 
+                    										#end</p>
+                        		    					</td>
+        												<!--
+            												<td>
+            													<label class="right_controla"><input type="checkbox" class="right_controlia" name="subBox" id="checkLine">本行全选</label>
+            												</td>
+        												-->
+                        							</tr>
+												#end
+                    						#end
+                    					#end
+    								</tbody>
+    							</table>
+								#if($shiro.hasPermission("SYSTEM_SERVICE_UPDATE"))
+        							<div class="tpage">
+        								<div class="tpager" style="width:375px;">
+                                            <span></span>
+                                            <div class="carinfo_ctblrbtn" >
+                                                <button type="button" class="carinfo_sub">确定</button>
+                                            </div>
+                                        </div>
+        							</div>
+								#end
+    						</div>
+    					</div>
+    		</div>
+    		<!--/合作管理-->
+    </div>
+</form>
+
+
+<script >
+	//点击查询
+	$("select[name='roleid']").change(function(){
+		//获取要查询角色值
+		var roleval = $("select[name='roleid']").val();
+		if(null != roleval && "" != roleval){
+			//获取角色对应权限
+			$.post("$appRoot/zx/func/ajaxGetFunByRoleid", {roleid:roleval},function(data){
+				//解析数组
+				$.each(data,function(i,item){
+					$("input[name='rescourceCode'][value='"+item.zxFuncCode+"']").attr("checked",'checked');
+				});
+			},'json');
+		}
+	});
+	//确定添加权限
+	$(".carinfo_sub").click(function(){
+		subform.ajaxload($("#form1").serialize(),"$appRoot/zx/func/insert");
+	});
+</script>

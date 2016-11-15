@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="operatelog">
+
+    <!-- 查询本页数据，用于显示当前页 -->
+    <select id="selectPage" parameterType="hashMap" resultType="operateLogBean">
+        SELECT
+             l.operate_id           AS operateId,
+             l.func_id              AS funcId,
+             f.func_name            AS funcName,
+             l.user_id              AS userId,
+             l.operate_ip           AS operateIp,
+             l.operate_time         AS operateTime,
+             l.operate_detail       AS operateDetail
+        FROM
+            tr_system_operate_log AS l
+                LEFT JOIN
+            tm_system_func AS f
+                ON f.func_id = l.func_id
+        <where>
+            <if test="operateId != null">and l.operate_id = #{operateId}</if>
+            <if test="userId != null">and l.user_id = #{userId}</if>
+            <if test="operateIp != null">and l.operate_ip = #{operateIp}</if>
+            <if test="operateTime1 != null"><![CDATA[and SUBSTRING(l.operate_time,1,10) >= #{operateTime1}]]></if>
+            <if test="operateTime2 != null"><![CDATA[and SUBSTRING(l.operate_time,1,10) <= #{operateTime2}]]></if>
+            <if test="operateDetail != null">and l.operate_detail like "%"#{operateDetail}"%"</if>
+        </where>
+        order by l.operate_time desc
+        <if test="qrysort != null">order by ${qrysort} ${qrymode}</if>
+    </select>
+
+    <!-- 查询总数，用于页面分页 -->
+    <select id="selectCount" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tr_system_operate_log AS l
+        <where>
+            <if test="operateId != null">and l.operate_id = #{operateId}</if>
+            <if test="userId != null">and l.user_id = #{userId}</if>
+            <if test="operateIp != null">and l.operate_ip = #{operateIp}</if>
+            <if test="operateTime1 != null"><![CDATA[and SUBSTRING(l.operate_time,1,10) >= #{operateTime1}]]></if>
+            <if test="operateTime2 != null"><![CDATA[and SUBSTRING(l.operate_time,1,10) <= #{operateTime2}]]></if>
+            <if test="operateDetail != null">and l.operate_detail like "%"#{operateDetail}"%"</if>
+        </where>
+    </select>
+    
+    <!-- 增加 -->
+    <insert id="insert" parameterType="operateLogBean">
+        INSERT INTO 
+            tr_system_operate_log(func_id,user_id,operate_ip,operate_time,operate_detail)
+        VALUES
+            (#{funcId},#{userId},#{operateIp},#{operateTime},#{operateDetail})
+    </insert>
+    
+</mapper>

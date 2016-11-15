@@ -1,0 +1,268 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/train.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/yuding.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/transticket/transticket.css">	
+<!--火车票-->
+	<div class="newadd">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/htt1.png">
+			<span>火车票管理</span>
+		</div>
+		
+		<div class="g_line"></div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>服务管理：</strong></span>
+		</div>
+		<form id="form1" method="post">
+			<input type="hidden" value="$!transticket.id" name="id" id="id"/>
+    		<div class="yuding_line">
+    			<span class="yuding_span"><strong>出发城市：</strong></span>
+				<select name="ttdStartProvinces" class="room_num" style="width:80px;" #if($!transticket.ttdStartProvinces) disabled  #end>
+					#foreach($item in $provinces)
+						<option value="$item.regionNo" #if($!transticket.ttdStartProvinces == $item.regionNo) selected  #end>$item.regionName</option>
+					#end
+				</select>
+				<select name="ttdStartCity" class="room_num" style="width:103px;" #if($!transticket.ttdStartCity) disabled  #end></select>
+				<select name="ttdStartTown" class="room_num" style="width:103px;" #if($!transticket.ttdStartTown) disabled  #end></select>
+					
+				 #if($!transticket.ttdStartProvinces)
+					<input type="hidden" name="ttdStartProvinces" value="$!transticket.ttdStartProvinces"/>
+				 #end
+				 #if($!transticket.ttdStartCity)
+					<input type="hidden" name="ttdStartCity" value="$!transticket.ttdStartCity"/>
+				 #end
+				 #if($!transticket.ttdStartTown)
+					<input type="hidden" name="ttdStartTown" value="$!transticket.ttdStartTown"/>
+				 #end
+    		</div>
+			<p class="font_p p9696" style="margin-left:108px;"><span style="color:red;padding-left:53px;">选择后不可修改，请根据实际情况进行填写！</span></p>
+		    <div class="yuding_line">
+    			<span class="yuding_span"><strong>	出发站点：</strong></span>
+    			<div class="div_rbox"  id="hc_zhandian">
+					#if(! $startStation)
+						<div class="div_right">
+        					<input type="text" value="$!item" name="ttdStartStation" class="room_num validate[required,maxSize[30]]"/>
+							<a href="javascript:void(0)" class="add_key_word">+</a>
+        				</div>
+					#else
+						#foreach($item in $startStation)
+        					<div class="div_right">
+            					<input type="text" value="$!item" name="ttdStartStation" class="room_num validate[required,maxSize[30]]"/>
+        						#if($!{velocityCount} == 1 )
+        							<a href="javascript:void(0)" class="add_key_word">+</a>
+        						#else
+    								<a href="javascript:void(0)" class="add_key_word">-</a>
+        						#end
+            				</div>
+						#end
+					#end
+				</div>
+            </div>
+			<p class="font_p p9696" style="margin-left:108px;">最多添加四个站点，请准确填写，必须要符合服务城市</p>
+    		<div class="yuding_line">
+    			<span class="yuding_span" style="margin-top:-15px;"><strong>目的城市：</strong></span>
+    			<div class="div_rbox">
+    				<label class="yuding_lab"><strong>国内</strong></label>
+    				<br clear="left">
+    				<div class="nation_box">
+    					<label class="yuding_lab mt15"><input type="radio" value="1" onclick="$('#div_ss').hide();" #if($!transticket.ttdEndIsDomestic=='1') checked #end class="yuding_radio" name="ttdEndIsDomestic">全国</label>
+    					<br clear="left">
+    					<div class="city_bigbox">
+    						<label class="yuding_lab_a mt15"><input type="radio" value="2" #if($!transticket.ttdEndIsDomestic=='0') checked #end class="yuding_radio" name="ttdEndIsDomestic"></label>
+							#if(! $startStation)
+    							<div class="city_box mt15" id="div_city_demo">
+        							<select class="yuding_date" city="province1" name="ttdEndProvinces">
+										<option value="0"></option>
+        								#foreach($item in $provinces)
+                    						<option value="$item.regionNo" #if($!transticket.ttdStartProvinces == $item.regionNo) #end>$item.regionName</option>
+                    					#end
+        							</select>
+        							<span class="yuding-spanl">省</span>
+        							<select class="yuding_date" city="city1" name="ttdEndTown">
+        								<option></option>
+        							</select>
+        							<span class="yuding-spanl">市</span>
+        							<a href="javascript:void(0)" class="a_add">+</a>
+        						</div>
+							#else
+								#foreach($pro in $endProvinces)
+									<div class="city_box mt15" #if($!{velocityCount} == 1 )  id="div_city_demo" #end>
+            							<select class="yuding_date" city="province$!{velocityCount}" name="ttdEndProvinces">
+            								#foreach($item in $provinces)
+                        						<option value="$item.regionNo" #if($!pro == $item.regionNo) selected  #end>$item.regionName</option>
+                        					#end
+            							</select>
+            							<span class="yuding-spanl">省</span>
+            							<select class="yuding_date" city="city$!{velocityCount}" name="ttdEndTown">
+            								<option></option>
+            							</select>
+            							<span class="yuding-spanl">市</span>
+										#if($velocityCount == 1)
+											<a href="javascript:void(0)" class="a_add">+</a>
+										#else
+											<a href="javascript:void(0)" class="a_add" style="background:#ccc">-</a>
+										#end
+            						</div>
+								#end
+							#end
+    					</div>
+    				</div>
+    				<br clear="left">
+    				<label class="yuding_lab"><strong>国际/港澳</strong></label>
+    				<br clear="left">
+    				<div class="inter_box">
+    					<label class="yuding_lab mt15"><input type="checkbox" value="1" #if($!transticket.ttdEndIsXg=='1') checked #end name="ttdEndIsXg" class="yuding_radio">香港</label>
+    					<label class="yuding_lab mt15"><input type="checkbox" value="1" #if($!transticket.ttdEndIsAm=='1') checked #end name="ttdEndIsAm" class="yuding_radio">澳门</label>
+    					<br clear="left">
+    					<div class="nation_smallbox">
+							#if(! $endCountry)
+        						<div class="city_box mt15" id="div_country_demo">
+        							<input type="text" class="room_num" name="ttdEndCountry">
+        							<span class="yuding-spanl">国家</span>
+        							<input type="text" class="room_num" name="ttdEndCity">
+        							<span class="yuding-spanl">城市</span>
+        							<a href="javascript:void(0)" class="a_add">+</a>
+        						</div>
+							#else
+								#foreach($item in $endCountry)
+									#set($i=$math.sub($velocityCount,1))
+    								<div class="city_box mt15" #if($!{velocityCount} == 1 ) id="div_country_demo" #end>
+            							<input type="text" class="room_num" value="$item" name="ttdEndCountry">
+            							<span class="yuding-spanl">国家</span>
+            							<input type="text" class="room_num" value="$endCity.get($i)" name="ttdEndCity">
+            							<span class="yuding-spanl">城市</span>
+										#if($velocityCount == 1)
+											<a href="javascript:void(0)" class="a_add">+</a>
+										#else
+											<a href="javascript:void(0)" class="a_add bg_ccc">-</a>
+										#end
+            						</div>
+								#end
+							#end
+    					</div>
+    				</div>
+    			<!--	<br clear="left">
+					<div id="coment">
+						<span class="nation_item" sid="0001" groupid="quanguo">全国</span>
+					</div>
+					
+					<input type="hidden" name="ttdEndStatcion" id="ttdEndStatcion"/> -->
+    			</div> 
+    		</div>
+        		<div class="yuding_line">
+        			<span class="yuding_span"><strong>常出车次：</strong></span>
+        		</div>
+        		<div class="wxy_train_box">
+        			<div class="wxy_train_boxl">
+    					<span class="w100">车次</span>
+        				<span class="w100">出发车站</span>
+        				<span class="w100">出发时间</span>
+        				<span class="w100">到达站点</span>
+        				<span class="w100">到达时间</span>
+        				<span class="w100">席别</span>
+        			</div>
+    				#foreach($!item in $listtransticketnum)
+            			<div class="wxy_train_boxl">
+    						<input type="hidden" value="$!item.id" name="tdlid"/>
+    						<input type="text" value="$!item.tdlNo" class="w100 validate[required,maxSize[10]]" name="tdlNo">
+            				<input type="text" value="$!item.tdlStartStation" class="w100 validate[required,maxSize[10]]" name="tdlStartStation">
+            				<input type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" value="$!item.tdlStartTime" class="w100 validate[required,maxSize[10]]" name="tdlStartTime">
+            				<input type="text" value="$!item.tdlArrivedStation" class="w100 validate[required,maxSize[10]]" name="tdlArrivedStation">
+            				<input type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" value="$!item.tdlArrivedTime" class="w100 validate[required,maxSize[10]]" name="tdlArrivedTime">
+    						
+    						<select name="tdlNtype" class="yuding_date" style="float:left">
+    							#foreach($i in $transtype.keySet())
+    								<option value="$i" #if('$item.tdlNtype==$i') selected  #end >$transtype.get($i)</option>
+    							#end
+    						</select>
+            				##<a href="javascript:void(0)" style="background-color:#ccc">-</a>
+							#if($velocityCount == 1)
+								<a href="javascript:void(0)">+</a>
+							#else
+								<a href="javascript:void(0)" style="background-color:#ccc">-</a>
+							#end
+            			</div>
+					#end
+        			<div class="wxy_train_boxl" id="wxy_train_boxl" style="display:none;">
+						<input type="hidden" value="" name="tdlid"/>
+    					<input type="text" class="w100 validate[required,maxSize[10]]" name="tdlNo">
+        				<input type="text" class="w100 validate[required,maxSize[10]]" name="tdlStartStation">
+        				<input type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" class="w100 validate[required,maxSize[10]]" name="tdlStartTime">
+        				<input type="text" class="w100 validate[required,maxSize[10]]" name="tdlArrivedStation">
+        				<input type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" class="w100 validate[required,maxSize[10]]" name="tdlArrivedTime">
+    					<select name="tdlNtype" class="yuding_date" style="float:left">
+    						#foreach($i in $transtype.keySet())
+    							<option value="$i">$transtype.get($i)</option>
+    						#end
+    					</select>
+        				<a href="javascript:void(0)">+</a>
+						##<a href="javascript:void(0)" style="background-color:#ccc">-</a>
+        			</div>
+        		</div>
+				<div class="yuding_line" style="margin-left:190px;">
+        			<button class="btn_add btn_fanhui" style="cursor:pointer" onclick="index.load('$appRoot/transticket/detail/list');" type="button">返回</button>
+        			<button class="btn_add btn_sub"  style="cursor:pointer" onclick="subform();"  type="button">确定</button>
+        		</div>
+		</form>
+	</div>
+	<div class="yuding_line"></div>
+	<div class="yuding_line"></div>
+	
+	<script>
+		
+		
+	//提交事件
+	function subform(){
+		/*
+    		var ttdEndStatcion = "";
+    		$.each($(".nation_item"),function(){
+    			var t = $(this).text();
+    			if(""!=t){
+    				ttdEndStatcion += t + ",";
+    			}
+    		});
+    		if(""!=ttdEndStatcion) ttdEndStatcion=ttdEndStatcion.substring(0,ttdEndStatcion.length-1);
+    		$("#ttdEndStatcion").attr("value",ttdEndStatcion);
+		*/
+		
+		$.post('$appRoot/transticket/detail/insert', $("#form1").serialize(),
+			function(response) {
+				if (response == '0') {
+					window.wxc.xcConfirm("服务器繁忙，请稍后！", window.wxc.xcConfirm.typeEnum.error);
+				} else if (response == '1') {
+					wxcalert("操作成功！");
+					setTimeout(function() {
+						index.load(page.url);
+					}, 1000);
+				}
+			}, 
+		"json");
+	}
+	
+	var t_province = 110000;
+	#if($transticket.ttdStartProvinces)
+		t_province = $!transticket.ttdStartProvinces;
+	#end
+
+	//如果为空则显示车次
+	#if(!$listtransticketnum || $listtransticketnum.size()==0)
+		$("#wxy_train_boxl").show();
+	#end
+	
+	//初始化省市县
+	regUtil.initProvince(t_province,'ttdStartProvinces','ttdStartCity','ttdStartTown','$!transticket.ttdStartCity','$!transticket.ttdStartTown');
+	
+	//修改时循环省市
+	#if(! $endProvinces)
+		//初始化省市县
+    	index.initProvinceByCity(110000,'province1','city1');
+    	var tranc  = 2;
+	#else
+    	#foreach($pro in $endProvinces)
+			#set($i=$math.sub($velocityCount,1))
+    		//初始化省市县
+    		index.initProvinceByCity($pro,'province$velocityCount','city$velocityCount','$endTown.get($i)');
+    	#end
+		
+		var tranc  = $!{endProvinces.size()}+1;
+	#end
+</script>

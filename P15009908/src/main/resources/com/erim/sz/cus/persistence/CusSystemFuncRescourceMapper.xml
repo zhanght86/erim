@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cussystemfuncrescource">
+	<!-- 查询所有 -->
+	<select id="selectAll" resultType="cusSystemFuncRescourceBean">
+		SELECT
+			id                      AS id,
+			cus_func_code           AS cusFuncCode,
+			cus_func_rescource_code AS cusFuncRescourceCode,
+			cus_func_rescource_name AS cusFuncRescourceName
+		FROM
+			cus_system_func_rescource
+	</select>
+	<!-- 根据登录名查询对象 -->
+	<select id="selectRecourceByFuncCode" resultType="cusSystemFuncRescourceBean">
+		
+		SELECT
+			id AS id,
+			cus_func_code AS cusFuncCode,
+			cus_func_rescource_code AS cusFuncRescourceCode,
+			cus_func_rescource_name AS cusFuncRescourceName
+		FROM
+			cus_system_func_rescource
+		WHERE
+			cus_func_code = #{cusFuncCode}
+	</select>
+</mapper>

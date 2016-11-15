@@ -1,0 +1,166 @@
+
+	<ul class="menu_list mb20">
+		##<li id="li_1" onclick="index.load('$appRoot/company/detail/suppliers?mspId=1');">国内</li>
+		##<li id="li_2" onclick="index.load('$appRoot/company/detail/suppliers?mspId=2');">国际</li>
+		<li id="li_02">国内
+    		<div class="second_block">
+    			#foreach($obj in $hoteline)
+    				<a id="a_$obj.codeKey" href="javascript:index.load('$appRoot/company/detail/suppliers?cbsServiceInside=$obj.codeKey&li=02&liname=a_$!obj.codeKey');">$obj.codeValue</a>
+				#end
+				#foreach($obj in $interline)
+					#if($obj.codeKey != '04')
+						<a id="a_gat_$obj.codeKey" href="javascript:index.load('$appRoot/company/detail/suppliers?cbsSerInterna=$obj.codeKey&li=02&liname=a_gat_$obj.codeKey');">$obj.codeValue</a>
+					#end
+				#end
+				##<a id="a_gat_01" href="javascript:index.load('$appRoot/company/detail/suppliers?cbsSerInterna=01&li=02&liname=a_gat_01');">香港</a>
+				##<a id="a_gat_02" href="javascript:index.load('$appRoot/company/detail/suppliers?cbsSerInterna=02&li=02&liname=a_gat_02');">澳门</a>
+				##<a id="a_gat_03" href="javascript:index.load('$appRoot/company/detail/suppliers?cbsSerInterna=03&li=02&liname=a_gat_03');">台湾</a>
+    		</div>
+		</li>
+		<li id="li_01">国际
+    		<div class="second_block">
+    			#foreach($obj in $countryine)
+    				<a id="a_country_$obj.codeKey" href="javascript:index.load('$appRoot/company/detail/suppliers?cbsServiceOuter=$obj.codeKey&li=01&liname=a_country_$obj.codeKey');">$obj.codeValue</a>
+    			#end
+    		</div>
+		</li>
+	</ul>
+	<div class="g_block_2 g_block_7 mb20">
+		<p class="g_tit_1 mb10">供应商信息（办事处、外联、批发商）</p>
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th style="width:50px;"><label><input type="checkbox" id="chooseAll">全选</label></th>
+				<th style="width:75px;">所属专线</th>
+				<th style="width:300px;">公司/品牌</th>
+				<th>办公地址</th>
+				<th style="width:75px;">产品数量</th>
+				##<th>公司地址</th>
+				<th style="width:140px;">负责人/电话</th>
+				<th style="width:140px;">计调/电话</th>
+				<th style="width:75px;">在线交流</th>
+			</tr>
+			#foreach($item in $companyList)
+    			<tr>
+					<td>
+						<input #if($!item.isLineCompany==1) checked #end type="checkbox" name="inp_all" value="$item.id"></td>
+    				<td>
+						##所属专线
+						#vtextarray($!item.cbsServiceInside,'C116')
+						##专线其它
+						$!item.cbsServiceAdd
+						##港澳台
+						#vtextarray($!item.cbsSerInterna,'C108')
+						##国际
+						#vtextarray($!item.cbsServiceOuter,'C118')
+						##国际其它
+						$!item.cbsServiceRest
+					</td>
+					<td><a href="javascript:index.load('$appRoot/tourism/detail/linelist?cpyid=$item.id');">$item.cpyName / $!item.cpyBrand</a></td>
+					<td>$!item.cbsCurrAddress</td>
+    				<td>$!item.intLineNum</td>
+					##<td>$!item.cpyAddress</td>
+    				<td>$!item.ccpName /$!item.ccpTelephone</td>
+					<td>$!item.cbsOperator /$!item.cbsOperatorQq</td>
+    				<td>
+						#if($erim.isNotEmpty($!item.cbsOperatorQq))
+							<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cbsOperatorQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a>
+						#end
+					</td>
+    			</tr>
+			#end
+		</table>
+		<div class="g_right"><a class="red_a ml25" onclick="javascript:inserts();">确定</a></div>
+	</div>
+	
+	<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+	
+<script>
+	//默认上次选择
+	$("#li_$!li").attr("class","on");
+	$("#$!liname").attr("class","on");
+	
+	//是否合作  0否 1是
+	var zscIsCoopertion = "0";
+	
+	
+	//是否合作
+	/*
+	$("input[name='inp_all']").click(function(){
+		if($(this).prop("checked")){
+			var url = '$appRoot/mall/linecompany/insert?mspCpyId='+$(this).val();
+		}else{
+			var url = '$appRoot/mall/linecompany/delete?mspCpyId='+$(this).val();
+		}
+		$.post(url,function(data){
+			if(1==data)  wxcalert('更新成功!');
+		},'json')
+	});
+	
+	*/
+	//点击全选
+	$("#chooseAll").click(function(){
+		$("input[name='inp_all']").prop("checked",$("#chooseAll").prop("checked"));
+		/*
+		if($("#chooseAll").prop("checked")){
+			var url = '$appRoot/mall/linecompany/insertAll?mspCpyId='+getBoxChecked();
+			$.post(url,function(data){
+    			if(data>0)  wxcalert('更新成功!');
+    		},'json')
+		}else{
+			var url = '$appRoot/mall/linecompany/deleteAll';
+    		$.post(url,function(data){
+    			if(data>0)  wxcalert('清除成功!');
+    		},'json')
+		}
+		*/
+	});
+	
+	//获取所有选中
+	function getBoxChecked(){
+		var v = "";
+		$.each($("input[name='inp_all']"),function(){
+			if($(this).prop("checked")){
+				v += $(this).val()+",";
+			}
+		});
+		return ""==v?"":v.substring(0,v.length-1);
+	}
+	
+	// 提交
+		function inserts(){
+			var AllchooseCpyid = "";
+			var chooseCpyid = "";
+			
+			//获取所有选中的
+			$.each($("input[name='inp_all']:checked"),function(){
+				chooseCpyid += $(this).val()+",";
+				
+			});
+			if(""!=chooseCpyid){ 
+				chooseCpyid = chooseCpyid.substring(0,chooseCpyid.length-1);
+			}
+			
+			//获取本页所有记录
+			
+			$.each($("input[name='inp_all']"),function(){
+			
+				AllchooseCpyid += $(this).val()+",";
+			  
+		    });
+			
+			if(""!=AllchooseCpyid){ 
+				AllchooseCpyid = AllchooseCpyid.substring(0,AllchooseCpyid.length-1);
+			}
+		
+			
+    		var url  = '$appRoot/mall/linecompany/insertAll_2?mspCpyId='+chooseCpyid+'&AllmspCpyId='+AllchooseCpyid;
+					
+    		$.post(url,function(data){
+    			if(data>0)  wxcalert('保存成功!');
+    		},'json');
+			
+			
+			
+		}
+	
+</script>

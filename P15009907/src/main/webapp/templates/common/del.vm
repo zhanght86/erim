@@ -1,0 +1,18 @@
+<!--删除-->
+<div class="del">
+	<div class="deltop">提示</div>
+	<div class="delcter">
+		<div class="delctera">
+			<img src="$staticRoot/images/del.png">
+			<div class="delfont">
+				<span>您确认要删除吗？</span> <span>如果是请点击确认，不是点击取消</span>
+			</div>
+		</div>
+		<div class="delcterb">
+			<button type="submit" class="delqueren"></button>
+			<button type="button" class="delquxiao"></button>
+		</div>
+	</div>
+</div>
+<div class="del_mask"></div>
+<!--/删除-->

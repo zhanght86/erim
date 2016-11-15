@@ -1,0 +1,93 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/planeticket/planeticket.css">
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jp_03.png" alt="机票管理" title="机票管理">机票管理</p>
+	<div class="g_line mb20"></div>
+	<div class="input_block clearfix">
+		<div class="label_left"><b style="font-weight:400">航程类型：</b></div>
+		<div class="input_right">
+			<b style="font-weight:400">
+			<label class="w130"><input type="radio" name="hcType" value="01" /> 单程-直飞航班</label>
+			<label class="w130"><input type="radio" name="hcType" value="02" /> 单程-中转航班</label>
+			<label class="w130"><input type="radio" name="hcType" value="03" checked /> 往返-直飞/中转</label>
+	    </b>
+		</div>
+	</div>
+	<div class="g_line mb20"></div>
+	<div class="input_block clearfix">
+		<div class="label_left" style="font-weight:400">产品编号：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w150">
+			<label class="ml35">出发城市：</label><select class="w150"><option></option></select>
+			<label class="ml35">到达城市：</label><select class="w150"><option></option></select>
+		</div>
+	</div>
+	<div class="input_block clearfix mb20">
+		<div class="label_left" style="font-weight:400">航空公司：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w150">
+			<label class="ml35"> 航班号 ： </label><input class="w150"><label class="ml35">上架状态： </label><select class="w150"><option>上架</option><option>下架</option></select><button class="y_but ml35">查 询</button>
+		</div>
+	</div>
+	<div class="g_line mb15"></div>
+	<div class="carad_ct">
+		<div class="carad_ctbtn" style="margin-left:30px;">
+			<button class="y_but ml35 pl0" type="button" style="width:170px;" onclick="index.load('$appRoot/planeticket/return/insertPage');">+ 新增往返-直飞/中转航班</button>
+		</div>
+	</div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>产品编码</td>
+					<td>航空公司</td>
+					<td>航班号</td>
+					<td>出发城市</td>
+					<td>起飞机场</td>
+					<td>起飞时间</td>
+					<td>中转城市</td>
+					<td>到达城市</td>
+					<td>落地机场</td>
+					<td>落地时间</td>
+					<td>机票管理</td>
+					<td>上线状态</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $planeticketReturnList)
+    				<tr>
+    					<td rowspan="2">$!item.ptdNo</td>
+    					<td>$!item.priStartBean.ptdCompany</td>
+    					<td>$!item.priStartBean.ptdNumber</td>
+    					<td>$!item.priStartBean.ptdStartCity</td>
+    					<td>$!item.priStartBean.ptdEndTerminal</td>
+    					<td>$!item.priStartBean.ptdStartTime</td>
+    					<td>$!item.priStartBean.ptdEndCity</td>
+						<td>中转城市</td>
+    					<td>$!item.priStartBean.ptdEndTerminal</td>
+    					<td>$!item.priStartBean.ptdEndTime</td>
+    					<td rowspan="2" class="carad_a">
+    							<a href="javascript:index.load('$appRoot/planeticket/return/updatePage?id=$item.id');">查看/修改</a>
+								##<a href="">短信内容</a>
+    							<a href="javascript:index.nextPage('$appRoot/town/detail/setsametown?ntype=$sametownntype&cid=$item.id');">同业管理</a>
+    					</td>
+    					<td rowspan="2" class="carad_img"><img src="$staticRoot/images/htcar2.png"> &nbsp; <img src="$staticRoot/images/htcar3.png"></td>
+    				</tr>
+					<tr>
+    					<td>$!item.priEndBean.ptdCompany</td>
+						<td>$!item.priEndBean.ptdNumber</td>
+    					<td>$!item.priEndBean.ptdStartCity</td>
+    					<td>$!item.priEndBean.ptdEndTerminal</td>
+    					<td>$!item.priEndBean.ptdStartTime</td>
+    					<td>$!item.priEndBean.ptdEndCity</td>
+						<td>中转城市</td>
+    					<td>$!item.priEndBean.ptdEndTerminal</td>
+    					<td>$!item.priEndBean.ptdEndTime</td>
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>
+
+#parse("planeticket/common/js.vm")

@@ -1,0 +1,127 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<div class="rdivv">
+    <div class="bus">
+    	<div class="carfixed_top">
+    		<img src="$staticRoot/images/htcar1.png" />
+    		<span>包车</span>
+    		<div class="cb"></div>
+    	   <div class="g_line"></div>
+    	</div>
+    	<form method="post" id="form1">
+    		<input type="hidden" name="id" value="$!texiDrive.id" /> 
+    		<input type="hidden" name="tdlId" value="$!texiDrive.tdlId" />
+    		<div class="bus_ctbox">
+    			<div class="self_ctl">
+    				<div class="self_ctltop">
+    					<img src="$staticRoot/images/htcar66.png"><span>半天包车</span>
+    				</div>
+    				<div class="self_ctlct">
+    					<div class="bus_ctlctline">
+    						<span>限时长：</span>
+    						<div class="bus_ctlctli">
+    							<input type="text" name="bclHfLimit" class="input-xlarge validate[required,custom[integer],min[1],max[12],maxSize[2]]" value="$!texiDrive.bclHfLimit" />
+    							<span>小时</span>
+    						</div>
+							<span class="mess_star_red" style="float:left">*</span>
+    						<span class="bus_ctlctle" style="margin-left:10px;">限公里：</span>
+    						<div class="bus_ctlctli">
+    							<input type="text" name="bclHfKm" class="input-xlarge validate[required,custom[integer],min[1],max[300],maxSize[3]]" value="$!texiDrive.bclHfKm">
+    							<span>公里</span>
+    						</div>
+							<span class="mess_star_red" style="float:left">*</span>
+    					</div>
+    					<div class="bus_ctlctline">
+    						<span>超时费：</span>
+    						<div class="bus_ctlctli">
+    							<input type="text" name="bclHfLength" class="input-xlarge validate[required,custom[integer],min[1],max[100000],maxSize[6]]" value="$!texiDrive.bclHfLength"> 元/小时
+    						</div>
+							<span class="mess_star_red" style="float:left">*</span>
+    						<span class="bus_ctlctle" style="margin-left:10px;">超公里费：</span>
+    						<div class="bus_ctlctli">
+    							<input type="text" name="bclHfLengthkm" class="input-xlarge validate[required,custom[integer],min[1],max[100000],maxSize[6]]" value="$!texiDrive.bclHfLengthkm"> 元/公里
+    						</div>
+							<span class="mess_star_red" style="float:left">*</span>
+    					</div>
+    					<div class="self_ctlctlinea">
+    						<span>费用包含：</span>
+    						<textarea name="bclHfCost" class="input-xlarge validate[maxSize[400]] ">$!texiDrive.bclHfCost</textarea>
+							<span class="mess_star_red">*</span>
+    					</div>
+    					<div class="self_ctlctlinea">
+    						<span>服务说明：</span>
+    						<textarea name="bclHfService" class="input-xlarge validate[maxSize[400]] ">$!texiDrive.bclHfService</textarea>
+							<span class="mess_star_red">*</span>
+    					</div>
+    					<div class="self_ctlctlinea">
+        					<span></span>
+        					<div class="self_ctlctlar"></div>
+        				</div>
+    				</div>
+    			</div>
+    			<div class="self_ctr">
+    				<div class="self_ctltop">
+    					<img src="$staticRoot/images/htcar66.png"><span>全天包车</span>
+    				</div>
+    				<div class="bus_ctlct">
+    					<div class="bus_ctlctline">
+        					<span>限时长：</span>
+        					<div class="bus_ctlctli">
+        						<input type="text" name="bclLimit" class="input-xlarge validate[required,custom[integer],min[1],max[24],maxSize[2]]" value="$!texiDrive.bclLimit"> <span>小时</span>
+        					</div>
+							<span class="mess_star_red" style="float:left">*</span>
+        					<span class="bus_ctlctle" style="margin-left:10px;">限公里：</span>
+        					<div class="bus_ctlctli">
+        						<input type="text" name="bclKm" class="input-xlarge validate[required,custom[integer],min[1],max[1000],maxSize[4]]" value="$!texiDrive.bclKm"><span>公里</span>
+        					</div>
+							<span class="mess_star_red" style="float:left">*</span>
+    					</div>
+    					<div class="bus_ctlctline">
+        					<span>超时费：</span>
+        					<div class="bus_ctlctli">
+        						<input type="text" name="bclLength" class="input-xlarge validate[required,custom[integer],min[1],max[100000],maxSize[6]]" value="$!texiDrive.bclLength"> 元/小时
+        					</div>
+							<span class="mess_star_red" style="float:left">*</span>
+        					<span class="bus_ctlctle" style="margin-left:10px;">超公里费：</span>
+        					<div class="bus_ctlctli">
+        						<input type="text" name="bclLengthkm" class="input-xlarge validate[required,custom[integer],min[1],max[100000],maxSize[6]]" value="$!texiDrive.bclLengthkm"> 元/公里
+        					</div>
+							<span class="mess_star_red" style="float:left">*</span>
+    					</div>
+        				<div class="self_ctlctlinea">
+        					<span>费用包含：</span>
+        					<textarea name="bclCost" class="input-xlarge validate[maxSize[400]] ">$!texiDrive.bclCost</textarea>
+    						<span class="mess_star_red">*</span>
+        				</div>
+        				<div class="self_ctlctlinea">
+        					<span>服务说明：</span>
+        					<textarea name="bclService" class="input-xlarge validate[maxSize[400]] ">$!texiDrive.bclService</textarea>
+    						<span class="mess_star_red">*</span>
+        				</div>
+        				<div class="carinfo_ctbl" style="margin-bottom:5px;">
+        					<span></span>
+        					<div class="carinfo_ctblrbtn">
+                                <a id="price" href="#"><span class="strong" style="color:red;font-size:15px;">量/价格管理</span></a>
+    							<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/texi/car/update','$appRoot/texi/detail/list');">提交</button>
+    							<button type="button" class="carinfo_qu" class="back" onclick="index.load(page.url);">返回</button>
+        					</div>
+        				</div>
+    				</div>
+    			</div>
+    		</div>
+    	</form>
+    </div>
+</div>
+<script type="text/javascript">
+	$("#price").click(function(){
+		//定义变量接受汽车id
+		var a = $("input[name='id']").val();
+		//判断id是否有值
+		if(a == ''){
+			//如果id为空没有值，则提示
+			wxcalert("请先提交包车信息");
+		}else{
+			//如果有值则执行操作进入量价管理页面
+			index.load('$appRoot/texi/car/carPricePage?dicPortal=01&bclId=$!texiDrive.id&tdlId=$!texiDrive.tdlId');
+		}
+	});
+</script>

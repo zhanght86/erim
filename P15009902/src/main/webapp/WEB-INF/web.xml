@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+    xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <!-- 项目名称,sz -->
+    <display-name>P130001</display-name>
+
+    <!-- 项目描述 -->
+    <description>sz</description>
+
+    <!-- 参 数:log4j配置路径 -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/log4j.xml</param-value>
+    </context-param>
+
+    <!-- 参 数:Log4j设定文件中可以引用当前应用的根目录，避免使用绝对路径 -->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>webAppRootKey.templet</param-value>
+    </context-param>
+
+    <!-- Http Flex Session attribute and binding listener support -->
+    <listener>
+        <listener-class>flex.messaging.HttpFlexSession</listener-class>
+    </listener>
+
+    <!-- 初始化加载Spring上下文 -->
+    <listener>
+       <listener-class>com.erim.flex.listener.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- 过滤器:字符编码过滤 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- MessageBroker Servlet -->
+    <servlet>
+        <servlet-name>MessageBrokerServlet</servlet-name>
+        <servlet-class>flex.messaging.MessageBrokerServlet</servlet-class>
+        <init-param>
+            <param-name>services.configuration.file</param-name>
+            <param-value>/WEB-INF/flex/services-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>RDSDispatchServlet</servlet-name>
+        <servlet-class>flex.rds.server.servlet.FrontEndServlet</servlet-class>
+        <init-param>
+            <param-name>useAppserverSecurity</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>10</load-on-startup>
+    </servlet>
+
+    <servlet-mapping id="RDS_DISPATCH_MAPPING">
+        <servlet-name>RDSDispatchServlet</servlet-name>
+        <url-pattern>/CFIDE/main/ide.cfm</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MessageBrokerServlet</servlet-name>
+        <url-pattern>/messagebroker/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- session超时定义,单位为分钟 -->
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
+
+    <!-- 欢迎页面定义 -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

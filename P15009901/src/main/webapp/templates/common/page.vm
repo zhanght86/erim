@@ -1,0 +1,70 @@
+<div class="g_xpage">
+	##设置参数
+    ##总页数
+    #set($size=$pagelink.size)
+    ##当前页数
+    #set($pageSize=$pagelink.pageSize)
+    ##总行数
+    #set($count=$pagelink.count)
+    ##当前页行数
+    #set($pageCount=$pagelink.pageCount)
+    ##每页显示行数
+    #set($limit=$pagelink.limit)
+    ##上一页页号
+    #set($pageSizeUp=$pageSize - 1)
+    ##下一页页号
+    #set($pageSizeDown=$pageSize + 1)
+    ##页码最多显示数码
+    #set($pageMax=10)
+	
+	##当页面数大于1的时候显示
+	<div class="tpager">
+		<p class="g_lpage">共<span style="color:red;font-weight:bold;">$count</span>条&nbsp;第<span style="color:red;font-weight:bold;">$pageSize</span>页</p>
+		
+	    #if($size > 1)
+	        ##首页上一页
+	        #if($pageSize!=1)
+	            <a href="?p=1&n=$limit$!pageCondition" class="cpageye">首页</a>
+	            <a href="?p=$pageSizeUp&n=$limit$!pageCondition" class="cpageye">上一页</a>
+	        #end
+	        ##中间页
+	        #foreach ($i in [1..$size])
+	            ##当前页与i的距离
+	            #if($size<=$pageMax)
+	                <a href="?p=$i&n=$limit$!pageCondition" #if($i==$pageSize)class="selected on"#end>$i</a>
+	            #else
+	                ##当前页与i距离
+	                #set($flag1=$pageSize - $i)
+	                #set($flag2=$i - 4)
+	                #set($flag3=$i + 4)
+	                ##第三页与当前页距离大于4
+	                #if($i==3 && $flag1>4)
+	                    <a href="?p=$i&n=$limit$!pageCondition">..</a>
+	                ##i大于最大显示值，并与当前页距离大于4
+	                #elseif($i>$pageMax && $i>$pageSize + 4)
+	                    <a href="?p=$i&n=$limit$!pageCondition">..</a>
+	                    #break;
+	                #end
+	                ##显示倒数后9条
+	                #if($pageSize > $size - ($pageMax - 2) && $i > $size - ($pageMax - 2))
+	                    <a href="?p=$i&n=$limit$!pageCondition" #if($i==$pageSize)class="selected"#end>$i</a>
+	                ##显示当前页前后各4条
+	                #else
+	                    #if($pageSize<$pageMax - 4)
+	                        <a href="?p=$i&n=$limit$!pageCondition" #if($i==$pageSize)class="selected"#end>$i</a>
+	                    #else
+	                        #if(($flag2<=$pageSize && $pageSize<=$flag3) || $i==1 || $i==2)
+	                            <a href="?p=$i&n=$limit$!pageCondition" #if($i==$pageSize)class="selected"#end>$i</a>
+	                        #end
+	                    #end
+	                #end
+	            #end
+	        #end
+	        ##末页下一页
+	        #if($pageSize!=$size)
+	            <a href="?p=$pageSizeDown&n=$limit$!pageCondition" class="cpageye">下一页</a>
+				<a href="?p=$size&n=$limit$!pageCondition" class="cpageye">尾页</a>
+	        #end
+	    #end
+	</div>
+</div>

@@ -1,0 +1,209 @@
+.same{
+	width: 95%;
+	height: 100%;
+	margin-left:20px;
+}
+.same_top{
+	width: 100%;
+	float: left;
+	height: auto;
+	padding-bottom: 25px;
+}
+.same_topn{
+	float: left;
+	height: 30px;
+	margin-top: 20px;
+	width: 300px;
+	line-height: 30px;
+}
+.same_topn>span{
+	margin-left: 35px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	width: 80px;
+	text-align: right;
+	float: left;
+	margin-right: 10px;
+}
+.same_topn>label{
+	height: 30px;
+	line-height: 30px;
+	width: 80px;
+	font-size: 12px;
+	float: left;
+}
+.same_topn>label>input{
+	float: left;
+	height: 15px;
+	width: 15px;
+	margin-right: 10px;
+	margin-top: 7px;
+}
+.same_toph{
+	float: left;
+	width: 500px;
+	height: 30px;
+}
+.same_toph .show{
+	display: block;
+}
+.same_tophb{
+	display: none;
+}
+.same_tophbn{
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	margin-top: 20px;
+}
+.same_tophbn>span{
+	width: 80px;
+	height: 30px;
+	float: left;
+	text-align: right;
+	margin-right: 10px;
+	font-size: 12px;
+	color: #393838;
+}
+.same_tophbn>label{
+	height: 30px;
+	line-height: 30px;
+	width: 80px;
+	font-size: 12px;
+	float: left;
+}
+.same_tophbn>label>input{
+	float: left;
+	height: 15px;
+	width: 15px;
+	margin-right: 10px;
+	margin-top: 7px;
+}
+.same_tophbi{
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	margin-top: 20px;
+}
+.same_tophbi>span{
+	width: 80px;
+	height: 30px;
+	float: left;
+	text-align: right;
+	margin-right: 10px;
+	font-size: 12px;
+	color: #393838;
+}
+.same_tophbi>label{
+	height: 30px;
+	line-height: 30px;
+	width: 80px;
+	font-size: 12px;
+	float: left;
+}
+.same_tophbi>label>input{
+	float: left;
+	height: 15px;
+	width: 15px;
+	margin-right: 10px;
+	margin-top: 7px;
+}
+.same_topct{
+	float: left;
+	width: 100%;
+}
+.same_topct .show{
+	display: block;
+}
+.same_topctb{
+	display: none;
+}
+.same_topctn{
+	float: left;
+	width: 100%;
+}
+.same_topctn .show{
+	display: block;
+}
+.same_topctnb{
+	display: none;
+}
+.same_topcti{
+	float: left;
+	width: 100%;
+}
+.same_topctib{
+	display: none;
+}
+.same_topctnbl{
+	margin-top: 15px;
+	height: 30px;
+	float: left;
+	margin-left: 35px;
+	width: 1100px;
+}
+.same_topctnbll{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+}
+.same_topctnbll>span{
+	height: 30px;
+	float: left;
+	padding: 0 15px;
+	font-size: 12px;
+	color: #393838;
+}
+.same_topctnbll>input{
+	float: left;
+	width: 130px;
+	height: 28px;
+	font-size: 12px;
+	color: #393838;
+	border:1px solid #ccc;
+}
+.same_topctnblr{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+}
+.same_topctnblr>span{
+	height: 30px;
+	float: left;
+	padding: 0 10px;
+	font-size: 12px;
+	color: #393838;
+}
+.same_topctnblr>input{
+	float: left;
+	width: 140px;
+	height: 28px;
+	font-size: 12px;
+	color: #393838;
+	border:1px solid #ccc;
+}
+/*查询按钮*/
+.same_boxbtn{
+	float: left;
+	height: 30px;
+	width: 90px;
+	margin-left: 60px;
+}
+.same_boxbtn button{
+	float: left;
+	height: 30px;
+	width: 90px;
+	background: #d09e64;
+	text-align: center;
+	line-height: 30px;
+	color: #fff;
+	border:none;
+	border-radius: 3px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.same_boxbtn button:hover{
+	background: #f99d23;
+}

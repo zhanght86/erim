@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="planeticketorder">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+		        <if test="ptoCode != null and ptoCode !=''">				and 	pto_code 			like "%"#{ptoCode}"%"</if> 
+ 			    <if test="ptoCommpany != null">			and 	pto_commpany 		like "%"#{ptoCommpany}"%"</if> 
+ 			    <if test="cpyId != null">			    and 	cpy_id		 		= 	 #{cpyId}</if>
+<!-- 			<if test="ptoStartTime != null">		and 	pto_start_time 		like "%"#{ptoStartTime}"%"</if> -->
+<!-- 			<if test="ptoStartAddress != null">		and 	pto_start_address 	like "%"#{ptoStartAddress}"%"</if> -->
+<!-- 			<if test="ptoEndTime != null">			and 	pto_end_time 		like "%"#{ptoEndTime}"%"</if> -->
+<!-- 			<if test="ptoEndAddress != null">		and 	pto_end_address 	like "%"#{ptoEndAddress}"%"</if> -->
+<!-- 			<if test="ptoBerth != null">			and 	pto_berth 			like "%"#{ptoBerth}"%"</if> -->
+<!-- 			<if test="ptoPrice != null">			and 	pto_price 			like "%"#{ptoPrice}"%"</if> -->
+<!-- 			<if test="ptoTotal != null">			and 	pto_total 			like "%"#{ptoTotal}"%"</if> -->
+<!-- 			<if test="cpyId != null">				and 	cpy_id 				like "%"#{cpyId}"%"</if> -->
+<!-- 			<if test="ptoCreateuser != null">		and 	pto_createuser 		like "%"#{ptoCreateuser}"%"</if> -->
+<!-- 			<if test="ptoCreatetime != null">		and 	pto_createtime 		like "%"#{ptoCreatetime}"%"</if> -->
+<!-- 			<if test="ptoPriceOnline != null">		and 	pto_price_online 	like "%"#{ptoPriceOnline}"%"</if> -->
+<!-- 			<if test="ptoPriceOffline != null">		and 	pto_price_offline 	like "%"#{ptoPriceOffline}"%"</if> -->
+<!-- 			<if test="ptoIsThrough != null">		and 	pto_price_offline 	like "%"#{ptoIsThrough}"%"</if> -->
+<!-- 			<if test="potNtype != null">		    and 	pot_ntype       	like "%"#{potNtype}"%"</if> -->
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPagePlaneticket" resultType="planeticketOrderBean">
+		SELECT
+			id ,
+			pto_num 			AS ptoNum,
+			pto_code            AS ptoCode,
+			pto_commpany 		AS ptoCommpany,
+			pto_start_time 		AS ptoStartTime,
+			pto_start_address 	AS ptoStartAddress,
+			pto_end_time 		AS ptoEndTime,
+			pto_end_address		AS ptoEndAddress,
+			pto_berth 			AS ptoBerth,
+			pto_price 			AS ptoPrice,
+			pto_total 			AS ptoTotal,
+			cpy_id 				AS cpyId,
+			pto_createuser 		AS ptoCreateuser,
+			pto_createtime 		AS ptoCreatetime,
+			pto_price_online 	AS ptoPriceOnline,
+			pto_price_offline 	AS ptoPriceOffline,
+			pto_is_through      AS ptoIsThrough,
+			pot_ntype           AS potNtype
+		FROM
+			planeticket_order
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPagePlaneticketCount" resultType="int">
+			SELECT
+				count(1)
+			FROM
+				planeticket_order
+		<include refid="sql_query" />
+	</select>
+
+   <!-- 接单/拒接 -->
+	<update id="receiveOrRefuse" parameterType="PlaneticketOrderBean">
+		UPDATE
+			planeticket_order
+		SET
+			pot_ntype = #{potNtype}
+		WHERE
+			id = #{id}
+	</update>
+	
+	
+	
+	
+</mapper>

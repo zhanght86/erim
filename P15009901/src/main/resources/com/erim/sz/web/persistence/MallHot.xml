@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mallhot">
+	
+	<!-- 查询 -->
+	<select id="selectList" resultType="mallHotBean">
+		SELECT
+			id 		       AS id,
+			cpy_id         AS cpyId,
+			mht_ntype      AS mhtNtype,
+			line_id        AS lineId,
+			mht_createtime AS mhtCreatetime,
+			mht_createuser AS mhtCreateuser
+		FROM
+			mall_hot
+		WHERE
+			cpy_id  = #{cpyId}
+		AND
+			mht_ntype = #{mhtNtype}
+	</select>
+</mapper>

@@ -1,0 +1,104 @@
+<!-- 特色餐-->
+<div class="tab-right-div">
+    <div class="tab-top">
+        <span class="tab-top-item subline">国内特色餐</span>
+		<span class="tab-top-item">国际·港澳台特色餐</span>
+    </div>
+    <div class="tab-main">
+	
+        <div class="tab-main-div show pd-top15">
+			<form id="form_cafi_guonei" method="post" action="$appRoot/$cpyno/tesecan.html">
+            <label class="tab-label">
+                <span class="tab-span">选择城市:</span>
+                <input class="tab-input home-city" type="text" name="cdlCityVo" >
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">美食搜索:</span>
+                <input class="tab-input" type="text" name="cdlName" value="$!tesecan.cdlName">
+            </label>
+			<!--<a href="$appRoot/$cpyno/tesecan.html" target="_blank">立即搜索</a>-->
+            <button type="submit" class="tab-submit" >立即搜索</button>
+			</form>
+			
+            <div class="tab-hot pd-top15">
+				<form id="form_cafi_guonei_cdlCityVo" method="post" action="$appRoot/$cpyno/tesecan.html">
+                    <span class="tab-span mt4"><strong>热门目的地</strong></span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','北京');$('#form_cafi_guonei_cdlCityVo').submit();">北京</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','张家界');$('#form_cafi_guonei_cdlCityVo').submit();">张家界</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','桂林');$('#form_cafi_guonei_cdlCityVo').submit();">桂林</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','三亚');$('#form_cafi_guonei_cdlCityVo').submit();">三亚</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','丽江');$('#form_cafi_guonei_cdlCityVo').submit();">丽江</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','昆明');$('#form_cafi_guonei_cdlCityVo').submit();">昆明</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','大连');$('#form_cafi_guonei_cdlCityVo').submit();">大连</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','西安');$('#form_cafi_guonei_cdlCityVo').submit();">西安</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','扬州');$('#form_cafi_guonei_cdlCityVo').submit();">扬州</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','杭州');$('#form_cafi_guonei_cdlCityVo').submit();">杭州</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','广州');$('#form_cafi_guonei_cdlCityVo').submit();">广州</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','上海');$('#form_cafi_guonei_cdlCityVo').submit();">上海</span>
+                    <span class="tab-hot-a" onclick="$('#cdlCityVo').attr('value','');$('#form_cafi_guonei_cdlCityVo').submit();">更多</span>
+    				<input type="hidden" name="cdlCityVo" value="" id="cdlCityVo" />
+    			</form>
+                <br clear="left">
+    			<form id="form_cafi_guonei_cdlSort" method="post" action="$appRoot/$cpyno/tesecan.html">
+                    <span class="tab-span mt4"><strong>主打菜系</strong></span>
+    				#foreach($item in $sort.keySet())
+						#if($velocityCount<7)
+    					<span class="tab-hot-a" onclick="$('#cdlSort').attr('value','$item'); $('#form_cafi_guonei_cdlSort').submit();">$sort.get($item)</span>
+						#end
+					#end
+                    <span class="tab-hot-a" onclick="$('#cdlSort').attr('value',''); $('#form_cafi_guonei_cdlSort').submit();">更多</span>
+    				<input type="hidden" name="cdlSort" value="" id="cdlSort" />
+				</form>
+            </div>
+			
+        </div>
+		
+		
+		<div class="tab-main-div pd-top15">
+			<form id="form_cafi_guoji" method="post" action="$appRoot/$cpyno/tesecan.html">
+                <label class="tab-label">
+                    <span class="tab-span">选择城市:</span>
+                    <input class="tab-input foreign-city" type="text" name="cdlForeignCity">
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span">美食搜索:</span>
+                    <input class="tab-input" type="text" name="cdlName">
+                </label>
+    			<!--<a href="$appRoot/$cpyno/tesecan.html" target="_blank">立即搜索</a>-->
+                <button type="submit" class="tab-submit" onclick="$('#form1').submit();">立即搜索</button>
+			</form>
+            <div class="tab-hot pd-top15">
+				<form id="form_cafi_guonei_cdlForeignCity" method="post" action="$appRoot/$cpyno/tesecan.html">
+                    <span class="tab-span mt4"><strong>热门目的地</strong></span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','香港');$('#form_cafi_guonei_cdlForeignCity').submit();">香港</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','澳门');$('#form_cafi_guonei_cdlForeignCity').submit();">澳门</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','台湾');$('#form_cafi_guonei_cdlForeignCity').submit();">台湾</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','东京');$('#form_cafi_guonei_cdlForeignCity').submit();">东京</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','首尔');$('#form_cafi_guonei_cdlForeignCity').submit();">首尔</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','曼谷');$('#form_cafi_guonei_cdlForeignCity').submit();">曼谷</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','芭提雅');$('#form_cafi_guonei_cdlForeignCity').submit();">芭提雅</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','巴黎');$('#form_cafi_guonei_cdlForeignCity').submit();">巴黎</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','新西兰');$('#form_cafi_guonei_cdlForeignCity').submit();">新西兰</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','纽约');$('#form_cafi_guonei_cdlForeignCity').submit();">纽约</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','加州');$('#form_cafi_guonei_cdlForeignCity').submit();">加州</span>
+                    <span class="tab-hot-a" onclick="$('#cdlForeignCity').attr('value','');$('#form_cafi_guonei_cdlForeignCity').submit();">更多</span>
+					<input type="hidden" name="cdlForeignCity" value="" id="cdlForeignCity" />
+				</form>
+                <br clear="left">
+                <form id="form_cafi_guoji_cdlSort" method="post" action="$appRoot/$cpyno/tesecan.html">
+                    <span class="tab-span mt4"><strong>主打菜系</strong></span>
+    				#foreach($item in $sort.keySet())
+						#if($velocityCount<7)
+    					<span class="tab-hot-a" onclick="$('#cdlSort_guoji').attr('value','$item'); $('#form_cafi_guoji_cdlSort').submit();">$sort.get($item)</span>
+						#end
+					#end
+                    <span class="tab-hot-a" onclick="$('#cdlSort_guoji').attr('value',''); $('#form_cafi_guoji_cdlSort').submit();">更多</span>
+    				<input type="hidden" name="cdlSort" value="" id="cdlSort_guoji" />
+				</form>
+            </div>
+			
+        </div>
+	
+    </div>
+</div>
+<!-- /特色餐-->

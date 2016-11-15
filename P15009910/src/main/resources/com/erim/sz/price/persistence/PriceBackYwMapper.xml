@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pricebackyw">
+
+	<!-- 分页查询 -->
+	<select id="selectPage"  resultType="priceBackYwBean">
+		SELECT
+			id 				 AS id,
+			cpy_id 			 AS cpyId,
+			cpy_yj_user_code AS cpyYjUserCode,
+			yj_user_code     AS yjUserCode,
+			pyb_level 		 AS pybLevel,
+			cpy_price 		 AS cpyPrice,
+			pyb_back_price	 AS pybBackPrice,
+			pyb_back_num	 AS pybBackNum,
+			pyb_createtime   AS pybCreatetime,
+			pyb_createuser   AS pybCreateuser
+		FROM
+			price_back_yw
+		WHERE	
+			cpy_id = #{cpyId}
+	</select>
+	
+	<!-- 查询数量 -->
+	<select id="selectPageCount"  resultType="int">
+		SELECT
+			count(1)
+		FROM
+			price_back_yw
+		WHERE	
+			cpy_id = #{cpyId}
+	</select>
+</mapper>

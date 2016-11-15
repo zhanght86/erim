@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="priceservice">
+	
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			price_service
+		(
+			cpy_id,
+			pse_no,
+			pse_name,
+			pse_price,
+			pse_remark,
+			pse_createtime,
+			pse_createuser,
+			pse_is_sx,
+			pse_sxtime,
+			pse_jstime,
+			pse_ntype,
+			pse_showurl
+		)
+		VALUES
+		(
+			#{cpyId},
+			#{pseNo},
+			#{pseName},
+			#{psePrice},
+			#{pseRemark},
+			#{pseCreatetime},
+			#{pseCreateuser},
+			#{pseIsSx},
+			#{pseSxtime},
+			#{pseJstime},
+			#{pseNtype},
+			#{pseShowurl}
+		)
+	</insert>
+	
+	
+	<!-- 根据服务企业id查询 -->
+	<select id="getServiceByCpyId" resultType="priceServiceBean">
+		SELECT 
+			pse_no    AS pseNo,
+			pse_is_sx AS pseIsSx
+		FROM
+			price_service
+		WHERE
+			cpy_id = #{cpyId}
+	</select>
+	
+	<!-- 修改新订支付编号 -->
+	<update id="update">
+		UPDATE
+			price_service
+		SET
+			pse_createtime = #{pseCreatetime},
+			pse_createuser = #{pseCreateuser},
+			pse_no		   = #{pseNo}
+		WHERE
+			cpy_id = #{cpyId}
+	</update>
+</mapper>

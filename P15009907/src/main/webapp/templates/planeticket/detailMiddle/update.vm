@@ -1,0 +1,333 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/jipiao.css">
+<script type="text/javascript">
+	//初始化省为北京市
+	var initProvinceId = 110000;	
+	
+    $(document).ready(function(){$("#add_gc").on("click",".zz_add",function(){
+    if($(this).text()=="删除中转"){$(this).parent().parent().parent().remove();}else{
+    $(this).text("删除中转").css("background-color","#969696");
+    $("#add_gc").append("<div><div class='g_line'></div><br><div class='input_block clearfix'><div class='label_left'>落地时间：</div><div class='input_right input_right_wauto'><select class='w90'><option></option></select><input type='text' class='w130 ml15'></div></div><div class='input_block clearfix'><div class='label_left'>中转国家：</div><div class='input_right input_right_wauto'><select class='w110'><option></option></select><label class='ml5'> 城市： </label><select class='w110'><option></option></select></div></div><div class='input_block clearfix'><div class='label_left'>中转起飞时间：</div>	<div class='input_right input_right_wauto'><input class='w130'></div></div><div class='input_block clearfix'><div class='label_left'>停留时间：</div><div class='input_right input_right_wauto'>1小时52分<button type='button' class='zz_add y_but ml55 mr20'>添加中转</button></div></div></div>");
+    }});})
+	//起飞国内国际的切换
+	$('#start_gj').hide();
+	$('#country').hide();
+	//当点击国际/港澳台时
+	$('#start2').click(function(){
+	  $('#start_gn').hide();
+	  $('#country').hide();
+	  $('#start_gj').show();
+	});
+	//获取出发时国际港澳台的值
+	var c = $("input[name='ptdStartState']:checked").val();
+	if(c == '01'){
+		 $('#start_gn').show();
+		  $('#start_gj').hide();
+	}else{
+		 $('#start_gn').hide();
+		$('#start_gj').show();
+	}
+	//当点击国际时
+	$("input[name='ptdStartTown']").click(function(){
+	  var a = $("input[name='ptdStartTown']:checked").val();
+	  if (a == '04') {
+	      $('#country').show();
+	  } else{
+	     $('#country').hide();
+	  }
+	});
+	//当点击国内时
+	$('#start1').click(function(){
+	 $('#start_gn').show();
+	 $('#start_gj').hide();
+	});
+ //中转国内国际的切换
+ $('#turn_gj').hide();
+ $('#country1').hide();
+	//当点击国际/港澳台时
+	$('#turn2').click(function(){
+		$('#turn_gn').hide();
+		$('#country1').hide();
+		$('#turn_gj').show();
+	}); 
+	//当点击国际
+	$("input[name='pdrnExternal']").click(function(){
+	   var b = $("input[name='pdrnExternal']:checked").val();
+	    if  (b == '04') {
+	      $('#country1').show();
+	   } else {
+	      $('#country1').hide();
+	   }
+	
+	});
+	//当点击国内时
+	$('#turn1').click(function(){
+	   $('#turn_gj').hide();
+	   $('#country1').hide();
+	   $('#turn_gn').show();
+	});
+	//到达国内国际的切换
+$('#end_gj').hide();
+$('#country3').hide();
+	//当点击国际/港澳台的时候
+	$('#end2').click(function(){
+		$('#end_gn').hide();
+		$('#country3').hide();
+		$('#end_gj').show();
+	})
+	//获取到达时国际港澳台的值
+	var c = $("input[name='ptdEndState']:checked").val();
+	if(c == '01'){
+		 $('#end_gn').show();
+		  $('#end_gj').hide();
+	}else{
+		 $('#end_gn').hide();
+		$('#end_gj').show();
+	}
+	//当点击国际的时候
+	$("input[name='ptdEndTown']").click(function(){
+	var c = $("input[name='ptdEndTown']:checked").val();
+	   if (c == '04') {
+	     $('#country3').show();   
+	   } else {
+	     $('#country3').hide();
+	    }
+	})
+	//当点击国内的时候
+	$('#end1').click(function(){
+	  $('#end_gj').hide();
+	  $('#country3').hide();
+	  $('#end_gn').show();
+	})
+</script>
+<form id="form1" method="post">
+<input type="hidden" name="id" value="$!planeticketDetail.id" />
+<input type='hidden' value="$planeticketDetailMiddleList.size()" name="zzsl" id="zzsl"/>
+<div class="jd_block">
+	<p class="tit_1 ml35"><img src="$staticRoot/images/jp_03.png" alt="添加机票" title="添加机票">添加单程中转航班机票</p>
+	<div class="g_line mb20"></div>
+	<div class="input_block clearfix">
+		<div class="label_left w130">国内/国际：</div>
+		<div class="input_right input_right_wauto">
+			<label class="w65"><input type="radio" name="gj">国内</label>
+			<label class="w90"><input type="radio" name="gj">国际/港澳台</label>
+		</div>
+	</div>
+    	<table class="fb_table">
+    		<tr><th>起飞</th><th>中转</th><th>目的地</th></tr>
+    		<tr>
+    			<td>
+    				<div class='g_line'></div><br>
+    				<div class="input_block clearfix">
+                		<div class="label_left">出发国家：</div>
+                		<div class="input_right input_right_wauto">
+                			 <label class="w130">
+								<input  type="radio" id="start1" name="ptdStartState" value="01" #if($!planeticketDetail.ptdStartState == "01") checked #end />国内</label>
+                			 <label>
+								<input  type="radio" id="start2"  name="ptdStartState" value="02" #if($!planeticketDetail.ptdStartState == "02") checked #end/>国际·港澳台</label>
+                		</div>
+                	</div>
+                	<div class="input_block clearfix" id="start_gn">
+                		<div class="label_left">出发地：</div>
+                		<div class="input_right input_right_wauto" >
+                			<select class="w90" name="ptdStartProvince" style="width:100px;">
+                                #foreach($item in $provinces)
+									<option value="$item.regionNo" #if($planeticketDetail.ptdStartProvince == $item.regionNo) selected #end>$item.regionName</option>
+                				#end
+                    	    </select>
+                			<span>市</span>
+                		     <select name="ptdStartCity" value="$!planeticketDetail.ptdStartCity" style="width:90px;"></select>
+                		</div>
+                	</div>
+                	<div class="input_block clearfix" id="start_gj">
+                	   <div class="label_left">出发地：</div>
+                	   <div class="input_right input_right_wauto">
+                            #foreach($item in $state.keySet())
+                    			<label class="w60"> 
+									<input type="radio" #if($erim.contains($!planeticketDetail.ptdStartTown,$item)) checked #end name="ptdStartTown" value="$item"> $state.get($item)
+                    			</label>
+							#end
+                       </div>
+                    </div>
+					<div class="input_block clearfix">
+					<div id="country" style="margin-left:60px;">
+    						<input type="text" style="width:110px;height:26px;" name="ptdForeign" class="validate[maxSize[15]]"><span> 国家</span>
+                            <input type="text"  style="width:110px;height:26px;" name="ptdForeignCity" class="validate[maxSize[10]]"><span>城市</span>
+                	   </div>
+                    </div>
+					<div class="input_block clearfix">
+    					<div class="label_left">所属航空公司：</div>
+    					<div class="input_right input_right_wauto">
+    						<input class="w130" name="ptdCompany" value="$!planeticketDetail.ptdCompany">
+    					</div>
+    				</div>
+					<div class="input_block clearfix">
+    					<div class="label_left">航班号：</div>
+    					<div class="input_right input_right_wauto">
+    						<input class="w130" name="ptdNumber" value="$!planeticketDetail.ptdNumber">
+    					</div>
+    				</div>
+    				<div class="input_block clearfix">
+    					<div class="label_left">起飞航站楼：</div>
+    					<div class="input_right input_right_wauto">
+    						<input class="w130" name="ptdStartTerminal" value="$!planeticketDetail.ptdStartTerminal">
+    					</div>
+    				</div>
+    				<div class="input_block clearfix">
+    					<div class="label_left">起飞时间：</div>
+    					<div class="input_right input_right_wauto" >
+    						<input class="w130" name="ptdStartTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" value="$!planeticketDetail.ptdStartTime">
+    					</div>
+    				</div>
+    				<div class="input_block clearfix">
+    					<div class="label_left">机型：</div>
+    					<div class="input_right input_right_wauto">
+    						<input class="w130" name="ptdModel" value="$!planeticketDetail.ptdModel">
+    					</div>
+    				</div>
+    			</td>
+				<!-- 中转 -->
+    			<td id="add_gc">
+    			
+					#foreach($middle in $planeticketDetailMiddleList)
+    					<div class="demo">
+							<input type="hidden" value="$!middle.id" name="pdrnMiddleId${velocityCount}"/>
+            				<div><div class='g_line'></div><br>
+        						<div class="input_block clearfix">
+                					<div class="label_left">落地时间：</div>
+                					<div class="input_right input_right_wauto">
+                						<input type="text" class="w130" value="$middle.pdrnMiddleTime" name="pdrnMiddleTime${velocityCount}" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" value="$!planeticketDetailMiddleList.pdrnMiddleTime">
+                					</div>
+                				</div>
+            					<div class="input_block clearfix">
+                            		<div class="label_left">中转国家：</div>
+                            		<div class="input_right input_right_wauto">
+                            			 <label class="w130"><input  type="radio" id="turn1" name="pdrnMiddleState${velocityCount}" value="01" #if($!middle.pdrnMiddleState == "01") checked #end/>国内</label>
+                            			 <label><input  type="radio" id="turn2"  name="pdrnMiddleState${velocityCount}" value="02" #if($!middle.pdrnMiddleState == "02") checked #end/>国际·港澳台</label>
+                            		</div>
+                            	</div>
+                            	<div class="input_block clearfix" id="turn_gn">
+                            		<div class="label_left">中转地：</div>
+                            		<div class="input_right input_right_wauto">
+                            			<select class="w90" name="pdrnProvince${velocityCount}" style="width:100px;">
+                                            #foreach($item in $provinces)
+                            					<option value="$item.regionNo" #if($!middle.pdrnProvince == $item.regionNo) selected  #end>$item.regionName</option>
+                            				#end
+                                	    </select>
+                            			<span>市</span>
+                            		     <select name="pdrnMiddleCity${velocityCount}" style="width:90px;"></select>
+                            		</div>
+                            	</div>
+                            	<div class="input_block clearfix" id="turn_gj">
+                            	   <div class="label_left">中转地：</div>
+                            	   <div class="input_right input_right_wauto">
+                                        #foreach($item in $state.keySet())
+                                			<label class="w60"> 
+                                				<input type="radio" name="pdrnExternal${velocityCount}" value="$item"> $state.get($item)
+                                			</label>
+            							#end
+                                   </div>
+                                </div>
+            					<div class="input_block clearfix">
+            					   <div id="country1" style="margin-left:60px;">
+                						<input type="text" style="width:110px;height:26px;" name="pdrnForeign${velocityCount}" class="validate[maxSize[15]]"><span> 国家</span>
+                                        <input type="text"  style="width:110px;height:26px;" name="pdrnForeignCity${velocityCount}" class="validate[maxSize[10]]"><span>城市</span>
+                            	    </div>
+            					</div>
+                				<div class="input_block clearfix">
+                					<div class="label_left">中转起飞时间：</div>
+                					<div class="input_right input_right_wauto">
+                						<input class="w130" name="pdrnMiddleEndtime${velocityCount}" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" value="$!middle.pdrnMiddleEndtime">
+                					</div>
+                				</div>
+                				<div class="input_block clearfix">
+                					<div class="label_left">停留时间：</div>
+                					<div class="input_right input_right_wauto">
+                						<button type="button" class="zz_add y_but ml55 mr20">添加中转</button>
+                					</div>
+                				</div>
+    						</div>
+						#end
+    				</div>
+    			</td>
+    			<td>
+    				<div class='g_line'></div><br>
+        				<div class="input_block clearfix">
+                    		<div class="label_left">到达国家：</div>
+                    		<div class="input_right input_right_wauto">
+                    			 <label class="w130"><input  type="radio" id="end1"  name="ptdEndState" value="01" #if($!planeticketDetail.ptdEndState == "01") checked #end/>国内</label>
+                    			<label><input  type="radio" id="end2" name="ptdEndState" value="02" #if($!planeticketDetail.ptdEndState == "02") checked #end/>国际·港澳台</label>
+                    		</div>
+                    	</div>
+                    	<div class="input_block clearfix" id="end_gn">
+                    		<div class="label_left">目的地：</div>
+                    		<div class="input_right input_right_wauto">
+                    			<select class="w90" name="ptdEndProvince" style="width:100px;">
+                                    #foreach($item in $provinces)
+										<option value="$item.regionNo" #if($planeticketDetail.ptdEndProvince == $item.regionNo) selected #end>$item.regionName</option>
+                    				#end
+                        	    </select>
+                    			<span>市</span>
+                    		     <select name="ptdEndCity" style="width:90px;"></select>
+                    		</div>
+                    	</div>
+						<div class="input_block clearfix" id="end_gj">
+                	   <div class="label_left">目的地：</div>
+                	   <div class="input_right input_right_wauto">
+                            #foreach($item in $state.keySet())
+                    			<label class="w60"> 
+									<input type="radio" #if($erim.contains($!planeticketDetail.ptdEndTown,$item)) checked #end name="ptdEndTown" value="$item"> $state.get($item)
+                    			</label>
+							#end
+                       </div>
+                    </div>
+					<div class="input_block clearfix">
+					<div id="country3" style="margin-left:60px;">
+    						<input type="text"  style="width:110px;height:26px;" name="endForeign" class="validate[maxSize[15]]"><span> 国家</span>
+                            <input type="text"  style="width:110px;height:26px;" name="endForeignCity" class="validate[maxSize[10]]"><span>城市</span>
+                	 </div>
+					 </div>
+    				 <div class="input_block clearfix">
+    					<div class="label_left">落地时间：</div>
+    					<div class="input_right input_right_wauto">
+    						<input type="text" class="w130" name="ptdEndTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" value="$!planeticketDetail.ptdEndTime">
+    					</div>
+    				 </div>
+					 <div class="input_block clearfix">
+        				<div class="label_left">落地航站楼：</div>
+        				<div class="input_right input_right_wauto">	
+        					<input type="text" class="w200 validate[required,maxSize[10]]" name="ptdEndTerminal" value="$!planeticketDetail.ptdEndTerminal">
+        				</div><span style="margin-left:10px;color:red;">*</span>
+        			</div>
+        				<div class="input_block clearfix">
+        					<div class="label_left">总时长：</div>
+        					<div class="input_right input_right_wauto">
+							 <input type="text" class="w200 validate[required,maxSize[10]]" name="ptdEndStay" value="$!planeticketDetail.ptdEndStay">
+        					</div><span style="margin-left:10px;color:red;">*</span>
+        				</div>
+        				<div class='g_line'></div><br>
+            			<div class="carinfo_ctblrbtn mb50">
+            				<button type="button" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/planeticket/detailMiddle/update','$appRoot/planeticket/detailMiddle/list');">提交</button>
+            				<button type="button" class="carinfo_qu" onclick="index.load('$appRoot/planeticket/detailMiddle/list');">返回</button>
+            			</div>
+    			</td>
+    		</tr>
+    	</table>
+</div>
+</form>
+	
+<script type="text/javascript">
+	//初始化省市县
+    regUtil.initProvince('$planeticketDetail.ptdStartProvince','ptdStartProvince','ptdStartCity','$planeticketDetail.ptdStartCity');
+	//初始化省市县
+   regUtil.initProvince('$planeticketDetail.ptdEndProvince','ptdEndProvince','ptdEndCity','$planeticketDetail.ptdEndCity');
+//初始化省市县
+   regUtil.initProvince('$planeticketDetail.pdrnProvince','pdrnProvince','pdrnMiddleCity','$planeticketDetail.pdrnMiddleCity');
+
+	//初始化国家
+	$("select[name='ptdForeign']").change(function(){
+    	index.country($(this).val(),$("select[name='ptdForeignCity']"));
+	});
+	$("select[name='endForeign']").change(function(){
+    	index.country($(this).val(),$("select[name='endForeignCity']"));
+	});
+</script>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sendPrice">
+	
+	<sql id="sql_query">
+		1 = 1	
+		<!-- 日期 
+		<if test = "tspDate != null and tspDate != ''"> AND tsp_date = #{tspDate} </if>-->
+		<!-- 线路ID 
+		<if test = "sendId != null and sendId != ''"> AND send_id = #{sendId} </if>-->
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		send_id 					AS sendId,
+		send_type 					AS sendType,
+		tsp_date 					AS tspDate,
+		tsp_is_open 				AS tspIsOpen,
+		tsp_week 					AS tspWeek,
+		tsp_sign 					AS tspSign,
+		tsp_trade_price 			AS tspTradePrice,
+		tsp_combination_price 		AS tspCombinationPrice,
+		tsp_retail_price 			AS tspRetailPrice,
+		tsp_sell_h 					AS tspSellH,
+		tsp_sell_m 					AS tspSellM,
+		tsp_sell_price 				AS tspSellPrice,
+		tsp_price_show 				AS tspPriceShow,
+		tsp_cancel_indent 			AS tspCancelIndent,
+		tsp_create_time 			AS tspCreateTime,
+		tsp_create_user 			AS tspCreateUser
+	</sql>
+	
+	<!-- 查询数据  -->
+	<select id="selectById" resultType="texiSendPriceBean">
+		SELECT 
+			id,
+			send_id 					AS sendId,
+			send_type 					AS sendType,
+			tsp_date 					AS tspDate,
+			tsp_is_open 				AS tspIsOpen,
+			tsp_week 					AS tspWeek,
+			tsp_sign 					AS tspSign,
+			tsp_trade_price 			AS tspTradePrice,
+			tsp_combination_price 		AS tspCombinationPrice,
+			tsp_retail_price 			AS tspRetailPrice,
+			tsp_sell_h 					AS tspSellH,
+			tsp_sell_m 					AS tspSellM,
+			tsp_sell_price 				AS tspSellPrice,
+			tsp_price_show 				AS tspPriceShow,
+			tsp_cancel_indent 			AS tspCancelIndent,
+			tsp_create_time 			AS tspCreateTime,
+			tsp_create_user 			AS tspCreateUser
+		FROM texi_send_price
+		where id = #{id}
+	</select>
+	
+</mapper>

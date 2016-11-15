@@ -1,0 +1,202 @@
+<script type="text/javascript" src="$staticRoot/js/price.js"></script>
+<script>
+	//批发价和零售价的比较
+	function comparison(field, rules, i, options){
+		// 批发价
+    	var mdlPriceTeam = $("input[name='mdlPriceTeam']").val();
+		// 零售价
+		var mdlPriceSeal = $("input[name='mdlPriceSeal']").val();
+		if(parseInt(mdlPriceTeam) * 1.05 >= parseInt(mdlPriceSeal)){
+            return '零售价必须大于批发价5%';
+        }
+	}
+	//批发价和同业价的比较
+	function comparison1(field,rules,i,options){
+	   	//批发价
+	   	var mdlPriceTeam = $("input[name='mdlPriceTeam']").val();
+	   	//同业价
+	   	var mdlPriceSame = $("input[name='mdlPriceSame']").val();
+		if(parseInt(mdlPriceSame) > parseInt(mdlPriceTeam)){
+	      	return '批发价必须大于或等于同业价';
+		}
+	}
+	//比较
+	function comparisonMax(field, rules, i, options){
+	    //批发价
+    	var mdlPriceTeam = $("#update_mdlPriceTeam").val();
+		//零售价
+		var mdlPriceSeal = $("#update_mdlPriceSeal").val();
+		if(parseInt(mdlPriceTeam) * 1.05 >= parseInt(mdlPriceSeal)){
+            return '零售价必须大于批发价的5%';
+        }
+	}
+	//同业价和批发价的比较
+	function comparisonMax1(field, rules, i, options){
+		//同业价
+    	var mdlPriceSame = $("#update_mdlPriceSame").val();
+		//批发价
+		var mdlPriceTeam = $("#update_mdlPriceTeam").val();
+		if(parseInt(mdlPriceSame) > parseInt(mdlPriceTeam)){
+            return '批发价必须大于或等于同业价';
+        }
+	}
+	
+</script>
+<style type="text/css">
+    .fangliang_date ul li .mess_box .sj_j{color:#32c832;}
+    .input_block .w190{width:190px;}
+    .win_box_edit2{width:500px;height:370px;margin-left:-250px;margin-top:-185px;}
+    .win_box_edit2 .input_block .label_left{width:80px;}
+    .win_box_edit2 .input_block .input_right{width:auto;}
+</style>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jd_3.png" alt="价格管理" title="价格管理">价格管理</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/management/price/list?portal=03');">
+				<img src="$staticRoot/images/jd_7.png" />
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/management/price/list?portal=02');">
+				<img src="$staticRoot/images/jd_9.png" />
+			</a>
+		</div>
+		<!-- <div class="date_close pt10">
+			<form method="post" id="form3">
+    			<input type="text" class="validate[required]" name="start" id="start" onfocus="WdatePicker()" />&nbsp; 至 &nbsp;
+    			<input type="text" class="validate[required]" name="end" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'start\',{m:1});}'})" />
+    			<button type="button" onclick="javascript:subform.searchform('form3','$appRoot/management/price/updateBatchIsOpen');">批量停售</button>
+            </form>
+		</div> -->
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">签证类型：$!mdlName</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="mdl_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							<li class="open_li">
+								<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+								<input type="hidden" name="date_id" value="$!item.id">
+								<input type="hidden" name="date_mdlPriceSame" value="$!item.mdlPriceSame">
+								<input type="hidden" name="date_mdlPriceTeam" value="$!item.mdlPriceTeam">
+								<input type="hidden" name="date_mdlPriceSeal" value="$!item.mdlPriceSeal">
+        						<span class="date_d">$!item.day</span>
+        						<div class="mess_box">
+									同：$!item.mdlPriceSame 元<br>
+									批：$!item.mdlPriceTeam 元<br>
+									零：$!item.mdlPriceSeal 元
+								</div>
+        						<span class="icon"></span>
+        					</li>
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load('$appRoot/management/detail/list');">返回</button>
+		<!--  <span>
+			<img src="$staticRoot/images/ljgl_03.png"> 正常出售 
+			<img src="$staticRoot/images/ljgl_01.png"> 暂不出售
+			<img src="$staticRoot/images/ljgl_02.png"> 已售完
+		</span> -->
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+		<span><b>价格管理</b></span>
+		<div class="cb"></div>
+		<div class="bg_block nobg_block">
+			<form method="post" id="form1">
+    			<div class="cb"></div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">日期：</div>
+    				<div class="input_righted11">
+						<input type="text" class="w80 validate[required]" name="start" id="start1" onClick="WdatePicker({minDate:'%y-%M-%d'})" /> &nbsp; 至 &nbsp;
+						<input type="text" class="w80 validate[required]" name="end" onClick="WdatePicker({minDate:'#F{$dp.$D(\'start1\',{m:1});}'})"  />
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">同业价：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w100">
+							<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" name="mdlPriceSame" placeholder="0" />元
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label style="font-weight:bold" class="ml15">批发价：</label>
+						<span class="tishi_box w100">
+							<input type="text" class="w65 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparison1]]" name="mdlPriceTeam" placeholder="0" />元
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+						<label style="font-weight:bold" class="ml15">零售价：</label>
+						<span class="tishi_box w100">
+							<input type="text" class="w65 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparison]]" name="mdlPriceSeal" placeholder="0" />元
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+				<div class="input_block clearfix">
+    				<div class="label_left">费用说明：</div>
+    				<div class="input_right">
+    					<textarea class="w350 h90 validate[maxSize[1000]]" name="mdlCostShow"></textarea>
+    				</div>
+    			</div>
+    			<div class="button_block clearfix">
+					<button class="y_but ml35" type="button" onclick="javascript:subform.sub('form1', '$appRoot/management/price/insertPrice', '$appRoot/management/price/list?portal=04')">&nbsp;提交&nbsp;</button>
+					<button class="b_but ml35" type="button" onclick="javascript:index.load('$appRoot/management/price/list?portal=04')">&nbsp;重 置&nbsp;</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	<form method="post" id="form2">
+        <input type="hidden" name="id" id="update_id"></input>
+		<div class="input_block clearfix ml15">
+			<div class="input_right mb20">
+				同业价：<span class="tishi_box w110">
+					<input type="text" class="w70 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" name="mdlPriceSame" id="update_mdlPriceSame" />元
+				</span>
+			</div>
+			<div class="input_right mb20">
+				批发价：<span class="tishi_box w110">
+					<input type="text" class="w70 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparisonMax1]]" name="mdlPriceTeam" id="update_mdlPriceTeam" />元
+				</span>
+			</div>
+			<div class="input_right">
+				零售价：<span class="tishi_box w110">
+					<input type="text" class="w70 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparisonMax]]" name="mdlPriceSeal" id="update_mdlPriceSeal" />元
+				</span>
+			</div>
+		</div>
+		<div class="cb mb25"></div>
+    	<div class="button_block button_block_wauto clearfix">
+    		<button class="y_but ml15 mr20" type="button" id="mdlQueding">提交</button>
+    		<button class="b_but" type="button" id="mdlQuxiao">取 消</button>
+    	</div>
+	</form>
+</div>

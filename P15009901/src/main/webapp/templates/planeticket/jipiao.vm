@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>机票列表页_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/plane.css">
+</head>
+<body>
+<form id="form1" method="post" action="$appRoot/$cpyno/jipiao.html">
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--导航-->
+       #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+		<div class="plane">
+			<div class="search-menu">
+        		<div class="search-div">
+					<select id="plane_choice" class="search-plane">
+						<option value="国内" name="ptdIsInternational"  value="01">国内</option>
+						<option value="国际" name="ptdIsInternational"  value="02">国际</option>
+					</select>
+					 <label class="tab-label" style="width:192px;">
+                        <span class="tab-span" style="width:55px;">出发地:</span>
+                        <input class="tab-input dklfjsldkf" type="text" style="width:120px;" name="stationStart" value="$!planeticketDetail.stationStart">
+                    </label>
+					<button onclick="change()" class="changeval"></button>
+                    <label class="tab-label" style="width:187px;">
+                        <span class="tab-span" style="width:50px;">目的地:</span>
+                        <input class="tab-input dklfjsldkf" type="text" autocomplete="off" style="width:120px;" name="stationEnd" value="$!planeticketDetail.stationEnd">
+                    </label>
+					<select id="plane_choice" class="search-plane">
+						<option value="国内">单程</option>
+						<option value="国际">往返</option>
+					</select>
+                    <label class="tab-label" style="width:222px;">
+                        <span class="tab-span">出发日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();" style="width:120px;" name="preDate" value="$!planeticketDetail.preDate">
+                    </label>
+					<label class="tab-label" style="width:222px;display:none" >
+                        <span class="tab-span">返程日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();" style="width:120px;">
+                    </label>
+        			<button class="search-btn" value="" type="submit" style="margin-top:15px;">搜索</button>
+        		</div>
+				<dl class="smenu-li">
+        			<dt class="smenu-title">航班类型：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num #if(!$planeticketDetail.ptdNtype  || $!planeticketDetail.ptdNtype == '') item-hover #end" onclick="$('#ptdNtype').attr('value',''); $('#form1').submit();">不限</span>
+        				<span class="smenu-item #if($!planeticketDetail.ptdNtype == '1') item-hover #end" onclick="$('#ptdNtype').attr('value','1'); $('#form1').submit();">直飞</span>
+        				<span class="smenu-item #if($!planeticketDetail.ptdNtype == '2') item-hover #end" onclick="$('#ptdNtype').attr('value','2'); $('#form1').submit();">中转</span>
+        			</dd>
+        		</dl>
+        		<dl class="smenu-li">
+        			<dt class="smenu-title">起飞时间：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num  #if(!$planeticketDetail.timePeriod || $!planeticketDetail.timePeriod == '') item-hover #end" onclick="$('#timePeriod').attr('value',''); $('#form1').submit();">不限</span>
+						<span class="smenu-item #if($!planeticketDetail.timePeriod == '1') item-hover #end" onclick="$('#timePeriod').attr('value','1'); $('#form1').submit();">0-6点</span>
+        				<span class="smenu-item #if($!planeticketDetail.timePeriod == '2') item-hover #end" onclick="$('#timePeriod').attr('value','2'); $('#form1').submit();">6-12点</span>
+        				<span class="smenu-item #if($!planeticketDetail.timePeriod == '3') item-hover #end" onclick="$('#timePeriod').attr('value','3'); $('#form1').submit();">12-18点</span>
+        				<span class="smenu-item #if($!planeticketDetail.timePeriod == '4') item-hover #end" onclick="$('#timePeriod').attr('value','4'); $('#form1').submit();">18-24点</span>
+						
+        			</dd>
+        		</dl>
+        		<dl class="smenu-li" style="display:none">
+        			<dt class="smenu-title">航空公司：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num item-hover">不限</span>
+        				<div class="smenu-right">
+        					<span class="smenu-item">海南航空</span>
+        					<span class="smenu-item">海南航空</span>
+        					<span class="smenu-item">海南航空</span>
+        					<span class="smenu-item">海南航空</span>
+        					<span class="smenu-item">北京5</span>
+        					<span class="smenu-item">北京6</span>
+        					<span class="smenu-item">北京7</span>
+        					<span class="smenu-item">北京8</span>
+        					<span class="smenu-item">北京9</span>
+        					<span class="smenu-item">北京10</span>
+        					<span class="smenu-item">北京11</span>
+        					<span class="smenu-item">北京12</span>
+        					<span class="smenu-item">北京13</span>
+        					<span class="smenu-item">北京14</span>
+        					<span class="smenu-item">北京15</span>
+        					<span class="smenu-item">北京16</span>
+        					<span class="smenu-item">北京17</span>
+        					<span class="smenu-item">北京18</span>
+        					<span class="smenu-item">北京19</span>
+        					<span class="smenu-item">北京20</span>
+        				</div>
+        				<span class="smenu-item-more">更多</span>
+        			</dd>
+        		</dl>
+				<dl class="smenu-li last" >
+        			<dt class="smenu-title">航位选择：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num item-hover">不限</span>
+        				<span class="smenu-item" >头等舱</span>
+        				<span class="smenu-item">商务舱</span>
+        				<span class="smenu-item">经济舱</span>
+        			</dd>
+        		</dl>
+        	</div>
+			<div style="clear:both;"></div>
+			<div class="plane_ct" style="margin-top:20px;">
+		        <div class="plane_ctl">
+		            <div>
+		                价格
+		            </div>
+		            <div>
+		                起飞时间
+		            </div>
+		        </div>
+		        <div class="plane_ctr" style="display:none">
+		            <div class="plane_box">
+		                <div class="plane_date">
+		                    <div class="pdate_box on">
+		                        <span class="pdate_boxt">12-12(周日)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div><!--留一个就可以，显示七个，调用90个(三个月)-->
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周一)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周二)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周三)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周四)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周五)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周六)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周日)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周一)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周二)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周三)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周四)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周五)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                    <div class="pdate_box">
+		                        <span class="pdate_boxt">12-12(周六)</span>
+		                        <span class="pdate-boxm">￥888</span>
+		                    </div>
+		                </div>  
+		            </div> 
+		            <div class="plane_btns">
+		                <a href="javascript:void(0)" class="up">
+		                </a>
+		                <a href="javascript:void(0)" class="down">
+		                </a>
+		            </div>
+		        </div>
+				<input type="hidden" name="ptdNtype" id="ptdNtype" value="$!planeticketDetail.ptdNtype"/>
+		        <input type="hidden" name="timePeriod" id="timePeriod" value="$!planeticketDetail.timePeriod"/>
+				
+			</div>
+		    <div class="planect_biger">
+		            <div class="planect_ct planeshow">
+						#foreach($plane in $planeticketList)
+		                <div class="planect_ctbox">
+		                	<ul>
+		                		<li class="p1">
+		                			<img src="$staticRoot/images/jipiao1.jpg">
+									<span>$!plane.ptdCompany</span>
+		                		</li>
+		                		<li class="p2">
+		                			<span>航班号：$!plane.ptdNumber</span>
+		                			<span>机型号：$!plane.ptdModel</span>
+		                		</li>
+		                		<li class="p3">
+		                			<span class="p3time">$!plane.ptdStartTime</span>
+		                			<span class="p3chang">$!plane.ptdStartTerminal</span>
+		                		</li>
+		                		<li class="p4">
+		                			<span>$!plane.ptdEndStay</span>
+		                		</li>
+		                		<li class="p5">
+		                			<span class="p3time">$!plane.ptdEndTime</span>
+		                			<span class="p3chang">$!plane.ptdEndTerminal</span>
+		                		</li>
+		                		<li class="p6">
+		                			<span>飞机餐</span>
+		                			<span>#if($!plane.ptdCostFood=='01') 有 #else 无   #end</span>
+		                		</li>
+		                		<li class="p7">
+		                			<span>机票类型</span>
+		                			<span>#if($!plane.ptdIsInternational=='01') 国内  #elseif($!plane.ptdIsInternational == '02') 国际·港澳台  #end</span>
+		                		</li>
+		                		<li class="p8">
+		                			<span>是否经停</span>
+		                			<span>#if($!plane.ptdYesno == '01') 否  #elseif($!plane.ptdYesno == '02') 是  #end</span>
+		                		</li>
+		                		<li class="p9">
+		                			<a href="javascript:void(0)" class="planect_can">查看</a>
+		                		</li>
+		                	</ul>
+		                </div>
+						
+		                <div class="planect_ctbhide">
+							#if($plane.preId1)
+								<ul>
+    								<li class="hid1">
+    		                			<span>$!plane.ptdCompany</span>
+    		                		</li>
+    		                		<li class="hid2">
+    		                			<span>退改规则</span>
+    		                		</li>
+    		                		<li class="hid3">
+    		                			<span>经济舱</span>
+    		                		</li>
+    		                		<li class="hid4">
+    		                			<span>￥$!plane.preRetailPrice1</span>
+    		                		</li>
+    		                		<li class="hid5">
+    		                			<a href="#">预订</a>
+    		                		</li>
+								</ul>
+							#end
+							#if($plane.preId2)
+								<ul>
+    								<li class="hid1">
+    		                			<span>$!plane.ptdCompany</span>
+    		                		</li>
+    		                		<li class="hid2">
+    		                			<span>退改规则</span>
+    		                		</li>
+    		                		<li class="hid3">
+    		                			<span>商务舱</span>
+    		                		</li>
+    		                		<li class="hid4">
+    		                			<span>￥$!plane.preRetailPrice2</span>
+    		                		</li>
+    		                		<li class="hid5">
+    		                			<a href="#">预订</a>
+    		                		</li>
+								</ul>
+							#end
+							#if($plane.preId3)
+								<ul>
+    								<li class="hid1">
+    		                			<span>$!plane.ptdCompany</span>
+    		                		</li>
+    		                		<li class="hid2">
+    		                			<span>退改规则</span>
+    		                		</li>
+    		                		<li class="hid3">
+    		                			<span>头等舱</span>
+    		                		</li>
+    		                		<li class="hid4">
+    		                			<span>￥$!plane.preRetailPrice3</span>
+    		                		</li>
+    		                		<li class="hid5">
+    		                			<a href="#">预订</a>
+    		                		</li>
+								</ul>
+							#end
+		                </div>
+						#end
+		            </div>
+				#parse("common/page.vm")
+		    </div>
+		</div>
+		#parse("common/footer.vm")
+	</div>
+</form>
+</body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+<script type="text/javascript" src="$staticRoot/js/plane.js"></script>

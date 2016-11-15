@@ -1,0 +1,105 @@
+<div class="rfooter">
+
+	<div class="quanju">
+     <div class="quanju1">
+       <div class="footer1">
+         <ul>
+           <li class="li_style">新手上路</li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/huiyuanzhuce.html">会员注册</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/huiyuandenglu.html">会员登录</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/ruhechaxun.html">如何查询</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/yudingliucheng.html">预订流程</a></li>
+         </ul>
+       </div>
+       <div class="footer2">
+         <ul>
+           <li class="li_style">常见问题</li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/gentuanyou.html">跟团游是什么？</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/danfangcha.html">单房差是什么？</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/banzizhu.html">半自助游是什么？</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/sirendingzhi.html">私人订制旅游是什么？</a></li>
+         </ul>
+       </div>
+       <div class="footer3">
+         <ul>
+           <li class="li_style">合同签署 </li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/qianhetong.html" style="padding-left:14px;">能传真签合同吗？</a></li>
+           <li class="li_style1"><a href="$staticRoot/images/abroad.pdf" target="_blank">出境旅游合同（示范文本）</a></li>
+           <li class="li_style1"><a href="$staticRoot/images/home.pdf" target="_blank">境内旅游合同（示范文本）</a></li>
+         </ul>
+       </div>
+       <div class="footer4">
+         <ul>
+           <li class="li_style">安全指南</li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/chuxing.html">出行安全常识</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/teshurenqun.html">特殊人群安全知识</a></li>
+           <li class="li_style1"><a href="$appRoot/$cpyno/help/gaoweihuodong.html">高危活动安全知识</a></li>
+         </ul>
+       </div>
+       <div class="footer5">
+         <ul>
+           <li class="li_style">联系我们</li>
+           <li class="li_style1" style="padding-left:14px;margin-bottom:10px;">&nbsp;</li>
+		    <li class="li_style1" style="padding-left:14px;">电话：$!mallWeb.webKh</li>
+		   #if($erim.isNotEmpty($!mallWeb.webTeletephone))
+				<li class="li_style1">应急电话：$!mallWeb.webTeletephone</li>
+		   #end
+		   #if($erim.isNotEmpty($!mallWeb.webCpytelephone))
+			<li class="li_style1">办公：$!mallWeb.webCpytelephone</li>
+		   #end
+		   
+         </ul>
+       </div>
+      </div>
+   </div>
+	<div class="rfooter_cen">
+		<ul class="rfooter_cen_con">
+			<span>优质服务&nbsp;值得推荐</span>
+			<li><img src="$staticRoot/images/footerpic4.jpg" /></li>
+			<li class="rftcen_conbg"><a href="$appRoot/$cpyno/jingxuan.html?searchModel=1">热门线路</a></li>
+			<!--<li><img src="$staticRoot/images/footerpic4.jpg" /></li>
+			<li class="rftcen_conbg2"><a href="zhuti.html">主题推荐</a></li>-->
+			<li><img src="$staticRoot/images/footerpic4.jpg" /></li>
+			<li class="rftcen_conbg4"><a href="$appRoot/$cpyno/lvyou.html?searchModel=2">当地旅游</a></li>
+			<li><img src="$staticRoot/images/footerpic4.jpg" /></li>
+			<li class="rftcen_conbg7"><a href="$appRoot/$cpyno/superfree.html">超级自由行</a></li>
+			<li><img src="$staticRoot/images/footerpic4.jpg" /></li>
+			<li class="rftcen_conbg6"><a href="$appRoot/$cpyno/news.html">旅游资讯</a></li>
+			<li><img src="$staticRoot/images/footerpic4.jpg" /></li>
+			<li class="rftcen_conbg5"><a href="$appRoot/$cpyno/abouts.html">关于我们</a></li>
+		</ul>
+	</div>
+	<div class="rfooter_bot">
+		
+		<ul class="rfotbot_bot">
+			<li class="bot1">
+                <a href="http://www.315.gov.cn/" target="_blank" title="" alt="">
+					<img src="$staticRoot/images/focz7.png" />
+			    </a> 
+				<!--img src="$staticRoot/images/focz1.png" />
+				<img src="$staticRoot/images/focz2.png" />
+				<img src="$staticRoot/images/focz3.png" />
+				<img src="$staticRoot/images/focz4.png" />
+				<img src="$staticRoot/images/focz5.png" /-->
+				<a href="http://tousu.100chengxin.com" target="_blank" title="" alt="">
+					<img src="$staticRoot/images/focz6.png" />
+			    </a>
+		</ul>
+		<br clear="left">
+			<br clear="left">
+		<ul class="rfotbot_top">
+            <li>旅行社经营许可证号：$!mallWeb.webLvyoucard | 营业执照号：$!mallWeb.webCard</li>
+			<!--li>版权所有</li>
+			<li>北京乐途游学文化传播有限公司</li>
+			<li>苏ICP证B2-20100204</li>
+			<li>旅行社业务许可证：L-JS-CJ00070</li-->
+		</ul>
+		<div align="center">
+			友情链接： <a href="http://www.jialvlianhe.com/">佳旅联合旅游网</a>、 
+			<a href="http://zt.jialvlianhe.com/">佳旅联合组团社服务平台</a>、
+			<a href="http://zx.jialvlianhe.com/">佳旅联合专线商服务平台</a>、
+			<a href="http://dj.jialvlianhe.com/">佳旅联合供应商服务平台</a>
+		</div><br>
+	</div>
+</div>
+<!--固定位置-->

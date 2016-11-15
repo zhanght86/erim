@@ -1,0 +1,95 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/planeticket/planeticket.css">
+<div class="addhotel">
+    <div class="addhltop">
+		<span>查看机票</span>
+	</div>
+        <div class="cb"></div>
+	   <div class="g_line"></div>
+        <form  id="form1"  method="post">
+		<div class="addhotelc">
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">航班号</label>
+    			<div class="addhotelcboxr">
+    				$!planeticketDetail.ptdNo
+    			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">航空公司</label>
+			<div class="addhotelcboxr">
+				$!planeticketDetail.ptdCompany
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">出发地点</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdStartAddress
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">出发时间</label>
+			<div class="addhotelcboxr">
+               $!planeticketDetail.ptdStartTime
+			</div>         
+		</div>
+		
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">到达地点</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdEndAddress
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">到达时间</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdEndTime
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">舱位</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdSpace
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">基建费</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdCostMaching
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">燃油费</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdCostFuel
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">飞机餐</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdCostFood
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">同城同业价价格</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdPriceSametown
+			</div>
+		</div>	
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">组团社价</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdPriceTeam
+			</div>
+		</div>
+		<div class="addhotelcbox">
+			<label class="addhotelcboxl">建议销售价</label>
+			<div class="addhotelcboxr">
+                $!planeticketDetail.ptdPriceSell
+			</div>
+		</div>
+		<div class="addsubmit">
+    		<a href="javascript:index.load(page.url);" class="back"></a>
+        </div>
+	</div>
+ </form>
+</div>
+

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="managementdetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="id != null and id != ''">		                     and 	id 			  		= 	 #{id}</if>
+			<if test="mdlName != null and mdlName != ''">			     and 	mdl_name 			like "%"#{mdlName}"%"</if>
+			<if test="mdlCode != null and mdlCode != ''">			     and 	mdl_code 			like "%"#{mdlCode}"%"</if>
+			<if test="mdlValidity != null and mdlValidity != ''">		 and 	mdl_validity 		like "%"#{mdlValidity}"%"</if>
+			<if test="mdlStay != null and mdlStay != ''">			     and 	mdl_stay 			like "%"#{mdlStay}"%"</if>
+			<if test="mdlNtype != null and mdlNtype != ''">		         and 	mdl_ntype 			like "%"#{mdlNtype}"%"</if>
+			<if test="mdlSend != null and mdlSend != ''">		         and 	mdl_send 			like "%"#{mdlSend}"%"</if>
+			<if test="cpyId != null and cpyId != ''">			         and 	cpy_id		 		= 	 #{cpyId}</if> 
+			<if test="mdlIsDelStatus != null and mdlIsDelStatus != ''">	 and 	mdl_is_del_status 	= 	 #{mdlIsDelStatus}</if>
+			<if test="mdlAddress != null and mdlAddress != ''">	         and 	mdl_address 	    like "%"#{mdlAddress}"%"</if>
+			<if test="mdlNumbers != null and mdlNumbers != ''">	         and 	mdl_numbers 	    = 	 #{mdlNumbers}</if>
+			<if test="mdlNum != null and mdlNum != ''">	         		 and 	mdl_num 	        = 	 #{mdlNum}</if>
+		</where>
+	</sql>
+	
+	<!-- 查询同城同业 -->
+	<sql id="sql_query_management">
+		1 = 1
+		<if test="mdlName != null and mdlName != ''">			     and 	mdl_name 			like "%"#{mdlName}"%"</if>
+		<if test="mdlCode != null and mdlCode != ''">			     and 	mdl_code 			like "%"#{mdlCode}"%"</if>
+		<if test="mdlValidity != null and mdlValidity != ''">		 and 	mdl_validity 		like "%"#{mdlValidity}"%"</if>
+		<if test="mdlStay != null and mdlStay != ''">			     and 	mdl_stay 			like "%"#{mdlStay}"%"</if>
+		<if test="mdlAddress != null and mdlAddress != ''">	         and 	mdl_address 	    like "%"#{mdlAddress}"%"</if>
+		<if test="mdlNtype != null and mdlNtype != ''">		         and 	mdl_ntype 			= 	#{mdlNtype} </if>
+		<if test="mdlSend != null and mdlSend != ''">		         and 	mdl_send 			= 	#{mdlSend} </if>
+		<if test="mdlIsDelStatus != null and mdlIsDelStatus != ''">	 and 	mdl_is_del_status 	= 	#{mdlIsDelStatus}</if>
+		<if test="mdlNumbers != null and mdlNumbers != ''">	         and 	mdl_numbers 	    = 	#{mdlNumbers}</if>
+		<if test="mdlNum != null and mdlNum != ''">	         		 and 	mdl_num 	        = 	#{mdlNum}</if>
+		<!-- 公司品牌名称 -->
+		<if test="cpyName != null 	and cpyName != ''">	and ( cpy_Name like "%"#{cpyName}"%" or cpy_brand like "%"#{cpyName}"%" )</if>
+	</sql>
+	
+	<sql id="COMPANYDETAIL">
+			cpy.cpy_name 		     AS cpyName,
+			cpy.cpy_telephone 		 AS cpyTelephone,
+			cpy.cpy_brand 	  		 AS cpyBrand,
+			ccp.cbs_operator         AS ccpName,
+			ccp.cbs_operator_phone   AS ccpTelephone,
+			cpy.cpy_email 	         AS ccpEmail,
+			ccp.cbs_operator_qq      AS ccpQq
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageManagement" resultType="managementDetailBean">
+		SELECT
+			id ,
+			mdl_name         	AS mdlName,
+			mdl_address      	AS mdlAddress,
+			mdl_long         	AS mdlLong,
+			mdl_price_same   	AS mdlPriceSame,
+			mdl_price_team   	AS mdlPriceTeam,
+			mdl_price_seal   	AS mdlPriceSeal,
+			mdl_ntype        	AS mdlNtype,
+			mdl_town         	AS mdlTown,
+			mdl_stay         	AS mdlStay,
+			mdl_validity     	AS mdlValidity,
+			mdl_numbers      	AS mdlNumbers,
+			mdl_img1         	AS mdlImg1,
+			mdl_img2         	AS mdlImg2,
+			mdl_img3         	AS mdlImg3,
+			mdl_message      	AS mdlMessage,
+			mdl_createtime   	AS mdlCreatetime,
+			mdl_createuser   	AS mdlCreateuser,
+			mdl_is_through   	AS mdlIsThrough,
+			mdl_through_time 	AS mdlThroughTime,
+			mdl_through_user 	AS mdlThroughUser,
+			cpy_id           	AS cpyId,
+			mdl_is_del_status 	AS mdlIsDelStatus,
+			mdl_attestor      	AS mdlAttestor,
+			mdl_send          	AS mdlSend,
+			mdl_order_know    	AS mdlOrderKnow,
+			mdl_add_instruction AS mdladdInstruction,
+			mdl_text_img        AS mdlTextImg,
+			mdl_material        AS mdlMaterial,
+			mdl_text_know     	AS mdlTextKnow,
+			mdl_code            AS mdlCode,
+			mdl_num				AS mdlNum,
+			mdl_province        AS mdlProvince,
+			mdl_money_contain   AS mdlMoneyContain,
+			mdl_interview       AS mdlInterview,
+			mdl_need_day        AS mdlNeedDay,
+			mdl_flag            AS　mdlFlag,
+			mdl_responsibility  AS mdlResponsibility,
+			mdl_scheduled       AS mdlScheduled
+		FROM
+			management_detail
+			<include refid="sql_query" />
+		ORDER BY 
+			mdl_is_del_status
+		DESC,
+			mdl_createtime 
+		DESC 
+	</select>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTown" resultType="managementDetailBean">
+		SELECT
+			management.id       AS id,
+			mdl_name         	AS mdlName,
+			mdl_address      	AS mdlAddress,
+			mdl_long         	AS mdlLong,
+			mdl_price_same   	AS mdlPriceSame,
+			mdl_price_team   	AS mdlPriceTeam,
+			mdl_price_seal   	AS mdlPriceSeal,
+			mdl_ntype        	AS mdlNtype,
+			mdl_town         	AS mdlTown,
+			mdl_stay         	AS mdlStay,
+			mdl_validity     	AS mdlValidity,
+			mdl_numbers      	AS mdlNumbers,
+			mdl_img1         	AS mdlImg1,
+			mdl_img2         	AS mdlImg2,
+			mdl_img3         	AS mdlImg3,
+			mdl_message      	AS mdlMessage,
+			mdl_createtime   	AS mdlCreatetime,
+			mdl_createuser   	AS mdlCreateuser,
+			mdl_is_through   	AS mdlIsThrough,
+			mdl_through_time 	AS mdlThroughTime,
+			mdl_through_user 	AS mdlThroughUser,
+			management.cpy_id   AS cpyId,
+			mdl_is_del_status 	AS mdlIsDelStatus,
+			mdl_attestor      	AS mdlAttestor,
+			mdl_send          	AS mdlSend,
+			mdl_order_know    	AS mdlOrderKnow,
+			mdl_add_instruction AS mdladdInstruction,
+			mdl_text_img        AS mdlTextImg,
+			mdl_material        AS mdlMaterial,
+			mdl_text_know     	AS mdlTextKnow,
+			mdl_code            AS mdlCode,
+			mdl_num				AS mdlNum,
+			mdl_province        AS mdlProvince,
+			mdl_money_contain   AS mdlMoneyContain,
+			mdl_interview       AS mdlInterview,
+			mdl_need_day        AS mdlNeedDay,
+			mdl_flag            AS　mdlFlag,
+			mdl_responsibility  AS mdlResponsibility,
+			mdl_scheduled       AS mdlScheduled,
+			<include refid = "COMPANYDETAIL" />
+		FROM
+			management_detail management
+		LEFT JOIN
+			company_detail cpy
+		ON 
+			management.cpy_id = cpy.id
+		LEFT JOIN
+			company_business ccp
+		on 
+			ccp.cpy_id = management.cpy_id
+		WHERE
+		   	mdl_is_del_status = '1'
+		   AND
+			management.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'MANAGEMENT' 
+			)
+			AND
+			<include refid= "sql_query_management"/>
+	</select>
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTownCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			management_detail management
+		WHERE
+			mdl_is_del_status = '1'
+	   AND
+			management.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'MANAGEMENT' 
+			)
+	</select>
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageManagementCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			management_detail
+		<include refid="sql_query"/>
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="managementDetailBean" >
+		INSERT INTO
+			management_detail
+			(
+				mdl_name,
+				mdl_address,
+				mdl_send,
+				mdl_ntype,
+				mdl_num,
+				mdl_long,
+				mdl_stay,
+				mdl_validity,
+			    mdl_interview,
+			    mdl_province,
+				mdl_responsibility,
+				mdl_order_know,
+				mdl_money_contain,
+				mdl_add_instruction,
+				mdl_createtime,
+				mdl_createuser,
+				mdl_through_time,
+				mdl_through_user,
+				cpy_id
+			)
+		VALUES
+			(
+				#{mdlName},
+				#{mdlAddress},
+				#{mdlSend},
+				#{mdlNtype},
+				#{mdlNum},
+				#{mdlLong},
+				#{mdlStay},
+				#{mdlValidity},
+				#{mdlInterview},
+				#{mdlProvince},
+				#{mdlResponsibility},
+				#{mdlOrderKnow},
+				#{mdlMoneyContain},
+				#{mdladdInstruction},
+				sysdate(),
+				#{mdlCreateuser},
+				#{mdlThroughTime},
+				#{mdlThroughUser},
+				#{cpyId}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="updateManagement" parameterType="ManagementDetailBean">
+		UPDATE
+			management_detail
+		SET
+			mdl_name 			= #{mdlName},
+			mdl_address 		= #{mdlAddress},
+			mdl_long 			= #{mdlLong},
+			mdl_price_same 		= #{mdlPriceSame},
+			mdl_price_team 		= #{mdlPriceTeam},
+			mdl_price_seal 		= #{mdlPriceSeal},
+			mdl_ntype 			= #{mdlNtype},
+			mdl_town 			= #{mdlTown},
+			mdl_stay 			= #{mdlStay},
+			mdl_validity 		= #{mdlValidity},
+			mdl_numbers 		= #{mdlNumbers},
+			mdl_img1 			= #{mdlImg1},
+			mdl_img2 			= #{mdlImg2},
+			mdl_img3 			= #{mdlImg3},
+			mdl_message 		= #{mdlMessage},
+			mdl_through_time 	= #{mdlThroughTime},
+			mdl_through_user 	= #{mdlThroughUser},
+			mdl_attestor        = #{mdlAttestor},
+			mdl_send            = #{mdlSend},
+			mdl_order_know      = #{mdlOrderKnow},
+			mdl_add_instruction = #{mdladdInstruction},
+			mdl_text_img        = #{mdlTextImg},
+			mdl_material        = #{mdlMaterial},
+			mdl_text_know       = #{mdlTextKnow},
+			mdl_num				= #{mdlNum},
+			mdl_province        = #{mdlProvince},
+			mdl_money_contain   = #{mdlMoneyContain},
+			mdl_interview       = #{mdlInterview},
+			mdl_need_day        = #{mdlNeedDay},
+			mdl_createtime      = #{mdlCreatetime},
+			mdl_flag            = #{mdlFlag},
+			mdl_responsibility  = #{mdlResponsibility}
+			
+		WHERE
+			id = #{id}
+	</update>
+	<!-- 修改签证价格 -->
+	<update id="updatePrice" parameterType="ManagementDetailBean">
+	UPDATE
+			management_detail
+		SET
+	    	mdl_price_same 		= #{mdlPriceSame},
+			mdl_price_team 		= #{mdlPriceTeam},
+			mdl_price_seal 		= #{mdlPriceSeal}
+		WHERE
+			id = #{id}
+	
+	</update>
+	
+	<!-- 更新产品编号 -->
+	<update id="updatecode">
+		UPDATE
+			management_detail
+		SET
+			mdl_code  =  #{mdlCode}
+		WHERE
+			id = #{id}
+	</update>
+
+	<!-- 上架下架 -->
+	<delete id="delete" parameterType="int">
+		UPDATE
+			management_detail
+		SET
+			mdl_is_del_status  = #{mdlIsDelStatus}
+		WHERE
+			id = #{id}
+     </delete>
+	
+	<!-- 查询指定实体 -->
+	<select id="selectByBookId" resultType="managementDetailBean">
+		SELECT
+			id ,
+			mdl_name            AS mdlName,
+			mdl_address         AS mdlAddress,
+			mdl_long            AS mdlLong,
+			mdl_price_same      AS mdlPriceSame,
+			mdl_price_team      AS mdlPriceTeam,
+			mdl_price_seal      AS mdlPriceSeal,
+			mdl_ntype           AS mdlNtype,
+			mdl_town            AS mdlTown,
+			mdl_stay            AS mdlStay,
+			mdl_validity        AS mdlValidity,
+			mdl_numbers         AS mdlNumbers,
+			mdl_img1            AS mdlImg1,
+			mdl_img2            AS mdlImg2,
+			mdl_img3            AS mdlImg3,
+			mdl_message         AS mdlMessage,
+			mdl_createtime      AS mdlCreatetime,
+			mdl_createuser      AS mdlCreateuser,
+			mdl_is_through      AS mdlIsThrough,
+			mdl_through_time    AS mdlThroughTime,
+			mdl_through_user    AS mdlThroughUser,
+			cpy_id              AS cpyId,
+			mdl_is_del_status   AS mdlIsDelStatus,
+			mdl_attestor        AS mdlAttestor,
+			mdl_send            AS mdlSend,
+			mdl_order_know      AS mdlOrderKnow,
+			mdl_add_instruction AS mdladdInstruction,
+			mdl_text_img        AS mdlTextImg,
+			mdl_material        AS mdlMaterial,
+			mdl_text_know       AS mdlTextKnow,
+			mdl_code            AS mdlCode,
+			mdl_num				AS mdlNum,
+			mdl_province        AS mdlProvince,
+			mdl_money_contain   AS mdlMoneyContain,
+			mdl_interview       AS mdlInterview,
+			mdl_need_day        AS mdlNeedDay,
+			mdl_flag            AS　mdlFlag,
+			mdl_responsibility  AS mdlResponsibility,
+			mdl_scheduled       AS mdlScheduled
+		FROM
+			management_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 预定方式 -->
+	<update id="update" parameterType="ManagementDetailBean">
+		UPDATE
+			management_detail
+		SET
+			mdl_scheduled       = #{mdlScheduled}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

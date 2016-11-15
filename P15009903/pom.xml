@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.e-rimming</groupId>
+        <artifactId>erim-parent</artifactId>
+        <version>0.0.2</version>
+        <relativePath>../erim-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>P15009903</artifactId>
+    <packaging>war</packaging>
+    <name>E-rimming :: P11000403 :: sz File</name>
+
+    <dependencies>
+		<!--==================================================================================== -->
+		<!-- servlet -->
+		<dependency> 
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<!--==================================================================================== -->
+		<!-- FileUp -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <!-- ueditor -->
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>ueditor-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>ueditor-json</artifactId>
+        </dependency>
+        <!--json-lib-->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>    
+            <artifactId>json-lib</artifactId>   
+            <classifier>jdk15</classifier>    
+        </dependency>
+        <dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- Thumbnailator: 图片处理类库 缩放 水印等 -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		</dependency>
+    </dependencies>
+</project>

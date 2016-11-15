@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<div class="rdivv">
+	<div class="carinfo">
+		<div class="carfixed_top">
+			<img src="$staticRoot/images/htcar1.png" />
+			<span>预定方式</span>
+			<div class="cb"></div>			
+		</div>
+		<div class="g_line mb20"></div>
+		<form method="post" id="form1">
+			<input type="hidden" value="$texiDetail.id" name="id" />
+			<!--
+			div class="carinfo_ctbl">
+				<span>预定方式：</span>
+				<div class="carinfo_ctblra" style="width:425px;text-align:left;" >
+                	#foreach($item in $scheduled.keySet())
+						<label class="w90"> 
+							<input type="checkbox" style="margin-right:5px;" class="validate[required] checkbox" #if($erim.contains($!texiDetail.tdlScheduled,$item)) checked #end name="tdlScheduled" value="$item"> $scheduled.get($item)
+                        </label>
+					#end
+				</div>
+				<span style=" color:red;margin-left:-115px;float: left; margin-top: 4px;">*</span>
+			</div>-->
+			<div class="input_block clearfix">
+        		<div class="label_left">预定方式：</div>
+        		<div class="input_right" style="width:500px;">
+        			#foreach($item in $scheduled.keySet())
+        				<label class="w90" > 
+        					<input type="checkbox" class="validate[required] checkbox" #if($erim.contains($!texiDetail.tdlScheduled,$item)) checked #end name="tdlScheduled" value="$item"> $scheduled.get($item)
+        				</label>
+        			#end
+        		</div>
+				<span  style=" color:red;margin-left: -130px;float: left; margin-top: 8px;">*</span>
+        	</div>
+			<div class="carinfo_ctbl">
+				<span></span>
+				<div class="carinfo_ctblrbtn">
+					<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/texi/detail/scheduled','$appRoot/texi/detail/list');">提交</button>
+					<button class="carinfo_qu" type="button" onclick="index.load(page.url);">返回</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

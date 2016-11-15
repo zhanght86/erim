@@ -1,0 +1,168 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/houtai.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<script type="text/javascript">
+ //比较
+	 function comparison(field, rules, i, options){
+        var hheLayerstart    = $("input[name='hheLayerstart']").val();
+		
+		var hheLayerend = $("input[name='hheLayerend']").val();
+		
+		if(parseInt(hheLayerstart)>parseInt(hheLayerend)){
+            return '所输范围不正确';
+        }
+    }
+
+	//上传图片
+	uploadify('uploadify1','hheImg1','filespan1','fileQueue1');
+	//uploadify('uploadify2','hheImg2','filespan2','fileQueue2');
+	//uploadify('uploadify3','hheImg3','filespan3','fileQueue3');
+	//uploadify('uploadify4','hheImg4','filespan4','fileQueue4');
+	
+	//房间设施('限时热水'和'24小时热水'不能同时选择)
+	/*
+	$("input[name='hheDevice']").change(function() {
+		var a = $("input[name='hheDevice'][value='23']:checked").val();
+		var b = $("input[name='hheDevice'][value='24']:checked").val();
+		if (a != undefined && b != undefined) {
+    	   wxcalert("限时热水和24小时热水不能同时选择");
+		}
+	});*/
+</script>
+</head>
+<body bgcolor="#f1f1f1">
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jd_03.png" alt="添加房型" title="添加房型">添加房型</p>
+	<div class="g_line mb20"></div>
+    <form method="post" id="form1">
+		<input type="hidden" name="hdlId" value="$!hdlId"/>
+    	<div class="input_block clearfix">
+    		<div class="label_left">房型名称：</div>
+    		<div class="input_right">
+    			<input type="text"  class="w200 validate[required,maxSize[30]]" name="hheName" placeholder="如：高级双标间或双人标准间等"/><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">可入住人数：</div>
+    		<div class="input_right">
+    			<span class="tishi_box w90">
+    				<input type="text" class="w65 validate[required,custom[integer],min[1]]" name="hhePresonnum" placeholder="0" />人
+    			</span>
+    			<label class="ml15">房间面积： </label>
+    			<span class="tishi_box w110">
+    				<input type="text"  class="w65 validate[required,custom[integer],min[1],maxSize[3]]" name="hheArea" placeholder="0" />平方米
+    			</span><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">所在楼层：</div>
+    		<div class="input_right">
+    			<span class="tishi_box w90">
+    				<input type="text"  class="w65 validate[required,custom[integer],min[1],maxSize[3]]" name="hheLayerstart" placeholder="0" />层
+    			</span>&nbsp; 至 &nbsp;
+    			<span class="tishi_box w90">
+    				<input type="text"  class="w65 validate[required,custom[integer],min[1],maxSize[3],funcCall[comparison]]" name="hheLayerend" placeholder="0" />层
+    			</span><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">该类型房间数：</div>
+    		<div class="input_right">
+    			<span class="tishi_box w90">
+    				<input type="text"  class=" w65 validate[required,custom[integer],min[1]" name="hheHomenum" placeholder="0" />间
+    			</span><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+			<div class="label_left">床型：</div>
+			<div class="input_right">                                                                       
+				<textarea  style="width:214px;height:60px;" placeholder="如：大床1张，宽2米；或单人床2张，宽1.2米" name="hdlBedtype" class="validate[required,maxSize[100]] "></textarea><span class="mess_star_red">*</span>
+			</div>
+		</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">加床：</div>
+    		<div class="input_right">
+				#foreach($item in $bed.keySet())
+    				<label class="w90" > 
+    					<input type="radio" name="hheIsAddbed"#if($item == '01')checked #end value="$item"> $bed.get($item)
+    				</label>
+    			#end<span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">窗户：</div>
+    		<div class="input_right">
+    			<label class="w60"><input type="radio" name="hheIsWindow" value="02" checked/>有</label>
+    			<label class="w60"><input type="radio" name="hheIsWindow" value="01" />无</label><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">阳台：</div>
+    		<div class="input_right">
+    			<label class="w60"><input type="radio" name="hheBalcony" value="02" checked/>有</label>
+    			<label class="w60"><input type="radio" name="hheBalcony" value="01" />无</label><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">一次性用品：</div>
+    		<div class="input_right">
+				<label class="w60"><input type="radio" name="hheYes" value="02" checked/>有</label>
+				<label class="w60"><input type="radio" name="hheYes" value="01" />无</label><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">房间设施：</div>
+    		<div class="input_right" style="width:460px;">
+    			#foreach($item in $roomequipment.keySet())
+    				<label class="w110" > 
+    					<input type="checkbox" class="validate[minCheckbox[1]] checkbox" name="hheDevice" value="$item"> $roomequipment.get($item)
+    				</label>
+    			#end
+    		</div><span class="mess_star_red">*</span>
+    	</div>
+		<div class="input_block clearfix" style="margin-bottom:10px;">
+    		<span style="margin-left:75px;color:red;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该房型将会下线</span>
+    	</div>
+		<div class="input_block clearfix">
+			<div class="label_left">房型图片：</div>
+			<div class="input_right">
+				<input name="hheImg1" value="" type="hidden" id="hheImg1"/>
+            	<input name="file" id="uploadify1" contenteditable="false" size="30" type="file" />
+				<span id="filespan1"></span>
+				<div id="fileQueue1"></div>
+			</div>
+		</div>
+		<!-- <div class="input_block clearfix">
+			<div class="label_left">房型图片：</div>
+			<div class="input_right">
+				<input name="hheImg2" value="" type="hidden" id="hheImg2"/>
+            	<input name="file" id="uploadify2" contenteditable="false" size="30" type="file" />
+				<span id="filespan2"></span>
+				<div id="fileQueue2"></div>
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left">房型图片：</div>
+			<div class="input_right">
+				<input name="hheImg3" value="" type="hidden" id="hheImg3"/>
+            	<input name="file" id="uploadify3" contenteditable="false" size="30" type="file" />
+				<span id="filespan3"></span>
+				<div id="fileQueue3"></div>
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left">房型图片：</div>
+			<div class="input_right">
+				<input name="hheImg4" value="" type="hidden" id="hheImg4"/>
+            	<input name="file" id="uploadify4" contenteditable="false" size="30" type="file" />
+				<span id="filespan4"></span>
+				<div id="fileQueue4"></div>
+			</div>
+		</div>-->
+		<div class="button_block clearfix button_block_w500 pb80">
+    		<button class="carinfo_sub ml35" id="btn" type="button" onclick="subform.sub('form1', '$appRoot/hotel/room/insertRoom', '$appRoot/hotel/room/listPage?hdlId=$!hdlId');">提交</button>
+			<button class="carinfo_qu ml35"  type="reset">重置</button>
+			<button  type="button" onclick="index.load('$appRoot/hotel/room/listPage?hdlId=$!hdlId');" class="carinfo_qu">返回</button>
+    	</div>
+	</form>
+</div>
+</body>

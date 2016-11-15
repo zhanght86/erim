@@ -1,0 +1,296 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<div class="rdivv">
+	<div class="caradmin_top">
+		<img src="$staticRoot/images/htcar1.png" />
+        <span>固定接送</span>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+	</div>
+	<div class="carfixed_ct">
+		<div class="carfixed_ctrtable" style="margin-left:16px;">
+			<span style="margin-left:35px;">$Texisend&nbsp;线路列表&nbsp;</span>
+			<table border="0" cellspadding="0" cellspacing="0" style="margin-left:35px;">
+				<thead>
+					<tr>
+                        <td>线路类型</td>
+    					<td>出发地</td>
+    					<td>目的地</td>
+    					<td>固定接送管理</td>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($item in $texisendlist)
+						<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+							#if($!item.gdlType == '01')
+								<td>接机</td>
+							#elseif($!item.gdlType == '02')
+								<td>送机</td>
+							#elseif($!item.gdlType == '03')
+								<td>接站</td>
+							#elseif($!item.gdlType == '04')
+								<td>送站</td>
+							#elseif($!item.gdlType == '05')
+								<td>固定线路</td>
+							#else
+								<td></td>
+							#end
+							#if($item.gdlType == '01')
+        						<td>$!item.gdlStart</td>
+        						<td>$!item.gdlEnd</td>
+							#end
+							#if($item.gdlType == '02')
+        						<td>$!item.gdlMachine</td>
+        						<td>$!item.gdlMachineback</td>
+							#end
+							#if($item.gdlType == '03')
+        						<td>$!item.gdlStation</td>
+        						<td>$!item.gdlStationup</td>
+							#end
+							#if($item.gdlType == '04')
+        						<td>$!item.gdlStationback</td>
+        						<td>$!item.gdlStationnup</td>
+							#end
+							#if($item.gdlType == '05')
+        						<td>$!item.gdlStartcity</td>
+        						<td>$!item.gdlEndcity</td>
+							#end
+    						<td>
+    							<a href="javascript:index.load('$appRoot/texi/send/view?id=$!item.id&gdlType=$item.gdlType');">查看/修改</a>&nbsp;&nbsp;
+    							<a href="javascript:index.load('$appRoot/texi/send/sendPricePage?sendId=$!item.id&sendType=$item.gdlType&dicPortal=01');">量/价管理</a>&nbsp;&nbsp;
+								<a href="javascript:index.delload('$appRoot/texi/send/delete?id=$!item.id','$appRoot/texi/send/list');">删除</a>  
+							</td>
+						</tr>
+					#end
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="carfixed_ctr" style="heigth:300px">
+        <span>添加线路</span>
+        <div class="carfixed_ctrl">
+        	<ul>
+        		<li name="gdlType" id="type1" value="01" class="carli" >接机</li>
+        		<li name="gdlType" id="type2" value="02">送机</li>
+        		<li name="gdlType" id="type3" value="03">接站</li>
+        		<li name="gdlType" id="type4" value="04">送站</li>
+        		<li name="gdlType" id="type5" value="05">固定线路</li>
+        	</ul>
+		</div>
+        <div class="carfixed_ctrr">
+        	<div class="carfixed_ctrbox show">
+				<!-- 接机表单 ---------------------------------------------------------->
+				<form method="post" id="form1">
+					<input type="hidden" id="send1" name="id" />
+					<input type="hidden" value="01" name="gdlType" />
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">出发机场：</span>
+            			<div class="carfixed_ctblr">
+            				<input type="text" name="gdlStart" class="validate[required,maxSize[20]]" value="$!texiSend1.gdlStart" />
+            				<span>到</span>
+							<input type="text" name="gdlEnd" class="validate[required,maxSize[20]]" value="$!texiSend1.gdlEnd" />
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlMoney" class="validate[required,maxSize[600]]">$!texiSend1.gdlMoney</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlShow" class="validate[required,maxSize[600]]">$!texiSend1.gdlShow</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carinfo_ctbl" style="width:360px; margin-left:68px;margin-top:4px;">
+						<span></span>
+                		<div class="carinfo_ctblrbtn">
+							<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+    						<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                		</div>
+                    </div>
+			    </form>
+        	</div>
+        	<div class="carfixed_ctrbox">
+				<!-- 送机表单 ---------------------------------------------------------->
+				<form method="post" id="form2">
+    				<input type="hidden" id="send2" name="id"/>
+    				<input type="hidden" value="02" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">出发城市：</span>
+            			<div class="carfixed_ctblr">
+            				<input type="text" class="validate[required,maxSize[20]]" name="gdlMachine" value="$!texiSend1.gdlMachine">
+            				<span>到</span>
+            				<input type="text" class="validate[required,maxSize[20]]" name="gdlMachineback" value="$!texiSend1.gdlMachineback">
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlMachinemoney" class="validate[required,maxSize[600]]">$!texiSend1.gdlMachinemoney</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlMachineshow" class="validate[required,maxSize[600]]">$!texiSend1.gdlMachineshow</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+					<div class="carinfo_ctbl" style="width:360px; margin-left:68px;margin-top:4px;">
+						<span></span>
+                		<div class="carinfo_ctblrbtn">
+                			<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form2','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+    						<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                		</div>
+                    </div>
+			  	</form>
+        	</div>
+			<!--接站-->
+        	<div class="carfixed_ctrbox">
+				<form method="post" id="form3">
+    				<input type="hidden" id="send3" name="id"/>
+    				<input type="hidden" value="03" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">出发车站：</span>
+            			<div class="carfixed_ctblr">
+            				<input type="text" class="validate[required,maxSize[20]]" name="gdlStation" value="$!texiSend1.gdlStation">
+            				<span>到</span>
+            				<input type="text" class="validate[required,maxSize[20]]" name="gdlStationup" value="$!texiSend1.gdlStationup">
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationmoney" class="validate[required,maxSize[600]]">$!texiSend1.gdlStationmoney</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationshow" class="validate[required,maxSize[600]]">$!texiSend1.gdlStationshow</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carinfo_ctbl" style="width:360px; margin-left:68px;margin-top:4px;">
+						<span></span>
+                		<div class="carinfo_ctblrbtn">
+                			<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form3','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+    						<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                		</div>
+                    </div>
+			  	</form>
+        	</div>
+			<!--送站-->
+        	<div class="carfixed_ctrbox">
+				<form method="post" id="form4">
+    				<input type="hidden" id="send4" name="id"/>
+    				<input type="hidden" value="04" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">出发城市：</span>
+            			<div class="carfixed_ctblr">
+            				<input type="text" class="validate[required,maxSize[20]]" name="gdlStationback" value="$!texiSend1.gdlStationback">
+            				<span>到</span>
+            				<input type="text"class="validate[required,maxSize[20]]"  name="gdlStationnup" value="$!texiSend1.gdlStationnup">
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationbackmoney" class="validate[required,maxSize[600]]">$!texiSend1.gdlStationbackmoney</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationbackshow" class="validate[required,maxSize[600]]">$!texiSend1.gdlStationbackshow</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carinfo_ctbl" style="width:360px; margin-left:68px;margin-top:4px;">
+						<span></span>
+                		<div class="carinfo_ctblrbtn">
+                			<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form4','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+    						<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                		</div>
+                    </div>
+			  	</form>
+        	</div>
+			<!-- 固定线路 -->
+        	<div class="carfixed_ctrbox">
+				<form method="post" id="form5">
+    				<input type="hidden" id="send5" name="id"/>
+    				<input type="hidden" value="05" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">出发城市：</span>
+            			<div class="carfixed_ctblr">
+            				<input type="text" class="validate[required,maxSize[20]]" name="gdlStartcity" value="$!texiSend1.gdlStartcity">
+            				<span>到</span>
+            				<input type="text" class="validate[required,maxSize[20]]" name="gdlEndcity" value="$!texiSend1.gdlEndcity">
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlCitymoney" class="validate[required,maxSize[600]]">$!texiSend1.gdlCitymoney</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlCityshow" class="validate[required,maxSize[600]]">$!texiSend1.gdlCityshow</textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carinfo_ctbl" style="width:360px; margin-left:68px;margin-top:4px;">
+						<span></span>
+                		<div class="carinfo_ctblrbtn">
+                			<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form5','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+    						<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                		</div>
+                    </div>
+		    	</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	
+	/*固定线路*/
+	$(".carfixed_ctrl li").click(function(){
+    	var liindex = $('.carfixed_ctrl li').index(this);
+		$(this).addClass('carli').siblings().removeClass('carli');
+        $('.carfixed_ctrr .carfixed_ctrbox').eq(liindex).show(0).siblings(".carfixed_ctrr .carfixed_ctrbox").hide(0);
+    });
+	
+	// 线路信息类型
+	var a = $!texiSend1.gdlType;
+	var id = $!texiSend1.id;
+	if (a == '01') {
+		$('#type1').addClass('carli').siblings().removeClass('carli');
+        $('.carfixed_ctrr .carfixed_ctrbox').eq(0).show(0).siblings(".carfixed_ctrr .carfixed_ctrbox").hide(0);
+		$("#send1").val(id);
+	}
+	if (a == '02') {
+		$('#type2').addClass('carli').siblings().removeClass('carli');
+        $('.carfixed_ctrr .carfixed_ctrbox').eq(1).show(0).siblings(".carfixed_ctrr .carfixed_ctrbox").hide(0);
+		$("#send2").val(id);
+	}
+	if (a == '03') {
+		$('#type3').addClass('carli').siblings().removeClass('carli');
+        $('.carfixed_ctrr .carfixed_ctrbox').eq(2).show(0).siblings(".carfixed_ctrr .carfixed_ctrbox").hide(0);
+		$("#send3").val(id);
+	}
+	if (a == '04') {
+		$('#type4').addClass('carli').siblings().removeClass('carli');
+        $('.carfixed_ctrr .carfixed_ctrbox').eq(3).show(0).siblings(".carfixed_ctrr .carfixed_ctrbox").hide(0);
+		$("#send4").val(id);
+	}
+	if (a == '05') {
+		$('#type5').addClass('carli').siblings().removeClass('carli');
+        $('.carfixed_ctrr .carfixed_ctrbox').eq(4).show(0).siblings(".carfixed_ctrr .carfixed_ctrbox").hide(0);
+		$("#send5").val(id);
+	}
+	
+</script>

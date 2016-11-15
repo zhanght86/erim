@@ -1,0 +1,277 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<script type="text/javascript">
+    /** $(document).ready(function(){
+    	$(".date_m").on("click","a",function(){
+    		$(".date_m a").css({'font-weight':'lighter','color':'#323232'})
+    		if($(this).attr("data-val")=="gdjc"){
+    			$(".gdjs_box").show();
+    			$(".bc_box").hide();
+    			$(this).css({'font-weight':'bold','color':'#2DA0E6'})
+    		}else if($(this).attr("data-val")=="bc"){
+    			$(".gdjs_box").hide();
+    			$(".bc_box").show();
+    			$(this).css({'font-weight':'bold','color':'#2DA0E6'})
+    		}
+    	})
+    }) */
+	// 当前租车使用类型
+	var applyType = $!applyType;
+	if (applyType == '01') {
+		$(".gdjs_box").show();
+		$(".bc_box").hide();
+		$(".zj_box").hide();
+		$("#gdjs").css({'font-weight':'bold','color':'#2DA0E6'})
+		$("#tsp_date_d").show();
+		$("#tcp_date_d").hide();
+		$("#tdp_date_d").hide();
+		
+	} else if (applyType == '02') {
+		$(".gdjs_box").hide();
+		$(".bc_box").show();
+		$("#bc").css({'font-weight':'bold','color':'#2DA0E6'})
+		$("#tsp_date_d").hide();
+		$("#tcp_date_d").show();
+		$("#tdp_date_d").hide();
+	} else if (applyType == '03') {
+		$(".gdjs_box").hide();
+		$(".bc_box").hide();
+		$(".zj_box").show();
+		$("#zj").css({'font-weight':'bold','color':'#2DA0E6'})
+		$("#tsp_date_d").hide();
+		$("#tcp_date_d").hide();
+		$("#tdp_date_d").show();
+	}
+	// 更改固定接送
+	$("input[name='send']").change(function() {
+		var send = $("input[name='send']:checked").val();
+		index.load("$appRoot/texi/price/showPage?portal=05&sendId=" + send);
+	});
+	// 更改包车类型
+	$("input[name='bcType']").change(function() {
+		var bcType = $("input[name='bcType']:checked").val();
+		index.load("$appRoot/texi/price/showPage?portal=06&bcType=" + bcType);
+	});
+	// 更改自驾类型
+	$("input[name='zjType']").change(function() {
+		var zjType = $("input[name='zjType']:checked").val();
+		index.load("$appRoot/texi/price/showPage?portal=07&zjType=" + zjType);
+	});
+	
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jd_3.png" alt="查看量/价" title="查看量/价" />$!tdlName 查看量/价
+	</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m" style="margin-right:0;">
+			<a id="hou" href="javascript:index.load('$appRoot/texi/price/showPage?portal=03');">
+				<img src="$staticRoot/images/jd_7.png">
+			</a>
+			<!-- 当前日期 -->
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/texi/price/showPage?portal=02');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+		#if($sendID)
+    		<div class="date_m" style="font-weight:lighter;padding:0 10px;margin-right:0;height:36px;line-height:36px;margin-top:14px;width:100px; text-align:center;">
+                <a href="javascript:index.load('$appRoot/texi/price/showPage?portal=04&applyType=01');" id="gdjs" style="color:#323232;display:block;" data-val="gdjc">固定接送</a>
+    		</div>
+		#end
+		#if($carID)
+    		<div class="date_m" style="font-weight:lighter;padding:0 10px;margin-right:0;height:36px;line-height:36px;margin-top:14px;width:100px; text-align:center;">
+                <a href="javascript:index.load('$appRoot/texi/price/showPage?portal=04&applyType=02');" id="bc" style="color:#323232;display:block;" data-val="bc">包车</a>
+    		</div>
+		#end
+		#if($driveID)
+    		<div class="date_m" style="font-weight:lighter;padding:0 10px;margin-right:0;height:36px;line-height:36px;margin-top:14px;width:100px; text-align:center;">
+                <a href="javascript:index.load('$appRoot/texi/price/showPage?portal=04&applyType=03');" id="zj" style="color:#323232;display:block;" data-val="bc">自驾</a>
+    		</div>
+		#end
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">
+				<span class="gdjs_box">
+					#foreach($item in $sendList)
+    					<label style="display:inline-block;width:400px;"><input type="radio" #if($sendID == $item.tdlTypeCode) checked #end name="send" value="$item.tdlTypeCode" />$item.tdlTypeName</label>
+						#if($!{velocityCount} == '2' || $!{velocityCount} == '4' || $!{velocityCount} == '6' || $!{velocityCount} == '8')
+							<br>
+						#end
+					#end
+				</span>
+				<span class="bc_box" style="display:none;">
+					<label class="w90"><input type="radio" #if($bcType == "02") checked #end name="bcType" value="02" />半天</label>
+					<label class="w90"><input type="radio" #if($bcType == "01") checked #end name="bcType" value="01" />全天</label>
+				</span>
+				<span class="zj_box" style="display:none;">
+					<label class="w90"><input type="radio" #if($zjType == "02") checked #end name="zjType" value="02" />半天</label>
+					<label class="w90"><input type="radio" #if($zjType == "01") checked #end name="zjType" value="01" />全天</label>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="tsp_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.tspSign == '0')
+								<li class="finish_li">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tspSign 辆<br>
+    									同：$!item.tspTradePrice 元<br>
+    									批：$!item.tspCombinationPrice 元<br>
+    									零：$!item.tspRetailPrice 元</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.tspIsOpen == '01')
+    							<li class="close_li">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tspSign 辆<br>
+    									同：$!item.tspTradePrice 元<br>
+    									批：$!item.tspCombinationPrice 元<br>
+    									零：$!item.tspRetailPrice 元
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										量：$!item.tspSign 辆<br>
+    									同：$!item.tspTradePrice 元<br>
+    									批：$!item.tspCombinationPrice 元<br>
+    									零：$!item.tspRetailPrice 元
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+				<ul id="tcp_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.tcpSign == '0')
+								<li class="finish_li">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tcpSign 辆<br>
+    									同：$!item.tcpTradePrice 元<br>
+    									批：$!item.tcpCombinationPrice 元<br>
+    									零：$!item.tcpRetailPrice 元</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.tcpIsOpen == '01')
+    							<li class="close_li">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tcpSign 辆<br>
+    									同：$!item.tcpTradePrice 元<br>
+    									批：$!item.tcpCombinationPrice 元<br>
+    									零：$!item.tcpRetailPrice 元
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										量：$!item.tcpSign 辆<br>
+    									同：$!item.tcpTradePrice 元<br>
+    									批：$!item.tcpCombinationPrice 元<br>
+    									零：$!item.tcpRetailPrice 元
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+				<ul id="tdp_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.tdpSign == '0')
+								<li class="finish_li">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tdpSign 辆<br>
+    									同：$!item.tdpTradePrice 元<br>
+    									批：$!item.tdpCombinationPrice 元<br>
+    									零：$!item.tdpRetailPrice 元</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.tdpIsOpen == '01')
+    							<li class="close_li">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tdpSign 辆<br>
+    									同：$!item.tdpTradePrice 元<br>
+    									批：$!item.tdpCombinationPrice 元<br>
+    									零：$!item.tdpRetailPrice 元
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										量：$!item.tdpSign 辆<br>
+    									同：$!item.tdpTradePrice 元<br>
+    									批：$!item.tdpCombinationPrice 元<br>
+    									零：$!item.tdpRetailPrice 元
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button class="carinfo_qu ml35" style="cursor:pointer" type="button" onclick="javascript:index.load(page.url);">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png"> 正常出租
+			<img src="$staticRoot/images/ljgl_01.png"> 已停租
+			<img src="$staticRoot/images/ljgl_02.png"> 已全部租出
+		</span>
+	</div>
+	<div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+

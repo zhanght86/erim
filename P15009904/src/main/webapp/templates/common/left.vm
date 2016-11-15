@@ -1,0 +1,19 @@
+<div class="left">
+	<div class="leftdiv">
+		#foreach($item in $parentListFunc)
+		<dl>
+			<dt id="left_dt_$item.id"><span> $item.zyFuncName </span></dt>
+			<div>
+    			#foreach($fun in $childListFunc)
+    				#if($fun.zyFuncParentcode == $item.zyFuncCode)
+            			<dd><span id="left_span_$fun.id" text="$appRoot$fun.zyFuncAction" parent="$item.zyFuncName">$fun.zyFuncName</span></dd>
+    				#end
+    			#end
+			</div>
+		</dl>
+		#end	
+	</div>
+	<div class="leftdivp">
+		<img src="$staticRoot/images/left.png">
+	</div>
+</div>

@@ -1,0 +1,22 @@
+@charset "utf-8";
+.quanju{
+	width:0 auto;
+	height:150px;
+	background:#eee;
+	}
+.quanju1{
+	width:800px;
+	margin-right: auto;
+	margin-left: auto;
+	}
+.footer1{
+	float:left;
+	width:200px;
+	height:auto;
+	margin-top:30px;
+	text-align:center;
+	}
+.li_style {list-style-type:none;}
+.Clear{
+	clear:both;
+	}

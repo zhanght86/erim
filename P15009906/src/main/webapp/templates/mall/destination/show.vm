@@ -1,0 +1,200 @@
+	<link rel="stylesheet" type="text/css" href="$staticRoot/js/jquery-ui-1.11.4/jquery-ui.css">
+	<div class="g_block_2 mb20">
+    	<p class="g_tit_1 mb15">目的地旅游模块</p>
+		<div class="input_block clearfix">			
+			<div class="label_left">主要地区：</div>
+			<div class="input_right">
+    			<span id="gj_block" >
+    				<!--主选项-->
+    				<label>
+    					<input type="radio" name="cdlExternal" checked value="00" > 国内 
+    				</label>
+    				<label class="ml15">
+    					<input type="radio" name="cdlExternal" value="01" > 香港 
+    				</label>
+    				<label class="ml15">
+    					<input type="radio" name="cdlExternal" value="02" > 澳门 
+    				</label>
+    				<label class="ml15">
+    					<input type="radio" name="cdlExternal" value="03" > 台湾 
+    				</label>
+    				<label class="ml15">
+    					<input id="gj" type="radio" name="cdlExternal" value="04" > 国家 
+    				</label>
+    								
+    			</span>		
+    			
+    			
+    			
+    			<!--省市县区域-->
+    			<div id="dq_gn_block" class="ml15" style="display:inline-block;">
+    					<select style="width:100px;" id="cdlProvince" name="cdlProvince">
+    					<option value=""></option>
+    					#foreach($item in $provinces)
+            				<option value="$item.regionNo">$item.regionName</option> 
+            			#end
+    					</select> 省
+    					<select style="width:100px;" id="cdlCity" name="cdlCity">
+    					</select> 市
+    					<select style="width:100px;" id="cdlCounty" name="cdlCounty">
+    					</select> 区/县
+    			</div>		
+    			
+    			<!--外国国家区域-->
+    			<div id="dq_gj_block" class="ml15" style="display:none;">
+    					<select style="width:150px;" id="cdlCountry" name="cdlcountry">
+    					<option value=""></option>
+    					#foreach($item in $countries)
+            				<option value="$item.codeKey">$item.codeValue</option> 
+            			#end
+    					</select> 国家				
+    			</div>		
+			
+			
+			
+				<span id="enter_add" class="red_a ml25">确认添加</span>
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left hui_font">已添加：</div>
+			<div class="input_right" id="inp_add">
+				#foreach($item in $listDestination)
+    				<span id="block_add_$item.id"><span class='add_span'>$item.mdnName</span><em class='add_del2' onclick="deleteInte('$item.id');">&times;</em></span>
+    			#end
+			</div>
+		</div>
+	</div>
+	
+    
+   <script type="text/javascript" src="$staticRoot/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+   <script type="text/javascript" src="$staticRoot/js/jquery-ui-1.11.4/jquery-ui.js"></script>
+	
+    <script type="text/javascript">
+			
+		index.initProvince(110000,'cdlProvince','cdlCity','cdlCounty','','');
+		
+		//国际国内选项--单击事件
+		$("input[name='cdlExternal']").click(function(){
+		  var a = $("input[name='cdlExternal']:checked").val();
+	      if (a == '00') {
+	     	$('#dq_gn_block').css('display','inline-block');
+			$('#dq_gj_block').hide();
+	      }
+		  else if (a == '04'){
+		    $('#dq_gj_block').css('display','inline-block');
+			$('#dq_gn_block').hide();
+	      }
+		  else
+		  {
+		    $('#dq_gj_block').hide();
+			$('#dq_gn_block').hide();
+		  }
+		});
+		
+		
+		
+		$("#enter_add").click(function(){
+			
+			
+			$(".ts_xx").html("");
+			
+			var len = $('#inp_add').children('span').length;
+			if(len>7) {
+				$(this).after("<span class='ts_xx' style='line-height:24px;padding-left:10px;color:red;'>添加上限为8!</span>");
+			}else
+			{ 
+			   //首先获取数据参数
+				
+			  var regionname ="";
+              var regioncode="";
+  
+              var regionlevel = $("input[name='cdlExternal']:checked").val();
+             
+              if (regionlevel == '00') 
+              {
+	
+      		    regioncode= $("#cdlCounty").val();
+       			regionname = $("#cdlCounty").find("option:selected").text();
+        	 	if (regioncode=="")
+        	    {
+        		  regioncode= $("#cdlCity").val();
+        		  regionname = $("#cdlCity").find("option:selected").text();
+
+       			}
+       			if (regioncode=="")
+                {
+                   regioncode= $("#cdlProvince").val();
+                   regionname = $("#cdlProvince").find("option:selected").text();
+                }
+                if (regioncode=="")
+                {
+                  wxcalert("请至少选择一个省、市、县选项！");
+                  return false;
+                }    	
+             }
+             else if (regionlevel == '04')
+             {
+		
+               regioncode= $("#cdlCountry").val();
+               regionname = $("#cdlCountry").find("option:selected").text();
+               if (regioncode=="")
+               {
+                 wxcalert("请至少选择一个国家选项！");
+                 return false;
+               }
+
+             }
+             else if (regionlevel == '01')
+             {
+               regionname ="香港";
+             }
+             else if (regionlevel == '02')
+             {
+               regionname ="澳门";
+              }
+             else if (regionlevel == '03')
+             {
+               regionname ="台湾";
+             }
+		     //
+		     var haveit=0;
+			 $("#inp_add span").each(function() {
+        		if($(this).text()==regionname){
+				   
+					haveit=1;
+        			
+        		}
+        	  });
+			  if (haveit==1)
+			  {
+			    wxcalert("选项重复，请选择其选项！");
+				return false;
+			  }
+			 //
+    			if(regionname != '' ){
+    				var inserturl = "$appRoot/mall/destination/insert?mdnName="+regionname+"&mdnRegionLevel="+regionlevel+"&mdnRegionCode="+regioncode;
+					
+					inserturl = encodeURI(inserturl);
+					
+        			$.post(inserturl,function(data){ 
+					    
+        				var htmlCont = "<span id='block_add_"+data+"'><span class='add_span'>" + regionname + "</span><em class='add_del2'  onclick='deleteInte(\""+data+"\");'>&times;</em>"
+        				$("#inp_add").append(htmlCont);
+						
+        			},'json');
+    			}
+			}
+		});
+		
+		
+		//删除
+		function deleteInte(id){
+			$("#block_add_"+id).remove();
+		
+			var delurl = "$appRoot/mall/destination/delete?id="+id;
+			$.post(delurl,function(data){  
+				var len = $('#inp_add').children('span').length;
+				if(len<5){  $(".ts_xx").html("") };
+			},'json');
+		}
+    </script>

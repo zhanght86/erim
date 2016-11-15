@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pricecpy">
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageLine" resultType="cafeteriaDetailBean">
+		SELECT
+			id 					  AS id,
+			cpy_id				  AS cpyId,
+			pri_guarantee_total   AS priGuaranteeTotal,
+			pri_guarantee_surplus AS priGuaranteeSurplus,
+			pri_ntype 			  AS priNtype,
+			pri_createtime 		  AS priCreatetime
+		   
+		FROM
+			price_cpy
+	</select>
+	
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageLineCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			price_cpy
+	</select>
+</mapper>

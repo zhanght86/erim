@@ -1,0 +1,19 @@
+<div class="left">
+	<div class="leftdiv">
+		#foreach($item in $parentListFunc)
+		<dl>
+			<dt><span> $item.zxFuncName </span></dt>
+			<div>
+    			#foreach($fun in $childListFunc)
+    				#if($fun.zxFuncParentcode == $item.zxFuncCode)
+            			<dd><span text="$appRoot$fun.zxFuncAction" parent="$item.zxFuncName">$fun.zxFuncName</span></dd>
+    				#end
+    			#end
+			</div>
+		</dl>
+		#end	
+	</div>
+	<div class="leftdivp">
+		<img src="$staticRoot/images/left.gif">
+	</div>
+</div>

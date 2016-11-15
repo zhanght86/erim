@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zysystemrolefunc">
+	
+	<!-- 根据角色查询 -->
+	<select id="selectRoleFuncByRoleId" resultType="zySystemRoleFuncBean">
+		SELECT
+			id 			  	  AS id,
+			zy_func_code     AS zyFuncCode,
+			zy_role_id       AS zyRoleId
+		FROM
+			zy_system_role_func
+		WHERE
+			zy_role_id        = #{zyRoleId}
+			and zy_func_code != '1'
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="selectAll" resultType="zySystemRoleFuncBean">
+		SELECT
+			id 			  	  AS id,
+			zy_func_code     AS zyFuncCode,
+			zy_role_id       AS zyRoleId
+		FROM
+			zy_system_role_func
+	</select>
+	
+	<insert id="insertList">
+		INSERT INTO
+			zy_system_role_func
+			(
+				zy_func_code,
+				zy_role_id
+			)
+		VALUES
+			<foreach collection="list" item="item" index="index" separator="," >
+			(
+				#{item.zyFuncCode},
+				#{item.zyRoleId}
+			)
+			</foreach>
+	</insert>
+	
+	<delete id="deleteByRoleCode">
+		DELETE	FROM
+			zy_system_role_func
+		WHERE
+			zy_role_id = #{zyRoleId}
+	</delete>
+</mapper>

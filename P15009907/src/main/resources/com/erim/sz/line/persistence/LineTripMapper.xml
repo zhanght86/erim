@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="linetrip">
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="tripByTxiId" resultType="lineTripBean">
+		SELECT
+			  id,
+            tdl_id                 AS tdlId,
+			ltp_date 		       AS ltpDate,
+			ltp_startplace         AS ltpStartplace,
+			ltp_endplace           AS ltpEndplace,
+			ltp_road               AS ltpRoad,
+			ltp_road_trip          AS ltpRoadTrip,
+			ltp_food               AS ltpFood,
+			ltp_food_trip          AS ltpFoodTrip,
+			ltp_ntype              AS ltpNtype,
+			ltp_road1              AS ltpRoad1,
+			ltp_road_trip1         AS ltpRoadTrip1,
+			ltp_food1              AS ltpFood1,
+			ltp_food_trip1         AS ltpFoodTrip1,
+			ldl_money_contain      AS ldlMoneyContain,
+			ldl_money_contain_off  AS ldlMoneyContainOff,
+			ldl_project            AS ldlProject,
+			ltp_remark             AS ltpRemark,
+			ldl_schedule_travel    AS ldlScheduleTravel,
+			gdd_img1			   AS gddImg1,
+	        gdd_img2			   AS gddImg2,
+			ldl_trip_traffic       AS ldlTripTraffic 
+		FROM
+			line_trip
+	    WHERE 
+	        tdl_id = #{tdlId}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			line_trip
+			(
+			    tdl_id,
+				ltp_date,
+				ltp_startplace,
+				ltp_endplace,
+				ltp_road,
+				ltp_road_trip,
+				ltp_food,
+				ltp_food_trip,
+				ltp_ntype,
+				ltp_road1,
+			    ltp_road_trip1,
+			    ltp_food1,
+			    ltp_food_trip1,
+			    ldl_money_contain,
+			    ldl_money_contain_off,
+			    ldl_project,
+			    ltp_remark,
+			    ldl_schedule_travel,
+			    gdd_img1,
+	            gdd_img2,
+			    ldl_trip_traffic
+			)
+	VALUES
+			(
+			    #{tdlId},
+				#{ltpDate},
+				#{ltpStartplace},
+				#{ltpEndplace},
+				#{ltpRoad},
+				#{ltpRoadTrip},
+				#{ltpFood},
+				#{ltpFoodTrip},
+				#{ltpNtype},
+				#{ltpRoad1},
+			    #{ltpRoadTrip1},
+			    #{ltpFood1},
+			    #{ltpFoodTrip1},
+			    #{ldlMoneyContain},
+			    #{ldlMoneyContainOff},
+			    #{ldlProject},
+			    #{ltpRemark},
+			    #{ldlScheduleTravel},
+			    #{gddImg1},
+	            #{gddImg2},
+			    #{ldlTripTraffic} 
+			)
+	</insert>
+	
+	<!-- 批量增加 -->
+	<insert id="insertList">
+		INSERT INTO
+			line_trip (
+			   	 tdl_id,
+				ltp_date,
+				ltp_startplace,
+				ltp_endplace,
+				ltp_road,
+				ltp_road_trip,
+				ltp_food,
+				ltp_food_trip,
+				ltp_ntype,
+				ltp_road1,
+			    ltp_road_trip1,
+			    ltp_food1,
+			    ltp_food_trip1,
+			    ldl_money_contain,
+			    ldl_money_contain_off,
+			    ldl_project,
+			    ltp_remark,
+			    ldl_schedule_travel,
+			    gdd_img1,
+	            gdd_img2,
+			    ldl_trip_traffic
+              )
+       VALUES
+       <foreach collection="list" item="item" index="index" separator=",">  
+             (
+              	#{item.tdlId},
+		        #{item.ltpDate},
+		        #{item.ltpStartplace},
+	            #{item.ltpEndplace},
+		        #{item.ltpRoad},
+		        #{item.ltpRoadTrip},
+	            #{item.ltpFood},
+		        #{item.ltpFoodTrip},
+		        #{item.ltpNtype},
+		        #{item.ltpRoad1},
+		        #{item.ltpRoadTrip1},
+		        #{item.ltpFood1},
+			    #{item.ltpFoodTrip1},
+			    #{item.ldlMoneyContain},
+			    #{item.ldlMoneyContainOff},
+			    #{item.ldlProject},
+			    #{item.ltpRemark},
+			    #{item.ldlScheduleTravel},
+			    #{item.gddImg1},
+	            #{item.gddImg2},
+			    #{item.ldlTripTraffic} 
+			)
+		</foreach>
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+		      line_trip
+		SET
+	         tdl_id                 = #{tdlId},
+		     ltp_date               = #{ltpDate},
+		     ltp_startplace         = #{ltpStartplace},
+		     ltp_endplace           = #{ltpEndplace},
+		     ltp_road               = #{ltpRoad},
+		     ltp_road_trip          = #{ltpRoadTrip},
+		     ltp_food               = #{ltpFood},
+		     ltp_food_trip          = #{ltpFoodTrip},
+		     ltp_ntype              = #{ltpNtype},
+		     ltp_road1              = #{ltpRoad1},
+		     ltp_road_trip1         = #{ltpRoadTrip1},
+		     ltp_food1              = #{ltpFood1},
+		     ltp_food_trip1         = #{ltpFoodTrip1},
+		     ldl_money_contain      = #{ldlMoneyContain},
+			 ldl_money_contain_off  = #{ldlMoneyContainOff},
+			 ldl_project            = #{ldlProject},
+			 ltp_remark             = #{ltpRemark},
+			 ldl_schedule_travel    = #{ldlScheduleTravel},
+			 gdd_img1			    = #{gddImg1},
+	         gdd_img2			    = #{gddImg2},
+			 ldl_trip_traffic       = #{ldlTripTraffic} 
+		WHERE
+		     id = #{id} 
+	</update>
+	<!-- 根据id删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			line_trip
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>

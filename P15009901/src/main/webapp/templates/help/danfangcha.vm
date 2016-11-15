@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht1">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">帮助中心</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">帮助中心</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>单房差</p>
+								<div class="about_guic">
+									<p><span>摘要: </span>单房差
+									</p>
+								</div>
+									<div class="b_mian">
+		<div class="b_center">
+    		<h2 class="b_title_h2">因旅游过程中的住宿一般是标准间，即两个床位，如果您的出游人数（成人）为奇数时，有可能需要补足另外一个床位的费用。您也可以选择接受与其他人拼房，当无法拼房时再补单房差。</h2>
+		</div>
+
+	</div>
+    <div class="clear"></div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+</body>
+</html>

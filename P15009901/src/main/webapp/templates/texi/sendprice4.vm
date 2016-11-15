@@ -1,0 +1,45 @@
+<div class="chakan_cont chakan_cont_zc clearfix">
+	<div class="b_div_h35">
+        <ul>
+			<li><span>产品编码：</span>$!texiDetailBean.tdlCode</li>
+            <li><span>出发车站：</span>$!texisend.gdlStationback</li>
+            <li><span>送达地点：</span>$!texisend.gdlStationnup</li>
+            <li><span>用车日期：</span>$!texisendprice.tspDate</li>	
+			<li><span>可同时接单：</span>$!texisendprice.tspSign辆</li>				
+        </ul>
+        <a class="close_chakan_a" href="javascript:void()"></a>
+    </div>
+    <div class="b_div_h270">
+        <div class="b_div_w480">
+            <span style="margin-top:3px;">费用说明：</span>
+            <pre style="float:none">$!texisend.gdlStationbackmoney</pre>
+            <span style="margin-top:3px;">服务说明：</span>
+            <pre style="float:none">$!texisend.gdlStationbackshow</pre>
+			<span style="margin-top:3px;">加收费用说明：</span>
+            <pre style="float:none">#if($erim.isNotEmpty($!texisendprice.tspSellH))$!texisendprice.tspSellH 后加收$!texisendprice.tspSellPrice#else无#end</pre>
+        </div>
+        <div class="b_div_w445">
+            <p><span>联系人姓名：</span><input type="text"/></p>
+            <p><span>手机号码：</span><input type="text"/></p>
+            <p><span>用车数量：</span><input type="text" onblur="checkCarOrderNum4($(this))"/>辆<span style="float:none;color:red;text-align:left;margin-left:10px;"></span></p>
+			<!--onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}"-->
+            <p><span>备注：</span><textarea></textarea></p>
+            <a href="javascript:void(0)" onclick="ordertips()">支付</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+function checkCarOrderNum4(obj){
+		var tspSign = '$!texisendprice.tspSign';
+		if(parseInt($(obj).val()) > parseInt(tspSign)){
+			$(obj).next("span").html('应小于'+tspSign+'辆');
+		}else{
+			$(obj).next("span").html('')
+		}
+
+}
+
+function ordertips(){
+	alert('对不起，您不可以在此支付');
+}
+</script>

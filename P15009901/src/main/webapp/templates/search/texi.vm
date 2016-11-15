@@ -1,0 +1,331 @@
+<!-- 租车-->
+<div class="tab-right-div">
+    <div class="tab-top">
+        <span class="tab-top-item subline">国内接送</span>
+        <span class="tab-top-item">国内包车</span>
+        <span class="tab-top-item">国内自驾</span>
+        <span class="tab-top-item">国际·港澳台接送</span>
+        <span class="tab-top-item">国际·港澳台包车</span>
+    </div>
+    <div class="tab-main">
+        <div class="tab-main-div show">
+            <span class="tab-span">行程类型:</span>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="home" checked="checked">接机
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="home">送机
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="home">接站
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="home">送站
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="home">固定线路
+            </label>
+            <div class="tab-main-body">
+                <div class="tab-body-div show">
+					<form id="form11" method="post" action="$appRoot/$cpyno/car.html">
+							<input type="hidden" name="tdlInland" value="02" />
+							<input type="hidden" value="1" name="searchType" />
+							<label class="tab-label">
+                                <span class="tab-span">机场:</span>
+                                <input class="tab-input" type="text" name="gdlStart">
+        					</label>
+    						<label class="tab-label">
+                                <span class="tab-span home-city">送达地点:</span>
+                                <input class="tab-input" type="text" name="gdlEnd">
+        					</label>
+        					<label class="tab-label">
+                                <span class="tab-span">用车时间:</span>
+                                <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tspDate">
+        					</label>
+        					<label class="tab-label" style="display:none">
+                                <span class="tab-span">城市:</span>
+                                <input class="tab-input home-city" type="text">
+        					</label>
+							<button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+                <div class="tab-body-div">
+					<form id="form12" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="02" />
+						<input type="hidden" value="2" name="searchType" />
+						<label class="tab-label">
+                            <span class="tab-span">出发地点:</span>
+                            <input class="tab-input" type="text" name="gdlMachine">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">机场:</span>
+                            <input class="tab-input" type="text" name="gdlMachineback">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">用车时间:</span>
+                            <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tspDate">
+    					</label>
+						<label class="tab-label" style="display:none">
+                            <span class="tab-span">城市:</span>
+                            <input class="tab-input home-city" type="text">
+    					</label>
+                        <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+                <div class="tab-body-div">
+					<form id="form13" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="02" />
+						<input type="hidden" value="3" name="searchType" />
+    					<label class="tab-label">
+                            <span class="tab-span">车站:</span>
+                            <input class="tab-input" type="text" name="gdlStation">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">送达地点:</span>
+                            <input class="tab-input" type="text" name="gdlStationup">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">用车时间:</span>
+                            <input type="text" class="tab-input laydate-icon" onclick="laydate();"  name="tspDate">
+    					</label>
+						<label class="tab-label" style="display:none">
+                            <span class="tab-span">城市:</span>
+                            <input class="tab-input home-city" type="text">
+    					</label>
+                        <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+                <div class="tab-body-div">
+					<form id="form14" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="02" />
+						<input type="hidden" value="4" name="searchType" />
+    					<label class="tab-label">
+                            <span class="tab-span">出发地点:</span>
+                            <input class="tab-input" type="text" name="gdlStationback">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">车站:</span>
+                            <input class="tab-input" type="text" name="gdlStationnup">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">用车时间:</span>
+                            <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tspDate">
+    					</label>
+						<label class="tab-label" style="display:none">
+                            <span class="tab-span">城市:</span>
+                            <input class="tab-input home-city" type="text">
+    					</label>
+                        <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+                <div class="tab-body-div">
+					<form id="form15" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="02" />
+						<input type="hidden" value="7" name="searchType" />
+                        <label class="tab-label">
+                            <span class="tab-span">出发地点:</span>
+                            <input class="tab-input" type="text" name="gdlStartcity">
+                        </label>
+                        <label class="tab-label">
+                            <span class="tab-span">送达地点:</span>
+                            <input class="tab-input" type="text" name="gdlEndcity">
+                        </label>
+                        <label class="tab-label">
+                            <span class="tab-span">用车时间:</span>
+                            <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tspDate">
+                        </label>
+                        <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-main-div pd-top15">
+			<form id="form21" method="post" action="$appRoot/$cpyno/car.html">
+				<input type="hidden" name="tdlInland" value="02" />
+				<input type="hidden" value="5" name="searchType" />
+				<label class="tab-label">
+					<span class="tab-span">用车方式:</span>
+					<select class="tab-select" id="car-day" name="bclType">
+                         <option #if(!$text.bclType || $!text.bclType == '' || $!text.bclType == '01') selected #end value='01'>全天</option>
+                         <option #if($!text.bclType == '02') selected #end value='02'>半天</option>
+                    </select>
+				</label>
+                <label class="tab-label">
+                    <span class="tab-span">用车时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tcpDate1">
+                </label>
+                <label class="tab-label" style="display:none">
+                    <span class="tab-span">结束时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                </label>
+				<label class="tab-label" style="display:none">
+                    <span class="tab-span">城市:</span>
+                    <input class="tab-input home-city" type="text">
+                </label>
+                <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+			</form>
+        </div>
+        <div class="tab-main-div pd-top15">
+			<form id="form31" method="post" action="$appRoot/$cpyno/car.html">
+				<input type="hidden" name="tdlInland" value="02" />
+				<input type="hidden" value="6" name="searchType" />
+                <label class="tab-label">
+                    <span class="tab-span">城市:</span>
+                    <input class="tab-input home-city" type="text" name="zjlCity">
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span">用车时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                </label>
+				<label class="tab-label">
+                    <span class="tab-span">用车方式:</span>
+                    <select class="tab-select" id="car-way" name="zjlType">
+                        <option value="01"  #if($!text.zjlType == '01' || $!text.zjlType == '') selected #end >全天</option>
+                        <option value="02"  #if($!text.zjlType == '02') selected #end >半天</option>
+                    </select>
+                </label>
+                <label class="tab-label" style="display:none">
+                    <span class="tab-span">结束时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                </label>
+                <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+			</form>
+        </div>
+        <div class="tab-main-div">
+            <span class="tab-span">行程类型:</span>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="inter" checked="checked">接机
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="inter">送机
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="inter">接站
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="inter">送站
+            </label>
+            <div class="tab-main-body">
+                <div class="tab-body-div show">
+					<form id="form41" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="01" />
+							<input type="hidden" value="1" name="searchType" />
+							<label class="tab-label">
+                                <span class="tab-span">机场:</span>
+                                <input class="tab-input" type="text" name="gdlStart">
+        					</label>
+    						<label class="tab-label">
+                                <span class="tab-span home-city">送达地点:</span>
+                                <input class="tab-input" type="text" name="gdlEnd">
+        					</label>
+        					<label class="tab-label">
+                                <span class="tab-span">用车时间:</span>
+                                <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tspDate">
+        					</label>
+        					<label class="tab-label" style="display:none">
+                                <span class="tab-span">城市:</span>
+                                <input class="tab-input home-city" type="text">
+        					</label>
+							<button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+                <div class="tab-body-div">
+                    <form id="form42" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="01" />
+						<input type="hidden" value="2" name="searchType" />
+						<label class="tab-label">
+                            <span class="tab-span">出发地点:</span>
+                            <input class="tab-input" type="text" name="gdlMachine">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">机场:</span>
+                            <input class="tab-input" type="text" name="gdlMachineback">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">用车时间:</span>
+                            <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tspDate">
+    					</label>
+						<label class="tab-label" style="display:none">
+                            <span class="tab-span">城市:</span>
+                            <input class="tab-input home-city" type="text">
+    					</label>
+                        <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+                <div class="tab-body-div">
+                    <form id="form43" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="01" />
+						<input type="hidden" value="3" name="searchType" />
+    					<label class="tab-label">
+                            <span class="tab-span">车站:</span>
+                            <input class="tab-input" type="text" name="gdlStation">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">送达地点:</span>
+                            <input class="tab-input" type="text" name="gdlStationup">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">用车时间:</span>
+                            <input type="text" class="tab-input laydate-icon" onclick="laydate();"  name="tspDate">
+    					</label>
+						<label class="tab-label" style="display:none">
+                            <span class="tab-span">城市:</span>
+                            <input class="tab-input home-city" type="text">
+    					</label>
+                        <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+                <div class="tab-body-div">
+                    <form id="form44" method="post" action="$appRoot/$cpyno/car.html">
+						<input type="hidden" name="tdlInland" value="01" />
+						<input type="hidden" value="4" name="searchType" />
+    					<label class="tab-label">
+                            <span class="tab-span">出发地点:</span>
+                            <input class="tab-input" type="text" name="gdlStationback">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">车站:</span>
+                            <input class="tab-input" type="text" name="gdlStationnup">
+    					</label>
+    					<label class="tab-label">
+                            <span class="tab-span">用车时间:</span>
+                            <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tspDate">
+    					</label>
+						<label class="tab-label" style="display:none">
+                            <span class="tab-span">城市:</span>
+                            <input class="tab-input home-city" type="text">
+    					</label>
+                        <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+					</form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-main-div pd-top15">
+            <form id="form51" method="post" action="$appRoot/$cpyno/car.html">
+				<input type="hidden" name="tdlInland" value="01" />
+				<input type="hidden" value="5" name="searchType" />
+				<label class="tab-label">
+					<span class="tab-span">用车方式:</span>
+					<select class="tab-select" id="car-day" name="bclType">
+                         <option #if(!$text.bclType || $!text.bclType == '' || $!text.bclType == '01') selected #end value='01'>全天</option>
+                         <option #if($!text.bclType == '02') selected #end value='02'>半天</option>
+                    </select>
+				</label>
+                <label class="tab-label">
+                    <span class="tab-span">用车时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="tcpDate1">
+                </label>
+                <label class="tab-label" style="display:none">
+                    <span class="tab-span">结束时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                </label>
+				<label class="tab-label" style="display:none">
+                    <span class="tab-span">城市:</span>
+                    <input class="tab-input home-city" type="text">
+                </label>
+                <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+			</form>
+        </div>
+    </div>
+</div>
+<!-- /租车-->

@@ -1,0 +1,226 @@
+<div class="indextour">
+    <div class="indextourtop">
+        <span><a href="$appRoot/$cpyno/lvyou.html?searchModel=2" target="_blank">当地旅游</a></span>
+        <ul>
+			#foreach($item in $dd.keySet())
+                <li #if($velocityCount == 1) class="indextourtopullihover" #end>
+                    $item
+                </li>
+			#end
+        </ul>
+    </div>
+    <div class="indextourcenterbiger">
+		#foreach($list in $dd.keySet())
+			<div  #if($velocityCount == 1) class="indextourcenter show" #else class="indextourcenter" #end>
+				<div class="indextourcter">
+                    <div class="indextourcenterleft">
+						#foreach($item in $dd.get($list))
+							#if($velocityCount < 4)
+								#if($velocityCount == 1)
+                                    <div class="indextcll">
+                                        <div class="indextourcenterleftleft">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+    											#if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1" >
+                                                #else
+                                                	<img src="$staticRoot/images/pic1.jpg" >
+                                                #end
+                                                <div class="indextourcenterleftleftfont">
+                                                    <p>
+    													$erim.subString($!item.gddName,30)
+                                                    </p>
+                                                    <div class="indextourcenterleftleftfontqian">
+                                                        <span class="indextourcenterleftleftfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                                                        
+                                                    </div>
+                                                </div> 
+											</a>
+                                        </div>
+                                    </div>
+								#end
+								#if($velocityCount == 2)
+                                    <div class="indextcterrbox">
+                                        <div class="indextourcenterrightbox">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+                                                #if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1" >
+                                                #else
+                                                	<img src="$staticRoot/images/pic2.jpg" >
+                                                #end
+                                                <div class="indextourcenterrightboxfont">
+                                                    <p>
+                                                        $erim.subString($!item.gddName,17)
+                                                    </p>
+                                                    <div class="indextourcenterrightboxfontqian">
+                                                        <span class="indextourcenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                                                        
+                                                    </div>
+                                                </div> 
+											</a>
+                                        </div>
+                                    </div>
+								#end
+								#if($velocityCount == 3)
+                                    <div class="indextcterrbox boxmarginrighttour">
+                                        <div class="indextourcenterrightbox">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+                                                #if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1" >
+                                                #else
+                                                	<img src="$staticRoot/images/pic2.jpg" >
+                                                #end
+                                                <div class="indextourcenterrightboxfont">
+                                                    <p>
+                                                        $erim.subString($!item.gddName,17)
+                                                    </p>
+                                                    <div class="indextourcenterrightboxfontqian">
+                                                        <span class="indextourcenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                                                        
+                                                    </div>
+                                                </div> 
+											</a>
+                                        </div>
+                                    </div>
+								#end
+							#end
+						#end
+                    </div>
+					
+                    <div class="indextourcentermiddle">
+						#foreach($item in $dd.get($list))
+							#if($velocityCount >3 && $velocityCount<7)
+								#if($velocityCount == 4)
+                                    <div class="indextcterrbox">
+                                        <div class="indextourcenterrightbox">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+                                                #if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1" >
+                                                #else
+                                                	<img src="$staticRoot/images/pic2.jpg" >
+                                                #end
+                                                <div class="indextourcenterrightboxfont">
+                                                    <p>
+                                                        $erim.subString($!item.gddName,17)
+                                                    </p>
+                                                    <div class="indextourcenterrightboxfontqian">
+                                                        <span class="indextourcenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                                                        
+                                                    </div>
+                                                </div> 
+											</a>
+                                        </div>
+                                    </div>
+								#end
+								#if($velocityCount == 5)
+                                    <div class="indextcterrbox">
+                                        <div class="indextourcenterrightbox">
+											#if($item.gddImg1 && $!item.gddImg1 != '')
+                                            	<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName"><img src="$staticFileRes$item.gddImg1" ></a>
+                                            #else
+                                            	<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName"><img src="$staticRoot/images/pic2.jpg" ></a>
+                                            #end
+                                            <div class="indextourcenterrightboxfont">
+                                                <p>
+                                                    $erim.subString($!item.gddName,17)
+                                                </p>
+                                                <div class="indextourcenterrightboxfontqian">
+                                                    <span class="indextourcenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                                                    
+                                                </div>
+                                            </div> </a>
+                                        </div>
+                                    </div>
+								#end
+								#if($velocityCount == 6)
+                                    <div class="indextcterrbox">
+                                        <div class="indextourcenterrightbox">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+                                                #if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1" >
+                                                #else
+                                                	<img src="$staticRoot/images/pic2.jpg" >
+                                                #end
+                                                <div class="indextourcenterrightboxfont">
+                                                    <p>
+                                                        $erim.subString($!item.gddName,17)
+                                                    </p>
+                                                    <div class="indextourcenterrightboxfontqian">
+                                                        <span class="indextourcenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                                                        
+                                                    </div>
+                                                </div> 
+											</a>
+                                        </div>
+                                    </div>
+								#end
+							#end
+						#end
+                    </div>
+                    <div class="indextourcenterright">
+						#foreach($item in $dd.get($list))
+							#if($velocityCount >6)
+								#if($velocityCount == 7)
+                					<div class="indextcterrbox">
+                						<div class="indextourcenterrightbox indextourrrb">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+                    							#if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1" >
+                                                #else
+                                                	<img src="$staticRoot/images/pic2.jpg" >
+                                                #end
+                								<div class="indextourcenterrightboxfont">
+                									<p>$erim.subString($!item.gddName,17)</p>
+                									<div class="indextourcenterrightboxfontqian">
+                										<span class="indextourcenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                									</div>
+                								</div>
+                							</a>
+                						</div>
+                					</div>
+								#end
+								#if($velocityCount == 8)
+                					<div class="indextcterrbox boxmargintour">
+                						<div class="indextourcenterrightbox">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+                    							#if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1" >
+                                                #else
+                                                	<img src="$staticRoot/images/pic2.jpg" >
+                                                #end
+                								<div class="indextourcenterrightboxfont">
+                									<p>$erim.subString($!item.gddName,17)</p>
+                									<div class="indextourcenterrightboxfontqian">
+                										<span class="indextourcenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                									</div>
+                								</div>
+                							</a>
+                						</div>
+                					</div>
+								#end
+								#if($velocityCount == 9)
+                					<div class="indextcll boxmargintour">
+                						<div class="indextourcenterleftleft">
+											<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName">
+                    							#if($item.gddImg1 && $!item.gddImg1 != '')
+                                                	<img src="$staticFileRes$item.gddImg1"  id="tourimg">
+                                                #else
+                                                	<img src="$staticRoot/images/pic2.jpg"  id="tourimg">
+                                                #end
+                								<div class="indextourcenterleftleftfont">
+                									<p>$erim.subString($!item.gddName,30)</p>
+                									<div class="indextourcenterleftleftfontqian">
+                										<span class="indextourcenterleftleftfontqianm"><label>￥$erim.emptyDefault($item.gpeRetailAdult,'0')</label>起</span>
+                									</div>
+                								</div>
+                							</a>
+                						</div>
+                					</div>
+								#end
+							#end
+						#end
+    				</div>
+                </div>
+			</div>
+		#end
+    </div>
+</div>

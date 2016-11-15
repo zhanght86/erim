@@ -1,0 +1,186 @@
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/aa_2.png" alt="企业信息" title="企业信息" />企业信息
+	</p>
+	<div class="g_line mb20"></div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<span style="margin-left:75px;color:red;font-size:14px;">基础信息：</span>
+    </div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+        <div class="label_left">公司名称：</div>
+		<div class="input_right">$!userCpyName</div>
+	</div>
+	#if($erim.isNotEmpty($!userCommpany.cpyBrand))
+    	<div class="input_block clearfix" style="margin-bottom:10px;">
+    		<div class="label_left">品牌名称：</div>
+    		<div class="input_right">$!userCommpany.cpyBrand</div>
+    	</div>
+	#end
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">公司电话：</div>
+		<div class="input_right">$!userCommpany.cpyTelephone</div>
+	</div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">负责人：</div>
+		<div class="input_right">$!userCommpany.ccpName</div>
+	</div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">负责人QQ：</div>
+		<div class="input_right">$!userCommpany.ccpQq</div>
+	</div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">负责人电话：</div>
+		<div class="input_right">$!userCommpany.ccpTelephone</div>
+	</div>
+	#if($erim.isNotEmpty($!userCommpany.cpyFax))
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">公司传真：</div>
+		<div class="input_right">$!userCommpany.cpyFax</div>
+	</div>
+	#end
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">公司邮箱：</div>
+		<div class="input_right">$!userCommpany.cpyEmail</div>
+	</div>
+	#if($erim.isNotEmpty($!userCommpany.cpyImg))
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">公司Logo：</div>
+		<div class="input_right">
+			<img class="img200" style="width:150px;height:100px;" src="$staticFileRes$userCommpany.cpyImg" />
+		</div>
+	</div>
+	#end
+	<div class="input_block clearfix">
+		<div class="label_left">公司地址：</div>
+		<div class="input_right">
+			#if($!userCommpany.cpyIsInland == '02') 
+				#vregion($!userCommpany.cpyProvince) #vregion($!userCommpany.cpyCity) #vregion($!userCommpany.cpyCounty) 
+			#else
+				#if($!userCommpany.cpyExternal == '04')
+					$!userCommpany.cpyForeign $!userCommpany.cpyForeignCity
+				#else
+					#vtext($!userCommpany.cpyExternal,'C108')
+				#end
+			#end 
+			$!userCommpany.cpyAddress
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<span style="margin-left:75px;color:red;font-size:14px;">业务信息：</span>
+    </div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		#if($!userBussiness.cbsService=='03')
+			<div class="label_left">地接涉及区域：</div>
+			<div style="float:left;width:697px;">
+		#elseif($!userBussiness.cbsService=='04')
+			<div class="label_left">同业服务范围：</div>
+		#end
+		#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+			<div class="input_right">
+				#vregion($!userBussiness.cbsRanProvince1)
+				#vregion($!userBussiness.cbsRanCity1)
+				#vregion($!userBussiness.cbsRanCounty1)
+            </div>
+		#end
+		#if($erim.isNotEmpty($!userBussiness.cbsRanProvince2))
+			<div class="input_right"  style="margin-left:0px;">
+				#vregion($!userBussiness.cbsRanProvince2)
+				#vregion($!userBussiness.cbsRanCity2)
+				#vregion($!userBussiness.cbsRanCounty2)
+			</div>
+		#end
+		#if($erim.isNotEmpty($!userBussiness.cbsRanProvince3))
+			<div class="input_right">
+				#vregion($!userBussiness.cbsRanProvince3)
+				#vregion($!userBussiness.cbsRanCity3)
+				#vregion($!userBussiness.cbsRanCounty3)
+			</div>
+		#end
+		#if($erim.isNotEmpty($!userBussiness.cbsRanProvince4))
+			<div class="input_right">
+				#vregion($!userBussiness.cbsRanProvince4)
+				#vregion($!userBussiness.cbsRanCity4)
+				#vregion($!userBussiness.cbsRanCounty4)
+			</div>
+		#end
+		#if($erim.isNotEmpty($!userBussiness.cbsRanProvince5))
+			<div class="input_right">
+				#vregion($!userBussiness.cbsRanProvince5)
+				#vregion($!userBussiness.cbsRanCity5)
+				#vregion($!userBussiness.cbsRanCounty5)
+			</div>
+		#end
+		#if($erim.isNotEmpty($!userBussiness.cbsRanState1) || $erim.isNotEmpty($!userBussiness.cbsRanState2)
+			 || $erim.isNotEmpty($!userBussiness.cbsRanState3)  || $erim.isNotEmpty($!userBussiness.cbsRanState4)
+			 || $erim.isNotEmpty($!userBussiness.cbsRanState5)  || $erim.isNotEmpty($!userBussiness.cbsRanInterna))
+			<div class="input_right">
+				$!userBussiness.cbsRanState1
+				$!userBussiness.cbsRanState2
+				$!userBussiness.cbsRanState3
+				$!userBussiness.cbsRanState4
+				$!userBussiness.cbsRanState5
+				#vtextarray($userBussiness.cbsRanInterna,'C108')
+			</div>
+		#end
+	</div>
+	  
+	
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">操作人(计调/OP)：</div>
+		<div class="input_right">$!userBussiness.cbsOperator</div>
+	</div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">操作人电话：</div>
+		<div class="input_right">$!userBussiness.cbsOperatorPhone</div>
+	</div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">操作人QQ：</div>
+		<div class="input_right">$!userBussiness.cbsOperatorQQ</div>
+	</div>
+	#if($erim.isNotEmpty($!userBussiness.cbsLicense))
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">营业执照扫描件：</div>
+		<div class="input_right">
+    		<img class="img200" style="width:150px;height:100px;" src="$staticFileRes$userBussiness.cbsLicense" />
+		</div>
+	</div>
+	#end
+	#if($erim.isNotEmpty($!userBussiness.cbsPermission))
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">营业许可证扫描件：</div>
+		<div class="input_right">
+    		<img class="img200" style="width:150px;height:100px;" src="$staticFileRes$userBussiness.cbsPermission" />
+		</div>
+	</div>
+	#end
+	#if($erim.isNotEmpty($!userBussiness.cbsProve))
+    	<div class="input_block clearfix">
+    		<div class="label_left">负责人证明：</div>
+    		<div class="input_right">
+        		<a href="$staticFileRes$!userBussiness.cbsProve" target="_blank">负责人证明.doc</a>
+    		</div>
+    	</div>
+	#end
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<span style="margin-left:75px;color:red;font-size:14px;">账户信息：</span>
+    </div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">单位全称：</div>
+		<div class="input_right">$!userBussiness.cbsAccountName</div>
+	</div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">账户：</div>
+		<div class="input_right">$!userBussiness.cbsAccount</div>
+	</div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">开户行：</div>
+		<div class="input_right">$!userBussiness.cbsOpenAccount</div>
+	</div>
+	<div class="input_block clearfix"></div>
+	<div class="input_block clearfix" style="margin-bottom:10px;">
+		<div class="label_left">开通QQ推广连接：</div>
+        <div class="input_right"><a  href="http://shang.qq.com/v3/widget.html">http://shang.qq.com/v3/widget.html</a></div>
+	</div>	
+        <span style="color:#A2A29F;margin-left:90px;">注：企业QQ无需开通推广功能 </span>
+</div>
+</div>

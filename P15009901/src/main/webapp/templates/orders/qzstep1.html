@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>user index</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/dingdan.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/d_u_c.js"></script>
+<script type="text/javascript" src="js/h5.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$(".delete_a").live("click",function(){
+		$(this).parent().parent().remove();
+		//return false;
+		for(var i=0;i<=$(".posi_block").length;i++)
+		{
+			$(".posi_con em").eq(i).text(i+1);
+		}
+		
+	})
+	$(".a_button3").bind("click",function(){
+		var num1=$(".posi_block").length+1;
+		$(this).parent().before("<div class='posi_block pl60'><div class='form_block pl90'><label>姓名：</label><input type='text' placeholder='证件的中文姓名'> <span class='error'>*</span></div><div class='form_block pl90'><label>证件类型：</label><input type='text' placeholder='请填写正确的证件号码'> <span class='error'>*</span></div><div class='form_block pl90 mb20'><label>验证码：</label><input type='text' placeholder='旅客手机号码'> <span class='error'>*</span></div><div class='posi_con'><em>"+num1+"</em><a class='delete_a' href='javascript:void(0);'>&times;</a></div><div class='g_line mb20 mr100'></div></div>");
+		return false;
+	})
+})
+</script>
+</head>
+<body>
+
+	<header class="mb10">
+		<div class="head_cont clearfix">
+			<a href="#"><img class="img_block" src="images/step_03.jpg" title="" alt=""></a>
+			<span class="nav_mini"><a href="#">用户中心</a>|<a href="#">网站首页</a></span>
+		</div>
+	</header>
+	<div class="g_cont">
+		<img class="mb10" src="images/step_05.jpg" title="进度：填写信息" alt="进度：填写信息">
+		<div class="g_lt_l">
+			
+			<div class="g_block_2 mb10">
+				<h3 class="g_tit_1 mb20">订单信息</h3>
+					<div class="posi_block pl60">
+						<div class="form_block pl90"><label>姓名：</label><input type="text" placeholder="证件的中文姓名"> <span class="error">*</span></div>
+						<div class="form_block pl90">
+							<label>证件类型：</label><input type="text" placeholder="请填写正确的证件号码"> <span class="error">*</span></div>
+						<div class="form_block pl90 mb20">
+							<label>验证码：</label><input type="text" placeholder="旅客手机号码"> <span class="error">*</span></div>
+						<div class="posi_con"><em>1</em></div>
+						<div class="g_line mb20 mr100"></div>
+					</div>
+					<div class="posi_block pl60">
+						<div class="form_block pl90"><label>姓名：</label><input type="text" placeholder="证件的中文姓名"> <span class="error">*</span></div>
+						<div class="form_block pl90">
+							<label>证件类型：</label><input type="text" placeholder="请填写正确的证件号码"> <span class="error">*</span></div>
+						<div class="form_block pl90 mb20">
+							<label>验证码：</label><input type="text" placeholder="旅客手机号码"> <span class="error">*</span></div>
+						<div class="posi_con"><em>2</em><a class="delete_a" href="javascript:void(0);">&times;</a></div>
+						<div class="g_line mb10 mr100"></div>
+					</div>
+					<p class="pl120 ml130 mb30"><a class="a_button3" href="javascript:void(0);">添加</a></p>
+				</div>
+			<div class="g_block_2 mb30">
+				<h3 class="g_tit_1 mb30">联系人信息<span class="sec_inf">登录一键设置联系人信息，<a href="#">立即注册</a>，已是佳佳会员，<a href="#">立即登录</a></span></h3>
+				<div class="form_block pl90"><label>姓名：</label><input class="select_1" type="text" placeholder="联系人姓名"></div>
+				<div class="form_block pl90"><label>手机号码：</label><input type="text" placeholder="接受验证信息和订单号码">
+						 <input type="button" id="btn" class="ml20" value="发送验证码" /> <span class="error">*</span>
+							<script type="text/javascript">
+var wait=60;
+document.getElementById("btn").disabled = false;  
+function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");  
+			o.style.cssText="background-color:#FAAF4B;";        
+            o.value="发送验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+			o.style.cssText="background-color:#c8c8c8;";
+            o.value= "("+ wait + ")重新发送";
+            wait--;
+            setTimeout(function() {
+                time(o)
+            },
+            1000)
+        }
+}
+document.getElementById("btn").onclick=function(){time(this);}
+</script></div>
+				<div class="form_block pl90 mb30 on_error"><label>验证码：</label><input type="text"> <span class="error">验证码错误请重新输入</span></div>
+			</div>
+			<div class="form_block2 pl120 mb50">
+				<p class="g_txt_1"><label><input name="Fruit" type="checkbox" />&nbsp;&nbsp;&nbsp;同意佳佳旅行网服务条款 <a href="#">查看条款</a> 并核实你所填写信息无误 </label></p><br>
+				<input type="submit" class="ml130" value="提交信息">
+			</div>
+		</div>
+
+		<div class="g_lt_r">
+			<div class="g_block_2" style="border-bottom:none;">
+				<h3 class="g_tit_1 mb20">订单信息</h3>
+
+				<div class="dc_mess_box pb10">
+					<img src="images/dad_03.png">
+					<p class="tit_p"><a href="#">法国7天签证单程</a><a class="edit_a" href="#">修改&gt;</a></p>
+					<p class="mess_p"><span>产品名称：</span><span class="cont">法国前程7天单程优惠</span></p>
+				</div>
+			</div>
+			<div class="g_block_4 g_block_4_4 pl18 pr18 pt5">
+				<h3 class="g_tit_2 mb10">结算信息</h3>
+				<ul class="g_list_1">
+					<li>成人票<span>￥29.9×2</span>
+				</ul>
+				<p class="add_mon">支付总额<span><em>￥</em>29.9</span></p>
+			</div>
+		</div>
+		<div class="cb"></div>
+		<footer>
+			<p>Copyright © 2002-2014  版权所有  北京佳旅联合国际旅行社有限公司   苏ICP证B2-20100204  旅行社业务许可证：L-JS-CJ00070	</p>
+		</footer>
+	</div>
+	
+</body>
+</html>
+ 

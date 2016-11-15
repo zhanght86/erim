@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.e-rimming</groupId>
+    <artifactId>erim-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>E-rimming :: Module :: Parent</name>
+    <version>0.0.2</version>
+    <organization>
+        <name>E-rimming</name>
+        <url>http://www.e-rimming.com</url>
+    </organization>
+
+    <properties>
+        <!-- 主要依赖库的版本定义 -->
+        <spring.version>3.1.1.RELEASE</spring.version>
+        <mybatis.version>3.1.0</mybatis.version>
+        <mybatis.spring.version>1.1.0</mybatis.spring.version>
+        <hibernate.version>4.1.1.Final</hibernate.version>
+        <shiro.version>1.2.0</shiro.version>
+        <commons.dbcp.version>1.4</commons.dbcp.version>
+        <commons.pool.version>1.6</commons.pool.version>
+        <commons.io.version>2.4</commons.io.version>
+        <commons.lang.version>2.6</commons.lang.version>
+        <commons.beanutils.version>1.8.3</commons.beanutils.version>
+        <commons.fileupload.version>1.3.1</commons.fileupload.version>
+        <commons.codec.version>1.9</commons.codec.version>
+        <commons.collections.version>3.2.1</commons.collections.version>
+        <commons.digester.version>2.1</commons.digester.version>
+        <commons.http.version>1.1</commons.http.version>
+        <commons.httpclient.version>3.1</commons.httpclient.version>
+        <commons.logging.version>1.1.3</commons.logging.version>
+        <org.codehaus.jackson>1.8.2</org.codehaus.jackson>
+        <cxf.version>2.6.0</cxf.version>
+        <db.mysql.version>5.1.18</db.mysql.version>
+        <db.hsqldb.version>1.8.0.7</db.hsqldb.version>
+        <erim.version>0.0.2</erim.version>
+        <erim.third.velocity.version>1.7</erim.third.velocity.version>
+        <erim.third.velocity-tools.version>2.0</erim.third.velocity-tools.version>
+        <erim.third.blazeds.version>4.0.0.14931</erim.third.blazeds.version>
+        <erim.third.jdbc-sqlserver.version>1.0</erim.third.jdbc-sqlserver.version>
+        <erim.third.ueditor.version>1.4.3</erim.third.ueditor.version>
+        <servlet.version>2.5</servlet.version>
+        <jstl.version>1.2</jstl.version>
+        <org.slf4j.version>1.6.2</org.slf4j.version>
+        <log4j.version>1.2.16</log4j.version>
+        <junit.version>4.8.2</junit.version>
+        <jetty.version>7.6.6.v20120903</jetty.version>
+        <mail.version>1.4.4</mail.version>
+        <!-- Plugin的属性定义 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.6</jdk.version>
+    </properties>
+
+    <!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找 -->
+    <repositories>
+        <!-- For E-rimming -->
+        <repository>
+            <id>e-rimming</id>
+            <url>http://218.240.148.3:9999/nexus/content/repositories/e-rimming</url>
+        </repository>
+        <!-- For Maven Official -->
+        <repository>
+            <id>offical</id>
+            <name>Maven Official Repository</name>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+       <repository>
+           <id>yoava</id>
+           <name>AOL yoava</name>
+           <url>http://yoava.artifactoryonline.com/yoava/repo</url>
+       </repository>
+    </repositories>
+
+    <!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
+    <dependencyManagement>
+        <dependencies>
+            <!--================================================================================ -->
+            <!-- spring basic -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- spring aop -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.6.0</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- spring tx -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- spring orm -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- spring mvc -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- hibernate -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                <version>1.0.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time-hibernate</artifactId>
+                <version>1.3</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-ehcache</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- apache -->
+            <dependency>
+                <groupId>commons-dbcp</groupId>
+                <artifactId>commons-dbcp</artifactId>
+                <version>${commons.dbcp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>${commons.pool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons.beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils-core</artifactId>
+                <version>${commons.beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons.collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-digester</groupId>
+                <artifactId>commons-digester</artifactId>
+                <version>${commons.digester.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons.logging.version}</version>
+            </dependency>
+            <!-- quartz -->
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>1.7.2</version>
+			</dependency>
+			<!-- java remote http -->
+            <dependency>
+                <groupId>commons-http</groupId>
+                <artifactId>commons-http</artifactId>
+                <version>${commons.http.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${commons.httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons.fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+			<!-- flex amf java -->
+            <dependency>
+            	<groupId>org.apache.httpcomponents</groupId>
+            	<artifactId>httpcore</artifactId>
+            	<version>4.4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>4.5</version>
+            </dependency>
+            <dependency>
+            	<groupId>org.apache.httpcomponents</groupId>
+            	<artifactId>httpclient</artifactId>
+            	<version>4.5</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!--jackson json -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${org.codehaus.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${org.codehaus.jackson}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- soap -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-core</artifactId>
+                <version>${cxf.version}</version>
+                <exclusions>
+                    <!-- use javax.mail.mail instead -->
+                    <exclusion>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                        <artifactId>geronimo-javamail_1.4_spec</artifactId>
+                    </exclusion>
+                    <!-- use javax.activation.activation instead -->
+                    <exclusion>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                        <artifactId>geronimo-activation_1.1_spec</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>${cxf.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                        <artifactId>geronimo-javamail_1.4_spec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                        <artifactId>geronimo-activation_1.1_spec</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>${cxf.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- db -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${db.mysql.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${db.hsqldb.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- servlet -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- validator -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>4.2.0.Final</version>
+            </dependency>
+
+            <!--================================================================================ -->
+            <!--==========================JAVA UTILS============================================ -->
+            <!--================================================================================ -->
+            <!-- Thumbnailator: 图片处理类库 缩放 水印等 -->
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>0.4.2</version>
+            </dependency>
+            <!-- xls: 处理excel文件 -->
+            <dependency>
+                <groupId>jexcelapi</groupId>
+                <artifactId>jxl</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <!-- xml: 处理xml文件 -->
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>1.6.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--json-lib-->
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>    
+                <artifactId>json-lib</artifactId>   
+                <version>2.4</version>
+                <classifier>jdk15</classifier>    
+            </dependency>
+            <!--================================================================================ -->
+            <!-- log -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${org.slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${org.slf4j.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${org.slf4j.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${org.slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- test -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- jetty -->
+            <dependency>
+                <groupId>org.eclipse.jetty.aggregate</groupId>
+                <artifactId>jetty-webapp</artifactId>
+                <version>${jetty.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-jsp</artifactId>
+                <version>${jetty.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- erimming -->
+            <dependency>
+                <groupId>com.e-rimming</groupId>
+                <artifactId>erim-core</artifactId>
+                <version>${erim.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming</groupId>
+                <artifactId>erim-utils</artifactId>
+                <version>${erim.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming</groupId>
+                <artifactId>erim-web</artifactId>
+                <version>${erim.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming</groupId>
+                <artifactId>erim-flex</artifactId>
+                <version>${erim.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming</groupId>
+                <artifactId>erim-flex2</artifactId>
+                <version>${erim.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming</groupId>
+                <artifactId>erim-flexuser</artifactId>
+                <version>${erim.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming</groupId>
+                <artifactId>erim-flexuser2</artifactId>
+                <version>${erim.version}</version>
+            </dependency>
+            <!--================================================================================ -->
+            <!-- java mail -->
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.4</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+            <!--================================================================================ -->
+            <!-- erim third -->
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${erim.third.velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>velocity-tools</artifactId>
+                <version>${erim.third.velocity-tools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>blazeds-common</artifactId>
+                <version>${erim.third.blazeds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>blazeds-core</artifactId>
+                <version>${erim.third.blazeds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>blazeds-proxy</artifactId>
+                <version>${erim.third.blazeds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>blazeds-rds-server</artifactId>
+                <version>${erim.third.blazeds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>blazeds-remoting</artifactId>
+                <version>${erim.third.blazeds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>blazeds-opt</artifactId>
+                <version>${erim.third.blazeds.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>jdbc-sqljdbc</artifactId>
+                <version>${erim.third.jdbc-sqlserver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>jdbc-sqljdbc4</artifactId>
+                <version>${erim.third.jdbc-sqlserver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>ueditor-base</artifactId>
+                <version>${erim.third.ueditor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>ueditor-json</artifactId>
+                <version>${erim.third.ueditor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>trs-msbase</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>trs-trsbean</artifactId>
+                <version>1.0</version>
+            </dependency>
+	        <dependency>
+	            <groupId>com.e-rimming.third</groupId>
+	            <artifactId>trs-mssqldriver</artifactId>
+	            <version>1.0</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.e-rimming.third</groupId>
+	            <artifactId>trs-mssqlserver</artifactId>
+	            <version>1.0</version>
+	        </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>alibaba-fastjson</artifactId>
+                <version>1.1.29</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>jai-core</artifactId>
+				<version>1.1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>jai-codec</artifactId>
+				<version>1.1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.e-rimming.third</groupId>
+                <artifactId>html2image</artifactId>
+                <version>0.9</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 插件配置 -->
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+        <pluginManagement>
+            <plugins>
+                <!-- compiler插件, 设定JDK版本 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.5</version>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.4</version>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>src/main/webapp/WEB-INF/lib</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.4.1</version>
+                    <configuration>
+                        <filesets>
+                            <fileset>
+                                <directory>src/main/webapp/WEB-INF/lib</directory>
+                                <followSymlinks>false</followSymlinks>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+                <!-- jetty插件,设定重载模式 -->
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${jetty.version}</version>
+                    <configuration>
+                        <reload>manual</reload>
+                    </configuration>
+                </plugin>
+                <!-- tomcat插件 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>tomcat-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

@@ -1,0 +1,44 @@
+	<form method="post" id="form1">
+    	<div class="g_block_2 mb20">
+			<div class="input_block clearfix mb0">
+    			<div class="input_right input_right_wauto">
+				<label>订单号：</label>
+				<input class="w130" name="ptoCode">
+				<label class="ml25">单程/往返：</label>
+				<input class="w130">
+				<label class="ml25">预定人姓名：</label>
+				<input class="w130">
+				<label class="ml25">预定人电话：</label>
+				<input class="w130">
+				<span class="red_a ml25"  type="button" onclick="index.searchform('form1','$appRoot/orders/planeticket/list');" >查询</span>
+			</div>
+			</div> 
+    	</div>
+    </div>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>公司/品牌</th>
+    			<th>服务地区</th>
+    			<th>出发地</th>
+    			<th>目的地</th>
+    			<th>负责人</th>
+    			<th>计调/电话</th>
+                <th>在线交谈</th>
+			</tr>
+			#foreach($item in $transticketList)
+				<tr>
+                  	<td>没有</td>
+                    <td>没有</td>
+        			<td>$!item.ttdStartAddress</td>
+                    <td>$!item.ttdArrivedAddress</td>
+        			<td>没有</td>
+        			<td>没有</td>
+        			<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cdlPeopleQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+				</tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>

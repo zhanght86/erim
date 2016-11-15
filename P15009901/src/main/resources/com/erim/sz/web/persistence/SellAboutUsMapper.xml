@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sellaboutus">
+	<!-- 根据关于我们ID查询 -->
+	<select id="selectSellAboutUsBean" resultType="aboutUsBean">
+		SELECT
+			sell_about_us.id         as id,
+			sell_about_us.cpy_id     as cpyId,
+			sau_remark               as sauRemark,
+			sau_createtime           as sauCreatetime,
+			sau_createuser           as sauCreateuser,
+			company_detail.cpy_name  as cpyName
+ 		FROM
+			sell_about_us  
+		left join 
+			company_detail
+		on 
+			sell_about_us.cpy_id = company_detail.id
+		WHERE
+			sell_about_us.cpy_id = #{cpyId}
+	</select>
+	
+</mapper>

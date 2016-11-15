@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>导游_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description">
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/tour.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/kuCity.css">
+	<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+        <div class="tour">
+			<!--导航-->
+            #parse("common/indexwraptwo.vm")
+			<!--导航结束-->
+		<form id="form1" method="post" action="$appRoot/$cpyno/daoyou.html">
+		   <div class="search-menu">
+				<div class="smenu-li" style="border-top:2px solid #faaf4d ">
+        			<span class="lab-span">服务类型:</span>
+        			<label class="lab-radio">
+        				<input  type="radio" class="search-radio" #if($!guide.gdlServer == '01' || !$guide.gdlServer || $!guide.gdlServer == '') checked="checked" #end onclick="gdlServerClick('01')">国内地陪
+        			</label>
+					<label class="lab-radio">
+        				<input type="radio" class="search-radio"  #if($!guide.gdlServer == '02') checked="checked" #end onclick="gdlServerClick('02')">国内全陪
+        			</label>
+        			<label class="lab-radio">
+        				<input type="radio" class="search-radio"  #if($!guide.gdlServer == '03') checked="checked" #end onclick="gdlServerClick('03')">国际·港澳台领队
+        			</label>
+        			<label class="lab-radio">
+        				<input type="radio" class="search-radio"  #if($!guide.gdlServer == '04') checked="checked" #end onclick="gdlServerClick('04')">国际·港澳台地陪
+        			</label>
+        		</div>
+        		<div class="guide-nation">
+					#if($!guide.gdlServer == '01' || !$guide.gdlServer || $!guide.gdlServer == '')
+    					<!--国内地陪-->
+    					#vsearchareaprovince('gdlLocalProvince',$!guide.gdlLocalProvince,'gdlLocalCity',$!guide.gdlLocalCity)
+    					<!--/国内地陪-->
+					#end
+					#if($!guide.gdlServer == '02')
+    					<!--国内全陪是出发地-->
+						#vsearchareaprovince('gdlNationalProvince',$!guide.gdlNationalProvince,'gdlNationalCity',$!guide.gdlNationalCity)
+    					<!--/国内全陪-->
+					#end
+					#if($!guide.gdlServer == '03')
+    					<!--国际·港澳台领队-->
+    					###vsearcharea('tdlWithinOrOuter','gdlLeaderProvince',$!guide.gdlLeaderProvince,'gdlLeaderCity',$!guide.gdlLeaderCity,'gdlDestination',$!guide.gdlDestination,'gdlDestinationCountry',$!guide.gdlDestinationCountry)
+						#vsearchareaprovince('gdlLeaderProvince',$!guide.gdlLeaderProvince,'gdlLeaderCity',$!guide.gdlLeaderCity)
+    					<!--/国际·港澳台领队-->
+					#end
+					#if($!guide.gdlServer == '04')
+    					<!--国际·港澳台地陪----------------------------------------------------------------->
+						#vsearchareacountry('gdlGaidLokal',$!guide.gdlGaidLokal,'gdlGaidCountry',$!guide.gdlGaidCountry)
+    					<!--/国际·港澳台地陪-->
+					#end
+        		</div>
+				<div class="smenu-li">
+        			<label class="search-lab" style="width:280px;">
+        				<span class="smenu-title">服务时间：</span>
+						<input type="text" class="search-input laydate-icon" onclick="laydate();" name="gpeDate" value="$!guide.gpeDate">
+        			</label>
+        			<label class="search-lab" style="display:none">
+        				<span class="smenu-title">服务结束：</span>
+						<input type="text" class="search-input laydate-icon" onclick="laydate();" name="gpeDate2" value="$!guide.gpeDate2">
+        			</label>
+        			<label class="search-lab" style="width:280px;">
+        				<span class="smenu-title">关键词：</span>
+        				<input type="text" name="gdlName" value="$!guide.gdlName" class="search-input">
+        			</label>
+        			<button class="search-btn" value="" type="submit" onclick="$appRoot/$cpyno/daoyou.html">搜索</button>
+        		</div>
+        		<dl class="smenu-li">
+        			<dt class="smenu-title">语种：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num  #if("" == $!guide.gdlLanguage || ! $guide.gdlLanguage)  item-hover #end "onclick="$('#gdlLanguage').attr('value',''); $('#form1').submit();">不限</span>
+        				<div class="smenu-right">
+							#foreach($item in $language.keySet())
+								<span class="smenu-item #if($!guide.gdlLanguage == $item) item-hover #end" href="javascript:;" onclick="$('#gdlLanguage').attr('value','$item'); $('#form1').submit();">$language.get($item)</span>
+        					#end
+        				</div>
+        				<span class="smenu-item-more lan">更多</span>
+        			</dd>
+        		</dl>
+				<dl class="smenu-li ">
+        			<dt class="smenu-title">评级：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num  #if("" == $!guide.gdlCompanyRating || ! $!guide.gdlCompanyRating) item-hover #end " onclick="$('#gdlCompanyRating').attr('value',''); $('#form1').submit();">不限</span>
+        				#foreach($item in $rating.keySet())
+							<span class="smenu-item #if($!guide.gdlCompanyRating == $item) item-hover #end "id="a_level_$item.id" onclick="$('#gdlCompanyRating').attr('value','$item'); $('#form1').submit();">$rating.get($item)</span>
+        				#end
+        			</dd>
+        		</dl> 
+				<dl class="smenu-li last">
+        			<dt class="smenu-title">性别：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num  #if("" == $!guide.gdlSex || ! $!guide.gdlSex) item-hover #end " onclick="$('#gdlSex').attr('value',''); $('#form1').submit();">不限</span>
+        				<span class="smenu-item #if($!guide.gdlSex == '02') item-hover #end " onclick="$('#gdlSex').attr('value','02'); $('#form1').submit();">女</span>
+						<span class="smenu-item #if($!guide.gdlSex == '01') item-hover #end " onclick="$('#gdlSex').attr('value','01'); $('#form1').submit();">男</span>
+        			</dd>
+        		</dl> 
+        	</div>
+			<input type="hidden" name="gdlSex" id="gdlSex" value="$!guide.gdlSex">
+			<input type="hidden" name="gdlCompanyRating" id="gdlCompanyRating" value="$!guide.gdlCompanyRating">
+			<input type="hidden" name="gdlLanguage" id="gdlLanguage" value="$!guide.gdlLanguage">
+			<!-- 国内全陪
+			<input type="hidden" name="gdlNationalProvince" id="gdlNationalProvince" value="$!guide.gdlNationalProvince">-->
+			<!-- 国内地陪
+			<input type="hidden" name="gdlLocalProvince" id="gdlLocalProvince" value="$!guide.gdlLocalProvince">-->
+			<!-- 国际领队
+			<input type="hidden" name="gdlLeaderProvince" id="gdlLeaderProvince" value="$!guide.gdlLeaderProvince">-->
+			<!--<input type="hidden" name="gdlGaidLokal1" id="gdlGaidLokal1" value="$!guide.gdlGaidLokal1">
+			<input type="hidden" name="gdlGaidLokal2" id="gdlGaidLokal2" value="$!guide.gdlGaidLokal2">
+			<input type="hidden" name="gdlGaidLokal3" id="gdlGaidLokal3" value="$!guide.gdlGaidLokal3">
+			<input type="hidden" name="gdlGaidLokal4" id="gdlGaidLokal4" value="$!guide.gdlGaidLokal4"> -->
+			<!-- 国际地陪
+			<input type="hidden" name="gdlGaidLokal"  id="gdlGaidLokal"  value="$!guide.gdlGaidLokal">-->
+			<input type="hidden" name="gdlServer"     id="gdlServer"     value="$!guide.gdlServer"/>
+			</form>
+		<!--	<div class="tour_cttop">
+				<a href="#" class="tour_default">
+					默认
+				</a>
+				<a href="#" class="tour_full">
+					全程陪同
+				</a>
+				<a href="#" class="tour_local">地方接待</a>
+				<div class="tour_cttp">
+					<label><input type="checkbox">
+					<span>优惠活动</span></label>
+				</div>
+			</div>-->
+			<div class="tour_center" >
+				<div class="tour_centerl">
+					#foreach($item in $guideList)
+    					<div class="tour_ctlbox full">
+    						<a href="$appRoot/$cpyno/guide/daoyouxiang/$item.id?gdlServer=$!guide.gdlServer" target="_blank">
+								#if($erim.isNotEmpty($!item.gdlShowImg))
+    								<img src="$guideRoot$!item.gdlShowImg" class="tour_ctlimg">
+    							#else
+									<img src="$staticRoot/images/isnull.png" class="tour_ctlimg">
+    							#end
+							</a>
+    						<div class="tour_ctlboxr">
+    							<div class="tour_ctlbrl">
+    								<div class="tourctlbx_name">
+										#if($!item.gdlSex == '01')
+											<a href="$appRoot/$cpyno/guide/daoyouxiang/$item.id?gdlServer=$!guide.gdlServer" target="_blank"><img src="$staticRoot/images/tourmen.jpg" class="tourctl_nimg1"></a>
+											<a href="$appRoot/$cpyno/guide/daoyouxiang/$item.id?gdlServer=$!guide.gdlServer" target="_blank" title="$item.gdlName"><span class="tourctl_n">$item.gdlName 男</span></a>
+										#elseif($!item.gdlSex == '02')
+											<a href="$appRoot/$cpyno/guide/daoyouxiang/$item.id?gdlServer=$!guide.gdlServer" target="_blank"><img src="$staticRoot/images/tourwomen.jpg" class="tourctl_nimg1"></a>
+											<a href="$appRoot/$cpyno/guide/daoyouxiang/$item.id?gdlServer=$!guide.gdlServer" target="_blank" title="$item.gdlName"><span class="tourctl_w">$item.gdlName 女</span></a>
+										#else
+										#end
+    									<span class="tourctl_n1">
+    										(#vtext($!item.gdlCompanyRating,'C104'))
+    									</span>
+    									<img src="$staticRoot/images/tour3.jpg" class="tourctl_nimg2">
+    								</div>
+    								<div class="tourctlbx_box">
+    									<div class="tourctlbx_boxl">
+    										从业时间:
+    									</div>
+    									<div class="tourctlbx_boxr">
+    										#vtext($!item.gdlAge,'C114')
+    									</div>
+    								</div>
+    								<div class="tourctlbx_box">
+    									<div class="tourctlbx_boxl">
+    										服务类型:
+    									</div>
+    									<div class="tourctlbx_boxr">
+											#if(!$guide.gdlServer || $!guide.gdlServer == '01' || $!guide.gdlServer == '')
+												国内地陪
+											#elseif($!guide.gdlServer == '02')
+												国内全陪
+											#elseif($!guide.gdlServer == '03')
+												国际港澳台/领队
+											#elseif($!guide.gdlServer == '04')
+												国家港澳台/地陪
+											#end
+    									</div>
+    								</div>
+									<div class="tourctlbx_box">
+    									<div class="tourctlbx_boxl">
+    										导游证号:
+    									</div>
+    									<div class="tourctlbx_boxr">
+    										$!item.gdlCertificate
+    									</div>
+    								</div>
+									<div class="tourctlbx_box">
+    									<div class="tourctlbx_boxl">
+    										语&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种:
+    									</div>
+    									<div class="tourctlbx_boxr">
+    										#vtextarray($!item.gdlLanguage,'C102')
+    									</div>
+    								</div>
+									<div class="tourctlbx_box" style="display:none">
+    									<div class="tourctlbx_boxl">
+    										自我介绍:
+    									</div>
+    									<div class="tourctlbx_boxr">
+    										$!item.gdlIntroduction
+    									</div>
+    								</div>
+    							</div>
+    							<div class="tour_ctlbrr">
+    								<div class="tour_ctlbrrbox">
+    									<span class="tour_ctlbrrm"><label>￥$!item.gpeGuestPrice</label><span>/天</span></span>
+    									<!--<span class="tour_ctlbrrt">10小时</span>-->
+    									<a href="$appRoot/$cpyno/guide/daoyouxiang/$item.id?gdlServer=$!guide.gdlServer" class="tour_ctlbrra" target="_blank">查看详情</a>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+					#end
+				</div>
+				<div class="tour_centerr">
+					<!--热门景区-->
+					#parse("common/hot.vm")
+					<!--/热门景区-->
+				</div>
+			</div>
+			#parse("common/page.vm")
+		</div>
+		#parse("common/footer.vm")
+	</div>
+	
+</body>
+</html>
+<script type="text/javascript">
+function gdlGaidLokalOnClick(obj,theindex){
+    //$('#gdlGaidLokal'+theindex).attr('value',obj);
+	
+	if(theindex == 4){
+		$("#nation-wxy").show();
+		$('#gdlGaidLokal').attr('value',obj);
+		return false;
+	}else{
+		$("#nation-wxy").hide();
+		$('#gdlGaidLokal').attr('value',obj);
+		//去除国家搜索项
+		$('#gdlGaidCountry').attr('value','');
+	}
+    $('#form1').submit();
+}
+function gdlGaidLokalClear(){
+ 	//$('#gdlGaidLokal1').val('');
+	//$('#gdlGaidLokal2').val('');
+	//$('#gdlGaidLokal3').val('');
+	//$('#gdlGaidLokal4').val('');
+	$('#gdlGaidLokal').val('');
+	
+	$('#gdlGaidCountry').val('');
+	$('#form1').submit();
+}
+$(function(){
+	var gdlGaidLokal  = '$!guide.gdlGaidLokal';
+	//var gdlGaidLokal1 = '$!guide.gdlGaidLokal1';
+	//var gdlGaidLokal2 = '$!guide.gdlGaidLokal2';
+	//var gdlGaidLokal3 = '$!guide.gdlGaidLokal3';
+	//var gdlGaidLokal4 = '$!guide.gdlGaidLokal4';
+	if(gdlGaidLokal == '01'){
+		$("#gdlGaidLokal_1").addClass("item-hover");
+	}
+	if(gdlGaidLokal == '02'){
+		$("#gdlGaidLokal_2").addClass("item-hover");
+	}
+	if(gdlGaidLokal == '03'){
+		$("#gdlGaidLokal_3").addClass("item-hover");
+	}
+	if(gdlGaidLokal == '04'){
+		$("#gdlGaidLokal_4").addClass("item-hover");
+		$("#nation-wxy").show();
+	}	
+
+});
+
+
+
+
+function gdlServerClick(objval){
+		//赋值
+		$("#gdlServer").val(objval);
+		var index= $(".search-div .lab-radio").index($(this));
+		$(".guide-nation>dl").eq(index).show().siblings(".guide-nation>dl").hide();
+		//国际·港澳台地陪 清除
+		$('select[name="gdlGaidLokal"]').val('');
+    	$('select[name="gdlGaidCountry"]').val('');
+		//全陪 清除
+		$('select[name="gdlNationalProvince"]').val('');
+		$('select[name="gdlNationalCity"]').val('');
+		//地陪 清除
+		$('select[name="gdlLocalProvince"]').val('');
+		$('select[name="gdlLocalCity"]').val('');
+		//领队 清除
+		$('select[name="gdlLeaderProvince"]').val('');
+		$('select[name="gdlLeaderCity"]').val('');
+		$('select[name="gdlDestination"]').val('');
+		$('select[name="gdlDestinationCountry"]').val('');
+		$('#form1').submit();
+}
+</script>
+<!--<script type="text/javascript" src="$staticRoot/js/tour.js"></script>-->
+<script type="text/javascript" src="$staticRoot/js/kuCity.js"></script>
+<script type="text/javascript">
+$('.tourtext').kucity();	
+
+var gdlGaidCountry = '$!guide.gdlGaidCountry';
+if(gdlGaidCountry == ''){
+	$("#nation-wxy").hide();
+}else{
+	$("#nation-wxy").show();
+}
+
+$(function(){
+
+		
+	//语种
+	if('$!guide.gdlLanguage' != ''){
+    	$(".lan").text("收起");
+    	$(".lan").prev(".smenu-right").find("span:gt(7)").show();
+    }else{
+    	$(".lan").text("更多");
+    	$(".lan").prev(".smenu-right").find("span:gt(7)").hide();
+    }
+		
+});		
+
+
+
+</script>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>

@@ -1,0 +1,81 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/welcome.css">
+	
+	<div class="hti_top">
+        <p>
+            个人中心
+        </p>
+    </div>
+    <div class="hti_center">
+        <div class="hti_centerbig">
+            <div class="hti_centerl">
+                <div class="hti_ctlline line_top">
+                    <span class="hti_ctllname">账号权限：</span>
+                    <span class="hti_ctlltxt">$userRoleName</span>
+                </div>
+                <div class="hti_ctlline">
+                    <span class="hti_ctllname">上次登录：</span>
+                    <span class="hti_ctlltxt">$!userBean.sellLastLoginIp &nbsp;$!date.format('yyyy年MM月dd日 HH:mm:ss',$!userBean.sellLastLoginTime)</span>
+                </div>
+                <div class="hti_ctllinea">
+                   ($!userBean.sellLastLoginAddress)
+                </div>
+                <div class="hti_ctllinea">
+                    [如果不是您登录，点击这里<a href="javascript:index.load('$appRoot/sell/user/updatePadPage');">修改密码</a>]
+                </div>
+				<div class="hti_ctlline">
+                    <span class="hti_ctllname">服务区域：</span>
+                    <span class="hti_ctlltxt">
+						#vregion($!companyBusiness.cbsProvince) #vregion($!companyBusiness.cbsCity) #vregion($!companyBusiness.cbsCounty)
+					</span>
+                </div>
+				<div class="hti_ctlline">
+                    <span class="hti_ctllname">品牌名称：</span>
+                    <span class="hti_ctlltxt">$!userCompany.cpyBrand</span>
+                </div>
+                <div class="hti_ctlline">
+                    <span class="hti_ctllname">公司名称：</span>
+                    <span class="hti_ctlltxt">$!userCompany.cpyName</span>
+                </div>
+                <div class="hti_ctlline">
+                    <span class="hti_ctllname">公司地址：</span>
+					<span class="hti_ctlltxt">
+						#if($!userCompany.cpyIsInland == '02') 
+							#vregion($!userCompany.cpyProvince) #vregion($!userCompany.cpyCity) #vregion($!userCompany.cpyCounty) 
+						#else
+							#if($!userCompany.cpyExternal == '04')
+								$!userCompany.cpyForeign $!userCompany.cpyForeignCity
+							#else
+								#vtext($!userCompany.cpyExternal,'C108')
+							#end
+						#end 
+						$!userCompany.cpyAddress</span>
+                </div>
+                <div class="hti_ctlline">
+                    <span class="hti_ctllname">公司电话：</span>
+                    <span class="hti_ctlltxt">$!userCompany.cpyTelephone</span>
+                </div>
+				<div class="hti_ctlline">
+                    <span class="hti_ctllname">公司传真：</span>
+                    <span class="hti_ctlltxt">$!userCompany.cpyFax</span>
+                </div>
+                <div class="hti_ctlline">
+                    <span class="hti_ctllname">公司邮箱：</span>
+                    <span class="hti_ctlltxt">$!userCompany.cpyEmail</span>
+                </div>
+            </div>
+        </div>
+        <div class="hti_centerr">
+            <h2>系统通知</h2>
+			#foreach($item in $noticeList)
+    		<div class="hti_ctrline">
+    			<a href="javascript:index.load('$appRoot/notice/detail/view?id=$item.id');" class="hti_ctrlnew">$item.pneTitle！</a>
+    			<span class="hti_ctrln">
+    				new
+    			</span>
+    			<span class="hti_ctrlr">
+					$date.format('yyyy年MM月dd日',$!item.pneCreatetime)
+    			</span>
+    		</div>
+			#end
+        </div>
+	</div>

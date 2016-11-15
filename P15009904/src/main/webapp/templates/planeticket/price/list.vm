@@ -1,0 +1,374 @@
+<script type="text/javascript" src="$staticRoot/js/product/price.js"></script>
+<script>
+	//比较
+	function comparison(field, rules, i, options){
+		// 同业价
+    	var preTradePrice = $("input[name='preTradePrice']").val();
+		// 零售价
+		var preRetailPrice = $("input[name='preRetailPrice']").val();
+		if(parseInt(preTradePrice) >= parseInt(preRetailPrice)){
+            return '零售价必须大于同业价';
+        }
+	}
+	//比较
+	function comparisonMin(field, rules, i, options){
+    	var preTradePrice = $("#update_preTradePrice").val();
+		var preRetailPrice = $("#update_preRetailPrice").val();
+		if(parseInt(preTradePrice) >= parseInt(preRetailPrice)){
+            return '零售价必须大于同业价';
+        }
+	}
+	//比较同业价+税费和零售价+税费
+	function comparisonzj(field, rules, i, options){
+		// 同业价+税费
+    	var preTrade = $("input[name='preTrade']").val();
+		// 零售价+税费
+		var preRetail = $("input[name='preRetail']").val();
+		if(parseInt(preTrade) >= parseInt(preRetail)){
+            return '零售价+税费必须大于同业价+税费';
+        }
+	}
+	
+	/*
+		同业总价来自 同业价 + 税费
+	*/
+	// 当同业价格失去焦点时
+	$("input[name='preTradePrice']").change(function() {
+		// 同业价
+		var tradePrice = $(this).val();
+		// 税费
+		var tallage = $("input[name='preTallage']").val();
+		// 当税费为空时
+		if (tallage == "") {
+			return;
+		}
+		var total = parseInt(tradePrice) + parseInt(tallage);
+		if (tradePrice == "") {
+    		// 同业总价
+    		$("input[name='preTrade']").val(0);
+		} else {
+    		$("input[name='preTrade']").val(total);
+		}
+	});
+	
+	/*
+		零售总价来自 零售价 + 税费
+	*/
+	// 当零售价格失去焦点时
+	$("input[name='preRetailPrice']").change(function() {
+		// 零售价
+		var retailPrice = $(this).val();
+		// 税费
+		var tallage = $("input[name='preTallage']").val();
+		// 当税费为空时
+		if　(tallage == "") {
+			return;
+		}
+		var total = parseInt(retailPrice) + parseInt(tallage);
+		if (retailPrice == "") {
+    		// 零售总价
+    		$("input[name='preRetail']").val(0);
+		} else {
+    		$("input[name='preRetail']").val(total);
+		}
+	});
+	
+	/*
+		当修改税费后
+	*/
+	$("input[name='preTallage']").change(function() {
+		var tall = $(this).val();
+		if (tall == "") {
+			$("input[name='preRetail']").val(0);
+			$("input[name='preTrade']").val(0);
+			return;
+		}
+		// 同业价格
+		var a = $("input[name='preTradePrice']").val();
+		if (a != "") {
+			$("input[name='preTrade']").val(parseInt(tall) + parseInt(a));
+		}
+		// 零售价格
+		var b = $("input[name='preRetailPrice']").val();
+		if (b != "") {
+			$("input[name='preRetail']").val(parseInt(tall) + parseInt(b));
+		}
+	});
+	
+	// 更改当前选择舱位
+	$("input[name='ptdClass']").change(function() {
+		var ptdClass = $("input[name='ptdClass']:checked").val();
+		index.load("$appRoot/planeticket/price/list?portal=08&ptdClass="+ptdClass);
+	});
+</script>
+<style type="text/css">
+    .fangliang_date ul li .mess_box .sj_j{color:#32c832;}
+    .input_block .w190{width:190px;}
+    .win_box_edit2{width:500px;height:370px;margin-left:-250px;margin-top:-185px;}
+    .win_box_edit2 .input_block .label_left{width:80px;}
+    .win_box_edit2 .input_block .input_right{width:auto;}
+</style>
+<div class="jd_block">
+	<p class="tit_1 ml35"><img src="$staticRoot/images/jd_3.png" alt="量/价管理" title="量/价管理" />量/价管理</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/planeticket/price/list?portal=03');">
+				<img src="$staticRoot/images/jd_7.png">
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/planeticket/price/list?portal=02');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+		<div class="date_close pt10">
+			<form method="post" id="form3">
+    			<input type="text" class="validate[required]" name="start" id="start" onclick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+    			<input type="text" class="validate[required]" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start\',{m:1});}'})" />
+    			<button type="button" class="carinfo_sub" onclick="javascript:price.batchStop('form3','$appRoot/planeticket/price/updateBatchIsOpen');" >批量停售</button>
+            </form>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">$!gdlName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>航班号：</span>$!ptdNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;舱位选择：
+                <label class="w80"><input type="radio" name="ptdClass" #if($!ptdClass == '01') checked #end value="01" />经济舱</label>
+                <label class="w80"><input type="radio" name="ptdClass" #if($!ptdClass == '02') checked #end value="02" />商务舱</label>
+                <label class="w80"><input type="radio" name="ptdClass" #if($!ptdClass == '03') checked #end value="03" />头等舱</label>
+			</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="pre_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.preSign == '0')
+								<li class="finish_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_preSign" value="$!item.preSign">
+									<input type="hidden" name="date_preTradePrice" value="$!item.preTradePrice">
+									<input type="hidden" name="date_preRetailPrice" value="$!item.preRetailPrice">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.preSign 张<br>
+    									同：$!item.preTradePrice 元<br>
+    									零：$!item.preRetailPrice 元<br>
+									</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.preIsOpen == '01')
+    							<li class="close_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_preSign" value="$!item.preSign">
+									<input type="hidden" name="date_preTradePrice" value="$!item.preTradePrice">
+									<input type="hidden" name="date_preRetailPrice" value="$!item.preRetailPrice">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.preSign 张<br>
+    									同：$!item.preTradePrice 元<br>
+    									零：$!item.preRetailPrice 元<br>
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_preSign" value="$!item.preSign">
+									<input type="hidden" name="date_preTradePrice" value="$!item.preTradePrice">
+									<input type="hidden" name="date_preRetailPrice" value="$!item.preRetailPrice">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.preSign 张<br>
+    									同：$!item.preTradePrice 元<br>
+    									零：$!item.preRetailPrice 元<br>
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load('$appRoot/planeticket/detail/list');">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png" /> 正常出售 
+			<img src="$staticRoot/images/ljgl_01.png" /> 暂不出售
+			<img src="$staticRoot/images/ljgl_02.png" /> 已售完
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+		<span><b>票量/价格管理</b></span>
+		<div class="cb"></div>
+		<form method="post" id="form1">
+    		<div class="bg_block nobg_block">
+    			<div class="cb"></div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">日期：</div>
+    				<div class="input_righted11">
+						<input type="text" class="w80 validate[required]" name="start" id="start1" onClick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+						<input type="text" class="w80 validate[required]" name="end" onClick="WdatePicker({minDate:'#F{$dp.$D(\'start1\',{m:1});}'})" />
+    					<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">按周选择：</div>
+    				<div class="input_right">
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="0">全选</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="1">周一</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="2">周二</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="3">周三</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="4">周四</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="5">周五</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="6">周六</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="7">周日</label>
+    					<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">机票数量：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+    						<input type="text" class="w90 validate[required,custom[integer],min[1],maxSize[3]]" name="preSign" placeholder="0" />张
+    					</span>
+    					<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+				<div class="input_block clearfix">
+    				<div class="label_left">税费：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+    						<input type="text" class="w90 validate[required,custom[integer],maxSize[6],min[1]]" name="preTallage" placeholder="0" />元
+    					</span>
+    					<span style="color:red;margin-top:-25px;">*</span>
+						<!-- 
+    					<label>
+    						<input type="radio" name="preIsTallage" value="02" class="ml15" checked> 已含 
+    					</label>
+    					<label>
+    						<input type="radio" name="preIsTallage" value="01"> 不含税
+    					</label>-->
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">同业价格：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+    						<input type="text" class="w75 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" name="preTradePrice" placeholder="0" />元/张
+    					</span>
+    					<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml15" style="font-weight:bold">总价：</label>
+    					<span class="tishi_box w110">
+    						<input type="text" class="w108 validate[required,custom[integer],maxSize[6],min[1]]" name="preTrade" placeholder="税+同业" disabled />
+    					</span>
+						<span style="margin-left:-20px">元</span>
+    					<span style="color:red;margin-top:-25px;margin-left:5px;">*</span>
+    				</div>
+    			</div>
+				<div class="input_block clearfix">
+    				<div class="label_left">零售价格：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+							<input type="text" class="w75 validate[required,custom[integer],max[100000],min[1],maxSize[6],funcCall[comparison]]" name="preRetailPrice" placeholder="0" />元/张
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml15" style="font-weight:bold">总价：</label>
+						<span class="tishi_box w110">
+    						<input type="text" class="w108 validate[required,custom[integer],maxSize[6],min[1],funcCall[comparisonzj]]" name="preRetail" placeholder="税+零售" disabled />
+    					</span>
+						<span style="margin-left:-20px">元</span>
+    					<span style="color:red;margin-top:-25px;margin-left:5px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">必选服务：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+    						<input type="text" class="w75 validate[custom[integer],maxSize[6]]" name="preRequired" placeholder="0" />元/人
+    					</span>
+    					<span class="tishi_box w200 ml15">
+    						<input type="text" class="w190 validate[maxSize[40]]" name="preRequiredShow" placeholder="如：保险  说明字数限40字以内" />
+    					</span> 
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">可选服务：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+    						<input type="text" class="w75 validate[custom[integer],maxSize[6]]" name="preOptional" placeholder="0">元/人
+                        </span>
+                        <span class="tishi_box w200 ml15">
+                        	<input type="text" class="w190 validate[maxSize[40]]" name="preOptianalShow" placeholder="如：保险  说明字数限40字以内">
+                        </span> 
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">出票工作时间：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w80">
+    						<input type="text" class="w50 validate[required]" name="preIssueStart" id="preIssueStart" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" />
+    					</span> 至 
+    					<span class="tishi_box w80">
+    						<input type="text" class="w50 validate[required]" name="preIssueEnd" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm',minDate:'#F{$dp.$D(\'preIssueStart\',{m:1});}'})" />
+    					</span><br>（非工作时间订单，将在下一个工作日处理）
+    				</div>
+    			</div>
+    			<div class="button_block clearfix">
+    				<button class="y_but ml35" id="btn" type="button" onclick="javascript:price.sub('btn', 'form1','$appRoot/planeticket/price/insert','$appRoot/planeticket/price/list?portal=04');">&nbsp;确 定&nbsp;</button>
+    				<button class="b_but ml35" type="button" onclick="index.load('$appRoot/planeticket/price/list?portal=04');">&nbsp;清 空&nbsp;</button>
+    			</div>
+    		</div>
+		</form>
+	</div>
+	<div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	<form method="post" id="form2">
+		<input type="hidden" name="id" id="update_id" />
+    	<div class="input_block clearfix ml15">
+    		<div class="input_right mb20">
+        		 机票数量： <span class="tishi_box w90">
+        			<input type="text" class="w70 validate[required,custom[integer],maxSize[3]]" name="preSign" id="update_preSign" />张
+        		</span>
+    		</div>
+    		<div class="input_right mb20">
+        		 同业价格：<span class="tishi_box w110">
+        			<input type="text" class="w70 validate[required,maxSize[6],min[1]]" name="preTradePrice" id="update_preTradePrice" />元/张
+        		</span>
+    		</div>
+    		<div class="input_right">
+        		 零售价格：<span class="tishi_box w110">
+        			<input type="text" class="w70 validate[required,maxSize[6],min[1],funcCall[comparisonMin]]" name="preRetailPrice" id="update_preRetailPrice" />元/张
+        		</span>
+    		</div>
+    	</div>
+    	<div class="cb mb25"></div>
+    	<div class="button_block button_block_wauto clearfix">
+    		<button class="y_but ml15 mr20" type="button" id="preQueding">确 定</button>
+    		<button class="b_but" type="button" id="preQuxiao">取 消</button>
+    	</div>
+	</form>
+</div>

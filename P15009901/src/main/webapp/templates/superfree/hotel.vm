@@ -1,0 +1,52 @@
+<div class="cjzyxdibiao">
+	<div class="cjzydibiaotop">
+		<img src="$staticRoot/images/chaojisearchb.jpg"> <a
+			href="$appRoot/$cpyno/jiudian.html"><span>酒店</span></a>
+		<div class="cjzy_dibiaotopcontent">
+			<ul>
+				<li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','张家界'); $('#form_hotel2').submit();">张家界</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','长沙'); $('#form_hotel2').submit();">长沙</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','北京'); $('#form_hotel2').submit();">北京</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','上海'); $('#form_hotel2').submit();">上海</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','广州'); $('#form_hotel2').submit();">广州</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','深圳'); $('#form_hotel2').submit();">深圳</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','成都'); $('#form_hotel2').submit();">成都</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','杭州'); $('#form_hotel2').submit();">杭州</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','南京'); $('#form_hotel2').submit();">南京</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','三亚'); $('#form_hotel2').submit();">三亚</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','厦门'); $('#form_hotel2').submit();">厦门</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','青岛'); $('#form_hotel2').submit();">青岛</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#hdlCityVo2').attr('value','');    $('#form_hotel2').submit();">更多</a></li>
+				<form id="form_hotel2" method="post" action="$appRoot/$cpyno/jiudian.html">
+					<input type="hidden" name="hdlCityVo" id="hdlCityVo2" />
+                </form>
+			</ul>
+		</div>
+	</div>
+	<div class="cjzyxdibiaocontent">
+		#foreach($item in $hotelList)
+		<div #if($velocityCount  % 5 == 0) class="cjzy_dibiaobox cjzyxdbcbr" #else class="cjzy_dibiaobox" #end>
+			<div class="cjzyxdibiaocbox">
+                <a href="$appRoot/$cpyno/hotel/jiudianxiang/$item.id" target="_blank" alt="" title="$item.hdlName">
+					<div class="cjzyxdibiaocboximg">
+						#if($!item.hdlImg1 != '')
+							<img src="$staticFileRes$item.hdlImg1" title="" alt="">
+						#else
+							<img src="$staticRoot/images/isnull.png" title="" alt="">
+						#end
+					</div>
+					<div class="cjzyxdibiaocboxfont">
+						<span class="cjzyxdibiaocboxname">$item.hdlName</span>
+						<p class="cjzyxdibiaocboxaddre">
+							$erim.subString($item.hdlAddress,15)
+						</p>
+						<p class="cjzyxdibiaocboxmenoy">
+							<label>￥<strong>$item.hnpRetailPrice</strong></label>起
+						</p>
+					</div>
+				</a>
+			</div>
+		</div>
+		#end
+	</div>
+</div>

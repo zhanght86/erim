@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="yjsystemrolefunc">
+	
+	<!-- 根据角色查询 -->
+	<select id="selectRoleFuncByRoleId" resultType="yjSystemRoleFuncBean">
+		SELECT
+			id 			  	   AS id,
+			yj_func_code     AS yjFuncCode,
+			yj_role_id       AS yjRoleId
+		FROM
+			yj_system_role_func
+		WHERE
+			yj_role_id        = #{yjRoleId}
+			and yj_func_code != '1'
+	</select>
+	
+	<insert id="insertList">
+		INSERT INTO
+			yj_system_role_func
+			(
+				yj_func_code,
+				yj_role_id
+			)
+		VALUES
+			<foreach collection="list" item="item" index="index" separator="," >
+			(
+				#{item.yjFuncCode},
+				#{item.yjRoleId}
+			)
+			</foreach>
+	</insert>
+	
+	<delete id="deleteByRoleCode">
+		DELETE	FROM
+			yj_system_role_func
+		WHERE
+			yj_role_id = #{yjRoleId}
+	</delete>
+</mapper>

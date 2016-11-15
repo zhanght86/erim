@@ -1,0 +1,396 @@
+
+
+<script type="text/javascript">
+  function tooltip(){ 
+ /* CONFIG */  
+  xOffset = 100;
+  yOffset = 20;  
+ /* END CONFIG */  
+ $("img[cid='bigger']").hover(function(e){     //鼠标要移动的图片        
+  this.t = this.src;          
+  $("body").append("<div id='tooltip'>" +"</div>");
+  $("#tooltip")
+   .css("top",(e.pageY - xOffset) + "px")
+   .css("left",(e.pageX + yOffset) + "px")
+   .css("background-image","url("+this.t+")")
+   .css("-moz-background-size","100% 100%")
+   .css("background-size","100% 100%")
+   .css("height","260px")
+   .css("padding-left","50px")
+   .css("border","2px solid #696")
+   .css("width","310px")
+   .css("position","absolute")
+   .fadeIn("fast");  
+    },
+ function(){
+  this.title = this.t;  
+  $("#tooltip").remove();
+    }); 
+ $("img[cid='bigger']").mousemove(function(e){
+  $("#tooltip")
+   .css("top",(e.pageY - xOffset) + "px")
+   .css("left",(e.pageX + yOffset) + "px")
+   .fadeIn("slow");
+ });   
+};
+$(document).ready(function(){
+ tooltip();
+});
+</script>
+<style>
+	.newline_ctrlblrb img{
+		width:50px;
+		height:30px;
+	}
+</style>
+
+<!-- 专线行程-->
+<div class="newline">
+<div class="newline_suptop">
+    <img src="$staticRoot/images/ddy.png" />
+    <span>行程管理</span>
+	<div class="cb"></div>
+	<div class="g_line"></div>
+</div>
+<div class="newline_ct">
+    <div class="newline_ctr">
+        <div class="newline_ctrl">
+            <span><strong>行程管理</strong></span>
+        </div>
+		<form method="post" id="form1">
+			<input type="hidden" name="xcsize" id="xcsize"/>
+			<div id="div_date">
+				#foreach($item in $linetrip)
+                    <div class="newline_ctrlbox">
+						<input type="hidden" name="id$velocityCount" value="$item.id" />
+                    	<div class="newline_ctrlbls">
+                    		<span><strong>第<span name='span_day'>$velocityCount</span>天</strong>线路：</span>
+                            <input type="text" name="ltpStartplace$velocityCount" value="$!item.ltpStartplace"  class="validate[maxSize[30]]" />
+							#if(! $item.agddTool)
+								<div class="newline_ctrlblrs">
+									<select class="w80" name="ldlTripTraffic$velocityCount">
+                    				#foreach($ite in $traffic.keySet())
+    									<option value="$item" #if($item.ldlTripTraffic == $ite) selected #end>$traffic.get($ite)</option>
+                                    #end
+                        			</select>
+								    <input type="text" name="ltpEndplace$velocityCount" value="$!item.ltpEndplace"  class="validate[maxSize[40]]" />
+                        			<a href="javascript:void(0);">+</a>
+								</div>
+							  #else
+								#set($ind = $velocityCount)
+								#foreach($iiii in $item.agddTool)
+									#set($j=$math.sub($velocityCount,1))
+									
+									<div class="newline_ctrlblrs">
+    									<select class="w80" name="ldlTripTraffic$ind">
+                        				#foreach($ite in $traffic.keySet())
+        									<option value="$ite" #if($iiii == $ite) selected #end>$traffic.get($ite)</option>
+                                        #end
+                            			</select>
+                            			<input type="text" name="ltpEndplace$ind" value="$!item.agddLineup.get($j)" class="validate[maxSize[30]]" />
+    									#if($velocityCount == 1)
+    										<a href="javascript:void(0);">+</a>
+    									#else
+    										<a href="javascript:void(0);">-</a>
+										#end
+									</div>
+								#end
+							#end
+                    	</div>
+                        <div class="newline_ctrlbl">
+                            <span>上午：</span>
+                            <div class="newline_ctrlblr">
+                                <textarea name="ltpRoad1$velocityCount" value="$!item.ltpRoad1" class="validate[maxSize[1000]]">$!item.ltpRoad1</textarea>
+                            </div>
+                        </div>
+    					<div class="newline_ctrlbl">
+                            <span>上传图片：</span>
+                            <div class="newline_ctrlblrb"  style="height:auto;">
+								#if("$!item.gddImg1" == "")
+									<input name="gddImg$velocityCount" type="hidden" id="gddImg$velocityCount"/>
+									<input name="uploadify$velocityCount" id="uploadify$velocityCount" contenteditable="false" size="30" type="file" />
+                				#else
+									<input name="gddImg$velocityCount" value="$!item.gddImg1" type="hidden" id="gddImg$velocityCount"/>
+									<input name="uploadify$velocityCount" id="uploadify$velocityCount" contenteditable="false" size="30" type="file" />
+									<img cid="bigger" class="img200" src="$staticFileRes$item.gddImg1" /><a href="javascript:uploadDelete('uploadify$velocityCount','filespan$velocityCount','$!item.gddImg1','gddImg$velocityCount');">删除图片</a>
+								#end
+									<span id="filespan$velocityCount"></span>
+									<div id="fileQueue$velocityCount"></div>
+                            </div>
+                        </div>
+                        <div class="newline_ctrlbl">
+                            <span>中餐：</span>
+                            <div class="newline_ctrlblrb" >
+                                <input type="text" name="ltpRoadTrip1$velocityCount" value="$!item.ltpRoadTrip1" class="validate[maxSize[200]]">
+                            </div>
+                        </div>
+                        <div class="newline_ctrlbl">
+                            <span>下午：</span>
+                            <div class="newline_ctrlblr">
+                                <textarea name="ltpFood1$velocityCount" value="$!item.ltpFood1" class="validate[maxSize[1000]]">$!item.ltpFood1</textarea>
+                            </div>
+                        </div>
+                    	<div class="newline_ctrlbl">
+                            <span>上传图片：</span>
+                            <div class="newline_ctrlblrb" style="height:auto;">
+								#if("$!item.gddImg2" == "")
+									<input name="gddImge$velocityCount" type="hidden" id="gddImge$velocityCount"/>
+									<input name="uploadifye$velocityCount" id="uploadifye$velocityCount" contenteditable="false" size="30" type="file" />
+                				#else
+									<input name="gddImge$velocityCount" value="$!item.gddImg2" type="hidden" id="gddImge$velocityCount"/>
+									<input name="uploadifye$velocityCount" id="uploadifye$velocityCount" contenteditable="false" size="30" type="file" />
+									<img cid="bigger" class="img200" src="$staticFileRes$item.gddImg2" /><a href="javascript:uploadDelete('uploadifye$velocityCount','filespane$velocityCount','$!item.gddImg2','gddImge$velocityCount');">删除图片</a>
+								#end
+									<span id="filespane$velocityCount"></span>
+									<div id="fileQueuee$velocityCount"></div>
+                            </div>
+                        </div>
+                        <div class="newline_ctrlbl">
+                            <span>晚餐：</span>
+                            <div class="newline_ctrlblrb">
+                                <input type="text" name="ltpFoodTrip1$velocityCount" value="$!item.ltpFoodTrip1" class="validate[maxSize[200]]">
+                            </div>
+                        </div>
+                    	<div class="newline_ctrlbl">
+                            <span>补充说明：</span>
+                            <div class="newline_ctrlblr">
+                                <textarea name="ltpRemark$velocityCount" class="validate[maxSize[400]]" value="$!item.ltpRemark" placeholder="可不填">$!item.ltpRemark</textarea>
+                            </div>
+                        </div>
+                    	<div class="carinfo_ctbl">
+                            <span></span>
+                            <div class="carinfo_ctblrbtn">
+								<button type="button" class="carinfo_sub" btn='add' onclick="trip.add($(this));" style="display:none;">增加一天</button>
+								#if($velocityCount >1)
+									<button type="button" class="carinfo_qu" cid="$item.id"  onclick="trip.deletee($(this),'$item.id')">删除当天</button>
+								#end
+    						</div>
+                        </div>
+    				</div>
+        		#end
+			</div>
+			<input type="hidden" name="tdlId" value="$!tdlId"/>
+			 <div class="input_block clearfix" style="padding-top:20px;margin-bottom:0;">
+				<div class="label_left" style="width:116px;font-weight:lighter;margin-right:5px;line-height: 48px;">产品特色：</div>
+    			<div class="newline_ctllr4" style="float:left;width:300px;" id="ldl_eature" >
+				#foreach($item in $ldlFeature)
+            		<div class="newline_ctllr2" >
+            			<input type="text" class="w200 lab_input validate[required,maxSize[20]]" name="ldlFeature" value="$!item"/>
+        				<span class="mess_star_red">*</span>
+						#if($!{velocityCount} == '1')
+							<a href='javascript:void(0)' class="zyjd_add">+</a>
+						#else
+							<a href='javascript:void(0)' class="zyjd_add">-</a>
+						#end
+            		</div>
+				   #end
+    			</div>
+        	</div>
+			<div class="newline_ctrlbl">
+                <span >产品经理推荐理由：</span>
+                <div class="newline_ctrlblr">
+                    <textarea name="ldlRecommend" class="validate[maxSize[600]]" placeholder="内容限300字以内">$!lineDetail.ldlRecommend</textarea>
+                </div>
+            </div>
+			<div class="newline_ctrlbl">
+                <span>行程特色：</span>
+                <div class="newline_ctrlblr">
+					  <script type="text/plain" id="editor">$!lineDetail.ldlFeatures</script>
+                </div>
+				<input  type="hidden" name="ldlFeatures" id="ldFeatures"/>
+            </div>
+            <div class="carinfo_ctbl">
+                <span></span>
+                <div class="carinfo_ctblrbtn">
+					<button type="button" class="carinfo_sub" onclick="$('#ldFeatures').attr('value',UE.getEditor('editor').getContent()); subform.sub('form1','$appRoot/line/detail/updatetrip', '$appRoot/line/detail/updatePage?id=$!tdlId');">提交</button>
+                    <button type="button" class="carinfo_qu" onclick="index.load('$appRoot/line/detail/updatePage?id=$!tdlId');">返回</button> 
+                </div>
+            </div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- /新增线路 -->
+<script type="text/javascript">
+
+
+	var editor = new baidu.editor.ui.Editor();
+    editor.render("editor");
+	
+	
+	
+	#foreach($item in $linetrip)
+		uploadify('uploadify'+$velocityCount,'gddImg'+$velocityCount,'filespan'+$velocityCount,'fileQueue'+$velocityCount);
+		uploadify('uploadifye'+$velocityCount,'gddImge'+$velocityCount,'filespane'+$velocityCount,'fileQueuee'+$velocityCount);
+		
+		#if("$item.gddImg1" != "")
+    		$("#uploadify$velocityCount").hide();
+    	#end
+		#if("$item.gddImg2" != "")
+			$("#uploadifye$velocityCount").hide();
+    	#end
+	#end
+	
+	//行程管理js
+	var trip = {
+		//序列
+		index : $!linetrip.size()+1,
+		//新增
+		add : function(data){
+			data.hide();
+			trip.setday();
+		},
+		//删除一天
+		deletee : function(data,cid){
+			if(cid != undefined){
+				trip.del(cid);
+			}
+			data.parents(".newline_ctrlbox").remove();
+			trip.initindex();
+		},
+		//添加行程
+		setday : function(){
+			//如果等于1 则删除当天隐藏
+			if(trip.index==1) {$("#div_demo").find(".carinfo_qu").hide();}
+			else{$("#div_demo").find(".carinfo_qu").show();}
+			//设置第几天序列
+			$("#div_demo").find("span[name='span_day']").html(trip.index);
+			var h = $("#div_demo").html();
+			
+			//序列化
+			h = h.replace('id1','id'+trip.index);
+			h = h.replace('ltpStartplace2','ltpStartplace'+trip.index);
+			h = h.replace('ldlTripTraffic2','ldlTripTraffic'+trip.index);
+			h = h.replace('ltpEndplace2','ltpEndplace'+trip.index);
+			h = h.replace('ltpRoad2','ltpRoad1'+trip.index);
+			
+			h = h.replace(/gddImg1/gm,'gddImg'+trip.index);
+			h = h.replace('uploadify1','uploadify'+trip.index);
+			h = h.replace('filespan1','filespan'+trip.index);
+			h = h.replace('fileQueue1','fileQueue'+trip.index);
+			h = h.replace('ltpRoadTrip2','ltpRoadTrip1'+trip.index);
+			h = h.replace('ltpFood2','ltpFood1'+trip.index);
+			
+			h = h.replace(/gddImge1/gm,'gddImge'+trip.index);
+			h = h.replace('uploadifye1','uploadifye'+trip.index);
+			h = h.replace('filespane1','filespane'+trip.index);
+			h = h.replace('fileQueuee1','fileQueuee'+trip.index);
+			h = h.replace('ltpFoodTrip2','ltpFoodTrip1'+trip.index);
+			h = h.replace('ltpRemark2','ltpRemark'+trip.index);
+			
+			$("#div_date").append(h);
+			
+			uploadify('uploadify'+trip.index,'gddImg'+trip.index,'filespan'+trip.index,'fileQueue'+trip.index);
+			uploadify('uploadifye'+trip.index,'gddImge'+trip.index,'filespane'+trip.index,'fileQueuee'+trip.index);
+	
+			trip.index ++;
+			trip.setsize();
+		},
+		//序列化
+		initindex : function(){
+			var i = 1;
+			//长度
+			$.each($(".newline_ctrlbox"),function(){
+				$(this).find("span[name='span_day']").html(i);
+				i++;
+			});
+			
+			$(".newline_ct button[btn='add']:last").show();
+			trip.index = i-1;
+			trip.setsize();
+		},
+		//长度
+		setsize : function(){
+			$("#xcsize").attr('value',trip.index);
+		},
+		//删除
+		del : function(id){
+			var url = "$appRoot/line/trip/delete?id="+id;
+			$.post(url,function(data){},'json');
+		}
+	}
+	
+	#if(!$linetrip || $linetrip.size() ==0)
+    	//初始化
+    	trip.setday();
+	#else
+		$(".newline_ct button[btn='add']:last").show();
+		trip.setsize();
+	#end
+</script>
+
+<div id="div_demo" style="display:none">
+	<!-- 行程管理 -->
+	<input type="hidden" name="id1" value="" />
+    <div class="newline_ctrlbox">
+    	<div class="newline_ctrlbls">
+    		<span><strong>第<span name='span_day'>1</span>天</strong>线路：</span>
+            <input type="text" name="ltpStartplace2"  class="validate[required,maxSize[10]]" />
+    		<div class="newline_ctrlblrs" id="div_newline_ctrlblrs">
+    			<select class="w80" name="ldlTripTraffic2">
+					<option value=""></option>
+    				#foreach($item in $traffic.keySet())
+						<option value="$item">$traffic.get($item)</option>
+                    #end
+    			</select>
+    			<input type="text" name="ltpEndplace2" class="validate[maxSize[40]]" />
+    			<a href="javascript:;">+</a>
+    		</div>
+    	</div>
+        <div class="newline_ctrlbl">
+            <span>上午：</span>
+            <div class="newline_ctrlblr">
+                <textarea name="ltpRoad2" class="validate[maxSize[1000]]">$!item.ltpRoad2</textarea>
+            </div>
+        </div>
+    	<div class="newline_ctrlbl">
+            <span>上传图片：</span>
+            <div class="newline_ctrlblrb" style="height:auto;">
+                <input name="gddImg1" type="hidden" id="gddImg1"/>
+            	<input name="file" id="uploadify1" contenteditable="false" size="30" type="file" />
+    			<span id="filespan1"></span>
+    			<div id="fileQueue1"></div>
+            </div>
+        </div>
+        <div class="newline_ctrlbl">
+            <span>中餐：</span>
+            <div class="newline_ctrlblrb">
+                <input type="text" name="ltpRoadTrip2" class="validate[maxSize[1000]]">
+            </div>
+        </div>
+        <div class="newline_ctrlbl">
+            <span>下午：</span>
+            <div class="newline_ctrlblr">
+                <textarea name="ltpFood2" class="validate[maxSize[1000]]">$!item.ltpFood2</textarea>
+            </div>
+        </div>
+    	<div class="newline_ctrlbl">
+            <span>上传图片：</span>
+            <div class="newline_ctrlblrb" style="height:auto;">
+                <input name="gddImge1" type="hidden" id="gddImge1"/>
+            	<input name="file" id="uploadifye1" contenteditable="false" size="30" type="file" />
+    			<span id="filespane1"></span>
+    			<div id="fileQueuee1"></div>
+            </div>
+        </div>
+        <div class="newline_ctrlbl">
+            <span>晚餐：</span>
+            <div class="newline_ctrlblrb">
+                <input type="text" name="ltpFoodTrip2" class="validate[maxSize[1000]]">
+            </div>
+        </div>
+    	<div class="newline_ctrlbl">
+            <span>补充说明：</span>
+            <div class="newline_ctrlblr">
+				<textarea name="ltpRemark2"  placeholder="可不填"></textarea>
+            </div>
+        </div>
+    	<div class="carinfo_ctbl">
+            <span></span>
+            <div class="carinfo_ctblrbtn">
+                <button type="button" class="carinfo_sub" btn='add' onclick="trip.add($(this));">增加一天</button>
+    			<button type="button" class="carinfo_qu"  onclick="trip.deletee($(this))">删除当天</button>
+            </div>
+        </div>
+    </div>
+</div>

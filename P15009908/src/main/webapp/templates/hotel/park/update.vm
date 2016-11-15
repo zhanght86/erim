@@ -1,0 +1,114 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<script type="text/javascript">
+	//上传图片
+	uploadify('uploadify','hpbImag','filespan','fileQueue');
+	#if("$!hotelpark.hpbImag" != "")
+		$("#uploadify").hide();
+	#end
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jd_03.png" alt="添加停车场" title="添加停车场">添加$!hotelBean.hdlName停车场</p>
+	<div class="g_line mb20"></div>
+	<div style="float:left">
+        <form method="post" id="form1">
+    		<input type="hidden" name="id" value="$!hotelpark.id"></input>
+    		<input type="hidden" name="hdlId" value="$!hotelBean.id"></input>
+        	<div class="input_block clearfix">
+        		<div class="label_left">停车场名称：</div>
+        		<div class="input_right" style="width:300px;">
+        			<input type="text" class="w200 validate[required,maxSize[20]]" placeholder="例如：p1/p2/p3" name="hpbName" value="$!hotelpark.hpbName" /><span class="mess_star_red">*</span>
+        		</div>
+        	</div>
+        	<div class="input_block clearfix">
+        		<div class="label_left">停车场类型：</div>
+        		<div class="input_right" style="width:185px;">
+    				#foreach($item in $texttype.keySet())
+        				<label class="w90" > 
+        					<input type="radio" #if($!hotelpark.hpbType == $item) checked #end name="hpbType" #if($item == '01') checked #end value="$item"> $texttype.get($item)
+        				</label>
+        			#end
+        		</div><span class="mess_star_red">*</span>
+        	</div>
+        	<div class="input_block clearfix">
+        		<div class="label_left">停车场面积：</div>
+        		<div class="input_right" style="width:300px;">
+        			<span class="tishi_box w200">
+    					<input type="text"  class="validate[custom[integer],min[1],maxSize[5]] text-input"  placeholder="0"  name="hpbArea" value="$!hotelpark.hpbArea" style="width:150px;"/>平方米
+    				</span>
+        		</div>
+        	</div>
+    		<div class="input_block clearfix">
+        		<div class="label_left">小型车位数量：</div>
+        		<div class="input_right" style="width:300px;">
+        			<input type="text" name="hpbCarNum"  class="w80 validate[custom[integer],maxSize[5]] text-input" value="$!hotelpark.hpbCarNum" placeholder="0" />
+        			<label class="ml15">大型车位数量：</label>
+        			<input type="text" name="hpbBusNum"  class="w80 validate[custom[integer],maxSize[5]] text-input" value="$!hotelpark.hpbBusNum" placeholder="0" />
+        		</div>
+        	</div>
+        	<div class="input_block clearfix">
+        		<div class="label_left">停车费用：</div>
+        		<div class="input_right"  style="width:300px;">
+    				#foreach($item in $zyxm.keySet())
+        				<label class="w90" > 
+        					<input type="radio" class="validate[minCheckbox[1]] checkbox"  #if($!hotelpark.hpbCost == $item) checked #end  #if($item == '01') checked #end name="hpbCost" value="$item"> $zyxm.get($item)
+        				</label>
+        			#end
+        		</div><span class="mess_star_red">*</span>
+            </div>
+			<div class="input_block clearfix" style="margin-bottom:10px;">
+        		<span style="margin-left:61px;color:red;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该停车场将会下线</span>
+        	</div>
+    		<div class="input_block clearfix">
+    			<div class="label_left">停车场图片：</div>
+    			<div class="input_right" style="width:300px;">
+    				#if("$!hotelpark.hpbImag" != "")
+        				<input name="hpbImag" value="$hotelpark.hpbImag" type="hidden" id="hpbImag"/>
+                    	<input name="file" id="uploadify" contenteditable="false" size="30" type="file" />
+        				<img class="img200" src="$staticFileRes$hotelpark.hpbImag" /><a href="javascript:uploadDelete('uploadify','filespan','$hotelBean.hdlImg1','hpbImag');">删除图片</a>
+    				#else
+    					<input name="hpbImag" value="" type="hidden" id="hpbImag"/>
+    					<input name="file" id="uploadify" contenteditable="false" size="30" type="file" />
+    				#end
+    				<span id="filespan"></span>
+    				<div id="fileQueue"></div>
+    			</div>
+    		</div>
+        	<div class="button_block clearfix">
+    			<button class="carinfo_sub ml35" id="btn" type="button" onclick="subform.sub('form1','$appRoot/hotel/park/savePark','$appRoot/hotel/park/insertPage?hdlId=$!hotelBean.id');"> 提&nbsp;&nbsp;交 </button>
+    			<button class="carinfo_qu" type="button" onclick="index.load('$appRoot/hotel/detail/updatePage?id=$!hotelBean.id');">返回</button>
+    		</div>
+    	</form>
+    </div>
+</div>
+<!--停车场列表-->
+	<div class="carad_ctrtable carfixed_ctrtable ml52" style="width:550px;float:left;">
+		<span style="margin-top:5px;">停车场列表:</span>
+		<table cellspacing="0" cellspadding="0" class="mb20" style="margin-left:0;">
+			<thead>
+				<tr>
+					<td>停车场名称</td>
+					<td>停车场类型</td>
+					<td>停车场面积</td>
+					<td>停车费用</td>
+					<td>停车管理</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $ParkList)
+				<tr>
+					<td>$!item.hpbName</td>
+					<td>$!item.hpbType</td>
+					<td>$!item.hpbArea㎡</td>
+					<td>$!item.hpbCost</td>
+					<td class="carad_a">
+						<a href="javascript:index.load('$appRoot/hotel/park/view?id=$!item.id&hdlId=$!item.hdlId');">查看/修改</a>
+					<!--	<a href="javascript:index.delload('$appRoot/hotel/park/delete?id=$!item.id', '$appRoot/hotel/park/insertPage?hdlId=$!hotelBean.id');">删除</a> -->
+					</td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+		<div class="button_block clearfix button_block_w500 ml50">
+		</div>
+    <div class="cb pb80"></div>
+</div>

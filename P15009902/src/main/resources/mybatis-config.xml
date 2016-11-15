@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false" />
+    </settings>
+    
+    <typeAliases>
+		<!-- java base -->
+		<typeAlias alias="asObject"                 	type="flex.messaging.io.amf.ASObject"/>
+		<typeAlias alias="hashMap"                  	type="java.util.HashMap"/>
+		
+		<!-- erim flex -->
+		<typeAlias alias="codeBean"                 	type="com.erim.flex.bean.CodeBean" />
+		<typeAlias alias="funcBean"                 	type="com.erim.flex.bean.FuncBean" />
+		<typeAlias alias="pageBean"                 	type="com.erim.flex.bean.PageBean" />
+		<typeAlias alias="pageDetailBean"           	type="com.erim.flex.bean.PageDetailBean" />
+		<typeAlias alias="fileBean"                     type="com.erim.flex.bean.FileBean" />
+		<typeAlias alias="operateLogBean"        		type="com.erim.flex.bean.OperateLogBean" />
+		<typeAlias alias="chartDataBean"           		type="com.erim.flex.bean.ChartDataBean" />
+        <typeAlias alias="regionBean"                   type="com.erim.flex.bean.RegionBean" />
+		
+		<!-- erim flexuser -->
+		<typeAlias alias="userBean"                 	type="com.erim.flexuser.bean.UserBean" />
+		<typeAlias alias="roleBean"                 	type="com.erim.flexuser.bean.RoleBean" />
+		
+		<!-- erim sz common -->
+		
+		<!-- erim sz ext -->
+		
+		<!-- 企业信息 -->
+		<typeAlias alias="vcompanyDetailBean"           type="com.erim.sz.common.bean.VCompanyDetailBean" />
+		<!-- 合作用户信息 -->
+		<typeAlias alias="vcompanyDetailBean"           type="com.erim.sz.bean.TeamCompanyDetailBean" />
+		<!-- 佣金用户 -->
+		<typeAlias alias="yjSystemUserBean"          	type="com.erim.sz.common.bean.YjSystemUserBean" />
+		<!-- 专线合作用户 -->
+		<typeAlias alias="zxSellCooperationBean"        type="com.erim.sz.common.bean.ZxSellCooperationBean" />
+    </typeAliases>
+    
+    <!-- 分页插件 -->
+    <plugins>
+        <plugin interceptor="com.erim.utils.mybatis.OffsetLimitInterceptor">
+            <property name="dialectClass" value="com.erim.utils.jdbc.dialect.MySQLDialect"/>
+        </plugin>
+    </plugins>
+    
+    <!-- 映射文件 -->
+    <mappers>
+        <!-- erim flex -->
+        <mapper resource="com/erim/flex/persistence/CodeMapper.xml"/>
+        <mapper resource="com/erim/flex/persistence/FileMapper.xml"/>
+        <mapper resource="com/erim/flex/persistence/FuncMapper.xml"/>
+        <mapper resource="com/erim/flex/persistence/OperateLogMapper.xml"/>
+        <mapper resource="com/erim/flex/persistence/PageDetailMapper.xml"/>
+        <mapper resource="com/erim/flex/persistence/PageMapper.xml"/>
+        <!-- erim flexuser -->
+        <mapper resource="com/erim/flexuser/persistence/RoleMapper.xml"/>
+        <mapper resource="com/erim/flexuser/persistence/UserMapper.xml"/>
+        <!-- erim sz -->
+        
+        <!-- 企业信息 -->
+        <mapper resource="com/erim/sz/persistence/CompanyDetailMapper.xml"/>
+        
+        <!-- 合作用户信息 -->
+        <mapper resource="com/erim/sz/persistence/TeamCompanyDetailMapper.xml"/>
+        
+        <!-- 佣金用户信息 -->
+        <mapper resource="com/erim/sz/persistence/YjSystemUserMapper.xml"/>
+        
+        <!-- 省市县 -->
+        <mapper resource="com/erim/sz/persistence/RegionMapper.xml"/>
+        
+        <!-- 同城同业 -->
+		<mapper resource="com/erim/sz/persistence/PubSameTownMapper.xml"/>
+		
+        <!-- 专线合作 -->
+		<mapper resource="com/erim/sz/persistence/ZxSellCooperationServiceMapper.xml"/>
+    </mappers>
+    
+</configuration>

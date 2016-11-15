@@ -1,0 +1,35 @@
+##<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+
+#set($total = 0)
+#set($totalback = 0)
+#foreach($item in $!cooperation)
+	#if($item.pybNtype=="1")
+		#set($total=$total+$item.pybPrice)
+	#elseif($item.pybNtype=="2")
+		#set($totalback=$totalback+$item.pybPrice)
+	#end
+#end
+<div class="zh_block">
+	<ul class="list_main">
+	
+		<li>
+			<dl class="clearfix">
+				<dd>已介绍</dd>
+				<dt><span><em>$!cooperation.size()</em>家</span></dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>返平台</dd>
+				<dt><span><em>$total</em>元</span></dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>返现金</dd>
+				<dt><span><em>$totalback</em>元</span></dt>
+			</dl>
+		</li>
+	</ul>
+	<img src="$staticRoot/images/yjtg.png"/>
+</div>

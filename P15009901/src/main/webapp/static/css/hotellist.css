@@ -1,0 +1,469 @@
+.hotel_ct{
+	width: 1200px;
+	margin: 30px auto;
+	clear: both;
+}
+.hlct_top{
+	width: 1198px;
+	margin-top: 20px;
+	border-left:1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 2px solid #faaf4b;
+}
+.hlct_topa{
+	width: 1198px;
+	height: 50px;
+	float: left;
+	border-bottom: 1px solid #ccc;
+	background: #fdfdfd;
+}
+.hlct_topaa{
+	margin-top: 7px;
+	margin-left: 43px;
+	width: 200px;
+	height: 26px;
+	line-height: 26px;
+	border:1px solid #ccc;
+	background: #fff;
+	float: left;
+}
+.hlct_topaa span{
+	float: left;
+	width: 40px;
+	margin-left: 14px;
+	color: #323232;
+	height: 26px;
+	line-height: 26px;
+	font-size: 12px;
+}
+.hlct_topaa input{
+	width: 120px;
+	height: 26px;
+	line-height: 26px;
+	border:0;
+	outline: none;
+	float: left;
+}
+.hlct_topaa img{
+	margin-right: 2px;
+	border: none;
+	float: left;
+	width: 14px;
+	height: 15px;
+	margin-top: 5px;
+}
+.hlct_topab{
+	margin-left: 39px;
+	margin-top: 7px;
+	width: 200px;
+	height: 26px;
+	border: 1px solid #ccc;
+	float: left;
+}
+.hlct_topab span{
+	float: left;
+	width: 50px;
+	margin-left: 14px;
+	color: #323232;
+	height: 26px;
+	line-height: 26px;
+	font-size: 12px; 
+}
+.hlct_topab input{
+	width: 110px;
+	height: 26px;
+	line-height: 26px;
+	border:0;
+	outline: none;
+	float: left;
+}
+.hlct_topab img{
+	margin-right: 2px;
+	border: none;
+	float: left;
+	width: 14px;
+	height: 15px;
+	margin-top: 5px;
+}
+.hlct_topac{
+	margin-left: 39px;
+	margin-top: 7px;
+	width: 200px;
+	height: 26px;
+	border: 1px solid #ccc;
+	float: left;
+}
+.hlct_topac input{
+	width: 110px;
+	height: 26px;
+	line-height: 26px;
+	border:0;
+	outline: none;
+	float: left;
+	color: #323232;
+	padding-left: 5px;
+}
+.hlct_topac img{
+	border: none;
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-top: 6px;
+	margin-left: 6px;
+}
+.hlct_topad{
+	margin-left: 68px;
+	margin-top: 7px;
+	width: 97px;
+	height: 26px;
+	float: left;
+}
+.hlct_topad button{
+	background: #faaf4b;
+	font-size: 16px;
+	color: #fff;
+	width: 97px;
+	height: 26px;
+	border-radius:3px;
+	line-height: 26px;
+	border:0;
+}
+.hlct_topad button:hover{
+	background: #f99d23;
+}
+/*位置*/
+.hid{
+	display: none;
+}
+.show{
+	display: block;
+}
+.hlct_topb{
+	width: 1198px;
+	clear: both;}
+.hlselect{list-style: none;}
+.hlselect li{
+	width: 1198px;
+	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+}
+#hlselect1{
+	width: 1078px;
+	padding-left: 20px;
+	float: left;
+	line-height: 41px;
+}
+#hlselect1 dt{
+	width: 100px;
+	text-align: right;
+	height: 41px;
+	line-height: 41px;
+	float: left;
+}
+#hlselect1 dd{
+	float: left;
+	height: 41px;
+	line-height: 41px;
+	margin-right: 5px;
+}
+#hlselect1 .hlselectdiv{
+	width: 928px;
+	float: right;
+}
+.hlselect li dl{
+	width: 1078px;
+	padding-left: 20px;
+
+	float: left;
+	line-height: 41px;
+}
+.hlselect li dl dt{
+	width: 100px;
+	text-align: right;
+	height: 41px;
+	line-height: 41px;
+	float: left;
+}
+.hlselect li dl dd{
+	float: left;
+	height: 41px;
+	line-height: 41px;
+	margin-right: 5px;
+}
+.hlselect li dl dd a{
+	height: 21px;
+	line-height: 21px;
+	padding:1px 10px 0 10px;
+	float: left;
+	margin-top: 10px;
+}
+.hlselect li dl dd a:hover{
+	background-color:#f99d23;
+	color: #fff;
+}
+/*更多*/
+.hlselect li p{
+	float: left;
+	background: #faaf4b;
+	width: 50px;
+	height: 20px;
+	color: #fff;
+	margin-top: 10px;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 3px;
+}
+.hlselect li p:hover{
+	background: #f99d23;
+	cursor: pointer;
+}
+
+
+.hlselect .hlselected a{color:#fff;background-color:#faaf4b}
+.hlselect-result{
+	background: #fdfdfd;
+}
+.hlselect-result dt{font-weight:bold}
+.hlselect-no{color:#999}
+.hlselect .hlselect-result a{padding-right:20px;background: url("../images/close.gif") right 9px no-repeat #faaf4b;}
+.hlselect .hlselect-result a:hover{background-position:right -15px}
+.hlselectsp input{
+	width: 50px;
+	border:1px solid #CCC;
+}
+.hlselectsp button{
+	margin-left: 10px;
+	width: 50px;
+	height: 21px;
+	text-align: center;
+	background: #faaf4b;
+	color: #fff;
+	font-size: 12px;
+	line-height: 21px;
+	border:0;
+	border-radius: 3px;
+}
+.hlselectsp button:hover{
+	background: #f99d23;
+}
+/*内容部分*/
+.hlct_ct{
+	width: 1200px;
+	clear: both;
+}
+/*左边部分*/
+.hlct_ctl{
+	width: 930px;
+	float: left;
+}
+/*排序*/
+.hlct_tocl{
+	width: 930px;
+	height: 40px;
+	border:1px solid #ccc;
+	margin-top: 10px;
+	background: #fdfdfd;
+}
+.hlct_tocl a{
+	height: 40px;
+	width: 100px;
+	text-align: center;
+	line-height: 40px;
+	float: left;
+	border-right: 1px solid #ccc;
+}
+.hlct_tocl a span{
+	height: 40px;
+	width: 60px;
+	text-align: right;
+	line-height: 40px;
+	color: #4d4d4d;
+	font-size: 12px;
+	float: left;
+}
+.hlct_tocj{
+	float: left;
+	width: 162px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-right: 1px solid #ccc;
+}
+.hlct_tocj input{
+	width: 60px;
+	height: 16px;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+.hlct_tocx{
+	width: 535px;
+	height: 40px;
+	line-height: 40px;
+	float: left;
+	text-align: right;
+	padding-right: 30px;
+}
+.hlct_tocx label{
+	height: 40px;
+	line-height: 40px;
+	float: right;
+}
+.hlct_tocx label input{
+	height: 15px;
+	width: 15px;
+	border: 1px solid #ccc;
+	margin-top: 14px;
+	float: left;
+}
+.hlct_tocx label span{
+	float: left;
+	height: 40px;
+	line-height: 40px;
+}
+/*酒店列表*/
+.hlct_ctlct{
+	width: 930px;
+	clear: both;
+}
+.hlct_box{
+	width: 930px;
+	height: 200px;
+	margin-top: 10px;
+	border: 1px solid #ccc;
+	background: #fdfdfd;
+}
+.hlct_box:hover{
+	border: 1px solid #f00;
+}
+.hlct_boxl{
+	width: 270px;
+	height: 200px;
+	float: left;
+}
+.hlct_boxl img{
+	width: 230px;
+	height: 160px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+/*中间部分*/
+.hlct_boxm{
+	float: left;
+	width: 422px;
+	height: 200px;
+}
+.hlct_boxmt{
+	width: 402px;
+	margin-top: 20px;
+}
+.hlct_boxmt span{
+	float: left;
+	padding-left: 5px;
+	line-height: 27px;
+	font-size: 16px;
+	color: #2da0e6;
+	cursor: pointer;
+}
+.hlct_boxmt span:hover{
+	color: #1482c8;
+	cursor: pointer;
+}
+.hlct_boxmt img{
+	float: left;
+	height: 17px;
+	margin-top: 5px;
+	margin-left: 6px;
+}
+.hlct_boxmm{
+	width: 392px;
+	height: 60px;
+	float: left;
+	line-height: 20px;
+	font-size:12px;
+	color: #323232;
+	padding-left: 5px;
+	padding-right: 5px;}
+.hlct_boxmb{
+	width: 402px;
+	height: 20px;
+	float: left;
+}
+.hlctZ_boxmb a{
+	width: 80px;
+	height: 20px;
+	float: left;
+}
+#hlct_boxmbs{
+	width: 80px;
+	height: 20px;
+	float: left;
+}
+.hlct_boxmb img{
+	width: 20px;
+	height: 20px;
+	float: left;
+	margin-right: 5px;
+}
+/*右边部分*/
+.hlct_boxr{
+	width: 238px;
+	height: 200px;
+	float: left;
+}
+.hlct_boxrm{
+	text-align: center;
+	width: 258px;
+	font-size: 12px;
+	color: #323232;
+	margin-top: 60px;
+	height: 34px;
+	line-height: 34px;
+}
+.hlct_boxrm label{
+	font-size: 24px;
+	color: #eb6464;
+	height: 34px;
+	line-height: 24px;
+}
+.hlct_boxrq{
+	width: 258px;
+	text-align: center;
+}
+.hlct_boxrq a{
+	display: block;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	font-size: 18px;
+	background:#eb6464;
+	margin-left: 80px;
+	margin-top: 25px;
+	border-radius: 3px;
+}
+.hlct_boxrq a:hover{
+	background: #e52828;
+}
+/*右边部分*/
+.hlct_ctr{
+	float: right;
+	width: 248px;
+	height: 270px;
+	border:1px solid #ccc;
+	margin-left: 18px;
+	margin-top: 10px;
+}
+.hlct_ctr img{
+	width: 248px;
+	height: 270px;
+}
+.div2{top:10px;z-index:999;position:fixed; _position:absolute}
+
+/*分页代码*/
+.g_xpage{font-size:14px;line-height:24px;color:#323232; text-align:right;margin-top:15px;}
+.g_xpage a{padding:3px 8px;margin-left:10px;border:1px solid #c9c9c9;vertical-align:top;}
+.g_xpage a.on{background-color:#faaf4b;color:#fff;}
+.g_xpage .input_txt{width:20px;height:23px;padding:0 2px;margin:0 5px;}
+/*11-26-bai*/
+.hlct_boxmt .b_span_hui{ float: left;color:#969696; font-size:12px; line-height:20px;margin-top: 5px;margin-left: 10px;}

@@ -1,0 +1,304 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/guide/guide.css">
+<script type="text/javascript">
+	//初始化省市县
+	regUtil.initProvince(0,'gdlNationalProvince','gdlNationalCity','gdlNationalCounty');
+	//初始化省市县
+	regUtil.initProvince(0,'gdlLocalProvince','gdlLocalCity','gdlLocalCounty');
+	//初始化省市县
+	regUtil.initProvince(0,'gdlLeaderProvince','gdlLeaderCity','gdlLeaderCounty');
+	
+	//国内国际地陪和国际港澳台领队、国际港澳台地陪切换
+	$("input[name='gdlServer']").change(function() {
+		var a = $("input[name='gdlServer']:checked").val();
+		if (a == '01') {
+    		$('#county01').show();
+    		$('#county02').hide();
+    		$('#county03').hide();
+    		$('#county04').hide();
+		}
+		if (a == '02') {
+    		$('#county01').hide();
+    		$('#county02').show();
+    		$('#county03').hide();
+    		$('#county04').hide();
+		}
+		if (a == '03') {
+			$('#county01').hide();
+    		$('#county02').hide();
+    		$('#county03').show();
+    		$('#county04').hide();
+		}
+		if (a == '04') {
+			$('#county01').hide();
+    		$('#county02').hide();
+    		$('#county03').hide();
+    		$('#county04').show();
+		}
+	});
+	//获取国内国际值
+	//搜索项留下输入内容
+	var b = $("input[name='gdlServer']:checked").val();
+	if(b == '01'){
+		$('#county01').show();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').hide();
+		var c = $("select[name='gdlLocalProvince']").val();
+		if (c != '') {
+    		//初始化省市县
+    		regUtil.initProvince(c,'gdlLocalProvince','gdlLocalCity','gdlLocalCounty',$guideDetail.gdlLocalCity,0);
+		}
+	}else if(b == '02'){
+		$('#county01').hide();
+		$('#county02').show();
+		$('#county03').hide();
+		$('#county04').hide();
+		var c = $("select[name='gdlNationalProvince']").val();
+		if (c != '') {
+    	  //初始化省市县
+    	  regUtil.initProvince(c,'gdlNationalProvince','gdlNationalCity','gdlNationalCounty',$guideDetail.gdlNationalCity,0);
+		}
+	}else if(b == '03'){
+		$('#county01').hide();
+		$('#county02').hide();
+		$('#county03').show();
+		$('#county04').hide();
+		var c = $("select[name='gdlLeaderProvince']").val();
+		if (c != '') {
+    		 //初始化省市县
+    		regUtil.initProvince(c,'gdlLeaderProvince','gdlLeaderCity','gdlLeaderCounty',$guideDetail.gdlLeaderCity,0);
+		}
+	}else if(b == '04'){
+		$('#county01').hide();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').show();
+		//初始化省市县
+    	regUtil.initProvince(0,'gdlNationalProvince','gdlNationalCity');
+    	//初始化省市县
+    	regUtil.initProvince(0,'gdlLocalProvince','gdlLocalCity');
+    	//初始化省市县
+    	regUtil.initProvince(0,'gdlLeaderProvince','gdlLeaderCity');
+	}else{
+		$('#county01').show();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').hide();
+		var c = $("select[name='gdlLocalProvince']").val();
+		if (c != '') {
+    		//初始化省市县
+    		regUtil.initProvince(c,'gdlLocalProvince','gdlLocalCity','gdlLocalCounty',$guideDetail.gdlLocalCity,0);
+		}
+	}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/ren.png" alt="同业资源导游" title="同业资源导游">同业资源导游<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form mothed="post" id="form1">
+		<div class="input_block clearfix">
+			<div style="width:120px;font-weight:400" class="label_left">服务类型：</div>
+			<div class="input_right">
+				<label>
+					<input type="radio" name="gdlServer" value="01" #if($erim.contains($!guideDetail.gdlServer,'01')) checked #end />国内地陪
+				</label>
+				<label class="ml15">
+					<input type="radio" name="gdlServer" value="02" #if($erim.contains($!guideDetail.gdlServer,'02')) checked #end />国内全陪
+				</label>
+				<label class="ml15">
+					<input type="radio" name="gdlServer" value="03" #if($erim.contains($!guideDetail.gdlServer,'03')) checked #end />国际/港澳台领队
+				</label>
+				<label class="ml15">
+					<input type="radio" name="gdlServer" value="04" #if($erim.contains($!guideDetail.gdlServer,'04')) checked #end />国际/港澳台地陪
+				</label>
+            </div>
+		</div>
+		<!---------- 国内地陪 ------------------------------------------->
+		<div class="input_block clearfix" id="county01">
+			<div style="width:120px;font-weight:400" class="label_left">目的地：</div>
+			<div class="input_right">
+				<select name="gdlLocalProvince" style="width:100px;">
+					<option value=""></option>
+					#foreach($item in $provinces)
+						 <option value="$item.regionNo" #if($guideDetail.gdlLocalProvince == $item.regionNo) selected #end>$item.regionName</option>
+					#end
+                </select>
+				<em class="w20">省</em>
+				<select type="text" name="gdlLocalCity"  value="$!guideDetail.gdlLocalCity" style="width:100px;"></select><em class="w20">市</em>
+			   <select type="text" name="gdlLocalCounty" value="$!guideDetail.gdlLocalCounty" style="width:100px;"></select>县
+			</div>
+		</div>
+		<!---------- 国内全陪 ------------------------------------------->
+		<div class="input_block clearfix" id="county02">
+			<div class="label_left" style="font-weight:400;width:120px;">出发地：</div>
+			<div class="input_right">
+				<select name="gdlNationalProvince" style="width:100px;">
+					<option value=""></option>
+					#foreach($item in $provinces)
+						<option value="$item.regionNo" #if($guideDetail.gdlNationalProvince == $item.regionNo) selected #end>$item.regionName</option>
+					#end
+                </select>
+				<em class="w20">省</em>
+				<select type="text" name="gdlNationalCity" style="width:100px;"></select><em class="w20">市</em>
+			    <select type="text" name="gdlNationalCounty" style="width:100px;"></select>县
+			</div>
+		</div>
+		<!---------- 国际港澳台领队 ------------------------------------------->
+		<div class="input_block clearfix" id="county03">
+			<div class="label_left" style="font-weight:400;width:120px;">出发地：</div>
+			<div class="input_right">
+				<select style="width:110px;height:30px;" name="gdlLeaderProvince">
+					<option value=""></option>
+					#foreach($item in $provinces)
+						<option value="$item.regionNo" #if($guideDetail.gdlLeaderProvince == $item.regionNo) selected #end>$item.regionName</option>
+					#end
+				</select>
+                <em class="w20">省</em>
+				<select type="text" name="gdlLeaderCity" style="width:100px;"></select>
+				<em class="w20">市</em>
+				<select type="text" name="gdlLeaderCounty" style="width:100px;"></select>县
+            </div><br clear="left">
+			<div class="label_left" style="font-weight:400;width:120px;margin-top:15px;"  >目的地：</div>
+			<div class="input_right" style="margin-top:15px;">
+				<label><input type="radio" name="gdlDestination" value="01" #if($erim.contains($!guideDetail.gdlDestination,'01')) checked #end/>香港&nbsp;</label>
+				<label class="ml15"><input type="radio" name="gdlDestination" #if($erim.contains($!guideDetail.gdlDestination,'02')) checked #end value="02" />澳门&nbsp;</label>
+				<label class="ml15"><input type="radio" name="gdlDestination" #if($erim.contains($!guideDetail.gdlDestination,'03')) checked #end value="03" />台湾&nbsp;</label>
+				<label class="ml35">国家：</label>
+				
+				#vcountry('gdlDestinationCountry','gdlDestinationCountry','','','')
+			</div>
+		</div>
+		<!---------- 国际港澳台地陪 ------------------------------------------->
+		<div class="input_block clearfix" id="county04">
+			<div class="label_left" style="font-weight:400;width:120px;">目的地：</div>
+			<div class="input_right">
+				<label><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'01')) checked #end value="01" />香港&nbsp;</label>
+				<label class="ml15"><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'02')) checked #end value="02" />澳门&nbsp;</label>
+				<label class="ml15"><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'03')) checked #end value="03" />台湾&nbsp;</label>
+				<label class="ml35">国家：</label>
+				
+				#vcountry('gdlGaidCountry','gdlGaidCountry','','','')
+			 </div>
+		</div>
+		<!---------- 结束 ------------------------------------------->
+		<div class="input_block clearfix">
+			<div class="doadmin_toplboxt">
+				<span style="width:118px;">系统编码：</span>
+				<div class="doadmin_toplbra" style="width:117px;">
+					<input style="width:101px;"  type="text" name="gdlCode" value="$!guideDetail.gdlCode" />
+				</div>
+			</div>
+			<div class="doadmin_toplboxt">
+				<span style="width:70px;">导游姓名：</span>
+				<div class="doadmin_toplbra" style="width:117px;">
+					<input style="width:101px;"  type="text" name="gdlName" value="$!guideDetail.gdlName" />
+				</div>
+			</div>
+			<div class="doadmin_toplboxt">
+				<span style="width:36px;">性别：</span>
+				<div class="doadmin_toplbra" style="width:64px;">
+					<select name="gdlSex" style="width:57px;">
+						<option value=""></option>
+                        #foreach($item in $sex.keySet())
+							<option value="$item" #if($guideDetail.gdlSex == $item) selected #end>$sex.get($item)</option>
+                        #end
+					</select>
+				</div>
+			</div>
+			<div class="doadmin_toplboxt">
+				<span style="width:118px;">从业时间：</span>
+				<div class="doadmin_toplbra" style="width:95px;">
+					<select name="gdlAge">
+						<option value=""></option>
+                        #foreach($item in $age.keySet())
+							<option value="$item" #if($guideDetail.gdlAge == $item) selected #end>$age.get($item)</option>
+                        #end
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="doadmin_toplboxe">
+			<span style="width:118px;">语种：</span>
+			<div class="doadmin_toplbra" style="width:95px;">
+				<select name="gdlLanguage" class="searchSelect">
+					<option value=""></option>
+                    #foreach($item in $language.keySet())
+						<option value="$item" #if($guideDetail.gdlLanguage == $item) selected #end>$language.get($item)</option>
+                    #end
+				</select>
+			</div>
+		</div>
+		<div class="doadmin_toplboxe">
+			<span style="width:91px;">导游等级：</span>
+			<div class="doadmin_toplbra" style="width:95px;">
+				<select  name="gdlGrade" class="searchSelect" value="$!guideDetail.gdlGrade">
+					<option value=""></option>
+                    #foreach($item in $grade.keySet())
+						<option value="$item" #if($guideDetail.gdlGrade == $item) selected #end>$grade.get($item)</option>
+                    #end
+				</select>
+			</div>
+		</div>
+		<div class="input_block clearfix mb20">
+			<div class="label_left" style="font-weight:400;">公司/品牌名称：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w130" name="cpyName" value="$!guideDetail.cpyName">
+				<label class="ml35">空档查询： </label>
+				<span class="tishi_box w110" onClick="WdatePicker()">
+					<input type="text" value="$!guideDetail.gpeDate" name="gpeDate" class="w80" style="width:108px;background:url($staticRoot/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer">
+               	</span> 
+				<button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/guide/detail/sametown');">查 询</button>
+           	</div>
+		</div>
+    </form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>系统编码</td>
+					<td>所在地区</td>
+					<td>姓名</td>
+					<td>性别</td>
+					<td>语种</td>
+					<td>从业时间</td>
+					<td>导游等级</td>
+					<td>公司评级</td>
+					<td>国内地陪</td>
+					<td>国际地陪</td>
+					<td>查看导服/档期</td>
+					<td>公司/品牌名称</td>
+					<td>联系人/电话</td>
+					<td>在线交流</td>
+					<!-- 
+					<td>在线预定</td>
+					-->
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $guideList)
+    				<tr>
+    					<td>$!item.gdlCode</td>
+    					<td>$!item.gdlServiceRegion</td>
+    					<td><a href="$webRoot/guide/daoyouxiang;"  target="_blank" title="点击查看外网展示">$!item.gdlName</a></td>
+    					<td>$!item.gdlSex</td>
+    					<td width="8%">$!item.gdlLanguage</td>
+    					<td>#vtext($!item.gdlAge,'C114')</td>
+    					<td>$!item.gdlGrade</td>
+    					<td>$!item.gdlCompanyRating</td>
+    					<td>$!item.gdlLocalProvince$!item.gdlLocalCity</td>
+    					<td width="8%">$!item.gdlGaidLokal<span><br/>$!item.gdlGaidCountry</span></td>
+						<td>
+							<a href="javascript:price.sametown('$appRoot/guide/price/getInternal?isInternal=$!item.gdlServer', '$appRoot/guide/price/list?gdlId=$!item.id&GdlName=$!item.gdlName&portal=06&sex=$!item.gdlSex&certificate=$!item.gdlCertificate&isInternal=$!item.gdlServer');">￥$!item.gpeFloorPrice元</a>
+                        </td>
+						<td>$!item.cpyName / $!item.cpyBrand</td>
+    					<td>$!item.ccpName / $!item.ccpTelephone</td>
+						<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+						<!--<td><a href="javascript:index.load('$appRoot/guide/order/insert')">预订</a></td>-->
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guideschedule">
+
+	<!-- 查询所有数据 -->
+	<select id="selectAll" resultType="guideScheduleBean">
+		SELECT
+			id 			   AS id,
+			gse_date_start AS gseDateStart,
+			gse_is_free    AS gseIsFree,
+			gdl_id         AS gdlId,
+			gse_date_end   AS gseDateEnd,
+			gse_price      AS gsePrice,
+			gse_ntype      AS gseNtype
+		FROM
+			guide_schedule
+		WHERE
+			gdl_id = #{gdlId}
+			<if test="gseDateStart != null">
+				and gse_date_start = #{gseDateStart}
+			</if>
+	</select>	
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			guide_schedule
+		(
+			gse_date_start,
+			gse_is_free,
+			gdl_id,
+			gse_date_end,
+			gse_price,
+			gse_ntype
+		)
+		VALUES
+		(
+			#{gseDateStart},
+			#{gseIsFree},
+			#{gdlId},
+			#{gseDateEnd},
+			#{gsePrice},
+			#{gseNtype}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			guide_schedule
+		SET
+			gse_date_start = #{gseDateStart},
+			gse_is_free    = #{gseIsFree},
+			gdl_id         = #{gdlId},
+			gse_date_end   = #{gseDateEnd},
+			gse_price      = #{gsePrice},
+			gse_ntype      = #{gseNtype}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

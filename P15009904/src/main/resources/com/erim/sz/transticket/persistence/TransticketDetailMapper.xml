@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="transticketdetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="id != null and id != ''">	                              and id 	                  =     #{id}</if>
+			<if test="cpyId != null">	                                      and cpy_id 	              =     #{cpyId}</if> 
+			<if test="ttdIsDelStatus != null and ttdIsDelStatus != ''">	      and ttd_is_del_status 	  like "%"#{ttdIsDelStatus}"%"</if>
+			<if test="ttdNo != null and ttdNo != ''">	                      and ttd_no 	              like "%"#{ttdNo}"%"</if>
+		</where>
+	</sql>
+	<!-- 查询同城同业 -->
+	<sql id="sql_query_transticket">
+		1 = 1
+		<if test="ttdNo != null and ttdNo != ''">	                      and ttd_no 	              like "%"#{ttdNo}"%"</if>
+	</sql>
+	<sql id="COMPANYDETAIL">
+			cpy.cpy_name 	  		 AS cpyName,
+			cpy.cpy_telephone		 AS cpyTelephone,
+			cpy.cpy_brand 	 		 AS cpyBrand,
+			
+			ccp.cbs_operator         AS ccpName,
+			ccp.cbs_operator_phone   AS ccpTelephone,
+			cpy.cpy_email 	         AS ccpEmail,
+			ccp.cbs_operator_qq      AS ccpQq
+	</sql>
+	<sql id="sql_column">
+		id 					AS id,
+		cpy_id 				AS cpyId,
+		ttd_createtime 		AS ttdCreatetime,
+		ttd_createuser	    AS ttdCreateuser,
+		ttd_is_del_status 	AS ttdIsDelStatus,
+		ttd_start_city 		AS ttdStartCity,
+		ttd_start_station1 	AS ttdStartStation1,
+		ttd_end_statcion 	AS ttdEndStatcion,
+		ttd_no 				AS ttdNo,
+		ttd_start_station2  AS ttdStartStation2,
+		ttd_start_station3  AS ttdStartStation3,
+		ttd_start_station4  AS ttdStartStation4,
+		ttd_start_provinces AS ttdStartProvinces,
+		ttd_start_town      AS ttdStartTown,
+		ttd_end_is_domestic AS ttdEndIsDomestic,
+		ttd_end_provinces   AS ttdEndProvinces,
+		ttd_end_town 		AS ttdEndTown,
+		ttd_end_is_xg	    AS ttdEndIsXg,
+		ttd_end_is_am       AS ttdEndIsAm,
+		ttd_end_is_tw 		AS ttdEndIsTw,
+		ttd_end_country 	AS ttdEndCountry,
+		ttd_end_city 		AS ttdEndCity
+	</sql>
+    <!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTown" resultType="transticketDetailBean">
+	SELECT
+	    transticket.id 	    AS id,
+		transticket.cpy_id 	AS cpyId,
+		ttd_createtime      AS ttdCreatetime,
+		ttd_createuser      AS ttdCreateuser,
+		ttd_is_del_status   AS ttdIsDelStatus,
+		ttd_start_city      AS ttdStartCity,
+		ttd_start_provinces AS ttdStartProvinces,
+		ttd_start_town      AS ttdStartTown,
+		ttd_start_station1  AS ttdStartStation1,
+		ttd_start_station2  AS ttdStartStation2,
+		ttd_start_station3  AS ttdStartStation3,
+		ttd_start_station4  AS ttdStartStation4,
+		ttd_end_statcion    AS ttdEndStatcion,
+		ttd_no              AS ttdNo,
+		<include refid = "COMPANYDETAIL" />
+	 	FROM
+			transticket_detail    transticket
+		LEFT JOIN
+			company_detail cpy
+		ON 
+			transticket.cpy_id = cpy.id
+		LEFT JOIN
+			company_business ccp
+		on 
+			ccp.cpy_id = transticket.cpy_id
+		WHERE
+		
+			transticket.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'TRANSTICKET' 
+			)
+			AND
+			<include refid="sql_query_transticket"/>
+	</select>
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTownCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			transticket_detail transticket
+		WHERE
+			transticket.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'TRANSTICKET' 
+			)
+	</select>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTransticket" resultType="transticketDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			transticket_detail
+			<include refid="sql_query" />
+		ORDER BY 
+			ttd_is_del_status
+		DESC,
+			ttd_createtime 
+		DESC
+	</select>
+	<select id="selectBeanByPriId" resultType="transticketDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			transticket_detail
+		WHERE
+			id = #{id}
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTransticketCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			transticket_detail
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="transticketDetailBean">
+        INSERT INTO
+			transticket_detail
+			(
+				cpy_id,
+				ttd_createtime,
+				ttd_createuser,
+				ttd_is_del_status,
+				ttd_start_city,
+				ttd_start_station1,
+				ttd_end_statcion,
+				ttd_no,
+				ttd_start_station2,
+				ttd_start_station3,
+				ttd_start_station4,
+				ttd_start_provinces,
+				ttd_start_town,
+				ttd_end_is_domestic,
+				ttd_end_provinces,
+				ttd_end_town,
+				ttd_end_is_xg,
+				ttd_end_is_am,
+				ttd_end_is_tw,
+				ttd_end_country,
+				ttd_end_city
+			)
+		VALUES
+			(
+				#{cpyId},
+				#{ttdCreatetime},
+				#{ttdCreateuser},
+				#{ttdIsDelStatus},
+				#{ttdStartCity},
+				#{ttdStartStation1},
+				#{ttdEndStatcion},
+				#{ttdNo},
+				#{ttdStartStation2},
+				#{ttdStartStation3},
+				#{ttdStartStation4},
+				#{ttdStartProvinces},
+				#{ttdStartTown},
+				#{ttdEndIsDomestic},
+				#{ttdEndProvinces},
+				#{ttdEndTown},
+				#{ttdEndIsXg},
+				#{ttdEndIsAm},
+				#{ttdEndIsTw},
+				#{ttdEndCountry},
+				#{ttdEndCity}
+			)
+    </insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="hashMap">
+		UPDATE
+			transticket_detail
+		SET
+			ttd_start_city	    = #{ttdStartCity},
+			ttd_start_station1  = #{ttdStartStation1},
+			ttd_end_statcion    = #{ttdEndStatcion},
+			ttd_no 				= #{ttdNo},
+			ttd_start_station2  = #{ttdStartStation2},
+			ttd_start_station3  = #{ttdStartStation3},
+			ttd_start_station4  = #{ttdStartStation4},
+			ttd_start_provinces = #{ttdStartProvinces},
+			ttd_start_town	    = #{ttdStartTown},
+			ttd_end_is_domestic = #{ttdEndIsDomestic},
+			ttd_end_provinces   = #{ttdEndProvinces},
+			ttd_end_town 		= #{ttdEndTown},
+			ttd_end_is_xg 		= #{ttdEndIsXg},	
+			ttd_end_is_am 		= #{ttdEndIsAm},
+			ttd_end_is_tw 		= #{ttdEndIsTw},
+			ttd_end_country 	= #{ttdEndCountry},
+			ttd_end_city	    = #{ttdEndCity}
+		WHERE
+			id = #{id}
+	</update>
+	<!--更新编码  -->
+	<update id="Transupdatecode">
+		UPDATE 
+		    transticket_detail
+		SET
+			ttd_code  = #{ttdCode}
+		WHERE
+		    id = #{id}
+	</update>
+	<!-- 上下架-->
+	<delete id="delete" parameterType="int">
+		UPDATE
+			transticket_detail
+		SET
+			ttd_is_del_status 	 = #{ttdIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>

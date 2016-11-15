@@ -1,0 +1,438 @@
+<script type="text/javascript" src="$staticRoot/js/price.js"></script>
+
+<script>
+	//比较
+	function comparison(field, rules, i, options) {
+	    //成人同业价
+    	var lpeTradeAdult    = $("input[name='lpeTradeAdult']").val();
+		//零售成人价
+		var lpeRetailAdult = $("input[name='lpeRetailAdult']").val();
+		
+		if(parseInt(lpeTradeAdult)>=parseInt(lpeRetailAdult)) {
+            return '成人零售价不能低于同业价';
+        }
+	}
+		//比较
+	function comparison1(field, rules, i, options) {
+		//同业儿童价
+		var lpeTradeChild = $("input[name='lpeTradeChild']").val();
+		//零售儿童价
+		var lpeRetailChild = $("input[name='lpeRetailChild']").val();
+		
+		if(parseInt(lpeTradeChild)>=parseInt(lpeRetailChild)) {
+            return '儿童零售价不能低于同业价';
+    	}
+	}
+	//比较
+	function comparisonMin(field, rules, i, options){
+	      //成人同业价
+    	var lpeTradeAdult    = $("#update_lpeTradeAdult").val();
+		//成人零售价
+		var lpeRetailAdult = $("#update_lpeRetailAdult").val();
+		
+		if(parseInt(lpeTradeAdult)>=parseInt(lpeRetailAdult)){
+            return '成人零售价不能低于同业价';
+        }
+	}
+		//比较
+	function comparisonMin1(field, rules, i, options){
+		//同业儿童价
+		var lpeTradeChild = $("#update_lpeTradeChild").val();
+		//零售儿童价
+		var lpeRetailChild = $("#update_lpeRetailChild").val();
+		
+		if(parseInt(lpeTradeChild)>=parseInt(lpeRetailChild)){
+            return '儿童零售价不能低于同业价';
+    	}
+	}
+	
+	// 当升级服务改变时
+	$("input[name='lpeIsUpgrade']").change(function() {
+		var isUpgr = $(this).val();
+		if (isUpgr == 01) {
+			$("input[name='lpeUpgradeCont']").attr('disabled','true');
+			$("input[name='lpeUpgradeAdult']").attr('disabled','true');
+			$("input[name='lpeUpgradeChild']").attr('disabled','true');
+			$("input[name='lpeUpgradeCont']").val(null);
+			$("input[name='lpeUpgradeAdult']").val(null);
+			$("input[name='lpeUpgradeChild']").val(null);
+		} else {
+			$("input[name='lpeUpgradeCont']").attr('disabled',false);
+			$("input[name='lpeUpgradeAdult']").attr('disabled',false);
+			$("input[name='lpeUpgradeChild']").attr('disabled',false);
+		}
+	});
+</script>
+<style type="text/css">
+    .fangliang_date ul li .mess_box .sj_j{color:#32c832;}
+    .input_block .w190{width:190px;}
+    .win_box_edit2{width:500px;height:370px;margin-left:-250px;margin-top:-185px;}
+    .win_box_edit2 .input_block .label_left{width:80px;}
+    .win_box_edit2 .input_block .input_right{width:auto;}
+</style>
+<div class="jd_block">
+	<p class="tit_1 ml35">
+		<img src="static/images/jd_3.png" alt="量/价管理" title="量/价管理" />/价管理
+	</p>
+	<div class="g_line mb25"></div>
+    <div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/line/price/list?portal=03');">
+				<img src="static/images/jd_7.png">
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/line/price/list?portal=02');">
+				<img src="static/images/jd_9.png">
+			</a>
+		</div>
+		<div class="date_close pt10">
+			<form method="post" id="form3">
+    			<input type="text" class="validate[required]" name="start" id="start"  onclick="WdatePicker({minDate:'%y-%M-%d'})"/>&nbsp; 至 &nbsp;
+    			<input type="text" class="validate[required]" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start\',{m:1});}'})"/>
+    			<button type="button" onclick="javascript:subform.searchform('form3','$appRoot/line/price/updateBatchIsOpen');">批量停售</button>
+            </form>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_margin" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">线路名称：$!tdlName</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="lpe_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.lpeSign == '0')
+								<li class="finish_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_lpeSign" value="$!item.lpeSign">
+									<input type="hidden" name="date_lpeTradeAdult" value="$!item.lpeTradeAdult">
+									<input type="hidden" name="date_lpeTradeChild" value="$!item.lpeTradeChild">
+									<input type="hidden" name="date_lpeRetailAdult" value="$!item.lpeRetailAdult">
+									<input type="hidden" name="date_lpeRetailChild" value="$!item.lpeRetailChild">
+									<input type="hidden" name="date_lpeSinglePrice" value="$!item.lpeSinglePrice">
+									<input type="hidden" name="date_lpeSingleShow" value="$!item.lpeSingleShow">
+									<input type="hidden" name="date_lpeInsurePrice" value="$!item.lpeInsurePrice">
+									<input type="hidden" name="date_lpeInsureShow" value="$!item.lpeInsureShow">
+									<input type="hidden" name="date_lpeIsUpgrade" value="$!item.lpeIsUpgrade">
+									<input type="hidden" name="date_lpeUpgradeCont" value="$!item.lpeUpgradeCont">
+									<input type="hidden" name="date_lpeUpgradeAdult" value="$!item.lpeUpgradeAdult">
+									<input type="hidden" name="date_lpeUpgradeChild" value="$!item.lpeUpgradeChild">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									余：$!item.lpeSign 位<br>
+    									同：$!item.lpeTradeAdult 元<br>
+    									零：$!item.lpeRetailAdult 元<br>
+										#if($!item.lpeIsUpgrade == '02')
+											<span class="sj_j">升级+ $!item.lpeUpgradeAdult 元</span>
+										#end
+									</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.lpeIsOpen == '01')
+    							<li class="close_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_lpeSign" value="$!item.lpeSign">
+									<input type="hidden" name="date_lpeTradeAdult" value="$!item.lpeTradeAdult">
+									<input type="hidden" name="date_lpeTradeChild" value="$!item.lpeTradeChild">
+									<input type="hidden" name="date_lpeRetailAdult" value="$!item.lpeRetailAdult">
+									<input type="hidden" name="date_lpeRetailChild" value="$!item.lpeRetailChild">
+									<input type="hidden" name="date_lpeSinglePrice" value="$!item.lpeSinglePrice">
+									<input type="hidden" name="date_lpeSingleShow" value="$!item.lpeSingleShow">
+									<input type="hidden" name="date_lpeInsurePrice" value="$!item.lpeInsurePrice">
+									<input type="hidden" name="date_lpeInsureShow" value="$!item.lpeInsureShow">
+									<input type="hidden" name="date_lpeIsUpgrade" value="$!item.lpeIsUpgrade">
+									<input type="hidden" name="date_lpeUpgradeCont" value="$!item.lpeUpgradeCont">
+									<input type="hidden" name="date_lpeUpgradeAdult" value="$!item.lpeUpgradeAdult">
+									<input type="hidden" name="date_lpeUpgradeChild" value="$!item.lpeUpgradeChild">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									余：$!item.lpeSign 位<br>
+    									同：$!item.lpeTradeAdult 元<br>
+    									零：$!item.lpeRetailAdult 元<br>
+										#if($!item.lpeIsUpgrade == '02')
+											<span class="sj_j">升级+ $!item.lpeUpgradeAdult 元</span>
+										#end
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_lpeSign" value="$!item.lpeSign">
+									<input type="hidden" name="date_lpeTradeAdult" value="$!item.lpeTradeAdult">
+									<input type="hidden" name="date_lpeTradeChild" value="$!item.lpeTradeChild">
+									<input type="hidden" name="date_lpeRetailAdult" value="$!item.lpeRetailAdult">
+									<input type="hidden" name="date_lpeRetailChild" value="$!item.lpeRetailChild">
+									<input type="hidden" name="date_lpeSinglePrice" value="$!item.lpeSinglePrice">
+									<input type="hidden" name="date_lpeSingleShow" value="$!item.lpeSingleShow">
+									<input type="hidden" name="date_lpeInsurePrice" value="$!item.lpeInsurePrice">
+									<input type="hidden" name="date_lpeInsureShow" value="$!item.lpeInsureShow">
+									<input type="hidden" name="date_lpeIsUpgrade" value="$!item.lpeIsUpgrade">
+									<input type="hidden" name="date_lpeUpgradeCont" value="$!item.lpeUpgradeCont">
+									<input type="hidden" name="date_lpeUpgradeAdult" value="$!item.lpeUpgradeAdult">
+									<input type="hidden" name="date_lpeUpgradeChild" value="$!item.lpeUpgradeChild">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										余：$!item.lpeSign 位<br>
+    									同：$!item.lpeTradeAdult 元<br>
+    									零：$!item.lpeRetailAdult 元<br>
+										#if($!item.lpeIsUpgrade == '02')
+											<span class="sj_j">升级+ $!item.lpeUpgradeAdult 元</span>
+										#end
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" class="b_but ml35" onclick="javascript:index.load('$appRoot/line/detail/list');">&nbsp; 返 回 &nbsp;</button>
+		<span>
+			<img src="static/images/ljgl_03.png" /> 正常出售
+			<img src="static/images/ljgl_01.png" /> 暂不出售
+			<img src="static/images/ljgl_02.png" /> 已售完
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+		<span><b>余位/价格管理:</b></span>
+		<div class="cb"></div>
+		<div class="bg_block nobg_block">
+			<form method="post" id="form1">
+    			<div class="cb"></div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">日期：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+							<input type="text" style="width:108px;background:url(static/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer;" class="w80 validate[required]" name="start" id="start1" onclick="WdatePicker({minDate:'%y-%M-%d'})"/>
+						</span>&nbsp; 至 &nbsp;
+						<span class="tishi_box w110">
+							<input type="text" style="width:108px;background:url(static/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer;" class="w80 validate[required]" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start1\',{m:1});}'})"/>
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+				<div class="input_block clearfix">
+    				<div class="label_left">按周选择：</div>
+					<div class="newline_ctllr">
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="0">全选</label>
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="1">周一</label>
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="2">周二</label>
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="3">周三</label>
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="4">周四</label>
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="5">周五</label>
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="6">周六</label>
+						<label class="w44"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="7">周日</label>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">可报团人数：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+							<input class="w80 validate[required,custom[integer],max[100000],min[1]]" type="text"  placeholder="0" name="lpeSign" />人
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">同业：</div>
+    				<div class="input_right">
+    					<label class="ml15">成人价：</label>
+						<span class="tishi_box w110">
+							<input class="w65 validate[required,custom[integer],max[100000],min[1]]" type="text"  placeholder="0" name="lpeTradeAdult" />元/人
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml15">儿童价：</label>
+						<span class="tishi_box w110">
+							<input class="w65 validate[custom[integer],max[100000],min[1]]" type="text"  placeholder="0" name="lpeTradeChild" />元/人
+						</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">零售：</div>
+    				<div class="input_right">
+    					<label class="ml15">成人价：</label>
+						<span class="tishi_box w110">
+							<input class="w65 validate[required,custom[integer],max[100000],min[1],funcCall[comparison]]" type="text"  placeholder="0" name="lpeRetailAdult" />元/人
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml15">儿童价：</label>
+						<span class="tishi_box w110">
+							<input class="w65 validate[custom[integer],max[100000],min[1],funcCall[comparison1]]" type="text"  placeholder="0" name="lpeRetailChild"/>元/人
+						</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">可选服务：</div>
+    				<div class="input_right">
+    					<label class="ml15">单房差：</label>
+						<span class="tishi_box w110">
+							<input class="w65 validate[custom[integer],maxSize[5],min[1]]" type="text"  placeholder="0" name="lpeSinglePrice" />元/人
+						</span>
+						<span class="tishi_box w200 ml15">
+							<input class="w190 validate[maxSize[40]]" type="text"  placeholder="说明：限40字以内" name="lpeSingleShow" />
+						</span> 
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">&nbsp;</div>
+    				<div class="input_right">
+    					<label class="ml15" style="margin-left:24px;">&nbsp;保险：</label>
+    					<span class="tishi_box w110">
+							<input class="w65 validate[maxSize[5],min[1]]" type="text"  placeholder="0" name="lpeInsurePrice" />元/人
+						</span>
+						<span class="tishi_box w200 ml15">
+							<input class="w190 validate[maxSize[40]]" type="text"  placeholder="说明：限40字以内" name="lpeInsureShow" />
+						</span> 
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">升级服务：</div>
+    				<div class="input_right">
+    					<label class="w80">
+							<input type="radio" name="lpeIsUpgrade" value="01" /> 不可升级 
+					    </label>
+							<input type="radio" name="lpeIsUpgrade" value="02" checked /> 可升级至
+					    </label>
+    					<input class="w100 mb16" type="text"  placeholder="如:5星/豪华" name="lpeUpgradeCont" >
+						<br>
+						<label class="ml35">成人+ </label>
+						<span class="tishi_box w110">
+							<input class="w65 validate[custom[integer],maxSize[5],min[1]]" type="text"  placeholder="0" name="lpeUpgradeAdult" />元/人
+						</span>
+						<label class="ml15">儿童+ </label>
+						<span class="tishi_box w110">
+							<input class="w65 validate[custom[integer],maxSize[5],min[1]]" type="text"  placeholder="0" name="lpeUpgradeChild" />元/人
+						</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">接受报团截止：</div>
+    				<div class="input_right">出发前 
+						<span class="tishi_box w90">
+							<input class="w65 validate[custom[integer]]" type="text"  placeholder="0" name="lpeRestrict" />天
+						</span> 以内不接受预定（非必填项）
+    				</div>
+    			</div>
+    			<div class="button_block clearfix">
+					<button class="y_but ml35" type="button" id="btn" onclick="subform.sub('form1','$appRoot/line/price/insert','$appRoot/line/price/list?portal=04');">&nbsp;提交&nbsp;</button>
+					<button class="b_but ml35" type="button" onclick="index.load('$appRoot/line/price/list?portal=04');">&nbsp;重置&nbsp;</button></div>
+			</form>
+		</div>
+	</div>
+	<div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit win_box_edit2" style="height: 370px;">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	<form method="post" id="form2" style="overflow:hidden;">
+		<input type="hidden" name="id" id="update_id" />
+		<div class="input_block clearfix">
+			<div class="label_left" style="width:80px;">余位：</div>
+			<div class="input_right input_right_wauto">
+				<span class="tishi_box w110">
+					<input class="w90 validate[required,custom[integer],maxSize[4]]" type="text" name="lpeSign" id="update_lpeSign" />人
+				</span>
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left" style="width:80px;">同业：</div>
+			<div class="input_right input_right_wauto">
+				<label class="ml15">成人价：</label>
+				<span class="tishi_box w110">
+					<input class="w65 validate[required,maxSize[5],min[1]]" type="text"  placeholder="" name="lpeTradeAdult" id="update_lpeTradeAdult" />元/人
+				</span>
+				<label class="ml15">儿童价：</label>
+				<span class="tishi_box w110">
+					<input class="w65 validate[maxSize[5],min[1]]" type="text"  placeholder="" name="lpeTradeChild" id="update_lpeTradeChild" />元/人
+				</span>
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left" style="width:80px;">零售：</div>
+			<div class="input_right input_right_wauto">
+				<label class="ml15">成人价：</label>
+				<span class="tishi_box w110">
+					<input class="w65 validate[required,maxSize[5],min[1],funcCall[comparisonMin]]" type="text" name="lpeRetailAdult" id="update_lpeRetailAdult" />元/人
+				</span>
+				<label class="ml15">儿童价：</label>
+				<span class="tishi_box w110">
+					<input class="w65 validate[maxSize[5],min[1],funcCall[comparisonMin1]]" type="text" name="lpeRetailChild" id="update_lpeRetailChild" />元/人
+				</span>
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left" style="width:80px;">可选服务：</div>
+			<div class="input_right input_right_wauto">
+				<label class="ml15">单房差：</label>
+				<span class="tishi_box w110">
+					<input class="w65" type="text validate[required,maxSize[5],min[1]]"  name="lpeSinglePrice" id="update_lpeSinglePrice" />元/人
+				</span>
+				<span class="tishi_box w200 ml15">
+					<input class="w190" type="text validate[required,maxSize[40]]"  placeholder="说明：限40字以内" name="lpeSingleShow" id="update_lpeSingleShow" />
+				</span> 
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left" style="width:80px;">&nbsp;</div>
+			<div class="input_right input_right_wauto">
+				<label class="ml15">&nbsp;保险:</label>
+				<span class="tishi_box w110">
+					<input class="w65 validate[maxSize[5],min[1]]" type="text" name="lpeInsurePrice" id="update_lpeInsurePrice" />元/人
+				</span>
+				<span class="tishi_box w200 ml15">
+					<input class="w190 validate[maxSize[40]]" type="text" name="lpeInsureShow" id="update_lpeInsureShow" placeholder="说明：限40字以内" />
+				</span> 
+			</div>
+		</div>
+		<div class="input_block clearfix mb25">
+			<div class="label_left"  style="width:80px;">升级服务：</div>
+			<div class="input_right input_right_wauto">
+				<input type="radio" name="lpeIsUpgrade" id="update_lpeIsUpgrade1" value="01"> 不可升级
+			    </label>
+				<input type="radio" name="lpeIsUpgrade" id="update_lpeIsUpgrade2" value="02"> 可升级至
+			    </label>
+				<input class="w100 mb16" type="text"  placeholder="如:5星/豪华" name="lpeUpgradeCont" id="update_lpeUpgradeCont" >
+				<br>成人+ 
+				</label>
+				<span class="tishi_box w110">
+					<input class="w65 validate[maxSize[5],min[1]]" type="text" name="lpeUpgradeAdult" id="update_lpeUpgradeAdult" />元/人
+				</span>
+				<label class="ml15">儿童+ </label>
+				<span class="tishi_box w110">
+					<input class="w65 validate[maxSize[5],min[1]]" type="text" name="lpeUpgradeChild" id="update_lpeUpgradeChild"/>元/人
+				</span>
+			</div>
+		</div>
+		<div class="cb mb25"></div>
+		<div class="button_block button_block_wauto clearfix">
+			<button class="y_but ml15 mr20" type="button" id="lpeQueding">确 定</button>
+			<button class="b_but" type="button" id="lpeQuxiao">取 消</button>
+		</div>
+        <div class="cb"></div>
+	</form>
+</div>

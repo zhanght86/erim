@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="groundtrip">
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="tripByTxiId" resultType="groundTriplBean">
+		SELECT
+			id,
+            tdl_id                AS tdlId,
+	        gdd_line			  AS gddLine,
+	        gdd_tool		      AS gddTool,
+	        gdd_am				  AS gddAm,
+	        gdd_lunch			  AS gddLunch,
+	        gdd_afternoon		  AS gddAfternoon,
+	        gdd_dinner			  AS gddDinner,
+	        gdd_supplement		  AS gddSupplement,
+	        gdd_img1			  AS gddImg1,
+	        gdd_img2			  AS gddImg2,
+	        gdd_lineup			  AS gddLineup
+		FROM
+			ground_trip
+	    WHERE 
+	        tdl_id = #{tdlId}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			ground_trip (
+			   	tdl_id,
+		        gdd_line,
+		        gdd_tool,
+	            gdd_lineup,
+		        gdd_am,
+		        gdd_img1,
+	            gdd_img2,
+		        gdd_lunch,
+		        gdd_afternoon,
+		        gdd_dinner,
+		        gdd_supplement
+			) VALUES (
+              	#{tdlId},
+		        #{gddLine},
+		        #{gddTool},
+	            #{gddLineup},
+		        #{gddAm},
+		        #{gddImg1},
+	            #{gddImg2},
+		        #{gddLunch},
+		        #{gddAfternoon},
+		        #{gddDinner},
+		        #{gddSupplement}
+			)
+	</insert>
+	
+	<!-- 批量增加 -->
+	<insert id="insertList">
+		INSERT INTO
+			ground_trip (
+			   	tdl_id,
+		        gdd_line,
+		        gdd_tool,
+	            gdd_lineup,
+		        gdd_am,
+		        gdd_img1,
+	            gdd_img2,
+		        gdd_lunch,
+		        gdd_afternoon,
+		        gdd_dinner,
+		        gdd_supplement
+              )
+       VALUES
+       <foreach collection="list" item="item" index="index" separator=",">  
+             (
+              	#{item.tdlId},
+		        #{item.gddLine},
+		        #{item.gddTool},
+	            #{item.gddLineup},
+		        #{item.gddAm},
+		        #{item.gddImg1},
+	            #{item.gddImg2},
+		        #{item.gddLunch},
+		        #{item.gddAfternoon},
+		        #{item.gddDinner},
+		        #{item.gddSupplement}
+			)
+		</foreach>
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			ground_trip
+		SET
+      		gdd_line		 = #{gddLine},
+          	gdd_tool		 = #{gddTool},
+          	gdd_am			 = #{gddAm},
+          	gdd_lunch		 = #{gddLunch},
+          	gdd_afternoon	 = #{gddAfternoon},
+          	gdd_dinner		 = #{gddDinner},
+          	gdd_supplement	 = #{gddSupplement},
+          	gdd_img1		 = #{gddImg1},
+    	  	gdd_img2		 = #{gddImg2},
+    	  	gdd_lineup		 = #{gddLineup}  
+		WHERE
+		     id = #{id} 
+	</update>
+	
+	<!-- 根据id删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			ground_trip
+		WHERE
+			id = #{id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriavoucherprice">
+	
+	<!-- 查询 -->
+	<select id="showList" resultType="cafeteriaVoucherPriceBean">
+		SELECT
+			id               AS id,
+			djq_id           AS djqId,
+			cvp_price_total  AS cvpPriceTotal,
+			cvp_price_town   AS cvpPriceTown,
+			cvp_price_sale   AS cvpPriceSale,
+			cvp_price_retail AS cvpPriceRetail
+		FROM
+			cafeteria_voucher_price
+		WHERE
+			djq_id = #{djqId}
+	</select>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lineprice">
+
+	<!-- 过滤条件 -->
+	<sql id="sql_query">
+		
+		1 = 1
+		<!-- 专线ID -->
+		<if test= "tdlId != null and tdlId != ''"> AND tdl_id = # {tdlId} </if>
+		<!-- 日期 -->
+		<if test= "lpeDate != null and lpeDate != ''"> AND lpe_date = # {lpeDate} </if>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		tdl_id					AS	tdlId,
+		tdl_name				AS	tdlName,
+		lpe_date				AS	lpeDate,
+		lpe_is_open				AS	lpeIsOpen,
+		lpe_week				AS	lpeWeek,
+		lpe_sign				AS	lpeSign,
+		lpe_trade_adult			AS	lpeTradeAdult,
+		lpe_trade_child			AS	lpeTradeChild,
+		lpe_retail_adult		AS	lpeRetailAdult,
+		lpe_retail_child		AS	lpeRetailChild,
+		lpe_single_price		AS	lpeSinglePrice,
+		lpe_single_show			AS	lpeSingleShow,
+		lpe_insure_price		AS	lpeInsurePrice,
+		lpe_insure_show			AS	lpeInsureShow,
+		lpe_is_upgrade			AS	lpeIsUpgrade,
+		lpe_upgrade_cont		AS	lpeUpgradeCont,
+		lpe_upgrade_adult		AS	lpeUpgradeAdult,
+		lpe_upgrade_child		AS	lpeUpgradeChild,
+		lpe_restrict			AS	lpeRestrict,
+		lpe_create_date			AS	lpeCreateDate,
+		lpe_create_user			AS	lpeCreateUser,
+		cpy_id					AS	cpyId
+	</sql>
+	
+	<!-- 查询数据列表 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="linePriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				line_price
+			ORDER BY
+				lpe_create_date
+			DESC
+		) t 
+		GROUP BY
+			t.lpeDate,
+			t.tdlId
+		HAVING
+			t.tdlId = #{bean.tdlId}
+			AND	t.lpeDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		INSERT INTO
+			line_price (
+				tdl_id,
+				tdl_name,
+				lpe_date,
+				lpe_is_open,
+				lpe_week,
+				lpe_sign,
+				lpe_trade_adult,
+				lpe_trade_child,
+				lpe_retail_adult,
+				lpe_retail_child,
+				lpe_single_price,
+				lpe_single_show,
+				lpe_insure_price,
+				lpe_insure_show,
+				lpe_is_upgrade,
+				lpe_upgrade_cont,
+				lpe_upgrade_adult,
+				lpe_upgrade_child,
+				lpe_restrict,
+				lpe_create_date,
+				lpe_create_user,
+				cpy_id
+			) VALUES (
+				#{tdlId},
+				#{tdlName},
+				#{lpeDate},
+				#{lpeIsOpen},
+				#{lpeWeek},
+				#{lpeSign},
+				#{lpeTradeAdult},
+				#{lpeTradeChild},
+				#{lpeRetailAdult},
+				#{lpeRetailChild},
+				#{lpeSinglePrice},
+				#{lpeSingleShow},
+				#{lpeInsurePrice},
+				#{lpeInsureShow},
+				#{lpeIsUpgrade},
+				#{lpeUpgradeCont},
+				#{lpeUpgradeAdult},
+				#{lpeUpgradeChild},
+				#{lpeRestrict},
+				#{lpeCreateDate},
+				#{lpeCreateUser},
+				#{cpyId}
+			)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			line_price
+		SET
+			lpe_sign			= #{lpeSign},
+			lpe_trade_adult		= #{lpeTradeAdult},
+			lpe_trade_child		= #{lpeTradeChild},
+			lpe_retail_adult	= #{lpeRetailAdult},
+			lpe_retail_child	= #{lpeRetailChild},
+			lpe_single_price	= #{lpeSinglePrice},
+			lpe_single_show		= #{lpeSingleShow},
+			lpe_insure_price	= #{lpeInsurePrice},
+			lpe_insure_show		= #{lpeInsureShow},
+			lpe_is_upgrade		= #{lpeIsUpgrade},
+			lpe_upgrade_cont	= #{lpeUpgradeCont},
+			lpe_upgrade_adult	= #{lpeUpgradeAdult},
+			lpe_upgrade_child	= #{lpeUpgradeChild}
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 更改出售状态 -->
+	<update id="updateIsOpen">
+		UPDATE
+			line_price
+		SET
+			lpe_is_open		= #{lpeIsOpen}
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 批量更改出售状态 -->
+	<update id="updateBatchIsOpen" parameterType="java.util.Map">
+		UPDATE
+			line_price
+		SET
+			lpe_is_open		= #{bean.lpeIsOpen}
+		WHERE
+			tdl_id	= #{bean.tdlId}
+			<!-- 日期 -->
+			AND lpe_date IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</update>
+</mapper>

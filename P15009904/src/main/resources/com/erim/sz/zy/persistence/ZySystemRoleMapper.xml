@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zysystemrole">
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		zy_system_role
+		(
+			zy_role_name,
+			cpy_id,
+			zy_role_is_cooperation
+		)
+		VALUES
+		(
+			#{zyRoleName},
+			#{cpyId},
+			#{zyRoleIsCooperation}
+		)
+	</insert>
+	<!-- 根据id查询角色 -->
+	<select id="selectBeanById" resultType="zySystemRoleBean">
+		SELECT
+			id 			  AS id,
+			zy_role_name AS zyRoleName,
+			cpy_id        AS cpyId
+		FROM
+			zy_system_role
+		WHERE
+			id = #{id}
+	</select>
+	<!--修改 -->
+	<update id="update">
+		UPDATE
+			zy_system_role
+		SET
+			zy_role_name = #{zyRoleName}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<sql id="sql_query">
+		where
+			(zy_role_is_cooperation != '1' or zy_role_is_cooperation is null)
+			<if test="cpyId != null and cpyId != ''"> and cpy_id = #{cpyId}</if>
+			<if test="zyRoleName != null and zyRoleName != ''"> and zy_role_name = #{zyRoleName}</if>
+			
+	</sql>
+	<!-- 查询 -->
+	<select id="selectBeanByCooperation" resultType="zySystemRoleBean">
+		SELECT
+			id 			 		    AS id,
+			zy_role_name		    AS zyRoleName,
+			cpy_id        			AS cpyId,
+			zy_role_is_cooperation AS zyRoleIsCooperation
+		FROM
+			zy_system_role
+		WHERE
+			zy_role_is_cooperation = '1'
+		AND 
+			cpy_id = #{cpyId}
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="selectPage" resultType="zySystemRoleBean">
+		
+		SELECT
+			id 			 		    AS id,
+			zy_role_name		    AS zyRoleName,
+			cpy_id        			AS cpyId,
+			zy_role_is_cooperation AS zyRoleIsCooperation
+		FROM
+			zy_system_role
+		
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			zy_system_role
+		
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 根据角色名车和公司id查询角色id -->
+	<select id="selectRoleIdByRolenameCpyid" resultType="zySystemRoleBean">
+		SELECT
+			id 			 		    AS id,
+			zy_role_name 			AS zyRoleName,
+			cpy_id        		    AS cpyId,
+			zy_role_is_cooperation AS zyRoleIsCooperation
+		FROM
+			zy_system_role
+		WHERE
+			cpy_id 		   = #{cpyId}
+		AND
+			zy_role_name  = #{zyRoleName}
+	</select>
+	
+	<select id="selectZySystemRoleByCpyId" resultType="zySystemRoleBean">
+		SELECT
+			id 			  			AS id,
+			zy_role_name 		    AS zyRoleName,
+			cpy_id        		    AS cpyId,
+			zy_role_is_cooperation AS zyRoleIsCooperation
+		FROM
+			zy_system_role
+		WHERE
+			cpy_id = #{cpyId}
+		AND
+			zy_role_is_cooperation is null
+	</select>
+</mapper>

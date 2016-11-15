@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sellsystemteam">
+	
+	<!-- 查询所有 -->
+	<select id="selectAll" resultType="sellSystemTeamBean">
+		SELECT
+			id 			  AS id,
+			sst_province  AS sstProvince,
+			sst_city      AS sstCity,
+			sst_code 	  AS sstCode,
+			sst_name 	  AS sstName,
+			sst_telephone AS sstTelephone,
+			sst_address   AS sstAddress,
+			sst_timestamp AS sstTimestamp
+		FROM
+			sell_system_team
+		
+		<where>
+			1=1
+			<if test="sstProvince != null and sstProvince !=''">
+				and sst_province = #{sstProvince}
+			</if>
+			<if test="sstCity != null and sstCity !=''">
+				and sst_city = #{sstCity}
+			</if>
+		</where>
+	</select>
+</mapper>

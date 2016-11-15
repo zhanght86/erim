@@ -1,0 +1,21 @@
+
+    <div class="g_left_block" style="overflow:hidden;overflow:auto;">
+
+		#foreach($item in $parentListFunc)
+			<div class="subNav">
+                $item.sellFuncName
+            </div>
+            <ul class="navContent g_menu">
+				#foreach($fun in $childListFunc)
+    				#if($fun.sellFuncParentcode == $item.sellFuncCode)
+                        <li>
+                            <a href="javascript:;" onclick="left.location('$appRoot$fun.sellFuncAction','$item.sellFuncName','$fun.sellFuncName');">$fun.sellFuncName</a>
+                        </li>
+					#end
+    			#end
+            </ul>
+		#end
+
+    </div>
+
+	

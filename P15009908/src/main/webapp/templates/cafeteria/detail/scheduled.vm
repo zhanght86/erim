@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+<div class="rdivv">
+<div class="newfood">
+	<div class="newfood_suptop">
+		<img src="$staticRoot/images/htfood.png" />
+		<span>预定方式</span>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+	</div>
+	<form method="post" id="form1">
+		<input type="hidden" value="$CafeteriaDetail.id" name="id"/>
+		<div class="carinfo_ctbl">
+			<span>预定方式：</span>
+			<div class="newfood_web">
+				#foreach($item in $scheduled.keySet())
+					<label class="checkbox inline"> 
+						<input class="input-xlarge validate[minCheckbox[1]] checkbox" type="checkbox" #if($erim.contains($!CafeteriaDetail.cdlScheduled,$item)) checked #end name="cdlScheduled" value="$item">$scheduled.get($item)
+	               </label>
+                #end
+			</div><span  style=" color:red;width:10px;float: left; margin-top: 0px;">*</span>
+		</div>
+		<div class="carinfo_ctbl" style="margin-bottom:80px;">
+			<span></span>
+			<div class="carinfo_ctblrbtn">
+				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/cafeteria/detail/scheduled','$appRoot/cafeteria/detail/list');">提交</button>
+				<button type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+			</div>
+		</div>
+	</form>
+</div>
+</div>

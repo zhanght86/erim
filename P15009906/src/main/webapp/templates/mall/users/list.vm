@@ -1,0 +1,49 @@
+	<form method="post" id="form">
+	<div class="g_block_2 mb20">
+		<div class="input_block clearfix mb0">
+			<div class="input_right input_right_wauto">
+				<!--<label>会员类型：</label>
+				<select class="w130"><option></option></select>-->
+				<label class="ml10">账号：</label>
+				<input class="w130" name="mluLoginname">
+				<label class="ml25">邮箱：</label>
+				<input class="w130" name="mluEmail">
+				<label class="ml25">QQ：</label>
+				<input class="w130" name="mluQq">
+			<span class="red_a ml25" onclick="index.searchform('form','$appRoot/mall/users/list');" href="javascript:void(0);">查询</span>
+			</div>
+		</div>
+	</div>
+   </form>
+	<div class="g_block_2 g_block_7 mb20">
+		<p class="g_tit_1 mb10">预付型会员</p>
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>账号</th>
+				<th>邮箱</th>
+				<th>QQ</th>
+				<th>注册时间 </th>
+				<th>注册ip</th>
+				<th>操作</th>
+			</tr>
+			#foreach($item in $mallusersList)
+    			<tr>
+    				<td>$!item.mluLoginname</td>
+    				<td>$!item.mluEmail</td>
+    				<td>$!item.mluQq</td>
+    				<td>$!date.format('yyyy年MM月dd日 HH:mm:ss',$!item.mluCreateTime)</td>
+    				<td>$!item.mluCreateIp</td>
+					<td>
+						#if($!item.mluLevel == '2')
+						<a  href="javascript:index.load('$appRoot/mall/users/upgrade?id=$item.id&mluLevel=1');">会员升级</a>
+						#end
+						#if($!item.mluLevel == '1')
+						<a  href="javascript:index.load('$appRoot/mall/users/upgrade?id=$item.id&mluLevel=2');">会员升级</a>
+						#end
+						<a>历史订单</a>
+					</td>
+    			</tr>
+			#end
+		</table>
+		#parse("common/page.vm")
+	</div>

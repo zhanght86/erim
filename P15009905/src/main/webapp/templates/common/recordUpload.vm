@@ -1,0 +1,26 @@
+<script>
+	function recordUpload(guiId,fileId, imgId, inputId) {
+        $.ajaxFileUpload({
+            url: '$staticRoot/js/upload05.jsp', // 文件上传服务器地址
+            secureuri: false, // 是否需要安全协议，一般设置为false
+            type: 'post', // 提交方式
+            fileElementId: fileId, // 上传文件域的id
+            dataType: 'text', // 返回值类型
+            data:guiId, // 导游ID
+            success: function(data, status) {  
+            	if (status == "success") {
+            		data = eval("("+data+")");
+            		var name = data.filename;
+            		var url = data.url;
+            		$("#"+imgId).attr("src", "/static"+url);
+            		$("#"+inputId).val(url);
+            	} else {
+            		alert("上传失败");
+            	}
+            },
+            error: function(data, status, e) { 
+                alert(e);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>关于我们_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/index.css">
+    <link href="$staticRoot/css/headerfooter.css" type="text/css" rel="stylesheet" />
+	<link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/user.css">
+
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+跟团游
+
+		#parse("common/footer.vm")
+		<!--固定位置-->
+	</div>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+</body>
+</html>

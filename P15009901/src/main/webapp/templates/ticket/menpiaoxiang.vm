@@ -1,0 +1,499 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>门票详情页_$!mallWeb.webCpyname网站</title>
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/hlxq.css">
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+    <script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+    <script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+    	$(".chakan_a").click(function(){
+			var id = $(this).parent().find("input[name='tclId']").val();
+    		if($(this).text()=="查看"){
+    			$(".chakan_block").remove();
+    			$(this).parent().parent().next().children("td").html("<div class='chakan_block clearfix' style='display:block;'></div>");
+    			$(".chakan_block").show();
+    			//$(".chakan_cont").clone().appendTo(".chakan_block").show();
+				$(".chakan_block").load("$appRoot/$cpyno/ticket/menpiaoxiang/price?tclId=" + id);
+    			$(".chakan_a").text("查看");
+    			$(this).text("收起");
+    		}else{
+    			$(".chakan_block").animate({height:"0px"});
+				//$(".chakan_block").css("height","0px");
+    			$(".chakan_cont").css("border","none;");
+    			$(this).text("查看");
+    		}
+    	})
+    })
+</script>
+</head>
+<body>
+    <div class="indexwrap"></div>
+		 <!--头部-->
+        #parse("common/head.vm")
+		<!--dwp html start-->
+		<div class="box_cb"></div>
+        <div class="g_cont">
+		<div class="g_crumbs">
+            <a href="$appRoot/1/menpiao.html">门票</a>&gt;$!ticketDetail.tdlName 
+        </div>
+		<div class="hlxqct_toplt">
+			<div class="hlxqct_toplth">
+				<h1>$!ticketDetail.tdlName <font style="line-height: 42px;font-size: 15px;color: #faaf4d;font-weight: bold;">[$!ticketDetail.tdlScenicLevel]</font> </h1>
+			</div>
+			<p style="width:1200px;height:auto">
+				<span class="b_bianhao_mr20"><strong>产品编码：$!ticketDetail.tdlCode</strong></span>
+                <strong>景点地址：</strong>$erim.subString($!ticketDetail.tdlAddress,20) <strong>&nbsp;&nbsp;&nbsp;&nbsp;开放时间：</strong>$!ticketDetail.tdlTimeOpen 
+			</p>
+		</div>
+			<div class="hlxqct_topl">
+					
+					<div class="hlxqct_toplc">
+						<div class="foucebox">
+				            <div class="bd">
+				                <div class="showDiv">
+				                    <a href="#">
+										#if($!ticketDetail.tdlImg1 != '')
+        									<img src="$staticFileRes$ticketDetail.tdlImg1" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+									</a>
+				                 <div>
+				             </div>
+				        </div>
+				            <div class="showDiv">
+				                <a href="#">
+									#if($!ticketDetail.tdlImg2 != '')
+    									<img src="$staticFileRes$ticketDetail.tdlImg2" title="" alt="">
+    								#else
+    									<img src="$staticRoot/images/isnull.png" title="" alt="">
+    								#end
+								</a>
+							<div>
+				            </div>
+				        </div>
+				        <div class="showDiv">
+				            <a href="#">
+								#if($!ticketDetail.tdlImg3 != '')
+									<img src="$staticFileRes$ticketDetail.tdlImg3" title="" alt="">
+								#else
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								#end
+							</a><div>
+				        </div>
+				        </div>
+				        <div class="showDiv">
+				            <a href="#">
+								#if($!ticketDetail.tdlImg4 != '')
+									<img src="$staticFileRes$ticketDetail.tdlImg4" title="" alt="">
+								#else
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								#end
+							</a><div>
+				        </div>
+				        </div>
+				        </div>
+				        <div class="hd">
+				            <ul>
+				                <li class=" ">
+				                    <a href="#">
+				                        #if($!ticketDetail.tdlImg1 != '')
+        									<img src="$staticFileRes$ticketDetail.tdlImg1" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                        <!--<span class="mask"></span>-->
+				                    </a>
+				                </li>
+				                <li class=" ">
+				                    <a href="#">
+				                        #if($!ticketDetail.tdlImg2 != '')
+        									<img src="$staticFileRes$ticketDetail.tdlImg2" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                        <!--<span class="mask"></span>-->
+				                    </a>
+				                </li>
+				                <li class="on">
+				                    <a href="#">
+				                        #if($!ticketDetail.tdlImg3 != '')
+        									<img src="$staticFileRes$ticketDetail.tdlImg3" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                        <!--<span class="mask"></span>-->
+				                    </a>
+				                </li>
+				                <li>
+				                    <a href="#">
+				                        #if($!ticketDetail.tdlImg4 != '')
+        									<img src="$staticFileRes$ticketDetail.tdlImg4" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                        <!--<span class="mask"></span>-->
+				                    </a>
+				                </li>
+				            </ul>
+				        </div>
+				        </div>
+					</div>
+				</div>		
+			
+            
+            <div class="map_block">
+            	<img src="$staticRoot/images/menpiao.jpg" width="300" height="250">
+            </div>
+            
+			<div class="box_cb mb20"></div>
+            
+            <p class="g_tab">
+				<a class="tab_1 on" href="javascript:void(0);" name="more">票类详情</a>
+				<a class="tab_2" href="javascript:void(0);">景点详情</a>
+			<p>
+             <div class="tab_block" style="float:left">
+                <div class="block_tab_1">
+                    <table class="g_table_1" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    	<tr>
+                            <th>门票类型</th>
+                            <th>提前预定时间</th>
+                            <!--th>原价</th-->
+							<th>实时价格</th>
+                            <!--th>优惠</th-->
+							<th></th>
+                        </tr>
+						#foreach($item in $ticketclass)
+    						<tr>
+                            	<!--<td></td>-->
+                                <td align="center">$!item.tdlTicket</td>
+                                <td align="center" style="padding:0 10px;">
+								#if($!item.tplDateType == '01')游玩前 $!item.tplForwardH 天 
+								#elseif($!item.tplDateType == '02') 
+									#if($erim.isNotEmpty($!item.tplSameH))
+										当日  $!item.tplSameH (时间)之前
+									#else
+										无需预定
+									#end
+									
+								#else 今天无票
+								#end
+								##$!ticketDetail.tdlTimeOpen - $!ticketDetail.tdlMaintenanceTime
+								</td>
+    							<!--td>￥120</td-->
+								<td class="red" style="font-size:18px;font-weight:bold;">
+										
+										 #if( $item.tplRetailPrice )
+											 ￥ $!item.tplRetailPrice 
+									     #else
+											今日无票
+										 #end
+								</td>
+    							<!--td></td-->
+    							<td>
+									<input type="hidden" name="tclId" value="$!item.id" />
+									<a class="chakan_a yuding" href="javascript:;">查看</a>
+								</td>
+                            </tr>
+    						<tr>
+                                <td colspan="4" class="add_chakan_box"></td>
+                            </tr>
+						#end
+                    </table>
+                    <div class="box_cb"></div>
+					<div style="float:left;padding:20px 46px 40px 44px;width:1108px;">
+    	<!--11.26-bai--><!--<h2 class="notes-title">
+    						预订须知
+                        </h2>
+						<div class="notes-line">
+    						<span class="notes-stitle">兑票方式</span>
+    						<span class="notes-stext">$!ticketDetail.tdlReferentialPolicies</span>
+						</div>
+    					<div class="notes-line">
+    						<span class="notes-stitle">预订限制</span>
+    						<span class="notes-stext">$!ticketDetail.tdlSetReservation</span>
+    					</div>
+						<span class="notes-stitle">补充说明</span>
+						<span class="notes-stext">$!ticketDetail.tdlSecurityGuide</span>-->
+    					<!--<p class="notes-txt">$!ticketDetail.tdlReferentialPolicies
+                        </p>
+						
+						<h2 class="notes-title">
+    						预订限制
+                        </h2>
+    					<p class="notes-txt">$!ticketDetail.tdlSetReservation
+                        </p>
+						
+						<h2 class="notes-title">
+    						退改规则
+                        </h2>
+    					<p class="notes-txt">$!ticketDetail.tdlSecurityGuide
+                        </p>-->
+					</div>
+                </div>
+                <div class="block_tab_2 pt20 pl30" style="float:left;padding:20px 46px 40px 44px;width:1108px;">
+					
+					<!--开始-->
+					<h2 class="notes-title">
+						景点特色
+                    </h2>
+					#if($erim.isNotEmpty($!ticketDetail.tdlAttractions))
+    					<div class="notes-line">
+    						<span class="notes-stitle">景点特色</span>
+    						<span class="notes-stext">
+								$!ticketDetail.tdlAttractions,
+								$!ticketDetail.tdlAddtheme
+							</span>
+                        </div>
+					#end
+					#if($erim.isNotEmpty($!ticketDetail.tdlAddress))
+    					<div class="notes-line">
+    						<span class="notes-stitle">详细地址</span>
+    						<span class="notes-stext">$!ticketDetail.tdlAddress</span>
+    					</div>
+					#end
+					#if($erim.isNotEmpty($!ticketDetail.tdlUsingThisDictionary))
+    					<div class="notes-line">
+    						<span class="notes-stitle">封闭维护说明</span>
+    						<span class="notes-stext">$!ticketDetail.tdlUsingThisDictionary</span>
+    					</div>
+					#end
+						<span class="notes-stitle">容纳参观人数</span>
+						<span class="notes-stext">
+							#if($!ticketDetail.tdlNum == '0') 不限
+							#elseif($!ticketDetail.tdlNum != '0')
+								$!ticketDetail.tdlNum人
+							#end</span>
+					<!--结束-->
+					#if($erim.isNotEmpty($!ticketDetail.tdlFeeDescription))
+                    	<h2 class="notes-title">
+    						景点介绍
+                        </h2>
+    					<pre>$!ticketDetail.tdlFeeDescription</pre>
+					#end
+					
+					#if($erim.isNotEmpty($!ticketDetail.tdlInSecurity))
+    					<h2 class="notes-title">
+    						友情提示
+                        </h2>
+    					<pre>$!ticketDetail.tdlInSecurity </pre>
+					#end
+					<!--开始-->
+					<!--结束-->
+                </div>
+				<!--
+                <div class="block_tab_3 pt20 pl30 pr0">
+                	周边酒店
+                    <div class="box_cb"></div>
+                </div>
+				-->
+             </div>
+            <div class="box_cb"></div>
+
+        </div>
+<!--dwp html end-->
+      #parse("common/footer.vm")
+
+<!--查看信息-->
+<!--  
+<div class="chakan_cont pt13 pb10 clearfix">
+	<div class="riqi ml20 mr30">
+    	<table class="xuanze" cellpadding="0" cellspacing="0" border="0" style="border-bottom:none;">
+        	<tbody>
+            	<tr>
+                    <td class="w200 blue_a white">选择参观日期</td>
+                    <td>
+                    	<span class="sjleft"><img src="$staticRoot/images/sanjiaoleft.jpg"></span><p class="date-title">2015年8月</p><span class="sjright"><img src="$staticRoot/images/sanjiaoright.jpg"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    	<table cellpadding="0" cellspacing="0" border="0" style="border-top:none;">
+            <tbody>
+                <tr>
+                    <th class="red">日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th class="borderright red">六</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p class="shu">1</p><span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="shu">2</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">3</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">4</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">5</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td class="red_bg">
+                        <p class="shu">6</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">7</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">8</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="shu">9</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">10</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">11</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td class="red_bg">
+                        <p class="shu">12</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="red">余：3张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">13</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">14</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">15</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="shu">16</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">17</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">18</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td class="yellow_bg">
+                        <p class="shu">今</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">20</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">21</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">22</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="shu">23</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">24</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">25</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">26</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">27</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                    <td>
+                        <p class="shu">28</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30张</span></p></span>
+                    </td>
+                     <td>
+                        <p class="shu">29</p>
+                        <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：0张</span></p></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="hui">
+                        <p class="shu">30</p><span class="jian"><p><span class="white">￥2000</span><br><span class="white">余：30张</span></p></span>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+		</tbody>
+    </table>
+	</div>
+	
+    <div class="chakan_right pt35" style="width:370px;">
+    		<p>购票数量：<span class="goupiao_num"><input type="text">张</span></p>
+    		<p>总价格：<span class="font_hong"><b>￥559</b></span></p>
+    		<p>费用说明：<span class="w280 ml100 mt-20">茗汤温泉成人票1张，108个独立温泉汤池，温泉游泳池，spa水疗，桑拿，石板浴，乒乓球，台球，沙滩排球，免费休息大厅，水果，饮料，点心等。</span></p>
+			<a href="$appRoot/$cpyno/texi/carorder" class="yuding_but ml270 mt40" style="width:75px;margin-left:226px;">预订</a>
+    	</div>	
+    </div>
+    <div class="chakan_cont b_chakan_cont">
+    	<div class="notes-line">
+    		<span class="notes-stitle">兑票方式</span>
+    		<span class="notes-stext">$!ticketDetail.tdlReferentialPolicies</span>
+    	</div>
+    	<div class="notes-line">
+    		<span class="notes-stitle">预订限制</span>
+    		<span class="notes-stext">$!ticketDetail.tdlSetReservation</span>
+    	</div>
+		<span class="notes-stitle">补充说明</span>
+		<span class="notes-stext">$!ticketDetail.tdlSecurityGuide</span>
+	</div>
+</div>
+-->
+</body>
+</html>
+ <script type="text/javascript" src="$staticRoot/js/jquery.SuperSlide.js"></script>

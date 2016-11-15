@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+
+    <!-- 基础设置 -->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false" />
+    </settings>
+    
+    <!-- 类缩写 -->
+    <typeAliases>
+		<!-- java base -->
+		<typeAlias alias="hashMap"                  	type="java.util.HashMap"/>
+        
+        <!-- erim web common -->
+        <typeAlias alias="codeBean"                     type="com.erim.web.bean.CodeBean" />
+        
+		<!-- 导游 -->
+		<typeAlias alias="guideDetailBean"           	type="com.erim.sz.common.bean.GuideDetailBean" />
+		<typeAlias alias="guideOrderBean"         		type="com.erim.sz.common.bean.GuideOrderBean" />
+		<typeAlias alias="guidePhotoBean"         		type="com.erim.sz.common.bean.GuidePhotoBean" />
+		<typeAlias alias="guideRecordBean"         		type="com.erim.sz.common.bean.GuideRecordBean" />
+		<typeAlias alias="guideScheduleBean"         	type="com.erim.sz.common.bean.GuideScheduleBean" />
+		<!-- 量价 -->
+		<typeAlias alias="guidePriceBean"         		type="com.erim.sz.common.bean.GuidePriceBean" />
+		
+		<!-- 字典 -->
+		<typeAlias alias="tmSystemRegionBean"         	type="com.erim.sz.web.tm.bean.TmSystemRegionBean" />
+		
+		
+    </typeAliases>
+    
+    <!-- 分页插件 -->
+    <plugins>
+        <plugin interceptor="com.erim.utils.mybatis.OffsetLimitInterceptor">
+            <property name="dialectClass" value="com.erim.utils.jdbc.dialect.MySQLDialect"/>
+        </plugin>
+    </plugins>
+    
+    <!-- 映射文件 -->
+    <mappers>
+        <!-- erim web -->
+        <mapper resource="com/erim/web/persistence/CodeMapper.xml"/>
+        <!-- erim sz -->
+        
+        <!-- 导游 -->
+        <mapper resource="com/erim/sz/web/persistence/GuideDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/web/persistence/GuideOrderMapper.xml"/>
+        <mapper resource="com/erim/sz/web/persistence/GuidePhotoMapper.xml"/>
+        <mapper resource="com/erim/sz/web/persistence/GuideRecordMapper.xml"/>
+        <mapper resource="com/erim/sz/web/persistence/GuideScheduleMapper.xml"/>
+        <!-- 导游量价表 -->
+        <mapper resource="com/erim/sz/web/persistence/GuidePriceMapper.xml"/>
+        
+        <!-- 字典 -->
+        <mapper resource="com/erim/sz/web/persistence/TmSystemRegionMapper.xml"/>
+        
+    </mappers>
+    
+</configuration>

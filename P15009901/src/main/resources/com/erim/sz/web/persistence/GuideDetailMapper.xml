@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guidedetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			and guide.gdl_is_del_status = '1'
+			<if test="gdlSex != null and gdlSex != ''">								 and guide.gdl_sex 		            =   #{gdlSex}</if>
+			<if test="gdlCompanyRating != null and gdlCompanyRating != ''">			 and guide.gdl_company_rating 	    =   #{gdlCompanyRating}</if>
+			<if test="gdlLanguage != null and gdlLanguage != ''">                    and guide.gdl_language             like "%"#{gdlLanguage}"%"</if>
+			<if test="gdlName != null and gdlName != ''">                            and guide.gdl_name                 like "%"#{gdlName}"%" </if>
+			<if test="gdlNationalProvince != null and gdlNationalProvince != ''">    and guide.gdl_national_province     = #{gdlNationalProvince}</if>
+			<if test="gdlLocalProvince != null and gdlLocalProvince != ''">          and guide.gdl_local_province        = #{gdlLocalProvince}</if>
+			<if test="gdlLeaderProvince != null and gdlLeaderProvince != ''">        and guide.gdl_leader_province       = #{gdlLeaderProvince}</if>
+			<if test="gdlGaidLokal != null and gdlGaidLokal != ''">                  and guide.gdl_gaid_lokal            = #{gdlGaidLokal}</if>
+		    <if test="gdlGaidCountry != null and gdlGaidCountry != ''">              and guide.gdl_gaid_country          like "%"#{gdlGaidCountry}"%"</if>
+		    <!--<if test="gpeDate != null and gpeDate != ''">                    and guide_price.gpe_date       = #{gpeDate} </if>
+		    <if test="gdlLocalCounty != null and gdlLocalCounty != ''">                    
+		    	and (guide.gdl_local_city  like "%"#{gdlLocalCity}"%" or guide.gdl_national_city  like "%"#{gdlLocalCity}"%")
+		    </if>-->
+		    <if test="gdlLocalCity != null and gdlLocalCity != ''">                   and guide.gdl_local_city           like "%"#{gdlLocalCity}"%" </if>
+		    <if test="gdlNationalCity != null and gdlNationalCity != ''">             and guide.gdl_national_city        like "%"#{gdlNationalCity}"%" </if>
+		    <if test="gdlLeaderCity != null and gdlLeaderCity != ''">                 and guide.gdl_leader_city          like "%"#{gdlLeaderCity}"%" </if>
+			<if test="gdlServer != null and gdlServer != ''">                         and guide.gdl_server               like "%"#{gdlServer}"%" </if>
+		</where>
+	</sql>
+	<sql id="sql_column">
+		guide.id,
+		guide.gdl_name                       AS gdlName,
+		guide.gdl_code                       AS gdlCode,
+		guide.gdl_sex                        AS gdlSex,
+		guide.gdl_signature               	 AS gdlSignature,
+		guide.gdl_introduction               AS gdlIntroduction,
+		guide.gdl_server                     AS gdlServer,
+		guide.gdl_img_person                 AS gdlImgPerson,
+		guide.gdl_img_card                   AS gdlImgCard,
+		guide.gdl_price                      AS gdlPrice,
+		guide.gdl_createtime                 AS gdlCreatetime,
+		guide.gdl_createuser                 AS gdlCreateuser,
+		guide.gdl_is_through                 AS gdlIsThrough,
+		guide.gdl_through_time               AS gdlThroughTime,
+		guide.gdl_through_user               AS gdlThroughUser,
+		guide.gdl_stars                      AS gdlStars,
+		guide.gdl_language                   AS gdlLanguage,
+		guide.gdl_property                   AS gdlProperty,
+		guide.gdl_is_del_status              AS gdlIsDelStatus,
+		guide.gdl_pwd                        AS gdlPwd,
+		guide.cpy_id                         AS cpyId,
+		guide.gdl_service_region             AS gdlServiceRegion,
+		guide.gdl_age                        AS gdlAge,
+		guide.gdl_age1                       AS gdlAge1,
+		guide.gdl_local_province             AS gdlLocalProvince,
+		guide.gdl_national_province          AS gdlNationalProvince,
+		guide.gdl_leader_province            AS gdlLeaderProvince,
+		guide.gdl_destination                AS gdlDestination,
+		guide.gdl_gaid_lokal                 AS gdlGaidLokal,
+		guide.gdl_type_service               AS gdlTypeService,
+		guide.gdl_grade                      AS gdlGrade,
+		guide.gdl_company_rating             AS gdlCompanyRating,
+		guide.gdl_local_city                 AS gdlLocalCity,
+		guide.gdl_national_city              AS gdlNationalCity,
+		guide.gdl_leader_city                AS gdlLeaderCity,
+		guide.gdl_destination_country        AS gdlDestinationCountry,
+		guide.gdl_gaid_country               AS gdlGaidCountry,
+		guide.gdl_local                      AS gdlLocal,
+		guide.gdl_national                   AS gdlNational,
+		guide.gdl_leader                     AS gdlLeader,
+		guide.gdl_destination1               AS gdlDestination1,
+		guide.gdl_certificate                AS gdlCertificate,
+		guide.gdl_native_place               AS gdlNativePlace,
+		guide.gdl_rest                       AS gdlRest
+	</sql>
+
+
+	<select id="selectById" resultType="guideDetailBean">
+		SELECT
+			<include refid="sql_column" />
+ 		FROM
+			guide_detail guide
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageGuide" resultType="guideDetailBean">
+		select <include refid="sql_column" /> ,a.gpeGuestPrice,
+		(
+			SELECT
+				gpt_img_url     	AS gptImgUrl
+			FROM
+				guide_photo
+			WHERE
+				gdl_id = guide.id
+			ORDER BY
+				gpt_createtime 
+			DESC
+			limit 1
+		 ) as gdlShowImg
+		from guide_detail guide 
+		join (
+		
+				select c1.gdl_id as gdl_id ,min(gpe_guest_price) as gpeGuestPrice from guide_price c1  join 
+				(
+					select c2.gdl_id,max(c2.gpe_create_time) as gpe_create_time,c2.gpe_date  from guide_price c2  group by c2.gpe_date ,c2.gdl_id 
+				) c2
+				on c1.gdl_id = c2.gdl_id
+				and c1.gpe_create_time = c2.gpe_create_time
+				and c1.gpe_date = c2.gpe_date
+				<if test="gpeDate != null and gpeDate != ''"> where c1.gpe_date = #{gpeDate} </if>
+				<if test="gpeDate == null or  gpeDate == ''"> 
+				where c1.gpe_date &gt;= date_format(now(),'%Y-%m-%d') and c1.gpe_date &lt;= date_format(last_day(curdate()),'%Y-%m-%d')
+				</if>
+				GROUP BY  c1.gdl_id
+		
+		)  a 
+		on guide.id = a.gdl_id
+		<include refid="sql_query" />
+		having gpeGuestPrice is not null
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageGuideCount" resultType="int">
+		select count(1) from 
+		(
+			select a.gpeGuestPrice
+			from guide_detail guide 
+			join (
+			
+					select c1.gdl_id as gdl_id ,min(gpe_guest_price) as gpeGuestPrice from guide_price c1  join 
+					(
+						select c2.gdl_id,max(c2.gpe_create_time) as gpe_create_time,c2.gpe_date  from guide_price c2  group by c2.gpe_date ,c2.gdl_id 
+					) c2
+					on c1.gdl_id = c2.gdl_id
+					and c1.gpe_create_time = c2.gpe_create_time
+					and c1.gpe_date = c2.gpe_date
+					<if test="gpeDate != null and gpeDate != ''"> where c1.gpe_date = #{gpeDate} </if>
+					<if test="gpeDate == null or  gpeDate == ''"> 
+					where c1.gpe_date &gt;= date_format(now(),'%Y-%m-%d') and c1.gpe_date &lt;= date_format(last_day(curdate()),'%Y-%m-%d')
+					</if>
+					GROUP BY  c1.gdl_id
+			
+			)  a 
+			on guide.id = a.gdl_id
+			<include refid="sql_query" />
+			having gpeGuestPrice is not null
+		) a
+	</select>
+</mapper>

@@ -1,0 +1,195 @@
+
+<!--日历wxy11-8-->
+<link href="$staticRoot/css/tab.css" type="text/css" rel="stylesheet">
+<link href="$staticRoot/css/kuCity.css" type="text/css" rel="stylesheet">
+<link href="$staticRoot/css/index.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$staticRoot/js/laydate/laydate.js"></script>
+<script type="text/javascript">
+//rili--wxy-11-8
+	laydate.skin('molv');
+</script>
+
+<style type="text/css">
+.logo_img{vertical-align:top;margin-right:10px;margin-top:10px;border:none;}
+.title_1{display:inline-block;font:bold 34px/70px microsoft yahei;color:#1482c8;margin-top:10px;*display:inline;overflow:hidden;zoom:1;}
+.title_1 .red{font:bold 34px/70px microsoft yahei;color:#fa6464;}
+</style>
+
+<div class="indexhead">
+	#if($!cpyno == '1' || ! $cpyno || '$!cpyno' == '')
+		<div class="indexheadcenter">
+    		<div class="indexheadcenterwrap">
+				<a href="#">
+					<img class="logo_img" src="$staticRoot/images/logo.png" width="100" height="71">
+				</a>
+				<h1 class="title_1">已合作组团社：<span class="red">...</span>家</h1>
+			</div>
+		</div>
+	#else
+    <!--	<div class="indexheadtop">
+    		<div class="indexheadtopwrap">
+    			<div class="indexheadtopleft">
+    				<span>您好，欢迎访问$!mallWeb.webTitle旅游网！</span>
+    			</div>
+    			<div class="indexheadtopright">
+    				<ul>
+    					#if (! $loginName)
+        					<li><a href="$appRoot/$cpyno/login.html" target="_blank">会员登录</a></li>
+        					<li><a href="$appRoot/$cpyno/registerPage.html">会员注册</a></li>
+    					#else
+    						<li><a href="$appRoot/$cpyno/member/index">欢迎：$loginName</a></li>
+    						<li><a href="$appRoot/$cpyno/login/loginout">注销</a></li>
+    						<li><a href="$appRoot/$cpyno/member/message">会员中心</a></li>
+    						<li><a href="$appRoot/$cpyno/member/all">我的订单</a></li>
+    					#end
+    				</ul>
+    			</div>
+    		</div>
+    	</div>-->
+    	<div class="indexheadcenter">
+    		<div class="indexheadcenterwrap">
+    			<div class="indexheadcenterleft">
+    				<div class="indexheadcenterleftimg">
+						<img src="$staticFileRes$!mallWeb.webLogo" style="width:98px;height:89px;">
+    				</div>
+    				<div class="indexheadcenterleftname">
+    					<div class="indexheadcenterleftnametop">$!mallWeb.webTitle</div>
+    					<div class="indexheadcenterleftnamelow">$!mallWeb.webCpyname</div>
+    				</div>
+    			</div>
+    			<div class="indexheadcentermiddle">
+    				<div class="indexheadcentermiddlsearch" style="position:relative">
+    					<input id="web_search" name="textfield" type="text" value="目的地/酒店/景点/其它关键字" onfocus="if (value =='目的地/酒店/景点/其它关键字'){value =''}; search($(this));" onblur="if (value ==''){value='目的地/酒店/景点/其它关键字'};" autocomplete="off"/> 
+    					<a href="javascript:;" target="_blank" id="a_search"><img src="$staticRoot/images/searchb.gif" alt="" title=""></a>
+						<div id="web_schdiv" class="web_searchdiv">
+                        	<ul class="web_searchul" id="ul_web_searchul">
+								#* 
+								<li class="web_searchli">我爱被今天俺妈<span>约有1000个结果</span></li>
+								<li class="web_searchli">事假装时间的客服束带结发<span>约有1000个结果</span></li>
+								<li class="web_searchli">北师大sd卡回复开始哦打飞机神农大丰<span>约有1000个结果</span></li>
+								<li class="web_searchli">上班的妇科款到即发没事的说的的设计费<span>约有1000个结果</span></li>
+								<li class="web_searchli">女生短发的时间法律；蓝色的客服的说法<span>约有1000个结果</span></li>
+								<li class="web_searchli">毕竟是客服看来是，地方看色调分离说的<span>约有1000个结果</span></li>
+									*#
+                            </ul>
+                        </div>
+    				</div>
+    			</div>
+    			<div class="indexheadcenterright">
+    				<div class="indexheadcenterrightiphonea">
+    					<img src="$staticRoot/images/iPhone.gif"> <span style="font-size:14px;">电话：$!mallWeb.webKh</span>
+    				</div>
+					<br clear="left">
+    				<div class="indexheadcenterrightiphoneb">
+    					<img src="$staticRoot/images/telephone.gif"> <span style="font-size:14px;">地址：$!mallWeb.webCpyaddress</span>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+	#end
+	<div class="indexheadlow">
+		<div class="indexheadlowmenu">
+			<ul>
+				<li class="indexheadlowmenuindex"><a href="$appRoot/$cpyno">旅游商城</a></li>
+				<li><a href="$appRoot/$cpyno/jingxuan.html?searchModel=1" target="_blank"   style="#if($!searchModel == 1) background-color: #166992; #end ">热门线路</a></li>
+				##<li><a href="$appRoot/$cpyno/zhuti.html">主题推荐</a></li>
+				<li><a href="$appRoot/$cpyno/lvyou.html?searchModel=2" target="_blank"      style="#if($!searchModel == 2) background-color: #166992; #end ">当地旅游</a></li>
+				<li><a href="$appRoot/$cpyno/superfree.html?searchModel=3" target="_blank"  style="#if($!searchModel == 3) background-color: #166992; #end ">超级自由行</a></li>
+				<li><a href="$appRoot/$cpyno/news.html?searchModel=4" target="_blank"       style="#if($!searchModel == 4) background-color: #166992; #end ">旅游资讯</a></li>
+				<li><a href="$appRoot/$cpyno/abouts.html?searchModel=5" target="_blank"     style="#if($!searchModel == 5) background-color: #166992; #end ">关于我们</a></li>
+				<li class="online-title" onmouseover="showBlock()" onmouseout="showNone()"><a href="javascript:void(0)">在线咨询</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="online">
+    <div class="online-service" onmouseover="showBlock()" onmouseout="showNone()">
+		#foreach($item in $astrqq)
+        	<span class="online-name">客服$velocityCount</span>
+        	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=$item&Site=在线客服&Menu=yes" class="online-qq">
+        		<img border=0 src="$staticRoot/images/button_old_101.gif" alt="在线交流" title="在线交流">
+        	</a>
+		#end
+    </div>
+</div>
+
+<!--wxy11-17tabxin-->
+<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+<!--城市-->
+<script src="$staticRoot/js/kuCity.js" type="text/javascript"></script>
+<!--国家-->
+<script src="$staticRoot/js/interkuCity.js" type="text/javascript"></script>
+<!--签证类型，所在大洲，国家-->
+<!--script src="$staticRoot/js/visasuper.js" type="text/javascript"></script-->
+<!--tab页面切换-->
+<script src="$staticRoot/js/tab.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+
+
+		//wxy11-17 tabxin
+//        国内城市下拉
+        $('.home-city').kucity();
+//        国际城市下拉
+        $('.foreign-city').interkucity();
+
+//        点击日历隐藏城市的下拉框
+        $(".laydate-icon").click(function(){
+            $(".interkucity").hide();
+            $(".kucity").hide();
+        });
+	
+	
+//        国内城市下拉
+        $('.local-citys').kucity();
+		
+		
+		//zaixianzixun
+		function showBlock(){
+			$(".online").css("display","block");
+		}
+		function showNone(){
+			$(".online").css("display","none");
+		}
+		
+		
+		/*
+		*王笑洋
+		*网站头部搜索功能的显示隐藏
+		*原理：鼠标起来显示隐藏的内容框
+		*/
+		$("#web_schdiv").hide();
+		//键盘弹起获取输入文本 进行模糊搜索
+        $("#web_search").keyup(function(){
+           search($(this));
+        });
+		
+		//模糊检索
+		function search(data){
+			 var name = data.attr("value");
+			if('' != name){
+				var url = "$appRoot/$cpyno/vSearchAny/search/selectListByName?vName="+name;
+				url = encodeURI(url);
+				$.post(url,function(data){
+					var htm = "";
+					var i = 0 ;
+					$.each(data,function(i,item){
+						if(i == 0){
+							$("#a_search").attr("href","$appRoot/$cpyno"+item.vUrl);
+							i = 1;
+						}
+						var newName = item.vName;
+						newName     = newName.replace(name,'<label style="color:red">'+name+'</label>')
+						htm += '<li class="web_searchli"><a href="$appRoot/$cpyno'+item.vUrl+'"  target="_blank">'+newName+'<span></span></a></li>';
+					});
+					$("#ul_web_searchul").html(htm);
+					$("#web_schdiv").show();
+				},'json');
+			}else{
+				$("#web_schdiv").hide();
+				$("#a_search").attr("href","javascript:;");
+			}
+		}
+</script>
+

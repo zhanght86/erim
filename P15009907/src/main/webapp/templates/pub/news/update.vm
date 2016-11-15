@@ -1,0 +1,37 @@
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/news.png">修改新闻
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		<input type="hidden" name="id" value="$!pubNews.id" />
+		<div class="input_block clearfix">
+    		<div class="label_left">主题：</div>
+    		<div class="input_right">
+                <input type="text" class="w200 validate[required,maxSize[100]]" value="$!pubNews.newTitle" name="newTitle" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix position_ab">
+    		<div class="label_left">内容：</div>
+    		<div class="input_right">
+    			<textarea style="width:350px;height:90px;"  name="newContent"  class="validate[required,maxSize[2000]]" >$!pubNews.newContent</textarea><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="input_block clearfix">
+        		<div class="label_left">新闻类型：</div>
+        		<div class="input_right">
+        			<select class="w200" name="newType">
+        				#foreach($item in $newsType.keySet())
+                            <option value="$item" #if($!pubNews.newType == $!item) selected #end>$newsType.get($item)</option>
+    					#end
+        			</select>
+        		</div>
+        	</div>
+    	</div>
+    	<div class="button_block clearfix">
+    		<button class="y_but ml35" type="button" onclick="subform.update('form1', '$appRoot/pub/news/update');">提交</button>
+			<button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+    	</div>
+	</form>
+</div>

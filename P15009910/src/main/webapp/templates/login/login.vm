@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="keywords" content="合作管理登录" />
+        <link rel="stylesheet"  href="$staticRoot/css/zxsdl.css" />
+        <title>合作管理登录</title>
+    	<script type="text/javascript" src="$staticFilePlug/jquery/jquery-1.11.3.min.js"></script>
+    	<script type="text/javascript">
+    		$(function() {
+        		$('#imgObj').click(function() {
+        			changeValidateCode();
+        		});
+        		function changeValidateCode() {
+        			$("#imgObj").attr("src","$appRoot/check/code?id=" + Math.random());
+        		}
+        	});
+    		//点击回车登陆系统
+    		$(document).keydown(function(event) { 
+                if (event.keyCode == 13) { 
+                    $(".sign_sign").click();
+                } 
+            }); 
+      	</script>
+    </head>
+    <body>
+        <!--bg-->
+        <div class="zxbj zxbj2"></div>
+        <!--logo-->
+        <div class="logo" style="top:0px;">
+        <img src="$staticRoot/images/logo.png">
+        <br />
+</div>
+<!--cont-->
+<div class="contentw">
+    <div id="dlkk">
+        <div class="dlkkz">
+            <h1>合作管理登录</h1>
+           <form action="$appRoot/yj/user/login" method="post" id="form1">
+                <label>账号</label>
+                <input  type="text" name="username" id="username"/>
+                <label>密码</label>
+                <input type="password" name="password" id="password"/>
+                <label>验证码</label>
+                <input id="yz" type="text" name="checkcode" id="checkcode" />
+                <img src="$appRoot/check/code" id="imgObj" alt="验证码">
+				<a style="color:red;position: relative;top: 22px;">$!errorMsg</a>
+                <button id="dl" onclick="$('#form1').submit();">登 录</button>
+				<button type="reset">重 置</button>
+			</form>
+		</div>
+    </div>
+    </div>
+    <!--footer-->
+    <div class="footer">
+        <p> Copyright  2015, jialvlianhe.com. All rights reserved. | 京ICP备14023329号-1<br />
+            客户服务电话:400-004-6161 </p>
+    </div>
+</body>
+</html>

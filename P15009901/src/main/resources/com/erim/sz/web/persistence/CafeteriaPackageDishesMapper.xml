@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriapackagedishes">
+	
+	
+	
+	<!-- 根据套餐ID查询菜品数据列表 -->
+	<select id="selectListByCpeId" resultType="cafeteriaPackageDishesBean">
+		SELECT
+			id 			   AS id,
+			cpe_id         AS cpeId,
+			cpd_price 	   AS cpdPrice,
+			cpd_avenue	   AS cpdAvenue,
+			cpd_createtime AS cpdCreatetime
+		FROM
+			cafeteria_package_dishes
+		WHERE
+			cpe_id = #{cpeId}
+		ORDER BY 
+			cpd_createtime 
+	</select>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mallshopline">
+	
+	<!-- 查询对应专线 -->
+	<select id="selectListByBean" resultType="mallShopLineBean">
+		SELECT
+			id 			   AS id,
+			cpy_id 	       AS cpyId,
+			msp_id1 	   AS mspId1,
+			msp_id2 	   AS mspId2,
+			msl_lineid     AS mslLineid,
+			msl_cpyid 	   AS mslCpyid,
+			msl_createtime AS mslCreatetime,
+			msl_createuser AS mslCreateuser
+		FROM
+			mall_shop_line
+		WHERE
+			cpy_id  = #{cpyId}
+		AND
+			msp_id1 = #{mspId1}
+		AND
+			msp_id2 = #{mspId2}
+	</select>
+	
+	<!-- 批量插入 -->
+	<insert id="insertAll">
+		INSERT INTO
+			mall_shop_line
+		(
+			cpy_id,
+			msp_id1,
+			msp_id2,
+			msl_lineid,
+			msl_cpyid,
+			msl_createtime,
+			msl_createuser
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator="," >
+        (
+           	#{item.cpyId},
+			#{item.mspId1},
+			#{item.mspId2},
+			#{item.mslLineid},
+			#{item.mslCpyid},
+			#{item.mslCreatetime},
+			#{item.mslCreateuser}
+        )
+        </foreach>
+	</insert>
+	
+	<!-- 删除所有 -->
+	<delete id="deleteAll">
+		DELETE FROM
+			mall_shop_line
+		WHERE
+			cpy_id  = #{cpyId}
+		AND
+			msp_id1 = #{mspId1}
+		AND
+			msp_id2 = #{mspId2}
+	</delete>
+</mapper>

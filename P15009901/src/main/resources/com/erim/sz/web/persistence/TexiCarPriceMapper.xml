@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="texicarprice">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			and tcp_is_open = '02'
+			<if test="bclType != null	and bclType != ''">			     and 	bcl_type 		=   #{bclType} </if>
+			<if test="tcpDate != null	and tcpDate != ''">	             and 	tcp_date 	    =   #{tcpDate} </if>
+			<if test="bclId != null	and bclId != ''">	                 and 	bcl_id 	        =   #{bclId} </if>
+			
+		</where>
+	</sql>
+	
+	<sql id="sql_column">
+		id ,
+		bcl_type                  AS bclType,
+		tcp_date                  AS tcpDate,
+		tcp_week                  AS tcpWeek,
+		tcp_retail_price          AS tcpRetailPrice,
+		tcp_price_show            AS tcpPriceShow,
+		tcp_cancel_indent         AS tcpCancelIndent,
+		tcp_create_time           AS tcpCreateTime
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTexiCarPrice" resultType="texiCarPriceBean">
+		SELECT
+			<include refid="sql_column" />
+ 		FROM
+			texi_car_price
+		<include refid="sql_query" />
+		ORDER BY 
+			tcp_create_time desc
+	</select>
+
+	
+</mapper>

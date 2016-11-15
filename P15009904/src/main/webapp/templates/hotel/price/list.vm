@@ -1,0 +1,391 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">	
+	
+<script type="text/javascript" src="$staticRoot/js/product/price.js"></script>
+<script type="text/javascript">
+	// 当点击不含早餐时候
+	$("input[name='hnpBreakfast']").change(function() {
+		var a = $("input[name='hnpBreakfast']:checked").val();
+		if (a == '02' || a == '03' || a == '04') {
+			$("input[name='hnpStartH']").attr('disabled',false);
+			$("input[name='hnpEndH']").attr('disabled',false);
+		} else {
+			$("input[name='hnpStartH']").attr('disabled',"true");
+			$("input[name='hnpEndH']").attr('disabled',"true");
+			$("input[name='hnpStartH']").val("");
+			$("input[name='hnpEndH']").val("");
+		}
+	});
+	
+	//零售价和批发价的比较
+	function comparison(field, rules, i, options){
+		// 批发价
+    	var hnpCombinationPrice = $("input[name='hnpCombinationPrice']").val();
+		// 零售价
+		var hnpRetailPrice = $("input[name='hnpRetailPrice']").val();
+		
+		if(parseInt(hnpCombinationPrice) * 1.05 >= parseInt(hnpRetailPrice)){
+            return '零售价必须大于批发价的5%';
+        }
+	}
+	
+	//批发价和同业价比价
+	function comparison1(field, rules, i, options){
+	    // 同业价
+		var hnpTradePrice = $("input[name='hnpTradePrice']").val();
+		// 批发价
+    	var hnpCombinationPrice = $("input[name='hnpCombinationPrice']").val();
+		
+		if(parseInt(hnpTradePrice)>parseInt(hnpCombinationPrice)){
+            return '批发价必须大于或等于同业价';
+        }
+	}
+	
+	//弹框零售价和批发价比较
+	function comparisonMin(field, rules, i, options){
+		// 批发价
+    	var hnpCombinationPrice = $("#update_hnpCombinationPrice").val();
+		// 零售价
+		var hnpRetailPrice = $("#update_hnpRetailPrice").val();
+		if(parseInt(hnpCombinationPrice) * 1.05 >= parseInt(hnpRetailPrice)){
+            return '零售价必须大于批发价的5%';
+        }
+	}
+	
+	//弹框批发价和同业价比较
+	function comparisonMin1(field, rules, i, options){
+		// 批发价
+    	var hnpCombinationPrice = $("#update_hnpCombinationPrice").val();
+		// 同业价
+		var hnpTradePrice = $("#update_hnpTradePrice").val();
+		if(parseInt(hnpTradePrice)>parseInt(hnpCombinationPrice)){
+			return '批发价必须大于或等于同业价';
+		}
+	}
+	
+	//比较
+	function comparisonRomnum(field, rules, i, options){
+        var hmgPersonnum    = $("#update_hnpSign").val();
+		
+		var hmgPersonNumEnd = '$homenum';
+		
+		if(parseInt(hmgPersonnum)>parseInt(hmgPersonNumEnd)){
+            return '不能大于房间总数量$homenum';
+        }
+    }
+	
+	//房间数量比较
+	function comparisonRomnum1(field, rules, i, options){
+		var hmgPersonnum    = $("#hnpSign").val();
+		
+		var hmgPersonNumEnd = '$homenum';
+		
+		if(parseInt(hmgPersonnum)>parseInt(hmgPersonNumEnd)){
+            return '不能大于房间总数量$homenum';
+        }
+	}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jd_3.png" alt="量/价管理" title="量/价管理" />$!hotelName 量/价管理
+	</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<!-- 当前日期切换 --------------------------------------->
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/hotel/price/listPagePortal?portal=04');">
+				<img src="$staticRoot/images/jd_7.png" />
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/hotel/price/listPagePortal?portal=03');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+		<!-- 根据日期批量关房      ----------------------------------->
+		<div class="date_close pt10">
+			<form method="post" id="form3">
+    			<input type="text" class="validate[required]" name="enteringStart" id="enteringStart" onClick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+    			<input type="text" class="validate[required]" name="enteringEnd" onClick="WdatePicker({minDate:'#F{$dp.$D(\'enteringStart\',{m:1});}'})" />
+    			<button type="button" class="carinfo_sub"  onclick="javascript:price.batchStop('form3','$appRoot/hotel/price/updateBatchOpen');">批量关房</button>
+            </form>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">
+				房型选择：
+				#foreach($item in $roomList)
+    				<label class="w90">
+                        <input type="radio" #if($!roomID == $!item.id) checked #end name="hheId" value="$item.id" >$!item.hheName</input>
+    				</label>
+				#end
+			</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="hnp_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							<!-- 空 -->
+							#if($!item.hnpSign == '0')
+								<li class="finish_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_hnpSign" value="$!item.hnpSign">
+									<input type="hidden" name="date_hnpTradePrice" value="$!item.hnpTradePrice">
+									<input type="hidden" name="date_hnpCombinationPrice" value="$!item.hnpCombinationPrice">
+									<input type="hidden" name="date_hnpRetailPrice" value="$!item.hnpRetailPrice">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+										#if($shiro.hasPermission("PRODUCT_HOTEL_NUM"))
+    									量：$!item.hnpSign 间<br>
+										#end
+										#if($shiro.hasPermission("PRODUCT_HOTEL_COST"))
+    									同：$!item.hnpTradePrice 元<br>
+    									批：$!item.hnpCombinationPrice 元<br>
+    									零：$!item.hnpRetailPrice 元
+										#end
+									</div>
+    								<span class="icon"></span>
+            					</li>
+							<!-- 关房 -->
+							#elseif($!item.hnpIsOpen == '01')
+    							<li class="close_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_hnpSign" value="$!item.hnpSign">
+									<input type="hidden" name="date_hnpTradePrice" value="$!item.hnpTradePrice">
+									<input type="hidden" name="date_hnpCombinationPrice" value="$!item.hnpCombinationPrice">
+									<input type="hidden" name="date_hnpRetailPrice" value="$!item.hnpRetailPrice">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									#if($shiro.hasPermission("PRODUCT_HOTEL_NUM"))
+    									量：$!item.hnpSign 间<br>
+										#end
+										#if($shiro.hasPermission("PRODUCT_HOTEL_COST"))
+    									同：$!item.hnpTradePrice 元<br>
+    									批：$!item.hnpCombinationPrice 元<br>
+    									零：$!item.hnpRetailPrice 元
+										#end
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							<!-- 开房 -->
+							#else
+								<li class="open_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_hnpSign" value="$!item.hnpSign">
+									<input type="hidden" name="date_hnpTradePrice" value="$!item.hnpTradePrice">
+									<input type="hidden" name="date_hnpCombinationPrice" value="$!item.hnpCombinationPrice">
+									<input type="hidden" name="date_hnpRetailPrice" value="$!item.hnpRetailPrice">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										#if($shiro.hasPermission("PRODUCT_HOTEL_NUM"))
+    									量：$!item.hnpSign 间<br>
+										#end
+										#if($shiro.hasPermission("PRODUCT_HOTEL_COST"))
+    									同：$!item.hnpTradePrice 元<br>
+    									批：$!item.hnpCombinationPrice 元<br>
+    									零：$!item.hnpRetailPrice 元
+										#end
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+        <button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load('$appRoot/hotel/detail/list');">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png" /> 已开房（正常出售） 
+			<img src="$staticRoot/images/ljgl_01.png" /> 已关房（暂不出售）
+			<img src="$staticRoot/images/ljgl_02.png" /> 已售完
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+        <span><b><font color="red">$roomName</font> 房量/价格管理：</b></span>
+		<div class="cb"></div>
+		<div class="bg_block nobg_block">
+			<form method="post" id="form1">
+    			<div class="cb"></div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">日期：</div>
+    				<div class="input_righted11">
+						<input type="text" class="validate[required]" name="enteringStart" id="enteringStart1" onClick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+						<input type="text" class="validate[required]" name="enteringEnd" onClick="WdatePicker({minDate:'#F{$dp.$D(\'enteringStart1\',{m:1});}'})" />
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">按周选择：</div>
+    				<div class="input_right">
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="0" />全选</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="1" />周一</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="2" />周二</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="3" />周三</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="4" />周四</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="5" />周五</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="6" />周六</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="7" />周日</label>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+				#if($shiro.hasPermission("PRODUCT_HOTEL_NUM"))
+    			<div class="input_block clearfix">
+    				<div class="label_left">可销售房间数：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+                            <input type="text" id="hnpSign" class="w90 validate[required,custom[integer],maxSize[3],min[1],funcCall[comparisonRomnum1]]" name="hnpSign" placeholder="0" />间
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+				#end
+				#if($shiro.hasPermission("PRODUCT_HOTEL_COST"))
+    			<div class="input_block clearfix">
+    				<div class="label_left">同业价：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w100">
+                            <input type="text" class="w65 validate[required,custom[integer],maxSize[6],min[1],max[100000]]" name="hnpTradePrice" placeholder="0" />元/间
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml10">批发价：</label>
+    					<span class="tishi_box w100">
+                            <input type="text" class="w65 validate[required,custom[integer],maxSize[6],max[100000],funcCall[comparison1]]" name="hnpCombinationPrice" placeholder="0" />元/间
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml10">零售价：</label>
+    					<span class="tishi_box w100">
+    						<input type="text" class="w65 validate[required,custom[integer],maxSize[6],max[100000],funcCall[comparison]]" name="hnpRetailPrice" placeholder="0" />元/间
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">早餐：</div>
+    				<div class="input_right">
+    					<label class="w80">
+    						<input type="radio" name="hnpBreakfast" value="02" checked/>含单早
+    					</label>
+    					<label class="w80">
+    						<input type="radio" name="hnpBreakfast" value="03" />含双早
+    					</label>
+						<label class="w80">
+    						<input type="radio" name="hnpBreakfast" value="01" />不含早餐
+    					</label>
+						<label class="w80">
+    						<input type="radio" name="hnpBreakfast" value="04" />含早餐
+    					</label>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">早餐时间：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w70">
+    						<input type="text" class="w68 validate[required]" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" name="hnpStartH" id="hnpStartH"/>
+    					</span>
+    					&nbsp; 至 &nbsp;
+    					<span class="tishi_box w70">
+    						<input type="text" class="w68 validate[required]" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm',minDate:'#F{$dp.$D(\'hnpStartH\',{m:1});}'})" name="hnpEndH"/>
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">房费包含其他服务：</div>
+    				<div class="input_right">
+    					<textarea class="w350 h90 validate[maxSize[200]]" name="hnpService"></textarea>
+    				</div>
+    			</div>
+				<div class="input_block clearfix">
+    				<div class="label_left">更改/取消规则：</div>
+    				<div class="input_right">
+    					<textarea class="w350 h90 validate[maxSize[300]]" name="hnpUpdateRule"></textarea>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">当日房售卖时间：</div>
+    				<div class="input_right">
+    					<label class="w80">
+    						<input type="radio" name="hnpSellTime" checked value="01" /> 
+    					</label>
+                        <span style="margin-left:-65px;">当日入住</span>
+    					<span class="tishi_box w90">
+    						<input type="text" style="margin-right:10px" class="w88 validate[required]" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})"  name="hnpSellH" />
+						</span> 后不接单<br>
+    					<label class="w90">
+    						<input type="radio" name="hnpSellTime" value="02" />24小时接单
+    					</label>
+    				</div>
+    			</div>
+				#end
+    			<div class="button_block clearfix">
+    				<button class="y_but ml35" id="btn" type="button" onclick="javascript:price.sub('btn', 'form1','$appRoot/hotel/price/insertPrice','$appRoot/hotel/price/listPagePortal?portal=05');">&nbsp;提交&nbsp;</button>
+    				<button class="b_but ml35" type="button" onclick="javascript:index.load('$appRoot/hotel/price/listPagePortal?portal=05');">&nbsp;重 置&nbsp;</button>
+    			</div>
+			</form>
+		</div>
+	</div><div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	<form method="post" id="form2">
+    	<div class="input_block clearfix">
+    		<div class="input_right">
+				<input type="hidden" name="id" id="update_id" />
+				#if($shiro.hasPermission("PRODUCT_HOTEL_NUM"))
+    			<div class="mb15">
+    				<label class="ml15">房间数量：</label>
+    				<span class="tishi_box w90">
+    					<input type="text" class="w65 validate[required,custom[integer],maxSize[3],funcCall[comparisonRomnum]]" name="hnpSign" id="update_hnpSign" />间
+    				</span>
+    			</div>
+				#end
+				#if($shiro.hasPermission("PRODUCT_HOTEL_COST"))
+    			<div class="mb15">
+    				<label class="ml15">同业价格：</label>
+    				<span class="tishi_box w110">
+    					<input type="text" class="w65 validate[required,custom[integer],max[100000],maxSize[6]]" name="hnpTradePrice" id="update_hnpTradePrice" />元/间
+    				</span>
+    			</div>
+    			<div class="mb15">
+    				<label class="ml15">批发价格：</label>
+    				<span class="tishi_box w110">
+    					<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6],funcCall[comparisonMin1]]" name="hnpCombinationPrice" id="update_hnpCombinationPrice" />元/间
+    				</span>
+    			</div>
+    			<div class="mb15">
+    				<label class="ml15">零售价格：</label>
+    				<span class="tishi_box w110">
+    					<input type="text" class="w65 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparisonMin]]" name="hnpRetailPrice" id="update_hnpRetailPrice" />元/间
+    				</span>
+    			</div>
+				#end
+    		</div>
+    	</div>
+    	<div class="button_block button_block_wauto clearfix" style="width:205px;">
+    		<button class="y_but ml15 mr20" type="button" id="hnp_queding">提交</button>
+    		<button class="b_but" type="button" id="hnp_quxiao">取 消</button>
+    	</div>
+	</form>
+</div>

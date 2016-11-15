@@ -1,0 +1,114 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+ <div class="rdivv">
+	<div class="caradmin_top">
+		<img src="$staticRoot/images/htfood.png">
+		<span>特色菜管理</span>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+    </div>
+  <div class="carfixed_ct">
+	<div class="carfixed_ctrtable">
+		<span>特色菜列表</span>
+		<table border="0" cellspadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<td>特色菜名称</td>
+					<td>价格</td>
+					<td>特色菜管理</td>
+					<td>上线状态</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $cuisineList)
+					<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+						<td>$!item.cslName</td>
+						<td>$!item.cslPrice &nbsp;元</td>
+						<td>
+							<a href="javascript:index.load('$appRoot/cafeteria/cuisine/showcuisine?id=$!item.id&cdlID=$!cdlID');">查看/修改</a>
+						<!--<a href="javascript:index.delload('$appRoot/cafeteria/cuisine/delete?id=$!item.id','$appRoot/cafeteria/cuisine/list');">删除</a> -->
+						</td>
+						<td>
+							#if($!item.cslIsDelStatus == '1')
+								<img src="$staticRoot/images/lvdui.png"/>&nbsp;
+								<a href="javascript:index.load('$appRoot/cafeteria/cuisine/delcuisine?id=$item.id&cslIsDelStatus=0');"><img src="$staticRoot/images/huicuo.png" /></a>
+							#end 
+							#if($!item.cslIsDelStatus == '0')
+								<a href="javascript:index.load('$appRoot/cafeteria/cuisine/delcuisine?id=$item.id&cslIsDelStatus=1');"><img src="$staticRoot/images/huidui.png" /></a>
+								&nbsp;<img src="$staticRoot/images/hongcuo.png"/>
+							#end
+						</td>
+					</tr>
+				#end
+			</tbody>
+		</table>
+	</div>
+  </div>
+  <div style=" clear: both;"></div>
+  <div class="specialfood"  style="margin-top:130px;">
+	<span>查看/修改特色菜</span>
+	<form method="post" id="form1">
+		 <input type="hidden" value="$!cafeteriaCuisine.id" name="id"/>
+		 <div class="doadmin_topl">
+			 <div class="doadmin_toplboxb" style="width:235px;">
+				<span style="width:100px;margin-right:5px;">特色菜名称：</span>
+				<div class="doadmin_toplbrb" style="margin-left:5px;">
+					<input type="text" name="cslName" value="$!cafeteriaCuisine.cslName"class="validate[required,maxSize[80]]"><span>*</span>
+				</div>
+			 </div>
+		     <div class="doadmin_toplboxb">
+				<span style="width:70px;">价格：</span>
+				<div class="doadmin_toplbrb">
+					<input type="text" name="cslPrice" value="$!cafeteriaCuisine.cslPrice" class="validate[required,custom[integer],min[1],maxSize[3]]">
+					<span style="color:#393838">元</span>
+					<span style="margin-left:149px;">*</span>
+                </div>
+			 </div>
+		</div>
+		<div class="djj_ctll">
+			<span>特色菜介绍：</span>
+			<div class="djj_ctlrql">
+				<textarea name="cslIntroduce" class="validate[required,maxSize[1000]]">$!cafeteriaCuisine.cslIntroduce</textarea>
+				<span>*</span>
+			</div>
+		</div>
+		<div class="djj_ctll" style="margin-bottom:-16px;">
+				<span></span>
+				<div class="djj_ctlrql">
+					<span style="color:red;margin-left:-68px;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该特色菜将会下线</span>
+				</div>
+			</div>
+		<div class="djj_ctll">
+			<span>上传图片：</span>
+			<div class="djj_ctlrql">
+				#if("$!cafeteriaCuisine.cslImag" != "")
+					<input name="file" id="uploadify" contenteditable="false" size="30" type="file"/>
+					<input name="cslImag" value="$cafeteriaCuisine.cslImag" type="hidden" id="cslImag"/>
+					<img class="img200" src="$staticFileRes$cafeteriaCuisine.cslImag" />
+					<a href="javascript:uploadDelete('uploadify','filespan','$cafeteriaCuisine.cslImag','cslImag');">删除图片</a>
+				#else
+        			<input name="cslImag" value="" type="hidden" id="cslImag"/>
+					<input name="file" id="uploadify" contenteditable="false" size="30" type="file" />
+				#end
+    				<span id="filespan"></span>
+    				<div id="fileQueue"></div>
+            </div>
+		</div>
+		<div class="carinfo_ctbl">
+			<span></span>
+			<div class="carinfo_ctblrbtn" style="width:360px;">
+				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/cafeteria/cuisine/insert','$appRoot/cafeteria/cuisine/list');">提交</button>
+				<button type="button" class="carinfo_sub" onclick="index.searchform('form1','$appRoot/cafeteria/cuisine/list');">继续添加</button>
+				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+			</div>
+		</div>
+    </form>
+  </div>
+</div>
+	<script type="text/javascript">
+	//上传图片
+	uploadify('uploadify','cslImag','filespan','fileQueue');
+	
+	#if("$!cafeteriaCuisine.cslImag" != "")
+		$("#uploadify").hide();
+	#end
+	</script>

@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/travel_list.css">
+	<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+		<!--导航-->
+          #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		
+		 
+		<div class="travel_list">
+				<!--当地旅游-->
+    		<div class="tlist_ct show">
+    			<div class="tlist_ct_local">
+    				<form id="form1" method="post" action="$appRoot/$cpyno/line/list">
+        				<div class="search-menu">
+                			#vsearcharea('','ldlProvince',$!line.ldlProvince,'ldlCity',$!line.ldlCity,'ldlCountylocation',$!line.ldlCountylocation,'ldlMajorcountries',$!line.ldlMajorcountries)
+            				
+                			<div class="smenu-li">
+                    			<label class="search-lab" style="width:280px;">
+									<span class="smenu-title">关键词：</span>
+                    				<input type="text" name="ldlName" value="$!line.ldlName" class="search-input">
+                    			</label>
+                    			<button class="search-btn" value="" type="submit">搜索</button>
+                    		</div>
+							#* 
+                    		<dl class="smenu-li">
+                    			<dt class="smenu-title">区域：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num  #if(($!line.ldlDeparturecityVo == '' || !$line.ldlDeparturecityVo)) && ( ''== $!line.ldlProvice ||  !$line.ldlProvice)) item-hover #end  nation-no"  onclick="$('#ldlProvice').attr('value',''); $('#ldlDeparturecityVo').attr('value','');$('#form1').submit();">不限</span>
+                    				<div class="smenu-nation">
+                    					<span class="item-area">国内<em class="icon-img"></em></span>
+                    					<span class="item-area">国际·港澳台<em class="icon-img"></em></span>
+                    				</div>
+                    				<div class="nations">
+                    					<div class="local-city">
+    										 <span class="smenu-item  #if("" == $!line.ldlProvice || ! $line.ldlProvice)  item-hover  #end" onclick="$('#ldlProvice').attr('value',''); $('#ldlDeparturecityVo').attr('value','');$('#form1').submit();">不限</span>
+        									#foreach($item in $provinces)
+                        					   <span class="smenu-item  #if($!line.ldlProvice == $item.regionNo) item-hover #end" id="a_level_$item.id" onclick="$('#ldlProvice').attr('value','$item.regionNo'); $('#ldlDeparturecityVo').attr('value','');$('#form1').submit();">$item.regionName</span>
+                        					#end
+                    					</div>
+                    					<div class="local-city">
+                    						<span class="smenu-item #if($!line.ldlDeparturecityVo == '')      item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','');     $('#ldlProvice').attr('value',''); $('#form1').submit();">不限</span>
+                    						<span class="smenu-item #if($!line.ldlDeparturecityVo == '香港')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','香港');   $('#ldlProvice').attr('value',''); $('#form1').submit();">香港</span>
+                    						<span class="smenu-item #if($!line.ldlDeparturecityVo == '澳门')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','澳门');   $('#ldlProvice').attr('value',''); $('#form1').submit();">澳门</span>
+                    						<span class="smenu-item #if($!line.ldlDeparturecityVo == '台湾')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','台湾');   $('#ldlProvice').attr('value',''); $('#form1').submit();">台湾</span>
+                    						<span class="smenu-item #if($!line.ldlDeparturecityVo == '东京')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','东京');   $('#ldlProvice').attr('value',''); $('#form1').submit();">东京</span>
+        									<span class="smenu-item #if($!line.ldlDeparturecityVo == '首尔')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','首尔');   $('#ldlProvice').attr('value',''); $('#form1').submit();">首尔</span>
+        									<span class="smenu-item #if($!line.ldlDeparturecityVo == '曼谷')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','曼谷');   $('#ldlProvice').attr('value',''); $('#form1').submit();">曼谷</span>
+        									<span class="smenu-item #if($!line.ldlDeparturecityVo == '芭提雅')  item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','芭提雅'); $('#ldlProvice').attr('value','');  $('#form1').submit();">芭提雅</span>
+        									<span class="smenu-item #if($!line.ldlDeparturecityVo == '巴黎')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','巴黎');   $('#ldlProvice').attr('value',''); $('#form1').submit();">巴黎</span>
+        									<span class="smenu-item #if($!line.ldlDeparturecityVo == '新西兰')  item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','新西兰'); $('#ldlProvice').attr('value','');  $('#form1').submit();">新西兰</span>
+        									<span class="smenu-item #if($!line.ldlDeparturecityVo == '纽约')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','纽约');   $('#ldlProvice').attr('value',''); $('#form1').submit();">纽约</span>
+        									<span class="smenu-item #if($!line.ldlDeparturecityVo == '加州')   item-hover #end"  onclick="$('#ldlDeparturecityVo').attr('value','加州');   $('#ldlProvice').attr('value',''); $('#form1').submit();">加州</span>
+                    					</div>
+                    				</div>
+                    			</dd>
+                    		</dl>
+							*#
+                    		<dl class="smenu-li">
+                    			<dt class="smenu-title">产品形态：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num #if('' == $!line.ldlProductForm || ! $line.ldlProductForm) item-hover #end" onclick="$('#ldlProductForm').attr('value',''); $('#form1').submit();">不限</span>
+        							#foreach($item in $product.keySet())
+        								<span class="smenu-item #if($!line.ldlProductForm == $item) item-hover  #end"  id="a_level_$item.id" onclick="$('#ldlProductForm').attr('value','$item'); $('#form1').submit();">$product.get($item)</span>
+                    				#end
+                    			</dd>
+                    		</dl>
+        					
+        					
+        					<dl class="smenu-li">
+                    			<dt class="smenu-title">产品标准：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num #if('' == $!line.ldlProductStandard || ! $line.ldlProductStandard) item-hover #end "   onclick="$('#ldlProductStandard').attr('value',''); $('#form1').submit();">不限</span>
+    								#foreach($item in $themeone.keySet())
+    									<span class="smenu-item #if($!line.ldlProductStandard == $item) item-hover #end " id="a_level_$item.id" onclick="$('#ldlProductStandard').attr('value','$item'); $('#form1').submit();">$themeone.get($item)</span>
+                    				#end
+                    			</dd>
+                    		</dl>
+        					<dl class="smenu-li">
+                    			<dt class="smenu-title">行程天数：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num  #if(!$line.countDay) item-hover #end"  onclick="$('#countDay').attr('value',null); $('#countDayCompare').attr('value',0); $('#form1').submit();">不限</span>
+                    				<span class=" smenu-item #if($!line.countDay == 1 && $!line.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',1); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 1天</span>
+                    				<span class=" smenu-item #if($!line.countDay == 2 && $!line.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',2); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 2天</span>
+                    				<span class=" smenu-item #if($!line.countDay == 3 && $!line.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',3); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 3天</span>
+                    				<span class=" smenu-item #if($!line.countDay == 4 && $!line.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',4); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 4天</span>
+    								<span class=" smenu-item #if($!line.countDay == 5 && $!line.countDayCompare == 1 ) item-hover #end " onclick="$('#countDay').attr('value',5); $('#countDayCompare').attr('value',1); $('#form1').submit();"> 5天以上</span>
+    								<!--<span class="smenu-item-more">更多</span>-->
+                    			</dd>
+                    		</dl>
+                    		<dl class="smenu-li">
+                    			<dt class="smenu-title">产品主题：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num  #if('' == $!line.ldlProType1 || ! $line.ldlProType1) item-hover #end " onclick="$('#ldlProType1').attr('value',''); $('#form1').submit();">不限</span>
+                    				<div class="smenu-right">
+    								#foreach($item in $zhuti.keySet())	
+                    					<span class="smenu-item #if($!line.ldlProType1 == $item) item-hover #end" id="a_level_$item.id" onclick="$('#ldlProType1').attr('value','$item'); $('#form1').submit();">$zhuti.get($item)</span>
+                    				#end	
+                    				</div>
+                    				<span class="smenu-item-more">更多</span>
+                    			</dd>
+                    		</dl>
+                    		<dl class="smenu-li last">
+                    			<dt class="smenu-title">学生活动：</dt>
+                    				<span class="no-num #if("" == $!line.ldlGame || ! $line.ldlGame) item-hover #end "  onclick="$('#ldlGame').attr('value',''); $('#form1').submit();">不限</span>
+                    				<div class="smenu-right">
+    								#foreach($item in $game.keySet())	
+                    					<span class="smenu-item #if($!line.ldlGame == $item) item-hover #end"  id="a_level_$item.id" onclick="$('#ldlGame').attr('value','$item'); $('#form1').submit();">$game.get($item)</span>
+    								#end
+    								</div>
+                    			</dd>
+                    		</dl>
+                    	</div>
+    					<input type="hidden" name="ldlProductForm" id="ldlProductForm" value="$!line.ldlProductForm">
+    					<input type="hidden" name="ldlProType1" id="ldlProType1" value="$!line.ldlProType1">
+    					<input type="hidden" name="ldlProductStandard" id="ldlProductStandard" value="$!line.ldlProductStandard">
+    					<input type="hidden" name="ldlGame" id="ldlGame" value="$!line.ldlGame">
+    					<input type="hidden" name="countDay" id="countDay" value="$!line.countDay">
+    					<input type="hidden" name="countDayCompare" id="countDayCompare" value="$!line.countDayCompare">
+						##<input type="hidden" name="ldlProvice" id="ldlProvice" value="$!line.ldlProvice">
+    					##<input type="hidden" name="ldlDeparturecityVo" id="ldlDeparturecityVo" value="$!line.ldlDeparturecityVo">
+    				
+    				
+    				</form>
+        			<div class="tlistctl_ct">
+        				<!--左边-->
+        				<div class="tlistctl_ctl">
+        					
+    						
+    					#foreach($item in $lineList)
+        					<div class="tlistctl_ctlbox">
+        						<div class="tlistctl_ctlboxl">
+    							#if($erim.isNotEmpty($!item.ldlPicture))
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang/$item.id?searchModel=1" target="_blank"><img src="$staticFileRes$item.ldlPicture" ></a>
+                                #else
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang/$item.id?searchModel=1" target="_blank"><img src="$staticRoot/images/isnull.png" ></a>
+                                #end
+        						</div>
+        						<div class="tlistctl_ctlboxm">
+        							<div class="tlistctl_ctlboxmf">
+                                    <a href="$appRoot/$cpyno/line/tejiaxiang/$item.id?searchModel=1" target="_blank" title="$!item.ldlName"><span class="fyellow">$erim.subString($!item.ldlName,25)<!--【三星/舒适】--></span></a>
+        							</div>
+        						<!--	<div class="tlistctl_ctlboxmx">
+        								<span>推荐星级</span>
+            								<p><img src="$staticRoot/images/trstar5.jpg"></p>
+        							</div>-->
+    							  <div class="tlistctl_ctlboxmx">
+                                    <span>产品形态</span>
+                                    <p>#vtext($!item.ldlProductForm,'C072')</p>
+    							   </div>
+        							<div class="tlistctl_ctlboxmx">
+        								<span>产品主题</span>
+        								<p>#vtextarray($!item.ldlProType1,'C086')</p>
+        							</div>
+        							<div class="tlistctl_ctlboxmx">
+        								<span>主要景点</span>
+        								<p>
+    										$erim.subString($!item.ldlAttraction,30)
+    									</p>
+        							</div>
+    							    <div class="tlistctl_ctlboxmx">
+                                    <span>线路玩法</span>
+                                    <p>$erim.subString($!item.ldlProductine,30)</p>
+    							   </div>
+        						</div>
+                              
+        						<div class="tlistctl_ctlboxr">
+    								<label><span>￥$!item.lpeRetailAdult</span><p>起</p></label>
+        							<a href="$appRoot/$cpyno/line/tejiaxiang/$item.id?searchModel=1" target="_blank">查看详情</a>
+        						</div>
+        					</div>
+    					#end
+        				</div>
+    					
+        				<!--/左边-->
+        				<!--右边-->
+        				<div class="tlistctl_ctr">
+        					
+        					<!--热门门票-->
+        					#parse("common/hot.vm")
+        					<!--/热门门票-->
+        				</div>
+        				<!--/右边-->
+        				#parse("common/page.vm")
+        			</div>
+        		</div>
+        	</div>
+    	<!--/当地旅游-->
+	
+	    </div>
+#parse("common/footer.vm")
+</div>
+</body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/travel_list.js"></script>
+<script type="text/javascript">
+	int();
+	
+	$(function(){
+		//产品主题默认展开项
+		if('$!line.ldlProType1' != ''){
+			$(".smenu-item-more").text("收起");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").show();
+		}else{
+			$(".smenu-item-more").text("更多");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").hide();
+		}	
+	});	
+</script>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>

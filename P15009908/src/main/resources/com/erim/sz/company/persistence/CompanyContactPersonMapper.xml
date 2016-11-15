@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="companycontact">
+	<!-- 增加 -->
+	<insert id="insert">
+		INSERT INTO
+			company_contact_person
+		(
+			cpy_id,
+			ccp_name,
+			ccp_telephone,
+			ccp_email,
+			ccp_qq,
+			ccp_card,
+			ccp_img_card1,
+			ccp_img_card2,
+			ccp_createtime
+		)
+		VALUES
+		(
+			#{cpyId},
+			#{ccpName},
+			#{ccpTelephone},
+			#{ccpEmail},
+			#{ccpQq},
+			#{ccpCard},
+			#{ccpImgCard1},
+			#{ccpImgCard2},
+			sysdate()
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			company_contact_person
+		SET
+			ccp_name = #{ccpName},
+			ccp_qq = #{ccpQq},
+			ccp_telephone = #{ccpTelephone}
+		WHERE
+			cpy_id = #{cpyId}
+	</update>
+	
+	<!-- 根据公司ID查询一条数据 -->
+	<select id="getPersonById" resultType="companyContactPersonBean">
+		SELECT
+			ccp_name		AS	ccpName,
+			ccp_qq			AS	ccpQq,
+			ccp_telephone	AS	ccpTelephone
+		FROM
+			company_contact_person
+		WHERE
+			cpy_id = #{cpyId}
+		ORDER BY
+			ccp_createtime
+		DESC 
+		LIMIT 1
+	</select>
+</mapper>

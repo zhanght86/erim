@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="planeticketdetail">
+	
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="preDate  != null and preDate != ''">	    and 	  pre_date 	    =     #{preDate}	</if>
+			<if test="ptdNtype != null and ptdNtype != ''">		and 	  ptd_ntype 	like "%"#{ptdNtype}"%"</if>
+			<if test="timePeriod != null and timePeriod != '' and timePeriod == '1' or timePeriod == 1">		
+				and 	 str_to_date(ptd_start_time,'%k:%i')  	&gt;= str_to_date('0:00','%k:%i') 
+				and 	 str_to_date(ptd_start_time,'%k:%i')  	&lt; str_to_date('6:00','%k:%i') 
+			</if>
+			<if test="timePeriod != null and timePeriod != '' and timePeriod == '2' or timePeriod == 2">		
+				and 	 str_to_date(ptd_start_time,'%k:%i') 	&gt;= str_to_date('6:00','%k:%i') 
+				and 	 str_to_date(ptd_start_time,'%k:%i')  	&lt; str_to_date('12:00','%k:%i') 
+			</if>
+			<if test="timePeriod != null and timePeriod != '' and timePeriod == '3' or timePeriod == 3">		
+				and 	 str_to_date(ptd_start_time,'%k:%i')	&gt;= str_to_date('12:00','%k:%i') 
+				and 	 str_to_date(ptd_start_time,'%k:%i')  	&lt; str_to_date('18:00','%k:%i') 
+			</if>
+			<if test="timePeriod != null and timePeriod != '' and timePeriod == '4' or timePeriod == 4">		
+				and 	 str_to_date(ptd_start_time,'%k:%i') 	&gt;= str_to_date('18:00','%k:%i') 
+				and 	 str_to_date(ptd_start_time,'%k:%i')  	&lt;= str_to_date('23:59','%k:%i') 
+			</if>
+			
+			<!-- <if test="ptdNo != null">				and 	ptd_no 				like "%"#{ptdNo}"%"</if>
+	 		<if test="ptdCompany != null">			and 	ptd_company 		like "%"#{ptdCompany}"%"</if>
+			<if test="ptdModel != null">			and 	ptd_model 			like "%"#{ptdModel}"%"</if>
+			<if test="ptdStartTime != null">		and 	ptd_start_time 		like "%"#{ptdStartTime}"%"</if>
+			<if test="ptdStartAddress != null">		and 	ptd_start_address 	like "%"#{ptdStartAddress}"%"</if>
+			<if test="ptdEndTime != null">			and 	ptd_end_time 		like "%"#{ptdEndTime}"%"</if>
+			<if test="ptdEndAddress != null">		and 	ptd_end_address 	like "%"#{ptdEndAddress}"%"</if>
+			<if test="ptdSpace != null">			and 	ptd_space 			like "%"#{ptdSpace}"%"</if>
+			<if test="ptdCostMaching != null">		and 	ptd_cost_maching 	like "%"#{ptdCostMaching}"%"</if>
+			<if test="ptdCostFuel != null">			and 	ptd_cost_fuel 		like "%"#{ptdCostFuel}"%"</if>
+			<if test="ptdCostFood != null">			and 	ptd_cost_food 		like "%"#{ptdCostFood}"%"</if>
+			<if test="ptdPriceSametown != null">	and 	ptd_price_sametown 	like "%"#{ptdPriceSametown}"%"</if>
+			<if test="ptdPriceTeam != null">		and 	ptd_price_team 		like "%"#{ptdPriceTeam}"%"</if>
+			<if test="ptdPriceSell != null">		and 	ptd_price_sell 		like "%"#{ptdPriceSell}"%"</if>
+			<if test="ptdCreatedate != null">		and 	ptd_createdate 		like "%"#{ptdCreatedate}"%"</if>
+			<if test="ptdCreateuser != null">		and 	ptd_createuser 		like "%"#{ptdCreateuser}"%"</if>
+			<if test="ptdIsThrough != null">		and 	ptd_is_through 		like "%"#{ptdIsThrough}"%"</if>
+			<if test="ptdThroughTime != null">		and 	ptd_through_time 	like "%"#{ptdThroughTime}"%"</if>
+			<if test="pdtThroughUser != null">		and 	pdt_through_user 	like "%"#{pdtThroughUser}"%"</if>  -->
+			
+		</where>
+	</sql>
+	<sql id="sql_column">
+		planeticket_detail.id 					 AS id,
+		planeticket_detail.cpy_id 				 AS cpyId,
+		planeticket_detail.ptd_no 				 AS ptdNo,
+		planeticket_detail.ptd_company 		     AS ptdCompany,
+		planeticket_detail.ptd_number 			 AS ptdNumber,
+		planeticket_detail.ptd_is_international AS ptdIsInternational,
+		planeticket_detail.ptd_model 			 AS ptdModel,
+		planeticket_detail.ptd_start_city 		 AS ptdStartCity,
+		planeticket_detail.ptd_start_time		 AS ptdStartTime,
+		planeticket_detail.ptd_start_terminal 	 AS ptdStartTerminal,
+		planeticket_detail.ptd_end_city 		 AS ptdEndCity,
+		planeticket_detail.ptd_end_time 		 AS ptdEndTime,
+		planeticket_detail.ptd_end_terminal 	 AS ptdEndTerminal,
+		planeticket_detail.ptd_cost_food 		 AS ptdCostFood,
+		planeticket_detail.ptd_cost_maching 	 AS ptdCostMaching,
+		planeticket_detail.ptd_cost_fuel 		 AS ptdCostFuel,
+		planeticket_detail.ptd_createtime 	 	 AS ptdCreatetime,
+		planeticket_detail.ptd_createuser 		 AS ptdCreateuser,
+		planeticket_detail.ptd_is_del_status 	 AS ptdIsDelStatus,
+		planeticket_detail.ptd_class_economy    AS ptdClassEconomy,
+		planeticket_detail.ptd_class_business 	 AS ptdClassBusiness,
+		planeticket_detail.ptd_start_town 		 AS ptdStartTown,
+		planeticket_detail.ptd_end_town 		 AS ptdEndTown,
+		planeticket_detail.ptd_end_stay 		 AS ptdEndStay,
+		planeticket_detail.ptd_end_ntype 		 AS ptdEndNtype,
+		planeticket_detail.ptd_start_state 	    AS ptdStartState,
+		planeticket_detail.ptd_end_state		 AS ptdEndState,
+		planeticket_detail.ptd_ntype			 AS ptdNtype,
+		planeticket_detail.ptd_foreign          AS ptdForeign,
+		planeticket_detail.ptd_foreigncity      AS ptdForeigncity,
+		planeticket_detail.ptd_endforeign		 AS ptdEndforeign,
+		planeticket_detail.ptd_endforeigncity   AS ptdEndforeigncity,
+		planeticket_detail.ptd_startprovince    AS ptdStartProvince,
+		planeticket_detail.ptd_endprovince      AS ptdEndProvince,
+		planeticket_detail.ptd_yesno            AS ptdYesno,
+		planeticket_detail.ptd_guojia           AS ptdGuojia,
+		planeticket_detail.ptd_province         AS ptdProvince,
+		planeticket_detail.ptd_city             AS ptdCity,
+		planeticket_detail.ptd_town             AS ptdTown,
+		planeticket_detail.ptd_jing_foreign     AS ptdJingforeign,
+		planeticket_detail.ptd_jing_city        AS ptdJingcity,
+		planeticket_detail.ptd_first_class		 AS ptdFirstClass,
+		planeticket_detail.ptd_scheduled        AS ptdScheduled
+		
+	</sql>
+	<sql id="sql_column1">
+		planeticket_price.id                    AS preId1,
+		planeticket_price.gdl_id                AS gdlId1,
+		planeticket_price.pre_date              AS preDate1,
+		planeticket_price.pre_is_open           AS preIsOpen1,
+		planeticket_price.pre_week              AS preWeek1,
+		planeticket_price.pre_sign              AS preSign1,
+		planeticket_price.pre_trade_price       AS preTradePrice1,
+		planeticket_price.pre_retail_price      AS preRetailPrice1,
+		planeticket_price.pre_tallage           AS preTallage1,
+		planeticket_price.pre_is_tallage        AS preIsTallage1,
+		planeticket_price.pre_required          AS preRequired1,
+		planeticket_price.pre_required_show     AS preRequiredShow1,
+		planeticket_price.pre_optional          AS preOptional1,
+		planeticket_price.pre_optianal_show     AS preOptianalShow1,
+		planeticket_price.pre_issue_start       AS preIssueStart1,
+		planeticket_price.pre_issue_end         AS preIssueEnd1,
+		planeticket_price.pre_create_time       AS preCreateTime1,
+		planeticket_price.pre_create_user       AS preCreateUser1,
+		planeticket_price.pre_trade             AS preTrade1,
+		planeticket_price.pre_retail            AS preRetail1,
+		planeticket_price.ptd_class             AS ptdClass1
+	</sql>
+	<sql id="sql_column2">
+		planeticket_price.id                    AS preId2,
+		planeticket_price.gdl_id                AS gdlId2,
+		planeticket_price.pre_date              AS preDate2,
+		planeticket_price.pre_is_open           AS preIsOpen2,
+		planeticket_price.pre_week              AS preWeek2,
+		planeticket_price.pre_sign              AS preSign2,
+		planeticket_price.pre_trade_price       AS preTradePrice2,
+		planeticket_price.pre_retail_price      AS preRetailPrice2,
+		planeticket_price.pre_tallage           AS preTallage2,
+		planeticket_price.pre_is_tallage        AS preIsTallage2,
+		planeticket_price.pre_required          AS preRequired2,
+		planeticket_price.pre_required_show     AS preRequiredShow2,
+		planeticket_price.pre_optional          AS preOptional2,
+		planeticket_price.pre_optianal_show     AS preOptianalShow2,
+		planeticket_price.pre_issue_start       AS preIssueStart2,
+		planeticket_price.pre_issue_end         AS preIssueEnd2,
+		planeticket_price.pre_create_time       AS preCreateTime2,
+		planeticket_price.pre_create_user       AS preCreateUser2,
+		planeticket_price.pre_trade             AS preTrade2,
+		planeticket_price.pre_retail            AS preRetail2,
+		planeticket_price.ptd_class             AS ptdClass2
+	</sql>
+	<sql id="sql_column3">
+		planeticket_price.id                    AS preId3,
+		planeticket_price.gdl_id                AS gdlId3,
+		planeticket_price.pre_date              AS preDate3,
+		planeticket_price.pre_is_open           AS preIsOpen3,
+		planeticket_price.pre_week              AS preWeek3,
+		planeticket_price.pre_sign              AS preSign3,
+		planeticket_price.pre_trade_price       AS preTradePrice3,
+		planeticket_price.pre_retail_price      AS preRetailPrice3,
+		planeticket_price.pre_tallage           AS preTallage3,
+		planeticket_price.pre_is_tallage        AS preIsTallage3,
+		planeticket_price.pre_required          AS preRequired3,
+		planeticket_price.pre_required_show     AS preRequiredShow3,
+		planeticket_price.pre_optional          AS preOptional3,
+		planeticket_price.pre_optianal_show     AS preOptianalShow3,
+		planeticket_price.pre_issue_start       AS preIssueStart3,
+		planeticket_price.pre_issue_end         AS preIssueEnd3,
+		planeticket_price.pre_create_time       AS preCreateTime3,
+		planeticket_price.pre_create_user       AS preCreateUser3,
+		planeticket_price.pre_trade             AS preTrade3,
+		planeticket_price.pre_retail            AS preRetail3,
+		planeticket_price.ptd_class             AS ptdClass3
+	</sql>
+	<sql id="sql_query2">
+			<if test="preDate  != null and preDate != ''">	and 	pre_date 	=  #{preDate}</if>
+	</sql>	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPagePlaneticket" resultType="planeticketDetailBean">
+		SELECT
+			id 					 AS id,
+			cpy_id 				 AS cpyId,
+			ptd_no 				 AS ptdNo,
+			ptd_company 		 AS ptdCompany,
+			ptd_number 			 AS ptdNumber,
+			ptd_is_international AS ptdIsInternational,
+			ptd_model 			 AS ptdModel,
+			ptd_start_city 		 AS ptdStartCity,
+			ptd_start_time		 AS ptdStartTime,
+			ptd_start_terminal 	 AS ptdStartTerminal,
+			ptd_end_city 		 AS ptdEndCity,
+			ptd_end_time 		 AS ptdEndTime,
+			ptd_end_terminal 	 AS ptdEndTerminal,
+			ptd_cost_food 		 AS ptdCostFood,
+			ptd_cost_maching 	 AS ptdCostMaching,
+			ptd_cost_fuel 		 AS ptdCostFuel,
+			ptd_createtime 	 	 AS ptdCreatetime,
+			ptd_createuser 		 AS ptdCreateuser,
+			ptd_is_del_status 	 AS ptdIsDelStatus,
+			ptd_class_economy    AS ptdClassEconomy,
+			ptd_class_business 	 AS ptdClassBusiness,
+			ptd_start_town 		 AS ptdStartTown,
+			ptd_end_town 		 AS ptdEndTown,
+			ptd_end_stay 		 AS ptdEndStay,
+			ptd_end_ntype 		 AS ptdEndNtype
+		FROM
+			planeticket_detail
+		<include refid="sql_query" />
+	</select>
+	
+	<select id="selectBeanByPriId" resultType="planeticketDetailBean">
+		SELECT
+			id 					 AS id,
+			cpy_id 				 AS cpyId,
+			ptd_no 				 AS ptdNo,
+			ptd_company 		 AS ptdCompany,
+			ptd_number 			 AS ptdNumber,
+			ptd_is_international AS ptdIsInternational,
+			ptd_model 			 AS ptdModel,
+			ptd_start_city 		 AS ptdStartCity,
+			ptd_start_time		 AS ptdStartTime,
+			ptd_start_terminal 	 AS ptdStartTerminal,
+			ptd_end_city 		 AS ptdEndCity,
+			ptd_end_time 		 AS ptdEndTime,
+			ptd_end_terminal 	 AS ptdEndTerminal,
+			ptd_cost_food 		 AS ptdCostFood,
+			ptd_cost_maching 	 AS ptdCostMaching,
+			ptd_cost_fuel 		 AS ptdCostFuel,
+			ptd_createtime 	 	 AS ptdCreatetime,
+			ptd_createuser 		 AS ptdCreateuser,
+			ptd_is_del_status 	 AS ptdIsDelStatus,
+			ptd_class_economy    AS ptdClassEconomy,
+			ptd_class_business 	 AS ptdClassBusiness,
+			ptd_start_town 		 AS ptdStartTown,
+			ptd_end_town 		 AS ptdEndTown,
+			ptd_end_stay 		 AS ptdEndStay,
+			ptd_end_ntype 		 AS ptdEndNtype
+		FROM
+			planeticket_detail
+		WHERE
+			id = #{id}
+	
+	</select>
+
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPagePlaneticketCount" resultType="int">
+		SELECT
+			count(distinct(planeticket_detail.id))
+		FROM
+			planeticket_detail
+		left join 
+			planeticket_price
+		on planeticket_detail.id = planeticket_price.gdl_id 
+		<include refid="sql_query" />
+	</select>
+	
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPagePlaneticketTest" resultType="planeticketDetailBean">
+select * from (
+					select *from 
+					(
+											select *
+											from 
+											(
+													SELECT 
+													<include refid="sql_column" />,planeticket_price.ptd_class
+													from planeticket_detail 
+													left join planeticket_price 
+													on planeticket_detail.id = planeticket_price.gdl_id 
+													<include refid="sql_query" />
+													group by planeticket_detail.id 
+
+											) aa
+											left join 
+											(
+
+													select 
+													<include refid="sql_column1" />
+													from 
+													planeticket_price  
+													where  planeticket_price.ptd_class = '01'
+													<include refid="sql_query2" />
+
+											) bb 
+											on aa.id = bb.gdlId1
+					) ttt
+					left join 
+					(
+
+							select 
+							<include refid="sql_column2" />
+							from 
+							planeticket_price 
+							where  planeticket_price.ptd_class = '02'
+							<include refid="sql_query2" />
+
+					) cc 
+
+					on ttt.id = cc.gdlId2 
+) mmm
+left join 
+(
+
+select 
+	<include refid="sql_column3" />
+from
+planeticket_price  
+where  planeticket_price.ptd_class = '01'
+<include refid="sql_query2" />
+
+) dd
+on mmm.id = dd.gdlId3
+
+	</select>
+	
+	
+	
+</mapper>

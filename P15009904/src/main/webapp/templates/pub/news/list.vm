@@ -1,0 +1,94 @@
+<div class="doadmin">
+	<div class="newfood_suptop mb20">
+		<img src="$staticRoot/images/news.png" />
+		<span>新闻资讯</span>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+	</div>
+	<div class="coadmin_top">
+		<form class="form-search" method="post" id="form1">
+    		<div class="doadmin_topl" style="margin-top:0; margin-bottom:20px;">
+    			<div class="doadmin_toplboxa" style="width:240px;">
+    				<span style="width:88px;">标题:</span>
+    				<div class="doadmin_toplbra" style="width:140px;">
+    					<input type="text" value="$!pubNews.newTitle" name="newTitle" style="width:135px;"/>
+    				</div>
+    			</div>
+				<div class="doadmin_toplboxa" style="width:240px;">
+    				<span>新闻类型:</span>
+    				<div class="doadmin_toplbra" style="width:130px;">
+						<select name="newType" style="width:100px;">
+							<option value=""></option>
+        					#foreach($item in $newsType.keySet())
+                                <option #if($pubNews.newType == $item) selected #end value="$item">$newsType.get($item)</option>
+        					#end
+						</select>
+    				</div>
+    			</div>
+				<!--<div class="doadmin_toplboxa" style="width:240px;">
+    				<span>是否门户显示:</span>
+    				<div class="doadmin_toplbra" style="width:130px;">
+						<select name="newIsShow" style="width:100px;">
+							<option value=""></option>
+        					#foreach($item in $isShow.keySet())
+                                <option value="$item">$isShow.get($item)</option>
+        					#end
+						</select>
+    				</div>
+				</div> -->
+    			<button class="doadmin_see" type="button" onclick="index.searchform('form1','$appRoot/pub/news/list');">查询</button>
+    		</div>
+		</form>
+	</div>
+	<div class="cb"></div>
+	<div class="g_line"></div>
+	<div class="doadmin_ct">
+		<div class="doadmin_ct_top">
+			<div class="carad_ctbtn">
+			   <button onclick="index.load('$appRoot/pub/news/insertPage');">+添加新闻</button>
+            </div>
+		</div>
+		<div class="doadmin_ct">
+			<div class="carad_ct">
+				<div class="carad_ctrtable">
+					<table cellspacing="0" cellspadding="0">
+						<thead>
+							<tr>
+								<td>标题</td>
+        						<td>新闻类型</td>
+        						<td>操作</td>
+        						<td>点击次数</td>
+        						<td>是否审核</td>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $!newsList)
+        						<tr #if($velocityConunt % 2 != 0) class="ttr" #end>
+									<td>$!item.newTitle</td>
+            			            <td>$!item.newType</td>
+									<td>
+										<a href="javascript:index.load('$appRoot/pub/news/updatePage?id=$item.id');">查看/修改</a>
+										<a href="javascript:index.del('$appRoot/pub/news/delete?id=$item.id');">删除</a>
+									</td>
+            			            <td>$!item.newClick</td>
+									<!--<td>
+										#if($!item.newIsShow == '02') 
+                                            <img src="$staticRoot/images/htcar2.png"> &nbsp;
+                    						<a href="javascript:index.load('$appRoot/pub/news/updateIsShow?id=$!item.id&newIsShow=01');"><img src="$staticRoot/images/htcar3.png"></a> 
+                						#end
+                						#if($!item.newIsShow == '01') 
+                    						<a href="javascript:index.load('$appRoot/pub/news/updateIsShow?id=$!item.id&newIsShow=02');"><img src="$staticRoot/images/htcar4.png"></a> &nbsp;  
+                    						<img src="$staticRoot/images/htcar5.png">
+                						#end
+                                    </td> -->
+                                    <td>$!item.newIsCheck</td>
+    							</tr>
+    						#end
+					  </tbody>
+					</table>
+					#parse("common/page.vm")
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

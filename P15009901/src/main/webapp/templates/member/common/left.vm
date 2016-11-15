@@ -1,0 +1,29 @@
+<div class="g_fl_rt">
+    <dl class="g_u_menu">
+        <dt>
+            <a href="$appRoot/$cpyno/member/index.html">会员首页</a>
+        </dt>
+        <dt class="u_dingdan">
+            <a href="#">订单中心</a><b id="menu_but"></b><b id="menu_but1"></b>
+        </dt>
+        <dd id="menu_box">
+            <a href="$appRoot/$cpyno/member/all">全部订单</a>
+            <a href="$appRoot/$cpyno/member/lvyou">旅游订单</a>
+            <a href="$appRoot/$cpyno/member/jipiao">机票订单</a>
+            <a href="$appRoot/$cpyno/member/jiudian">酒店订单</a>
+            <a href="$appRoot/$cpyno/member/menpiao">门票订单</a>
+            <a href="$appRoot/$cpyno/member/zuche">租车订单</a>
+            <a href="$appRoot/$cpyno/member/qianzheng">签证订单</a>
+            <a href="$appRoot/$cpyno/member/daoyou">预订的导游</a>
+            <a href="$appRoot/$cpyno/member/tesecan">特色餐订单</a>
+            <a href="$appRoot/$cpyno/member/dangdiyou">当地游订单</a>
+        </dd>
+        <dt class="u_huiyuan">
+            <a href="#">会员中心</a><b id="menu_but2"></b><b id="menu_but3"></b>
+        </dt>
+        <dd id="menu_box2">
+            <a href="$appRoot/$cpyno/member/message">个人资料</a>
+            <a href="$appRoot/$cpyno/member/anquan">账户安全</a>
+        </dd>
+    </dl>
+</div>

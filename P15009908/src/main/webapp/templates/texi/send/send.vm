@@ -1,0 +1,292 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<div class="rdivv">
+	<div class="caradmin_top">
+		<img src="$staticRoot/images/htcar1.png" />
+        <span>固定接送</span>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+	</div>
+	<div class="carfixed_ct">
+		<div class="carfixed_ctrtable" style="margin-left:16px;">
+			<span style="margin-left:35px;">$Texisend&nbsp;线路列表&nbsp;</span>
+			<table border="0" cellspadding="0" cellspacing="0" style="margin-left:35px;">
+				<thead>
+					<tr>
+						<td>线路类型</td>
+    					<td>出发地</td>
+    					<td>目的地</td>
+    					<td>固定接送管理</td>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($item in $texisendlist)
+						<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+							#if($!item.gdlType == '01')
+								<td>接机</td>
+							#elseif($!item.gdlType == '02')
+								<td>送机</td>
+							#elseif($!item.gdlType == '03')
+								<td>接站</td>
+							#elseif($!item.gdlType == '04')
+								<td>送站</td>
+							#elseif($!item.gdlType == '05')
+								<td>固定线路</td>
+							#else
+								<td></td>
+							#end
+							#if($item.gdlType == '01')
+        						<td>$!item.gdlStart</td>
+        						<td>$!item.gdlEnd</td>
+							#end
+							#if($item.gdlType == '02')
+        						<td>$!item.gdlMachine</td>
+        						<td>$!item.gdlMachineback</td>
+							#end
+							#if($item.gdlType == '03')
+        						<td>$!item.gdlStation</td>
+        						<td>$!item.gdlStationup</td>
+							#end
+							#if($item.gdlType == '04')
+        						<td>$!item.gdlStationback</td>
+        						<td>$!item.gdlStationnup</td>
+							#end
+							#if($item.gdlType == '05')
+        						<td>$!item.gdlStartcity</td>
+        						<td>$!item.gdlEndcity</td>
+							#end
+    						 <td>
+    							<a href="javascript:index.load('$appRoot/texi/send/view?id=$!item.id&gdlType=$item.gdlType');">查看/修改</a>&nbsp;&nbsp;
+    							<a href="javascript:index.load('$appRoot/texi/send/sendPricePage?sendId=$!item.id&sendType=$item.gdlType&dicPortal=01');">量/价管理</a>&nbsp;&nbsp;
+								<a href="javascript:index.delload('$appRoot/texi/send/delete?id=$!item.id','$appRoot/texi/send/list');">删除</a> 
+							</td>
+						</tr>
+					#end
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="carfixed_ctr" style="heigth:300px">
+        <span>添加线路</span>
+        <div class="carfixed_ctrl">
+        	<ul>
+        		<li name="gdlType" value="01" class="carli" >接机</li>
+        		<li name="gdlType" value="02">送机</li>
+        		<li name="gdlType" value="03">接站</li>
+        		<li name="gdlType" value="04">送站</li>
+        		<li name="gdlType" value="05">固定线路</li>
+        	</ul>
+        </div>
+        <div class="carfixed_ctrr">
+        	<div class="carfixed_ctrbox show">
+				<!-- 接机表单 ---------------------------------------------------------->
+				<form method="post" id="form1">
+					<input type="hidden" value="$!texiSend1.id" name="id" />
+					<input type="hidden" value="01" name="gdlType" />
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">机场：</span>
+            			<div class="carfixed_ctblr">
+            				<input type="text" name="gdlStart" class="validate[required,maxSize[20]]"/>
+            				<span>到</span>
+                            <input type="text" name="gdlEnd" class="validate[required,maxSize[20]]"/>
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlMoney" class="validate[required,maxSize[600]]" ></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlShow" class="validate[required,maxSize[600]]" placeholder="例如：取消更改订单说明等"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carinfo_ctbl">
+            			<div class="carinfo_ctblrbtn" style="width:360px; margin-left:48px;">
+            				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+            				<button type="reset" class="carinfo_qu">重置</button>
+            				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+            			</div>
+            		</div>
+			    </form>
+        	</div>
+        	<div class="carfixed_ctrbox">
+				<!-- 送机表单 ---------------------------------------------------------->
+				<form method="post" id="form2">
+    				<input type="hidden" value="$!texiSend1.id" name="id"/>
+    				<input type="hidden" value="02" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<!--<span class="carfixed_ctrbll">出发城市：</span>-->
+            			<div class="carfixed_ctblr" style="width:440px;">
+            				<span>从</span><input type="text" name="gdlMachine" class="validate[required,maxSize[20]]"/>
+            				<span>到</span><input type="text" name="gdlMachineback" class="validate[required,maxSize[20]]"/><span>机场</span>
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlMachinemoney" class="validate[required,maxSize[600]]"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlMachineshow" class="validate[required,maxSize[600]]" placeholder="例如：取消更改订单说明等"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+					<div class="carinfo_ctbl">
+            			<div class="carinfo_ctblrbtn" style="width:360px; margin-left:48px;">
+            				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form2','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+            				<button type="reset" class="carinfo_qu">重置</button>
+            				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+            			</div>
+            		</div>
+			  	</form>
+        	</div>
+        	<div class="carfixed_ctrbox">
+				<form method="post" id="form3">
+    				<input type="hidden" value="$!texiSend1.id" name="id"/>
+    				<input type="hidden" value="03" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">车站：</span>
+            			<div class="carfixed_ctblr">
+            				<input type="text"  name="gdlStation" class="validate[required,maxSize[20]]"/>
+            				<span>到</span>
+            				<input type="text" name="gdlStationup" class="validate[required,maxSize[20]]"/>
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationmoney" class="validate[required,maxSize[600]]"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationshow" class="validate[required,maxSize[600]]" placeholder="例如：取消更改订单说明等"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carinfo_ctbl">
+            			<div class="carinfo_ctblrbtn" style="width:360px; margin-left:48px;">
+            				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form3','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+            				<button type="reset" class="carinfo_qu">重置</button>
+            				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+            			</div>
+            		</div>
+			  	</form>
+        	</div>
+        	<div class="carfixed_ctrbox">
+				<form method="post" id="form4">
+    				<input type="hidden" value="$!texiSend1.id" name="id"/>
+    				<input type="hidden" value="04" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<!--<span class="carfixed_ctrbll">出发城市：</span>-->
+            			<div class="carfixed_ctblr" style="width:440px;">
+            				<span>从</span><input type="text" name="gdlStationback" class="validate[required,maxSize[20]]"/>
+            				<span>到</span>
+            				<input type="text" name="gdlStationnup" class="validate[required,maxSize[20]]"/><span>车站</span>
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationbackmoney" class="validate[required,maxSize[600]]"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlStationbackshow" class="validate[required,maxSize[600]]" placeholder="例如：取消更改订单说明等"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+					<div class="carinfo_ctbl">
+            			<div class="carinfo_ctblrbtn" style="width:360px; margin-left:48px;">
+            				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form4','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+            				<button type="reset" class="carinfo_qu">重置</button>
+            				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+            			</div>
+            		</div>
+				</form>
+			</div>
+        	<div class="carfixed_ctrbox">
+				<form method="post" id="form5">
+    				<input type="hidden" value="$!texiSend1.id" name="id"/>
+    				<input type="hidden" value="05" name="gdlType"/>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">出发城市：</span>
+							<div class="carfixed_ctblr">
+            				<input type="text" name="gdlStartcity" class="validate[required,maxSize[20]]"/>
+            				<span>到</span>
+            				<input type="text" name="gdlEndcity" class="validate[required,maxSize[20]]"/>
+            			</div>
+						<span style="color:red;margin-left:-14px;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">费用说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlCitymoney" class="validate[required,maxSize[600]]"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		<div class="carfixed_ctrbl">
+            			<span class="carfixed_ctrbll">服务说明：</span>
+            			<div class="carfixed_ctblr">
+            				<textarea name="gdlCityshow" class="validate[required,maxSize[600]]" placeholder="例如：取消更改订单说明等"></textarea>
+            			</div><span style="margin-left:-15px;color:red;">*</span>
+            		</div>
+            		 <div class="carinfo_ctbl">
+            			<div class="carinfo_ctblrbtn" style="width:360px; margin-left:48px;">
+            				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form5','$appRoot/texi/send/insert','$appRoot/texi/send/list');">提交</button>
+            				<button type="reset" class="carinfo_qu">重置</button>
+            				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+            			</div>
+            		</div>				  
+            	</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	//初始化省市县
+	regUtil.initProvince(110000,'gdlSendprivnce','gdlSendcity','gdlSendcounty');
+	/*固定线路*/
+	$(".carfixed_ctrl li").click(function(){
+    	var liindex = $('.carfixed_ctrl li').index(this);
+		$(this).addClass('carli').siblings().removeClass('carli');
+        $('.carfixed_ctrr .carfixed_ctrbox').eq(liindex).show(0).siblings(".carfixed_ctrr .carfixed_ctrbox").hide(0);
+    });
+	
+	//默认国际隐藏
+	$('#city_gj').hide();
+	$('#gj').hide();
+	//国内和国际港澳台隐藏显示切换
+	$('#tdlInland01').click(function(){
+		$('#city_gn').show();
+		$('#city_gj').hide();
+		$('#gj').hide();
+	});
+	$('#tdlInland02').click(function(){
+		$('#city_gn').hide();
+		$('#city_gj').show();
+		$('#gj').hide();
+	});
+	//点击港澳台国家和显示隐藏
+	$('#county01').click(function(){
+		$('#gj').hide();
+	});
+	$('#county02').click(function(){
+		$('#gj').hide();
+	});
+	$('#county03').click(function(){
+		$('#gj').hide();
+	});
+	//点击国际时国家和城市显示
+	$('#county04').click(function(){
+		$('#gj').show();
+	});
+</script>

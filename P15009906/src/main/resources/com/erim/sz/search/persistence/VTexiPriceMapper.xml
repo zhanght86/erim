@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="vtexiprice">
+	
+	<sql id="sql_column">
+		tcp_id  			  AS tcpId,
+		tcp_sign  			  AS tcpSign,
+		tcp_date  			  AS tcpDate,
+		tcp_combination_price AS tcpCombinationPrice,
+		tcp_retail_price      AS tcpRetailPrice,
+		tcp_ntype   		  AS tcpNtype
+	</sql>	
+	
+	<!-- 根据租车id和类型查询量价信息 -->
+	<select id="selectTexiPrice" resultType="vTexiPriceBean">
+		SELECT
+			<include refid="sql_column"></include>
+		FROM
+			v_texi_price
+		WHERE
+			tcp_id    = #{tcpId}
+		AND
+			tcp_ntype = #{tcpNtype}
+	</select>
+</mapper>

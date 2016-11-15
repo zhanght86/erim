@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht1">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">帮助中心</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">帮助中心</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>能传真签合同</p>
+								<div class="about_guib" style="display:none">
+									<ul>
+										<li>来源：佳旅联合旅行社&nbsp;&nbsp;&nbsp;&nbsp;时间：2015-12-14&nbsp;&nbsp;&nbsp;&nbsp;点击：120</li>
+									</ul>
+								</div>
+								<div class="about_guic">
+									<p><span>摘要: </span>能传真签合同
+									</p>
+								</div>
+									<div class="b_mian">
+		<div class="b_center">
+    		<ul>
+    			<li>合同可以选择传真签约、快递签约或者去门市签约。除周边跟团游外，还可以提前预约上门签约服务，在指定范围内安排。您也可以选择不签约。</li>
+    		</ul>
+		</div>
+		
+		
+	</div>
+    <div class="clear"></div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+</body>
+</html>

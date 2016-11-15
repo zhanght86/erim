@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="groundprice">
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		gdl_id					AS	gdlId,
+		gdl_name				AS	gdlName,
+		gpe_date				AS	gpeDate,
+		gpe_is_open				AS	gpeIsOpen,
+		gpe_week				AS	gpeWeek,
+		gpe_sign				AS	gpeSign,
+		gpe_trade_adult			AS	gpeTradeAdult,
+		gpe_trade_child			AS	gpeTradeChild,
+		gpe_retail_adult		AS	gpeRetailAdult,
+		gpe_retail_child		AS	gpeRetailChild,
+		gpe_single_price		AS	gpeSinglePrice,
+		gpe_single_show			AS	gpeSingleShow,
+		gpe_insure_price		AS	gpeInsurePrice,
+		gpe_insure_show			AS	gpeInsureShow,
+		gpe_is_upgrade			AS	gpeIsUpgrade,
+		gpe_upgrade_cont		AS	gpeUpgradeCont,
+		gpe_upgrade_adult		AS	gpeUpgradeAdult,
+		gpe_restrict			AS	gpeRestrict,
+		gpe_create_time			AS	gpeCreateTime,
+		gpe_create_user			AS	gpeCreateUser,
+		cpy_id					AS	cpyId,
+		gpe_wholesale_child		AS  gpeWholesaleChild,
+		gpe_wholesale_adult		AS  gpeWholesaleAdult
+	</sql>
+		<!-- 查询数据列表 -->
+	<select id="selectPriceByGroundId" resultType="groundPriceBean">
+		select 
+			id,
+			gdl_id					AS	gdlId,
+			gdl_name				AS	gdlName,
+			gpe_date				AS	gpeDate,
+			gpe_is_open				AS	gpeIsOpen,
+			gpe_week				AS	gpeWeek,
+			gpe_sign				AS	gpeSign,
+			gpe_trade_adult			AS	gpeTradeAdult,
+			gpe_trade_child			AS	gpeTradeChild,
+			gpe_retail_adult		AS	gpeRetailAdult,
+			gpe_retail_child		AS	gpeRetailChild,
+			gpe_single_price		AS	gpeSinglePrice,
+			gpe_single_show			AS	gpeSingleShow,
+			gpe_insure_price		AS	gpeInsurePrice,
+			gpe_insure_show			AS	gpeInsureShow,
+			gpe_is_upgrade			AS	gpeIsUpgrade,
+			gpe_upgrade_cont		AS	gpeUpgradeCont,
+			gpe_upgrade_adult		AS	gpeUpgradeAdult,
+			gpe_restrict			AS	gpeRestrict,
+			gpe_create_time			AS	gpeCreateTime,
+			gpe_create_user			AS	gpeCreateUser,
+			cpy_id					AS	cpyId,
+			gpe_wholesale_child		AS  gpeWholesaleChild,
+			gpe_wholesale_adult		AS  gpeWholesaleAdult
+		from ground_price 
+		where gdl_id = #{gdlId}
+		and gpe_date =  #{gpeDate}
+		order by gpe_create_time desc
+		limit 1
+
+	</select>
+	<!-- 查询数据列表 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="groundPriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				ground_price
+			ORDER BY
+				gpe_create_time
+			DESC
+		) t 
+		GROUP BY
+			t.gpeDate,
+			t.gdlId
+		HAVING
+			t.gdlId = #{bean.gdlId}
+			AND	t.gpeDate &gt;= date_format(now(),'%Y-%m-%d')
+			AND	t.gpeDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+</mapper>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="managementdetail">
+	<sql id="sql_query">
+		<where>
+			 mdl_is_del_status = '1'
+			 <if test="mdlNtype != null and mdlNtype  != ''">				and 	mdl_ntype 			=  #{mdlNtype}</if>
+			 <if test="mdlInterview != null and mdlInterview  != ''">		and 	mdl_interview 		=  #{mdlInterview}</if>
+			 <if test="mdlSend != null and mdlSend != ''">					and 	mdl_send       like "%"#{mdlSend}"%"</if>
+			 <if test="mdlAddress != null and mdlAddress != ''">			and 	mdl_address    like "%"#{mdlAddress}"%" </if>
+		</where>
+	</sql>
+	
+	<sql id="sql_column">
+		id 					AS id,
+		cpy_id 				AS cpyId,
+		mdl_name 			AS mdlName,
+		mdl_address 		AS mdlAddress,
+		mdl_long 			AS mdlLong,
+		mdl_price_same 		AS mdlPriceSame,
+		mdl_price_team 		AS mdlPriceTeam,
+		mdl_ntype 			AS mdlNtype,
+		mdl_town 			AS mdlTown,
+		mdl_stay 			AS mdlStay,
+		mdl_validity 		AS mdlValidity,
+		mdl_numbers 		AS mdlNumbers,
+		mdl_img1 			AS mdlImg1,
+		mdl_img2 			AS mdlImg2,
+		mdl_img3 			AS mdlImg3,
+		mdl_message 		AS mdlMessage,
+		mdl_createtime 		AS mdlCreatetime,
+		mdl_createuser 		AS mdlCreateuser,
+		mdl_is_through 		AS mdlIsThrough,
+		mdl_through_time 	AS mdlThroughTime,
+		mdl_through_user 	AS mdlThroughUser,
+		mdl_is_del_status   AS mdlIsDelStatus,
+		mdl_caseload 		AS mdlCaseload,
+		mdl_interview	    AS mdlInterview,
+		mdl_procedures 		AS mdlProcedures,
+		mdl_responsibility  AS mdlResponsibility,
+		mdl_money_contain   AS mdlMoneyContain,
+		mdl_code		    AS mdlCode,
+		mdl_province 		AS mdlProvince,
+		mdl_city 			AS mdlCity,
+		mdl_attestor	    AS mdlAttestor,
+		mdl_send 			AS mdlSend,
+		mdl_order_know 		AS mdlOrderKnow,
+		mdl_add_instruction AS mdlAddInstruction,
+		mdl_text_img 		AS mdlTextImg,
+		mdl_material 		AS mdlMaterial,
+		mdl_text_know	    AS mdlTextKnow,
+		mdl_num 			AS mdlNum,
+		mdl_need_day 		AS mdlNeedDay,
+		mdl_material_zy 	AS mdlMaterialZy,
+		mdl_know_zy 		AS mdlKnowZy,
+		mdl_text_img_zy 	AS mdlTextImgZy,
+		mdl_img_zy		    AS mdlImgZy,
+		mdl_material_xs 	AS mdlMaterialXs,
+		mdl_know_xs 		AS mdlKnowXs,
+		mdl_text_img_xs 	AS mdlTextImgXs,
+		mdl_img_xs 			AS mdlImgXs,
+		mdl_material_tx 	AS mdlMaterialTx,
+		mdl_know_tx 		AS mdlKnowTx,
+		mdl_img_tx 			AS mdlImgTx,
+		mdl_text_img_tx 	AS mdlTextImgTx,
+		mdl_material_et 	AS mdlMaterialEt,
+		mdl_know_et 		AS mdlKnowEt,
+		mdl_img_et 			AS mdlImgEt,
+		mdl_text_img_et 	AS mdlTextImgEt
+	</sql>
+	<sql id="sql_column_management_price">
+		mdl_id                  AS mdlId,
+		mdl_date                AS mdlDate,
+		min(mdl_price_seal)     AS mdlPriceSeal
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageManagement" resultType="managementDetailBean">
+		select a.*, b.code_mark as mdlFlag from 
+		(
+			select <include refid="sql_column" /> 
+				<if test="mdlDate != null and mdlDate != ''">
+				,(
+					select a.mdl_price_seal from 
+					(
+						select mdl_id,mdl_price_seal,mdl_create_time
+						from management_price
+						where  mdl_is_open = '02'
+						and mdl_date = #{mdlDate}
+						order by mdl_create_time desc
+					) a
+					where a.mdl_id = management_detail.id
+					order by a.mdl_create_time desc
+					limit 1
+				) as mdlPriceSeal
+				</if>
+			from management_detail 
+			<include refid="sql_query"/>
+			having mdlPriceSeal is not null
+		) a
+		left join 
+		(
+			select * 
+				from tm_system_code 
+			where 
+				tm_system_code.code_id = 'C067'	
+		) b		
+		on a.mdlAddress = b.code_value
+		group by a.id
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageManagementCount" resultType="int">
+		select count(1) from
+		(
+			select a.mdlPriceSeal from 
+			(
+				select <include refid="sql_column" /> 
+					<if test="mdlDate != null and mdlDate != ''">
+					,(
+						select a.mdl_price_seal from 
+						(
+							select mdl_id,mdl_price_seal,mdl_create_time
+							from management_price
+							where  mdl_is_open = '02'
+							and mdl_date = #{mdlDate}
+							order by mdl_create_time desc
+						) a
+						where a.mdl_id = management_detail.id
+						order by a.mdl_create_time desc
+						limit 1
+					) as mdlPriceSeal
+					</if>
+				from management_detail 
+				<include refid="sql_query"/>
+				having mdlPriceSeal is not null
+			) a
+			left join 
+			(
+				select * 
+					from tm_system_code 
+				where 
+					tm_system_code.code_id = 'C067'	
+			) b		
+			on a.mdlAddress = b.code_value
+			group by a.id
+		) a
+	</select>
+	
+	
+	<!-- 查询本页数据，用于显示当前页 
+	<select id="selectPageManagement" resultType="managementDetailBean">
+		select a.*, b.code_mark as mdlFlag from 
+		(
+			select <include refid="sql_column" />,a.mdlPriceSeal  as mdlPriceSeal
+			from  
+				management_detail 
+			join 
+				(
+					select c1.mdl_id as mdl_id ,min(cast(c1.mdl_price_seal as SIGNED INTEGER)) as mdlPriceSeal from management_price c1  join 
+					(
+						select c2.mdl_id,max(c2.mdl_create_time) as mdl_create_time,c2.mdl_date  from management_price c2  group by c2.mdl_date ,c2.mdl_id 
+					) c2
+					on c1.mdl_id = c2.mdl_id
+					and c1.mdl_create_time = c2.mdl_create_time
+					and c1.mdl_date = c2.mdl_date
+					where c1.mdl_date &gt;= date_format(now(),'%Y-%m-%d') and c1.mdl_date &lt;= date_format(last_day(curdate()),'%Y-%m-%d')
+					GROUP BY  c1.mdl_id
+								
+				) a
+			on management_detail.id = a.mdl_id
+			<include refid="sql_query"/>
+			having mdlPriceSeal is not null
+		) a
+		left join 
+		(
+			select * 
+				from tm_system_code 
+			where 
+				tm_system_code.code_id = 'C067'	
+		) b		
+		on a.mdlAddress = b.code_value
+		group by a.id
+	</select>-->
+
+	<!-- 查询总数，用于页面分页 
+	<select id="selectPageManagementCount" resultType="int">
+		   select count(1) from 
+		    (
+			    select a.mdlPriceSeal  as mdlPriceSeal
+				from  
+					management_detail 
+				join 
+					(
+						select c1.mdl_id as mdl_id ,min(cast(c1.mdl_price_seal as SIGNED INTEGER)) as mdlPriceSeal from management_price c1  join 
+						(
+							select c2.mdl_id,max(c2.mdl_create_time) as mdl_create_time,c2.mdl_date  from management_price c2  group by c2.mdl_date ,c2.mdl_id 
+						) c2
+						on c1.mdl_id = c2.mdl_id
+						and c1.mdl_create_time = c2.mdl_create_time
+						and c1.mdl_date = c2.mdl_date
+						where c1.mdl_date &gt;= date_format(now(),'%Y-%m-%d') and c1.mdl_date &lt;= date_format(last_day(curdate()),'%Y-%m-%d')
+						GROUP BY  c1.mdl_id
+									
+					) a
+				on management_detail.id = a.mdl_id
+				<include refid="sql_query"/>
+				having mdlPriceSeal is not null
+			) a
+	</select>-->
+	
+	<select id="selectBeanByPriId" resultType="managementDetailBean">
+		select a.*, b.code_mark as mdlFlag
+		from
+		(
+			SELECT
+				<include refid="sql_column"/>
+			FROM
+				management_detail
+			
+			WHERE
+				id = #{id}
+		) a
+		left join 
+		(
+			select * from tm_system_code 
+			where tm_system_code.code_id = 'C067'
+		) b
+		on a.mdlAddress = b.code_value
+		group by a.id
+	</select>
+</mapper>

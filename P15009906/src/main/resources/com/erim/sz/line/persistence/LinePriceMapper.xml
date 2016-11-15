@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lineprice">
+
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		tdl_id					AS	tdlId,
+		tdl_name				AS	tdlName,
+		lpe_date				AS	lpeDate,
+		lpe_is_open				AS	lpeIsOpen,
+		lpe_week				AS	lpeWeek,
+		lpe_sign				AS	lpeSign,
+		lpe_trade_adult			AS	lpeTradeAdult,
+		lpe_trade_child			AS	lpeTradeChild,
+		lpe_retail_adult		AS	lpeRetailAdult,
+		lpe_retail_child		AS	lpeRetailChild,
+		lpe_single_price		AS	lpeSinglePrice,
+		lpe_single_show			AS	lpeSingleShow,
+		lpe_insure_price		AS	lpeInsurePrice,
+		lpe_insure_show			AS	lpeInsureShow,
+		lpe_is_upgrade			AS	lpeIsUpgrade,
+		lpe_upgrade_cont		AS	lpeUpgradeCont,
+		lpe_upgrade_adult		AS	lpeUpgradeAdult,
+		lpe_upgrade_child		AS	lpeUpgradeChild,
+		lpe_restrict			AS	lpeRestrict,
+		lpe_create_date			AS	lpeCreateDate,
+		lpe_create_user			AS	lpeCreateUser,
+		cpy_id					AS	cpyId
+	</sql>
+	
+	<!-- 查询数据列表 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="linePriceBean">
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				line_price
+			WHERE
+				tdl_id = #{tdlId}
+			AND
+				lpe_date between #{startDate} and #{endDate}
+	</select>
+</mapper>

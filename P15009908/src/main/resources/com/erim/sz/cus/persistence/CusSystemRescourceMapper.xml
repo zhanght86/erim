@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cussystemrescource">
+	<select id="selectRescourceByUrl" resultType="CusSystemRescourceBean">
+		SELECT
+			id AS id,
+			cus_func_rescource_code AS cusFuncRescourceCode,
+			cus_rescource_name AS cusRescourceName,
+			cus_rescource_url AS cusRescourceUrl
+		FROM
+			cus_system_rescource
+		WHERE
+			cus_rescource_url = #{cusRescourceUrl}
+	</select>
+</mapper>

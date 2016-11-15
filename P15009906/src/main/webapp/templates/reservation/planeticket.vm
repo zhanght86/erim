@@ -1,0 +1,107 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".g_block_1").on("click",".red_a",function(){
+		if($(this).text()=="添加乘客"){
+			$(this).text('删除乘客').css("background-color","#ccc");
+			$(this).parent().parent().parent().after("<div class='qz_add_block'><div class='g_line mb20'></div><div class='input_block clearfix'><div class='label_left w80'>乘客类型：</div><div class='input_right'><label class='w80'><input type='radio' checked>成人</label><label class='w80'><input type='radio' >儿童</label></div></div><div class='input_block clearfix'><div class='label_left w80'>姓名：</div><div class='input_right input_right_wauto'><input class='w200'></div></div><div class='input_block clearfix'><div class='label_left w80'>证件号码：</div><div class='input_right input_right_wauto'><input class='w200'></div></div><div class='input_block clearfix'><div class='label_left w80'>手机号码：</div><div class='input_right input_right_wauto'><input class='w200'><a class='red_a' href='javascript:void(0);'>添加乘客</a></div></div></div>");
+			
+		}else{
+			$(this).parent().parent().parent().remove();
+		}
+	})
+})
+</script>
+    <div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">联系人信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">姓名：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left w80">手机号码：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+	</div>
+    <div class="cb"></div>
+    <div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">乘机人信息</p>
+		<div class="qz_add_block">
+			<div class="input_block clearfix">
+			<div class="label_left w80">乘客类型：</div>
+			<div class="input_right">
+				<label class="w80"><input type="radio" checked>成人</label><label class="w80"><input type="radio" >儿童</label>
+			</div>
+		</div>
+			<div class="input_block clearfix">
+                <div class="label_left w80">姓名：</div>
+                <div class="input_right input_right_wauto">
+                    <input class="w200">
+                </div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">证件号码：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w200">
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">手机号码：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w200"><a class="red_a" href="javascript:void(0);">添加乘客</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="cb"></div>
+    <div class="g_block_1 mb20 mr20">
+        <p class="g_tit_1 mb10">发票信息</p>
+        <div class="input_block clearfix">
+            <div class="qz_add_block">
+                <div class="input_block clearfix">
+                	<div class="label_left w80">取票方式：</div>
+                    <div class="input_right">
+                        <label class="w80"><input type="radio" checked>快递送达</label>￥10&nbsp;&nbsp;&nbsp;<label class="w80"><input type="radio" >个人领取</label>
+                    </div>
+			</div>
+            <div class="input_block clearfix">
+            	<div class="input_right input_right_wauto">
+					<label class="ml20">配送信息：</label>订单金额发票
+				</div>
+            </div>
+            <div class="input_block clearfix">
+                <div class="label_left w80">收件人：</div>
+                <div class="input_right input_right_wauto">
+                    <input class="w200">
+                </div>
+            </div>         
+            <div class="input_block clearfix">
+                <div class="label_left w80">手机号码：</div>
+                <div class="input_right input_right_wauto">
+                    <input class="w200">
+                </div>
+            </div> 
+            <div class="input_block clearfix">
+                <div class="label_left w80">派送地址：</div>
+				<div class="input_right input_right_wauto">
+					<select class="w90"><option></option></select>&nbsp;省&nbsp;<select class="w90"><option></option></select>市
+				</div>
+            </div>
+            <div class="input_block clearfix">
+                <div class="input_right input_right_wauto">
+                    <p><input class="w200 ml88 hui_span" value="区/县,街道,详细地址"></p>
+                </div>
+            </div>
+            <div class="input_block clearfix">
+                <div class="label_left w80">邮编：</div>
+                <div class="input_right input_right_wauto">
+                    <input class="w200">
+                </div>
+            </div> 
+        </div>
+    </div>
+    </div>
+    <div class="g_right w515"><a class="hui2_a" href="javascript:void(0);">取消</a><a class="red_a ml25" href="javascript:void(0);">提交订单</a></div>

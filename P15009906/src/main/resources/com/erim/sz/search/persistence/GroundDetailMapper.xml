@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="grounddetail">
+	
+	
+	<!-- 过滤条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			 <if test="id != null and id != ''">						        	and 	id 			        like "%"#{id}"%"</if>
+		     <if test="gddCode != null and gddCode != ''">							and 	gdd_code 			like "%"#{gddCode}"%"</if>
+		     <if test="gddCodeone != null and gddCodeone != ''">					and 	gdd_codeone 	    like "%"#{gddCodeone}"%"</if>
+		     <if test="gddName != null and gddName != ''">							and 	gdd_name 			like "%"#{gddName}"%"</if>
+		     <if test="gddProvice != null and gddProvice != ''">							and 	gdd_province 			like "%"#{gddProvice}"%"</if>
+		     <if test="gddCounty != null and gddCounty != ''">							and 	gdd_county 			like "%"#{gddCounty}"%"</if>
+		     <if test="gddCity != null and gddCity != ''">							and 	gdd_city 			like "%"#{gddCity}"%"</if>
+		     <if test="gddThemeone != null and gddThemeone != ''">					and 	gdd_themeone 		like "%"#{gddThemeone}"%"</if>
+		     <if test="gddProduct != null and gddProduct != ''">			    	and 	gdd_product 	    like "%"#{gddProduct}"%"</if>
+		     <if test="gddStandards != null and gddStandards != ''">		    	and 	gdd_standards 	    like "%"#{gddStandards}"%"</if>
+		     <if test="gddDeparturecity != null 	and gddDeparturecity != ''">	and 	gdd_departurecity 	like 	"%"#{gddDeparturecity}"%"</if>
+		     <if test="gddCountylocation != null and gddCountylocation != ''">		and 	gdd_countylocation 	=       #{gddCountylocation}	</if>
+		     <if test="gddMajorcountries != null and gddMajorcountries != ''">		and 	gdd_majorcountries 	like 	"%"#{gddMajorcountries}"%"</if>
+		     <if test="gddInternation != null 	and gddInternation != ''">			and 	gdd_internation 	=       #{gddInternation}		</if>
+		     <if test="gddLocalwide != null and gddLocalwide != ''">							and 	gdd_Localwide 		= #{gddLocalwide} </if>
+		     <if test="gddProductine != null and gddProductine != ''">							and 	gdd_Productine 		like "%"#{gddProductine}"%"</if>
+		     <if test="gddGame != null and gddGame != ''">							and 	gdd_Game 			= #{gddGame} </if>
+		     
+		      <!-- 行程天数、比较符号： 0等于 1大于 2小于 -->
+	          <if test="countDay != null and countDay !='' and countDayCompare==0 ">
+	     	          and (select count(1) from ground_trip a where a.tdl_id=ground_detail.id) = #{countDay} 
+	          </if>
+	          <if test="countDay != null and countDay !='' and countDayCompare==1 ">
+	     	          and (select count(1) from ground_trip a where a.tdl_id=ground_detail.id) &gt;= #{countDay} 
+	          </if>
+		</where>
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageGround" resultType="groundDetailBean">
+		SELECT
+			ground_detail.id as id,
+			gdd_name               AS gddName,
+			gdd_code			   AS gddCode,
+			gdd_province           AS gddProvice,
+			gdd_city               AS gddCity,
+			gdd_county             AS gddCounty,
+			gdd_is_surrounding     AS gddIsSurrounding,
+			gdd_characteristic     AS gddCharacteristic,
+			gdd_product			   AS gddProduct,
+			gdd_standards		   AS gddStandards,
+			gdd_set                AS gddSet,
+			gdd_starttime          AS gddStarttime,
+			gdd_mark			   AS gddMark,
+			gdd_cost_contains      AS gddCostContains,
+			gdd_themeone		   AS gddThemeone,
+			gdd_nomoney			   AS gddNomoney,
+			gdd_expense			   AS gddExpense,
+			gdd_is_booking_limit   AS gddIsbookinglimit,
+			gdd_travelinformation  AS gddTravelinformation,
+			gdd_default			   AS gddDefault,
+			gdd_consumersdefault   AS gddConsumersdefault,
+			gdd_supplement		   AS gddSupplement,
+			gdd_remind 			   AS gddRemind,
+			gdd_destination		   AS gddDestination,
+			gdd_internation		   AS gddInternation,
+			gdd_localwide		   AS gddLocalwide,
+			gdd_img1               AS gddImg1,
+			gdd_img2               AS gddImg2,
+			gdd_img3               AS gddImg3,
+			gdd_ntype1             AS gddNtype1,
+			gdd_ntype2             AS gddNtype2,
+			gdd_discount           AS gddDiscount,
+			gdd_comment            AS gddComment,
+			gdd_price_team         AS gddPriceTeam,
+			gdd_price_sell         AS gddPriceSell,
+			gdd_createtime         AS gddCreatetime,
+			gdd_createuser         AS gddCreateuser,
+			gdd_is_through         AS gddIsThrough,
+			gdd_through_time       AS gddThroughTime,
+			gdd_through_user       AS gddThroughUser,
+			gdd_is_del_status      AS gddIsDelStatus,
+			gdd_is_latertime	   AS gddIslatertime,
+			gdd_is_del_num         AS gddisnum,
+			gdd_is_people          AS gddispeople,
+			gdd_is_score           AS gddisscore,
+			gdd_is_day             AS gddIsoneday,
+			gdd_is_walk            AS gddIstwoday,
+			gdd_is_money           AS gddIsmoney,
+			gdd_is_show            AS gddIsshow,
+			gdd_is_pinpai          AS gddIspinpai,
+			ground_detail.cpy_id				   AS cpyId,
+			gdd_norm               AS gddNorm,
+			gdd_form               AS gddForm,
+			gdd_reasons            AS gddReasons,
+			gdd_guide_brand        AS gddGuideBrand,
+			gdd_cost_explain       AS gddCostExplain,
+			gdd_project            AS gddProject,
+			gdd_am_trip            AS gddAmTrip,
+			gdd_noon_food          AS gddNoonFood,
+			gdd_pm_trip            AS gddPmTrip,
+			gdd_dinner             AS gddDinner,
+			gdd_stay               AS gddStay,
+			gdd_prompt             AS gddPrompt,
+			gdd_theme              AS gddTheme,
+			gdd_line               AS gddLine,
+			gdd_countylocation	   AS gddCountylocation,
+			gdd_foreign			   AS gddForeign,
+			gdd_foreigncity        AS gddForeigncity,
+			gdd_productine	   	   AS gddProductine,
+			gdd_majorcountries	   AS gddMajorcountries,
+			gdd_departurecity	   AS gddDeparturecity,
+			gdd_codeone			   AS gddCodeone,
+			
+			cpy_name        	AS cpyName,
+			cpy_brand        	AS cpyBrand,
+			cpy_telephone   	AS cpyTelephone,
+			ccp_name			AS ccpName,
+			ccp_telephone		AS ccpTelephone,
+			ccp_qq				AS ccpQq,
+			cbs_operator		AS cbsOperator,
+			cbs_operator_phone	AS cbsOperatorPhone,
+			cbs_operator_qq		AS cbsOperatorQq,
+			(select count(1) from ground_trip a where a.tdl_id=ground_detail.id) as TripDays   
+		FROM
+			ground_detail
+		LEFT JOIN
+			company_detail
+		ON 
+			company_detail.id = ground_detail.cpy_id
+		LEFT JOIN
+			company_contact_person
+		ON
+			company_contact_person.cpy_id = ground_detail.cpy_id
+		LEFT JOIN
+			company_business
+		ON
+			company_business.cpy_id = ground_detail.cpy_id
+			<include refid="sql_query" />
+		ORDER BY 
+			gdd_createtime 
+		DESC
+	</select>
+	
+	
+	<sql id="sql_column">
+			id,
+			gdd_name               AS gddName,
+			gdd_code			   AS gddCode,
+			gdd_province           AS gddProvice,
+			gdd_city               AS gddCity,
+			gdd_county             AS gddCounty,
+			gdd_is_surrounding     AS gddIsSurrounding,
+			gdd_characteristic     AS gddCharacteristic,
+			gdd_product			   AS gddProduct,
+			gdd_standards		   AS gddStandards,
+			gdd_set                AS gddSet,
+			gdd_starttime          AS gddStarttime,
+			gdd_mark			   AS gddMark,
+			gdd_cost_contains      AS gddCostContains,
+			gdd_themeone		   AS gddThemeone,
+			gdd_nomoney			   AS gddNomoney,
+			gdd_expense			   AS gddExpense,
+			gdd_is_booking_limit   AS gddIsbookinglimit,
+			gdd_travelinformation  AS gddTravelinformation,
+			gdd_default			   AS gddDefault,
+			gdd_consumersdefault   AS gddConsumersdefault,
+			gdd_supplement		   AS gddSupplement,
+			gdd_remind 			   AS gddRemind,
+			gdd_destination		   AS gddDestination,
+			gdd_internation		   AS gddInternation,
+			gdd_localwide		   AS gddLocalwide,
+			gdd_img1               AS gddImg1,
+			gdd_img2               AS gddImg2,
+			gdd_img3               AS gddImg3,
+			gdd_ntype1             AS gddNtype1,
+			gdd_ntype2             AS gddNtype2,
+			gdd_discount           AS gddDiscount,
+			gdd_comment            AS gddComment,
+			gdd_price_team         AS gddPriceTeam,
+			gdd_price_sell         AS gddPriceSell,
+			gdd_createtime         AS gddCreatetime,
+			gdd_createuser         AS gddCreateuser,
+			gdd_is_through         AS gddIsThrough,
+			gdd_through_time       AS gddThroughTime,
+			gdd_through_user       AS gddThroughUser,
+			gdd_is_del_status      AS gddIsDelStatus,
+			gdd_is_latertime	   AS gddIslatertime,
+			gdd_is_del_num         AS gddisnum,
+			gdd_is_people          AS gddispeople,
+			gdd_is_score           AS gddisscore,
+			gdd_is_day             AS gddIsoneday,
+			gdd_is_walk            AS gddIstwoday,
+			gdd_is_money           AS gddIsmoney,
+			gdd_is_show            AS gddIsshow,
+			gdd_is_pinpai          AS gddIspinpai,
+			cpy_id				   AS cpyId,
+			gdd_norm               AS gddNorm,
+			gdd_form               AS gddForm,
+			gdd_reasons            AS gddReasons,
+			gdd_guide_brand        AS gddGuideBrand,
+			gdd_cost_explain       AS gddCostExplain,
+			gdd_project            AS gddProject,
+			gdd_am_trip            AS gddAmTrip,
+			gdd_noon_food          AS gddNoonFood,
+			gdd_pm_trip            AS gddPmTrip,
+			gdd_dinner             AS gddDinner,
+			gdd_stay               AS gddStay,
+			gdd_prompt             AS gddPrompt,
+			gdd_theme              AS gddTheme,
+			gdd_line               AS gddLine,
+			gdd_countylocation	   AS gddCountylocation,
+			gdd_foreign			   AS gddForeign,
+			gdd_foreigncity        AS gddForeigncity,
+			gdd_productine	   	   AS gddProductine,
+			gdd_majorcountries	   AS gddMajorcountries,
+			gdd_departurecity	   AS gddDeparturecity,
+			gdd_codeone			   AS gddCodeone
+	</sql>
+	
+	<select id="selectBeanByPriId" resultType="groundDetailBean">
+		SELECT
+			<include refid="sql_column"/>
+		FROM
+			ground_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageGroundCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			ground_detail
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="groundDetailBean">
+		INSERT INTO
+			ground_detail
+			(
+				gdd_name,
+				gdd_internation,
+				gdd_countylocation,
+				gdd_foreign,
+			    gdd_foreigncity,
+				gdd_province,
+				gdd_city,
+				gdd_county,
+			    gdd_localwide,
+			    gdd_characteristic,
+				gdd_product,
+				gdd_standards,
+				gdd_themeone,
+				gdd_set,
+				gdd_starttime,
+				gdd_mark,
+				gdd_cost_contains,
+				gdd_nomoney,
+				gdd_expense,
+				gdd_is_booking_limit,
+				gdd_travelinformation,
+				gdd_default,
+				gdd_consumersdefault,
+				gdd_supplement,
+				gdd_remind,
+			    gdd_is_del_status,
+				gdd_createtime,
+				gdd_createuser,
+				cpy_id,
+				gdd_productine,
+				gdd_majorcountries,
+				gdd_departurecity,
+				gdd_codeone
+			)
+		VALUES
+			(
+				#{gddName},
+				#{gddInternation},
+				#{gddCountylocation},
+				#{gddForeign},
+			    #{gddForeigncity},
+				#{gddProvice},
+			    #{gddCity},
+			    #{gddCounty},
+				#{gddLocalwide},
+				#{gddCharacteristic},
+				#{gddProduct},
+				#{gddStandards},
+				#{gddThemeone},
+				#{gddSet},
+				#{gddStarttime},
+				#{gddMark},
+				#{gddCostContains},
+				#{gddNomoney},
+				#{gddExpense},
+				#{gddIsbookinglimit},
+				#{gddTravelinformation},
+				#{gddDefault},
+				#{gddConsumersdefault},
+				#{gddSupplement},
+				#{gddRemind},
+				#{gddIsDelStatus},
+				#{gddCreatetime},
+				#{gddCreateuser},
+				#{cpyId},
+				#{gddProductine},
+				#{gddMajorcountries},
+				#{gddDeparturecity},
+				#{gddCodeone}
+			)
+	</insert>
+	
+	<!-- 更新当地旅游信息产品编号 -->
+	<update id="updateGroundCode">
+		UPDATE
+			ground_detail
+		SET
+			gdd_code			= #{gddCode}
+		WHERE
+			id					= #{id}
+		
+	</update>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="groundDetailBean">
+		UPDATE
+			ground_detail
+		SET
+			gdd_name               = #{gddName},
+			gdd_province           = #{gddProvice},
+			gdd_city               = #{gddCity},
+			gdd_county             = #{gddCounty},
+			gdd_characteristic     = #{gddCharacteristic},
+			gdd_product			   = #{gddProduct},
+			gdd_standards		   = #{gddStandards},
+			gdd_set                = #{gddSet},
+			gdd_starttime          = #{gddStarttime},
+			gdd_mark			   = #{gddMark},
+			gdd_cost_contains      = #{gddCostContains},
+			gdd_themeone		   = #{gddThemeone},
+			gdd_nomoney			   = #{gddNomoney},
+			gdd_expense			   = #{gddExpense},
+			gdd_is_booking_limit   = #{gddIsbookinglimit},
+			gdd_travelinformation  = #{gddTravelinformation},
+			gdd_default			   = #{gddDefault},
+			gdd_consumersdefault   = #{gddConsumersdefault},
+			gdd_supplement		   = #{gddSupplement},
+			gdd_remind 			   = #{gddRemind},
+			gdd_destination		   = #{gddDestination},
+			gdd_internation		   = #{gddInternation},
+			gdd_localwide		   = #{gddLocalwide},
+			gdd_countylocation	   = #{gddCountylocation},
+			gdd_foreign			   = #{gddForeign},
+			gdd_foreigncity        = #{gddForeigncity},
+			gdd_productine	   	   = #{gddProductine},
+			gdd_majorcountries	   = #{gddMajorcountries},
+			gdd_departurecity	   = #{gddDeparturecity},
+			gdd_codeone			   = #{gddCodeone}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 上架下架 -->
+	<delete id="delete" parameterType="int">
+		UPDATE
+			ground_detail
+		SET
+			gdd_is_del_status 	 = #{gddIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>

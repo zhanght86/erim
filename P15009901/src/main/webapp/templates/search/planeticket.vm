@@ -1,0 +1,101 @@
+<!-- 机票-->
+<div class="tab-right-div">
+    <div class="tab-top">
+        <span class="tab-top-item subline">国内机票</span>
+        <span class="tab-top-item">国际·港澳台机票</span>
+    </div>
+    <div class="tab-main">
+        <div class="tab-main-div show">
+            <span class="tab-span">行程类型:</span>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="home-plane" checked="checked">单程
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="home-plane">往返
+            </label>
+            <div class="tab-main-body">
+                <div class="tab-body-div show">
+                    <label class="tab-label">
+                        <span class="tab-span">出发地:</span>
+                        <input class="tab-input home-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">目的地:</span>
+                        <input class="tab-input home-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">出发日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                    </label>
+                    <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+                </div>
+                <div class="tab-body-div">
+                    <label class="tab-label">
+                        <span class="tab-span">出发地:</span>
+                        <input class="tab-input home-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">目的地:</span>
+                        <input class="tab-input home-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">出发日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">返程日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                    </label>
+                    <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+                </div>
+            </div>
+        </div>
+        <div class="tab-main-div">
+            <span class="tab-span">行程类型:</span>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="inter-plane" checked="checked">单程
+            </label>
+            <label class="tab-lab">
+                <input type="radio" class="tab-radio" name="inter-plane">往返
+            </label>
+            <div class="tab-main-body">
+                <div class="tab-body-div show">
+                    <label class="tab-label">
+                        <span class="tab-span">出发地:</span>
+                        <input class="tab-input foreign-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">目的地:</span>
+                        <input class="tab-input foreign-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">出发日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                    </label>
+                    <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+                </div>
+                <div class="tab-body-div">
+                    <label class="tab-label">
+                        <span class="tab-span">出发地:</span>
+                        <input class="tab-input foreign-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">目的地:</span>
+                        <input class="tab-input foreign-city" type="text">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">出发日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                    </label>
+                    <label class="tab-label">
+                        <span class="tab-span">返程日期:</span>
+                        <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                    </label>
+					<!--<a href="$appRoot/$cpyno/jipiao.html" target="_blank">立即搜索</a>-->
+                    <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /机票-->

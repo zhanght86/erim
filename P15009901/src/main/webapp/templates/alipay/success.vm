@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="$staticRoot/css/register-houtai.css" rel="stylesheet">
+<!--d2015-12-5css start-->
+<style type="text/css">
+.content_d{margin-top:30px;background-color:#fff;border-radius:20px;width:990px;margin-left:auto;margin-right:auto;padding:100px 0 200px;}
+.orange_size20{color:#f68e3a;font-size:20px; line-height:30px;padding:15px 0;display:inline-block; vertical-align:bottom}
+.content_d p{font-size:14px;line-height:26px;color:#333;padding-left:410px;}
+.d_line{height:0;line-height:0;font-size:0;overflow:hidden; border-bottom:1px dashed #ccc;margin:30px 120px 10px;}
+</style>
+</head>
+<body style="background-color:#f8f7f7;">
+    <div class="register">
+    	<div class="reg_head">
+    		<div class="reg_heada">
+    			<img src="$staticRoot/images/logo_houtai.jpg" alt="logo">
+    		</div>
+    	</div>
+		
+		
+		<!--d2015-12-5 start-->
+    	<div class="content_d">
+			<center><img src="$staticRoot/images/success_03_houtai.png" style="vertical-align:middle;margin-right:30px;"><span class="orange_size20">恭喜您，支付成功！</span></center><br><br>
+			<p><strong>支付方式：</strong>支付宝</p>
+			<p><strong>订单号：</strong>$!out_trade_no</p>
+			<p><strong>公司名称：</strong>$!companyDetail.cpyName</p>
+			<p><strong>公司品牌：</strong>$!companyDetail.cpyBrand</p>
+			<p><strong>支付金额：</strong>¥$!price</p>
+			<div class="d_line"></div>
+    	</div>
+		<!--d2015-12-5 end-->
+		
+    	<div class="footer">
+    		版权所有&nbsp;&copyright&nbsp;北京佳旅联合科技有限公司
+    	</div>
+    </div>
+</body>
+</html>

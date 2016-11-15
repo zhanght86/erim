@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>手机导游</title> 
+    #parse("common/global.vm")
+</head>
+<body style="padding: 0px;">
+	<!-- header -->
+	<!-- content -->
+	<div class="content">
+		<div class="touxiang">
+			<div class="login">
+				<div class="toux">
+					<img src="$staticRoot/img/jllhlogo.png">
+				</div>
+				<FORM action="$appRoot/login" method="post" id="form1">
+    				<div class="tanchu jianju">
+    					<div class="wenben">
+    						<p>手机号:</p>
+    						<input type="text" name="username" placeholder="请输入手机号" class="wenben1 validate[required]">
+    					</div>
+    					<div class="wenben">
+    						<p>密&nbsp;&nbsp;&nbsp;码:</p>
+    						<input type="password" name="password" placeholder="请输入密码"  class="wenben1 validate[required]">
+    					</div>
+    				</div>
+				</FORM>
+			</div>
+			#if ($message)
+				<div class="tishi">$message</div>
+			#end
+			<div class="anniu3">登录</div>
+			<div class="zmm">
+				<a href="#">无法登录？</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="$staticRoot/js/guide/login.js"></script>
+</body>
+</html>

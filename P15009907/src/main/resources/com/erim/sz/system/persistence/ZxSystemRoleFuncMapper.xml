@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zxsystemrolefunc">
+	
+	<!-- 根据角色查询 -->
+	<select id="selectRoleFuncByRoleId" resultType="zxSystemRoleFuncBean">
+		SELECT
+			id 			  	 AS id,
+			zx_func_code     AS zxFuncCode,
+			zx_role_id       AS zxRoleId
+		FROM
+			zx_system_role_func
+		WHERE
+			zx_role_id        = #{zxRoleId}
+			and zx_func_code != '1'
+	</select>
+	
+	<insert id="insertList">
+		INSERT INTO
+			zx_system_role_func
+			(
+				zx_func_code,
+				zx_role_id
+			)
+		VALUES
+			<foreach collection="list" item="item" index="index" separator="," >
+			(
+				#{item.zxFuncCode},
+				#{item.zxRoleId}
+			)
+			</foreach>
+	</insert>
+	
+	<delete id="deleteByRoleCode">
+		DELETE	FROM
+			zx_system_role_func
+		WHERE
+			zx_role_id = #{zxRoleId}
+	</delete>
+</mapper>

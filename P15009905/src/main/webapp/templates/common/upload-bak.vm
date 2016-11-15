@@ -1,0 +1,103 @@
+<script>
+
+	//ajax 同步异步处理
+	$.ajax({async: false});
+
+	function photoUpload(guiId) {
+        $.ajaxFileUpload({
+            url: '$staticRoot/js/upload05.jsp', // 文件上传服务器地址
+            secureuri: false, // 是否需要安全协议，一般设置为false
+            type: 'post', // 提交方式
+            fileElementId: 'reportimg1', // 上传文件域的id
+            dataType: 'text',//返回值类型 一般设置为json
+            data:guiId, // 导游ID
+            success: function(data, status) { 
+            	if (status == "success" && undefined != data) {
+            		data = eval("("+data+")");
+            		var name = data.filename;
+            		var url = data.url;
+					//延时1s执行
+            		setTimeout("repoerImg('"+url+"')",1000);
+            	} else {
+            		alert("上传失败");
+            	}
+            },
+            error: function(data, status, e) {
+                alert(data+'----'+status+'---'+e);
+            }
+        });
+    }
+	
+	//返回图片路径后载入上传图片中 并且刷新页面
+	function localhostHtml(url){
+		$.post("/photo/insert?gptImgUrl="+url,function(result) {
+			if ("1" == result) {
+				// 刷新页面
+				window.location = _appRoot + '/photo';
+			} else {
+				alert("上传失败");
+			}
+		}, 'text');
+	}
+	
+	//判断图片是否存在
+	function repoerImg(url){
+		$.ajax({
+      	    url : "$staticRoot"+url,
+            type : 'HEAD',
+            error : function() {
+				//如果图片不存在 回滚判断流程
+                setTimeout("repoerImg('"+url+"')",1000);
+            },
+            success : function() {
+				//如果图片存在执行插入 刷新页面
+				localhostHtml(url);
+            }
+        });
+	}
+	
+	var uploadify = function(id,fileid){
+    	 $("#"+id).uploadify({
+            auto            : true, // 是否立即上传
+            'swf'		    : '$staticRoot/js/uploadify/uploadify.swf',
+            //后台处理的页面
+            'uploader'      : '$staticRoot/js/upload05.jsp',
+            queueID         : fileid,//与下面的id对应
+            buttonClass	    :'btn',
+            buttonImage     : null,
+            formData        : {guiId:"$id"},
+			//buttonImg 		: '$staticRoot/img/gallery_add_btn.jpg',
+            buttonText      : '点击上传',
+            multi           :  false, //多文件上传
+            fileTypeDesc    : '请选择图片，仅支持格式JPG,BMP,PNG,GIF，最大4M',
+            fileTypeExts    : '*.JPG;*.GIF;*.PNG;*.BMP;', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+            fileObjName     : 'file',//服务端File对应的名称。
+        	fileSizeLimit   : '2MB',//文件上传的大小限制，如果是字符串单位可以是B KB MB GB，默认是0，表示无限制
+        	width		    : 65,
+        	height		    : 20,
+        	onUploadSuccess : function(file,data,response) {//上传完成时触发（每个文件触发一次
+				alert(response);
+				return;
+				if (response == true && undefined != data) {
+    				data=eval("("+data+")");
+    				var filename = data.filename;
+    				var url   	 = data.url;
+    				/*$.post("/photo/insert?gptImgUrl="+url,function(result) {
+            			if ("1" == result) {
+            				// 刷新页面
+        					window.location = _appRoot + '/photo';
+            			} else {
+            				alert("上传失败");
+            			}
+            		}, 'text');*/
+				} else {
+					alert("上传失败");
+				}
+    		},
+    		onUploadError : function(file,data,response) {
+        		alert('上传失败','e');
+    		}
+     	});
+	};
+		
+</script>

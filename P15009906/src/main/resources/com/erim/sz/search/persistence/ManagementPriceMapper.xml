@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="managementprice">
+	
+	
+	<!-- 查询数据列表 -->
+	<select id="listManagementPrice" resultType="managementPriceBean">
+		SELECT
+			id,
+			mdl_id					AS	mdlId,
+			mdl_name				AS	mdlName,
+			mdl_is_open				AS	mdlIsOpen,
+			mdl_date				AS	mdlDate,
+			mdl_week				AS	mdlWeek,
+			mdl_price_same			AS	mdlPriceSame,
+			mdl_price_team			AS	mdlPriceTeam,
+			mdl_price_seal			AS	mdlPriceSeal,
+			mdl_create_time			AS	mdlCreateTime,
+			mdl_create_user			AS	mdlCreateUser,
+			mdl_cost_show           AS  mdlCostShow
+		FROM
+			management_price
+		WHERE
+			mdl_id = #{mdlId}
+		AND
+			mdl_date between #{startDate} and #{endDate}
+	</select>
+</mapper>

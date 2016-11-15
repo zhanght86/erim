@@ -1,0 +1,241 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<script type="text/javascript"> 
+	//初始化省市县
+	regUtil.initProvince(0,'hdlProvince','hdlCity','hdlCounty');
+	
+	//默认国际港澳台隐藏
+	$('#szd02').hide();
+	//默认国家和城市隐藏
+	$('#county01').hide();
+	
+	//点击国内时
+	$('#gddInland01').click(function() {
+		$('#szd02').hide();//国际港澳台隐藏
+		$('#szd01').show();//国内显示
+		$('#county01').hide();//国家和城市隐藏
+	});
+	//点击国国际港澳台时
+	$('#gddInland02').click(function() {
+		$('#szd01').hide();//国内隐藏
+		$('#szd02').show();//国际港澳台显示
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county02').click(function(){
+		$('#county01').hide();
+	});
+	$('#county03').click(function(){
+		$('#county01').hide();
+	});
+	$('#county04').click(function(){
+		$('#county01').hide();
+	});
+	//点击国际时国家和城市隐藏和显示
+	$('#county').click(function(){
+		$('#county01').toggle();
+	});
+	
+	//获取国内国际的值
+	var a = $("input[name='hdlIsInternal']:checked").val();	
+	//为国内时
+	if (a == '02') {
+		var b = $("select[name='hdlProvince']").val();//获取省的值
+		var city = $("input[name='hdl_city']").val();//获取是的值
+		var county = $("input[name='hdl_county']").val();//获取县值
+		$('#szd01').show();//国内显示
+		$('#szd02').hide();//国际港澳台隐藏
+		$('#county01').hide();//国家和城市隐藏
+		//初始化省市县
+	   	regUtil.initProvince(b,'hdlProvince','hdlCity','hdlCounty',city,county);
+	} else if (a == '01') {
+	//为国际港澳台时
+	    $('#szd01').hide();//国内隐藏
+		$('#szd02').show();//国际港澳台显示
+		//初始化省市县
+		regUtil.initProvince(0,'hdlProvince','hdlCity','hdlCounty');
+	} else {
+	    //不为国内也不为国际港澳台时候
+		$('#county01').hide();//国家和城市隐藏
+    	$('#szd02').hide();//国际港澳台隐藏
+		var b = $("select[name='hdlProvince']").val();//获取省的值
+		var city = $("input[name='hdl_city']").val();//获取是的值
+		var county = $("input[name='hdl_county']").val();//获取县的值
+		//如果省为空
+    	if (b == '') {
+    		//初始化省市县
+    		regUtil.initProvince(0,'hdlProvince','hdlCity','hdlCounty');
+		} else {
+		//如果省不为空
+			regUtil.initProvince(b,'hdlProvince','hdlCity','hdlCounty',city,county);
+		}
+	}
+	
+   	//是否为国际
+	var a = $("input[name='hdlExternal']:checked").val();
+	if (a == '04') {
+		$('#county01').show();//国家和城市显示
+	} else {
+		$('#county01').hide();//国家和城市隐藏
+	}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/ren.png" alt="同业资源酒店" title="同业资源酒店" />同业资源酒店
+		<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		<div class="coadmin_top clearfix">
+    		<input type="hidden" name="hdl_city" value="$hotelDetail.hdlCity" />
+    		<input type="hidden" name="hdl_county" value="$hotelDetail.hdlCounty" />
+			#*  
+            <div class="doadmin_topl">
+    			<div class="doadmin_toplbox">
+                    <span style="width:97px;">所在区域：</span>
+                    <label>
+                        <input type="radio" id="gddInland01" name="hdlIsInternal" #if($hotelDetail.hdlIsInternal == '02') checked #end value="02" /> 国内
+    				</label>
+                    <label>
+                        <input type="radio" id="gddInland02" name="hdlIsInternal" #if($hotelDetail.hdlIsInternal == '01') checked #end value="01" /> 国际/港澳台
+    				</label>
+                </div>
+    		</div>
+			*#
+		    <div class="doadmin_topl">
+				<div class="doadmin_toplbox" id="szd01" style="width:480px;">
+					<span>所在城市：</span>
+					<div class="doadmin_toplbrb" style="width:350px;">
+                        <select name="hdlProvince" style="float:none;width:90px;">
+							<option value=""></option>
+        					#foreach($item in $provinces)
+                                <option value="$item.regionNo" #if($hotelDetail.hdlProvince == $item.regionNo) selected #end>$item.regionName</option>
+        					#end
+                        </select>
+						<em class="w20">省</em>
+						<select type="text" class="w80" name="hdlCity" style="float:none;width:90px;">
+						</select> 市
+						<select type="text" class="w90" name="hdlCounty"  style="float:none;width:90px;">
+                        </select> 区县
+					</div>
+				</div>	
+				<div class="doadmin_toplbox" id="szd02">
+					<span>所在城市：</span>
+					<div class="doadmin_toplbrb" style="width:300px;">
+        				<label>
+							<input type="radio" id="county02" name="hdlExternal" #if($hotelDetail.hdlExternal == '01') checked #end  value="01" />香港&nbsp;
+						</label>
+                        <label>
+							<input type="radio" id="county03" name="hdlExternal" #if($hotelDetail.hdlExternal == '02') checked #end  value="02" />澳门&nbsp;
+						</label>
+						<label>
+						    <input type="radio" id="county04" name="hdlExternal" #if($hotelDetail.hdlExternal == '03') checked #end  value="03" />台湾&nbsp;
+						</label>
+						<label>
+					     	<input type="radio" id="county" name="hdlExternal" #if($hotelDetail.hdlExternal == '04') checked #end  value="04" />国际&nbsp;
+        				</label>
+                    </div>
+            	</div>
+				<div class="co_nationdiv" id="county01">
+                    <span>国家：</span>	
+					<input type="text" name="hdlForeign" value="$!hotelDetail.hdlForeign" style="width:120px;height:25px;">
+					<span>城市：</span>
+					<input type="text" name="hdlForeignCity" value="$!hotelDetail.hdlForeignCity" style="width:120px;height:25px">
+				</div>
+			</div> 
+    		<div class="doadmin_topl" style="margin-top: 10px;">
+				<div class="input_block clearfix">
+					<div class="label_left" style="font-weight:400;width:100px;">产品编码：</div>
+					<div class="input_right input_right_wauto">
+        				<input class="w130" style="width:108px;" name="hdlCode" value="$!hotelDetail.hdlCode"/>
+        				<span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;酒店名称：</span>
+        				<input class="w130" style="width:151px;" name="hdlName" value="$!hotelDetail.hdlName"/>
+        				<label class="ml15">酒店档次：</label>
+    					<select class="w150" name="hdlLevel">
+            			     <option value=""></option>
+            			     <option  #if($hotelDetail.hdlLevel == '01') selected #end value="01">三星/舒适</option>
+        				     <option  #if($hotelDetail.hdlLevel == '02') selected #end value="02">四星/高档</option>
+        				     <option  #if($hotelDetail.hdlLevel == '03') selected #end value="03">五星/豪华</option>
+    						 <option  #if($hotelDetail.hdlLevel == '04') selected #end value="04">经济型商务酒店</option>
+        					 <option  #if($hotelDetail.hdlLevel == '05') selected #end value="05">豪华型商务酒店</option>
+        					 <option  #if($hotelDetail.hdlLevel == '06') selected #end value="06">经济型客栈</option>
+        					 <option  #if($hotelDetail.hdlLevel == '07') selected #end value="07">高档型客栈</option>
+    						 <option  #if($hotelDetail.hdlLevel == '08') selected #end value="08">豪华型客栈</option>
+    						 <option  #if($hotelDetail.hdlLevel == '09') selected #end value="09">其他</option>
+						</select>
+					</div>
+    			</div>
+    		</div>
+            <div class="input_block clearfix mb20">
+    			<div class="label_left" style="font-weight:400;width:122px;">入住日期：</div>
+            	<div class="input_right input_right_wauto">
+    				<span class="tishi_box w110" onClick="WdatePicker()">
+    					<input type="text" value="$!hotelDetail.hnpDate" class="w80" name="hnpDate" style="width:108px;background:url($staticRoot/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer">
+    				</span>
+    				<label class="ml15">公司/品牌名称： </label>
+    				<input class="w150" name="cpyName" value="$!hotelDetail.cpyName">
+        			<button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/hotel/detail/sametown');">查 询</button>
+                </div>
+        	</div>
+		</div>
+    </form>
+    <div class="g_line mb20"></div>
+    <div class="carad_ctrtable ml35" style="width:90%">
+    	<table cellspacing="0" cellspadding="0" >
+    		<thead>
+				<tr>
+					<td>产品编码</td>
+					<td>所在地区</td>
+					<td>酒店名称</td>
+					<td>酒店档次</td>
+					<!-- <td>酒店房型</td> -->
+					<td>价格/数量</td>
+					<td>公司/品牌名称</td>
+					<td>联系人/电话</td>
+					<td>在线交流</td>
+					<!--
+					<td>在线预定</td>-->
+				</tr>
+			</thead>
+			<tbody>
+			#foreach($item in $hotelList)
+				<tr>
+					<td>$!item.hdlCode</td>
+					#if($!item.hdlIsInternal == '01')
+						#if($!item.hdlExternal == '04')
+							<td>$!item.hdlForeignCity</td>
+						#else
+							<td>#vtext($!item.hdlExternal,'C108')</td>
+						#end
+					#else
+						<td>#vregion($!item.hdlCity)</td>
+					#end
+					<td><a href="$webRoot/hotel/jiudianxiang/$item.id" target="_blank" title="查看外网展示">$!item.hdlName</a></td>
+					<td>#vtext($!item.hdlLevel,'C022')</td>
+					<td>
+						<a href="javascript:price.sametown('$appRoot/hotel/price/getRoomNum?hdlId=$item.id', '$appRoot/hotel/price/listPagePortal?portal=06&hdlId=$!item.id&hheId=$!item.hheId');">
+							#if($erim.isNotEmpty($!item.hnpTradePrice))
+								￥$!item.hnpTradePrice元/$!item.hnpSign间 
+							#else
+								查看量/价
+							#end
+						</a>
+					</td>
+			    	<td>$!item.cpyName / $!item.cpyBrand</td>
+    				<td>$!item.ccpName / $!item.ccpTelephone</td>
+					<td>
+						<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes">
+							<img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流">
+						</a>
+					</td>
+					<!-- 
+					<td>
+						<a href="javascript:index.load('$appRoot/hotel/order/insert')">预订</a>
+					</td>
+					-->
+				</tr>
+			#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

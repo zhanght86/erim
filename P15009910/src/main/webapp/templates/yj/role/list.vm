@@ -1,0 +1,34 @@
+	<div class="g_block_2 mb20">
+		<div class="input_block clearfix mb0">
+			<div class="input_right input_right_wauto">
+				<label>名称：</label>
+				<input class="w130" />
+				<span class="red_a ml25" href="javascript:void(0);">查询</span>
+			</div>
+		</div>
+	</div>
+	<div class="g_block_2 g_block_7 mb20">
+		<p class="g_tit_1 mb10"><a class="xz" href="javascript:;" onclick="index.load('$appRoot/yj/role/insertPage');">新增</a></p>
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>序号</th>
+				<th>角色名</th>
+				<th>操作</th>
+			</tr>
+			#foreach($item in $userList)
+				<tr>
+                  	<td>$item.id</td>
+		            <td>$!item.yjRoleName</td>
+					<td><a href="javascript:index.load('$appRoot/yj/role/updatePage?id=$item.id');">修改</a></td>
+				</tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>
+<script type="text/javascript">
+	$("table tr:even").each(function(){
+		$(this).css("background-color","#fbfbfb");
+	})
+</script>

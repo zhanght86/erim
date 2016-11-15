@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jd_03.png" alt="添加酒店" title="添加酒店" />预定方式
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+        <input type="hidden" name="id" value="$!hotelBean.id"></input>
+		<input type="hidden" name="tdlId" value="$!hotelBean.tdlId"></input>
+		<input type="hidden" name="hdlId" value="$!hotelBean.hdlId"></input>
+		<div class="input_block clearfix">
+    		<div class="label_left">预定方式：</div>
+    		<div class="input_right" style="width:500px;">
+    			#foreach($item in $scheduled)
+    				<label class="w90" > 
+    					<input type="checkbox" class="validate[minCheckbox[1]] checkbox" name="hdlScheduled" value="$item.codeKey" #if($erim.contains($!hotelBean.hdlScheduled,$item.codeKey)) checked #end />$item.codeValue
+    				</label>
+    			#end
+    		</div><span  style=" color:red;margin-left: -130px;float: left; margin-top: 8px;">*</span>
+    	</div>
+    	<div class="button_block clearfix button_block_w500" style="width:400px;">
+    		<button class="y_but ml30" id="btn" type="button" onclick="subform.sub('form1', '$appRoot/hotel/detail/scheduled','$appRoot/hotel/detail/list');">提交</button>
+			<button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+    	</div>
+	</form>
+</div>

@@ -1,0 +1,429 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<script type="text/javascript"> 
+	//可接受信用卡
+	 $("input[level]").click(function(){
+        if($(this).val()==07){
+            $("input[level=1]:checkbox").attr("checked",false);
+        }else{
+           $("input[level=2]:checkbox").attr("checked",false);
+        }
+    }) 
+	//省市县级联选择
+	//regUtil.initProvince('$hotelBean.hdlProvince','hdlProvince','hdlCity','hdlCounty','$hotelBean.hdlCity','$hotelBean.hdlCounty');
+	
+	// 默认隐藏国外类的组件
+	var b = $("input[name='hdlIsInternal']:checked").val();
+	if (b == '01') {
+    	$('#szd11').hide();
+	} else if (b == '02') {
+    	$('#szd12').hide();
+	}
+	
+	// 点击国内时
+	$('#hdlInland11').click(function() {
+		$('#szd12').hide();
+		$('#szd11').show();
+		//$("input[name='hdlForeign']").val("");
+		//$("input[name='hdlForeignCity']").val("");
+	});
+	
+	// 点击国外时
+	$('#hdlInland12').click(function() {
+		$('#szd11').hide();
+		$('#szd12').show();
+	});
+	
+	// 当点击国际所在地时
+	$("input[name='hdlExternal']").change(function() {
+		var a = $("input[name='hdlExternal']:checked").val();
+		if (a == '04') {
+			$("input[name='hdlForeign']").attr('disabled',false);
+			$("input[name='hdlForeignCity']").attr('disabled',false);
+		} else {
+			$("input[name='hdlForeign']").attr('disabled',"true");
+			$("input[name='hdlForeignCity']").attr('disabled',"true");
+			$("input[name='hdlForeign']").val("");
+			$("input[name='hdlForeignCity']").val("");
+		}
+	});
+	//上传图片
+	uploadify('uploadify1','hdlImg1','filespan1','fileQueue1');
+	uploadify('uploadify2','hdlImg2','filespan2','fileQueue2');
+	uploadify('uploadify3','hdlImg3','filespan3','fileQueue3');
+	uploadify('uploadify4','hdlImg4','filespan4','fileQueue4');
+	uploadify('uploadify5','hdlImg5','filespan5','fileQueue5');
+	//点击删除图片上传图片按钮显示
+	#if("$!hotelBean.hdlImg1" != "")
+		$("#uploadify1").hide();
+	#end
+	#if("$!hotelBean.hdlImg2" != "")
+		$("#uploadify2").hide();
+	#end
+	#if("$!hotelBean.hdlImg3" != "")
+		$("#uploadify3").hide();
+	#end
+	#if("$!hotelBean.hdlImg4" != "")
+		$("#uploadify4").hide();
+	#end
+	#if("$!hotelBean.hdlImg5" != "")
+		$("#uploadify5").hide();
+	#end
+	
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+   var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+});
+</script>
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jd_03.png" alt="添加酒店" title="添加酒店" />查看/修改酒店
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+        <input type="hidden" name="id" value="$!hotelBean.id"></input>
+		<input type="hidden" name="tdlId" value="$!hotelBean.tdlId"></input>
+		<input type="hidden" name="hdlId" value="$!hotelBean.hdlId"></input>
+		<div class="input_block clearfix">
+    		<div class="label_left">酒店名称：</div>
+    		<div class="input_right">
+                <input type="text" class="w200 validate[required,maxSize[80]]" name="hdlName" value="$!hotelBean.hdlName" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">英文名称：</div>
+    		<div class="input_right">
+    			<input type="text" class="w200 validate[maxSize[200]]" name="hdlEnglish" value="$!hotelBean.hdlEnglish" />
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">酒店关键字：</div>
+			<div class="div_big" style="float:left;width:600px;" id="hotel-keywords">
+    			#foreach($item in $keyword)
+            		<div class="input_right #if($!{velocityCount} > 1) newline_ctllr4 mt15 #end">
+    					<input type="text" class="w200 lab_input validate[required,maxSize[20]]" name="hdlKeyword" value="$item" />
+        				<span class="mess_star_red">*</span>
+						##if($!{keyword.size()} == $!{velocityCount})
+						#if($!{velocityCount} == 1)
+							<a href='javascript:void(0)' class="add_key_word">+</a>
+						#else
+							<a href='javascript:void(0)' class="add_key_word">-</a>
+						#end
+            		</div>
+				#end
+			</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">国家：</div>
+    		<div class="input_right">
+    			<label class="w65">
+                    <input type="radio" id="hdlInland11" name="hdlIsInternal" #if($!hotelBean.hdlIsInternal == '02') checked #end value="02">国内</input>
+    			</label>
+				#* 
+                <label class="w130"> 
+    				<input type="radio" id="hdlInland12" name="hdlIsInternal" #if($!hotelBean.hdlIsInternal == '01') checked #end value="01">国际/港澳台</input>
+    			</label>
+				*#
+    		</div>
+    	</div>
+    	<div class="input_block clearfix" id="szd11">
+    		<div class="label_left">所在地：</div>
+    		<div class="input_right">
+				#lockProvince('hdlProvince','hdlProvince','w80 validate[required]','',$!hotelBean.hdlProvince,'hdlCity','hdlCounty',$!hotelBean.hdlCity,$!hotelBean.hdlCounty)
+				<em class="w20">省</em><select name='hdlCity' id='hdlCity' class='w90' onchange="lock.town($(this),'hdlCounty');"></select>
+				<em class="w20">市</em><select name='hdlCounty' id='hdlCounty' class='w100'></select>
+				区/县 <span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix" id="szd12">
+    		<div class="label_left">所在地：</div>
+    		<div class="input_right">
+    			<label class="w65">
+					<input type="radio" name="hdlExternal" #if($!hotelBean.hdlExternal == '01') checked #end value="01" />香港
+				</label>
+				<label class="w65">
+					<input type="radio" name="hdlExternal" #if($!hotelBean.hdlExternal == '02') checked #end value="02" />澳门
+				</label>
+				<label class="w65">
+					<input type="radio" name="hdlExternal" #if($!hotelBean.hdlExternal == '03') checked #end value="03" />台湾
+				</label>
+				<label class="w65">
+					<input type="radio" name="hdlExternal" #if($!hotelBean.hdlExternal == '04') checked #end value="04" />国际
+				</label>
+				#if($!hotelBean.hdlExternal == '04')
+    				<input type="text" class="w80 validate[maxSize[15]] autoquerycountry" name="hdlForeign" value="$!hotelBean.hdlForeign"> &nbsp; 国家 &nbsp;
+    				<input type="text" class="w80 validate[maxSize[10]]" name="hdlForeignCity" value="$!hotelBean.hdlForeignCity"> &nbsp; 城市
+				#else
+    				<input type="text" class="w80 validate[maxSize[15]] autoquerycountry" name="hdlForeign" disabled> &nbsp; 国家 &nbsp;
+    				<input type="text" class="w80 validate[maxSize[10]]" name="hdlForeignCity" disabled> &nbsp; 城市
+				#end
+    		</div>
+		</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">详细地址：</div>
+    		<div class="input_right">
+    			<input type="text"  class="w350 validate[required,maxSize[100]]" name="hdlAddress" value="$!hotelBean.hdlAddress" />
+				<span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">所属商圈：</div>
+    		<div class="input_right">
+    			<input type="text"  class="w350 validate[maxSize[40]]" placeholder="没有可不填" name="hdlDistrict" value="$!hotelBean.hdlDistrict"/>
+    		</div>
+    	</div>
+		<!-- <div class="input_block clearfix">
+    		<div class="label_left">经度：</div>
+    		<div class="input_right">
+    			<input type="text"  class="w90 validate[required,custom[number],maxSize[10],minSize[10]]" name="longitude" value="$!hotelBean.longitude" />
+    			<label class="ml25" >纬度： </label>
+    			<input type="text"  class="w90 mr20 validate[required,custom[number],maxSize[10],minSize[10]]"  name="latitude"  value="$!hotelBean.latitude"  />
+				<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank"><span style="color:#0251B9;font-size:12px;">经纬度获取方法</span></a>
+    		</div>
+		</div> -->
+    	<div class="input_block clearfix">
+    		<div class="label_left">酒店电话：</div>
+    		<div class="input_right">
+    			<input type="text" class="w130 validate[required,custom[phone]]" name="hdlTelephone" value="$!hotelBean.hdlTelephone" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">酒店档次：</div>
+    		<div class="input_right">
+    			<select class="w130" name="hdlLevel">
+    				#foreach($item in $startlevel.keySet())
+    					<option value="$item" #if($!hotelBean.hdlLevel == $item) selected #end>$startlevel.get($item)</option>
+                    #end
+    			</select><span class="mess_star_red">*</span>
+    			<label class="ml35">房间总数： </label>
+    			<input type="text" class="w130 validate[required,custom[integer],max[9999],min[1]]]" name="hdlRoomNum" value="$!hotelBean.hdlRoomNum" />
+				<span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">开业时间：</div>
+    		<div class="input_right">
+    			<input type="text"  name="hdlStart" style="width:131px;" class="w110" value="$!hotelBean.hdlStart"onFocus="WdatePicker({maxDate:'%y-%M'})"/><span class="mess_star_red">*</span>
+    			<label class="ml35" style="margin-left:36px;">最近装修时间：</label>
+    			<input type="text"  style="width:132px;"   name="hdlRenovationDate"   value="$!hotelBean.hdlRenovationDate" onFocus="WdatePicker({maxDate:'%y-%M'})" />
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">酒店特色：</div>
+    		<div class="input_right" style="width:500px;">
+    			#foreach($item in $hotelfeatures)
+    				<label class="w90"> 
+    					<input type="checkbox" class="validate[minCheckbox[1]] checkbox" name="hdlCharacteristic" value="$item.codeKey" #if($erim.contains($!hotelBean.hdlCharacteristic,$item.codeKey)) checked #end/>$item.codeValue
+    				</label>
+    			#end
+    		</div><span class="mess_star_red">*</span>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">酒店设施：</div>
+    		<div class="input_right" style="width:500px;">
+    			#foreach($item in $hotelfacilities)
+    				<label class="w90" > 
+    					<input type="checkbox" class="validate[minCheckbox[1]] checkbox" name="hdlFacilities" value="$item.codeKey" #if($erim.contains($!hotelBean.hdlFacilities,$item.codeKey)) checked #end />$item.codeValue
+    				</label>
+    			#end
+    		</div><span class="mess_star_red">*</span>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">网络设施：</div>
+    		<div class="input_right" style="width:520px;">
+    			#foreach($item in $WiFi.keySet())
+    				<label class="w130" style="width:125px;"> 
+    					<input type="radio" class="validate[minCheckbox[1]] checkbox" name="hdlNetWork" value="$item" #if($erim.contains($!hotelBean.hdlNetWork,$item)) checked #end /> $WiFi.get($item)
+    				</label>
+    			#end
+    		</div><span class="mess_star_red">*</span>
+    	</div>
+			<div class="input_block clearfix">
+    		<div class="label_left">酒店服务：</div>
+    		<div class="input_right" style="width:500px;">
+    			#foreach($item in $serviceitems)
+    				<label class="w90" > 
+    					<input type="checkbox" class="validate[minCheckbox[1]] checkbox" name="hdlService" value="$item.codeKey" #if($erim.contains($!hotelBean.hdlService,$item.codeKey)) checked #end />$item.codeValue
+    				</label>
+    			#end
+    		</div><span class="mess_star_red">*</span>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">可接受信用卡：</div>
+    		<div class="input_right" style="width:500px;">
+    			<label class="w90 mb15">
+    				<input type="checkbox" name="hdlCreditcard" level='1' value="01" #if($erim.contains($!hotelBean.hdlCreditcard,'01')) checked #end><img src="$staticRoot/images/jd_03.jpg" title="国内发行银联卡">
+    			</label>
+    			<label class="w90 mb15">
+    				<input type="checkbox" name="hdlCreditcard" level='1' value="02" #if($erim.contains($!hotelBean.hdlCreditcard,'02')) checked #end><img src="$staticRoot/images/jd_05.jpg" title="JCB"/>
+    			</label>
+    			<label class="w90 mb15">
+    				<input type="checkbox" name="hdlCreditcard" level='1' value="03" #if($erim.contains($!hotelBean.hdlCreditcard,'03')) checked #end><img src="$staticRoot/images/jd_07.jpg" title="大来（Diners Club）"/>
+    			</label>
+    			<label class="w90 mb15">
+    				<input type="checkbox" name="hdlCreditcard" level='1' value="04" #if($erim.contains($!hotelBean.hdlCreditcard,'04')) checked #end><img src="$staticRoot/images/jd_09.jpg" title="运通（AMEX）"/>
+    			</label>
+    			<label class="w90">
+    				<input type="checkbox" name="hdlCreditcard" level='1' value="05" #if($erim.contains($!hotelBean.hdlCreditcard,'05')) checked #end><img src="$staticRoot/images/jd_15.jpg" title="威士（VISA）"/>
+    			</label>
+    			<label class="w90">
+    				<input type="checkbox" name="hdlCreditcard" level='1' value="06" #if($erim.contains($!hotelBean.hdlCreditcard,'06')) checked #end><img src="$staticRoot/images/jd_16.jpg" title="万事达（Master）"/>
+    			</label>
+    			<label class="w130">
+    				<input type="checkbox" name="hdlCreditcard" level='2' value="07" #if($erim.contains($!hotelBean.hdlCreditcard,'07')) checked #end>不接受信用卡
+    			</label>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">公交/地铁：</div>
+    		<div class="input_right">
+    			<input type="text" style="width:231px;" class="w200 validate[maxSize[40]]" name="hdlPosition" value="$!hotelBean.hdlPosition" />
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">附近机场/火车站：</div>
+    		<div class="input_right">
+    			<input class="w200 validate[maxSize[80]]" style="width:231px;" name="hdlNearSite" value="$!hotelBean.hdlNearSite" />
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">医院/学校/行政单位：</div>
+    		<div class="input_right">
+    			<input style="width:231px;" class="w200 validate[maxSize[100]]" name="hdlMark" value="$!hotelBean.hdlMark" />
+    		</div>
+    	</div>
+    	<div class="input_block clearfix" > 
+    		<div class="label_left">附近景点：</div>
+			<div class="div_big" style="float:left;width:600px;" id="hotel-around">
+    			#foreach($ite in $feature)
+					#if($!{velocityCount} == 1)
+						<div class="input_right">
+					#else
+						<div class="input_right newline_ctllr4 mt15">
+					#end
+    					<input class="w200 lab_input validate[maxSize[40]]" name="hdlFeature" value="$ite" />
+						#if($!{velocityCount} == 1)
+							<a href='javascript:void(0)' class="add_key_word">+</a>
+						#else
+							<a href='javascript:void(0)' class="add_key_word">-</a>
+						#end
+        			</div>
+    			#end
+            </div>
+    	</div>
+		<div class="input_block clearfix" >
+    		<div class="label_left">交通位置：</div>
+    		<div class="input_right">
+    			<textarea  name="hdlLocation" style="width:350px;height:90px;" class="validate[maxSize[200]]">$!hotelBean.hdlLocation</textarea>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">酒店介绍：</div>
+    		<div class="input_right">
+    			<textarea  name="hdlDescribe" style="width:350px;height:90px;" class="validate[required,maxSize[2000]]">$!hotelBean.hdlDescribe</textarea><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<!-- 
+		<div class="input_block clearfix">
+    		<div class="label_left">预定方式：</div>
+    		<div class="input_right" style="width:500px;">
+    			#foreach($item in $scheduled)
+    				<label class="w90" > 
+    					<input type="checkbox" class="validate[minCheckbox[1]] checkbox" name="hdlScheduled" value="$item.codeKey" #if($erim.contains($!hotelBean.hdlScheduled,$item.codeKey)) checked #end />$item.codeValue
+    				</label>
+    			#end
+    		</div><span  style=" color:red;margin-left:-144px;float: left; margin-top: 8px;">*</span>
+		</div>-->
+		<div class="input_block clearfix" style="margin-bottom:10px;">
+			<span style="margin-left:75px;color:red;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该酒店将会下线</span>
+        </div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">外观图片：</div>
+    		<div class="input_right position_re">
+				#if("$!hotelBean.hdlImg1" != "")
+					<input name="file" id="uploadify1" contenteditable="false" size="30" type="file"/>
+					<input name="hdlImg1" value="$hotelBean.hdlImg1" type="hidden" id="hdlImg1"/>
+					<img class="img200" src="$staticFileRes$hotelBean.hdlImg1" />
+					<a href="javascript:uploadDelete('uploadify1','filespan1','$hotelBean.hdlImg1','hdlImg1');">删除图片</a>
+				#else
+        			<input name="hdlImg1" value="" type="hidden" id="hdlImg1"/>
+					<input name="file" id="uploadify1" contenteditable="false" size="30" type="file" />
+				#end
+				<span id="filespan1"></span>
+				<div id="fileQueue1"></div>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">大堂图片：</div>
+    		<div class="input_right position_re">
+				#if("$!hotelBean.hdlImg2" != "")
+					<input name="file" id="uploadify2" contenteditable="false" size="30" type="file"/>
+					<input name="hdlImg2" value="$hotelBean.hdlImg2" type="hidden" id="hdlImg2"/>
+					<img class="img200" src="$staticFileRes$hotelBean.hdlImg2" /><a href="javascript:uploadDelete('uploadify2','filespan2','$hotelBean.hdlImg1','hdlImg2');">删除图片</a>
+				#else
+        			<input name="hdlImg2" value="" type="hidden" id="hdlImg2"/>
+					<input name="file" id="uploadify2" contenteditable="false" size="30" type="file" />
+				#end
+				<span id="filespan2"></span>
+				<div id="fileQueue2"></div>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">楼道图片：</div>
+    		<div class="input_right position_re">
+				#if("$!hotelBean.hdlImg3" != "")
+					<input name="file" id="uploadify3" contenteditable="false" size="30" type="file"/>
+					<input name="hdlImg3" value="$hotelBean.hdlImg3" type="hidden" id="hdlImg3"/>
+					<img class="img200" src="$staticFileRes$hotelBean.hdlImg3" /><a href="javascript:uploadDelete('uploadify3','filespan3','$hotelBean.hdlImg1','hdlImg3');">删除图片</a>
+				#else
+        			<input name="hdlImg3" value="" type="hidden" id="hdlImg3"/>
+					<input name="file" id="uploadify3" contenteditable="false" size="30" type="file" />
+				#end
+				<span id="filespan3"></span>
+				<div id="fileQueue3"></div>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">其他图片：</div>
+    		<div class="input_right position_re">
+				#if("$!hotelBean.hdlImg4" != "")
+					<input name="file" id="uploadify4" contenteditable="false" size="30" type="file"/>
+					<input name="hdlImg4" value="$hotelBean.hdlImg4" type="hidden" id="hdlImg4"/>
+					<img class="img200" src="$staticFileRes$hotelBean.hdlImg4" /><a href="javascript:uploadDelete('uploadify4','filespan4','$hotelBean.hdlImg1','hdlImg4');">删除图片</a>
+				#else
+        			<input name="hdlImg4" value="" type="hidden" id="hdlImg4"/>
+					<input name="file" id="uploadify4" contenteditable="false" size="30" type="file" />
+				#end
+				<span id="filespan4"></span>
+				<div id="fileQueue4"></div>
+    		</div>
+    	</div>
+    	<!-- <div class="input_block clearfix">
+    		<div class="label_left">其他图片：</div>
+    		<div class="input_right position_re">
+				#if("$!hotelBean.hdlImg5" != "")
+					<input name="file" id="uploadify5" contenteditable="false" size="30" type="file"/>
+					<input name="hdlImg5" value="$hotelBean.hdlImg5" type="hidden" id="hdlImg5"/>
+					<img class="img200" src="$staticFileRes$hotelBean.hdlImg5" />
+					<a href="javascript:uploadDelete('uploadify5','filespan5','$hotelBean.hdlImg1');">删除图片</a>
+				#else
+        			<input name="hdlImg5" value="" type="hidden" id="hdlImg5"/>
+					<input name="file" id="uploadify5" contenteditable="false" size="30" type="file" />
+				#end
+				<span id="filespan5"></span>
+				<div id="fileQueue5"></div>
+    		</div>
+		</div> -->
+    	<div class="button_block clearfix button_block_w500">
+    		<button class="y_but ml30" id="btn" type="button" onclick="subform.ajaxCheck('form1', '$appRoot/hotel/detail/update');">提交</button>
+            <button class="y_but ml30" id="btn" type="button" onclick="subform.subload('form1', '$appRoot/hotel/detail/update', '$appRoot/hotel/detail/meetinsertPage?id=$!hotelBean.id')">会议室</button>
+            <button class="y_but ml30" id="btn" type="button" onclick="subform.subload('form1', '$appRoot/hotel/detail/update', '$appRoot/hotel/Cefeteria/updatePage?tdlId=$!hotelBean.id')">餐厅</button>
+            <button class="y_but ml30" id="btn" type="button" onclick="subform.subload('form1', '$appRoot/hotel/detail/update', '$appRoot/hotel/park/insertPage?hdlId=$!hotelBean.id')">停车场</button>
+			<button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+    	</div>
+	</form>
+</div>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

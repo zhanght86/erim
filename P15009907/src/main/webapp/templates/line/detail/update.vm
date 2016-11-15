@@ -1,0 +1,472 @@
+<!--修改线路-->
+<div class="newline">
+	<div class="newline_suptop">
+		<img src="static/images/htz2.png">
+	<span>修改专线</span>
+	<div class="g_line" style="clear: both;"></div>
+   </div>
+<div class="newline_ct">
+	<form method="post" id="form1">
+		<input type="hidden" name="id" value="$lineDetail.id"/>
+		<!--左边-->
+		<div class="newline_ctll">
+			<span style="width:111px;"><strong>线路信息</strong></span>
+           </div>
+		<div class="newline_ctll">
+			<span style="width:121px;">产品编号：</span>
+			<div class="newline_ctllr">
+				<input type="text"  value="$!lineDetail.ldlCode1"  name="ldlCode1" class="validate[maxSize[8],custom[onlyLetterNumber]]" style="width:200px;" >
+               </div>
+		</div>
+		<div class="newline_ctll">
+			<span style="width:121px;">线路名称：</span>
+			<div class="newline_ctllr">
+				<input type="text"value="$!lineDetail.ldlName" style="width:200px;"   name="ldlName" class="validate[required,maxSize[120]]" >
+				<span style="color:red;">*</span>
+               </div>
+		</div>
+			<div class="newline_ctll">
+				<span style="width:121px;">专线管理：</span>
+				<div class="newline_ctllr">
+					<label>
+						<input type="radio"  name="ldlNtype" value="01" #if($!lineDetail.ldlNtype == '01') checked #end>国内
+                    </label>
+					<label>
+						<input type="radio"  name="ldlNtype" value="02" #if($!lineDetail.ldlNtype == '02') checked #end>国际/港澳台
+				    </label>
+					<span style="color:red;margin-left:5px;">*</span>
+                </div>
+              </div>
+	          <div class="newline_ctll">
+				<span style="width:121px;">所属专线：</span>
+				<div class="newline_ctllr">
+    				 ##<input type="text"  placeholder="例如：湖南专线" class="validate[required,maxSize[30]]" value="$!lineDetail.ldlSpecialLine" style="width:165px;"   name="ldlSpecialLine"  >
+						#foreach($line in $myline)
+							<label>
+								<input #if($line==$!lineDetail.ldlSpecialLine) checked  #end type="radio" name="ldlSpecialLine" id="ldlSpecialLine" value="$line"/>$line
+							</label>
+						#end
+                    </div>
+			 <span style="width:10px;color:red;">*</span>
+		</div>
+		<div class="newline_ctll">
+               <span style="width:121px;">出发城市：</span>
+               <div class="localt_ctllra">
+                   <label>
+                       <input type="radio" id="gddInland01" name="ldlInternation" value="1" #if($!lineDetail.ldlInternation == '1') checked #end>国内
+				</label>
+                <label>
+                       <input type="radio" id="gddInland02" name="ldlInternation" value="2" #if($!lineDetail.ldlInternation == '2') checked #end>国际/港澳台
+				</label><span style="color:red;margin-left:5px;">*</span>
+               </div>
+           </div>
+           <div class="localt_ctlla" id="city_gn11">
+               <span style="width:121px;">出发地：</span>
+               <div class="localt_ctllraa">
+				#lockProvince('ldlProvince','ldlProvince','w80','',$!lineDetail.ldlProvince,'ldlCity','ldlCounty',$!lineDetail.ldlCity,$!lineDetail.ldlCounty)
+				<span>省</span>
+                   <select name='ldlCity' id='ldlCity' class='w80' onchange="lock.town($(this),'ldlCounty');"></select>
+				   <span>市</span>
+                   <select name='ldlCounty' id='ldlCounty' class='w80'></select>
+				   <span>区县</span>
+			</div>
+		</div>
+		<div class="localt_ctlla" id="city_gj12">
+			<span style="width:121px;">出发地：</span>
+               <div class="localt_ctllraa">
+				<label style="width:55px">
+                       <input type="radio" name="ldlCountylocation" value="01" #if($lineDetail.ldlCountylocation == '01') checked #end checked="checked">香港
+				</label>
+                <label style="width:55px">
+                    <input type="radio" name="ldlCountylocation" value="02" #if($lineDetail.ldlCountylocation == '02') checked #end > 澳门
+				</label>
+                <label style="width:55px">
+                    <input type="radio" name="ldlCountylocation" value="03" #if($lineDetail.ldlCountylocation == '03') checked #end >台湾
+				</label>
+				<label style="width:55px">
+                    <input type="radio" name="ldlCountylocation" value="04" #if($lineDetail.ldlCountylocation == '04') checked #end >国际
+				</label>
+					<span style="color:red;margin-left:10px;">*</span>
+                </div>
+				<div class="localt_ctllraa" id="county">
+					<span>国家</span>
+					<input type="text" name="ldlMajorcountries" value="$!lineDetail.ldlMajorcountries" class="validate[required,maxSize[15]] autoquerycountry" style="width:108px;">
+					<span>城市</span>
+					<input type="text" name="ldlDeparturecity" value="$!lineDetail.ldlDeparturecity" class="validate[required,maxSize[10]]" style="width:108px;">
+				</div>
+            </div>
+			<div class="newline_ctlla2" id="ticket">
+			<span class="line-height:60px;" style="width:121px;">主要景点/城市/国家：</span>
+			<div class="newline_ctllr4" style="float:left; width:auto; max-width:430px;" id="zyjd_add">
+        		#foreach($item in $atdlCharacteristi)
+        			#set($i=$math.sub($velocityCount,1))
+        			<div class="newline_ctllr2 #if($!{velocityCount}>1) #end">
+        				<input type="text" name="ldlAttraction" value="$item" class="validate[required,maxSize[30]]" style="width:165px;">
+                		#if($!{velocityCount}==1)
+        					<a href="javascript:void(0)" class="zyjd_add"style="float:right;" >+</a>
+                		#else
+        					<a href="javascript:void(0)" class="zyjd_add" style="float:right;" >-</a>
+        				#end
+        			</div>
+        		#end
+			</div>
+			<p class="pred" style="margin-left:0px;" >*</p>
+		</div>
+       	<div class="newline_ctlla2" id="Productine">
+               <span style="width:121px;">线路玩法：</span>
+        	<div class="newline_ctllr4" style="float:left;width:600px;" id="xl_divadd">
+        		<div class="newline_ctllr2">
+                       <input type="text" name="ldlProductine" value="$!lineDetail.ldlProductine" placeholder="例如：香港＋澳门＋台湾" class="validate[required,maxSize[50]]" style="width:206px;">
+                   </div>
+        		<p class="pred">*</p>
+               </div>
+           </div>
+		<div class="newline_ctll">
+               <span style="width:121px;">是否属于周边：</span>
+               <div class="localt_ctllra">
+                   <label id="szd03">
+                       <input type="radio"  name="ldlPerimeterIs" value="01" #if($!lineDetail.ldlPerimeterIs == '01') checked #end>否
+				</label>
+                <label id="szd04">
+                       <input type="radio"  name="ldlPerimeterIs" value="02" #if($!lineDetail.ldlPerimeterIs == '02') checked #end>是
+				</label><span style="color:red;margin-left:5px;">*</span>
+               </div>
+           </div>
+        <div class="newline_ctll">
+        	<span style="width:121px;" >同业标识：</span>
+        	<div class="newline_ctllr">
+				<span style="margin-left:-133px;color:red;margin-top:1px;">*<span style="color:#969696">&nbsp;&nbsp;此项为同行识别所提供，不在外网展示</span></span>
+				#foreach($item in $samesig.keySet())
+				<label style="width:300px;"> 
+        			<input type="radio" #if($erim.contains($!lineDetail.ldlSameSign,$item)) checked #end name="ldlSameSign" value="$item"> $samesig.get($item)
+         		</label><br clear="left">
+				 #end
+    		</div>
+        </div>
+       	<div class="newline_ctlla">
+        	<span style="line-height: 42px;width:121px;">客人构成：</span>
+        	<div class="newline_ctllra">
+				#foreach($item in $guest.keySet())
+				<label class="checkbox inline"> 
+					<input type="radio" #if($erim.contains($!lineDetail.ldlGuest,$item)) checked #end name="ldlGuest" value="$item"> $guest.get($item)
+               	</label>
+			    #end
+        	</div>
+        </div>
+        <div class="newline_ctlla">
+        	<span style="line-height: 42px;width:121px;">产品形态：</span>
+        	<div class="newline_ctllra">
+				#foreach($item in $product.keySet())
+                   <label class="checkbox inline"> 
+        			<input type="radio" #if($erim.contains($!lineDetail.ldlProductForm,$item)) checked #end name="ldlProductForm" value="$item"> $product.get($item)
+                   </label>
+				#end
+        	</div>
+        </div>
+		<div class="newline_ctlla">
+			<span style="line-height: 42px;width:121px;">产品标准：</span>
+    		<div class="newline_ctllra">
+			  #foreach($item in $standard.keySet())
+				<label class="checkbox inline"> 
+					<input type="radio" #if($erim.contains($!lineDetail.ldlProductStandard,$item)) checked #end name="ldlProductStandard" value="$item"> $standard.get($item)
+    	       	</label>
+			  #end
+    		</div>
+		</div>
+		<div class="newline_ctlla">
+    		<span style="line-height: 42px;width:121px;">大交通：</span>
+    		<div class="newline_ctllra">去程：
+				<select name="ldlBigTraffic" style="width:100px;height:30px;">
+				 #foreach($item in $vehicle.keySet())
+				 <option value="$item" #if($lineDetail.ldlBigTraffic == $item) selected #end>$vehicle.get($item)</option>
+				  #end
+				</select>
+				返程：
+				<select name="ldlBigTraffic1" style="width:100px;height:30px;">
+				 #foreach($item in $vehicle.keySet())
+				 <option value="$item" #if($lineDetail.ldlBigTraffic1 == $item) selected #end>$vehicle.get($item)</option>
+				  #end
+				</select>
+    		</div>
+    	</div>
+		<div class="newline_ctll">
+               <span style="line-height: 28px;width:121px;">是否属于学生活动：</span>
+               <div class="newline_ctllr" style="width:425px;">
+    			<label> 
+					<input type="radio" name="ldlYesno" id="NO" value="01" #if($lineDetail.ldlYesno == '01') checked #end />否
+    			</label>
+				<label> 
+					<input type="radio" name="ldlYesno" id="YES" value="02" #if($lineDetail.ldlYesno == '02') checked #end />是
+    			</label>
+               </div>
+           </div>
+		   <div class="newline_ctlla"  id="student"  >
+			<span style="line-height: 41px;width:121px;">学生活动：</span>
+               <div class="newline_ctllra" style="width:539px;" id="student" >
+				#foreach($item in $game.keySet())
+            		<label class="w90"> 
+						<input type="checkbox"  #if($erim.contains($!lineDetail.ldlGame,$item)) checked #end name="ldlGame" value="$item"> $game.get($item)
+            		</label>
+				#end
+				#foreach($item in $ldladdgame)
+						#set($i=$math.sub($velocityCount,1))
+						 <div class="newline_ctllr2 student1  #if($!{velocityCount}>1) #end"  style="text-align:right;margin-top:1px;" id="student1">
+                               <input type="text" name="ldlAddgame"  class="validate[maxSize[10]]" value="$item" style="width:108px;">
+								#if($!{velocityCount}==1)
+        					  <a href="javascript:void(0)" class="a_button"style="float:right;" >+</a>
+        					#else
+        						<a href="javascript:void(0)" class="a_button"style="float:right;" >-</a>
+        						#end
+        				  </div>
+						  #end
+                        </div>
+        			 </div>
+    		   <div class="newline_ctlla" id="ldlprotype">
+    			<span style="line-height: 42px;width:121px;">产品主题：</span>
+    			<div class="newline_ctllra">
+    				#foreach($item in $theme.keySet())
+    				<label class="checkbox inline"> 
+    					<input type="checkbox"   #if($erim.contains($!lineDetail.ldlProType1,$item)) checked #end name="ldlProType1" value="$item"> $theme.get($item)
+                 	</label>
+    				#end 
+    				<label style="width:70px"> 其他主题：</label>
+    				#foreach($item in $ldlProType2)
+    					#set($i=$math.sub($velocityCount,1))
+    					<div class="newline_ctllr2 #if($!{velocityCount}>1) #end" style="text-align:right;margin-top:1px;">
+                           <input type="text" name="ldlProType2" value="$item" class="validate[maxSize[10]]" style="width:108px;">
+    					#if($!{velocityCount}==1)
+    						<a href="javascript:void(0)" class="a_button"style="float:right;" >+</a>
+    					#else
+    						<a href="javascript:void(0)" class="a_button"style="float:right;" >-</a>
+    					#end
+                       	</div>
+    					#end
+    			</div>
+    		</div>
+		<div class="newline_ctlla2" style="margin-left:24px;">
+			<span style="width:131px;">专线推广图：</span>
+    		<div class="newline_ctllr3" style="padding-top:20px;" cid="line_shell" style="height:auto;">
+				#vfile('ldlPicture','ldlPicture',$!lineDetail.ldlPicture)
+			</div>
+           </div>
+			## 	行程管理入口   ---------------------------------------------------------------------------------------
+			
+			#if($shiro.hasPermission("LINE_DETIAL_TRIP_SHOW"))
+    			<div class="djj_ctl">
+                   <div class="djj_ctlrq" style="width:500px;float:left;margin-bottom:50px;margin-left:50px;">
+    				<button type="button" class="djj_sub carinfo_sub" onclick="insertXc();">行程管理</button>
+                   </div>
+               </div>
+			#end
+			## 		行程管理入口    ---------------------------------------------------------------------------------------
+			<!--<div class="newline_ctll">
+				<span>集合地点:</span>
+				<div class="newline_ctllr">
+					<input type="text" name="ldlSet" value="$!lineDetail.ldlSet" class="validate[required,maxSize[50]]" style="width:200px;">
+					<span style="color:red;">*</span>
+                  </div>
+				</div>
+				<div class="newline_ctll">
+				<span>集合时间:</span>
+				<div class="newline_ctllr">
+					<input type="text" name="ldlStarttime1" class="validate[required]" value="$!lineDetail.ldlStarttime1" style="width:200px;">
+					<span style="color:red;">*</span>
+                  </div>
+				</div>
+				<div class="newline_ctll">
+				<span>集合标志:</span>
+				<div class="newline_ctllr">
+					<input type="text" name="ldlMark" value="$!lineDetail.ldlMark" style="width:200px;">
+                  </div>
+				</div>-->
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">费用包含：</span>
+			<div class="newline_ctllra">
+					<textarea  placeholder="内容在1000字之内" type=""  name="ldlMoneyContain" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlMoneyContain</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">费用不含：</span>
+			<div class="newline_ctllra">
+				  <textarea  placeholder="内容在1000字之内" type=""  name="ldlMoneyContainOff" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlMoneyContainOff</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">推荐自费：</span>
+			<div class="newline_ctllra">
+				<textarea  placeholder="内容在1000字之内" type=""  name="ldlExpense" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlExpense</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">预定限制：</span>
+			<div class="newline_ctllra">
+				<textarea  placeholder="内容在1000字之内" type="text"  name="ldlScheduleLimit" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlScheduleLimit</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">出行须知：</span>
+			<div class="newline_ctllra">
+				 <textarea  placeholder="内容在2000字之内" type=""  name="ldlScheduleTravel" class="input-xlarge validate[maxSize[4000]] ">$!lineDetail.ldlScheduleTravel</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">旅行社违约：</span>
+			<div class="newline_ctllra">
+				 <textarea placeholder="旅行社违约内容在1000字之内" type=""  name="ldlScheduleBreak" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlScheduleBreak</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">消费者违约：</span>
+			<div class="newline_ctllra">
+				<textarea  placeholder="消费者违约内容在1000字之内" type=""  name="ldlScheduleBreak1" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlScheduleBreak1</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+			<span style="line-height: 79px;width:121px;">补充说明：</span>
+			<div class="newline_ctllra">
+				<textarea  placeholder="内容在1000字之内" type=""  name="ldlNotes" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlNotes</textarea>
+			</div>
+		</div>
+		<div class="newline_ctlla">
+    	      <span style="line-height: 79px;width:121px;">特别提醒：</span>
+    	         <div class="newline_ctllra">
+    		        <textarea  placeholder="内容在1000字之内" type=""  name="ldlRemind" class="input-xlarge validate[maxSize[2000]] ">$!lineDetail.ldlRemind</textarea>
+                </div>
+    	   </div>
+		<div class="carinfo_ctbl">
+			<span></span>
+			<div class="carinfo_ctblrbtn mb50" style="width:360px;">
+				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/line/detail/update','$appRoot/line/detail/list');">提交</button>
+				<button type="button" class="carinfo_qu"   onclick="page.url=index.pageurl; index.load(page.backurl);">返回</button>
+			</div>
+		</div>
+    </form>
+</div>
+</div>
+<script>
+	//跳转行程页面
+    var tdlId = $("input[name='id']").val();
+	function insertXc() {
+    	var data = "form1";
+    	$('#'+data).validationEngine({   
+            scroll       			: true,
+            showOneMessage			: true,
+            focusFirstField			: true   
+		});
+    	//如果验证通过则提交
+    	if($('#'+data).validationEngine('validate')) {
+    		$.post('$appRoot/line/detail/update', $("#"+data).serialize(),
+    			function(response) {
+    				if (response == '0') {
+    					window.wxc.xcConfirm("服务器繁忙，请稍后！", window.wxc.xcConfirm.typeEnum.error);
+    				} else {
+    					setTimeout(function() {
+    						index.load('$appRoot/line/trip/showTrip?tdlId='+tdlId);
+    					}, 1000);
+    				}
+    			}, 
+    		"json");
+    	}
+    }
+//获取是否属于学生活动的值
+	var b = $("input[name='ldlYesno']:checked").val();
+	if(b == '02'){
+		$('#student').show();
+		$('#ldlprotype').hide();
+		
+	}else if(b == '01'){
+		$('#student').hide();
+		$('#ldlprotype').show();
+		
+	}else{
+		$('#student').hide();
+		$('#ldlprotype').hide();
+	}
+	
+		//点击是否
+	$('#YES').click(function(){
+		$('#student').show();
+		$('#ldlprotype').hide();
+	});
+	$('#NO').click(function(){
+		$('#student').hide();
+		$('#ldlprotype').show();
+	});
+	
+	// 当点击产品分类时触发
+	$("input[name='ldlInternation']").change(function() {
+		var a = $("input[name='ldlInternation']:checked").val();
+		if (a == '1') {
+			$('#city_gn11').show();
+    	  	$('#city_gj12').hide();
+    		$('#county').hide();
+		} else if (a == '2') {
+			$('#city_gj12').show();
+    		$('#city_gn11').hide();
+    		$('#county').hide();
+			$("input[name='ldlCountylocation'][value='01']").attr("checked",true);
+		}
+	});
+	
+	//点击港澳台国际时主要国家和出发城市隐藏于展示
+	$("input[name='ldlCountylocation']").change(function() {
+		var a = $("input[name='ldlCountylocation']:checked").val();
+		if (a == '04') {
+			$('#county').show();
+		}else{
+			$('#county').hide();
+		}
+	});
+	
+	//是否属于周边 如果为国际则默认否
+	$("input[name='ldlInternation']").change(function() {
+		var a = $("input[name='ldlInternation']:checked").val();
+		if (a == '2') {
+			$('#szd04').hide();
+			$("input[name='ldlPerimeterIs'][value='01']").prop("checked",true);
+		}else{
+		  $('#szd04').show();
+		}
+	});
+	// 默认隐藏国外类的组件
+	var b = $!lineDetail.ldlInternation; //获取国内国际得值
+	//如果为国内时
+	if (b == '1') {
+    	var provice = $lineDetail.ldlProvince; // 省
+		
+    	$('#city_gn11').show(); //国内展示
+		$('#city_gj12').hide(); //国际隐藏
+		$('#county').hide();//主要国家隐藏
+	} 
+	//如果为国际港澳台时
+	else if (b == '2') {
+		var a = $lineDetail.ldlCountylocation; //获取香港、澳门、台湾和国际的值
+		$('#city_gj12').show();//国际显示
+    	$('#city_gn11').hide();//国内隐藏
+		//如果为国际时
+		if(a == '04') {
+			$('#county').show();//主要国家显示
+		}else{
+			$('#county').hide();//主要国家隐藏
+		 }
+	}
+	
+	// 默认隐藏国外类的组件
+	var b = $!lineDetail.ldlInternation; //
+	//如果为国内时
+	if (b == '2') {
+    	$('#szd04').hide();
+		$("input[name='ldlPerimeterIs'][value='01']").prop("checked",true);
+	} 
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+  var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+});
+
+$("div[cid='line_shell']").children("img").css("width","120px").css("heigth","100px");
+</script>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

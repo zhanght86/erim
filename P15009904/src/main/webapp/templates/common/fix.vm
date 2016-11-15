@@ -1,0 +1,16 @@
+	<!--修改金额-->
+	<div class="fix">
+		<div class="fixtop">修改金额</div>
+		<div class="fixcter">
+			<div class="fixctera">
+				<span>当前金额</span><input type="text"> <span>修改金额</span><input
+					type="text">
+			</div>
+			<div class="fixcterb">
+				<button type="submit" class="queren"></button>
+				<button type="submit" class="quxiao"></button>
+			</div>
+		</div>
+	</div>
+	<div class="fix_mask"></div>
+	<!--/修改金额-->

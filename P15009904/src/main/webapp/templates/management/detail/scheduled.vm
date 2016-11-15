@@ -1,0 +1,32 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/management/management.css">
+<div class="rdivv">
+	<!-- 签证管理预定方式 -->
+	<div class="visaadmin">
+		<div class="visaadmin_suptop">
+			<img src="$staticRoot/images/htv.png">
+			<span>预定方式</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<form method="post" id="form1" style="width:400px;">
+			<input type="hidden" value="$managementDetail.id" name="id"/>
+    		<div class="visaa_line">
+    			<span>预定方式：</span>
+    			<div class="visaa_liner">
+    				#foreach($item in $scheduled.keySet())
+    					<label class="w90"> 
+							<input class="input-xlarge" class="validate[minCheckbox[1]] checkbox" name="mdlScheduled" value="$item" type="checkbox" #if($erim.contains($!managementDetail.mdlScheduled,$item)) checked #end>$scheduled.get($item)
+    	               	</label>
+                    #end
+					<span style=" color:red;width:10px;float: left; margin-top:2px;">*</span>
+				</div>
+    		</div>
+			<div class="carinfo_ctbl" style="margin-left:-55px;">
+        		<div class="carinfo_ctblrbtn pb80" style="width:243">
+        			<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/management/detail/scheduled','$appRoot/management/detail/list');">提交</button>
+        			<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+        		</div>
+			</div>
+  		</form>
+ 	</div>
+</div>

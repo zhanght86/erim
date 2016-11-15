@@ -1,0 +1,42 @@
+<div class="rdivv">
+	<div class="tese">
+		<div class="tesetop4">			
+		</div>
+		<div class="tesetop2">
+			<form class="form-search" method="post" id="form1">
+				<div class="teseline">
+    				<span>名称：</span>
+    				<input type="text"  name="sellUserRealname"/>
+    			</div>
+    			<button type="button" onclick="index.searchform('form1','$appRoot/sell/user/list');"></button>
+            </form>
+		</div>
+		<div class="tesetop3"></div>
+
+		<div class="tesect">
+			<div class="tesetable">
+				<table border="0" cellspadding="0" cellspacing="0">
+					<thead>
+						<tr>
+    						<th>企业名称</th>
+    						<th>公司品牌</th>
+							<th>公司地址</th>
+							<th>联系电话</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($item in $userList)
+        	                  <tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+        			            <td>$!item.cpyName</td>
+        			            <td>$!item.cpyBrand</td>
+								<td>$!item.cpyAddress</td>
+								<td>$!item.cpyTelephone</td>
+        	                  </tr>
+        	              #end
+					</tbody>
+				</table>
+				#parse("common/page.vm")
+			</div>
+		</div>
+	</div>
+</div>

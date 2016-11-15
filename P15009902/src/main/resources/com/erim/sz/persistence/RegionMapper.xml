@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="region">
+
+    <!-- 查询所有数据，用于生成前端页面菜单 -->
+    <select id="selectAll" resultType="regionBean">
+        SELECT
+			region_id        AS regionId,
+            region_no        AS regionNo,
+            region_pid       AS regionPid,
+            region_level     AS regionLevel,
+			region_name      AS regionName,
+            region_spell     AS regionSpell,
+            region_remark    AS regionRemark
+        FROM
+            tm_system_region
+        ORDER BY
+            region_pid,region_no
+    </select>
+    
+    <!-- 查询本页数据，用于显示当前页 -->
+    <select id="selectPage" parameterType="hashMap" resultType="regionBean">
+        SELECT
+            region_id        AS regionId,
+            region_no        AS regionNo,
+            region_pid       AS regionPid,
+            region_level     AS regionLevel,
+            region_name      AS regionName,
+            region_spell     AS regionSpell,
+            region_remark    AS regionRemark
+        FROM
+            tm_system_region AS b
+        <where>
+            <if test="regionId != null">and b.region_id = #{regionId}</if>
+            <if test="regionPids != null">
+                and b.region_pid in
+                <foreach collection="regionPids" item="item" open="(" separator="," close=")">
+                    ${item}
+                </foreach>
+            </if>
+            <if test="regionName != null">and b.region_name like "%"#{regionName}"%"</if>
+            <if test="regionNo != null">and b.region_no like "%"#{regionNo}"%"</if>
+            <if test="regionLevel != null">and b.region_level = #{regionLevel}</if>
+        </where>
+        <if test="qrysort != null">order by ${qrysort} ${qrymode}</if>
+    </select>
+
+    <!-- 查询总数，用于页面分页 -->
+    <select id="selectCount" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_region AS b
+        <where>
+            <if test="regionId != null">and b.region_id = #{regionId}</if>
+            <if test="regionPids != null">
+                and b.region_pid in
+                <foreach collection="regionPids" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="regionName != null">and b.region_name like "%"#{regionName}"%"</if>
+            <if test="regionNo != null">and b.region_no like "%"#{regionNo}"%"</if>
+            <if test="regionLevel != null">and b.region_level = #{regionLevel}</if>
+        </where>
+    </select>
+
+    <!-- 增加 -->
+    <insert id="insert" parameterType="hashMap">
+        INSERT INTO 
+            tm_system_region(region_id,region_no,region_pid,region_level,region_name,region_spell,region_remark)
+        VALUES
+            (#{regionId},#{regionNo},#{regionPid},#{regionLevel},#{regionName},#{regionSpell},#{regionRemark})
+    </insert>
+    
+    <!-- 修改 -->
+    <update id="update" parameterType="hashMap">
+        UPDATE 
+            tm_system_region
+        SET
+            region_id = #{regionId},
+            region_no = #{regionNo},
+            region_pid = #{regionPid},
+            region_level = #{regionLevel},
+            region_name = #{regionName},
+            region_spell = #{regionSpell},
+            region_remark = #{regionRemark}
+        WHERE
+            region_id = #{dataitems[0].regionId}
+    </update>
+    
+    <!-- 修改 -->
+    <update id="updateRegionPid" parameterType="hashMap">
+        UPDATE 
+            tm_system_region
+        SET
+            region_pid = #{regionId}
+        WHERE
+            region_pid = #{dataitems[0].regionId}
+    </update>
+
+    <!-- 批量删除 -->
+    <delete id="delete" parameterType="hashMap">
+        DELETE FROM
+            tm_system_region
+        WHERE
+            region_id 
+        IN
+            <foreach collection="dataitems" item="item"  open="(" separator="," close=")">  
+                #{item.regionId}
+            </foreach>
+    </delete>
+   
+    <!-- 验证“地区名称”是否重复 -->
+    <select id="verifyRegionName" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_region
+        <where>
+            region_name = #{regionName}
+            <if test="regionPid != null">and region_pid = #{regionPid}</if>
+            <if test="regionPid == null">and region_pid IS NULL</if>
+        </where>
+    </select>
+    
+    <!-- 验证“地区ID”是否重复 -->
+    <select id="verifyRegionId" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_region
+        WHERE
+            region_id = #{regionId}
+    </select>
+    
+    <!-- 验证“地区NO”是否重复 -->
+    <select id="verifyRegionNo" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_region
+        WHERE
+            region_no = #{regionNo}
+    </select>
+   
+    <!-- 查询子类别总数，用于删除验证 -->
+    <select id="selectCountByPid" parameterType="String" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_region
+        WHERE
+            region_pid = #{regionPid}
+    </select>
+	
+</mapper>

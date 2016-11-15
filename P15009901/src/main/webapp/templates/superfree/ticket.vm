@@ -1,0 +1,102 @@
+<div class="cjzyxmenpiao">
+	<div class="cjzyxmenpiaotop">
+		<img src="$staticRoot/images/chaoji6.jpg"> <a
+			href="$appRoot/$cpyno/menpiao.html"><span>景点门票</span></a>
+		<div class="cjzyx_menpiaotopcontent">
+			<ul>
+					<li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','北京');$('#form_ticket').submit();">北京</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','张家界');$('#form_ticket').submit();">张家界</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','昆明');$('#form_ticket').submit();">昆明</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','大连');$('#form_ticket').submit();">大连</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','西安');$('#form_ticket').submit();">西安</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','扬州');$('#form_ticket').submit();">扬州</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','杭州');$('#form_ticket').submit();">杭州</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','广州');$('#form_ticket').submit();">广州</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','上海');$('#form_ticket').submit();">上海</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','成都');$('#form_ticket').submit();">成都</a></li>
+					<li><a href="javascript:void(0)" onclick="$('#tdlCityVo2').attr('value','');$('#form_ticket').submit();">更多</a></li>
+			</ul>
+			<form id="form_ticket" method="post" action="$appRoot/$cpyno/menpiao.html">
+				<input type="hidden" name="tdlCityVo" id="tdlCityVo2"/>
+			</form>	
+		</div>
+	</div>
+	<div class="cjzyxmenpiaocontent">
+		<div class="cjzyxmenpiaoctcenter">
+			<div class="cjzyxmenpiaoctctleft">
+				<div class="cjzyxmenpiaoctctlefta">
+					#foreach($item in $attractions.keySet())
+						#if($velocityCount == 1)
+							<a href="$appRoot/$cpyno/ticket/menpiao?tdlAttractions=$item">
+        						<div class="cjzyxmenpiaoctctleftaa">
+        							<span>$attractions.get($item)</span>
+        						</div>
+        					</a>
+						#end
+						#if($velocityCount == 2)
+							<a href="$appRoot/$cpyno/ticket/menpiao?tdlAttractions=$item">
+        						<div class="cjzyxmenpiaoctctleftab">
+        							<div class="cjzyxmenpiaoctctleftaba">
+        								<span>$attractions.get($item)</span>
+        							</div>
+        						</div>
+        					</a>
+						#end
+						#if($velocityCount == 3)
+							<a href="$appRoot/$cpyno/ticket/menpiao?tdlAttractions=$item">
+        						<div class="cjzyxmenpiaoctctleftac">
+        							<div class="cjzyxmenpiaoctctleftaca">
+        								<span>$attractions.get($item)</span>
+        							</div>
+        						</div>
+        					</a>
+						#end
+    				#end 
+				</div>
+				<div class="cjzyxmenpiaoctctleftb">
+					#foreach($item in $attractions.keySet())
+						#if($velocityCount == 4)
+							<a href="$appRoot/$cpyno/ticket/menpiao?tdlAttractions=$item">
+        						<div class="cjzyxmenpiaoctctleftba">
+        							<span>$attractions.get($item)</span>
+        						</div>
+        					</a>
+						#end
+						#if($velocityCount == 5)
+							<a href="$appRoot/$cpyno/ticket/menpiao?tdlAttractions=$item">
+        						<div class="cjzyxmenpiaoctctleftbb">
+        							<div class="cjzyxmenpiaoctctleftbba">
+        								<span>$attractions.get($item)</span>
+        							</div>
+        						</div>
+        					</a>
+						#end
+    				#end 
+					<a href="$appRoot/$cpyno/ticket/menpiao">
+						<div class="cjzyxmenpiaoctctleftbc"></div>
+					</a>
+				</div>
+			</div>
+			<div class="cjzyxmenpiaoctctright">
+				
+				#foreach($item in $ticketList)
+					<div class="cjzy_menpiaorightbox">
+    					<div class="cjzympctctrbox">
+                            <a href="$appRoot/$cpyno/ticket/menpiaoxiang/$item.id" target="_blank" alt="" title=""> 
+								#if($!item.tdlImg1 != '')
+									<img src="$staticFileRes$item.tdlImg1" title="" alt="">
+								#else
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								#end
+    							<div class="cjzympctctrboxfont">
+    								<span class="cjzympctctrbfa">$erim.subString($item.tdlName,12)</span> 
+									<span class="cjzympctctrbfb"><label>￥$!item.tplRetailPrice</label></span>
+    							</div>
+    						</a>
+    					</div>
+    				</div>
+				#end
+			</div>
+		</div>
+	</div>
+</div>

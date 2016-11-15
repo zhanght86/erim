@@ -1,0 +1,33 @@
+
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+
+<!-- 保存书签图标 -->
+<link rel="apple-touch-icon" href="$staticRoot/img/tubiao.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="$staticRoot/img/tubiao.png" /> 
+<link rel="apple-touch-icon" sizes="114x114" href="$staticRoot/img/tubiao.png" /> 
+<link rel="apple-touch-icon" sizes="144x144" href="$staticRoot/img/tubiao.png" /> 
+
+<!--自定义样式-->
+<link href="$staticRoot/css/global.css" rel="stylesheet" type="text/css"/>
+<link href="$staticRoot/css/tanchu.css" rel="stylesheet" type="text/css"/>
+
+<!--jquery-->
+<script type="text/javascript" src="$staticRoot/js/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="$staticRoot/js/ajaxfileupload.js"></script>
+
+<!--设定工程名-->
+<script>var _appRoot    = "$appRoot";</script>
+<script>var _staticRoot = "$staticRoot";</script>
+
+<!--验证框架js-->
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/jqueryValidation-2.6.2/css/validationEngine.jquery.css"/>
+<script type="text/javascript" src="$staticRoot/js/jqueryValidation-2.6.2/js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="$staticRoot/js/jqueryValidation-2.6.2/js/jquery.validationEngine.min.js"></script>
+<script type="text/javascript" src="$staticRoot/js/jqueryValidation-2.6.2/js/jquery.validationEngine-zh_CN.js"></script>
+
+<!-- 上传框架 -->
+<link rel="stylesheet" type="text/css" href="$staticFilePlug/uploadify/uploadify.css"/>
+<script type="text/javascript" src="$staticFilePlug/uploadify/jquery.uploadify.js"></script>
+
+<!--自定义js-->
+<script type="text/javascript" src="$staticRoot/js/guide/guide.js"></script>

@@ -1,0 +1,133 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<script type="text/javascript">
+	//上传图片
+	uploadify('uploadify','hmgImg','filespan','fileQueue');
+	#if("$!meeting.hmgImg" != "")
+		$("#uploadify").hide();
+	#end
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jd_03.png" alt="添加会议室" title="添加会议室">添加$!hotelBean.hdlName会议室</p>
+	<div class="g_line"></div>
+	<div class="cb"></div>
+	<div class="carad_ctrtable carfixed_ctrtable ml52" style="width:480px;">
+		<span>添加会议室:</span>
+		<div class="cb"></div>
+		<div class="bg_block">
+			<form method="post" id="form1">
+                <input type="hidden" name="id" value="$!meeting.id"></input>
+                <input type="hidden" name="hdlId" value="$!meeting.hdlId"></input>
+    			<div class="cb"></div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">会议室名称：</div>
+    				<div class="input_right">
+    					<input type="text" class="w200 validate[required,maxSize[20]]" name="hmgName" value="$!meeting.hmgName" /><span class="mess_star_red">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">会议室面积：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w150">
+                            <input type="text" class="w100  validate[required,custom[number],max[100000],min[1]]]" name="hmgArea" value="$!meeting.hmgArea">平方米</input>
+    					</span><span class="mess_star_red">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">可容纳人数：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w90">
+    						<input type="text" class="w65  validate[required,custom[number],max[100000],min[1]]]" name="hmgPersonnum" value="$!meeting.hmgPersonnum" />人
+    					</span> 至 
+    					<span class="tishi_box w90">
+                            <input type="text" class="w65  validate[required,custom[number],max[100000],min[1]]]" name="hmgPersonNumEnd" value="$!meeting.hmgPersonNumEnd" />人</input>
+    					</span><span class="mess_star_red">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">会议室设施：</div>
+    				<div class="input_right" style="width:335px;">
+    					#foreach($item in $sheshi.keySet())
+            				<label class="w80" > 
+            					<input type="checkbox" name="hmgIsTea" value="$item" #if($erim.contains($!meeting.hmgIsTea,$item)) checked #end> $sheshi.get($item)
+            				</label>
+						#end
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">摆放形式：</div>
+    				<div class="input_right"style="width:335px;">
+    					#foreach($item in $shape.keySet())
+            				<label class="w80" > 
+            					<input type="checkbox" name="hmgShape" value="$item" #if($erim.contains($!meeting.hmgShape,$item)) checked #end> $shape.get($item)
+            				</label>
+						#end
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">最近装修时间：</div>
+    				<div class="input_right">
+						<input type="text"  name="hmgRenovationDate" class="validate[custom[date],past[NOW]]" value="$!meeting.hmgRenovationDate"  onClick="WdatePicker({maxDate:'%y-%M-%d'})"  />
+    				</div>
+    			</div>
+				<div class="input_block clearfix" style="margin-bottom:10px;">
+            		<span style="margin-left:38px;color:red;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该会议室将会下线</span>
+            	</div>
+				<div class="input_block clearfix">
+    				<div class="label_left">场景预览图：</div>
+    				<div class="input_right">
+					#if("$!meeting.hmgImg" != "")
+        				<input name="hmgImg" value="$meeting.hmgImg" type="hidden" id="hmgImg"/>
+                    	<input name="file" id="uploadify" contenteditable="false" size="30" type="file" />
+        				<img class="img200" src="$staticFileRes$meeting.hmgImg" /><a href="javascript:uploadDelete('uploadify','filespan','$meeting.hmgImg','hmgImg');">删除图片</a>
+    				#else
+    					<input name="hmgImg" value="" type="hidden" id="hmgImg"/>
+    					<input name="file" id="uploadify" contenteditable="false" size="30" type="file" />
+    				#end
+        				<span id="filespan"></span>
+        				<div id="fileQueue"></div>
+    				</div>
+				</div> 
+    			<div class="carinfo_ctbl" style="display:block;width:500px;float:none">
+        			<div class="carinfo_ctblrbtn" style="width:360px; margin-left:48px;clear:both">
+        				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/hotel/meeting/update', '$appRoot/hotel/detail/meetinsertPage?id=$meeting.hdlId');">&nbsp;提交&nbsp;</button>
+        				<button class="carinfo_qu" type="button" onclick="index.load('$appRoot/hotel/detail/updatePage?id=$meeting.hdlId');">返回</button>
+					</div>
+    			</div>
+			</form>
+		</div>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml52" style="width:550px;margin-left:70px;">
+    	<span>会议室列表:</span>
+    	<table cellspacing="0" cellspadding="0" class="mb20" style="margin-left:0;">
+    		<thead>
+    			<tr>
+    				<td>会议室名称</td>
+    				<td>会议室面积</td>
+    				<td>可容纳人数</td>
+    				<td>摆放形式</td>
+    				<td>会议室管理</td>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			#foreach($item in $meetingList)
+    			<tr>
+    				<td>$!item.hmgName</td>
+    				<td>$!item.hmgArea</td>
+    				<td>$!item.personNum</td>
+    				<td>$!item.hmgShape</td>
+    				<td class="carad_a">
+    					<a href="javascript:index.load('$appRoot/hotel/meeting/updatePage?id=$!item.id&hdlId=$!item.hdlId');">查看/修改</a>
+    				<!--	<a href="javascript:index.delload('$appRoot/hotel/meeting/delete?id=$!item.id', '$appRoot/hotel/detail/meetinsertPage?id=$!item.hdlId');">删除</a> -->
+    				</td>
+    			</tr>
+    			#end
+    		</tbody>
+    	</table>
+    	<div class="button_block clearfix button_block_w500 ml50">
+    		<!--  <button class="y_but ml35" type='button' onclick="index.load('$appRoot/hotel/detail/cafeteriaPage');">下一步</button> 
+    		<button class="b_but" type="button" onclick="index.load('$appRoot/hotel/detail/updatePage?id=$meeting.hdlId');">上一步</button> -->
+    	</div>
+    </div>
+	<div class="cb"></div>
+
+	</div>

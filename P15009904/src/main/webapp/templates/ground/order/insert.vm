@@ -1,0 +1,112 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/yuding.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ground/ground.css">
+	<!--新增套餐-->
+	<div class="newadd">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/dd_ci_03.png">
+			<span>新增套餐</span>
+		</div>
+		<div class="g_line"></div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>联系人信息：</strong></span>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">姓名：</span>
+			<input type="text" class="yuding_input">
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">手机号码：</span>
+			<input type="text" class="yuding_input">
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>订单信息：</strong></span>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">产品类型：</span>
+			<input type="text" class="yuding_input">
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">出发日期：</span>
+			<input type="text" class="yuding_date">
+			<img src="$staticRoot/images/date_01.png" class="yuding_date_img">
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">返程日期：</span>
+			<input type="text" class="yuding_date">
+			<img src="$staticRoot/images/date_01.png" class="yuding_date_img">
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">人数：</span>
+			<input type="text" class="yuding_num">
+			<span class="yuding-spanl">成人</span>
+			<input type="text" class="yuding_num">
+			<span class="yuding-spanl">儿童</span>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">出发城市：</span>
+			<input type="text" class="yuding_input">
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">险种选项：</span>
+			<select class="yuding_date">
+				<option></option>
+			</select>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span">期限：</span>
+			<select class="yuding_date">
+				<option></option>
+			</select>
+			<span class="yuding-spanl">金额：</span>
+			<select class="yuding_date">
+				<option></option>
+			</select>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>游客信息：</strong></span>
+		</div>
+		<div class="yuding_bigerbox">
+			<div class="yuding_bigbox">
+				<div class="yuding_box">
+					<span class="yuding_span mt20">游客类型：</span>
+					<label class="yuding_lab mt20"><input type="radio" class="yuding_radio">成人</label>
+					<label class="yuding_lab mt20"><input type="radio" class="yuding_radio">儿童</label>
+					<br clear="left">
+					<span class="yuding_span mt20">证件类型：</span>
+					<input type="text" class="yuding_input mt20">
+					<br clear="left">
+					<span class="yuding_span mt20">证件号码：</span>
+					<input type="text" class="yuding_input mt20">
+					<br clear="left">
+					<span class="yuding_span mt20">手机号码：</span>
+					<input type="text" class="yuding_input mt20">
+				</div>
+				<a href="javascript:void(0)" class="btn_add">添加游客</a>
+			</div>
+		</div>
+		<div class="yuding_line mb50">
+			<button class="btn_add btn_fanhui">返回</button>
+			<button class="btn_add btn_sub">提交订单</button>
+		</div>
+
+
+
+
+	</div>
+	<!--/新增套餐-->
+	
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".yuding_bigbox a").live("click",function(){
+		if($(this).text()=="添加游客"){
+			$(this).text('删除游客').css("background-color","#ccc");
+			$(this).parent().after('<div class="yuding_bigbox"><div class="yuding_box"> <span class="yuding_span mt20">游客类型：</span> <label class="yuding_lab mt20"><input type="radio" class="yuding_radio">成人</label> <label class="yuding_lab mt20"><input type="radio" class="yuding_radio">儿童</label> <br clear="left"> <span class="yuding_span mt20">证件类型：</span> <input type="text" class="yuding_input mt20"> <br clear="left"> <span class="yuding_span mt20">证件号码：</span> <input type="text" class="yuding_input mt20"> <br clear="left"> <span class="yuding_span mt20">手机号码：</span> <input type="text" class="yuding_input mt20"> </div> <a href="javascript:void(0)" class="btn_add">添加游客</a></div>');
+		}else{
+			$(this).parent().remove();
+		}
+	});
+});
+
+
+</script>
+

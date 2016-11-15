@@ -1,0 +1,7 @@
+<head>
+    <title>$title</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/dingdan.css">
+    <script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+    <script type="text/javascript" src="$staticRoot/js/h5.js"></script>
+</head>

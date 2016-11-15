@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sellsystemrole">
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		sell_system_role
+		(
+			sell_role_name,
+			cpy_id
+		)
+		VALUES
+		(
+			#{sellRoleName},
+			#{cpyId}
+		)
+	</insert>
+	<!-- 根据id查询角色 -->
+	<select id="selectBeanById" resultType="sellSystemRoleBean">
+		SELECT
+			id 			    AS id,
+			sell_role_name  AS sellRoleName,
+			cpy_id          AS cpyId
+		FROM
+			sell_system_role
+		WHERE
+			id = #{id}
+	</select>
+	<!--修改 -->
+	<update id="update">
+		UPDATE
+			sell_system_role
+		SET
+			sell_role_name = #{sellRoleName}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<sql id="sql_column">
+		<where>
+			1=1
+			<if test="cpyId != null and cpyId != '' "> and cpy_id = #{cpyId} </if>
+		</where>
+	</sql>
+	
+	<!-- 分页查询 -->
+	<select id="selectPage" resultType="sellSystemUserBean">
+		
+		SELECT
+			id 			    AS id,
+			sell_role_name  AS sellRoleName,
+			cpy_id          AS cpyId
+		FROM
+			sell_system_role
+		<include refid="sql_column" />
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			sell_system_role
+		<include refid="sql_column" />
+	</select>
+	
+	<select id="selectSellSystemRoleByCpyId" resultType="sellSystemUserBean">
+		SELECT
+			id 			    AS id,
+			sell_role_name  AS sellRoleName,
+			cpy_id          AS cpyId
+		FROM
+			sell_system_role
+		WHERE
+			cpy_id = #{cpyId}
+	</select>
+</mapper>

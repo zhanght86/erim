@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+    #set($title='全部订单')
+    #parse("member/common/head.vm")
+    <body>
+        <div class="indexwrap">
+            #parse("common/head.vm")
+
+            <!--dwp html start-->
+            <div class="box_cb mb20"></div>
+            <div class="g_cont">
+                #parse("member/common/left.vm")
+				
+                <div class="g_fl_lt">
+                    <div class="g_u_block pb20 mb20">
+
+                        <div class="jd_table">
+                            <div class="head_top">
+                                <span class="w380">订单信息</span><span> <span class="select_box"> <span class="select_main"><span class="select_txt">产品类型</span><span class="select_but"><b></b></span></span>
+                                        <ul class="select_list2" >
+                                            <li class="selected">
+                                                全部
+                                            </li>
+                                            <li>
+                                                香港
+                                            </li>
+                                            <li>
+                                                意大利
+                                            </li>
+                                        </ul> </span> </span><span>订单日期</span><span>订单金额</span><span> <span class="select_box"> <span class="select_main"><span class="select_txt">订单状态</span><span class="select_but"><b></b></span></span>
+                                        <ul class="select_list2" >
+                                            <li class="selected">
+                                                全部
+                                            </li>
+                                            <li>
+                                                香港
+                                            </li>
+                                            <li>
+                                                意大利
+                                            </li>
+                                        </ul> </span> </span><span>操作</span>
+                            </div>
+                            <p class="tr_cont">
+                                <span class="w230">泰国个人旅游签证</span><span class="w150">上海签送</span><span>朱建乐</span><span>2015.09.09</span><span>￥16666</span><span>已付款</span><span><a class="reserve" href="#">再次预订</a></span>
+                            </p>
+                            <p class="tr_cont">
+                                <span class="w230">南非个人旅游签证</span><span class="w150">广州签送</span><span>朱建乐</span><span>2015.09.09</span><span>￥16666</span><span>未付款</span><span><a class="paid" href="#">马上付款</a></span>
+                            </p>
+                        </div>
+                        <div class="no_order_mess">
+                            您暂时还没有订单
+                            <br>
+                            <a href="#">去选购</a>
+                        </div>
+
+                        <div class="box_cb"></div>
+                    </div>
+
+                </div>
+                <div class="box_cb"></div>
+            </div>
+            <!--dwp html end-->
+
+			 #parse("common/footer.vm")
+        </div>
+		
+		<script>
+            $(".on").removeClass('on');
+            $("#menu_box a").eq(0).attr("class","on");
+        </script>
+    </body>
+</html>

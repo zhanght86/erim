@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guidephoto">
+
+	<!-- 查询所有数据 -->
+	<select id="selectGuidePhotoByGuide" resultType="guidePhotoBean">
+		SELECT
+			id             	AS id,
+			gdl_id         	AS gdlId,
+			gpt_img_url    	AS gptImgUrl,
+			gpt_createuser 	AS gptCreateuser,
+			gpt_createtime 	AS gptCreatetime
+		FROM
+			guide_photo
+		WHERE
+			gdl_id = #{gdlId}
+		ORDER BY
+			gpt_createtime
+		DESC
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		INSERT INTO 
+			guide_photo (
+				gdl_id,
+				gpt_img_url,
+				gpt_createuser,
+				gpt_createtime
+			) VALUES (
+				#{gdlId},
+				#{gptImgUrl},
+				#{gptCreateuser},
+				#{gptCreatetime}
+			)
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deletePhoto">
+		DELETE FROM
+			guide_photo
+		WHERE
+			id = #{id}
+	</delete>
+	
+</mapper>

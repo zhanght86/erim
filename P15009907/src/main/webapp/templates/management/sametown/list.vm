@@ -1,0 +1,85 @@
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/ren.png" alt="同业资源签证" title="同业资源签证">同业资源签证<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form mothed="post" id="form1">
+    	<div class="input_block clearfix">
+    		<div class="label_left" style="font-weight:400; width:70px;">签证名称：</div>
+    		<div class="input_right input_right_wauto" >
+    			<input type="text" class="w110" name="mdlName" value="$!managementDetail.mdlName" />
+    			<label class="ml15">送签地：</label>
+    			<select class="w110" name="mdlSend">
+    				<option></option>
+    				#foreach($item in $send.keySet())
+    					<option #if($managementDetail.mdlSend == $item) selected #end value="$item">$send.get($item)</option>
+    				#end
+    			</select>
+    			<label class="ml15">签证类型：</label>
+    			<select name="mdlNtype" style="width:110px;height:30px;">
+    				<option></option>
+    				#foreach($item in $models.keySet())
+    					<option #if($managementDetail.mdlNtype == $item) selected #end value="$item">$models.get($item)</option>
+    				#end
+    			</select>
+    			<label class="ml15">公司/品牌名称： </label>
+    			<span class="w110">
+    				<input class="w110" name="cpyName" value="$!managementDetail.cpyName" />
+    			</span>
+    			<label class="ml15">时间： </label>
+				<span class="w110" onClick="WdatePicker()">
+					<input type="text" class="w110" name="mdlDate" value="$!managementDetail.mdlDate" >
+				</span>
+    			<button class="y_but ml35" onclick="index.searchform('form1','$appRoot/management/detail/sametown');" type="button">查 询</button>
+    		</div>
+    	</div>
+	</form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable" style="width:95%">
+		<table cellspacing="0" cellspadding="0" style="min-width:1100px;" >
+			<thead>
+				<tr>
+					<td style="min-width:80px;">产品编码</td>
+					<td style="min-width:120px;">签证名称</td>
+					<td style="min-width:80px;">送签地</td>
+					<td style="min-width:80px;">签证类型</td>
+					<td style="min-width:85px;">可停留天数</td>
+					<td style="min-width:65px;">有效期</td>
+					<td style="min-width:100px;">入境次数</td>
+					<td style="min-width:70px;">价格</td>
+					<td style="min-width:200px;">公司/品牌名称</td>
+					<td style="min-width:120px;">计调/电话</td>
+					<td style="min-width:90px;">在线交流</td>
+					<!-- 
+					<td>在线预定</td>
+					-->
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $managementList)
+    				<tr>
+    					<td>$!item.mdlCode</td>
+    					<td><a href="$appRoot/management/qianzhengxiang/$item.id" title="点击打开外网展示">$!item.mdlName</a></td>
+    					<td>$!item.mdlSend</td>
+    					<td>$!item.mdlNtype</td>
+    					<td>$!item.mdlStay&nbsp;天</td>
+    					<td>$!item.mdlValidity&nbsp;个月</td>
+    					<td>$!item.mdlNum</td>
+    					<td>
+						    <a href="javascript:index.load('$appRoot/management/price/list?mdlId=$!item.id&mdlName=$!item.mdlNtype&portal=05');">$!item.mdlPriceSame</a>
+						</td>
+    					<td>$!item.cpyName / $!item.cpyBrand</td>
+    					<td>$!item.ccpName / $!item.ccpTelephone</td>
+						<td>
+							#if($erim.isNotEmpty($!item.ccpQq))
+							<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a>
+							#end	
+                        </td>
+						<!--<td><a href="javascript:index.load('$appRoot/management/order/insert')">预订</a></td>-->
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+
+</div>

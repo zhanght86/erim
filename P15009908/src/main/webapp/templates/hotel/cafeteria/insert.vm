@@ -1,0 +1,110 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<script type="text/javascript">
+	//上传图片
+	uploadify('uploadify','hmgCafeteriaimg','filespan','fileQueue');
+</script>
+<div class="jd_block">
+    <p class="tit_1 ml20"><img src="$staticRoot/images/jd_03.png" alt="添加餐厅" title="添加餐厅">添加$!hotelBean.hdlName餐厅</img></p>
+	<div class="g_line mb20"></div>
+	<div style="float:left">
+        <form method="post" id="form1">
+    		<input type="hidden" name="tdlId" value="$!hotelBean.id"></input>
+        	<div class="input_block clearfix">
+        		<div class="label_left">餐厅名称：</div>
+        		<div class="input_right" style="width:300px;">
+        			<input type="text"  class="w200 validate[required,maxSize[20]]" name="hmgCafeterianame" placeholder="未命名可直接写：XXX酒店餐厅"/><span class="mess_star_red">*</span>
+        		</div>
+        	</div>
+        	<div class="input_block clearfix" style="width:540px;">
+        		<div class="label_left">餐厅类型：</div>
+        		<div class="input_right" style="width:375px;">
+    				#foreach($item in $cttype.keySet())
+        				<label class="w90" > 
+        					<input type="checkbox" class="validate[minCheckbox[1],maxCheckbox[4]] checkbox" name="hmgCafeteriatype" value="$item"> $cttype.get($item)
+        				</label>
+					#end
+        		</div>
+    			<span class="mess_star_red">*</span>
+        	</div>
+        	<div class="input_block clearfix">
+        		<div class="label_left">餐厅面积：</div>
+        		<div class="input_right" style="width:300px;">
+        			<span class="tishi_box w200">
+    					<input type="text"  class="w150 validate[custom[integer],min[1],max[9999]]" name="hmgCafeteriaarea" placeholder="0" />平方米
+    				</span>
+        		</div>
+        	</div>
+        	<div class="input_block clearfix">
+        		<div class="label_left">可容纳人数：</div>
+        		<div class="input_right" style="width:300px;">
+        			<span class="tishi_box w90">
+    					<input type="text" class=" w65 validate[custom[integer],min[1],maxSize[5]] text-input"  name="hmgCafeterianum"  placeholder="0" />人
+    				</span> 至 
+    				<span class="tishi_box w90">
+    					<input type="text" class=" w65 validate[custom[integer],min[1],maxSize[5],funcCall[comparison]] text-input" name="hmgCafeterianumend"  placeholder="0" />人
+    				</span>
+        		</div>
+        	</div>
+			<div class="input_block clearfix" style="margin-bottom:10px;">
+        		<span style="margin-left:75px;color:red;font-size:14px;">请勿添加带有其他标志(水印、字样)的图片，否则该餐厅将会下线</span>
+        	</div>
+    		<div class="input_block clearfix">
+    			<div class="label_left">餐厅图片：</div>
+    			<div class="input_right" style="width:300px;">
+    				<input name="hmgCafeteriaimg" value="" type="hidden" id="hmgCafeteriaimg"/>
+                	<input name="file" id="uploadify" contenteditable="false" size="30" type="file" />
+    				<span id="filespan"></span>
+    				<div id="fileQueue"></div>
+    			</div>
+    		</div>
+        	<div class="button_block clearfix">
+    			<button class="carinfo_sub ml35" id="btn" type="button" onclick="subform.sub('form1', '$appRoot/hotel/Cefeteria/update', '$appRoot/hotel/Cefeteria/updatePage?tdlId=$!hotelBean.id');">提交</button>
+    			<button class="carinfo_qu" type='button' onclick="index.load('$appRoot/hotel/detail/updatePage?id=$!hotelBean.id');">返回</button>
+    		</div>
+        </form>
+	</div>
+</div>
+<!--餐厅列表-->
+	<div class="carad_ctrtable carfixed_ctrtable ml52" style="width:550px;float:left;">
+		<span style="margin-top:5px;">餐厅列表:</span>
+		<table cellspacing="0" cellspadding="0" class="mb20" style="margin-left:0;">
+			<thead>
+				<tr>
+					<td>餐厅名称</td>
+					<td>餐厅类型</td>
+					<td>餐厅面积</td>
+					<td>可容纳人数</td>
+					<td>餐厅管理</td>
+				</tr>
+			</thead>
+			<tbody>               
+				#foreach($item in $cefeteriaList)
+				<tr>
+					<td width="15%">$!item.hmgCafeterianame</td>
+					<td width="30%">$!item.hmgCafeteriatype</td>
+					<td width="12%">$!item.hmgCafeteriaarea㎡</td>
+					<td width="15%">$!item.hmgCafeterianum~$!item.hmgCafeterianumend</td>
+					<td width="28%" class="carad_a">
+						<a href="javascript:index.load('$appRoot/hotel/Cefeteria/view?id=$!item.id&tdlId=$!item.tdlId');">查看/修改</a>
+					<!--	<a href="javascript:index.delload('$appRoot/hotel/Cefeteria/delete?id=$!item.id', '$appRoot/hotel/Cefeteria/updatePage');">删除</a> -->
+					</td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+		<div class="button_block clearfix button_block_w500 ml50">
+		</div>
+	</div>
+    <div class="cb pb80"></div>
+<script type="text/javascript">
+	//比较
+	 function comparison(field, rules, i, options){
+        var cpePersonMin  = $("input[name='hmgCafeterianum']").val();
+		
+		var cpePersonMax  = $("input[name='hmgCafeterianumend']").val();
+		
+		if(parseInt(cpePersonMin)>=parseInt(cpePersonMax)){
+            return '适用人数，最多不能小于最少人数';
+        }
+    }
+</script>

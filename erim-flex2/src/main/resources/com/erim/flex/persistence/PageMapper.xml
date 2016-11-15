@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="page">
+
+    <!-- 查找页面信息，用于框架核心，所以使用pagename做参数 -->
+    <select id="selectEntityByName" parameterType="hashMap" resultType="pageBean">
+        SELECT
+            page_id         AS id,
+            page_name       AS name,
+            page_title      AS title,
+            page_width      AS width,
+            page_height     AS height
+        FROM
+            tm_system_page
+        WHERE
+            page_name = #{pagename}
+    </select>
+    
+    <!-- 根据ID查询数据 -->
+    <select id="selectEntityById" parameterType="hashMap" resultType="pageBean">
+        SELECT
+            page_id         AS id,
+            page_name       AS name,
+            page_title      AS title,
+            page_width      AS width,
+            page_height     AS height
+        FROM
+            tm_system_page
+        WHERE
+            page_id = #{id}
+    </select>
+
+    <!-- 查询所有数据，用于页面ID数据源转换 -->
+    <select id="selectAll" parameterType="hashMap" resultType="pageBean">
+        SELECT
+            page_id         AS id,
+            page_name       AS name,
+            page_title      AS title,
+            page_width      AS width,
+            page_height     AS height
+        FROM
+            tm_system_page
+    </select>
+
+    <!-- 查询本页数据，用于显示当前页 -->
+    <select id="selectPage" parameterType="hashMap" resultType="pageBean">
+        SELECT
+            page_id        AS id,
+            page_name      AS name,
+            page_title     AS title,
+            page_width     AS width,
+            page_height    AS height
+        FROM
+            tm_system_page
+        <where>
+            <if test="id != null">and page_id = #{id}</if>
+            <if test="name != null">and page_name like "%"#{name}"%"</if>
+            <if test="title != null">and page_title like "%"#{title}"%"</if>
+            <if test="width != null">and page_width = #{width}</if>
+            <if test="height != null">and page_height = #{height}</if>
+        </where>
+        <if test="qrysort != null">order by ${qrysort} ${qrymode}</if>
+    </select>
+
+    <!-- 查询总数，用于页面分页 -->
+    <select id="selectCount" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_page
+        <where>
+            <if test="id != null">and page_id = #{id}</if>
+            <if test="name != null">and page_name like "%"#{name}"%"</if>
+            <if test="title != null">and page_title like "%"#{title}"%"</if>
+            <if test="width != null">and page_width = #{width}</if>
+            <if test="height != null">and page_height = #{height}</if>
+        </where>
+    </select>
+
+    <!-- 增加 -->
+    <insert id="insert" parameterType="hashMap">
+        INSERT INTO 
+            tm_system_page(page_id,page_name,page_title,page_width,page_height)
+        VALUES
+            (#{id},#{name},#{title},#{width},#{height})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="hashMap">
+        UPDATE tm_system_page
+           SET page_id = #{id},
+               page_name = #{name},
+               page_title = #{title},
+               page_width = #{width},
+               page_height = #{height}
+         WHERE page_id = #{oldid}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="delete" parameterType="hashMap">
+        DELETE FROM
+            tm_system_page
+        WHERE
+            page_id = #{pageid}
+    </delete>
+    
+</mapper>

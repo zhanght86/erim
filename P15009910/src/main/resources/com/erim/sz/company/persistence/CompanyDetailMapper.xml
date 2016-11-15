@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="companydetail">
+
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+	company_detail.id   AS id,
+		cpy_code        AS cpyCode,
+		cpy_name        AS cpyName,
+		cpy_brand       AS cpyBrand,
+		cpy_telephone   AS cpyTelephone,
+		cpy_fax         AS cpyFax,
+		cpy_email       AS cpyEmail,
+		cpy_is_inland	AS cpyIsInland,
+		cpy_province    AS cpyProvince,
+		cpy_city        AS cpyCity,
+		cpy_county      AS cpyCounty,
+		cpy_address     AS cpyAddress,
+		cpy_nature      AS cpyNature,
+		cpy_img         AS cpyImg,
+		cpy_x           AS cpyX,
+		cpy_y           AS cpyY,
+		cpy_img_permit1 AS cpyImgPermit1,
+		cpy_img_permit2 AS cpyImgPermit2,
+		cpy_img_permit3 AS cpyImgPermit3,
+		cpy_custom_id   AS cpyCustomId,
+		cpy_createdate  AS cpyCreatedate,
+		cpy_createip    AS cpyCreateip,
+		cpy_roe         AS cpyRoe,
+		cpy_ntype       AS cpyNtype,
+		cpy_is_through  AS cpyIsThrough
+	</sql>	
+	
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			company_detail
+			(
+				cpy_name,
+				cpy_brand,
+				cpy_telephone,
+				cpy_fax,
+				cpy_email,
+				cpy_is_inland,
+				cpy_province,
+				cpy_city,
+				cpy_county,
+				cpy_external,
+				cpy_foreign,
+				cpy_foreign_city,
+				cpy_address,
+				cpy_img,
+				cpy_x,
+				cpy_y,
+				cpy_createdate,
+				cpy_createip,
+				cpy_roe,
+				cpy_ntype,
+				cpy_is_through
+			)
+		VALUES
+			(
+				#{cpyName},
+				#{cpyBrand},
+				#{cpyTelephone},
+				#{cpyFax},
+				#{cpyEmail},
+				#{cpyIsInland},
+				#{cpyProvince},
+				#{cpyCity},
+				#{cpyCounty},
+				#{cpyExternal},
+				#{cpyForeign},
+				#{cpyForeignCity},
+				#{cpyAddress},
+				#{cpyImg},
+				#{cpyX},
+				#{cpyY},
+				#{cpyCreatedate},
+				#{cpyCreateip},
+				#{cpyRoe},
+				#{cpyNtype},
+				#{cpyIsThrough}
+			)
+	</insert>
+	
+	<!-- 修改公司编码 -->
+	<update id="updateCode">
+		UPDATE 
+			company_detail
+		SET
+			cpy_code 		= #{cpyCode}
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 修改企业基础信息 -->
+	<update id="update">
+		UPDATE
+			company_detail
+		SET
+			cpy_name 			= #{cpyName},
+			cpy_brand 			= #{cpyBrand},
+			cpy_telephone 		= #{cpyTelephone},
+			cpy_fax 			= #{cpyFax},
+			cpy_email 			= #{cpyEmail},
+			cpy_is_inland 		= #{cpyIsInland},
+			cpy_province 		= #{cpyProvince},
+			cpy_city 			= #{cpyCity},
+			cpy_county 			= #{cpyCounty},
+			cpy_external 		= #{cpyExternal},
+			cpy_foreign 		= #{cpyForeign},
+			cpy_foreign_city 	= #{cpyForeignCity},
+			cpy_address 		= #{cpyAddress},
+			cpy_img 			= #{cpyImg},
+			cpy_x 				= #{cpyX},
+			cpy_y 				= #{cpyY}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 查询 -->
+	<select id="selectLineCompany" resultType="companyDetailBean">
+		SELECT
+			<include refid="sql_column" />
+			,(select count(1) from line_detail where cpy_id = company_detail.id)  AS intLineNum
+		FROM
+			company_detail
+		WHERE
+			cpy_roe = #{cpyRoe}
+			<if test="cid != null">
+				and id in 	
+				 <foreach item="item" index="index" collection="cid" open="(" separator="," close=")">  
+					  #{item}  
+				 </foreach>		
+			</if>
+	</select>
+	
+	<!-- 根据ID查询一条信息 -->
+	<select id="selectBeanById" resultType="companyDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			company_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 查询 -->
+	<select id="selectPageCafeteria" resultType="companyDetailBean">
+		SELECT
+			<include refid="sql_column" />
+			,(select  pse_is_sx  from  price_service  where cpy_id=company_detail.id ) as pseIsSx
+			,company_business.cbs_operator          cbsOperator
+			,company_business.cbs_operator_phone    cbsOperatorPhone
+			,company_contact_person.ccp_name  		ccpName
+			,company_contact_person.ccp_telephone   ccpTelephone
+			,yj_system_user.yj_user_code		    cpyYjUserCode
+		FROM
+			company_detail company_detail
+		LEFT JOIN
+			yj_system_user yj_system_user
+		ON
+			yj_system_user.cpy_id = company_detail.id
+		LEFT JOIN
+			company_business  company_business
+		ON
+			company_business.cpy_id = company_detail.id
+		LEFT JOIN
+			company_contact_person  company_contact_person
+		ON
+			company_contact_person.cpy_id = company_detail.id
+		
+		WHERE
+			company_detail.yj_user_code=#{yjUserCode}
+		AND 
+		(
+			company_detail.id in (select cus_system_user.cpy_id from cus_system_user)
+			or company_detail.id in (select zx_system_user.cpy_id from zx_system_user)
+			or company_detail.id in (select zy_system_user.cpy_id from zy_system_user)
+			or company_detail.id in (select sell_system_user.cpy_id from sell_system_user)
+		)
+	</select>
+	
+	<!-- 查询总数 -->
+	<select id="selectPageCafeteriaCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			company_detail
+		WHERE
+			yj_user_code=#{yjUserCode}
+		AND 
+		(
+			company_detail.id in (select cus_system_user.cpy_id from cus_system_user)
+			or company_detail.id in (select zx_system_user.cpy_id from zx_system_user)
+			or company_detail.id in (select zy_system_user.cpy_id from zy_system_user)
+			or company_detail.id in (select sell_system_user.cpy_id from sell_system_user)
+		)
+	</select>
+</mapper>

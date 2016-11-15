@@ -1,0 +1,7 @@
+<div class="about_left">
+	<a href="$appRoot/$cpyno/abouts.html?searchModel=5&about=1"><div class="about_zx">关于我们</div></a>
+	<a href="$appRoot/$cpyno/news/news?newType=00"><div class="about_zx" id="gongsi3" onclick="show_about(this.id,'rigrht3')">旅游资讯</div></a>
+    <a href="$appRoot/$cpyno/news/news?newType=01"><div class="about_zx" id="gongsi1" onclick="show_about(this.id,'rigrht1')">出行指南</div></a>
+    <a href="$appRoot/$cpyno/news/news?newType=02"><div class="about_zx" id="gongsi4" onclick="show_about(this.id,'rigrht4')">户外指南</div></a>
+	<a href="$appRoot/$cpyno/news/newsFooter"><div class="about_gs" id="gongsi5" onclick="show_about(this.id,'rigrht5')">帮助中心</div></a>
+</div>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht1">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">帮助中心</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">帮助中心</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>私人订制旅游</p>
+								<div class="about_guib" style="display:none">
+									<ul>
+										<li>来源：佳旅联合旅行社&nbsp;&nbsp;&nbsp;&nbsp;时间：2015-12-14&nbsp;&nbsp;&nbsp;&nbsp;点击：120</li>
+									</ul>
+								</div>
+								<div class="about_guic">
+									<p><span>摘要: </span>私人订制旅游
+									</p>
+								</div>
+									<div class="b_mian">
+		<div class="b_center">
+    	<h2 class="b_title_h2">私人订制旅游是什么？</h2>
+    		<ul>
+    			<li>“私人定制旅游”现在是国外非常流行的旅游方式，根据旅游者的需求，以旅游者为主导进行旅游行动流程的设计，即高端旅行策划机构根据客户的特定需求，从路线、方式和服务着手为客户量身打造的具有浓郁个人专属风格的旅行，它提供的是一种个性化、专属化、“一对一”式的高品质服务。 </li>
+    			
+    			
+    		</ul>
+		</div>
+	
+	</div>
+    <div class="clear"></div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+</body>
+</html>

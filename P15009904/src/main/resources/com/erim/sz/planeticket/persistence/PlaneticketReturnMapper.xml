@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="planeticketreturn">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="cpyId != null and cpyId != '' ">
+				and cpy_id  = #{cpyId}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="sql_column">
+		id 					 AS id,
+		cpy_id 				 AS cpyId,
+		ptd_no               AS ptdNo,
+		ptr_createtime 		 AS ptrCreatetime,
+		ptr_createuser 		 AS ptrCreateuser,
+		ptr_return 		 	 AS ptrReturn,
+		ptr_start_city 		 AS ptrStartCity,
+		ptr_start_town 		 AS ptrStartTown,
+		ptr_start_zzid 		 AS ptrStartZzid,
+		ptr_start_ptdid 	 AS ptrStartPtdid,
+		ptr_end_city 		 AS ptrEndCity,
+		ptr_end_town 		 AS ptrEndTown,
+		ptr_end_zzid 		 AS ptrEndZzid,
+		ptr_is_international AS ptrIsInternational,
+		ptr_end_ptdid		 AS ptrEndPtdid
+	</sql>
+	
+	<!-- 不分页查询所有数据 -->
+	<select id="selectPlaneticket" resultType="planeticketReturnBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_return
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPagePlaneticket" resultType="planeticketReturnBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_return
+		<include refid="sql_query" />
+	</select>
+	<!-- 根据id查询实体 -->
+	<select id="selectBeanByPriId" resultType="planeticketReturnBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_return
+		WHERE
+			id = #{id}
+	</select>
+
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPagePlaneticketCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			planeticket_return
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="planeticketReturnBean">
+	INSERT INTO
+			planeticket_return
+			(
+				cpy_id,
+				ptd_no,
+				ptr_createtime,
+				ptr_createuser,
+				ptr_return,
+				ptr_start_city,
+				ptr_start_town,
+				ptr_start_zzid,
+				ptr_start_ptdid,
+				ptr_end_city,
+				ptr_end_town,
+				ptr_end_zzid,
+				ptr_is_international,
+				ptr_end_ptdid
+			)
+		VALUES
+			(
+				#{cpyId},
+				#{ptdNo},
+				#{ptrCreatetime},
+				#{ptrCreateuser},
+				#{ptrReturn},
+				#{ptrStartCity},
+				#{ptrStartTown},
+				#{ptrStartZzid},
+				#{ptrStartPtdid},
+				#{ptrEndCity},
+				#{ptrEndTown},
+				#{ptrEndZzid},
+				#{ptrIsInternational},
+				#{ptrEndPtdid}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			planeticket_return
+		SET
+			ptr_return			 = #{ptrReturn},
+			ptr_start_city 		 = #{ptrStartCity},
+			ptr_start_town 		 = #{ptrStartTown},
+			ptr_start_zzid 	  	 = #{ptrStartZzid},
+			ptr_start_ptdid 	 = #{ptrStartPtdid},
+			ptr_end_city 		 = #{ptrEndCity},
+			ptr_end_town 		 = #{ptrEndTown},
+			ptr_end_zzid 		 = #{ptrEndZzid},
+			ptr_is_international = #{ptrIsInternational},
+			ptr_end_ptdid 		 = #{ptrEndPtdid}
+		WHERE
+			id = #{id}
+	</update>
+    <!-- 更新产品编号 -->
+	<update id="updatecode">
+		UPDATE
+			planeticket_return
+		SET
+			ptd_no  =  #{ptdNo}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 上下架 -->
+	<delete id="deletebean" parameterType="int">
+		UPDATE
+			planeticket_return
+		SET
+			ptd_is_del_status 	 = #{ptdIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>

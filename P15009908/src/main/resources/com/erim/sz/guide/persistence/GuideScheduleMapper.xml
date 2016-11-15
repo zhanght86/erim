@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guideschedule">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="gseDate != null">		and 	gse_date 		like "%"#{gseDate}"%"</if>
+			<if test="gseIsFree != null">	and 	gse_is_free 	like "%"#{gseIsFree}"%"</if>
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageGuide" resultType="guideScheduleBean">
+		SELECT
+			id ,
+			gse_date AS gseDate,
+			gse_is_free AS gseIsFree
+		FROM
+			guide_schedule
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageGuideCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			guide_schedule
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert">
+
+		INSERT INTO
+			guide_schedule
+				(
+					gse_date,
+					gse_is_free
+				)
+		VALUES
+				(
+					#{gseDate},
+					#{gseIsFree}
+				)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			guide_schedule
+		SET
+			gse_date = #{gseDate},
+			gse_is_free = #{gseIsFree}
+		WHERE
+			id = #{dataitems[0].id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="hashMap">
+		DELETE FROM
+			guide_schedule
+		WHERE
+			id
+		IN
+			<foreach collection="dataitems" item="item"  open="(" separator="," close=")">#{item.id}</foreach>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,37 @@
+.tab_block{width:455px;}
+.tab_block .tab_a a{display:inline-block;height:29px;line-height:28px;color:#fff;font-size:14px;padding:0 15px;background-color:#969696;border:1px solid #ccc;border-radius:5px 5px 0 0;}
+.tab_block .tab_a a.on{background-color:#d09e64;border-bottom:1px solid #d09e64;}
+.tab_block table{width:455px;border-right:1px solid #ccc;border-radius:0 4px 5px 5px;}
+.tab_block table th{background-color:#d09e64;height:33px;color:#fff;}
+.tab_block table td{background-color:#fff;height:30px; text-align:center;border-left:1px solid #ccc;border-bottom:1px solid #ccc;}
+.tab_block table th.rt{border-radius:0 4px 0 0;}
+.tab_block table td.rb{border-radius:0 0 5px 0;}
+.tab_block table td.lb{border-radius:0 0 0 5px;}
+.tab_block .tab_2{display:none;}
+.button_block_w1060{width:1060px;}
+.flt_box{width:530px;float:left;}
+
+
+.bg_block .input_block .input_right_wauto{width:auto;}
+.green_box{background-color:#baf59e;display:inline-block;width:20px;height:20px;vertical-align:middle;}
+.fb_table .input_right .y_but,.bg_block .input_right .y_but{border:none;height:22px;border-radius:5px;float:right;color:#FFF;padding:0px 10px;
+font-size:12px;background-color:#d09e64;}
+.fb_table .input_right .b_but,.bg_block .input_right .b_but{border:none;height:22px;border-radius:5px;float:right;color:#FFF;padding:0px 10px;
+font-size:12px;background-color:#969696;float:right;}
+.flt_box .bg_block{border:1px solid #ccc;padding-bottom:0;}
+.bg_block table{border-top:1px solid #ccc;}
+.bg_block table th{height:24px;}
+.bg_block table th.red{color:#f56464;}
+.bg_block table td{height:38px;text-align:center;border-top:1px solid #ccc;border-right:1px solid #ccc;}
+.bg_block table td.pitch_on{background-color:#baf59e;}
+.bg_block table td:last-child{border-right:none;}
+
+.fb_table th{height:26px;padding-bottom:10px;}
+.fb_table td{min-width:380px;vertical-align:top;padding:0 20px;}
+.fb_table .input_block .label_left{width:100px;}
+
+
+
+.ml5{margin-left:5px;}.mt_15{margin-top:-15px;}.mt_10{margin-top:-10px;}.mr60{margin-right:60px;}.ml55{margin-left:75px;}
+
+

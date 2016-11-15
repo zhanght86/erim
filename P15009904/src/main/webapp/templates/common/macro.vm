@@ -1,0 +1,40 @@
+
+## 下拉框 宏
+#macro( mselect $class $name $list $selected ) 
+	<select name="$class" name="$name">
+        #foreach( $item in $list.keySet()) 
+			<option value="$item"  #if($!selected == $!item) selected #end>$list.get($item)</option>
+        #end 
+	</select>
+#end 
+
+
+## 输出 宏
+#macro( mtext $value $list ) 
+    #foreach( $item in $list.keySet()) 
+		#if($item == $value )
+			$!list.get($item)
+		#end
+    #end 
+#end 
+
+## 产品类型
+#macro( cpntype $value $list)
+	#foreach($item in $list.keySet())
+		#if($value == $item)
+			$!list.get($item)
+		#end
+	#end
+#end
+
+## 转码
+#macro( regionname $value)
+	#if($value)
+    	#foreach($item in $region)
+    		#if($value == $item.regionNo)
+    			$item.regionName
+    		#end
+		#end
+	#end
+#end
+		

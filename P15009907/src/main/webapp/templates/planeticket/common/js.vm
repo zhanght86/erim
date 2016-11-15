@@ -1,0 +1,22 @@
+
+<script type="text/javascript">
+  
+	//当改变航程类型时触发
+	$('input[name="hcType"]').change(function(){
+    	//获取点击类型value
+    	var hcType = $('input[name="hcType"]:checked').val();
+		
+		// 单程-直飞航班
+		if (hcType == '01') {
+        	index.load('$appRoot/planeticket/detail/list');
+		}
+		// 单程-中转航班
+		if (hcType == '02') {
+        	index.load('$appRoot/planeticket/detailMiddle/list');
+		}
+		// 往返-直飞/中转
+		if (hcType == '03') {
+        	index.load('$appRoot/planeticket/return/list');
+		}
+	})
+</script>

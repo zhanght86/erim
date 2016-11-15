@@ -1,0 +1,90 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".g_block_1").on("click",".red_a",function(){
+		if($(this).text()=="添加票类"){
+			$(this).text('删除票类').css("background-color","#ccc");
+			$(this).parent().parent().parent().after("<div class='qz_add_block'><div class='g_line mb20 mt'></div><div class='input_block clearfix'><div class='label_left w80'>门票类型：</div><div class='input_right'><select class='w130'><option></option></select></div></div><div class='input_block clearfix'><div class='label_left w80'>门票数量：</div><div class='input_right input_right_wauto'><input class='w130'><a class='red_a' href='javascript:void(0);'>添加票类</a></div></div></div>");
+			
+		}else{
+			$(this).parent().parent().parent().remove();
+		}
+	})
+})
+</script>
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">联系人信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">姓名：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left w80">手机号码：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+	</div>
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">订单信息</p>
+		
+			<div class="input_block clearfix">
+				<div class="label_left w80">订单须知 &nbsp;&nbsp;</div>
+				<div class="input_right input_right_wauto"></div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="input_right input_right_wauto">
+					<label class="ml20">提前预定时间：</label>1天16点前<label class="ml15">提前预定时间：</label>1天16点前
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">入园方式：</div>
+				<div class="input_right w280">实体票入园（取票为自行取票,地址-张家界大峡谷售票处）</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">出游日期：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w130 riqi">
+				</div>
+			</div>
+		<div class="qz_add_block">
+			<div class="g_line mb20 mt"></div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">门票类型：</div>
+				<div class="input_right">
+					<select class="w130"><option></option></select>
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">门票数量：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w130"><a class="red_a" href="javascript:void(0);">添加票类</a>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">取票人信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">取票人姓名：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left w80">取票人手机：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+	</div>
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">入园保障</p>
+		<div class="input_block clearfix">
+			<div class="input_right input_right_wauto">
+				在线成功预订此门票，如非因游客原因（不可抗力除外）导致不能正常凭票入园，本站在收到游客反馈后10分钟内未能解决，游客可直接购买全价票入园。本站将协助退票并全额退还游客已支付未能使用的门票款，另补偿差价（差价以游客景区实际购票价与本站价之间差价为准）。请游客务必保留当天入园的有效凭证。
+			</div>
+		</div>
+	</div>
+	<div class="g_right w515"><a class="hui2_a" href="javascript:void(0);">取消</a><a class="red_a ml25" href="javascript:void(0);">提交订单</a></div>

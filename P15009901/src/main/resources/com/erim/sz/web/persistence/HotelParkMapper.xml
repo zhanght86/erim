@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelpark">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="hdlId != null  and hdlId != ''">	and 	hdl_id 	 =  #{hdlId} </if>
+		</where>
+	</sql>
+	<sql id="sql_column">
+		id,
+		hdl_id					AS hdlId,
+		hpb_name          		AS hpbName,
+		hpb_area          		AS hpbArea,
+		hpb_type     		    AS hpbType,
+		hpb_cost 		        AS hpbCost,
+		hpb_car_num        		AS hpbCarNum,
+		hpb_bus_num		  		AS hpbBusNum,
+		hpb_imag                AS hpbImag
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="hotelParkBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_park
+		<include refid="sql_query" />
+	</select>
+	
+</mapper>

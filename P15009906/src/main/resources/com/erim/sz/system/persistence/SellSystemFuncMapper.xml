@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sellsystemfunc">
+	<select id="selectFuncByCode" resultType="sellSystemFuncBean">
+		SELECT
+			id                        AS id,
+			sell_func_code            AS sellFuncCode,
+			sell_func_parentcode 	  AS sellFuncParentcode,
+			sell_func_name 			  AS sellFuncName,
+			sell_func_action 	      AS sellFuncAction,
+			sell_func_img             AS sellFuncImg,
+			sell_func_order           AS sellFuncOrder
+		FROM
+			sell_system_func
+		WHERE
+			sell_func_code in 
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+				 #{item}  
+			</foreach>  
+		ORDER BY
+			sell_func_order
+	</select>
+
+	<!-- 查询所有 -->
+	<select id="selectAll" resultType="sellSystemFuncBean">
+		
+		SELECT
+			id                        AS id,
+			sell_func_code            AS sellFuncCode,
+			sell_func_parentcode 	  AS sellFuncParentcode,
+			sell_func_name 		 	  AS sellFuncName,
+			sell_func_action 	      AS sellFuncAction,
+			sell_func_img             AS sellFuncImg,
+			sell_func_order           AS sellFuncOrder
+		FROM
+			sell_system_func
+		ORDER BY
+			sell_func_order
+	</select>
+	<!-- 根据登录名查询对象 -->
+	<select id="selectFuncByParentcode" resultType="sellSystemFuncBean">
+		
+		SELECT
+			id                        AS id,
+			sell_func_code            AS sellFuncCode,
+			sell_func_parentcode 	  AS sellFuncParentcode,
+			sell_func_name 			  AS sellFuncName,
+			sell_func_action 	      AS sellFuncAction,
+			sell_func_img             AS sellFuncImg,
+			sell_func_order           AS sellFuncOrder
+		FROM
+			sell_system_func
+		WHERE
+			sell_func_parentcode = #{sellFuncParentcode}
+		ORDER BY
+			sell_func_order
+	</select>
+</mapper>

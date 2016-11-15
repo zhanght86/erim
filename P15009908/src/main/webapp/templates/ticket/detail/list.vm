@@ -1,0 +1,297 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ticket/ticket.css">
+<script>
+	regUtil.initProvince(0,'tdlProvince','tdlCity','tdlCounty');
+	
+	//是否为国际港澳台
+	var c = $("input[name='tdlNation']:checked").val();
+	if(c == '04'){
+		$('#county01').show();
+	}else{
+		$('#county01').hide();
+	}
+	
+	//国内国际港澳台显示
+	$('#gddInland01').click(function() {
+		$('#county01').hide();
+		$('#szd02').hide();
+		$('#szd01').show();
+	});
+	$('#gddInland02').click(function() {
+		$('#szd01').hide();
+		$('#szd02').show();
+	});
+	
+	//点击港澳台国际时国家和城市的隐藏和切换
+	//$("input[name='tdlNation']").change(function() {
+	//	var a = $("input[name='tdlNation']:checked").val();
+	//	if (a == '04') {
+    //		$('#county01').show();
+	//	}else{
+	//		$('#county01').hide();
+	//	}
+	//});
+	
+	//点击香港澳门台湾国家和城市隐藏
+	$('#tdlNation01').click(function(){
+		$('#county01').hide();
+	});
+	$('#tdlNation02').click(function(){
+		$('#county01').hide();
+	});
+	$('#tdlNation03').click(function(){
+		$('#county01').hide();
+	});
+	//点击国际的时候国家和城市显示
+	$('#tdlNation04').click(function(){
+		$('#county01').toggle();
+	});
+	
+	// 是否选择 国内 国际 
+	var b = $("input[name='tdlWithinOrOuter']:checked").val();	
+	if(b == '01'){
+		//国际隐藏
+		$('#szd02').hide();
+		//国内显示
+		$('#szd01').show();
+		//绑定省市
+		var a = $("select[name='tdlProvince']").val();
+		var city  = $("input[name='dic_city']").val();
+		var county = $("input[name='dic_county']").val();
+		if(a != ''){
+			regUtil.initProvince(a,'tdlProvince','tdlCity','tdlCounty',city,county);
+		}
+	}else if(b == '02'){
+		//国内隐藏
+		$('#szd01').hide();
+		//国际显示
+		$('#szd02').show();
+		regUtil.initProvince(0,'tdlProvince','tdlCity','tdlCounty');
+	}else{
+		$('#szd02').hide();
+		$('#szd01').show();
+		$('#county01').hide();
+		var a = $("select[name='tdlProvince']").val();
+		var city = $("input[name='dic_city']").val();
+		var county = $("input[name='dic_county']").val();
+		if(a != '') {
+			regUtil.initProvince(a,'tdlProvince','tdlCity','tdlCounty',city,county);
+		} 
+	}
+	
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+    $(function() {
+       	var guojiastr = $("#guojiaforqueryId").html();
+        var arr = guojiastr.split(",");
+        $(".autoquerycountry").autocomplete(arr);
+    });
+</script>
+<div class="doadmin">
+	<p class="tit_1 ml20 pt20">
+		<img src="$staticRoot/images/htj.png" alt="门票管理" title="门票管理">门票管理
+	</p>
+	<div class="cb"></div>
+	<div class="g_line mb15"></div>
+	<div class="coadmin_top clearfix" style="min-width:1000px;">
+		<input type="hidden" name="dic_city" value="$ticketDetail.tdlCity" />
+		<input type="hidden" name="dic_county" value="$ticketDetail.tdlCounty" />
+		<form method="post" id="form1">
+			<!-- 国内和国际都不为null时，显示所在区域 -->
+			#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1) && $erim.isNotEmpty($!userBussiness.cbsRanInterna))
+			<div class="doadmin_topl">
+			#else
+			<div class="doadmin_topl" hidden>
+			#end
+				<div class="doadmin_toplbox">
+					<span style="width:97px;">景点区域：</span>
+					#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+					<label> 
+						<input type="radio" id="gddInland01" name="tdlWithinOrOuter" value="01" #if($ticketDetail.tdlWithinOrOuter == '01') checked #end/> 国内
+					</label> 
+					#end
+        			#if($erim.isNotEmpty($!userBussiness.cbsRanInterna))
+					<label> 
+						<input type="radio" id="gddInland02" name="tdlWithinOrOuter" value="02" #if($ticketDetail.tdlWithinOrOuter == '02' || $erim.isEmpty($!userBussiness.cbsRanProvince1)) checked #end/> 国际/港澳台
+					</label>
+        			#end
+				</div>
+			</div>
+			<div class="doadmin_topl">
+				<div class="doadmin_toplboxb">
+					<span style="font-weight:400">产品编码：</span>
+					<div class="doadmin_toplbrb">
+						<input type="text" name="tdlCode" value="$!ticketDetail.tdlCode">
+					</div>
+				</div>
+				<div class="doadmin_toplbox" id="szd01" style="width:480px;">
+					<span>所在城市：</span>
+					<!--<div class="doadmin_toplbrb" id="sheng" style="width: 350px;">
+						<select name="tdlProvince" id="tdlProvince" style="float: none;">
+							<option value=""></option>
+							#foreach($item in $provinces)
+								<option value="$item.regionNo" #if($ticketDetail.tdlProvince == $item.regionNo) selected #end>$item.regionName</option> 
+							#end
+						</select>
+						<em class="w20">省</em>
+						<select type="text" class="w90" name="tdlCity" id="tdlCity" style="float: none;width:120px;"></select> 市
+						<select type="text" class="w90" name="tdlCounty" id="tdlCounty" style="float: none;width:120px;"></select> 区县
+					</div>-->
+					<div class="doadmin_toplbrb" id="sheng" style="width: 350px;">
+					#lockProvince('tdlProvince','tdlProvince','','1',$!ticketDetail.tdlProvince,'tdlCity','tdlCounty',$!ticketDetail.tdlCity,$!ticketDetail.tdlCounty)
+                    <select name='tdlCity' id='tdlCity' class='w90' onchange="lock.town($(this),'tdlCounty');"></select>
+                    <select name='tdlCounty' id='tdlCounty' class='w90'></select>
+				</div>
+				</div>
+				<div class="doadmin_toplbox" id="szd02">
+					<span>所在城市：</span>
+					<div class="doadmin_toplbrb" style="width: 300px;">
+						<label> 
+							<input type="radio" name="tdlNation" id="tdlNation01" value="01" #if($ticketDetail.tdlNation == '01') checked #end />香港&nbsp;
+						</label>
+						<label>
+							<input type="radio" name="tdlNation" id="tdlNation02" value="02" #if($ticketDetail.tdlNation == '02') checked #end/>澳门&nbsp;
+						</label>
+						<label> 
+							<input type="radio" name="tdlNation" id="tdlNation03" value="03" #if($ticketDetail.tdlNation == '03') checked #end/>台湾&nbsp;
+						</label>
+						<label> 
+							<input type="radio" name="tdlNation" value="04" id="tdlNation04" #if($ticketDetail.tdlNation == '04') checked #end/>国际&nbsp;
+						</label>
+					</div>
+				</div>
+				<div class="co_nationdiv" id="county01">
+					<span>国家：</span> 
+					<input type="text" name="tdlCountyone" class="validate[maxSize[15]] autoquerycountry" value="$!ticketDetail.tdlCountyone" style="width: 120px; height: 25px;">
+					<span>城市：</span> 
+					<input type="text" name="tdlCityone" class="validate[maxSize[10]]"value="$!ticketDetail.tdlCityone" style="width: 120px; height: 25px">
+				</div>
+			</div>
+			<div class="doadmin_topl mb20">
+				<div class="doadmin_toplboxb">
+					<span style="font-weight:400">景点名称：</span>
+					<div class="doadmin_toplbrb">
+						<input type="text" value="$!ticketDetail.tdlName" name="tdlName">
+					</div>
+				</div>
+				<div class="doadmin_toplboxb">
+					<span style="font-weight:400;width:100px;">景点级别：</span>
+					<div class="doadmin_toplbrb">
+						<select name="tdlScenicLevel">
+							<option value=""></option>
+							#foreach($item in $level.keySet())
+								<option value="$item" #if($ticketDetail.tdlScenicLevel == $item) selected #end>$level.get($item)</option>
+							#end
+						</select>
+					</div>
+				</div>
+				<button type="button" class="doadmin_see" style="margin-left:265px;" onclick="index.searchform('form1','$appRoot/ticket/detail/list');">查询</button>
+			</div>
+		</form>
+    	<div class="cb"></div>
+    	<div class="g_line mb15"></div>
+		#if($shiro.hasPermission("PRODUCT_TICKET_INSERT"))
+        	<div class="carad_ct">
+        		<div class="carad_ctbtn" style="margin-top: 0px;">
+        				<button onclick="index.load('$appRoot/ticket/detail/insertPage');" class="add_pd15 ml30">+新增景点</button>
+        		</div>
+        	</div>
+		#end
+    	<div class="doadmin_ct">
+    		<div class="carad_ct ml30">
+    			<div class="carad_ctrtable">
+    				<table cellspacing="0" cellspadding="0">
+    					<thead>
+    						<tr>
+    							<td style="min-width:80px;">产品编码</td>
+    							<td style="min-width:70px;">所在城市</td>
+    							<td style="min-width:200px;">景点名称</td>
+    							<td style="min-width:70px;">景点级别</td>
+    							<td style="min-width:125px;">景点主题</td>
+								<td style="min-width:260px;">门票管理</td>
+								#if($shiro.hasPermission("PRODUCT_TICKET_FUNC"))
+									<td style="min-width:65px;">操作人管理</td>
+								#end
+								#if($shiro.hasPermission("PRODUCT_TICKET_DELETE")) 
+									<td style="min-width:60px;">上架状态</td>
+								#end
+    						</tr>
+    					</thead>
+    					<tbody>
+    						#foreach($item in $ticketList)
+    						<tr>
+    							<td>$!item.tdlCode</td> 
+								#if($!item.tdlWithinOrOuter == '02')
+									#if($!item.tdlNation == '04')
+										<td>$!item.tdlCityone</td> 
+									#else
+										<td>#vtext($!item.tdlNation,'C108')</td> 
+									#end 
+								#elseif($!item.tdlWithinOrOuter == '01')
+									<td>#vregion($!item.tdlCity)</td> 
+								#else
+									<td></td> 
+								#end
+    							<td>
+									#if('1' == $!userIsCooperation)
+            							$!item.tdlName
+            						#else
+										<a href="$webRoot/ticket/menpiaoxiang/$!item.id" target="_blank" style="white-space:normal; word-break:break-all; word-wrap:break-word;" title="查看外网展示">$!item.tdlName</a>
+									#end
+								</td>
+    							<td>#vtext($!item.tdlScenicLevel,'C098')</td>
+								<td>#vtextarray($!item.tdlAttractions,'C099')</td>
+    							<td class="carad_a">
+    								#if($shiro.hasPermission("PRODUCT_TICKET_UPDATE")) 
+    									<a href="javascript:index.load('$appRoot/ticket/detail/updatePage?id=$!item.id');">查看/修改</a>
+    								#end
+									#if($shiro.hasPermission("PRODUCT_TICKET_CLASS")) 
+    									<a href="javascript:index.load('$appRoot/ticketclass/detail/insertticket?tdlId=$item.id');">票类管理</a>
+    								#end 
+									#if($shiro.hasPermission("PRODUCT_TICKET_SAMETOWN")) 
+										<a href="javascript:index.nextPage('$appRoot/town/detail/setsametown?ntype=$sametownntype&cid=$item.id');">同业管理</a>
+									#end
+									#if($shiro.hasPermission("PRODUCT_TICKET_SCHEDULED")) 
+    									<a href="javascript:index.load('$appRoot/ticket/detail/scheduledPage?id=$!item.id');" style="margin-right:0px;">预定方式</a>
+    								#end
+    								##<a href="">短信内容</a>
+    							</td>
+								#if($shiro.hasPermission("PRODUCT_TICKET_FUNC"))
+									<td><a href="javascript:index.load('$appRoot/cus/func/addChildUser?ntype=$sametownntype&cid=$item.id');">权限设置</a></td>
+								#end
+								#if($shiro.hasPermission("PRODUCT_TICKET_DELETE")) 
+        							<td>
+        								<div class="wrapper">
+        									<div class="imageContainer1">
+        										#if($!item.tdlIsDelStatus == '1') 
+        											<span>
+        												<img src="$staticRoot/images/lvdui.png" />
+        											</span>
+        											<a href="javascript:index.load('$appRoot/ticket/detail/delete?id=$item.id&tdlIsDelStatus=0');">
+        												<img src="$staticRoot/images/huicuo.png" id="img" class="active" />
+        											</a>
+        										#end 
+    											#if($!item.tdlIsDelStatus == '0') 
+        											<a href="javascript:index.load('$appRoot/ticket/detail/delete?id=$item.id&tdlIsDelStatus=1');">
+        												<img src="$staticRoot/images/huidui.png" id="png" />
+        											</a>
+        											<span>
+        												<img src="$staticRoot/images/hongcuo.png" />
+        											</span>
+        										#end
+        									</div>
+        								</div>
+        							</td>
+								#end
+    						</tr>
+    						#end
+    					</tbody>
+    				</table>
+    				#parse("common/page.vm")
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+<!--/合作管理-->
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

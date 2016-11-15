@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>佳旅联合</title>
+	<meta name="name" content="content" charset="utf-8">
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/sign.css">
+	<meta name="keywords" content="登录" />
+	<meta name="description" content="登录" />
+	<script type="text/javascript" src="$staticFilePlug/jquery/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+    		$('#imgObj').click(function() {
+    			changeValidateCode();
+    		});
+    		function changeValidateCode() {
+    			$("#imgObj").attr("src","$appRoot/check/code?id=" + Math.random());
+    		}
+    	});
+		//点击回车登陆系统
+		$(document).keydown(function(event) { 
+            if (event.keyCode == 13) { 
+                $(".sign_sign").click();
+            } 
+        }); 
+  	</script>
+</head>
+<body>
+	<div class="sign">
+		<div class="sign_bg">
+			<img src="$staticRoot/images/bg.jpg" alt="背景图">
+		</div>
+		<div class="sign_content">
+			<div class="sign_head">
+				<img src="$staticRoot/images/logo.png" alt="logo">
+			</div>
+			<div class="sign_body">
+				<div class="sign_bodyl">
+					<img src="$staticRoot/images/picl.png" alt="君之领域">
+				</div>
+				<div class="sign_bodyr">
+					<h1 class="ml51">组团社登录</h1>
+					<form action="$appRoot/sell/user/login" method="post" id="form1">
+    					<div class="sign_bodyrc ml51">
+    						<span class="sign_bodyrcf">账号</span>
+    						<input type="text" name="username" id="username" value="" class="sign_bodyrci">
+    						<span class="sign_bodyrcf">密码</span>
+    						<input type="password" name="password" id="password" value="" class="sign_bodyrci">
+    						<span class="sign_bodyrcf">验证码</span>
+    						<input type="text" name="checkcode" id="checkcode" value="" class="sign_bodyrcy">
+    						<img src="$appRoot/check/code" id="imgObj" alt="验证码">
+							<a style="color:red">$!errorMsg</a>
+    						<!-- <a href="#" style="color:#0088cc;font-size:14px;text-decoration:underline;">忘记密码?</a> -->
+    						<button type="button" onclick="window.location=href='$appRoot/company/regedit/info';" class="sign_sub">注册</button>
+    						<button type="button" onclick="$('#form1').submit();" class="sign_sign">登录</button>
+    					</div>
+					</form>
+				</div>
+                <div class="sign_bodyr1">
+                    <p style="text-indent:2em;">
+                        导客以应办之事，助人以必须之便。如舟车舱之代订，旅舍铺位之预定，
+                        团体旅行之计划，调研研究之人手，以致轮船进出日期，火车往来时间，
+                        均在为游客所急需者。
+                    </p>
+                    <p class="fr" style="padding-right:20px;">
+                        ——　中国第一家旅行社服务宗旨
+                    </p>
+                </div>
+			</div>
+		</div>
+		<div class="sign_footer">
+			<p>客户服务电话:400-004-6161</p>
+			<p>Copyright  2015, jialvlianhe.com. All rights reserved. | 京ICP备14023329号-1</p>
+		</div>
+	</div>
+</body>
+</html>

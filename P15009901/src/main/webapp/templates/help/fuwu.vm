@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>关于我们_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/index.css">
+    <link href="$staticRoot/css/headerfooter.css" type="text/css" rel="stylesheet" />
+	<link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/user.css">
+
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht3">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">服务保障</span>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<div class="about_cen">
+
+
+<p>1.周边旅游线路(汽车线)退款、退团政策</p><br>
+
+<p>(1)、出发前不足4天（不含双休日及法定假日）的，提出退订、人数减少或其它项目改变，将根据实际情况收取车位损失费用，退还扣除车位损失的剩余团款；</p><br>
+<p>(2)、特殊人群如有门票优惠政策（以当地政策为准），您可持有相关证件，由导游协助在景区门口做相应退款。</p><br>
+<p>(3)、行程中如您自愿取消部分景点，将不退还相应费用。赠送项目如不能成行，不做任何退款。</p><br>
+<p>(4)、出发日为法定公休假日（如：五一、国庆、春节）前后3天者，退团不退款。</p><br>
+<p>2.国内长线退款、退团政策？</p><br>
+
+<p>以下情况可全额退款：</p><br>
+
+<p>出发日期7日以外（周末、节假日等旅游旺季除外），或因旅行社原因不能成团。</p><br>
+
+<p>以下情况可部分退款：</p><br>
+
+<p>1、出发日期3日以外、不足7日的，扣除机票损失及代办业务等各项已产生费用；</p><br>
+<p>2、出发日期1日以外、不足3日的，扣除机票全款及代办业务等各项已产生费用；</p><br>
+<p>3、行程中因老年证、军官证、学生证、教师证等证件产生优惠的，将退还成本价与优惠价之间差额；</p><br>
+<p>4、行程中所含景点、用餐、住宿等项目如不参加需提前告知导游，未产生的费用当地现退；</p><br>
+<p>5、因不可抗力因素或者您自身原因造成行程不能进行，未产生的费用当地现退。</p><br>
+
+<p>以下情况不退款：</p><br>
+
+<p>1、出发前1日以内退团，费用不退；</p><br>
+<p>2、赠送项目如遇天气、航班时间等不可抗力因素不能成行，费用不退；</p><br>
+<p>3、机票为团队折扣票，开票后不得签转、更改、退票；</p><br>
+<p>4、旅游者未能按照合同约定及时参加旅游项目或未能及时搭乘交通工具的，视为自愿放弃，费用不退；</p><br>
+<p>3.出境旅游线路退款、退团政策</p><br>
+
+<p>以下情况可全额退款：</p><br>
+
+<p>1、出发日期7日以外（周末、节假日等旅游旺季除外），因旅行社原因不能成团。</p><br>
+
+<p>以下情况可部分退款：</p><br>
+
+<p>1、签证被拒签，扣除签证办理所产生费用，退还剩余团款。（给旅行社造成损失的，还应当承担赔偿责任）。</p><br>
+
+<p>以下情况不退款：</p><br>
+
+<p>1、支付订金以后，因客人个人原因取消者（包括报名后无法提供齐全的有效证件、签证材料者；签证完毕后不能根据要求支付相应的保证金者或无法在旅行社指定 日期前支付团款及保证金者）订金不予退还，并承担其他相关损失费用；</p><br>
+<p>2、赠送项目如遇天气、航班时间等不可抗力因素不能成行，费用不退；</p><br>
+<p>3、旅游者未能按照合同约定及时参加旅游项目或未能及时搭乘交通工具的，视为自愿放弃，费用不退。</p><br>
+
+
+
+								</div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+			
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+
+		#parse("common/footer.vm")
+		<!--固定位置-->
+	</div>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+</body>
+</html>

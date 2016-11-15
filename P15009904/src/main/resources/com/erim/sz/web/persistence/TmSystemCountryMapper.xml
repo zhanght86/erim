@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tmsystemcountry">
+	
+	<sql id="sql_column">
+		country_id 	   AS countryId,
+		country_pid    AS countryPid,
+		country_level  AS countryLevel,
+		country_name   AS countryName,
+		country_remark AS countryRemark
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="tmSystemCountryBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			tm_system_country
+	</select>
+	
+	<!-- 根据ID查询一条信息 -->
+	<select id="getSystemCountryById" resultType="tmSystemCountryBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			tm_system_country
+		WHERE
+			country_id = #{countryId}
+	</select>
+</mapper>

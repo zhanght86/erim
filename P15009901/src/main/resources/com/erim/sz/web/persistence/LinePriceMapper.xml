@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lineprice">
+
+	<!-- 过滤条件 -->
+	<sql id="sql_query">
+		where  1 = 1
+		<!-- 专线ID -->
+		<if test= "tdlId != null and tdlId != ''"> AND tdl_id = #{tdlId} </if>
+		<!-- 日期 -->
+		<if test= "lpeDate != null and lpeDate != ''"> AND lpe_date = #{lpeDate} </if>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		tdl_id					AS	tdlId,
+		tdl_name				AS	tdlName,
+		lpe_date				AS	lpeDate,
+		lpe_is_open				AS	lpeIsOpen,
+		lpe_week				AS	lpeWeek,
+		lpe_sign				AS	lpeSign,
+		lpe_trade_adult			AS	lpeTradeAdult,
+		lpe_trade_child			AS	lpeTradeChild,
+		lpe_retail_adult		AS	lpeRetailAdult,
+		lpe_retail_child		AS	lpeRetailChild,
+		lpe_single_price		AS	lpeSinglePrice,
+		lpe_single_show			AS	lpeSingleShow,
+		lpe_insure_price		AS	lpeInsurePrice,
+		lpe_insure_show			AS	lpeInsureShow,
+		lpe_is_upgrade			AS	lpeIsUpgrade,
+		lpe_upgrade_cont		AS	lpeUpgradeCont,
+		lpe_upgrade_adult		AS	lpeUpgradeAdult,
+		lpe_upgrade_child		AS	lpeUpgradeChild,
+		lpe_restrict			AS	lpeRestrict,
+		lpe_create_date			AS	lpeCreateDate,
+		lpe_create_user			AS	lpeCreateUser,
+		cpy_id					AS	cpyId
+	</sql>
+	
+	<!-- 查询数据列表 -->
+	<select id="selectPriceByLineId" resultType="linePriceBean">
+		select 
+			id,
+			tdl_id					AS	tdlId,
+			tdl_name				AS	tdlName,
+			lpe_date				AS	lpeDate,
+			lpe_is_open				AS	lpeIsOpen,
+			lpe_week				AS	lpeWeek,
+			lpe_sign				AS	lpeSign,
+			lpe_trade_adult			AS	lpeTradeAdult,
+			lpe_trade_child			AS	lpeTradeChild,
+			lpe_retail_adult		AS	lpeRetailAdult,
+			lpe_retail_child		AS	lpeRetailChild,
+			lpe_single_price		AS	lpeSinglePrice,
+			lpe_single_show			AS	lpeSingleShow,
+			lpe_insure_price		AS	lpeInsurePrice,
+			lpe_insure_show			AS	lpeInsureShow,
+			lpe_is_upgrade			AS	lpeIsUpgrade,
+			lpe_upgrade_cont		AS	lpeUpgradeCont,
+			lpe_upgrade_adult		AS	lpeUpgradeAdult,
+			lpe_upgrade_child		AS	lpeUpgradeChild,
+			lpe_restrict			AS	lpeRestrict,
+			lpe_create_date			AS	lpeCreateDate,
+			lpe_create_user			AS	lpeCreateUser,
+			cpy_id	
+		from line_price 
+		where tdl_id = #{tdlId}
+		and lpe_date =  #{lpeDate}
+		order by lpe_create_date desc
+		limit 1
+
+	</select>
+	<!-- 查询数据列表 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="linePriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				line_price
+			ORDER BY
+				lpe_create_date
+			DESC
+		) t 
+		GROUP BY
+			t.lpeDate,
+			t.tdlId
+		HAVING
+			t.tdlId = #{bean.tdlId}
+			AND	t.lpeDate &gt;= date_format(now(),'%Y-%m-%d')
+			AND	t.lpeDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+</mapper>

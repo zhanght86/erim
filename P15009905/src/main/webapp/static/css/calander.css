@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+*{
+	margin:0;
+	padding:0;
+}
+
+ul{
+	list-style:none;
+}
+.month-cell{
+	width: 13.8%;
+	height: 60px;
+	color: #f6f5f5;
+	border-right: 1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	float: left;
+}
+.month-cell .plink{
+	
+}
+.month-box img{
+	width: 8px;
+	height: 8px;
+	padding-left: 8px;
+}
+
+.month-month{
+	color: black;
+	width: 100%;
+	height:16px;	
+	text-align: center;
+}
+
+.month-price{
+    color:red;
+    font-size: 15px;
+    text-align: right;
+}
+
+.month-cell.red {
+    background: #7c9bf4;
+}
+
+.month-cell.red span {
+    color: #ffffff;
+    border-color: #7c9bf4;
+}
+/*满档*/
+.b_red{
+	background: #FF9292;
+}
+/*空挡*/
+.b_blue{
+	background: #9ACEFD;
+}
+/*wxy 白块样式*/
+.fff_btn{
+	width:8px;
+	height:8px;
+	background:#fff;
+	margin-left:8px;
+	display:block;
+	margin-top:8px;
+}
+.col_blue{
+	background:blue;
+}

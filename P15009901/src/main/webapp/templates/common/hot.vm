@@ -1,0 +1,54 @@
+<div class="clistctma_ctr">
+	<!--热门景区-->
+	<div class="tour_scenic">
+		<h1>热门专线</h1>
+		#foreach($item in $hotLine)
+    		<div class="tour_scbox">
+    			<a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" target="_blank" title="$!item.ldlName">
+					#if($!item.ldlPicture)
+						<img src="$staticFileRes$!item.ldlPicture" class="tour_scbximg">
+					#else
+						<img src="$staticRoot/images/isnull.png" title="" alt="" class="tour_scbximg">
+					#end
+				</a>
+    			<div class="tour_scbxfont">
+    				<span><a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" title="$!item.ldlName" target="_blank">$erim.subString($!item.ldlName,8)</a></span>
+					<br clear="left">
+    				<label style="padding-top:20px;"><h2>￥$!item.lpeRetailAdult</h2><p>起</p></label>
+    			</div>
+    		</div>
+		#end
+	</div>
+	<!--/热门景区-->
+	<!--热门门票-->
+    <div class="tour_scenic b_mt10">
+		<h1>热门门票</h1>
+		#foreach($item in $hotticket)
+    		<div class="tour_scbox">
+    			<a href="$appRoot/$cpyno/ticket/menpiaoxiang/${item.id}.html" target="_blank" title="$!item.tdlName">
+					#if($!item.tdlImg1)
+						<img src="$staticFileRes$item.tdlImg1" class="tour_scbximg">
+					#else
+						<img src="$staticRoot/images/isnull.png" title="" alt="" class="tour_scbximg">
+					#end
+					</a>
+    			<div class="tour_scbxfont">
+    				<span><a href="$appRoot/$cpyno/ticket/menpiaoxiang/${item.id}.html" target="_blank" title="$!item.tdlName">$erim.subString($!item.tdlName,8)</a></span>
+					<br clear="left">
+    				<span>景点级别：
+						#if($!item.tdlScenicLevel == '01')不分级
+						#elseif($!item.tdlScenicLevel == '02')A级
+						#elseif($!item.tdlScenicLevel == '03')AA级
+						#elseif($!item.tdlScenicLevel == '04')AAA级
+						#elseif($!item.tdlScenicLevel == '05')AAAA级
+						#elseif($!item.tdlScenicLevel == '06')AAAAA级
+						#end
+					</span>
+    				<label><h2>￥$!item.tplRetailPrice</h2><p>起</p></label>
+    			</div>
+    		</div>
+		#end
+	</div>
+	<!--/热门门票-->
+</div>
+	

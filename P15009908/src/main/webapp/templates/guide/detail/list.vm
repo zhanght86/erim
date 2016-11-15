@@ -1,0 +1,333 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/guide/guide.css">
+<script type="text/javascript">
+	
+	//国内国际地陪和国际港澳台领队、国际港澳台地陪切换
+	$("input[name='gdlServer']").change(function() {
+		var a = $("input[name='gdlServer']:checked").val();
+		if (a == '01') {
+    		$('#county01').show();
+    		$('#county02').hide();
+    		$('#county03').hide();
+    		$('#county04').hide();
+		}
+		if (a == '02') {
+    		$('#county01').hide();
+    		$('#county02').show();
+    		$('#county03').hide();
+    		$('#county04').hide();
+		}
+		if (a == '03') {
+			$('#county01').hide();
+    		$('#county02').hide();
+    		$('#county03').show();
+    		$('#county04').hide();
+		}
+		if (a == '04') {
+			$('#county01').hide();
+    		$('#county02').hide();
+    		$('#county03').hide();
+    		$('#county04').show();
+		}
+	});
+	//获取国内国际值
+	//搜索项留下输入内容
+	var b = $("input[name='gdlServer']:checked").val();
+	if(b == '01'){
+		$('#county01').show();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').hide();
+		var c = $("select[name='gdlLocalProvince']").val();
+		if (c != '') {
+    		//初始化省市县
+    		regUtil.initProvince(c,'gdlLocalProvince','gdlLocalCity','gdlLocalCounty',$guideDetail.gdlLocalCity,0);
+		}
+	}else if(b == '02'){
+		$('#county01').hide();
+		$('#county02').show();
+		$('#county03').hide();
+		$('#county04').hide();
+		var c = $("select[name='gdlNationalProvince']").val();
+		if (c != '') {
+    	  //初始化省市县
+    	  regUtil.initProvince(c,'gdlNationalProvince','gdlNationalCity','gdlNationalCounty',$guideDetail.gdlNationalCity,0);
+		}
+	}else if(b == '03'){
+		$('#county01').hide();
+		$('#county02').hide();
+		$('#county03').show();
+		$('#county04').hide();
+		var c = $("select[name='gdlLeaderProvince']").val();
+		if (c != '') {
+    		 //初始化省市县
+    		regUtil.initProvince(c,'gdlLeaderProvince','gdlLeaderCity','gdlLeaderCounty',$guideDetail.gdlLeaderCity,0);
+		}
+	}else if(b == '04'){
+		$('#county01').hide();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').show();
+	}else{
+		$('#county01').show();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').hide();
+		var c = $("select[name='gdlLocalProvince']").val();
+		if (c != '') {
+    		//初始化省市县
+    		regUtil.initProvince(c,'gdlLocalProvince','gdlLocalCity','gdlLocalCounty',$guideDetail.gdlLocalCity,0);
+		}
+	}
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+    var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $("#gdlDestinationCountryInputId").autocomplete(arr);
+	$("#gdlGaidCountryInputId").autocomplete(arr);
+});
+</script>
+<div class="rdivv">
+	<div class="lineadmin">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/aa_1.png">
+			<span>导游（领队）管理</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+        </div>
+		<div class="doadmin_topp mb0" style="min-width:1000px;">
+			<form method="post" id="form1">
+				<div class="input_block clearfix">
+					<div style="width:120px;font-weight:400" class="label_left">服务类型：</div>
+					<div class="input_right">
+						#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+    						<label><input type="radio" name="gdlServer" value="01" #if($erim.contains($!guideDetail.gdlServer,'01')) checked #end/>国内地陪</label>
+    						<label class="ml15"><input type="radio" name="gdlServer" value="02" #if($erim.contains($!guideDetail.gdlServer,'02')) checked #end />国内全陪</label>
+    						<label class="ml15"><input type="radio" name="gdlServer" value="03" #if($erim.contains($!guideDetail.gdlServer,'03')) checked #end/>国际/港澳台领队</label>
+						#end
+						#if($erim.isNotEmpty($!userBussiness.cbsRanInterna))
+							<label class="ml15"><input type="radio" name="gdlServer" value="04" #if($erim.contains($!guideDetail.gdlServer,'04') || $erim.isEmpty($!userBussiness.cbsRanProvince1)) checked #end/>国际/港澳台地陪</label>
+						#end
+                    </div>
+				</div>
+				<!---------- 国内地陪 ------------------------------------------->
+				<div class="input_block clearfix" id="county01">
+					<div style="width:120px;font-weight:400" class="label_left">目的地：</div>
+					<div class="input_right">
+						#lockProvince('gdlLocalProvince','gdlLocalProvince','','1',$!guideDetail.gdlLocalProvince,'gdlLocalCity','gdlLocalCounty',$!guideDetail.gdlLocalCity,$!cafeteriaDetail.gdlLocalCounty)
+                        <select name='gdlLocalCity' id='gdlLocalCity' class='w110' onchange="lock.town($(this),'gdlLocalCounty');"></select>
+                        <select name='gdlLocalCounty' id='gdlLocalCounty' class='w110'></select>
+					</div>
+				</div>
+				<!---------- 国内全陪 ------------------------------------------->
+				<div class="input_block clearfix" id="county02">
+					<div class="label_left" style="font-weight:400;width:120px;">出发地：</div>
+					<div class="input_right">
+						#lockProvince('gdlNationalProvince','gdlNationalProvince','','1',$!guideDetail.gdlNationalProvince,'gdlNationalCity','gdlNationalCounty',$!guideDetail.gdlNationalCity,$!cafeteriaDetail.gdlNationalCounty)
+                        <select name='gdlNationalCity' id='gdlNationalCity' class='w110' onchange="lock.town($(this),'gdlNationalCounty');"></select>
+                        <select name='gdlNationalCounty' id='gdlNationalCounty' class='w110'></select>
+					</div>
+				</div>
+				<!---------- 国际港澳台领队 ------------------------------------------->
+				<div class="input_block clearfix" id="county03">
+					<div class="label_left" style="font-weight:400;width:120px;">出发地：</div>
+					<div class="input_right">
+						#lockProvince('gdlLeaderProvince','gdlLeaderProvince','','1',$!guideDetail.gdlLeaderProvince,'gdlLeaderCity','gdlLeaderCounty',$!guideDetail.gdlLeaderCity,$!cafeteriaDetail.gdlLeaderCounty)
+                        <select name='gdlLeaderCity' id='gdlLeaderCity' class='w110' onchange="lock.town($(this),'gdlLeaderCounty');"></select>
+                        <select name='gdlLeaderCounty' id='gdlLeaderCounty' class='w110'></select>
+                    </div><br clear="left">
+					<div class="label_left" style="font-weight:400;width:120px;margin-top:15px;"  >目的地：</div>
+					<div class="input_right" style="margin-top:15px;">
+						<label><input type="radio" name="gdlDestination" value="01" #if($erim.contains($!guideDetail.gdlDestination,'01')) checked #end/>香港&nbsp;</label>
+						<label class="ml15"><input type="radio" name="gdlDestination" #if($erim.contains($!guideDetail.gdlDestination,'02')) checked #end value="02" />澳门&nbsp;</label>
+						<label class="ml15"><input type="radio" name="gdlDestination" #if($erim.contains($!guideDetail.gdlDestination,'03')) checked #end value="03" />台湾&nbsp;</label>
+						<label class="ml35">国家：</label>
+						<input id="gdlDestinationCountryInputId" style="width:150px;"  type="text" name="gdlDestinationCountry" value="$!guideDetail.gdlDestinationCountry" />
+					</div>
+				</div>
+				<!---------- 国际港澳台地陪 ------------------------------------------->
+				<div class="input_block clearfix" id="county04">
+					<div class="label_left" style="font-weight:400;width:120px;">目的地：</div>
+					<div class="input_right">
+						<label><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'01')) checked #end value="01" />香港&nbsp;</label>
+						<label class="ml15"><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'02')) checked #end value="02" />澳门&nbsp;</label>
+						<label class="ml15"><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'03')) checked #end value="03" />台湾&nbsp;</label>
+						<label class="ml35">国家：</label>
+						<input id="gdlGaidCountryInputId" style="width:150px;"  type="text" name="gdlGaidCountry" value="$!guideDetail.gdlGaidCountry" />
+					 </div>
+				</div>
+				<!---------- 结束 ------------------------------------------->
+				<div class="doadmin_toplboxt">
+					<span style="width:120px;">系统编码：</span>
+					<div class="doadmin_toplbra" style="width:117px;">
+						<input style="width:101px;"  type="text" name="gdlCode" value="$!guideDetail.gdlCode" />
+					</div>
+				</div>
+				<div class="doadmin_toplboxt">
+					<span style="width:39px;">姓名：</span>
+					<div class="doadmin_toplbra" style="width:117px;">
+						<input style="width:101px;"  type="text" name="gdlName" value="$!guideDetail.gdlName" />
+					</div>
+				</div>
+				<div class="doadmin_toplboxt">
+					<span style="width:36px;">性别：</span>
+					<div class="doadmin_toplbra" style="width:64px;">
+						<select name="gdlSex" style="width:57px;">
+							<option value=""></option>
+                            #foreach($item in $sex.keySet())
+								<option value="$item" #if($guideDetail.gdlSex == $item) selected #end>$sex.get($item)</option>
+                            #end
+						</select>
+					</div>
+				</div>
+				<div class="doadmin_toplboxe">
+					<span style="width:37px;">语种：</span>
+					<div class="doadmin_toplbra" style="width:95px;">
+						<select name="gdlLanguage" value="$!guideDetail.gdlLanguage" >
+							<option></option>
+							#foreach($item in $language.keySet())
+								 <option value="$item" #if($guideDetail.gdlLanguage == $item) selected #end>$language.get($item)</option>
+							#end
+						</select>
+					</div>
+				</div>
+				<div class="doadmin_toplboxt">
+					<span style="width:50px;">状态：</span>
+					<div class="doadmin_toplbrb" style="width:140px;">
+						<select name="gdlIsDelStatus">
+							<option></option>
+							<option value="1" #if($guideDetail.gdlIsDelStatus == '1') selected #end>上团</option>
+							<option value="0" #if($guideDetail.gdlIsDelStatus == '0') selected #end>下团</option>
+						</select>
+					</div>
+				</div>
+				<div class="input_block">
+					<button class="y_but" style="width:90px;" type="button" onclick="index.searchform('form1','$appRoot/guide/detail/list');" >查询</button>
+                </div>
+           	</form>
+		</div>
+	</div>
+</div>
+<div class="cb"></div>
+<div class="g_line ml20"></div>
+<div class="carad_ct">
+	#if($shiro.hasPermission("PRODUCT_GUIDE_INSERT"))
+	<div class="carad_ctbtn" style="width: 50%;">
+		<button type="button" onclick="index.load('$appRoot/guide/detail/insertPage');" class="add_pd15 ml30">+新增导游/领队</button>
+	</div>
+	#end
+	<div class="carad_ctrtable ml30">
+		<table cellspacing="0" cellspadding="0">
+			<thead>
+				<tr>
+					<td style="min-width:80px;">系统编码</td>
+					<td style="min-width:65px;">姓名</td>
+					<td style="min-width:40px;">性别</td>
+					<td style="min-width:80px;">手机号</td>
+					<td style="min-width:60px;">密码</td>
+					<td style="min-width:85px;">国内地陪</td>
+					<td style="min-width:85px;">国内全陪</td>
+					<td style="min-width:85px;">国际领队</td>
+					<td style="min-width:85px;">国际地陪</td>
+					<td style="min-width:85px;">语种</td>
+					<!-- 
+					<td style="min-width:65px;">公司评级</td>
+					-->
+                    <td style="min-width:270px;">导服/档期管理</td>
+					##if($shiro.hasPermission("PRODUCT_GUIDE_FUNC"))
+						##<td style="min-width:65px;">操作人管理</td>
+					##end
+					#if($shiro.hasPermission("PRODUCT_GUIDE_DELETE"))
+						<td style="min-width:60px;">上架状态</td>
+					#end
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $guideList)
+				<tr>
+					<td>$!item.gdlCode</td>
+					<td>
+						#if('1' == $!userIsCooperation)
+							$!item.gdlName
+						#else
+							<a class="dwp_f_a" target="_blank"  href="$webRoot/guide/daoyouxiangdj/$item.id" style="text-align:left;white-space:normal; word-break:break-all; word-wrap:break-word;"  title="点击打开外网展示">$!item.gdlName</a>
+						#end
+					</td>
+                    <td>$!item.gdlSex</td>
+					<td>$!item.gdlMobileUsers</td>
+					<td>$!item.gdlPwd</td>
+					<!-- 国内地陪  -->
+					<td>
+						#if($erim.contains($!item.gdlServer,'01'))
+							$!item.gdlLocalCity
+						#end
+					</td>
+					<!-- 国内全陪  -->
+					<td>
+						#if($erim.contains($!item.gdlServer,'02'))
+							$!item.gdlNationalCity
+						#end
+					</td>
+					<!-- 国际领队  -->
+					<td>
+						#if($erim.contains($!item.gdlServer,'03'))
+    						$!item.gdlLeaderCity<br>
+    						$!item.gdlDestination$!item.gdlDestinationCountry
+						#end
+					</td>
+					<!-- 国际地陪  -->
+					<td>
+						#if($erim.contains($!item.gdlServer,'04'))
+    						$!item.gdlGaidLokal<br>
+    						$!item.gdlGaidCountry
+						#end
+					</td>
+					<td width="6%">$!item.gdlLanguage<br>$!item.gdlRest</td>
+					<!--  
+					<td>$!item.gdlCompanyRating</td>
+					-->
+					<td class="carad_a">
+						#if($shiro.hasPermission("PRODUCT_GUIDE_UPDATE"))
+							<a href="javascript:index.load('$appRoot/guide/detail/updatePage?id=$item.id');">查看/修改</a>
+						#end
+						
+						#if($shiro.hasPermission("PRODUCT_GUIDE_PRICE"))
+							<a href="javascript:price.suburl('$appRoot/guide/price/getInternal?isInternal=$!item.gdlServer', '$appRoot/guide/price/list?gdlId=$!item.id&portal=01&certificate=$!item.gdlCertificate&isInternal=$!item.gdlServer');">导服费管理</a>
+						#end
+						#if($shiro.hasPermission("PRODUCT_GUIDE_SAMETOWN"))
+							<a href="javascript:index.nextPage('$appRoot/town/detail/setsametown?ntype=$sametownntype&cid=$item.id');">同业管理</a>
+						#end
+						
+						#if($shiro.hasPermission("PRODUCT_GUIDE_SCHEDULED"))
+							<a href="javascript:index.load('$appRoot/guide/detail/scheduledPage?id=$item.id');"style="margin-right:0px;" style="margin-right:0px;">预约方式</a>
+						#end
+						##<a href="">短信内容</a>
+					</td>
+					#*if($shiro.hasPermission("PRODUCT_GUIDE_FUNC")) 
+    					<td>
+    						<a href="javascript:index.load('$appRoot/cus/func/addChildUser?ntype=$sametownntype&cid=$item.id');">权限设置</a>
+    					</td>
+					#end*#
+					#if($shiro.hasPermission("PRODUCT_GUIDE_DELETE"))
+    					<td>
+    						<span>
+    							#if($!item.gdlIsDelStatus == '1')
+                                    <span><img src="$staticRoot/images/lvdui.png"/></span>
+                                    <a href="javascript:index.load('$appRoot/guide/detail/deletebean?id=$item.id&gdlIsDelStatus=0');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+    							#end
+    							#if($!item.gdlIsDelStatus == '0')
+    								<a href="javascript:index.load('$appRoot/guide/detail/deletebean?id=$item.id&gdlIsDelStatus=1');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+    								<span><img src="$staticRoot/images/hongcuo.png"/></span>
+    							#end
+                           </span>
+    					</td>
+					#end
+			   	</tr>
+				#end
+			</tbody>
+        </table>
+		#parse("common/page.vm")
+	</div>
+</div>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

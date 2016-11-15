@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="vsearchany">
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		v_id	  AS vId,
+		v_name	  AS vName,
+		v_address AS vAddress,
+		v_remark  AS vRemark,
+		v_ntype	  AS vNtype,
+		v_url	  AS vUrl
+	</sql>
+	
+	<!-- 查询 -->
+	<select id="selectSearchResult" resultType="vSearchAnyBean">
+		SELECT
+			<include refid="sql_column"></include>
+		FROM
+			v_search_any
+		WHERE
+			v_name    like '%${vName}%'
+		or
+			v_address like '%${vName}%'
+		or
+			v_remark  like '%${vName}%'
+		LIMIT 
+			10
+	</select>
+</mapper>

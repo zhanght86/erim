@@ -1,0 +1,21 @@
+@charset "utf-8";
+body,p{ width:100%; background:#caae8d; font-size:16px; padding:0; margin:0;}
+a{ text-decoration:none; color:#333;}
+.mt10{ margin-top:10px;}
+.main{ width:600px; height:325px; margin:0 auto;position:absolute; left:50%; top:50%; margin-left:-300px; margin-top:-163px;}
+.bg404{background:url(../images/error/404.jpg) no-repeat;}
+.bg500{ background:url(../images/error/500.jpg) no-repeat;}
+.bg400{ background:url(../images/error/400.jpg) no-repeat;}
+.whbg{ background:url(../images/error/whbg.jpg) fixed center center no-repeat;background-size:cover;width: 100%;}
+.qtbg{ background:url(../images/error/qt.jpg) no-repeat;}
+.h175{ height:175px;}
+.h190{ height:190px;}
+.h300{ height:300px;}
+.mr75{ float:right; margin-right:75px; }
+.mr95{ float:right; margin-right:95px; }
+.mr105{ float:right; margin-right:105px; }
+.mr125{ float:right;margin-right:125px;}
+.mr140{ float:right; margin-right:140px; }
+.mr190{float:right;margin-right:190px;}
+.ml95{float:left;margin-left:95px;}
+.ml105{float:left;margin-left:105px; }

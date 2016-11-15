@@ -1,0 +1,53 @@
+ <div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		修改密码
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		<div class="input_block clearfix">
+    		<div class="label_left">原密码：</div>
+    		<div class="input_right">
+                <input type="text" class="text-input validate[required,maxSize[100]]" name="oldPwd" id="oldPwd" /><span style="color:red;">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">新密码:：</div>
+    		<div class="input_right">
+        	<input type="password" class="text-input validate[required,minSize[6],maxSize[20]]" id="pwd" name="yjUserPassword" /><span style="color:red;">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">确认密码：</div>
+    		<div class="input_right">
+        		<input type="password" class="text-input validate[required,equals[pwd]]"/><span style="color:red;">*</span>
+    		</div>
+    	</div>
+		<div class="content_btn2" id="an" style="text-align: left;width: 1000px;">
+    		
+					<!-- <button type="button" class="prev" onclick="javascript:regUtil.load('$appRoot/company/regedit/updateBusiness?cpyId=' + $!cpyId);">上一步</button> -->
+					
+        	<button type="button" class="red_a ml25"   onclick="index.load('$appRoot/welcome');" style="background-color:#CCCCCC;" >返回</button>
+					<button type="button" class="red_a ml25" style="margin-left:40px;"  onclick="subform('form1', '$appRoot/yj/user/updatePsd');">确定</button>
+					
+           </div>
+		</form>	
+    </div>
+	
+	<script>
+		function subform(formid,url){
+			var data = $("#"+formid).serialize();
+    		$.post(url, data,
+    			function(response) {
+    				if (response == '0') {
+    					wxcalert("服务器繁忙，请稍后！");
+    				} else if (response == '1') {
+    					wxcalert("操作成功！");
+    				} else if (response == '2') {
+    					wxcalert("原密码输入不正确！");
+    				} else if (response == '3') {
+    					wxcalert("原密码不能为空！");
+    				} 
+    			}, 
+    		"json");
+		}
+	</script>

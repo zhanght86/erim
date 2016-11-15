@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="companybusiness">
+	
+	<!-- 新增 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			company_business (
+				cpy_id,
+				cbs_service,
+				cbs_ser_inland,
+				cbs_service_inside,
+				cbs_service_add,
+				cbs_ser_interna,
+				cbs_service_outer,
+				cbs_service_rest,
+				cbs_ser_province,
+				cbs_ser_city,
+				cbs_ser_county,
+				cbs_nur_inland,
+				cbs_nur_interna,
+				cbs_nur_state,
+				cbs_nur_rest,
+				cbs_srl_inland,
+				cbs_srl_interna,
+				cbs_srl_dir,
+				cbs_srl_rest,
+				cbs_curr_address,
+				cbs_operator,
+				cbs_operator_qq,
+				cbs_prove,
+				cbs_account_name,
+				cbs_account,
+				cbs_open_account,
+				cbs_operator_phone,
+				cbs_license,
+				cbs_permission
+			) VALUES (
+				#{cpyId},
+				#{cbsService},
+				#{cbsSerInland},
+				#{cbsServiceInside},
+				#{cbsServiceAdd},
+				#{cbsSerInterna},
+				#{cbsServiceOuter},
+				#{cbsServiceRest},
+				#{cbsSerProvince},
+				#{cbsSerCity},
+				#{cbsSerCounty},
+				#{cbsNurInland},
+				#{cbsNurInterna},
+				#{cbsNurState},
+				#{cbsNurRest},
+				#{cbsSrlInland},
+				#{cbsSrlInterna},
+				#{cbsSrlDir},
+				#{cbsSrlRest},
+				#{cbsCurrAddress},
+				#{cbsOperator},
+				#{cbsOperatorQQ},
+				#{cbsProve},
+				#{cbsAccountName},
+				#{cbsAccount},
+				#{cbsOpenAccount},
+				#{cbsOperatorPhone},
+				#{cbsLicense},
+				#{cbsPermission}
+			)
+	</insert>
+	
+	<!-- 根据公司ID修改业务范围信息 -->
+	<update id="update">
+		UPDATE
+			company_business
+		SET
+			cpy_id 				= 	#{cpyId},
+			cbs_service 		= 	#{cbsService},
+			cbs_ran_province1 	= 	#{cbsRanProvince1},
+			cbs_ran_province2 	= 	#{cbsRanProvince2},
+			cbs_ran_province3 	= 	#{cbsRanProvince3},
+			cbs_ran_province4 	= 	#{cbsRanProvince4},
+			cbs_ran_province5 	= 	#{cbsRanProvince5},
+			cbs_ran_city1 		= 	#{cbsRanCity1},
+			cbs_ran_city2 		= 	#{cbsRanCity2},
+			cbs_ran_city3 		= 	#{cbsRanCity3},
+			cbs_ran_city4 		= 	#{cbsRanCity4},
+			cbs_ran_city5 		= 	#{cbsRanCity5},
+			cbs_ran_county1 	= 	#{cbsRanCounty1},
+			cbs_ran_county2 	= 	#{cbsRanCounty2},
+			cbs_ran_county3 	= 	#{cbsRanCounty3},
+			cbs_ran_county4 	= 	#{cbsRanCounty4},
+			cbs_ran_county5 	= 	#{cbsRanCounty5},
+			cbs_ran_interna 	= 	#{cbsRanInterna},
+			cbs_ran_state1 		= 	#{cbsRanState1},
+			cbs_ran_state2 		= 	#{cbsRanState2},
+			cbs_ran_state3 		= 	#{cbsRanState3},
+			cbs_ran_state4 		= 	#{cbsRanState4},
+			cbs_ran_state5 		= 	#{cbsRanState5},
+			cbs_product_type 	= 	#{cbsProductType},
+			cbs_product_name 	= 	#{cbsProductName},
+			cbs_operator 		=	#{cbsOperator},
+			cbs_operator_qq 	=	#{cbsOperatorQQ},
+			cbs_prove 			=	#{cbsProve},
+			cbs_account_name 	=	#{cbsAccountName},
+			cbs_account 		=	#{cbsAccount},
+			cbs_open_account 	=	#{cbsOpenAccount},
+			cbs_operator_phone 	=	#{cbsOperatorPhone},
+			cbs_license 		=	#{cbsLicense},
+			cbs_permission 		=	#{cbsPermission}
+		WHERE
+			cpy_id = #{cpyId}
+	</update>
+	
+	<!-- 根据公司ID查询一条业务范围信息 -->
+	<select id="getBusinessById" resultType="companyBusinessBean">
+		SELECT
+			id 				   AS id,
+			cpy_id 			   AS cpyId,
+			cbs_service 	   AS cbsService,
+			cbs_cpy_type 	   AS cbsCpyType,
+			cbs_inland 		   AS cbsInland,
+			cbs_province	   AS cbsProvince,
+			cbs_city 		   AS cbsCity,
+			cbs_county 		   AS cbsCounty,
+			cbs_is_interna 	   AS cbsIsInterna,
+			cbs_state 		   AS cbsState,
+			cbs_ser_inland 	   AS cbsSerInland,
+			cbs_service_inside AS cbsServiceInside,
+			cbs_service_add    AS cbsServiceAdd, 
+			cbs_ser_interna    AS cbsSerInterna,
+			cbs_service_outer  AS cbsServiceOuter,
+			cbs_service_rest   AS cbsServiceRest,
+			cbs_ser_province   AS cbsSerProvince,
+			cbs_ser_city 	   AS cbsSerCity,
+			cbs_ser_county     AS cbsSerCounty,
+			cbs_nur_inland     AS cbsNurInland,
+			cbs_nur_interna    AS cbsNurInterna,
+			cbs_nur_state      AS cbsNurState,
+			cbs_nur_rest 	   AS cbsNurRest,
+			cbs_srl_inland     AS cbsSrlInland,
+			cbs_srl_interna    AS cbsSrlInterna,
+			cbs_srl_dir	       AS cbsSrlDir,
+			cbs_srl_rest	   AS cbsSrlRest,
+			cbs_curr_address   AS cbsCurrAddress,
+			cbs_ran_province1  AS cbsRanProvince1,
+			cbs_ran_province2  AS cbsRanProvince2,
+			cbs_ran_province3  AS cbsRanProvince3,
+			cbs_ran_province4  AS cbsRanProvince4,
+			cbs_ran_province5  AS cbsRanProvince5,
+			cbs_ran_city1 	   AS cbsRanCity1,
+			cbs_ran_city2 	   AS cbsRanCity2,
+			cbs_ran_city3 	   AS cbsRanCity3,
+			cbs_ran_city4 	   AS cbsRanCity4,
+			cbs_ran_city5 	   AS cbsRanCity5,
+			cbs_ran_county1    AS cbsRanCounty1,
+			cbs_ran_county2    AS cbsRanCounty2,
+			cbs_ran_county3    AS cbsRanCounty3,
+			cbs_ran_county4    AS cbsRanCounty4,
+			cbs_ran_county5    AS cbsRanCounty5,
+			cbs_ran_interna    AS cbsRanInterna,
+			cbs_ran_state1     AS cbsRanState1,
+			cbs_ran_state2     AS cbsRanState2,
+			cbs_ran_state3     AS cbsRanState3,
+			cbs_ran_state4     AS cbsRanState4,
+			cbs_ran_state5 	   AS cbsRanState5,
+			cbs_product_type   AS cbsProductType,
+			cbs_product_name   AS cbsProductName,
+			cbs_operator 	   AS cbsOperator,
+			cbs_operator_qq    AS cbsOperatorQq,
+			cbs_prove          AS cbsProve,
+			cbs_account_name   AS cbsAccountName,
+			cbs_account 	   AS cbsAccount,
+			cbs_open_account   AS cbsOpenAccount,
+			cbs_operator_phone AS cbsOperatorPhone,
+			cbs_license 	   AS cbsLicense,
+			cbs_permission 	   AS cbsPermission,
+			cbs_pro_province   AS cbsProProvince,
+			cbs_pro_city	   AS cbsProCity,
+			cbs_pro_county 	   AS cbsProCounty
+		FROM
+			company_business
+		WHERE
+			cpy_id = #{cpyId}
+		LIMIT 1
+	</select>
+	
+	<!-- 根据公司ID查询一条业务范围信息 -->
+	<delete id="deleteBusinessByCpyId">
+		DELETE FROM
+			company_business
+		WHERE
+			cpy_id = #{cpyId}
+	</delete>
+</mapper>

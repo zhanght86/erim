@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelmeet">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="hdlId != null  and hdlId != ''">	and 	hdl_id 	 =  #{hdlId} </if>
+		</where>
+	</sql>
+	<sql id="sql_column">
+		id ,
+		hmg_name          		AS hmgName,
+		hmg_area          		AS hmgArea,
+		hmg_personnum     		AS hmgPersonnum,
+		hmg_personnum_end 		AS hmgPersonNumEnd,
+		hmg_is_tea        		AS hmgIsTea,
+		hmg_shape		  		AS hmgShape,
+		hmg_renovation_date     AS hmgRenovationDate,
+		hdl_id            		AS hdlId,
+		hmg_img 			    AS hmgImg
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="hotelMeetBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_meeting
+		<include refid="sql_query" />
+	</select>
+	
+</mapper>

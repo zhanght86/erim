@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ticketdetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+		    <if test="cpyId != null">			                            	and cpy_id		   	    = 	    #{cpyId}</if>
+		    <if test="tdlScenicLevel != null 	and tdlScenicLevel != ''">		and tdl_scenic_level 	=       #{tdlScenicLevel}</if>
+		    
+		    <if test="tdlProvince != null 		and tdlProvince != ''">		    and tdl_province 	    =       #{tdlProvince}</if>
+		    <if test="tdlCity != null 			and tdlCity != ''">		        and tdl_city 	        =       #{tdlCity}</if>
+		    <if test="tdlCounty != null 		and tdlCounty != ''">		    and tdl_county 	        =       #{tdlCounty}</if>
+		    
+		    <if test="tdlCode != null 			and tdlCode != ''">		        and tdl_code 	        like "%"#{tdlCode}"%"</if>
+		    <if test="tdlName != null 		    and tdlName != '' ">	        and tdl_name            like "%"#{tdlName}"%"</if>
+		    <if test="tdlScenicLevel != null 	and tdlScenicLevel != ''">		and tdl_scenic_level 	=       #{tdlScenicLevel}</if>
+			<if test="tdlCityone != null 		and tdlCityone != ''">		    and tdl_ciityone 		=       #{tdlCityone}</if>
+			<if test="tdlAttractions != null 	and tdlAttractions != ''">		and tdl_attractions 	=       #{tdlAttractions}</if>
+			<if test="tdlWithinOrOuter != null 	and tdlWithinOrOuter != ''">	and tdl_within_or_outer =       #{tdlWithinOrOuter}</if>
+			<if test="tdlCountyone != null 		and tdlCountyone != ''">		and tdl_countyone 		like "%"#{tdlCountyone}"%"</if>
+			<if test="tdlNation != null 		and tdlNation != ''">			and tdl_nation 			like "%"#{tdlNation}"%"</if>
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTicket" resultType="ticketDetailBean">
+		SELECT
+			ticket_detail.id ,
+			tdl_name                   AS tdlName,
+			tdl_code                   AS tdlCode,
+			tdl_key                    AS tdlKey,
+			tdl_scenic_level		   AS tdlScenicLevel,
+			tdl_address                AS tdlAddress,
+			tdl_tel                    AS tdlTel,
+			tdl_nearby_spots           AS tdlNearbySpots,
+			tdl_attractions			   AS tdlAttractions,
+			tdl_nearby_hotel           AS tdlNearbyHotel,
+			tdl_nearby_architecture    AS tdlNearbyArchitecture,
+			tdl_position               AS tdlPosition,
+			tdl_is_credit              AS tdlIsCredit,
+			tdl_time_open              AS tdlTimeOpen,
+			tdl_time_close             AS tdlTimeClose,
+			tdl_comment                AS tdlComment,
+			tdl_visit                  AS tdlVisit,
+			tdl_message                AS tdlMessage,
+			tdl_img1                   AS tdlImg1,
+			tdl_img2                   AS tdlImg2,
+			tdl_img3                   AS tdlImg3,
+			tdl_createtime             AS tdlCreatetime,
+			tdl_createuser             AS tdlCreateuser,
+			tdl_maintenance_time       AS tdlMaintenanceTime,
+			tdl_is_through             AS tdlIsThrough,
+			tdl_through_time           AS tdlThroughTime,
+			tdl_through_user           AS tdlThroughUser,
+			tdl_province               AS tdlProvince,
+			tdl_city                   AS tdlCity,
+			tdl_min	                   AS tdlMin,
+			tdl_server                 AS tdlServer,
+			tdl_cash_cvoucher          AS tdlCashCvoucher,
+			tdl_in_the_park            AS tdlInThePark,
+			tdl_in_the_address         AS tdlInTheAddress,
+			tdl_using_this_dictionary  AS tdlUsingThisDictionary,
+			tdl_fee_description        AS tdlFeeDescription,
+			tdl_contact_person         AS tdlContacPerson,
+			tdl_validity               AS tdlValidity,
+			tdl_in_security            AS tdlInSecurity,	
+		    tdl_state_price            AS tdlStatePrice,
+		    tdl_refund_instructions    AS tdlRefundInstructions,
+		    tdl_is_del_status          AS tdlIsDelStatus,
+		    tdl_referential_policies   AS tdlReferentialPolicies,
+			tdl_set_reservation        AS tdlSetReservation,
+			tdl_security_guide         AS tdlSecurityGuide,
+			tdl_iphone                 AS tdlIphone,
+			tdl_qq                     AS tdlQq,
+			tdl_email                  AS tdlEmail,
+			tdl_county                 AS tdlCounty,
+			ticket_detail.cpy_id					   AS cpyId,
+			tdl_within_or_outer        AS tdlWithinOrOuter,
+			tdl_nation				   AS tdlNation,
+			tdl_countyone			   AS tdlCountyone,
+			tdl_ciityone			   AS tdlCityone
+			, 
+				cpy_name        	AS cpyName,
+				cpy_brand        	AS cpyBrand,
+				cpy_telephone   	AS cpyTelephone,
+				ccp_name			AS ccpName,
+				ccp_telephone		AS ccpTelephone,
+				ccp_qq				AS ccpQq,
+				cbs_operator		AS cbsOperator,
+				cbs_operator_phone	AS cbsOperatorPhone,
+				cbs_operator_qq		AS cbsOperatorQq  
+		FROM
+			ticket_detail
+		LEFT JOIN
+			company_detail
+		ON 
+			company_detail.id = ticket_detail.cpy_id
+		LEFT JOIN
+			company_contact_person
+		ON
+			company_contact_person.cpy_id = ticket_detail.cpy_id
+		LEFT JOIN
+			company_business
+		ON
+			company_business.cpy_id = ticket_detail.cpy_id
+		<include refid="sql_query" />
+	</select>
+		<select id="selectBeanByPriId" resultType="ticketDetailBean">
+		SELECT
+			id ,
+			tdl_name                   AS tdlName,
+			tdl_key                    AS tdlKey,
+			tdl_address                AS tdlAddress,
+			tdl_tel                    AS tdlTel,
+			tdl_nearby_spots           AS tdlNearbySpots,
+			tdl_nearby_hotel           AS tdlNearbyHotel,
+			tdl_nearby_architecture    AS tdlNearbyArchitecture,
+			tdl_position               AS tdlPosition,
+			tdl_is_credit              AS tdlIsCredit,
+			tdl_time_open              AS tdlTimeOpen,
+			tdl_time_close             AS tdlTimeClose,
+			tdl_comment                AS tdlComment,
+			tdl_visit                  AS tdlVisit,
+			tdl_message                AS tdlMessage,
+			tdl_img1                   AS tdlImg1,
+			tdl_img2                   AS tdlImg2,
+			tdl_img3                   AS tdlImg3,
+			tdl_createtime             AS tdlCreatetime,
+			tdl_createuser             AS tdlCreateuser,
+			tdl_maintenance_time       AS tdlMaintenanceTime,
+			tdl_is_through             AS tdlIsThrough,
+			tdl_through_time           AS tdlThroughTime,
+			tdl_through_user           AS tdlThroughUser,
+		    tdl_province               AS tdlProvince,
+			tdl_city                   AS tdlCity,
+			tdl_min	                   AS tdlMin,
+			tdl_server                 AS tdlServer,
+			tdl_cash_cvoucher          AS tdlCashCvoucher,
+			tdl_in_the_park            AS tdlInThePark,
+			tdl_in_the_address         AS tdlInTheAddress,
+			tdl_using_this_dictionary  AS tdlUsingThisDictionary,
+			tdl_fee_description        AS tdlFeeDescription,
+			tdl_contact_person         AS tdlContacPerson,
+			tdl_validity               AS tdlValidity,
+			tdl_in_security            AS tdlInSecurity,
+			tdl_state_price            AS tdlStatePrice,
+			tdl_refund_instructions    AS tdlRefundInstructions,
+			tdl_is_del_status          AS tdlIsDelStatus,
+			tdl_referential_policies   AS tdlReferentialPolicies,
+			tdl_set_reservation        AS tdlSetReservation,
+			tdl_security_guide         AS tdlSecurityGuide,
+			tdl_iphone                 AS tdlIphone,
+			tdl_qq                     AS tdlQq,
+			tdl_email                  AS tdlEmail,
+			tdl_county                 AS tdlCounty,
+			cpy_id					   AS cpyId
+		FROM
+			ticket_detail
+		WHERE
+			id = #{id}
+	</select>
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTicketCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			ticket_detail
+		<include refid="sql_query" />
+	</select>
+
+</mapper>

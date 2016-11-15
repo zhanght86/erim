@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="texisend">
+	
+	<!-- 过滤条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test = "tdlId != null and tdlId != ''"> and tdl_id = #{tdlId} </if>
+		</where>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		tdl_id					AS tdlId,
+		gdl_del_status			AS gdlDelStatus,
+		gdl_code				AS gdlCode,
+		gdl_type				AS gdlType,
+		gdl_start				AS gdlStart,
+		gdl_end					AS gdlEnd,
+		gdl_money				AS gdlMoney,
+		gdl_show   				AS gdlShow,
+		gdl_machine				AS gdlMachine,
+		gdl_machineback			AS gdlMachineback,
+		gdl_machinemoney		AS gdlMachinemoney,
+		gdl_machineshow			AS gdlMachineshow,
+		gdl_station				AS gdlStation,
+		gdl_stationup			AS gdlStationup,
+		gdl_stationmoney		AS gdlStationmoney,
+		gdl_stationshow			AS gdlStationshow,
+		gdl_stationback			AS gdlStationback,
+		gdl_stationnup			AS gdlStationnup,
+		gdl_stationbackmoney	AS gdlStationbackmoney,
+		gdl_stationbackshow		AS gdlStationbackshow,
+		gdl_startcity			AS gdlStartcity,
+		gdl_endcity				AS gdlEndcity,
+		gdl_citymoney			AS gdlCitymoney,
+		gdl_cityshow			AS gdlCityshow,
+		gdl_sendprivnce			AS gdlSendprivnce,
+		gdl_sendcity			AS gdlSendcity,
+		gdl_sendnation			AS gdlSendnation,
+		gdl_sendcounty			AS gdlSendcounty,
+		gdl_sendintand			AS gdlSendintand,
+		gdl_sendforgen			AS gdlSendforgen,
+		gdl_sendforgencity		AS gdlSendforgencity,
+		tdl_name				AS tdlName
+	</sql>
+		
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPagetrantportTexiCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			texi_send
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 根据线路信息ID查询 -->
+	<select id="getTexiSendById" resultType="texiSendBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			texi_send
+		WHERE
+		   id = #{id}
+	</select>
+	
+	<!-- 获取固定接送线路信息数据获取 -->
+	<select id="selectTexiSendList" resultType="texiSendBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			texi_send
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 固定接送增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+  		INSERT INTO
+			texi_send (
+				tdl_id,
+				gdl_del_status,
+				gdl_type,
+				gdl_start,
+				gdl_end,
+				gdl_money,
+				gdl_show,
+				gdl_machine,
+				gdl_machineback,
+				gdl_machinemoney,
+				gdl_machineshow,
+				gdl_station,
+				gdl_stationup,
+				gdl_stationmoney,
+				gdl_stationshow,
+				gdl_stationback,
+				gdl_stationnup,
+				gdl_stationbackmoney,
+				gdl_stationbackshow,
+				gdl_startcity,
+				gdl_endcity,
+				gdl_citymoney,
+				gdl_cityshow,
+				tdl_name
+			) VALUES (
+				#{tdlId},
+				#{gdlDelStatus},
+				#{gdlType},
+				#{gdlStart},
+				#{gdlEnd},
+				#{gdlMoney},
+				#{gdlShow},
+				#{gdlMachine},
+				#{gdlMachineback},
+				#{gdlMachinemoney},
+				#{gdlMachineshow},
+				#{gdlStation},
+				#{gdlStationup},
+				#{gdlStationmoney},
+				#{gdlStationshow},
+				#{gdlStationback},
+				#{gdlStationnup},
+				#{gdlStationbackmoney},
+				#{gdlStationbackshow},
+				#{gdlStartcity},
+				#{gdlEndcity},
+				#{gdlCitymoney},
+				#{gdlCityshow},
+				#{tdlName}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			texi_send
+		SET
+			gdl_start 		 		= #{gdlStart},
+			gdl_end 		 		= #{gdlEnd},
+			gdl_money		 		= #{gdlMoney},
+			gdl_show		 		= #{gdlShow},
+			gdl_machine		 		= #{gdlMachine},
+			gdl_machineback	 		= #{gdlMachineback},
+			gdl_machinemoney 		= #{gdlMachinemoney},
+			gdl_machineshow	 		= #{gdlMachineshow},
+			gdl_station		 		= #{gdlStation},
+			gdl_stationup	 		= #{gdlStationup},
+			gdl_stationmoney 		= #{gdlStationmoney},
+			gdl_stationshow	 		= #{gdlStationshow},
+			gdl_stationback	 		= #{gdlStationback},
+			gdl_stationnup	 		= #{gdlStationnup},
+			gdl_stationbackmoney	= #{gdlStationbackmoney},
+			gdl_stationbackshow		= #{gdlStationbackshow},
+			gdl_startcity	 		= #{gdlStartcity},
+			gdl_endcity		 		= #{gdlEndcity},
+			gdl_citymoney	 		= #{gdlCitymoney},
+			gdl_cityshow	 		= #{gdlCityshow}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 修改产品编码 -->
+	<update id="updateCode">
+		UPDATE
+			texi_send
+		SET
+			gdl_code 		= #{gdlCode}
+		WHERE
+			id				= #{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			texi_send
+		WHERE
+			id=#{id}
+	</delete>
+</mapper>

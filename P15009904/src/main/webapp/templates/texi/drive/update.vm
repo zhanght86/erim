@@ -1,0 +1,459 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<script type="text/javascript"> 
+
+	//判断有没有id
+	var a = $("input[name='id']").val();
+	if (a == '') {//如果id为空
+    	//初始化省市县
+    	regUtil.initProvince(110000,'zjlProvince','zjlCity','zjlCounty');
+	} else {//如果有id
+		// 判断自驾类型
+		var e = '$!texiDrive.zjlType';
+		// 当可自驾时，加载省市
+		if (e == '02') {
+    		var b = '$!texiDrive.zjlProvince';
+    		var d = '$!texiDrive.zjlCity';
+        	//初始化省市县
+        	regUtil.initProvince(b,'zjlProvince','zjlCity','zjlCounty',d,0);
+		} else { // 不可自驾时，则加载默认省市
+    		//初始化省市县
+        	regUtil.initProvince(110000,'zjlProvince','zjlCity','zjlCounty');
+			//半天包车
+			$("select[name='zjlProvince']").attr('disabled',"true");
+			$("select[name='zjlCity']").attr('disabled',"true");
+			$("input[name='zjlPlaceCar']").attr('disabled',"true");
+			$("input[name='zjlHfLimit']").attr('disabled',"true");
+			$("input[name='zjlHfLimitKm']").attr('disabled',"true");
+			$("input[name='zjlHfTakePlace']").attr('disabled',"true");
+			$("textarea[name='zjlHfTakeAddress']").attr('disabled',"true");
+			$("input[name='zjlHfBackPlace']").attr('disabled',"true");
+			$("textarea[name='zjlHfBackAddress']").attr('disabled',"true");
+			$("textarea[name='zjlHfCostShow']").attr('disabled',"true");
+			$("textarea[name='zjlHfBackNotice']").attr('disabled',"true");
+			$("textarea[name='zjlHfInsuranceNotice']").attr('disabled',"true");
+			$("textarea[name='zjlHfUpdateNotice']").attr('disabled',"true");
+			$("textarea[name='zjlHfSpecialNote']").attr('disabled',"true");
+			$("textarea[name='zjlHfBreachNotice']").attr('disabled',"true");
+			$("input[name='zjlHfLimit']").val("");
+			$("input[name='zjlHfLimitKm']").val("");
+			$("textarea[name='zjlHfBackAddress']").val("");
+			$("textarea[name='zjlHfCostShow']").val("");
+			$("textarea[name='zjlHfBackNotice']").val("");
+			$("textarea[name='zjlHfInsuranceNotice']").val("");
+			$("textarea[name='zjlHfUpdateNotice']").val("");
+			$("textarea[name='zjlHfSpecialNote']").val("");
+			$("textarea[name='zjlHfBreachNotice']").val("");
+			//全天包车
+			$("input[name='zjlDay']").attr('disabled',"true");
+			$("input[name='zjlLimit']").attr('disabled',"true");
+			$("input[name='ZjlTakePlace']").attr('disabled',"true");
+			$("textarea[name='zjlTakeAddress']").attr('disabled',"true");
+			$("input[name='zjlBackPlace']").attr('disabled',"true");	
+			$("textarea[name='zjlBackAddress']").attr('disabled',"true");
+			$("textarea[name='zjlCostShow']").attr('disabled',"true");
+			$("textarea[name='zjlBackShow']").attr('disabled',"true");
+			$("textarea[name='zjlBreachNotice']").attr('disabled',"true");
+			$("textarea[name='zjlInsuranceNotice']").attr('disabled',"true");
+			$("textarea[name='zjlUpdateNotice']").attr('disabled',"true");
+			$("textarea[name='zjlSpecialNotice']").attr('disabled',"true");
+			$("input[name='zjlDay']").val("");
+			$("input[name='zjlLimit']").val("");
+			$("textarea[name='zjlTakeAddress']").val("");
+			$("textarea[name='zjlBackAddress']").val("");
+			$("textarea[name='zjlCostShow']").val("");
+			$("textarea[name='zjlBackShow']").val("");
+			$("textarea[name='zjlBreachNotice']").val("");
+			$("textarea[name='zjlInsuranceNotice']").val("");
+			$("textarea[name='zjlUpdateNotice']").val("");
+			$("textarea[name='zjlSpecialNotice']").val("");
+		}
+	}
+
+	// 当点击不可自驾时文本框都不能输入
+	$("input[name='zjlType']").change(function() {
+		var c = $("input[name='zjlType']:checked").val();
+		if (c == '02') {
+			//半天包车
+			$("select[name='zjlProvince']").attr('disabled',false);
+			$("select[name='zjlCity']").attr('disabled',false);
+			$("input[name='zjlPlaceCar']").attr('disabled',false);
+			$("input[name='zjlHfLimit']").attr('disabled',false);
+			$("input[name='zjlHfLimitKm']").attr('disabled',false);
+			$("input[name='zjlHfTakePlace']").attr('disabled',false);
+			$("textarea[name='zjlHfTakeAddress']").attr('disabled',false);
+			$("input[name='zjlHfBackPlace']").attr('disabled',false);
+			$("textarea[name='zjlHfBackAddress']").attr('disabled',false);
+			$("textarea[name='zjlHfCostShow']").attr('disabled',false);
+			$("textarea[name='zjlHfBackNotice']").attr('disabled',false);
+			$("textarea[name='zjlHfInsuranceNotice']").attr('disabled',false);
+			$("textarea[name='zjlHfUpdateNotice']").attr('disabled',false);
+			$("textarea[name='zjlHfSpecialNote']").attr('disabled',false);
+			$("textarea[name='zjlHfBreachNotice']").attr('disabled',false);
+			//全天包车
+			$("input[name='zjlDay']").attr('disabled',false);
+			$("input[name='zjlLimit']").attr('disabled',false);
+			$("input[name='ZjlTakePlace']").attr('disabled',false);
+			$("textarea[name='zjlTakeAddress']").attr('disabled',false);
+			$("input[name='zjlBackPlace']").attr('disabled',false);
+			$("textarea[name='zjlBackAddress']").attr('disabled',false);
+			$("textarea[name='zjlCostShow']").attr('disabled',false);
+			$("textarea[name='zjlBackShow']").attr('disabled',false);
+			$("textarea[name='zjlBreachNotice']").attr('disabled',false);
+			$("textarea[name='zjlInsuranceNotice']").attr('disabled',false);
+			$("textarea[name='zjlUpdateNotice']").attr('disabled',false);
+			$("textarea[name='zjlSpecialNotice']").attr('disabled',false);
+			
+		} else {
+			//半天包车
+			$("select[name='zjlProvince']").attr('disabled',"true");
+			$("select[name='zjlCity']").attr('disabled',"true");
+			$("input[name='zjlPlaceCar']").attr('disabled',"true");
+			$("input[name='zjlHfLimit']").attr('disabled',"true");
+			$("input[name='zjlHfLimitKm']").attr('disabled',"true");
+			$("input[name='zjlHfTakePlace']").attr('disabled',"true");
+			$("textarea[name='zjlHfTakeAddress']").attr('disabled',"true");
+			$("input[name='zjlHfBackPlace']").attr('disabled',"true");
+			$("textarea[name='zjlHfBackAddress']").attr('disabled',"true");
+			$("textarea[name='zjlHfCostShow']").attr('disabled',"true");
+			$("textarea[name='zjlHfBackNotice']").attr('disabled',"true");
+			$("textarea[name='zjlHfInsuranceNotice']").attr('disabled',"true");
+			$("textarea[name='zjlHfUpdateNotice']").attr('disabled',"true");
+			$("textarea[name='zjlHfSpecialNote']").attr('disabled',"true");
+			$("textarea[name='zjlHfBreachNotice']").attr('disabled',"true");
+			$("input[name='zjlHfLimit']").val("");
+			$("input[name='zjlHfLimitKm']").val("");
+			$("textarea[name='zjlHfTakeAddress']").val("");
+			$("textarea[name='zjlHfBackAddress']").val("");
+			$("textarea[name='zjlHfCostShow']").val("");
+			$("textarea[name='zjlHfBackNotice']").val("");
+			$("textarea[name='zjlHfInsuranceNotice']").val("");
+			$("textarea[name='zjlHfUpdateNotice']").val("");
+			$("textarea[name='zjlHfSpecialNote']").val("");
+			$("textarea[name='zjlHfBreachNotice']").val("");
+			//全天包车
+			$("input[name='zjlDay']").attr('disabled',"true");
+			$("input[name='zjlLimit']").attr('disabled',"true");
+			$("input[name='ZjlTakePlace']").attr('disabled',"true");
+			$("textarea[name='zjlTakeAddress']").attr('disabled',"true");
+			$("input[name='zjlBackPlace']").attr('disabled',"true");
+			$("textarea[name='zjlBackAddress']").attr('disabled',"true");
+			$("textarea[name='zjlCostShow']").attr('disabled',"true");
+			$("textarea[name='zjlBackShow']").attr('disabled',"true");
+			$("textarea[name='zjlBreachNotice']").attr('disabled',"true");
+			$("textarea[name='zjlInsuranceNotice']").attr('disabled',"true");
+			$("textarea[name='zjlUpdateNotice']").attr('disabled',"true");
+			$("textarea[name='zjlSpecialNotice']").attr('disabled',"true");
+			$("input[name='zjlDay']").val("");
+			$("input[name='zjlLimit']").val("");
+			$("textarea[name='zjlTakeAddress']").val("");
+			$("textarea[name='zjlBackAddress']").val("");
+			$("textarea[name='zjlCostShow']").val("");
+			$("textarea[name='zjlBackShow']").val("");
+			$("textarea[name='zjlBreachNotice']").val("");
+			$("textarea[name='zjlInsuranceNotice']").val("");
+			$("textarea[name='zjlUpdateNotice']").val("");
+			$("textarea[name='zjlSpecialNotice']").val("");
+		}
+	});
+	
+	/*获取半天、全天取车地点和还车地点的值*/
+	//半天取车地点
+	var b = $("input[name='zjlHfTakePlace']:checked").val();
+	if(b == '02'){
+		$("textarea[name='zjlHfTakeAddress']").attr('disabled',false);
+	}else{
+		$("textarea[name='zjlHfTakeAddress']").attr('disabled',"true");
+		$("textarea[name='zjlHfTakeAddress']").val("");
+	}
+	
+	//半天还车地点
+	var b = $("input[name='zjlHfBackPlace']:checked").val();
+	if(b == '02'){
+		$("textarea[name='zjlHfBackAddress']").attr('disabled',false);
+	}else{
+		$("textarea[name='zjlHfBackAddress']").attr('disabled',"true");
+		$("textarea[name='zjlHfBackAddress']").val("");
+	}
+	
+	//全天取车地点
+	var b = $("input[name='ZjlTakePlace']:checked").val();
+	if(b == '02'){
+		$("textarea[name='zjlTakeAddress']").attr('disabled',false);
+	}else{
+		$("textarea[name='zjlTakeAddress']").attr('disabled',"true");
+		$("textarea[name='zjlTakeAddress']").val("");
+	}
+	
+	//全天还车地点
+	var b = $("input[name='zjlBackPlace']:checked").val();
+	if(b == '02'){
+		$("textarea[name='zjlBackAddress']").attr('disabled',false);
+	}else{
+		$("textarea[name='zjlBackAddress']").attr('disabled',"true");
+		$("textarea[name='zjlBackAddress']").val("");
+	}
+	
+	/*点击事件*/
+	//半天取车地点
+	$("input[name='zjlHfTakePlace']").change(function() {
+    	var b = $("input[name='zjlHfTakePlace']:checked").val();
+    	if(b == '02'){
+    		$("textarea[name='zjlHfTakeAddress']").attr('disabled',false);
+    	}else{
+    		$("textarea[name='zjlHfTakeAddress']").attr('disabled',"true");
+    		$("textarea[name='zjlHfTakeAddress']").val("");
+    	}
+    });
+	
+	//半天还车地点
+    $("input[name='zjlHfBackPlace']").change(function() {
+        var b = $("input[name='zjlHfBackPlace']:checked").val();
+        if(b == '02'){
+        	$("textarea[name='zjlHfBackAddress']").attr('disabled',false);
+        }else{
+        	$("textarea[name='zjlHfBackAddress']").attr('disabled',"true");
+        	$("textarea[name='zjlHfBackAddress']").val("");
+        }
+    });
+	
+	//全天取车地点
+	$("input[name='ZjlTakePlace']").change(function() {
+    	var b = $("input[name='ZjlTakePlace']:checked").val();
+    	if(b == '02'){
+    		$("textarea[name='zjlTakeAddress']").attr('disabled',false);
+    	}else{
+    		$("textarea[name='zjlTakeAddress']").attr('disabled',"true");
+    		$("textarea[name='zjlTakeAddress']").val("");
+    	}
+    });
+	
+	//全天还车地点
+	$("input[name='zjlBackPlace']").change(function() {
+    	var b = $("input[name='zjlBackPlace']:checked").val();
+    	if(b == '02'){
+    		$("textarea[name='zjlBackAddress']").attr('disabled',false);
+    	}else{
+    		$("textarea[name='zjlBackAddress']").attr('disabled',"true");
+    		$("textarea[name='zjlBackAddress']").val("");
+    	}
+    });
+	
+	//点击量价
+	$("#price").click(function(){
+		//定义变量接受汽车id
+		var a = $("input[name='id']").val();
+		//判断汽车id是否有值
+		if(a == ''){
+			//如果id为空没有值，则提示
+			wxcalert("请先提交自驾信息");
+		}else{
+		    //如果id有值则执行操作进入自驾量价管理
+			index.load('$appRoot/texi/drive/drivePricePage?dicPortal=01&zjlId=$!texiDrive.id&tdlId=$!texiDrive.tdlId');
+		}
+	});
+	
+</script>
+<div class="rdivv">
+<div class="self-driving">
+	<div class="carfixed_top">
+		<img src="$staticRoot/images/htcar1.png" />
+		<span>自驾</span>
+		<div class="cb"></div>
+	   <div class="g_line"></div>
+	</div>
+	<form method="post" id="form1">
+		<input type="hidden" name="id" value="$!texiDrive.id"/>
+		<input type="hidden" name="tdlId" value="$!texiDrive.tdlId"/>
+		<div class="self_ct">
+			<div class="self_cttop">
+				<span>自驾类型：</span>	
+				<label>
+					<input id="user_111" type="radio" name="zjlType"  value="02" #if($!texiDrive.zjlType == "02") checked #end class="validate[minCheckbox[1]] checkbox" />可自驾
+				</label>
+				<label>
+					<input id="no_user_111" type="radio" name="zjlType"  value="01" #if($!texiDrive.zjlType == "01") checked #end class="validate[minCheckbox[1]] checkbox" />不可自驾
+				</label>
+			</div>
+			
+			<!-- 
+			<div class="self_cttopa">
+				<span>用车城市：</span>
+				<select name="zjlProvince" style="width:80px;height:25px;" >
+					#foreach($item in $provinces)
+						<option #if($!texiDrive.zjlProvince == $item.regionNo) selected #end value="$item.regionNo">$item.regionName</option>
+					#end
+				</select>省
+				<select name="zjlCity" style="width:80px;height:25px;"></select>市
+				<input name="zjlCounty" type="hidden" />-->
+               
+				<!-- 
+				<select name="zjlCounty" style="width:80px;height:25px;"></select>县
+				<input name="zjlCounty" type="hidden" />-->
+			
+			<div class="self_cttopa" style="width:480px; margin-bottom: 15px;">
+				<span>可否异地还车：</span>
+				<label>
+					<input type="radio" name="zjlPlaceCar" value="02" #if($!texiDrive.zjlPlaceCar == "02") checked #end class="validate[minCheckbox[1]] checkbox" />可以
+				</label>
+				<label>
+					<input type="radio" name="zjlPlaceCar" value="01" #if($!texiDrive.zjlPlaceCar == "01") checked #end class="validate[minCheckbox[1]] checkbox" />不可以
+				</label>
+				
+			</div>
+			<div class="self_ctbiger">
+				<div class="self_ctbox show">
+					<div class="self_ctl">
+						<div class="self_ctltop">
+							<img src="$staticRoot/images/htcar66.png" />
+							<span>半天</span>
+						</div>
+						<div class="self_ctlct">
+							<div class="self_ctlctline" style="width:465px;">
+								<span>限时长：</span>
+								<div class="self_ctlctli">
+									<input type="text" name="zjlHfLimit" value="$!texiDrive.zjlHfLimit" class="validate[required,custom[integer],min[1],max[12],maxSize[2]]" />
+									小时
+								</div>
+								<span class="self_ctlctle">限公里：</span>
+								<div class="self_ctlctli">
+									<input type="text" name="zjlHfLimitKm" value="$!texiDrive.zjlHfLimitKm" class="validate[required,custom[integer],min[1],max[300],maxSize[3]]" />
+									公里
+								</div>
+							</div>
+							<span style="margin-left:5px;color:red;margin-top:30px;width:10px;float:left;">*</span>
+							<div class="self_ctlctline">
+								<span>取车地点：</span>
+								<label><input type="radio" #if($!texiDrive.zjlHfTakePlace == "02") checked #end name="zjlHfTakePlace" value="02" class="validate[minCheckbox[1]] checkbox"/>固定地点</label>
+								<label><input type="radio" #if($!texiDrive.zjlHfTakePlace == "01") checked #end name="zjlHfTakePlace" value="01" class="validate[minCheckbox[1]] checkbox"/>送车上门</label>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>取车地址：</span>
+								<textarea name="zjlHfTakeAddress"  placeholder="多个可换行输入，如 1:北京" class="validate[required,maxSize[200]]" style="width:170px;height:44px;float:left;" >$!texiDrive.zjlHfTakeAddress</textarea>
+								<span class="mess_star_red" style="float:left;">*</span>
+							</div>
+							<div class="self_ctlctline">
+								<span>还车地点：</span>
+								<label><input type="radio" name="zjlHfBackPlace" value="02" #if($!texiDrive.zjlHfBackPlace == "02") checked #end class="validate[minCheckbox[1]] checkbox" />固定地点</label>
+								<label><input type="radio" name="zjlHfBackPlace" value="01" #if($!texiDrive.zjlHfBackPlace == "01") checked #end class="validate[minCheckbox[1]] checkbox" />上门取车</label>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>还车地址：</span>
+								<textarea name="zjlHfBackAddress"  placeholder="多个可换行输入，如 1:北京" class="validate[required,maxSize[200]]" style="width:170px;height:44px;float:left" >$!texiDrive.zjlHfBackAddress</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>费用说明：</span>
+								<textarea name="zjlHfCostShow" class="validate[required,maxSize[1000]]" style="float:left;">$!texiDrive.zjlHfCostShow</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>取还车须知：</span>
+								<textarea name="zjlHfBackNotice" class="validate[required,maxSize[1000]]" style="float:left">$!texiDrive.zjlHfBackNotice</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>违章须知：</span>
+								<textarea name="zjlHfBreachNotice" class="validate[required,maxSize[1000]]" style="float:left;">$!texiDrive.zjlHfBreachNotice</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>保险说明：</span>
+								<textarea name="zjlHfInsuranceNotice" class="validate[required,maxSize[1000]]" style="float:left">$!texiDrive.zjlHfInsuranceNotice</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>更改/取消订单说明：</span>
+								<textarea name="zjlHfUpdateNotice" class="validate[required,maxSize[1000]]" style="float:left;">$!texiDrive.zjlHfUpdateNotice</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>特别备注：</span>
+								<textarea name="zjlHfSpecialNote" class="validate[maxSize[1000]]" >$!texiDrive.zjlHfSpecialNote</textarea>
+							</div>
+							<div class="self_ctlctlinea">
+								<span></span>
+								<div class="self_ctlctlar"></div>
+							</div>
+						</div>
+					</div>
+					<div class="self_ctr">
+						<div class="self_ctltop">
+							<img src="$staticRoot/images/htcar66.png">
+							<span>全天</span>
+						</div>
+						<div class="self_ctlct"> 
+							<div class="self_ctlctline" style="width:465px;">
+								<span>限时长：</span>
+								<div class="self_ctlctli">
+									<input type="text" name="zjlDay" class="validate[required,custom[integer],min[1],max[24],maxSize[2]]" value="$!texiDrive.zjlDay">小时
+								</div>
+								<span style="width:60px;">限公里：</span>
+								<div class="self_ctlctli">
+									<input type="text" name="zjlLimit" class="validate[required,custom[integer],min[1],max[600],maxSize[3]]" value="$!texiDrive.zjlLimit">公里
+								</div>
+							</div><span style="margin-left:5px;color:red;margin-top:30px;width:10px;float:left;">*</span>
+							<div class="self_ctlctline">
+								<span>取车地点：</span>
+								<label><input type="radio" value="02" name="ZjlTakePlace" #if($!texiDrive.ZjlTakePlace == "02") checked #end class="validate[minCheckbox[1]] checkbox"/>固定地点</label>
+								<label><input type="radio" value="01" name="ZjlTakePlace" #if($!texiDrive.ZjlTakePlace == "01") checked #end class="validate[minCheckbox[1]] checkbox"/>送车上门</label>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>取车地址：</span>
+								<textarea name="zjlTakeAddress"  placeholder="多个可换行输入，如 1:北京" class="validate[required,maxSize[200]]" style="width:170px;height:44px;float:left">$!texiDrive.zjlTakeAddress</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctline">
+								<span>还车地点：</span>
+								<label><input type="radio" value="02" name="zjlBackPlace" #if($!texiDrive.zjlBackPlace == "02") checked #end class="validate[minCheckbox[1]] checkbox">固定地点</label>
+								<label><input type="radio" value="01" name="zjlBackPlace" #if($!texiDrive.zjlBackPlace == "01") checked #end class="validate[minCheckbox[1]] checkbox">上门取车</label>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>还车地址：</span>
+								<textarea name="zjlBackAddress"  placeholder="多个可换行输入，如 1:北京" class="validate[required,maxSize[200]]" style="width:170px;height:44px;float:left;">$!texiDrive.zjlBackAddress</textarea>
+								<span class="mess_star_red" style="float:left;">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>费用说明：</span>
+								<textarea name="zjlCostShow" class="validate[required,maxSize[1000]]" style="float:left">$!texiDrive.zjlCostShow</textarea>
+								<span class="mess_star_red" style="float:left;">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>取还车须知：</span>
+								<textarea name="zjlBackShow" class="validate[required,maxSize[1000]]" style="float:left">$!texiDrive.zjlBackShow</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>违章须知：</span>
+								<textarea name="zjlBreachNotice" class="validate[required,maxSize[1000]]" style="float:left">$!texiDrive.zjlBreachNotice</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>保险说明：</span>
+								<textarea name="zjlInsuranceNotice" class="validate[required,maxSize[1000]]" style="float:left">$!texiDrive.zjlInsuranceNotice</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>更改/取消订单说明：</span>
+								<textarea name="zjlUpdateNotice" class="validate[required,maxSize[1000]]" style="float:left">$!texiDrive.zjlUpdateNotice</textarea>
+								<span class="mess_star_red" style="float:left">*</span>
+							</div>
+							<div class="self_ctlctlinea">
+								<span>特别备注：</span>
+								<textarea name="zjlSpecialNotice" class="validate[maxSize[1000]]">$!texiDrive.zjlSpecialNotice</textarea>
+							</div>
+							<div class="self_ctlctlinea">
+								<div class="self_ctlctlar" style="width:485px;">
+                                     <a id="price" href="#" ><span class="strong" style="color:red;font-size:15px;margin-left:150px; ">量/价格管理</span></a>
+				
+									<button type="button" id="btn" class="carsubmit" onclick="subform.sub('form1','$appRoot/texi/drive/updte','$appRoot/texi/detail/list');">提交</button>
+									<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+   	</form>
+</div>
+</div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>注册_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/register.css">
+
+</head>
+<body>
+	<div class="register">
+		<div class="register_top">
+			<div class="register_topl">
+				<img src="$staticRoot/images/logo1.gif">
+			</div>
+			<div class="register_topm">
+				<h1>佳佳旅行网</h1>
+				<span>石家庄佳佳国际旅行社有限公司</span>
+			</div>
+			<div class="register_topr">
+				<div class="register_toprf">
+					<a href="#" class="register_topd">登录&nbsp;</a>
+					<a href="#">|&nbsp;客服中心</a>
+				</div>
+			</div>
+		</div>
+		<div class="register_center">
+			<div class="rc_top">
+				<img src="$staticRoot/images/r3.png">
+			</div>
+			<div class="rc_ct3">
+				<img src="$staticRoot/images/r5.jpg">
+				<div class="rc_ct4">
+					<a href="$appRoot">返回首页</a>
+					<a href="#">补填信息</a>
+				</div>
+			</div>
+		</div>
+		<div class="register_footer">
+			Copyright@2002-2014&nbsp;版权所有&nbsp;北京佳旅联合国际旅行社有限公司&nbsp;苏ICP证B2-2000204&nbsp;旅行社业务许可证：L-JS-CJ00070  
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+<script type="text/javascript" src="$staticRoot/js/register.js"></script>

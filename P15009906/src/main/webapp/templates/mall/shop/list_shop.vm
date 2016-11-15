@@ -1,0 +1,49 @@
+
+
+	<ul class="menu_list mb20">
+		#foreach($item in $listmall)
+			#if($item.mspLevel == 1)
+				<li id="li_$item.id">$item.mspName
+        			<div class="second_block">
+        				#foreach($obj in $listmall)
+							#if($item.id == $obj.mspId)
+								<a id="a_$obj.id" href="javascript:index.load('$appRoot/mall/shop/list?mspId=$item.id&id=$obj.id');">$obj.mspName</a>
+							#end
+						#end
+        			</div>
+        		</li>
+			#end
+		#end
+	</ul>
+	<div class="g_block_2 g_block_7 mb20">
+		<p class="g_tit_1 mb10">产品商信息（办事处、外联、批发商）</p>
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>供应商编码</th>
+				<th>所属专线</th>
+				<th>产品数量</th>
+				<th>公司/品牌</th>
+				<th>负责人/电话</th>
+				<th>计调/电话</th>
+				<th>在线交流</th>
+			</tr>
+			#foreach($item in $companyList)
+    			<tr>
+    				<td>$!item.id</td>
+    				<td>石家庄</td>
+    				<td>20</td>
+    				<td><a href="javascript:index.load('$appRoot/tourism/detail/linelist');">$item.cpyName / $!item.cpyBrand</a></td>
+    				<td>王建/$!item.cpyTelephone</td>
+    				<td>张占波/1231231232</td>
+    				<td><img src="$staticRoot/images/001.gif"></td>
+    			</tr>
+			#end
+		</table>
+	</div>
+	<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+	
+	<script >
+		//默认上次选择
+		$("#li_$!mallshop.mspId").attr("class","on");
+		$("#a_$!mallshop.id").attr("class","on");
+    </script>

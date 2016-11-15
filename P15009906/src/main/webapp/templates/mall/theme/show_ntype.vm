@@ -1,0 +1,198 @@
+	<div class="g_block_2 mb20 pb5">
+		<div class="input_block clearfix">
+            <div class="label_left" style="width:60px;"><label>选择主题：</label></div>
+    		<div class="input_right input_right_wauto" style="width:760px;">
+    			<span class="add_block_1">    			
+    			<select class="w130" style="margin-bottom:15px;">
+					#foreach($item in $codeList.keySet())
+						<option value="$codeList.get($item)">$codeList.get($item)</option>
+					#end
+				</select>
+				</span> <button class="add_but1 red_a" href="javascript:void(0);">确认添加</button>
+    		</div>
+    	</div>
+    </div>
+	<p class="tab_a_2">
+			<!--
+			<a class="on" href="javascript:;"><span>周末</span></a>
+			<a href="javascript:;"><span>周末</span>(1)</a>
+			<a href="javascript:;"><span></span></a><a href="javascript:;"><span></span></a><a href="javascript:;"><span></span></a><a href="javascript:;"><span></span></a><a href="javascript:;"><span></span></a><a href="javascript:;"><span></span></a><a href="javascript:;"><span></span></a-->
+	</p>
+	<div class="g_block_2 mb20" id="tab_a_block">
+		<div class="tab_con">
+			<div class="tab_n tab_show">
+    		<div>
+				#* 
+    			<div class="input_block clearfix">
+    				<div class="input_right input_right_wauto">
+    					<label class="ml12">目的地：</label>
+    					<input class="w130">
+    					<label class="ml25">主要景点：</label>
+    					<input class="w130">
+    					<label class="ml25">线路名称：</label>
+    					<input class="w130">
+    				</div>
+    			</div>
+    			<div class="input_block clearfix mt_10">
+    				<div class="input_right input_right_wauto">
+    					<label>产品形态：</label>
+    					<select class="w90"><option></option></select>
+    					<label class="ml25">供应商名称/品牌：</label>
+    					<input class="w130">
+    					<label class="ml35">负责人：</label>
+    					<input class="w90"><span class="red_a ml25">查询</span>
+    				</div>
+    			</div>
+				*#
+    			<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+    				<tr>
+    					<th>已选0个</th>
+    					<th>产品编码</th>
+    					<th>目的地</th>
+    					<th style="width:20%">线路名称</th>
+    					<th>主要景点</th>
+    					<th>行程天数</th>
+    					<th>产品标准</th>
+    					<th>产品形态</th>
+    					<th>供应商名称/品牌</th>
+    					<th>负责人</th>
+    				</tr>
+					#foreach($item in $listhot)
+        				<tr>
+        					<td><input type="checkbox" name="child_box" value="$!item.id"></td>
+        					<td>$!item.ldlCode</td>
+        					<td>广东</td>
+        					<td><a href="#">$!item.ldlName</a></td>
+        					<td>核电站</td>
+        					<td>8天</td>
+        					<td>$!item.ldlProductStandard</td>
+        					<td>跟团游</td>
+        					<td>广州阳关旅社</td>
+        					<td>王建</td>
+        				</tr>
+					#end
+    			</table>
+    			<div class="tpage mb20">
+    				<div class="tpagel tpage2 pl0"><span class="select_mess"><img src="$staticRoot/images/sd_03.jpg">请在此选择您热门精选模块需要展示的产品（只能选择12个）</span></div>
+    			</div>
+    			<div class="g_right"><a class="red_a ml25" href="javascript:void(0);">确定</a></div>
+    		</div>
+		</div>
+	</div>
+	
+</div>
+		
+	<script type="text/javascript">
+    	$(document).ready(function(){
+		
+			//点击加号 添加所选主题
+		/*	$(".input_right .add_but1").click(function(){
+				var html  = "<span class='add_block_1'><select class='w130'>";
+				#foreach($item in $codeList.keySet())
+					html += '<option value="$codeList.get($item)">$codeList.get($item)</option>';
+				#end
+					html += "</select><em class='add_del'>&times;</em></span>";
+				$(this).before(html);
+				showorhide();
+			})*/
+			//点击加号添加主题,添加空白框
+			/*$(".input_right .add_but1").click(function(){
+				 var html  = '<a href="javascript:;" class="add_theme"><span class="add_span">'+$(".input_right select").val()+'</span><p class="add_del">&times;</p></a>';
+				$(".tab_a_2").append(html);
+				showorhide();
+			});*
+		/*	$(".input_right").on("click",".add_del",function(){
+				$(this).parent().remove();
+				showorhide();
+			})*/
+			
+			$(".tab_a_2").on("click",".add_del",function(){
+				$(this).parent().remove();
+				showorhide();
+			});
+		/*	function showorhide(){
+				if($(".input_right .add_block_1").length > 7){
+					$(".input_right .add_but1").hide();
+                   $(".input_right .add_but1").after(" <span class='ts_xx' style='color:red'> 最多可选8项主题！</span>");
+					$(".ts_xx").animate({opacity:"0"},3000,function(){$(".ts_xx").remove()});
+				}else{
+					$(".input_right .add_but1").show();
+				}
+			}*/
+			function showorhide(){
+				if($(".tab_a_2 a").length > 5){
+					//$(".input_right .add_but1").hide();
+					$(".input_right .add_but1").text("添加完成").css("background-color","#ccc").attr("disabled", true); 
+					$(".add_block_1 select").attr("disabled", true); 
+                   $(".input_right .add_but1").after(" <span class='ts_xx' style='color:red'> 最多可选6项主题！</span>");
+					$(".ts_xx").animate({opacity:"0"},2000,function(){$(".ts_xx").remove()});
+				}else{
+					//$(".input_right .add_but1").show();
+					$(".input_right .add_but1").text("确认主题").css("background-color","#F3BF73").attr("disabled", false); 
+					$(".add_block_1 select").attr("disabled", false); 
+				}
+			}
+			
+			$(".tab_a_2 a").each(function(){
+				if($(this).find("span").text()==""){
+					$(this).hide();
+				}else{
+					$(this).show();
+				}
+			})
+			//点击加号添加主题,添加空白框
+			$(".input_right .add_but1").click(function(){
+				
+				if(!$(".input_right select").val()==""){
+    				for(var i=0;i<$(".tab_a_2 a").length;i++){
+    						if($(".input_right select").val()==$(".tab_a_2 a").eq(i).find("span").text()){
+								if($(".ts_xxx").text()==""){
+        							$(".tab_a_2").append("<span class='ts_xxx' style='color:red;line-height:30px;padding-left:10px;'>此主题已存在，请选择其他主题！</span>");
+        							$(".ts_xxx").animate({opacity:"0"},2000,function(){
+        								$(".ts_xxx").remove();
+        							
+        							});
+								}
+    							return false;						
+    						}
+    					}
+    					 var html  = '<a href="javascript:;" class="add_theme"><span class="add_span">'+$(".input_right select").val()+'</span><p class="add_del">&times;</p></a>';
+						$(".tab_a_2").append(html);
+						showorhide();
+    					$(".tab_a_2 a").each(function(){
+            				if($(this).find("span").text()==""){
+            					$(this).hide();
+            				}else{
+            					$(this).show();
+            				}
+            			});
+				}
+			});
+			//select选择那一项，蓝色的款里面的内容也是那一项
+	/*	$(".input_right").on("change","select",function(){
+        		var eqNum = $(this).parent().index();
+				if(!$(this).val()==""){
+					for(var i=0;i<$(".tab_a_2 a").length;i++){
+						if($(this).val()==$(".tab_a_2 a").eq(i).find("span").text()){							
+							$(".tab_a_2").append("<span class='ts_xxx' style='color:red;line-height:30px;padding-left:10px;'>此主题已存在，请选择其他主题！</span>");
+							$(".ts_xxx").animate({opacity:"0"},2000,function(){
+								$(".ts_xxx").remove();
+								$(".tab_a_2 a").eq(eqNum).hide().find("span").text("");
+							});
+							return false;						
+						}
+						
+					}
+					$(".tab_a_2 a").eq(eqNum).find("span").text($(this).val());
+					$(".tab_a_2 a").each(function(){
+        				if($(this).find("span").text()==""){
+        					$(this).hide();
+        				}else{
+        					$(this).show();
+        				}
+        			})
+				}
+				
+        	})*/
+        })
+	</script>

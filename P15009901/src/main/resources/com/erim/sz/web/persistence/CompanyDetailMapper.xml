@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="companydetail">
+	
+	<sql id="sql_column">
+			id					  AS id,
+			cpy_code			  AS cpyCode,
+			cpy_name 			  AS cpyName,
+			cpy_telephone 		  AS cpyTelephone,
+			cpy_fax 			  AS cpyFax,
+			cpy_email 		      AS cpyEmail,
+			cpy_province 		  AS cpyProvince,
+			cpy_city 			  AS cpyCity,
+			cpy_county 			  AS cpyCounty,		
+			cpy_address			  AS cpyAddress,
+			cpy_nature			  AS cpyNature,
+			cpy_x				  AS cpyX,
+			cpy_y 				  AS cpyY,
+			cpy_img_permit1       AS cpyImgPermit1,
+			cpy_img_permit2		  AS cpyImgPermit2,
+			cpy_img_permit3		  AS cpyImgPermit3,
+			cpy_custom_id 		  AS cpyCustomId,
+			cpy_createdate		  AS cpyCreatedate,
+			cpy_createip 		  AS cpyCreateip,
+			cpy_roe				  AS cpyRoe,
+			cpy_ntype 			  AS cpyNtype,
+			cpy_is_through 		  AS cpyIsThrough,
+			cpy_brand			  AS cpyBrand,
+			cpy_is_people 		  AS cpyIsPeople,
+			cpy_is_phone 		  AS cpyIsPhone,
+			cpy_is_operation 	  AS cpyIsOperation,
+			cpy_is_operationphone AS cpyIsOperationphone,
+			cpy_is_qq 		      AS cpyIsQq,
+			cpy_is_inland 		  AS cpyIsInland,
+			cpy_external 		  AS cpyExternal,
+			cpy_foreign 		  AS cpyForeign,
+			cpy_foreign_city 	  AS cpyForeignCity,
+			yj_user_code		  AS yjUserCode
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="selectAll" resultType="companyDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			company_detail
+		WHERE
+			cpy_roe = '2'
+	</select>
+	
+	<!-- 根据企业id查询 -->
+	<select id="selectByPriId" resultType="companyDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			company_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 根据企业编码查询企业信息 -->
+	<select id="selectOneByCode" resultType="companyDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			company_detail
+		WHERE
+			cpy_code = #{cpyCode}
+	</select>
+</mapper>

@@ -1,0 +1,148 @@
+<div class="rdivv">
+<div class="coadmin">
+<div class="newfood_suptop">
+	<img src="$staticRoot/images/htz1.png">
+	<span>合作管理</span>
+	<div class="cb"></div>
+	<div class="g_line"></div>
+</div>
+<div class="coadmin_top">
+	<div class="coadmin_topl">
+		<span>国家:</span>
+		<label><input type="radio" name="co" checked="checked">国内</label>
+		<label><input type="radio" name="co">国际/港澳台</label>
+	</div>
+	<div class="coadmin_tct">
+		<div class="coadmin_tctb show">
+			<div class="doadmin_toplbox">
+				<span>所在城市:</span>
+				<div class="doadmin_toplbr">
+					<select>
+						<option>河北省</option>
+					</select>
+					<span>省</span>
+					<select>
+						<option>石家庄</option>
+					</select>
+					<span>市</span>
+					<select>
+						<option>桥西区</option>
+					</select>
+					<span>区/县</span>
+				</div>
+			</div>
+			<div class="doadmin_toplboxb">
+				<span>公司名称:</span>
+				<div class="doadmin_toplbrb">
+					<input type="text" value="哇哈哈" >
+				</div>
+			</div>
+		</div>
+		<div class="coadmin_tctb">
+			<div class="doadmin_toplbox">
+				<span>所在城市:</span>
+				<div class="doadmin_toplbr">
+					<label><input type="radio" name="men" class="co_g">香港</label>
+					<label><input type="radio" name="men" class="co_g">澳门</label>
+					<label><input type="radio" name="men" class="co_g">台湾</label>
+					<label><input type="radio" name="men" id="co_nation">国家</label>
+				</div>
+			</div>
+			<div class="co_nationdiv">
+				<select>
+					<option>日本</option>
+				</select>
+				<span>国家</span>
+				<select>
+					<option>大阪</option>
+				</select>
+				<span>城市</span>
+			</div>
+			<div class="doadmin_toplboxb">
+				<span>公司名称:</span>
+				<div class="doadmin_toplbrb">
+					<input type="text" value="哇哈哈" >
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="doadmin_topl">
+		<div class="doadmin_toplboxb">
+			<span>品牌名称:</span>
+			<div class="doadmin_toplbrb">
+				<input type="text" value="哇哈哈" >
+			</div>
+		</div>
+		<div class="doadmin_toplboxb">
+			<span>负责人:</span>
+			<div class="doadmin_toplbrb">
+				<input type="text" value="哇哈哈" >
+			</div>
+		</div>
+		<div class="doadmin_toplboxb">
+			<span>计调:</span>
+			<div class="doadmin_toplbrb">
+				<input type="text" value="哇哈哈" >
+			</div>
+		</div>
+		<div class="doadmin_toplboxb">
+			<span>合作状态:</span>
+			<div class="doadmin_toplbrb">
+				<select>
+					<option>已合作</option>
+					<option>未合作</option>
+				</select>
+			</div>
+		</div>
+		<button class="doadmin_see">查询</button>
+	</div>
+	<div class="g_line">
+	</div>
+	<div  class="trainl_cttop">
+		<ul>
+			<li id="trainl_li">同城地接社</li>
+			<li>同城专线</li>
+			<li>同城组团社</li>
+		</ul>
+	</div>
+	<div class="trainl_biger">
+		<div class="train_box show">
+			<div class="carad_ctrtable">
+				<table cellspacing="0" cellspadding="0">
+					<thead>
+						<tr>
+							<td class="doadmin_label"><label><input type="checkbox" id="checkAllt4">全选</label></td>
+							<td>地接区域</td>
+							<td>城市</td>
+							<td>公司名称</td>
+							<td>品牌名称</td>
+							<td>公司地址</td>
+							<td>负责人</td>
+							<td>负责人电话</td>
+							<td>计调</td>
+							<td>计调电话</td>
+							<td>公司电话</td>
+							<td>在线交流</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="checkbox" name="subBoxt4"></td>
+							<td>华东</td>
+							<td>石家庄</td>
+							<td>石家庄鑫源旅行社</td>
+							<td>石家庄鑫源</td>
+							<td>桥西区人民政府</td>
+							<td>李先生</td>
+							<td >15242776577</td>
+							<td>李先生</td>
+							<td >15242776577</td>
+							<td>0318-59624482</td>
+							<td><img src="$staticRoot/images/button_old_101.gif"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="tpage">
+				</div>
+			</div>
+		</div>

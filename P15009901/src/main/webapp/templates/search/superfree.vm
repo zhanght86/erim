@@ -1,0 +1,58 @@
+
+<!--最大的-->
+<!--<div class="list_header W">-->
+<div id="tab">
+	<!--左边-->
+	<div id="tab-left">
+        <ul>
+            <li class="tab-left-hover">酒店</li>
+            <li>门票</li>
+            <li>租车</li>
+            <li>导游</li>
+            <li>签证</li>
+            <li>特色餐</li>
+			<li class="last">交通资讯</li>
+            <!-- <li class="last">交通资讯</li>-->
+        </ul>
+	</div>
+	<div id="tab-right">	
+		<!--酒店右边-->
+		#parse("search/hotel.vm")
+		<!--/酒店右边-->
+
+		<!--门票-->
+		#parse("search/ticket.vm")
+		<!--/门票-->
+		
+		<!--租车-->
+		#parse("search/texi.vm")
+		<!--/租车-->
+
+		<!--导游-->
+		#parse("search/guide.vm")
+		<!--/导游-->
+		
+		<!--签证-->
+		#parse("search/management.vm")
+		<!--/签证-->
+		
+		<!--特色餐-->
+		#parse("search/cafeteria.vm")
+		<!--/特色餐-->
+		
+		<!--机票-->
+		##parse("search/planeticket.vm")
+		<!--/机票-->   
+		
+		<!--火车票-->
+		##parse("search/transticket.vm")
+		<!--/火车票-->
+	</div>
+</div>
+	<!--右边-->
+<div class="list_right">
+	<img src="$staticRoot/images/right.jpg" id="aaaaaaaaaaaaaaaaaaaaa" width="477" height="316" />
+</div>
+	<!--/右边-->
+<!--/最大的-->
+<div class="C"></div>

@@ -1,0 +1,33 @@
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/user1.png">修改密码
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		<div class="input_block clearfix">
+    		<div class="label_left">原密码：</div>
+    		<div class="input_right">
+                <input type="password" class="w200 validate[required,maxSize[100]]" id="oldpassword" name="oldpassword" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">新密码：</div>
+    		<div class="input_right">
+    			<input type="password" class="w200 	validate[required,custom[onlyLetterNumber],minSize[6]]" id="zxUserPassword" name="zxUserPassword1" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">再次输入密码：</div>
+    		<div class="input_right">
+    			<input type="password" class="w200 	validate[required,minSize[6],custom[onlyLetterNumber],equals[zxUserPassword]]" name="zxUserPassword" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="carinfo_ctbl" style="margin-left:-140px;">
+			<span></span>
+			<div class="carinfo_ctblrbtn">
+			<button class="carinfo_sub" type="button" id="btn" onclick="subform.update('form1', '$appRoot/zx/user/updatePsd');">提交</button>
+    	    <button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+            </div>
+        </div>
+	</form>
+</div>

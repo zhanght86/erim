@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriadetail">
+	
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="id !=null and id != ''"> 	   				        and  	id  	      	    =   #{id} </if>
+			<if test="cdlInland != null and cdlInland != '' ">      	and 	cdl_cdlInland		= #{cdlInland} </if>
+			<if test="cdlCode != null and cdlCode != ''">		        and 	cdl_code 		    like "%"#{cdlCode}"%" </if>
+			<if test="cdlProvince != null and cdlProvince != ''">		and 	cdl_province 		= #{cdlProvince} </if>
+			<if test="cdlCity != null and cdlCity != ''">           	and 	cdl_city 		    = #{cdlCity} </if>
+			<if test="cdlCounty != null and cdlCounty != ''">           and 	cdl_county 		    = #{cdlCounty} </if>
+			<if test="cdlExternal != null and cdlExternal != '' ">  	and 	cdl_external		= #{cdlExternal} </if>
+			<if test="cdlForeign != null and cdlForeign != '' ">    	and 	cdl_foreign		    = #{cdlForeign}	</if>
+			<if test="cdlForeignCity != null and cdlForeignCity != '' ">and 	cdl_foreigncity		= #{cdlForeignCity}	</if>
+			<if test="cdlOrderNormz != null and cdlOrderNormz != ''">	and 	cdl_order_normz 	>= #{cdlOrderNormz}	</if>
+			<if test="cdlName != null and cdlName != ''">			  	and 	cdl_name 			like "%"#{cdlName}"%" </if>
+			<if test="cpyId != null ">			                    	and 	cpy_id		 		= #{cpyId} </if>
+			<if test="cdlIsDelStatus !=null and cdlIsDelStatus != ''">  and    	cdl_is_del_status   = #{cdlIsDelStatus}	</if>
+			<if test="cdlTelephone != null and cdlTelephone != ''">     and 	cdl_telephone 		like "%"#{cdlTelephone}"%" </if>
+			<if test="cdlBusiness != null and cdlBusiness != ''">		and 	cdl_business 		like "%"#{cdlBusiness}"%" </if>
+		</where>
+	</sql>
+	
+	<!-- 同业资源搜索项 -->
+	<sql id="sql_query_notwhere">
+		1 = 1
+		<if test="cdlInland != null and cdlInland != '' ">      	and 	cdl_cdlInland		= #{cdlInland}	</if>
+		<if test="cdlCode != null and cdlCode != ''">		        and 	cdl_code 		    like "%"#{cdlCode}"%"	</if>
+		<if test="cdlProvince != null and cdlProvince != ''">		and 	cdl_province 		= #{cdlProvince}	</if>
+		<if test="cdlCity != null and cdlCity != ''">           	and 	cdl_city 		    = #{cdlCity}	</if>
+		<if test="cdlCounty != null and cdlCounty != ''">           and 	cdl_county 		    = #{cdlCounty}	</if>
+		<if test="cdlExternal != null and cdlExternal != '' ">  	and 	cdl_external		= #{cdlExternal}	</if>
+		<if test="cdlForeign != null and cdlForeign != '' ">    	and 	cdl_foreign		    like "%"#{cdlForeign}"%"	</if>
+		<if test="cdlForeignCity != null and cdlForeignCity != '' ">and 	cdl_foreigncity		like "%"#{cdlForeignCity}"%"	</if>
+		<if test="cdlOrderNormz != null and cdlOrderNormz != ''">	and 	cdl_order_normz 	= #{cdlOrderNormz}	</if>
+		<if test="cpyName != null and cpyName != ''"> and (cpy_name like "%"#{cpyName}"%" or cpy_brand like "%"#{cpyName}"%" )	</if>
+		<if test="cdlBusiness != null and cdlBusiness != ''">		and 	cdl_business 		like "%"#{cdlBusiness}"%" </if>
+
+	</sql>
+	
+	<sql id="COMPANYDETAIL">
+			cpy.cpy_name 	  AS cpyName,
+			cpy.cpy_telephone AS cpyTelephone,
+			cpy.cpy_brand 	  AS cpyBrand,
+			ccp.cbs_operator         AS ccpName,
+			ccp.cbs_operator_phone   AS ccpTelephone,
+			cpy.cpy_email 	         AS ccpEmail,
+			ccp.cbs_operator_qq      AS ccpQq
+	</sql>
+	
+	<!-- 根据特色餐ID查询 -->
+	<select id="selectCafeteriaDetailById" resultType="cafeteriaDetailBean">
+		SELECT
+			id ,
+			cdl_name 			AS 		cdlName,
+			cdl_telephone		AS 		cdlTelephone,
+			cdl_province 		AS 		cdlProvince,
+			cdl_city 			AS 		cdlCity,
+			cdl_county          AS      cdlCounty,
+			cdl_address 		AS 		cdlAddress,
+			cdl_x 				AS 		cdlX,
+			cdl_y 				AS 		cdlY,
+			cdl_img1 			AS 		cdlImg1,
+			cdl_img2 			AS 		cdlImg2,
+			cdl_img3 			AS 		cdlImg3,
+			cdl_img4            AS      cdlImg4,
+			cdl_img5            AS      cdlImg5,
+			cdl_createtime 		AS 		cdlCreatetime,
+			cdl_createuse 		AS 		cdlCreateuse,
+			cdl_is_through 		AS 		cdlIsThrough,
+			cdl_through_time 	AS 		cdlThroughTime,
+			cdl_through_user 	AS 		cdlThroughUser,
+			cdl_is_del_status   AS      cdlIsDelStatus,
+			cdl_price           AS      cdlPrice,
+			cdl_special_price   AS      cdlSpecialPrice,
+			cdl_special_name    AS      cdlSpecialName,
+			cdl_level           AS      cdlLevel,
+			cpy_id				AS 		cpyId,
+			cdl_sort            AS      cdlSort,
+			cdl_notice          AS      cdlNotice,
+			cdl_introduce       AS      cdlIntroduce,
+			cdl_open_time       AS      cdlOpenTime,
+			cdl_close_time      AS      cdlCloseTime,
+			cdl_reason          AS      cdlReason,
+			cdl_eat_people      AS      cdlEatPeople,
+			cdl_stop_car        AS      cdlStopCar,
+			cdl_internet        AS      cdlInternet,
+			cdl_business        AS      cdlBusiness,
+			cdl_order_norme     AS      cdlOrderNorme,
+			cdl_order_normz     AS      cdlOrderNormz,
+			cdl_receive_num     AS      cdlReceiveNum,
+			cdl_cdlInland		AS      cdlInland,
+			cdl_external		AS      cdlExternal,
+			cdl_foreign			AS      cdlForeign,
+			cdl_foreigncity		AS      cdlForeignCity,
+			cdl_code            AS      cdlCode,
+			cdl_people_qq       AS      cdlPeopleQq,
+			cdl_phone           AS      cdlPhone,
+			cdl_district		AS 		cdlDistrict,
+			cdl_unlimited       AS      cdlUnlimited,
+			cdl_special         AS      cdlSpecial,
+		    cdl_scheduled       AS      cdlScheduled 
+			 
+ 		FROM 
+			cafeteria_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageCafeteria" resultType="cafeteriaDetailBean">
+		SELECT
+			id ,
+			cdl_name 			AS 		cdlName,
+			cdl_telephone		AS 		cdlTelephone,
+			cdl_province 		AS 		cdlProvince,
+			cdl_city 			AS 		cdlCity,
+			cdl_county          AS      cdlCounty,
+			cdl_address 		AS 		cdlAddress,
+			cdl_x 				AS 		cdlX,
+			cdl_y 				AS 		cdlY,
+			cdl_img1 			AS 		cdlImg1,
+			cdl_img2 			AS 		cdlImg2,
+			cdl_img3 			AS 		cdlImg3,
+			cdl_img4            AS      cdlImg4,
+			cdl_img5            AS      cdlImg5,
+			cdl_createtime 		AS 		cdlCreatetime,
+			cdl_createuse 		AS 		cdlCreateuse,
+			cdl_is_through 		AS 		cdlIsThrough,
+			cdl_through_time 	AS 		cdlThroughTime,
+			cdl_through_user 	AS 		cdlThroughUser,
+			cdl_is_del_status   AS      cdlIsDelStatus,
+			cdl_price           AS      cdlPrice,
+			cdl_special_price   AS      cdlSpecialPrice,
+		    cdl_special_name	AS      cdlSpecialName,
+		    cdl_level           AS      cdlLevel,
+		    cpy_id				AS 		cpyId,
+		    cdl_sort            AS      cdlSort,
+		    cdl_notice          AS      cdlNotice,
+		    cdl_introduce       AS      cdlIntroduce,
+		    cdl_open_time       AS      cdlOpenTime,
+			cdl_close_time      AS      cdlCloseTime,
+			cdl_reason          AS      cdlReason,
+			cdl_eat_people      AS      cdlEatPeople,
+			cdl_stop_car        AS      cdlStopCar,
+			cdl_internet        AS      cdlInternet,
+			cdl_business        AS      cdlBusiness,
+			cdl_order_norme     AS      cdlOrderNorme,
+			cdl_order_normz     AS      cdlOrderNormz,
+			cdl_receive_num     AS      cdlReceiveNum,
+			cdl_cdlInland		AS      cdlInland,
+			cdl_external		AS      cdlExternal,
+			cdl_foreign			AS      cdlForeign,
+			cdl_foreigncity		AS      cdlForeignCity,
+			cdl_code            AS      cdlCode,
+			cdl_people_qq       AS      cdlPeopleQq,
+			cdl_phone           AS      cdlPhone,
+		   	cdl_district		AS 		cdlDistrict,
+		   	cdl_unlimited       AS      cdlUnlimited,
+		   	cdl_special         AS      cdlSpecial,
+		   	cdl_scheduled       AS      cdlScheduled 
+		FROM
+			cafeteria_detail
+			<include refid="sql_query" />
+	   	ORDER BY 
+	   		cdl_is_del_status 
+	   	DESC,
+		   	cdl_createtime
+		DESC
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页-->
+    <select id="selectPageTown" resultType="cafeteriaDetailBean">
+    	SELECT town.* FROM (
+			SELECT
+				cafeteria.id        AS      id,
+				cdl_name 			AS 		cdlName,
+				cdl_telephone		AS 		cdlTelephone,
+				cdl_province 		AS 		cdlProvince,
+				cdl_city 			AS 		cdlCity,
+				cdl_county          AS      cdlCounty,
+				cdl_address 		AS 		cdlAddress,
+				cdl_x 				AS 		cdlX,
+				cdl_y 				AS 		cdlY,
+				cdl_img1 			AS 		cdlImg1,
+				cdl_img2 			AS 		cdlImg2,
+				cdl_img3 			AS 		cdlImg3,
+				cdl_img4            AS      cdlImg4,
+				cdl_img5            AS      cdlImg5,
+				cdl_createtime 		AS 		cdlCreatetime,
+				cdl_createuse 		AS 		cdlCreateuse,
+				cdl_is_through 		AS 		cdlIsThrough,
+				cdl_through_time 	AS 		cdlThroughTime,
+				cdl_through_user 	AS 		cdlThroughUser,
+				cdl_is_del_status   AS      cdlIsDelStatus,
+				cdl_price           AS      cdlPrice,
+				cdl_special_price   AS      cdlSpecialPrice,
+			    cdl_special_name	AS      cdlSpecialName,
+			    cdl_level           AS      cdlLevel,
+			    cdl_sort            AS      cdlSort,
+			    cdl_notice          AS      cdlNotice,
+			    cdl_introduce       AS      cdlIntroduce,
+			    cdl_open_time       AS      cdlOpenTime,
+				cdl_close_time      AS      cdlCloseTime,
+				cdl_reason          AS      cdlReason,
+				cdl_eat_people      AS      cdlEatPeople,
+				cdl_stop_car        AS      cdlStopCar,
+				cdl_internet        AS      cdlInternet,
+				cdl_business        AS      cdlBusiness,
+				cdl_order_norme     AS      cdlOrderNorme,
+				cdl_order_normz     AS      cdlOrderNormz,
+				cdl_receive_num     AS      cdlReceiveNum,
+				cdl_cdlInland		AS      cdlInland,
+				cdl_external		AS      cdlExternal,
+				cdl_foreign			AS      cdlForeign,
+				cdl_foreigncity		AS      cdlForeignCity,
+				cdl_code            AS      cdlCode,
+				cdl_people_qq       AS      cdlPeopleQq,
+				cdl_phone           AS      cdlPhone,
+			   	cdl_district		AS 		cdlDistrict,
+			   	cdl_unlimited       AS      cdlUnlimited,
+			   	cdl_special         AS      cdlSpecial,
+			   	<if test="cpcDate != null and cpcDate!= ''">
+				   	<!-- 根据日期查询当天同业价 -->
+					(SELECT
+						a.cpc_trade_price
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time 
+								DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpcTradePrice,
+					<!-- 根据日期查询当天产品余量 -->
+					(SELECT
+						a.cpc_sign
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_sign,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpcSign,
+					<!-- 是否限量 -->
+					(SELECT
+						a.cpc_is_sign
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_sign,
+									cpc_is_sign,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpcIsSign,
+					<!-- 套餐ID -->
+					(SELECT
+						a.cpe_id
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_sign,
+									cpc_is_sign,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpeId,
+				</if>
+			   	cdl_scheduled       AS      cdlScheduled, 
+			   	<include refid = "COMPANYDETAIL" />
+			   	,(
+			   		SELECT 
+			   			group_concat(cafeteria_voucher_price.cvp_price_town) 
+			   		FROM 
+			   			cafeteria_voucher_price  
+			   		WHERE djq_id in (
+						select id from cafeteria_voucher where
+						cafeteria_voucher.id = cafeteria_voucher_price.djq_id
+						and cafeteria.id = cafeteria_voucher.cdl_ID
+					)
+				) cvpPriceTown,
+				(
+					SELECT 
+						group_concat(cafeteria_voucher_price.cvp_price_total) FROM cafeteria_voucher_price 
+			   		WHERE djq_id in (
+						select id from cafeteria_voucher where
+						cafeteria_voucher.id = cafeteria_voucher_price.djq_id
+						and cafeteria.id = cafeteria_voucher.cdl_ID
+					)
+				) cvpPriceTotal
+			FROM
+				cafeteria_detail cafeteria
+		    LEFT JOIN
+				company_detail cpy
+			ON 
+				cafeteria.cpy_id = cpy.id
+			LEFT JOIN
+				company_business ccp
+			ON 
+				ccp.cpy_id = cafeteria.cpy_id
+			WHERE
+			    cdl_is_del_status = '1'
+			    AND
+				cafeteria.id in (
+					select 
+						st.cid 
+					from 
+						pub_sametown st 
+					where 
+						st.cpyid_from != #{cpyId} 
+					and 
+						st.cpyid_to    = #{cpyId}
+					and 
+						st.ntype       = 'CAFETERIA' 
+				)
+				AND 
+				<include refid="sql_query_notwhere"/>
+		) town
+		WHERE
+			town.cpcTradePrice is not null
+		ORDER BY 
+			cpcIsSign
+		DESC,
+			cpcSign
+		DESC
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTownCount" resultType="int">
+		SELECT count(1) FROM (
+			SELECT
+				cafeteria.id        AS      id,
+				cdl_name 			AS 		cdlName,
+				cdl_telephone		AS 		cdlTelephone,
+				cdl_province 		AS 		cdlProvince,
+				cdl_city 			AS 		cdlCity,
+				cdl_county          AS      cdlCounty,
+				cdl_address 		AS 		cdlAddress,
+				cdl_x 				AS 		cdlX,
+				cdl_y 				AS 		cdlY,
+				cdl_img1 			AS 		cdlImg1,
+				cdl_img2 			AS 		cdlImg2,
+				cdl_img3 			AS 		cdlImg3,
+				cdl_img4            AS      cdlImg4,
+				cdl_img5            AS      cdlImg5,
+				cdl_createtime 		AS 		cdlCreatetime,
+				cdl_createuse 		AS 		cdlCreateuse,
+				cdl_is_through 		AS 		cdlIsThrough,
+				cdl_through_time 	AS 		cdlThroughTime,
+				cdl_through_user 	AS 		cdlThroughUser,
+				cdl_is_del_status   AS      cdlIsDelStatus,
+				cdl_price           AS      cdlPrice,
+				cdl_special_price   AS      cdlSpecialPrice,
+			    cdl_special_name	AS      cdlSpecialName,
+			    cdl_level           AS      cdlLevel,
+			    cdl_sort            AS      cdlSort,
+			    cdl_notice          AS      cdlNotice,
+			    cdl_introduce       AS      cdlIntroduce,
+			    cdl_open_time       AS      cdlOpenTime,
+				cdl_close_time      AS      cdlCloseTime,
+				cdl_reason          AS      cdlReason,
+				cdl_eat_people      AS      cdlEatPeople,
+				cdl_stop_car        AS      cdlStopCar,
+				cdl_internet        AS      cdlInternet,
+				cdl_business        AS      cdlBusiness,
+				cdl_order_norme     AS      cdlOrderNorme,
+				cdl_order_normz     AS      cdlOrderNormz,
+				cdl_receive_num     AS      cdlReceiveNum,
+				cdl_cdlInland		AS      cdlInland,
+				cdl_external		AS      cdlExternal,
+				cdl_foreign			AS      cdlForeign,
+				cdl_foreigncity		AS      cdlForeignCity,
+				cdl_code            AS      cdlCode,
+				cdl_people_qq       AS      cdlPeopleQq,
+				cdl_phone           AS      cdlPhone,
+			   	cdl_district		AS 		cdlDistrict,
+			   	cdl_unlimited       AS      cdlUnlimited,
+			   	cdl_special         AS      cdlSpecial,
+			   	<if test="cpcDate != null and cpcDate!= ''">
+				   	<!-- 根据日期查询当天同业价 -->
+					(SELECT
+						a.cpc_trade_price
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time 
+								DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpcTradePrice,
+					<!-- 根据日期查询当天产品余量 -->
+					(SELECT
+						a.cpc_sign
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_sign,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpcSign,
+					<!-- 是否限量 -->
+					(SELECT
+						a.cpc_is_sign
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_sign,
+									cpc_is_sign,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpcIsSign,
+					<!-- 套餐ID -->
+					(SELECT
+						a.cpe_id
+						FROM
+							(
+								SELECT
+									cdl_id,
+									cpe_id,
+									cpc_sign,
+									cpc_is_sign,
+									cpc_trade_price
+								FROM
+									cafeteria_price
+								WHERE 
+									cpc_date = #{cpcDate}
+								AND
+									cpc_is_open = '02'
+								ORDER BY
+									cpc_create_time DESC
+							) a
+						WHERE
+							a.cdl_id = cafeteria.id
+						GROUP BY
+							a.cpe_id
+						ORDER BY
+							a.cpc_trade_price
+						LIMIT 1
+					) AS cpeId,
+				</if>
+			   	cdl_scheduled       AS      cdlScheduled, 
+			   	<include refid = "COMPANYDETAIL" />
+			   	,(
+			   		SELECT 
+			   			group_concat(cafeteria_voucher_price.cvp_price_town) 
+			   		FROM 
+			   			cafeteria_voucher_price  
+			   		WHERE djq_id in (
+						select id from cafeteria_voucher where
+						cafeteria_voucher.id = cafeteria_voucher_price.djq_id
+						and cafeteria.id = cafeteria_voucher.cdl_ID
+					)
+				) cvpPriceTown,
+				(
+					SELECT 
+						group_concat(cafeteria_voucher_price.cvp_price_total) FROM cafeteria_voucher_price 
+			   		WHERE djq_id in (
+						select id from cafeteria_voucher where
+						cafeteria_voucher.id = cafeteria_voucher_price.djq_id
+						and cafeteria.id = cafeteria_voucher.cdl_ID
+					)
+				) cvpPriceTotal
+			FROM
+				cafeteria_detail cafeteria
+		    LEFT JOIN
+				company_detail cpy
+			ON 
+				cafeteria.cpy_id = cpy.id
+			LEFT JOIN
+				company_business ccp
+			ON 
+				ccp.cpy_id = cafeteria.cpy_id
+			WHERE
+			    cdl_is_del_status = '1'
+			    AND
+				cafeteria.id in (
+					select 
+						st.cid 
+					from 
+						pub_sametown st 
+					where 
+						st.cpyid_from != #{cpyId} 
+					and 
+						st.cpyid_to    = #{cpyId}
+					and 
+						st.ntype       = 'CAFETERIA' 
+				)
+				AND 
+				<include refid="sql_query_notwhere"/>
+		) town
+		WHERE
+			town.cpcTradePrice is not null
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCafeteriaCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			cafeteria_detail
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="cafeteriaDetailBean">
+		INSERT INTO
+			cafeteria_detail (
+				cdl_name,
+				cdl_telephone,
+				cdl_province,
+				cdl_city,
+				cdl_county,
+				cdl_address,
+				cdl_x,
+				cdl_y,
+				cdl_img1,
+				cdl_img2,
+				cdl_img3,
+				cdl_img4,
+			    cdl_img5,
+				cdl_createtime,
+				cdl_createuse,
+				cdl_price,
+				cdl_special_price,
+				cdl_special_name,
+				cdl_level, 
+				cdl_is_del_status,
+				cpy_id,
+				cdl_sort,
+				cdl_notice,
+				cdl_introduce,
+				cdl_open_time,
+			    cdl_close_time,
+			    cdl_reason,
+			    cdl_eat_people,
+			    cdl_stop_car,
+			    cdl_internet,
+			    cdl_business,
+			    cdl_order_norme,
+			    cdl_order_normz,
+			    cdl_receive_num,
+			    cdl_cdlInland,
+				cdl_external,
+				cdl_foreign,
+				cdl_foreigncity,
+				cdl_people_qq,
+			    cdl_phone,
+			    cdl_district,
+			    cdl_unlimited,
+			    cdl_special
+			) VALUES (
+				#{cdlName},
+				#{cdlTelephone},
+				#{cdlProvince},
+				#{cdlCity},
+				#{cdlCounty},
+				#{cdlAddress},
+				#{cdlX},
+				#{cdlY},
+				#{cdlImg1},
+				#{cdlImg2},
+				#{cdlImg3},
+				#{cdlImg4},
+			    #{cdlImg5},
+				#{cdlCreatetime},
+				#{cdlCreateuse},
+				#{cdlPrice},
+				#{cdlSpecialPrice},
+				#{cdlSpecialName},
+				#{cdlLevel},
+				#{cdlIsDelStatus},
+				#{cpyId},
+				#{cdlSort},
+				#{cdlNotice},
+				#{cdlIntroduce},
+				#{cdlOpenTime},
+			    #{cdlCloseTime},
+			    #{cdlReason},
+			    #{cdlEatPeople},
+			    #{cdlStopCar},
+			    #{cdlInternet},
+			    #{cdlBusiness},
+			    #{cdlOrderNorme},
+		    	#{cdlOrderNormz},
+			    #{cdlReceiveNum},
+				#{cdlInland},
+				#{cdlExternal},
+				#{cdlForeign},
+				#{cdlForeignCity},
+				#{cdlPeopleQq},
+			    #{cdlPhone},
+			    #{cdlDistrict},
+			    #{cdlUnlimited},
+			    #{cdlSpecial}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+	UPDATE
+			cafeteria_detail
+			SET
+				cdl_name              = #{cdlName},
+				cdl_telephone         = #{cdlTelephone},
+				cdl_province          = #{cdlProvince},
+				cdl_city              = #{cdlCity},
+				cdl_county            = #{cdlCounty},
+				cdl_address           = #{cdlAddress},
+				cdl_x                 = #{cdlX},
+				cdl_y                 = #{cdlY},
+				cdl_img1              = #{cdlImg1},
+				cdl_img2              = #{cdlImg2},
+				cdl_img3              = #{cdlImg3},
+				cdl_img4              = #{cdlImg4},
+			    cdl_img5              = #{cdlImg5},
+				cdl_price             = #{cdlPrice},
+				cdl_special_price     = #{cdlSpecialPrice},
+				cdl_special_name      = #{cdlSpecialName},
+				cdl_level             = #{cdlLevel},
+				cdl_sort              = #{cdlSort},
+				cdl_notice            = #{cdlNotice},
+				cdl_introduce         = #{cdlIntroduce},
+				cdl_open_time         = #{cdlOpenTime},
+			    cdl_close_time        = #{cdlCloseTime},
+			    cdl_reason            = #{cdlReason},
+			    cdl_eat_people        = #{cdlEatPeople},
+			    cdl_stop_car          = #{cdlStopCar},
+			    cdl_internet          = #{cdlInternet},
+			    cdl_business          = #{cdlBusiness},
+			    cdl_order_norme       = #{cdlOrderNorme},
+			    cdl_order_normz       = #{cdlOrderNormz},
+			    cdl_receive_num       = #{cdlReceiveNum},
+			    cdl_cdlInland		  = #{cdlInland},
+				cdl_external		  = #{cdlExternal},
+				cdl_foreign			  = #{cdlForeign},
+				cdl_foreigncity		  = #{cdlForeignCity},
+				cdl_people_qq         = #{cdlPeopleQq},
+			    cdl_phone             = #{cdlPhone},
+			    cdl_district 		  = #{cdlDistrict},
+			    cdl_unlimited         = #{cdlUnlimited},
+			    cdl_createtime 		  = #{cdlCreatetime},
+			    cdl_special           = #{cdlSpecial}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!--更新编码  -->
+	<update id="updateCafeteriacode">
+		UPDATE
+			cafeteria_detail
+		SET
+			cdl_code	= #{cdlCode}
+		WHERE
+			id			= #{id}
+	</update>
+	
+	<!-- 上架下架 -->
+	<delete id="delete" parameterType="int">
+		UPDATE
+			cafeteria_detail
+		SET
+			cdl_is_del_status  = #{cdlIsDelStatus}
+		WHERE
+			id = #{id}
+   </delete>
+
+	<!-- 删除 -->
+	<delete id="cafeteriadelete" parameterType="hashMap">
+		DELETE FROM
+			cafeteria_detail
+		WHERE
+			id= #{id}
+	</delete>
+	
+	<!-- 修改预定方式 -->
+	<update id="update1">
+		UPDATE
+			cafeteria_detail
+		SET
+			cdl_scheduled         = #{cdlScheduled}
+		WHERE
+			id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+  <title>佳旅联合</title>
+ </head>
+ <body>
+	导游档期 <br/>
+	<table border="1">
+		<tr>
+			<td>ID</td>
+			<td>时间</td>
+		</tr>
+		 #foreach($item in $cafeteriaList)
+		 	<tr>
+		 		<td>$item.id</td>
+		 		<td>$item.gseDate</td>
+		 	</tr>
+		 #end
+	 </table>
+ </body>
+ </html>

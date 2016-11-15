@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="texisend">
+	<!-- 自驾查询 -->
+	<select id="selectSendById" resultType="texiSendBean">
+	  SELECT
+	     id,
+	     zjl_hf_take_address   AS  zjlHfTakeAddress,
+	     zjl_hf_back_address   AS  zjlHfBackAddress,
+	     zjl_hf_take_place     AS  zjlHfTakePlace,
+	     zjl_hf_back_place     AS  zjlHfBackPlace
+	 FROM
+	     texi_drive
+	 WHERE
+	     id = #{id}
+   </select>
+   <sql id="sql_column">
+		id,
+		tdl_id					AS tdlId,
+		gdl_del_status			AS gdlDelStatus,
+		gdl_code				AS gdlCode,
+		gdl_type				AS gdlType,
+		gdl_start				AS gdlStart,
+		gdl_end					AS gdlEnd,
+		gdl_money				AS gdlMoney,
+		gdl_show   				AS gdlShow,
+		gdl_machine				AS gdlMachine,
+		gdl_machineback			AS gdlMachineback,
+		gdl_machinemoney		AS gdlMachinemoney,
+		gdl_machineshow			AS gdlMachineshow,
+		gdl_station				AS gdlStation,
+		gdl_stationup			AS gdlStationup,
+		gdl_stationmoney		AS gdlStationmoney,
+		gdl_stationshow			AS gdlStationshow,
+		gdl_stationback			AS gdlStationback,
+		gdl_stationnup			AS gdlStationnup,
+		gdl_stationbackmoney	AS gdlStationbackmoney,
+		gdl_stationbackshow		AS gdlStationbackshow,
+		gdl_startcity			AS gdlStartcity,
+		gdl_endcity				AS gdlEndcity,
+		gdl_citymoney			AS gdlCitymoney,
+		gdl_cityshow			AS gdlCityshow,
+		gdl_sendprivnce			AS gdlSendprivnce,
+		gdl_sendcity			AS gdlSendcity,
+		gdl_sendnation			AS gdlSendnation,
+		gdl_sendcounty			AS gdlSendcounty,
+		gdl_sendintand			AS gdlSendintand,
+		gdl_sendforgen			AS gdlSendforgen,
+		gdl_sendforgencity		AS gdlSendforgencity,
+		tdl_name				AS tdlName
+	</sql>
+   <select id="selectSendById2" resultType="texiSendBean">
+	 SELECT
+			<include refid="sql_column" />
+		FROM
+			texi_send
+		WHERE
+		   id = #{id}
+   </select>
+</mapper>

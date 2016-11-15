@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="texiorder">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="torCode != null and torCode !=''">			and tor_code 		like "%"#{torCode}"%"</if>
+<!--		<if test="torTotalprice != null">	and tor_totalprice 	like "%"#{torTotalprice}"%"</if>
+			<if test="torIssure != null">		and tor_issure 		like "%"#{torIssure}"%"</if>
+			<if test="torPayOnline != null">	and tor_pay_online 	 =     #{torPayOnline}</if>
+			<if test="torPayOffline != null">	and tor_pay_offline  =     #{torPayOffline}</if>
+			<if test="torPayMoney != null">		and tor_pay_money 	like "%"#{torPayMoney}"%"</if>
+			<if test="torNtype != null">		and tor_ntype 		like "%"#{torNtype}"%"</if>
+			<if test="torCreatetime != null">	and tor_createtime 	like "%"#{torCreatetime}"%"</if>
+			<if test="torCreateuser != null">	and tor_createuser 	like "%"#{torCreateuser}"%"</if>
+			<if test="torIsThrough != null">	and tor_is_through 	like "%"#{torIsThrough}"%"</if>-->
+			<if test="cpyId != null">		    and cpy_id		 	 = 	 #{cpyId}</if>
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTexi" resultType="texiOrderBean">
+		SELECT
+			id ,
+			tor_code AS torCode,
+			tor_totalprice AS torTotalprice,
+			tor_issure AS torIssure,
+			tor_pay_online AS torPayOnline,
+			tor_pay_offline AS torPayOffline,
+			tor_pay_money AS torPayMoney,
+			tor_ntype AS torNtype,
+			tor_createtime AS torCreatetime,
+			tor_createuser AS torCreateuser,
+			cpy_id AS cpyId,
+			tor_is_through AS torIsThrough
+		FROM
+			texi_order
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTexiCount" resultType="int">
+		SELECT
+		   count(1)
+		FROM
+		   texi_order
+		<include refid="sql_query" />
+	</select>
+
+	
+	<!-- 接单/拒接 -->
+	<update id="receiveOrRefuse" parameterType="TexiOrderBean">
+		UPDATE
+			texi_order
+		SET
+			tor_ntype = #{torNtype}
+		WHERE
+			id = #{id}
+	</update>
+
+	
+	
+</mapper>

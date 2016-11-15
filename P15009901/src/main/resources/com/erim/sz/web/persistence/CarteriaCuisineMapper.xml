@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CafeteriaCuisine">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="cdlID != null  and cdlID != ''">	and 	cdl_id 	 =  #{cdlID} </if>
+		</where>
+	</sql>
+	<sql id="sql_column">
+			id 					AS id,
+			cdl_id              AS cdlID,					
+			csl_name 	        AS cslName,
+			csl_price 	        AS cslPrice,
+			csl_introduce       AS cslIntroduce,
+			csl_imag 	        AS cslImag,
+			csl_is_del_status 	AS cslIsDelStatus,
+			csl_createtime      AS cslCreatetime,
+			csl_type            As cslType
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="cafeteriaCuisineBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			cafeteria_cuisine
+		<include refid="sql_query" />
+	</select>
+</mapper>

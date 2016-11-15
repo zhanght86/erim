@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hoteldetail">
+	
+	<!-- 查询过滤条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			    <if test="hdlName != null     		and hdlName != ''">		   		and 	hdl_name 		   like"%"#{hdlName}"%"</if>
+			    <if test="hdlCity !=null 			and hdlCity != ''"> 	   		and  	hdl_city  	      	  =   #{hdlCity}</if>
+		</where>
+	</sql>
+	
+	<!-- 酒店信息查询字段 -->
+	<sql id="sql_column">
+		id,
+		hdl_code             AS hdlCode,
+		hdl_name             AS hdlName,
+		hdl_english			 AS hdlEnglish,
+		hdl_keyword			 AS hdlKeyword,
+		hdl_province         AS hdlProvince,
+		hdl_city             AS hdlCity,
+		hdl_county           AS hdlCounty,
+		hdl_address          AS hdlAddress,
+		longitude          	 AS longitude,
+		latitude          	 AS latitude,
+		hdl_telephone        AS hdlTelephone,
+		hdl_is_cz            AS hdlChuanzhen,
+		hdl_level            AS hdlLevel,
+		hdl_room_num         AS hdlRoomNum,
+		hdl_is_start   		 AS hdlStart,
+		hdl_renovation_date  AS hdlRenovationDate,
+		hdl_characteristic   AS hdlCharacteristic,
+		hdl_facilities       AS hdlFacilities,
+		hdl_network       	 AS hdlNetWork,
+		hdl_service          AS hdlService,
+		hdl_creditcard       AS hdlCreditcard,
+		hdl_position         AS hdlPosition,
+		hdl_district         AS hdlDistrict,
+		hdl_near_site		 AS hdlNearSite,
+		hdl_mark             AS hdlMark,
+		hdl_feature          AS hdlFeature,
+		hdl_describe         AS hdlDescribe,
+		hdl_img1             AS hdlImg1,
+		hdl_img2             AS hdlImg2,
+		hdl_img3             AS hdlImg3,
+		hdl_img4             AS hdlImg4,
+		hdl_img5             AS hdlImg5,
+		hdl_createtime       AS hdlCreatetime,
+		hdl_createuser       AS hdlCreateuser,
+		hdl_is_del_status    AS hdlIsDelStatus,
+		hdl_ctmc			 AS hdlCtmc,
+		hdl_ctlx			 AS hdlCtlx,
+		hdl_ctmj			 AS hdlCtmj,
+		hdl_ctnum_sta		 AS hdlCtnumSta,
+		hdl_ctnum			 AS hdlCtnum,
+		hdl_img6			 AS hdlImg6,
+		hdl_textpname		 AS hdlTextpName,
+		hdl_textlx			 AS hdlTextLx,
+		hdl_textmj			 AS hdlTextmj,
+		hdl_textnum			 AS hdlTextNum,
+		hdl_textmony		 AS hdlTextmony,
+		hdl_img7			 AS hdlImg7,
+		hdl_is_internal		 AS hdlIsInternal,
+		hdl_external		 AS hdlExternal,
+		hdl_foreign			 AS hdlForeign,
+		hdl_foreign_city	 AS hdlForeignCity,
+		hdl_location         AS hdlLocation
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageHotelList" resultType="hotelDetailBean">
+		SELECT
+			<include refid="sql_column" />
+			, (SELECT code_value FROM tm_system_code WHERE code_id = 'C022' AND code_key = hdl_level) dicLevel
+			, (SELECT region_name FROM tm_system_region WHERE region_pid = '0' AND region_id = hdl_province) dicCity
+		FROM
+			hotel_detail
+		<include refid="sql_query" />
+		ORDER BY
+			hdl_createtime
+		DESC
+	</select>
+	
+	<!-- 根据ID查询酒店信息 -->
+	<select id="getHotelById" resultType="hotelDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_detail
+		WHERE
+			id = #{id}
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageHotelListCount" resultType="int">
+		SELECT
+			count(id)
+		FROM
+			hotel_detail
+		<include refid="sql_query" />
+	</select>
+</mapper>

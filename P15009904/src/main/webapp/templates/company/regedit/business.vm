@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>佳旅联合</title>
+    <meta name="keywords" content="注册页面" />
+    <meta name="description" content="注册页面" />
+    #parse("company/regedit/common.vm")
+	
+	<script type="text/javascript">
+		$(function() {
+    		uploadify('uploadify4','cbsLicense4','filespan4','fileQueue4');
+    		uploadify('uploadify5','cbsPermission5','filespan5','fileQueue5');
+    		uploadifydoc('uploadify6','cbsProve6','filespan6','fileQueue6');
+		})
+    </script>
+</head>
+<body>
+    <div class="register">
+    	<div class="reg_head">
+    		<div class="reg_heada">
+    			<img src="$staticRoot/images/logotop.jpg" alt="logo">
+    		</div>
+    	</div>
+    	<div class="content">
+    		<div class="content_top">
+    			<img src="$staticRoot/images/menu_2.png" alt="登录资料">
+    		</div>
+			<div class="content_biger">
+                <div class="content_box show">
+					<form method="post" id="form2">
+						<input type="hidden" name="cpyId" value="$!cpyId"></input>
+						<!-- 业务范围 -->
+						<input type="hidden" name="cbsService" value="04"></input>
+                        <div class="content_line3">
+                            <span><strong>经营产品类别：</strong></span>
+                            <div class="content_liner5" style="width:380px;">
+                               <label><input type="radio" checked  class="validate[minCheckbox[1]]" name="cbsProductType" value="01">酒店</input></label>
+                               <label><input type="radio" class="validate[minCheckbox[1]]" name="cbsProductType" value="02">签证</input></label>
+                               <label><input type="radio" class="validate[minCheckbox[1]]" name="cbsProductType" value="03">导游</input></label>
+                               <label><input type="radio" class="validate[minCheckbox[1]]" name="cbsProductType" value="04">门票</input></label>
+                               <label><input type="radio" class="validate[minCheckbox[1]]" name="cbsProductType" value="05">租车</input></label>
+                               <label><input type="radio" class="validate[minCheckbox[1]]" name="cbsProductType" value="06">机票</input></label>
+                               <label><input type="radio" class="validate[minCheckbox[1]]" name="cbsProductType" value="07">特色餐</input></label>
+                               <label><input type="radio" class="validate[minCheckbox[1]]" name="cbsProductType" value="08">交通资讯</input></label>
+							   <span style="color:red;">*</span>
+                            </div>
+                        </div>
+						<div class="content_line3">
+                            <span><strong>同业范围：</strong></span>
+                            <div class="content_address">
+                                <select name="cbsProProvince">
+    							    #foreach($item in $provinces)
+    									<option value="$item.regionNo">$item.regionName</option>
+    								#end
+                                </select>
+                                <span>省</span>
+                                <select name="cbsProCity">
+								</select>
+                                <span>市</span>
+                                <select name="cbsProCounty">
+								</select>
+                                <span>区/县</span>
+								<span style="color:red;">*</span>
+                            </div>
+						</div>
+                        <div class="content_line3">
+                            <span><strong>操作人(计调)：</strong></span>
+                            <div class="content_liner3">
+                                <input type="text" name="cbsOperator" class="validate[required,maxSize[10]]" />
+                                <span style="color:red;">*</span>
+                            </div>
+                        </div>
+                        <div class="content_line3">
+                            <span><strong>操作人电话：</strong></span>
+                            <div class="content_liner3">
+                                <input type="text" name="cbsOperatorPhone" class="validate[required,custom[phone]]" />
+                                <span style="color:red;">*</span>
+                            </div>
+                        </div>
+                        <div class="content_line3">
+                            <span><strong>操作人QQ：</strong></span>
+                            <div class="content_liner3">
+                                <input type="text" class="validate[custom[qq]]" name="cbsOperatorQQ" class="validate[required,custom[qq]]" />
+                                <span style="color:red;">*</span>
+                            </div>
+                        </div>
+						<div class="content_line3" style="text-align:center; width:775px;">
+							<a id="zizhi" style="cursor: pointer;">填写公司资质信息(可不填，后期需补充)</a>
+                        </div>
+						<div style="display:none;" id="div1">
+                            <div class="content_line3 clearfix">
+                                <span><strong>营业执照扫描件：</strong></span>
+                                <div class="content_liner4" style="width:auto; float:left;">
+    								<div style="display:inline-block;float:left; margin-top:5px; margin-right:10px;">
+        								<input name="cbsLicense" value="" type="hidden" id="cbsLicense4"/>
+                                    	<input name="file" id="uploadify4" contenteditable="false" size="30" type="file"/>
+                        				<span id="filespan4"></span>
+                        				<div id="fileQueue4"></div>
+    								</div>
+                                    <a target="_blank" href="http://file.jialvlianhe.com/template/jialvlianhe_yyzzmb.jpg">预览模板</a>
+                                </div>
+                            </div>
+                            <div class="content_line3 clearfix">
+                                <span><strong>经营许可证扫描件：</strong></span>
+                                <div class="content_liner4" style="width:auto; float:left;">
+    								<div style="display:inline-block;float:left; margin-top:5px; margin-right:10px;">
+        								<input name="cbsPermission" value="" type="hidden" id="cbsPermission5"/>
+                                    	<input name="file" id="uploadify5" contenteditable="false" size="30" type="file"/>
+                        				<span id="filespan5"></span>
+                        				<div id="fileQueue5"></div>
+    								</div>
+                                    <a target="_blank" href="http://file.jialvlianhe.com/template/jialvlianhe_jyxkzmb.jpg">预览模板</a>
+                                </div>
+                            </div>
+                            <div class="content_line3 clearfix">
+                                <span><strong>负责人证明：</strong></span>
+                                <div class="content_liner4" style="width:600px; float:left;">
+    								<div style="display:inline-block;float:left; margin-top:5px; margin-right:10px;">
+        								<input name="cbsProve" value="" type="hidden" id="cbsProve6"/>
+                                    	<input name="file" id="uploadify6" contenteditable="false" size="30" type="file"/>
+                        				<span id="filespan6"></span>
+                        				<div id="fileQueue6"></div>
+    								</div>
+                                    <a target="_blank" href="http://file.jialvlianhe.com/template/jialvlianhe_fzrzmwjmb.zip" download="newfilename" style="margin-right:10px;">下载模板</a>&nbsp;
+    								<a target="_blank" href="http://file.jialvlianhe.com/template/jialvlianhe_fzrzmsmyty.jpg">预览模板</a>
+                                </div>
+                            </div>
+    						<div class="content_line3">
+                                <span><strong>公司账户</strong></span>
+                            </div>
+                            <div class="content_line3">
+                                <span>单位全称：</span>
+                                <div class="content_liner3">
+                                    <input type="text" name="cbsAccountName" class="validate[maxSize[50]]" />
+                                </div>
+                            </div>
+                            <div class="content_line3">
+                                <span>账号：</span>
+                                <div class="content_liner3">
+                                    <input type="text" name="cbsAccount" class="validate[custom[onlyNumberSp],maxSize[20]]" />
+                                </div>
+                            </div>
+                            <div class="content_line3">
+                                <span>开户行：</span>
+                                <div class="content_liner3">
+                                    <input type="text" name="cbsOpenAccount" class="validate[maxSize[100]]" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content_btn">
+                            <button type="button" class="prev" onclick="javascript:register.load('$appRoot/company/regedit/updateInfo);">上一步</button>
+                            <button type="button" id="btn" onclick="javascript:register.regedit('form2', '$appRoot/company/regedit/saveBusiness', '$appRoot/company/regedit/user');">下一步</button>
+                        </div>
+					</form>
+                </div>
+            </div>
+    	</div>
+    	<div class="footer">
+    		版权所有&nbsp;&copyright&nbsp;北京佳旅联合科技有限公司
+    	</div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+ $('#zizhi').click(function() {
+		$('#div1').toggle();
+	});
+
+</script>

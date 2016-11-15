@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+#set($title='导游订单')
+#parse("common/orderhead.vm")
+<body>
+	
+	#parse("common/orderheader.vm")
+		
+    <div class="g_cont">
+        <img class="mb10" src="$staticRoot/images/step_05.jpg" title="进度：填写信息" alt="进度：填写信息">
+        <div class="g_lt_l">
+            <table>
+                <tr valign="top">
+                    <td>
+                    <div class="g_block_2 mb10">
+                        <h3 class="g_tit_1 mb20">订单信息</h3>
+
+                        <div class="form_block pl90">
+                            <label>导游姓名：</label><span class="w200">李俊龙</span><label>导游性别：</label><span class="w200">男</span><a href="#">修改></a>
+                        </div>
+                        <div class="form_block pl90">
+                            <label>服务语种：</label><span class="w200">西班牙语</span>
+                        </div>
+                        <div class="form_block pl90">
+                            <label>预约日期：</label>
+                            <input type="text" class="select_2" value="2015-9-11" maxlength="10">
+                            共8天
+                        </div>
+                        <div class="form_block pl90">
+                            <label>服务说明：</label>服务费用<font color="#FF9900" size="+1">380</font>/天时间为9小时，超时费50元
+                        </div>
+                        <div class="form_block pl90"><img style="margin-left:-40px; margin-right:40px;" src="$staticRoot/images/tt.jpg">
+                        </div>
+                        <div class="form_block pl90">
+                            <label>服务类型：</label>
+                            <input type="radio" name="RadioGroup1" value="男导游" id="RadioGroup1_0">
+                            男导游&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="RadioGroup1" value="女导游" id="RadioGroup1_1">
+                            女导游
+                        </div>
+                        <div class="form_block pl90">
+							<label>备注信息：</label>
+                            <textarea cols="50" rows="3" placeholder="&nbsp;如果您有什么要求可以写在备注里"></textarea>
+                        </div>
+                    </div></td><td>&nbsp;&nbsp;</td>
+                    <td>
+                    <div class="g_lt_r">
+                        <div class="g_block_4 pl18 pr18">
+                            <h3 class="g_tit_2 mb10">结算信息</h3>
+                            <ul class="g_list_1">
+                                <li>
+                                    成人票<span>￥29.9×2</span>
+                                <li>
+                                    成人票<span>￥29.9×2</span>
+                            </ul>
+                            <p class="add_mon">
+                                支付总额<span><em>￥</em>29.9</span>
+                            </p>
+                        </div>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td>
+                    <div class="g_block_2 mb10">
+                        <h3 class="g_tit_1 mb20">联系人信息<span class="sec_inf">登录一键设置联系人信息，<a href="#">立即注册</a>，已是佳佳会员，<a href="#">立即登录</a></span></h3>
+                        <div class="form_block pl90">
+                            <label>姓名：</label>
+                            <input type="text" placeholder="联系人姓名">
+                        </div>
+                        <div class="form_block pl90">
+                            <label>手机号码：</label>
+                            <input type="text" placeholder="接受验证信息和订单号码">
+                            <span class="error">*</span>
+                        </div>
+                    </div></td>
+                </tr>
+            </table>
+            <div class="form_block2 pl90 mb50">
+                <p class="g_txt_1">
+                    <label>
+                        <input name="Fruit" type="checkbox" />
+                        &nbsp;&nbsp;&nbsp;同意佳佳旅行网服务条款 <a href="#">查看条款</a> 并核实你所填写信息无误 </label>
+                </p>
+                <br>
+                <input style="margin-right:-150px; margin-left:150px;" type="submit" value="提交信息">
+            </div>
+        </div>
+
+        <div class="cb"></div>
+        <footer>
+            <p>
+                Copyright © 2002-2014  版权所有  北京佳旅联合国际旅行社有限公司   苏ICP证B2-20100204  旅行社业务许可证：L-JS-CJ00070
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>
+

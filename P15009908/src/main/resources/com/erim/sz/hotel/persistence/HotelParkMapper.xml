@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="hotelpark">
+	
+	<!-- 查询条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="hdlId != null and hdlId != ''">   	and 	    hdl_id 	     =   #{hdlId} 	</if>
+		</where>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		hdl_id					AS hdlId,
+		hpb_name          		AS hpbName,
+		hpb_area          		AS hpbArea,
+		hpb_type     		    AS hpbType,
+		hpb_cost 		        AS hpbCost,
+		hpb_car_num        		AS hpbCarNum,
+		hpb_bus_num		  		AS hpbBusNum,
+		hpb_imag                AS hpbImag
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageparkList" resultType="hotelParkBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_park
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageparkListCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			hotel_park
+		<include refid="sql_query" />	
+	</select>
+	
+	<!-- 根据ID查询一条信息 -->
+	<select id="selectParkById" resultType="hotelParkBean">
+		SELECT
+			id,
+			hpb_name          		AS hpbName,
+			hpb_area          		AS hpbArea,
+			hpb_type     		    AS hpbType,
+			hpb_cost 		        AS hpbCost,
+			hpb_car_num        		AS hpbCarNum,
+			hpb_bus_num		  		AS hpbBusNum,
+			hpb_imag                AS hpbImag
+			FROM
+			hotel_park
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert">
+		INSERT INTO
+			hotel_park
+			(
+				hpb_name,
+				hpb_area,
+				hpb_type,
+				hpb_cost,
+				hpb_car_num,
+				hpb_bus_num,
+				hpb_imag,
+				hdl_id
+			)
+		VALUES
+			(
+				#{hpbName},
+				#{hpbArea},
+				#{hpbType},
+				#{hpbCost},
+				#{hpbCarNum},
+				#{hpbBusNum},
+				#{hpbImag},
+				#{hdlId}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			hotel_park
+		SET
+			hpb_name          		= #{hpbName},
+			hpb_area          		= #{hpbArea},
+			hpb_type     		    = #{hpbType},
+			hpb_cost 		        = #{hpbCost},
+			hpb_car_num        		= #{hpbCarNum},
+			hpb_bus_num		  		= #{hpbBusNum},
+			hpb_imag                = #{hpbImag}
+		WHERE
+			id = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			hotel_park
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<!--上下架 -->
+	<delete id="delet" parameterType="int">
+		UPDATE
+			hotel_park
+		SET
+			hpb_is_del_status 	 = #{hpbIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	
+</mapper>

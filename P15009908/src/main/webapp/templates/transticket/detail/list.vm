@@ -1,0 +1,91 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/train.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/yuding.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/transticket/transticket.css">
+<!--火车票-->
+	<div class="newadd">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/htt1.png">
+			<span>交通管理</span>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>出发城市：</strong></span>
+			<p class="font_p">
+				$!transticket.ttdStartProvinces 
+				$!transticket.ttdStartCity  
+				$!transticket.ttdStartTown 
+			</p>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>出发站点：</strong></span>
+			<p class="font_p">$!transticket.ttdStartStation1 $!transticket.ttdStartStation2 $!transticket.ttdStartStation3 $!transticket.ttdStartStation4</p>
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>目的城市：</strong></span>
+			<p class="font_p">
+					#if($!transticket.ttdEndIsDomestic == '1') 全国, #end
+						
+					##$!transticket.ttdEndProvinces  不显示省 只显示城市  大波哥提的
+					$!transticket.ttdEndTown
+					
+					#if($!transticket.ttdEndIsXg == '1') 香港, #end
+                    #if($!transticket.ttdEndIsAm == '1') 澳门, #end
+                    #if($!transticket.ttdEndIsTw == '1') 台湾, #end
+
+					$!transticket.ttdEndCountry
+					$!transticket.ttdEndCity
+			</p>
+		</div>
+		<div class="yuding_line" style="margin-left:10px;">
+		  #if($shiro.hasPermission("PRODUCT_TRANSTICKET_UPDATE"))
+			<button class="btn_add" style="cursor:pointer" type="button" onclick="index.load('$appRoot/transticket/detail/update?id=$!transticket.id');">交通管理</button>
+		  #end
+		  #if($shiro.hasPermission("PRODUCT_TRANSTICKET_SAME"))
+			<button class="btn_add" style="cursor:pointer" type="button" onclick="index.nextPage('$appRoot/town/detail/setsametown?ntype=TRANSTICKET&cid=$!transticket.id');">同业管理</button>
+			#end
+		</div>
+		<div class="yuding_line">
+			<span class="yuding_span"><strong>常出车次：</strong></span>
+		</div>
+		<div class="carad_ctrtable">
+			<table cellspacing="0" cellspadding="0">
+				<thead>
+					<tr>
+						<td>车次</td>
+						<td>出发城市</td>
+						<td>出发时间</td>
+						<td>目的城市</td>
+						<td>到达时间</td>
+						<td>席别</td>
+						#if($shiro.hasPermission("PRODUCT_TRANSTICKET_DELET"))
+						<td>上架状态</td>
+						#end
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($item in $listtransticketnum)
+    					<tr>
+							<td>$item.tdlNo</td>
+    						<td>$item.tdlStartStation</td>
+    						<td>$item.tdlStartTime</td>
+    						<td>$item.tdlArrivedStation</td>
+    						<td>$item.tdlArrivedTime</td>
+							<td>#vtext($!item.tdlNtype,'C006')</td> 
+							#if($shiro.hasPermission("PRODUCT_TRANSTICKET_DELET"))
+    						<td class="carad_img">
+								#if($!item.tdlIsDelStatus == '02')
+                                    <span><img src="$staticRoot/images/lvdui.png"/></span>
+                                    <a href="javascript:index.load('$appRoot/transticket/num/xj?id=$item.id&tdlIsDelStatus=01');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+    							#end
+    							#if($!item.tdlIsDelStatus == '01')
+    								<a href="javascript:index.load('$appRoot/transticket/num/xj?id=$item.id&tdlIsDelStatus=02');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+    								<span><img src="$staticRoot/images/hongcuo.png"/></span>
+    							#end
+							</td>
+							#end
+    					</tr>
+					#end
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--/火车票-->

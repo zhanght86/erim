@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zxsellcooperation">
+	
+	<!-- 更新所有产品为已合作 -->
+	<update id="update">
+	     UPDATE 
+	     	zx_sell_cooperation   
+	     SET
+	     	zsc_is_coopertion = #{zscIsCoopertion},
+			zsc_cooperiontime = #{zscCooperiontime},
+			zsc_cooperionuser = #{zscCooperionuser}
+		 WHERE 
+		 	sell_cpy_id = #{sellCpyId} 
+	 	 AND 
+	 	 	cpy_id      = #{cpyId}
+	 	 AND
+	 	 	cid		    = #{cid}   
+	</update>
+	
+	<update id="deleteALl">
+		 UPDATE 
+	     	zx_sell_cooperation   
+	     SET
+	     	zsc_is_coopertion = '0',
+			zsc_cooperiontime = #{zscCooperiontime},
+			zsc_cooperionuser = #{zscCooperionuser}
+		 WHERE 
+		 	sell_cpy_id = #{sellCpyId} 
+	</update>
+</mapper>

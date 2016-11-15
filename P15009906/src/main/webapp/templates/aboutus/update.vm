@@ -1,0 +1,41 @@
+<form id="form1" method="post">
+	<input type="hidden" name="id" value="$!aboutUs.id">
+	<div class="newline_ctlla2">
+        <span style="font-size:16px;font-weight:bold;color:#4778C7;">关于我们</span><br><br>
+      <!--
+		<div class="newline_ctllra" style="margin-left:165px;margin-top:30px;">
+			<textarea placeholder="内容限1000字以内" style="width:700px;height:400px;" name="sauRemark" class="validate[maxSize[2000]]">$!aboutUs.sauRemark</textarea>
+		</div>
+		-->
+		
+		<div class="newline_ctrlblr" style="z-index:5;position:relative;">
+			<script type="text/plain" id="editor">$!aboutUs.sauRemark</script>
+        </div>
+		<input type="hidden" name="sauRemark" id="sauRemark"/>		
+		
+	</div>
+    <div style="margin-left:800px;margin-top:20px;">
+		<button type="button" class="about_us" onclick="javascript:save();">提交</button>
+	</div>
+</form>
+<script>
+    var editor = new baidu.editor.ui.Editor();
+    editor.render("editor");
+	function save(){
+		var formid  = "form1";
+		var url     = "$appRoot/sell/aboutus/update";
+		var loadurl = "$appRoot/sell/aboutus/updatePage";
+		$('#sauRemark').attr('value',UE.getEditor('editor').getContent());
+		var data = $("#"+formid).serialize();
+		$.post(url, data, function(response) {
+			if (response == '0') {
+				wxcalert("服务器繁忙，请稍后！");
+			} else if (response == '1') {
+				wxcalert("操作成功！");
+				setTimeout(function() {
+					index.load(loadurl);
+				}, 1000);
+			}
+		}, "json");
+	}
+</script>

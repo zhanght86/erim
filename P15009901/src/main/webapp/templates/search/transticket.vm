@@ -1,0 +1,54 @@
+<!-- 火车票-->
+<div class="tab-right-div">
+    <div class="tab-top">
+        <span class="tab-top-item subline">您的需求</span>
+        <div class="tab-top-div">
+            <a href="https://kyfw.12306.cn/otn/lcxxcx/init" title="12306" target="_blank" class="tickets">
+			<img src="$staticRoot/images/12306_bg.png">点击进入12306购票中心</a>
+            <br clear="left">
+            <span class="tab-tips">如果网上无票，请留下您的需求，我们将竭诚为您服务!</span>
+        </div>
+    </div>
+    <div class="tab-main">
+        <div class="tab-main-div show pd-top15">
+            <label class="tab-label">
+                <span class="tab-span">出发地:</span>
+                <input class="tab-input" type="text">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">目的地:</span>
+                <input class="tab-input home-city" type="text">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">出发日期:</span>
+                <input type="text" class="tab-input laydate-icon" onclick="laydate()">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">票类选择:</span>
+                <select class="tab-select">
+                    <option>软卧</option>
+                    <option>硬卧</option>
+                    <option>软座</option>
+                    <option>硬座</option>
+                    <option>一等座</option>
+                    <option>二等座</option>
+                </select>
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">联系人:</span>
+                <input class="tab-input" type="text">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">联系方式:</span>
+                <input class="tab-input" type="text">
+            </label>
+			<label class="tab-label">
+                <span class="tab-span">备注:</span>
+				<textarea class="tab-textarea">
+                </textarea>
+            </label>
+            <button type="submit" value="提交信息" class="tab-submit" style="margin-left:175px;">提交信息</button>
+        </div>
+    </div>
+</div>
+<!-- /火车票-->

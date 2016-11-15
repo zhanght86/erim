@@ -1,0 +1,44 @@
+<div class="cjzyxjipiao">
+	<div class="cjzyxjipiaotop">
+		<img src="$staticRoot/images/chaoji4.jpg"> <a
+			href="$appRoot/$cpyno/jipiao.html"><span>机票</span></a>
+		<div class="cjzyx_jipiaotop">
+			<ul>
+				<li><span>石家庄&rarr;</span></li>
+				<li><a href="#" target="_blank" alt="" title="">北京</a>
+				<li>
+				<li><a href="#" target="_blank" alt="" title="">上海</a>
+				<li>
+				<li><a href="#" target="_blank" alt="" title="">广州</a>
+				<li>
+				<li><a href="#" target="_blank" alt="" title="">深圳</a>
+				<li>
+				<li><a href="#" target="_blank" alt="" title="">杭州</a>
+				<li>
+				<li><a href="#" target="_blank" alt="" title="">更多城市</a>
+				<li>
+			</ul>
+		</div>
+	</div>
+	<div class="cjzyxjipiaocontent">
+		<div class="cjzyx_jipiaoleft">
+			#foreach($item in $planeticketList)
+    			<div class="cjzyx_jipiaoleftbox">
+    				<div class="cjzyxjpctbimoney">
+    					<a href="$appRoot/$cpyno/planeticket/jipiao" target="_blank" alt="" title=""> <span
+    						class="cjzyxjpctbimyb">$!item.ptdStartAddress &rarr;$!item.ptdStartAddress</span>
+    						<div class="cjzyxjpctbimya">
+    							<span class="cjzyxjpctbimyaq"><label><small>￥</small>$!item.ptdPriceSell</label></span>
+								<!-- <span class="cjzyxjpctbimyaz">3折</span>--> 
+								<span class="cjzyxjpctbimyarq">$!item.ptdStartTime</span>
+    						</div>
+    					</a>
+    				</div>
+    			</div>
+			#end
+		</div>
+		<div class="cjzyx_jipiaoright">
+			<img src="$staticRoot/images/right.jpg" id="img-banner" width="396" height="310" />
+		</div>
+	</div>
+</div>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="vcompanydetail">
+	
+	<sql id="sql_query">
+		<where>
+			1=1
+			<if test = "cpyRoe != null and cpyRoe != ''">          and cpy_roe   	 = #{cpyRoe}  		   </if>
+			<if test = "cpyName != null and cpyName != ''">        and cpy_name  like "%"#{cpyName}"%"   </if>
+			<if test = "cpyBrand != null and cpyBrand != ''">      and cpy_brand like "%"#{cpyBrand}"%"  </if>
+			<if test = "ccpName != null and ccpName != ''">        and ccp_name  like "%"#{ccpName}"%"   </if>
+			
+			<if test = "yjUserCode != null and yjUserCode != ''"> 
+				 and v_company_detail.yj_user_code  = #{yjUserCode}   
+			</if>
+			
+			AND 
+			(
+				   v_company_detail.id in (select cus_system_user.cpy_id from cus_system_user)
+				or v_company_detail.id in (select zx_system_user.cpy_id from zx_system_user)
+				or v_company_detail.id in (select zy_system_user.cpy_id from zy_system_user)
+				or v_company_detail.id in (select sell_system_user.cpy_id from sell_system_user)
+			)
+		</where>
+	</sql>
+	
+	<!-- 根据企业id查询企业信息 -->
+	<select id="selectById" resultType="vCompanyDetailBean">
+		SELECT
+			<include refid="sql_column"></include>
+		FROM
+			v_company_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 分页查询企业相关 -->
+	<select id="selectPage" resultType="vCompanyDetailBean">
+		SELECT
+			<include refid="sql_column"></include>
+			,yj_system_user.yj_user_code cpyYjUserCode
+			,(select sum(pyb_back_price) from price_back_yw where price_back_yw.cpy_id = v_company_detail.id) backMoneyLevelf
+			,(select sum(pyb_back_price) from price_back_yw where price_back_yw.cpy_id in (
+				select company_detail.id from company_detail where company_detail.yj_user_code in (
+					select ysu.yj_user_code from yj_system_user ysu where ysu.yj_parent_login_name = yj_system_user.yj_user_code
+				)
+			) )backMoneyLevelS
+		FROM
+			v_company_detail
+		LEFT JOIN
+			yj_system_user
+		ON
+			yj_system_user.cpy_id = v_company_detail.id
+			<include refid="sql_query"></include>
+	</select>
+	
+	<!-- 总数查询 -->
+	<select id="selectPageCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			v_company_detail
+			<include refid="sql_query"></include>
+	</select>
+	
+	<sql id="sql_column">
+		v_company_detail.id 	AS id,
+		cpy_code 				AS cpyCode,
+v_company_detail.yj_user_code   AS yjUserCode,
+		cpy_name 				AS cpyName,
+		cpy_telephone 			AS cpyTelephone,
+		cpy_fax 				AS cpyFax,
+		cpy_email 				AS cpyEmail,
+		cpy_province 			AS cpyProvince,
+		cpy_province_name 		AS cpyProvinceName,
+		cpy_city 				AS cpyCity,
+		cpy_city_name			AS cpyCityName,
+		cpy_county				AS cpyCounty,
+		cpy_county_name 		AS cpyCountyName,
+		cpy_address 			AS cpyAddress,
+		cpy_nature 				AS cpyNature,
+		cpy_x 					AS cpyX,
+		cpy_y 					AS cpyY,
+		cpy_img_permit1 		AS cpyImgPermit1,
+		cpy_img_permit2 		AS cpyImgPermit2,
+		cpy_img_permit3 		AS cpyImgPermit3,
+		cpy_custom_id 			AS cpyCustomId,
+		cpy_createdate 			AS cpyCreatedate,
+		cpy_createip 			AS cpyCreateip,
+		cpy_roe 				AS cpyRoe,
+		cpy_ntype 				AS cpyNtype,
+		cpy_is_through 			AS cpyIsThrough,
+		cpy_brand 				AS cpyBrand,
+		cpy_is_people 			AS cpyIsPeople,
+		cpy_is_phone 			AS cpyIsPhone,
+		cpy_is_operation 		AS cpyIsOperation,
+		cpy_is_operationphone   AS cpyIsOperationphone,
+		cpy_is_qq			    AS cpyIsQq,
+		cpy_is_inland 			AS cpyIsInland,
+		cpy_external 			AS cpyExternal,
+		cpy_foreign 			AS cpyForeign,
+		cpy_foreign_city 		AS cpyForeignCity,
+		cpy_img 				AS cpyImg,
+		cbs_id 					AS cbsId,
+		cbs_service 			AS cbsService,
+		cbs_cpy_type 			AS cbsCpyType,
+		cbs_inland 				AS cbsInland,
+		cbs_province 			AS cbsProvince,
+		cbs_city			    AS cbsCity,
+		cbs_county 				AS cbsCounty,
+		cbs_is_interna 			AS cbsIsInterna,
+		cbs_state 				AS cbsState,
+		cbs_ser_inland 			AS cbsSerInland,
+		cbs_service_inside 		AS cbsServiceInside,
+		cbs_service_add 		AS cbsServiceAdd,
+		cbs_ser_interna 		AS cbsSerInterna,
+		cbs_service_outer	    AS cbsServiceOuter,
+		cbs_service_rest 		AS cbsServiceRest,
+		cbs_ser_province 		AS cbsSerProvince,
+		cbs_ser_city 			AS cbsSerCity,
+		cbs_ser_county 			AS cbsSerCounty,
+		cbs_nur_inland 			AS cbsNurInland,
+		cbs_nur_interna 		AS cbsNurInterna,
+		cbs_nur_state 			AS cbsNurState,
+		cbs_nur_rest 			AS cbsNurRest,
+		cbs_srl_inland 			AS cbsSrlInland,
+		cbs_srl_interna 		AS cbsSrlInterna,
+		cbs_srl_dir 			AS cbsSrlDir,
+		cbs_srl_rest 			AS cbsSrlRest,
+		cbs_curr_address 		AS cbsCurrAddress,
+		cbs_ran_province1 		AS cbsRanProvince1,
+		cbs_ran_province2 		AS cbsRanProvince2,
+		cbs_ran_province3 		AS cbsRanProvince3,
+		cbs_ran_province4 		AS cbsRanProvince4,
+		cbs_ran_province5 		AS cbsRanProvince5,
+		cbs_ran_city1 			AS cbsRanCity1,
+		cbs_ran_city2 			AS cbsRanCity2,
+		cbs_ran_city3 			AS cbsRanCity3,
+		cbs_ran_city4 			AS cbsRanCity4,
+		cbs_ran_city5 			AS cbsRanCity5,
+		cbs_ran_county1 		AS cbsRanCounty1,
+		cbs_ran_county2 		AS cbsRanCounty2,
+		cbs_ran_county3 		AS cbsRanCounty3,
+		cbs_ran_county4 		AS cbsRanCounty4,
+		cbs_ran_county5 		AS cbsRanCounty5,
+		cbs_ran_interna 		AS cbsRanInterna,
+		cbs_ran_state1 			AS cbsRanState1,
+		cbs_ran_state2 			AS cbsRanState2,
+		cbs_ran_state3 			AS cbsRanState3,
+		cbs_ran_state4 			AS cbsRanState4,
+		cbs_ran_state5 			AS cbsRanState5,
+		cbs_product_type 		AS cbsProductType,
+		cbs_product_name 		AS cbsProductName,
+		cbs_operator 			AS cbsOperator,
+		cbs_operator_qq 		AS cbsOperatorQq,
+		cbs_prove 				AS cbsProve,
+		cbs_account_name 		AS cbsAccountName,
+		cbs_account 			AS cbsAccount,
+		cbs_open_account 		AS cbsOpenAccount,
+		cbs_operator_phone 		AS cbsOperatorPhone,
+		cbs_license 			AS cbsLicense,
+		cbs_permission 			AS cbsPermission,
+		cbs_pro_province 		AS cbsProProvince,
+		cbs_pro_city 			AS cbsProCity,
+		cbs_pro_county 			AS cbsProCounty,
+		ccp_id 					AS ccpId,
+		ccp_name 				AS ccpName,
+		ccp_telephone 			AS ccpTelephone,
+		ccp_email 				AS ccpEmail,
+		ccp_qq	 				AS ccpQq,
+		ccp_card 				AS ccpCard,
+		ccp_img_card1 			AS ccpImgCard1,
+		ccp_img_card2 			AS ccpImgCard2,
+		ccp_createtime 			AS ccpCreatetime
+	</sql>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriapackage">
+	
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		cdl_id				AS cdlID,	
+		cpe_name 	        AS cpeName,
+		cpe_Person_min 	    AS cpePersonMin,
+		cpe_person_max      AS cpePersonMax,
+		cpe_content_num     AS cpeContentNum,
+		cpe_each_price      AS cpeEachPrice,
+		cpe_cafeteria_type  AS cpeCafeteriaType,
+ 		cpe_cafeteria_norms AS cpeCafeteriaNorms,
+ 		cpe_cafeteria_name  AS cpeCafeteriaName,
+ 		cpe_cafeteria_img   AS cpeCafeteriaImg,
+ 		cpe_start_time      AS cpeStartTime,
+ 		cpe_end_time        AS cpeEndTime,
+ 		cpe_introduction    AS cpeIntroduction,
+ 		cpe_buy_know        AS cpeBuyKnow,
+ 		cpe_message 	    AS cpeMessage,
+ 		cpe_friendly_tips   AS cpeFriendlyTips,
+ 		cpe_service         AS cpeService,
+ 		cpe_is_del_status   AS cpeIsDelStatus,
+ 		cpe_code            AS cpeCode,
+ 		cpe_create_time     AS cpeCreatetime,
+ 		cpe_other_name      AS cpeOtherName,
+ 		cpe_other_norms     AS cpeOtherNorms,
+ 		cpe_other_price     AS cpeOtherPrice,
+ 		cpe_image           AS cpeImage,
+ 		cpe_content_price   AS cpeContentPrice,
+ 		cpe_Img5            AS cpeImg5
+	</sql>
+	
+	<!-- 根据套餐ID查询 -->
+	<select id="selectPackageByCdlId" resultType="cafeteriaPackageBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			cafeteria_package
+		WHERE
+			cdl_id= #{cdlID}
+	</select>
+	
+	
+	<!-- 根据套餐ID查询菜品数据列表 -->
+	<select id="selectDishesByCpeId" resultType="cafeteriaPackageDishesBean">
+		SELECT
+			id 			   AS id,
+			cpe_id         AS cpeId,
+			cpd_price 	   AS cpdPrice,
+			cpd_avenue	   AS cpdAvenue,
+			cpd_createtime AS cpdCreatetime
+		FROM
+			cafeteria_package_dishes
+		WHERE
+			cpe_id = #{cpeId}
+		ORDER BY 
+			cpd_createtime 
+	</select>
+	
+	
+	<!-- 根据菜品ID，查询菜列表 -->
+	<select id="selectFoodByCpdId" resultType="cafeteriaPackageDishesFoodBean">
+		SELECT
+			id 			   AS id,
+			cpf_name 	   AS cpfName,
+			cpf_price 	   AS cpfPrice,
+			cpf_img1 	   AS cpfImg1,
+			cpf_img2       AS cpfImg2,
+			cpf_ntype      AS cpfNtype,
+			cpf_createtime AS cpfCreatetime,
+			cpd_id 		   AS cpdId,
+			cpe_id 		   AS cpeId,
+			cpf_number     AS cpfNumber
+		FROM
+			cafeteria_package_dishes_food
+		WHERE
+			cpd_id = #{cpdId}
+	</select>
+</mapper>

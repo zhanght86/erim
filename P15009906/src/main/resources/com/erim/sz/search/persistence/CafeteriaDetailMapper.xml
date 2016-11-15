@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriadetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="cdlName != null and cdlName != ''">			            and 	cdl_name 			    like "%"#{cdlName}"%"</if>
+			<if test="cdlForeignCity != null and cdlForeignCity != ''">			and 	cdl_foreigncity 	    like "%"#{cdlForeignCity}"%"</if>
+			<if test="cdlForeign != null and cdlForeign != ''">					and 	cdl_foreign 	    	like "%"#{cdlForeign}"%"</if>
+			<if test="cdlExternal != null and cdlExternal != ''">				and 	cdl_external 	    	like "%"#{cdlExternal}"%"</if>
+			<if test="cdlInland != null and cdlInland != ''">					and 	cdl_cdlInland 	    	like "%"#{cdlInland}"%"</if>
+			<if test="cdlCode != null and cdlCode != ''">			            and 	cdl_code 			    like "%"#{cdlCode}"%"</if>
+			<if test="cdlBusiness != null  and cdlBusiness != ''">			    and 	cdl_business 			 =    #{cdlBusiness}</if>
+			<if test="cdlOrderNormz != null  and cdlOrderNormz != ''">			and 	cdl_order_normz 	     =   #{cdlOrderNormz}</if>
+			<if test="cdlCity != null  and cdlCity != ''">			            and 	cdl_city 	             =   #{cdlCity}</if>
+			<if test="cpyId != null">			                                and 	cpy_id		 		     = 	 #{cpyId}</if>
+			<!-- 价格参数 -->
+			<if test="PriceOption == 1">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+  					cdl_id=cafeteria_detail.id AND
+  					cpe_content_price &lt;50 
+  				)		
+			
+			</if>
+			<if test="PriceOption == 2">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+  					cdl_id=cafeteria_detail.id AND
+  					cpe_content_price &gt;=50 and
+  					cpe_content_price &lt;=100 
+  				)		
+			
+			</if>
+			<if test="PriceOption == 3">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+  					cdl_id=cafeteria_detail.id AND
+  					cpe_content_price &gt;=101 and
+  					cpe_content_price &lt;=200 
+  				)		
+			
+			</if>
+			<if test="PriceOption == 4">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+  					cdl_id=cafeteria_detail.id AND
+  					cpe_content_price &gt;=201 and
+  					cpe_content_price &lt;=400 
+  				)		
+			
+			</if>
+			<if test="PriceOption == 5">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+  					cdl_id=cafeteria_detail.id AND
+  					cpe_content_price &gt;400 
+  				)		
+			
+			</if>
+			
+			<!-- 人数参数 -->
+			<if test="PersonOption == 1">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+    				cdl_id=cafeteria_detail.id AND
+    				cpe_person_min &lt;=1 AND cpe_person_max &gt;=1 
+  				)		
+			
+			</if>
+			<if test="PersonOption == 2">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+    				cdl_id=cafeteria_detail.id AND
+    				cpe_person_min &lt;=2 AND cpe_person_max &gt;=2 
+  				)		
+			
+			</if>
+			
+			<if test="PersonOption == 3">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+    				cdl_id=cafeteria_detail.id AND(
+    				(cpe_person_min &lt;=3 AND cpe_person_max &gt;=3 )
+    				or 
+    				(cpe_person_min &lt;=4 AND cpe_person_max &gt;=4 )
+    				)
+  				)		
+			
+			</if>
+			
+			<if test="PersonOption == 4">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+    				cdl_id=cafeteria_detail.id AND(
+    				(cpe_person_min &lt;=5 AND cpe_person_max &gt;=5 )
+    				or 
+    				(cpe_person_min &lt;=6 AND cpe_person_max &gt;=6 )
+    				)
+  				)		
+			
+			</if>
+			
+			<if test="PersonOption == 5">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+    				cdl_id=cafeteria_detail.id AND(
+    				(cpe_person_min &lt;=7 AND cpe_person_max &gt;=7 )
+    				or 
+    				(cpe_person_min &lt;=8 AND cpe_person_max &gt;=8 )
+    				)
+  				)		
+			
+			</if>
+			
+			<if test="PersonOption == 6">
+			   and 
+			   EXISTS 
+				(
+					select id from cafeteria_package where 
+    				cdl_id=cafeteria_detail.id AND
+    				cpe_person_max &gt;=9
+    				
+  				)		
+			
+			</if>
+			
+			
+		</where> 
+	</sql>
+	
+	<sql id="sql_column">
+			cafeteria_detail.id ,
+			cdl_name 			AS 		cdlName,
+			cdl_telephone		AS 		cdlTelephone,
+			cdl_province 		AS 		cdlProvince,
+			cdl_city 			AS 		cdlCity,
+			cdl_county          AS      cdlCounty,
+			cdl_address 		AS 		cdlAddress,
+			cdl_x 				AS 		cdlX,
+			cdl_y 				AS 		cdlY,
+			cdl_img1 			AS 		cdlImg1,
+			cdl_img2 			AS 		cdlImg2,
+			cdl_img3 			AS 		cdlImg3,
+			cdl_img4            AS      cdlImg4,
+			cdl_img5            AS      cdlImg5,
+			cdl_createtime 		AS 		cdlCreatetime,
+			cdl_createuse 		AS 		cdlCreateuse,
+			cdl_is_through 		AS 		cdlIsThrough,
+			cdl_through_time 	AS 		cdlThroughTime,
+			cdl_through_user 	AS 		cdlThroughUser,
+			cdl_is_del_status   AS      cdlIsDelStatus,
+			cdl_price           AS      cdlPrice,
+			cdl_special_price   AS      cdlSpecialPrice,
+		    cdl_special_name	AS      cdlSpecialName,
+		    cdl_level           AS      cdlLevel,
+  cafeteria_detail.cpy_id		AS 		cpyId,
+		    cdl_sort            AS      cdlSort,
+		    cdl_notice          AS      cdlNotice,
+		    cdl_introduce       AS      cdlIntroduce,
+		    cdl_open_time       AS      cdlOpenTime,
+			cdl_close_time      AS      cdlCloseTime,
+			cdl_reason          AS      cdlReason,
+			cdl_eat_people      AS      cdlEatPeople,
+			cdl_stop_car        AS      cdlStopCar,
+			cdl_internet        AS      cdlInternet,
+			cdl_business        AS      cdlBusiness,
+			cdl_order_norme     AS      cdlOrderNorme,
+			cdl_order_normz     AS      cdlOrderNormz,
+			cdl_receive_num     AS      cdlReceiveNum,
+			cdl_cdlInland		AS      cdlInland,
+			cdl_external		AS      cdlExternal,
+			cdl_foreign			AS      cdlForeign,
+			cdl_foreigncity		AS      cdlForeignCity,
+			cdl_code            AS      cdlCode,
+			cdl_people_qq       AS      cdlPeopleQq,
+			cdl_phone           AS      cdlPhone,
+		   	cdl_district		AS 		cdlDistrict,
+		   	cdl_unlimited       AS      cdlUnlimited,
+		   	cdl_special         AS      cdlSpecial,
+		   	cdl_scheduled       AS      cdlScheduled 
+	</sql>
+	<!-- 根据特色餐ID查询 -->
+	<select id="selectCafeteriaDetialById" resultType="cafeteriaDetailBean">
+		SELECT
+			<include refid="sql_column"></include>
+ 		FROM
+			cafeteria_detail
+		WHERE
+			id = #{id}
+	</select>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageCafeteria" resultType="cafeteriaDetailBean">
+		SELECT
+			<include refid="sql_column"></include>
+			, 
+			cpy_name        	AS cpyName,
+			cpy_brand        	AS cpyBrand,
+			cpy_telephone   	AS cpyTelephone,
+			ccp_name			AS ccpName,
+			ccp_telephone		AS ccpTelephone,
+			ccp_qq				AS ccpQq,
+			cbs_operator		AS cbsOperator,
+			cbs_operator_phone	AS cbsOperatorPhone,
+			cbs_operator_qq		AS cbsOperatorQq  
+		FROM
+			cafeteria_detail
+		LEFT JOIN
+			company_detail
+		ON 
+			company_detail.id = cafeteria_detail.cpy_id
+		LEFT JOIN
+			company_contact_person
+		ON
+			company_contact_person.cpy_id = cafeteria_detail.cpy_id
+		LEFT JOIN
+			company_business
+		ON
+			company_business.cpy_id = cafeteria_detail.cpy_id
+		<include refid="sql_query" />
+	</select>
+	
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCafeteriaCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			cafeteria_detail
+		<include refid="sql_query" />
+	</select>
+
+	
+</mapper>

@@ -1,0 +1,43 @@
+<div class="head">
+	<div class="htop">
+		<div class="htopl" style="width:auto; max-width:1100px;">
+			#if($erim.isNotEmpty($!userCpyLogo))
+				<img src="$staticFileRes$userCpyLogo" style="margin-right:-20px;">
+			#end
+			<span style="font-size:15px;margin-left:50px;">&nbsp;&nbsp;$!userCpyBrand<span style="font-size:22px;font-weight: bold; margin-left:0;">$!userCpyName</span></span>
+		</div>
+		<div class="htopr">
+			<span>您好:$userName</span> 
+			<a href="javascript:index.load('$appRoot/welcome');" class="signout">主页</a> 
+			&nbsp;&nbsp;
+			<a href="javascript:index.load('$appRoot/cpy/detail');" class="signout">企业信息</a> 
+			&nbsp;&nbsp;
+			<a href="javascript:index.load('$appRoot/zy/user/updatePadPage');">修改密码</a>
+			&nbsp;&nbsp;
+			<a href="javascript:destroy();" class="signout">退出</a> 
+		</div>
+	</div>
+	<div class="hfooter">
+		<div class="hfl">今天是&nbsp;$erim.nowDate()</div>
+		<div class="hfm">   
+			<img src="$staticRoot/images/houtai3.png">
+		</div>
+		<div class="hfr">
+			<p>&nbsp;您的位置：&nbsp;</p>
+			<span id="titleSpan">首页</span>
+		</div>
+		
+		##<div class="hfl">大波波出炉 手撕菠菜</div>
+	</div>
+</div>
+	
+<script >
+	//销毁cookie
+	function destroy(){
+		mycookie.del("leftclick");
+		mycookie.del("leftspanclick");
+		mycookie.del("loaddata");
+		
+		window.location = "$appRoot/loginOut";
+	}
+</script>

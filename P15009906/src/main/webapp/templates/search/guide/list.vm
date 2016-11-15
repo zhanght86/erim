@@ -1,0 +1,278 @@
+	
+	
+	
+	<form method="post" id="form1" class="mb10" action="$appRoot/search/guide/list">
+    	<div class="search_block clearfix">
+				<div class="input_bg">
+					<div class="input_block clearfix" style="margin-bottom:0;">
+						<div class="input_right input_right_wauto">
+							<label class="ml25 pl10"> 系统编码：</label>
+							<input class="w130" name="gdlCode" value="$!guideDetail.gdlCode">
+								<label class="ml10 pl10"> 导游/领队姓名：</label>
+							<input class="w130" name="gdlName" value="$!guideDetail.gdlName">
+								<label class="ml10 pl10">空档查询：</label>
+								<input class="w130"name="gpeDate" value="$!guideDetail.gpeDate" onclick="WdatePicker({minDate:'%y-%M-%d'})">
+								<label class="ml10 pl10"> 导游性别：</label>
+								<input type="radio" name="gdlSex" value="" checked /> 不限
+								#foreach($item in $sex.keySet())
+									<input type="radio" name="gdlSex" value="$item" #if($erim.contains($!guideDetail.gdlSex,$item)) checked #end/> $sex.get($item)
+    							#end
+							<span class="red_a ml25" type="button" onclick="index.searchform('form1','$appRoot/search/guide/list');">查询</span>
+						</div>
+					</div>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">服务类型</span></li>
+						<li class="second bx"><a class="smenu-item item-hover #if("" == $!guideDetail.gdlServer || ! $guideDetail.gdlServer)  on  #end" onclick="$('#gdlServer').attr('value','');index.searchform('form1','$appRoot/search/guide/list');">不限</a></li>
+						<li ><a class="smenu-item item-hover #if("01" == $!guideDetail.gdlServer )  on  #end" onclick="$('#gdlServer').attr('value','01');">国内地陪 <em class="icon_img"></a></em></li>
+						<li ><a class="smenu-item item-hover #if("04" == $!guideDetail.gdlServer )  on  #end" onclick="$('#gdlServer').attr('value','04');">国际/港澳台地陪 <em class="icon_img"></em></a></li>
+						<li ><a class="smenu-item item-hover #if("02" == $!guideDetail.gdlServer )  on  #end" onclick="$('#gdlServer').attr('value','02');">国内全陪 <em class="icon_img"></em></a></li>
+						<li ><a class="smenu-item item-hover #if("03" == $!guideDetail.gdlServer )  on  #end" onclick="$('#gdlServer').attr('value','03');">国际/港澳台领队 <em class="icon_img"></em></a></li>
+						
+					
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				<div class="show_block">
+					<div>
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml10 pl10">目的地：</label>
+    							<select class="w90" name="gdlLocalProvince">
+									<option value="" ></option>
+									#foreach($item in $provinces)
+        								<option value="$item.regionNo" #if($guideDetail.gdlLocalProvince == $item.regionNo) selected #end>$item.regionName</option> 
+        							#end
+								</select> 省
+    							<select class="w90" name="gdlLocalCity"><option></option></select> 市
+    							<select class="w90" name="gdlLocalCounty"><option></option></select> 区/县
+    						</span>
+						</span>
+					</div>
+					
+					<div>
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+        						<label class="ml25 pl10">目的地：
+								<label>
+        						    <input type="radio" name="gdlGaidLokal" class="ml25" value="01" #if($erim.contains($!guideDetail.gdlGaidLokal,'01')) checked #end> 香港 </label>
+								<label>
+									<input type="radio" name="gdlGaidLokal" value="02" #if($erim.contains($!guideDetail.gdlGaidLokal,'02')) checked #end> 澳门 </label>
+								<label>
+									<input type="radio" name="gdlGaidLokal" value="03" #if($erim.contains($!guideDetail.gdlGaidLokal,'03')) checked #end> 台湾 </label>
+								<label>
+									<input id="gj" type="radio" name="gdlGaidLokal" value="04" #if($erim.contains($!guideDetail.gdlGaidLokal,'04')) checked #end> 国家 </label>
+							</span>
+						</span>
+					</div>
+					
+					
+					
+					<div>
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    		     				<label class="ml10 pl10">目的地：#vregion($!userCompany.cpyProvince) #vregion($!userCompany.cpyCity)</label>
+								<input type="hidden" name="gdlNationalProvince" value="$!userCompany.cpyProvince">
+            					<input type="hidden" name="gdlNationalCity" value="$!userCompany.cpyCity">
+																
+    						</span>
+						</span>
+					</div>
+					<div>
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+        						<label class="ml10 pl10">出发地：#vregion($!userCompany.cpyProvince) #vregion($!userCompany.cpyCity)</label>
+								<input type="hidden" name="gdlLeaderProvince" value="$!userCompany.cpyProvince">
+            					<input type="hidden" name="gdlLeaderCity" value="$!userCompany.cpyCity">	
+    							   							
+        						
+							</span>
+						</span>
+					</div>
+					
+					
+                </div>
+				
+				
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">公司评级</span></li>
+						<li class="second bx"><a class="smenu-item item-hover #if("" == $!guideDetail.gdlCompanyRating || ! $guideDetail.gdlCompanyRating)  on  #end" onclick="$('#gdlCompanyRating').attr('value','');index.searchform('form1','$appRoot/search/guide/list');">不限</a></li>
+						<li>
+							#foreach($item in $rating.keySet())
+							   <a class="smenu-item item-hover #if($!guideDetail.gdlCompanyRating == $item) on #end" id="a_level_$item.id" onclick="$('#gdlCompanyRating').attr('value','$item');index.searchform('form1','$appRoot/search/guide/list');">$rating.get($item)</a>
+            				#end
+						</li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont clearfix">
+						<li class="first"><span class="span_tit">导游语种</span></li>
+						<li class="second bx"><a class="smenu-item item-hover #if("" == $!guideDetail.gdlLanguage || ! $guideDetail.gdlLanguage)  on  #end" onclick="$('#gdlLanguage').attr('value','');index.searchform('form1','$appRoot/search/guide/list');">不限</a></li>
+						<li>
+							#foreach($item in $language.keySet())
+							   <a class="smenu-item item-hover #if($!guideDetail.gdlLanguage == $item) on #end" id="a_level_$item.id" onclick="$('#gdlLanguage').attr('value','$item');index.searchform('form1','$appRoot/search/guide/list');">$language.get($item)</a>
+            				#end
+						</li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+			</div>
+		<a class="big_more_a" style="display:none;">更多查询项</a>
+		<input type="hidden" name="gdlCompanyRating" id="gdlCompanyRating" value="$!guideDetail.gdlCompanyRating"/>
+		<input type="hidden" name="gdlLanguage" id="gdlLanguage" value="$!guideDetail.gdlLanguage"/>
+		<input type="hidden" name="gdlServer" id="gdlServer" value="$!guideDetail.gdlServer"/>
+		<input type="hidden" name="city1" value="$!guideDetail.gdlLocalCity">
+		<input type="hidden" name="county1" value="$!guideDetail.gdlLocalCounty">
+		<input type="hidden" name="city2" value="$!guideDetail.gdlNationalCity">
+		<input type="hidden" name="county2" value="$!guideDetail.gdlNationalCounty">
+		<input type="hidden" name="city3" value="$!guideDetail.gdlLeaderCity">
+		<input type="hidden" name="county3" value="$!guideDetail.gdlLeaderCounty">
+	</form>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th style="min-width:90px;">系统编码</th>
+				<th style="min-width:110px;">语种</th>
+				##<th style="min-width:100px;">目的地</th>
+				<th style="min-width:90px;">姓名</th>
+				<th style="min-width:60px;">性别</th>
+				<th style="min-width:80px;">导游等级</th>
+			   <!--<th>公司评级</th>-->
+				<th style="min-width:200px;">公司/品牌</th>
+               <!-- <th>负责人/电话</th> -->
+                <th style="min-width:100px;">计调电话</th>
+                <th style="min-width:80px;">在线交谈</th>
+				<th style="min-width:80px;">预订</th>
+			</tr>
+			#foreach($item in $guideList)
+				<tr>
+                  	<td>$!item.gdlCode</td>
+					<td>#vtextarray($!item.gdlLanguage,'C102')</td>
+					##<td>香港、澳门</td>
+					<td><a class="clistctma_ctl" href="javascript:void(0);">$!item.gdlName</a></td>		
+                    <td>#vtextarray($!item.gdlSex,'C003')</td>
+					<td>#vtextarray($!item.gdlGrade,'C092')</td>
+				<!--<td>$!item.gdlCompanyRating</td>-->
+					<td>$!item.cpyName / $!item.cpyBrand</td>
+    				<td>$!item.cbsOperator / $!item.cbsOperatorPhone</td>
+                    <td>
+    					#if($erim.isNotEmpty($!item.ccpQq))
+    						<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.ccpQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a>
+    					#end
+    				</td>
+					<!--<td><a href="javascript:index.load('$appRoot/reservation/guide/page')">预订</a></td>-->
+					<td><a class="chakan_a" href="javascript:void(0);">查看</a></td>
+				</tr>
+				<tr style="display:none;" tid="tr_detail">
+    				<td colspan = '9' style='height:0;'>
+    					<div class='chakan_block1'>
+    						<div class="chakan_jdxx clearfix">
+                        	 	<div class="b_div_h35">
+                                    <ul style="margin:0px;padding:0px;clear:both">
+                                        <li><span class="mr20" style="font-size:16px;">$!item.gdlName</span><span class=" mr20">#vtextarray($!item.gdlSex,'C003')</span></li>
+                                    </ul>
+                                    <a class="close_a" href="javascript:void(0);"></a>
+                                </div>
+                                <div class="b_div_h270 pl24"><br>
+									#if($erim.isNotEmpty($!item.gdlLanguage))
+                                    <p><span>语种：</span>#vtextarray($!item.gdlLanguage,'C102')</p>
+									#end
+									#if($erim.isNotEmpty($!item.gdlAge))
+                                    <p><span>从业时间：</span>#vtext($!item.gdlAge,'C114')</p>
+									#end
+									#if($erim.isNotEmpty($!item.gdlCertificate))
+                    				<p><span>导游/领队证号：</span>$!item.gdlCertificate</p>
+									#end
+									#if($erim.isNotEmpty($!item.gdlNativePlace))
+                    				<p><span>籍贯：</span>$!item.gdlNativePlace</p>
+									#end
+									#if($erim.isNotEmpty($!item.gdlGrade))
+                                    <p><span>导游/领队等级：</span>#vtextarray($!item.gdlGrade,'C092')</p>
+									#end
+                        			<br>
+                                </div>
+                            </div>
+    					</div>	
+    				</td>
+    			 </tr>
+    			 <tr tid="tr_list" style="display:none;">
+    				<td colspan = '9'>
+    					<div class='chakan_block'>
+    						<div class="chakan_cont clearfix">
+                                <table class="fl_list_g" cellpadding="0" cellspacing="0">
+                    				<tr class="fl_list_t">
+                                    	<td class="w130">类型</td>
+                    					<td class="w270">服务城市+目的城市</td>
+                    				
+                    					<td colspan="6" class="date_td">
+											<img width="10" class="first" cid="-1" src="$staticRoot/images/aas_03.png" onclick="search.fiveDate('span_month_${velocityCount}','${item.gdlServer}','$!{item.id}',$(this).attr('cid'),'GUIDE');">
+    										<span class="date_cont" date="$nowDate" id="span_month_$velocityCount"></span>
+    										<script>
+    											search.fiveDate('span_month_${velocityCount}','${item.gdlServer}','$!{item.id}',0,'GUIDE');
+    										</script>
+    										<img width="10" class="last" cid="1" src="$staticRoot/images/aas_05.png" onclick="search.fiveDate('span_month_${velocityCount}','${item.gdlServer}','$!{item.id}',$(this).attr('cid'),'GUIDE');">
+										</td>
+                    				</tr>
+									#foreach($ser in $erim.split($!item.gdlServer,','))
+                        				<tr>
+                                        	<td class="w130">#vtext($!ser,'C101')</td>
+                        					<td class="w270">
+												#if($!ser == '01')
+													#vregiontoline($!item.gdlLocalProvince,$!item.gdlLocalCity,$!item.gdlLocalCounty)
+												#elseif($!ser == '02')
+													#vregiontoline($!item.gdlNationalProvince,$!item.gdlNationalCity,$!item.gdlNationalCounty)
+												#elseif($!ser == '03')
+													#vregiontoline($!item.gdlLeaderProvince,$!item.gdlLeaderCity,$!item.gdlLeaderCounty)
+													#vtextarray($!item.gdlDestination,'C108')
+													$!item.gdlDestinationCountry
+												#elseif($!ser == '04')
+													#vtextarray($!item.gdlGaidLokal,'C108')
+													$!item.gdlGaidCountry
+												#end
+											</td>
+                            				<td class="w90" id="w90_$!{item.id}_$!{ser}_0"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{ser}_1"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{ser}_2"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{ser}_3"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{ser}_4"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{ser}_5"></td>
+                        				</tr>
+									#end
+                                </table>              
+                    			<a class="a_zhifu" href="#">预订</a><br><br><br>
+               			     </div>
+    					</div>
+    				</td>
+    			 </tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>
+	
+<script type="text/javascript">
+    //省市县级联选择
+	index.initProvince(110000,'gdlLocalProvince','gdlLocalCity','gdlLocalCounty','','');
+	index.initProvince(110000,'gdlNationalProvince','gdlNationalCity','gdlNationalCounty','','');
+	index.initProvince(110000,'gdlLeaderProvince','gdlLeaderCity','gdlLeaderCounty','','');
+	var b;
+	var city
+	var county;
+	var a = $("input[name='gdlServer']").val();
+	
+	if(a == '01'){
+		 b = $("select[name='gdlLocalProvince']").val();//获取省的值
+		 city = $("input[name='city1']").val();//获取市的值
+		 county = $("input[name='county1']").val();//获取县的值
+		 if (city===undefined) {city="";}
+		 if (county===undefined) {county="";}
+		//初始化省市县
+		index.initProvince(b,'gdlLocalProvince','gdlLocalCity','gdlLocalCounty',city,county);
+	}
+	
+	
+  </script>	

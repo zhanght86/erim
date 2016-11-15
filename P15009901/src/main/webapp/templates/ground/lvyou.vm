@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/travel_list.css">
+	<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+		<!--导航-->
+          #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		
+		 
+		<div class="travel_list">
+				<!--当地旅游-->
+    		<div class="tlist_ct show">
+    			<div class="tlist_ct_local">
+    				<form id="form1" method="post" action="$appRoot/$cpyno/lvyou.html?searchModel=2">
+        				<div class="search-menu">
+                			#vsearcharea('gddInternation','gddProvice',$!ground.gddProvice,'gddCity',$!ground.gddCity,'gddCountylocation',$!ground.gddCountylocation,'gddMajorcountries',$!ground.gddMajorcountries)
+            				
+                			<div class="smenu-li">
+                    			<label class="search-lab" style="width:280px;">
+									<span class="smenu-title">关键词：</span>
+                    				<input type="text" name="gddName" value="$!ground.gddName" class="search-input">
+                    			</label>
+                    			<button class="search-btn" value="" type="submit" onclick="$appRoot/$cpyno/lvyou.html">搜索</button>
+                    		</div>
+							#* 
+                    		<dl class="smenu-li">
+                    			<dt class="smenu-title">区域：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num  #if(($!ground.gddDeparturecityVo == '' || !$ground.gddDeparturecityVo)) && ( ''== $!ground.gddProvice ||  !$ground.gddProvice)) item-hover #end  nation-no"  onclick="$('#gddProvice').attr('value',''); $('#gddDeparturecityVo').attr('value','');$('#form1').submit();">不限</span>
+                    				<div class="smenu-nation">
+                    					<span class="item-area">国内<em class="icon-img"></em></span>
+                    					<span class="item-area">国际·港澳台<em class="icon-img"></em></span>
+                    				</div>
+                    				<div class="nations">
+                    					<div class="local-city">
+    										 <span class="smenu-item  #if("" == $!ground.gddProvice || ! $ground.gddProvice)  item-hover  #end" onclick="$('#gddProvice').attr('value',''); $('#gddDeparturecityVo').attr('value','');$('#form1').submit();">不限</span>
+        									#foreach($item in $provinces)
+                        					   <span class="smenu-item  #if($!ground.gddProvice == $item.regionNo) item-hover #end" id="a_level_$item.id" onclick="$('#gddProvice').attr('value','$item.regionNo'); $('#gddDeparturecityVo').attr('value','');$('#form1').submit();">$item.regionName</span>
+                        					#end
+                    					</div>
+                    					<div class="local-city">
+                    						<span class="smenu-item #if($!ground.gddDeparturecityVo == '')      item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','');     $('#gddProvice').attr('value',''); $('#form1').submit();">不限</span>
+                    						<span class="smenu-item #if($!ground.gddDeparturecityVo == '香港')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','香港');   $('#gddProvice').attr('value',''); $('#form1').submit();">香港</span>
+                    						<span class="smenu-item #if($!ground.gddDeparturecityVo == '澳门')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','澳门');   $('#gddProvice').attr('value',''); $('#form1').submit();">澳门</span>
+                    						<span class="smenu-item #if($!ground.gddDeparturecityVo == '台湾')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','台湾');   $('#gddProvice').attr('value',''); $('#form1').submit();">台湾</span>
+                    						<span class="smenu-item #if($!ground.gddDeparturecityVo == '东京')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','东京');   $('#gddProvice').attr('value',''); $('#form1').submit();">东京</span>
+        									<span class="smenu-item #if($!ground.gddDeparturecityVo == '首尔')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','首尔');   $('#gddProvice').attr('value',''); $('#form1').submit();">首尔</span>
+        									<span class="smenu-item #if($!ground.gddDeparturecityVo == '曼谷')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','曼谷');   $('#gddProvice').attr('value',''); $('#form1').submit();">曼谷</span>
+        									<span class="smenu-item #if($!ground.gddDeparturecityVo == '芭提雅')  item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','芭提雅'); $('#gddProvice').attr('value','');  $('#form1').submit();">芭提雅</span>
+        									<span class="smenu-item #if($!ground.gddDeparturecityVo == '巴黎')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','巴黎');   $('#gddProvice').attr('value',''); $('#form1').submit();">巴黎</span>
+        									<span class="smenu-item #if($!ground.gddDeparturecityVo == '新西兰')  item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','新西兰'); $('#gddProvice').attr('value','');  $('#form1').submit();">新西兰</span>
+        									<span class="smenu-item #if($!ground.gddDeparturecityVo == '纽约')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','纽约');   $('#gddProvice').attr('value',''); $('#form1').submit();">纽约</span>
+        									<span class="smenu-item #if($!ground.gddDeparturecityVo == '加州')   item-hover #end"  onclick="$('#gddDeparturecityVo').attr('value','加州');   $('#gddProvice').attr('value',''); $('#form1').submit();">加州</span>
+                    					</div>
+                    				</div>
+                    			</dd>
+                    		</dl>
+							*#
+                    		<dl class="smenu-li">
+                    			<dt class="smenu-title">产品形态：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num #if('' == $!ground.gddProduct || ! $ground.gddProduct) item-hover #end" onclick="$('#gddProduct').attr('value',''); $('#form1').submit();">不限</span>
+        							#foreach($item in $product.keySet())
+        								<span class="smenu-item #if($!ground.gddProduct == $item) item-hover  #end"  id="a_level_$item.id" onclick="$('#gddProduct').attr('value','$item'); $('#form1').submit();">$product.get($item)</span>
+                    				#end
+                    			</dd>
+                    		</dl>
+        					
+        					
+        					<dl class="smenu-li">
+                    			<dt class="smenu-title">产品标准：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num #if('' == $!ground.gddThemeone || ! $ground.gddThemeone) item-hover #end "   onclick="$('#gddThemeone').attr('value',''); $('#form1').submit();">不限</span>
+    								#foreach($item in $themeone.keySet())
+    									<span class="smenu-item #if($!ground.gddThemeone == $item) item-hover #end " id="a_level_$item.id" onclick="$('#gddThemeone').attr('value','$item'); $('#form1').submit();">$themeone.get($item)</span>
+                    				#end
+                    			</dd>
+                    		</dl>
+        					<dl class="smenu-li">
+                    			<dt class="smenu-title">行程天数：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num  #if(!$ground.countDay) item-hover #end"  onclick="$('#countDay').attr('value',null); $('#countDayCompare').attr('value',0); $('#form1').submit();">不限</span>
+                    				<span class=" smenu-item #if($!ground.countDay == 1 && $!ground.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',1); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 1天</span>
+                    				<span class=" smenu-item #if($!ground.countDay == 2 && $!ground.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',2); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 2天</span>
+                    				<span class=" smenu-item #if($!ground.countDay == 3 && $!ground.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',3); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 3天</span>
+                    				<span class=" smenu-item #if($!ground.countDay == 4 && $!ground.countDayCompare == 0 ) item-hover #end " onclick="$('#countDay').attr('value',4); $('#countDayCompare').attr('value',0); $('#form1').submit();"> 4天</span>
+    								<span class=" smenu-item #if($!ground.countDay == 5 && $!ground.countDayCompare == 1 ) item-hover #end " onclick="$('#countDay').attr('value',5); $('#countDayCompare').attr('value',1); $('#form1').submit();"> 5天以上</span>
+    								<!--<span class="smenu-item-more">更多</span>-->
+                    			</dd>
+                    		</dl>
+                    		<dl class="smenu-li">
+                    			<dt class="smenu-title">产品主题：</dt>
+                    			<dd class="smenu-items">
+                    				<span class="no-num  #if('' == $!ground.gddStandards || ! $ground.gddStandards) item-hover #end " onclick="$('#gddStandards').attr('value',''); $('#form1').submit();">不限</span>
+                    				<div class="smenu-right">
+    								#foreach($item in $zhuti.keySet())	
+                    					<span class="smenu-item #if($!ground.gddStandards == $item) item-hover #end" id="a_level_$item.id" onclick="$('#gddStandards').attr('value','$item'); $('#form1').submit();">$zhuti.get($item)</span>
+                    				#end	
+                    				</div>
+                    				<span class="smenu-item-more">更多</span>
+                    			</dd>
+                    		</dl>
+                    		<dl class="smenu-li last">
+                    			<dt class="smenu-title">学生活动：</dt>
+                    				<span class="no-num #if("" == $!ground.gddGame || ! $ground.gddGame) item-hover #end "  onclick="$('#gddGame').attr('value',''); $('#form1').submit();">不限</span>
+                    				<div class="smenu-right">
+    								#foreach($item in $game.keySet())	
+                    					<span class="smenu-item #if($!ground.gddGame == $item) item-hover #end"  id="a_level_$item.id" onclick="$('#gddGame').attr('value','$item'); $('#form1').submit();">$game.get($item)</span>
+    								#end
+    								</div>
+                    			</dd>
+                    		</dl>
+                    	</div>
+    					<input type="hidden" name="gddProduct" id="gddProduct" value="$!ground.gddProduct">
+    					<input type="hidden" name="gddThemeone" id="gddThemeone" value="$!ground.gddThemeone">
+    					<input type="hidden" name="gddStandards" id="gddStandards" value="$!ground.gddStandards">
+    					<input type="hidden" name="gddGame" id="gddGame" value="$!ground.gddGame">
+    					<input type="hidden" name="countDay" id="countDay" value="$!ground.countDay">
+    					<input type="hidden" name="countDayCompare" id="countDayCompare" value="$!ground.countDayCompare">
+    					<!--<input type="hidden" name="gddProvice" id="gddProvice" value="$!ground.gddProvice">-->
+    					<input type="hidden" name="gddDeparturecityVo" id="gddDeparturecityVo" value="$!ground.gddDeparturecityVo">
+    				
+    				
+    				</form>
+        			<div class="tlistctl_ct">
+        				<!--左边-->
+        				<div class="tlistctl_ctl">
+        					
+    						
+    					#foreach($item in $groundList)
+        					<div class="tlistctl_ctlbox">
+        						<div class="tlistctl_ctlboxl">
+    							#if($item.gddImg1 && $!item.gddImg1 != '')
+                                	<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank"><img src="$staticFileRes$item.gddImg1" ></a>
+                                #else
+                                	<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank"><img src="$staticRoot/images/isnull.png" ></a>
+                                #end
+        						</div>
+        						<div class="tlistctl_ctlboxm">
+        							<div class="tlistctl_ctlboxmf">
+                                    <a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank" title="$!item.gddName"><span class="fyellow">$erim.subString($!item.gddName,25)<!--【三星/舒适】--></span></a>
+        							</div>
+        						<!--	<div class="tlistctl_ctlboxmx">
+        								<span>推荐星级</span>
+            								<p><img src="$staticRoot/images/trstar5.jpg"></p>
+        							</div>-->
+    							  <div class="tlistctl_ctlboxmx">
+                                    <span>产品形态</span>
+                                    <p>$!item.gddProduct</p>
+    							   </div>
+        							<div class="tlistctl_ctlboxmx">
+        								<span>产品主题</span>
+        								<p>#if($!item.gddYesno == '01')$!item.gddStandards,$!item.gddAddstandards#else$!item.gddGame,$!item.gddAddgame#end</p>
+        							</div>
+        							<div class="tlistctl_ctlboxmx">
+        								<span>主要景点</span>
+        								<p>
+    										$erim.subString($!item.gddCharacteristic,30)
+    									</p>
+        							</div>
+    							    <div class="tlistctl_ctlboxmx">
+                                    <span>线路玩法</span>
+                                    <p>$erim.subString($!item.gddProductine,30)</p>
+    							   </div>
+        						</div>
+                              
+        						<div class="tlistctl_ctlboxr">
+    								<label><span>￥$!item.gpeRetailAdult</span><p>起</p></label>
+        							<a href="$appRoot/$cpyno/ground/lvyouxiang/$item.id?searchModel=2" target="_blank">查看详情</a>
+        						</div>
+        					</div>
+    					#end
+        				</div>
+    					
+        				<!--/左边-->
+        				<!--右边-->
+        				<div class="tlistctl_ctr">
+        					
+        					<!--热门门票-->
+        					#parse("common/hot.vm")
+        					<!--/热门门票-->
+        				</div>
+        				<!--/右边-->
+        				#parse("common/page.vm")
+        			</div>
+        		</div>
+        	</div>
+    	<!--/当地旅游-->
+	
+	    </div>
+#parse("common/footer.vm")
+</div>
+</body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/travel_list.js"></script>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript">
+	int();
+	
+	$(function(){
+		//所在区域默认展开项
+		if('$!ground.gddDeparturecityVo' != ''){
+    		$(".smenu-nation").prev().removeClass("item-hover");
+    		$(".smenu-nation").children().eq(1).addClass("item-hover").siblings().removeClass("item-hover");
+    		$(".nations .local-city").eq(1).show().siblings(".nations .local-city").hide();
+		}else if('$!ground.gddProvice' != ''){
+			$(".smenu-nation").prev().removeClass("item-hover");
+    		$(".smenu-nation").children().eq(0).addClass("item-hover").siblings().removeClass("item-hover");
+    		$(".nations .local-city").eq(0).show().siblings(".nations .local-city").hide();
+		}else{
+			$(".local-city").hide();
+		}
+		//产品主题默认展开项
+		if('$!ground.gddStandards' != ''){
+			$(".smenu-item-more").text("收起");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").show();
+		}else{
+			$(".smenu-item-more").text("更多");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").hide();
+		}	
+	});	
+</script>

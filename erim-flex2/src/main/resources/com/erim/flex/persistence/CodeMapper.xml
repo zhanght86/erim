@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="code">
+	
+	<!-- 根据code_id和code_key查找单条数据，添加之前确认该项是否存在 -->
+    <select id="selectEntityById" parameterType="hashMap" resultType="codeBean">
+        SELECT
+            code_id         AS codeId,
+            code_key        AS codeKey,
+            code_value      AS codeValue,
+            code_no         AS codeNo,
+            code_mark       AS codeMark
+        FROM
+            tm_system_code
+        WHERE
+            code_id = #{codeId}
+        AND
+            code_key = #{codeKey}
+    </select>
+
+    <!-- 查询所有数据，用于DataService单例数据systemCode生成 -->
+    <select id="selectAll" parameterType="hashMap" resultType="codeBean">
+        SELECT
+            code_id         AS codeId,
+            code_key        AS codeKey,
+            code_value      AS codeValue,
+            code_no         AS codeNo,
+            code_mark       AS codeMark
+        FROM
+            tm_system_code
+        ORDER BY
+            code_id,code_no
+    </select>
+    
+    <!-- 查询本页数据，用于显示当前页 -->
+    <select id="selectPage" parameterType="hashMap" resultType="codeBean">
+        SELECT
+            code_id         AS codeId,
+            code_key        AS codeKey,
+            code_value      AS codeValue,
+            code_no         AS codeNo,
+            code_mark       AS codeMark
+        FROM
+            tm_system_code
+        <where>
+            <if test="codeId != null">and code_id = #{codeId}</if>
+            <if test="codeKey != null">and code_key = #{codeKey}</if>
+            <if test="codeValue != null">and code_value = #{codeValue}</if>
+            <if test="codeNo != null">and code_no = #{codeNo}</if>
+            <if test="codeMark != null">and code_mark = #{codeMark}</if>
+        </where>
+        <if test="qrysort != null">order by ${qrysort} ${qrymode}</if>
+    </select>
+
+    <!-- 查询总数，用于页面分页 -->
+    <select id="selectCount" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_code
+        <where>
+            <if test="codeId != null">and code_id = #{codeId}</if>
+            <if test="codeKey != null">and code_key = #{codeKey}</if>
+            <if test="codeValue != null">and code_value = #{codeValue}</if>
+            <if test="codeNo != null">and code_no = #{codeNo}</if>
+            <if test="codeMark != null">and code_mark = #{codeMark}</if>
+        </where>
+    </select>
+
+    <!-- 增加 -->
+    <insert id="insert" parameterType="hashMap">
+        INSERT INTO 
+            tm_system_code(code_id,code_key,code_value,code_no,code_mark)
+        VALUES
+            (#{codeId},#{codeKey},#{codeValue},#{codeNo},#{codeMark})
+    </insert>
+    
+    <!-- 修改 -->
+    <update id="update" parameterType="hashMap">
+        UPDATE 
+            tm_system_code
+        SET
+            code_id = #{codeId},
+            code_key = #{codeKey},
+            code_value = #{codeValue},
+            code_no = #{codeNo},
+            code_mark = #{codeMark}
+        WHERE
+            code_id = #{dataitems[0].codeId}
+        AND
+        	code_key = #{dataitems[0].codeKey}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="delete" parameterType="hashMap">
+        DELETE FROM
+            tm_system_code
+        WHERE
+            code_id = #{dataitems[0].codeId}
+        AND
+        	code_key = #{dataitems[0].codeKey}
+    </delete>
+    
+</mapper>

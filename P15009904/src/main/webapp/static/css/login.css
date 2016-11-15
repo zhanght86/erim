@@ -1,0 +1,149 @@
+@charset "utf-8";
+*{
+	margin: 0;
+	padding: 0;
+}
+img{
+	border:0;
+}
+body{
+	background-color: #f4f4f4;
+}
+.bd{
+	position: fixed;
+	left: 50%;
+	top: 45%;
+	margin-left: -571px;
+	margin-top: -225px;
+	border: 1px solid #ccc;
+	width: 1142px;
+	height: 380px;
+}
+.wrap{
+	width: 942px;
+	height: 250px;
+	margin: 80px 120px 130px 88px;
+}
+.left{
+	width: 585px;
+	height: 250px;
+	float: left;
+}
+.right{
+	float: left;
+	width: 357px;
+	height: 250px;
+}
+.rtop{
+	width: 357px;
+	height: 48px;
+	float: left;
+}
+.rtop img{
+	width: 357px;
+	height: 48px;
+	float: left;
+}
+.line1{
+	margin-top: 10px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	width: 357px;
+}
+.line1 img{
+	float: left;
+	width: 107px;
+	height: 30px;
+}
+.line1 input{
+	float: left;
+	width: 246px;
+	height: 28px;
+	border: 1px solid #ccc;
+}
+.line2{
+	margin-top: 15px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	width: 357px;
+}
+.line2 img{
+	float: left;
+	width: 107px;
+	height: 30px;
+}
+.line2 input{
+	float: left;
+	width: 246px;
+	height: 28px;
+	border: 1px solid #ccc;
+}
+.line3{
+	margin-top: 15px;
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	width: 357px;
+}
+.line3 img{
+	float: left;
+}
+.line3 input{
+	float: left;
+	width: 126px;
+	height: 28px;
+	border: 1px solid #ccc;
+}
+.line4{
+	margin-top: 32px;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+}
+.zhuce{
+	background: #4b7dfa;
+	height: 30px;
+	width: 100px;
+	float: left;
+	margin-left: 20px;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 30px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.zhuce:hover{
+	background: #1482c8;
+}
+.denglu{
+	margin-left: 90px;
+	background: #faaf4b;
+	height: 30px;
+	width: 100px;
+	float: left;
+
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 30px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.denglu:hover{
+	background: #f99d23;
+}
+.line4 span{
+	width: 250px;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 123px;
+	margin-top: 17px;
+	color: red;
+	font-size: 14px;
+}

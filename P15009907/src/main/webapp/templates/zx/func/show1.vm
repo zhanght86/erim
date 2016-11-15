@@ -1,0 +1,46 @@
+<div class="rdivv">
+	<div class="tese">
+		<div class="tesetop4">			
+		</div>
+		<div class="tesetop2">
+			<form class="form-search" method="post" id="form1">
+    			<div class="teseline">
+    				<span>名称：</span>
+    				<input class="input-medium search-query" name="mdlName" value="$!planeticketDetail.mdlName" type="text" />
+    			</div>
+    			<button type="button" onclick="index.searchform('form1','$appRoot/transticket/detail/list');"></button>
+            </form>
+		</div>
+		<div class="tesetop3"></div>
+		
+		<div class="tesect">
+			<div class="tesetable">
+				<table border="0" cellspadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th style="width:10%;">模块</th>
+    						<th style="width:10%;">子模块</th>
+    						<th>功能</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($item in $listFunc)
+    	    				#foreach($childitem in $item.childListSellSystemFuncBean)
+    							<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+    								#if($velocityCount == 1)
+    		    						<td rowspan="$item.childSize">$item.sellFuncName</td>
+    		    					#end
+    								<td>$childitem.sellFuncName</td>
+    								<td style="float:left;">
+    		    						#foreach($rescource in $childitem.childListSellSystemFuncRescourceBean)
+    	    								<input type="checkbox" style="padding-top:10px;" name="rescourceCode" value="$rescource.sellFuncRescourceCode"/>$rescource.sellFuncRescourceName 
+    		    						#end
+    		    					</td>
+    							</tr>
+    						#end
+    					#end
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

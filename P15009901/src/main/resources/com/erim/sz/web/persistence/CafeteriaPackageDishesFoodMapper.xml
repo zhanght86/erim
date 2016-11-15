@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriapackagedishesfood">
+	
+	<!-- 根据菜品ID，查询菜列表 -->
+	<select id="selectFoodByCpdId" resultType="cafeteriaPackageDishesFoodBean">
+		SELECT
+			id 			   AS id,
+			cpf_name 	   AS cpfName,
+			cpf_price 	   AS cpfPrice,
+			cpf_img1 	   AS cpfImg1,
+			cpf_img2       AS cpfImg2,
+			cpf_ntype      AS cpfNtype,
+			cpf_createtime AS cpfCreatetime,
+			cpd_id 		   AS cpdId,
+			cpe_id 		   AS cpeId,
+			cpf_number     AS cpfNumber
+		FROM
+			cafeteria_package_dishes_food
+		WHERE
+			cpd_id = #{cpdId}
+	</select>
+	
+	<!-- 根据条件查询其它菜列表 -->
+	<select id="selectFoodByFood" resultType="cafeteriaPackageDishesFoodBean">
+		SELECT
+			id 			   AS id,
+			cpf_name 	   AS cpfName,
+			cpf_price 	   AS cpfPrice,
+			cpf_img1 	   AS cpfImg1,
+			cpf_img2       AS cpfImg2,
+			cpf_ntype      AS cpfNtype,
+			cpf_createtime AS cpfCreatetime,
+			cpd_id 		   AS cpdId,
+			cpe_id 		   AS cpeId,
+			cpf_number     AS cpfNumber
+		FROM
+			cafeteria_package_dishes_food
+		WHERE
+			cpd_id 		= #{cpdId}
+		AND
+			cpe_id 		= #{cpeId}
+		AND
+			cpf_ntype 	= #{cpfNtype}
+		ORDER BY 
+			cpf_createtime
+	</select>
+	
+	<!-- 查询 --> 
+	<select id="select">
+		SELECT
+			id 			   AS id,
+			cpf_name 	   AS cpfName,
+			cpf_price 	   AS cpfPrice,
+			cpf_img1 	   AS cpfImg1,
+			cpf_img2       AS cpfImg2,
+			cpf_ntype      AS cpfNtype,
+			cpf_createtime AS cpfCreatetime,
+			cpd_id 		   AS cpdId,
+			cpe_id 		   AS cpeId,
+			cpf_number     AS cpfNumber
+		FROM
+			cafeteria_package_dishes_food
+	</select>
+</mapper>

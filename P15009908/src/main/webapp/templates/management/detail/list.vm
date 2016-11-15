@@ -1,0 +1,233 @@
+<!-- 签证管理 -->
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/management/management.css">
+<div class="visaadmin">
+	<p class="tit_1 ml20 pt20"><img src="$staticRoot/images/htv.png" width="25px" alt="签证管理" title="签证管理">签证管理</p>
+	<div class="g_line"></div>
+	<form class="form-search" method="post" id="form1">
+		<div class="visaadmin_top">
+			<div  class="visaadmin_topl">
+				<div class="visaadmin_toplb">
+    				<span>产品编码：</span>
+    				<input type="text" name="mdlCode" value="$!managementDetail.mdlCode">
+    			</div>
+    			<div class="visaadmin_toplb">
+    				<span>国家：</span>
+    				<input type="text" name="mdlAddress" value="$!managementDetail.mdlAddress"  style="width:200px;height:30px;" class="autoquerycountry">
+                    <span>送签地：</span>
+    				<select name="mdlSend" style="width:198px;height:30px;">
+    					<option  value=""></option>
+    					 #foreach($item in $send.keySet())
+                             <option value="$item"  #if($managementDetail.mdlSend == $item) selected #end>$send.get($item)</option>
+    					 #end
+                    </select>
+    			</div>
+    		</div>
+			<div  class="visaadmin_topl">
+				<div class="visaadmin_toplb">
+					<span>签证类型：</span>
+					<select  name="mdlNtype" class="visaadmin_toplb" style="width:200px;">
+						<option value=""></option>
+						#foreach($item in $models.keySet())
+							<option value="$item" #if($managementDetail.mdlNtype == $item) selected #end>$models.get($item)</option>
+						#end
+					</select>
+				</div>
+    			<!--
+    			<div class="visaadmin_toplb">
+    				<span>入境次数：</span>
+    				 <select  name="mdlNum" class="visaadmin_toplb" style="width:200px;">
+            		    <option value=""></option>
+                        #foreach($item in $entry.keySet())
+                          <option value="$item" #if($managementDetail.mdlNum == $item) selected #end>$entry.get($item)</option>
+                        #end
+            		</select>
+    			</div>-->
+    			<div class="visaadmin_toplb">
+    				<span>上架状态：</span>
+    				<select name="mdlIsDelStatus">
+    					<option #if($managementDetail.mdlIsDelStatus == '') selected #end value=""></option>
+    					<option #if($managementDetail.mdlIsDelStatus == '1') selected #end value="1">上架</option>
+                        <option #if($managementDetail.mdlIsDelStatus == '0') selected #end value="0">下架</option>
+    				</select>
+    			 </div>
+				 <div class="input_block">
+					<button class="y_but" style="width:90px;margin-left:215px;" onclick="index.searchform('form1','$appRoot/management/detail/list');" type="button">查询</button>
+				 </div>
+			</div>
+		</div>
+	</form>
+	<div class="cb"></div>
+	<div class="g_line"></div>
+	#if($shiro.hasPermission("PRODUCT_MANAGEMENT_INSERT"))
+	<div class="carad_ct">
+		<div class="carad_ctbtn"style="margin-left:0;">
+			<button type="button" onclick="index.load('$appRoot/management/detail/insertPage');" class="add_pd15 ml40" >+新增签证</button>
+		</div>
+		#end
+		<div class="carad_ctrtable ml40">
+			<table cellspacing="0" cellspadding="0"style="margin-left:0;">
+				<thead>
+					<tr>
+						<td>产品编码</td>
+						<td>签证名称</td>
+						<td>国家</td>
+						<td>送签地</td>
+						<td>签证类型</td>
+                        <td>办理时长</td>
+						<td>可停留天数</td>
+						<td>签证有效期</td>
+						<td>入境次数</td>
+						<td>签证管理</td>
+						<td>操作人管理</td>
+						<td>上架状态</td>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($item in $managementList)
+    					<tr>
+    						<td>$!item.mdlCode</td>
+							<td><a href="$webRoot/management/qianzhengxiang/$item.id" target="_blank" title="点击打开外网展示">$!item.mdlName</a></td>
+    						<td>$!item.mdlAddress</a></td>
+    						<td>$!item.mdlSend</td>
+    						<td width="6%">$!item.mdlNtype</td>
+                            <td>$!item.mdlLong</td>
+    						<td>$!item.mdlStay&nbsp;天</td>
+    						<td>$!item.mdlValidity&nbsp;个月</td>
+    						<td>$!item.mdlNum</td>
+    						<td class="carad_a">
+								<!--  
+								<input type="hidden" name="i1" value="$item.id"></input>
+                                <input type="hidden" name="i2" value="$item.mdlPriceSame"></input>
+                                <input type="hidden" name="i3" value="$item.mdlPriceTeam"></input>
+                                <input type="hidden" name="i4" value="$item.mdlPriceSeal"></input>
+								-->
+								#if($shiro.hasPermission("PRODUCT_MANAGEMENT_UPDATE"))
+								<a href="javascript:index.load('$appRoot/management/detail/updatePage?id=$!item.id');">查看/修改</a>
+								#end
+								#if($shiro.hasPermission("PRODUCT_MANAGEMENT_SCHEDULED"))
+								<a href="javascript:index.load('$appRoot/management/detail/scheduledPage?id=$!item.id');">预定方式</a>
+								#end
+								#if($shiro.hasPermission("PRODUCT_MANAGEMENT_PRICE"))
+                                <!-- 
+								<a class="priceadmin" style="cursor:pointer">价格管理</a>
+								-->
+								<a href="javascript:index.load('$appRoot/management/price/list?mdlId=$!item.id&mdlName=$!item.mdlNtype&portal=01');">价格管理</a>
+								#end
+								<a href="javascript:index.nextPage('$appRoot/town/detail/setsametown?ntype=$sametownntype&cid=$item.id');">同业管理</a>
+								##<a href="">短信内容</a>
+							</td>
+							<td>
+        						<a href="javascript:index.load('$appRoot/cus/func/addChildUser?ntype=$sametownntype&cid=$item.id');">权限设置</a>
+        					</td>
+							<td>
+        						<div class="wrapper">
+    								<div class="imageContainer1">
+        								#if($!item.mdlIsDelStatus == '1')
+                                            <span><img src="$staticRoot/images/lvdui.png"/></span>
+                                            <a href="javascript:index.load('$appRoot/management/detail/delete?id=$item.id&mdlIsDelStatus=0');">
+												<img src="$staticRoot/images/huicuo.png" id="img" class="active" />
+											</a>
+        								#end
+        								#if($!item.mdlIsDelStatus == '0')
+        									<a href="javascript:index.load('$appRoot/management/detail/delete?id=$item.id&mdlIsDelStatus=1');">
+												<img src="$staticRoot/images/huidui.png" id="png" />
+											</a>
+        									<span><img src="$staticRoot/images/hongcuo.png"/></span>
+        								#end
+    								</div>
+                                 </div>
+    					     </td>
+    					</tr>
+					#end
+				</tbody>
+			</table>
+			#parse("common/page.vm")
+		</div>
+	</div>
+</div>
+<!-- <div class="win_box_bg"></div>
+<div class="win_box_edit">
+	<form  method="post" id="form2">
+		
+    	<input type="hidden" value="$managementDetail.id" name="id"/>
+    	<a class="esc_a" href="javascript:void(0);">&times;</a>
+    	<div class="input_block clearfix">
+    		<div class="input_right">
+    			<div class="mb15">
+					<label class="ml15">同业价格：</label>
+					<span class="tishi_box w110">
+						<input type="text" name="mdlPriceSame" value="$!managementPrice.mdlPriceSame" class="w65  validate[required,custom[integer],max[100000],min[1]]">元/人</span>
+					<label class="ml15">起</label>
+				</div>
+    			<div class="mb15">
+					<label class="ml15">批发价格：</label>
+					<span class="tishi_box w110">
+						<input type="text" name="mdlPriceTeam" value="$!managementPrice.mdlPriceTeam" class="w65  validate[required,custom[integer],max[100000],min[1],funcCall[comparison1]]">元/人</span>
+					<label class="ml15">起</label>
+				</div>
+    			<div class="mb15">
+					<label class="ml15">零售价格：</label>
+					<span class="tishi_box w110">
+						<input type="text" name="mdlPriceSeal" value="$!managementPrice.mdlPriceSeal" class="w65  validate[required,custom[integer],max[100000],min[1],funcCall[comparison]]">元/人</span>
+					<label class="ml15">起</label>
+				</div>
+    		</div>
+    	</div>
+    	<div class="button_block button_block_wauto clearfix" style="width:210px;">
+    		<button class="y_but ml15 mr20" type="button" onclick="subform.sub('form2','$appRoot/management/price/update','$appRoot/management/detail/list');">确 定</button>
+    		<button class="b_but" type="button" onclick="index.load(page.url);">取 消</button>
+    	</div>
+    </form>
+			</div>  --> 
+<script type="text/javascript">
+	// $(".priceadmin").click(function(){
+	//	var id = $(this).parent().children("input[name='i1']").val();
+	//	var same = $(this).parent().children("input[name='i2']").val();
+	//	var team = $(this).parent().children("input[name='i3']").val();
+	//  var seal = $(this).parent().children("input[name='i4']").val();
+	//	$("input[name='id']").val(id);
+	//	$("input[name='mdlPriceSame']").val(same);
+	//	$("input[name='mdlPriceTeam']").val(team);
+	//	$("input[name='mdlPriceSeal']").val(seal);
+	//	$(".win_box_edit").show();
+	//	$(".win_box_bg").show();
+	//});
+	//$(".win_box_edit .esc_a").click(function() {
+	//	$(".win_box_edit").hide();
+	//	$(".win_box_bg").hide();
+	//})
+	
+	//比较
+	function comparison(field, rules, i, options){
+		// 批发价
+    	var mdlPriceTeam = $("input[name='mdlPriceTeam']").val();
+		// 零售价
+		var mdlPriceSeal = $("input[name='mdlPriceSeal']").val();
+		
+		if(parseInt(mdlPriceTeam)>=parseInt(mdlPriceSeal)){
+            return '零售价不能低于批发价';
+        }
+	}
+	//比较
+	function comparison1(field, rules, i, options){
+		// 批发价
+    	var mdlPriceTeam = $("input[name='mdlPriceTeam']").val();
+		// 同业价
+		var mdlPriceSame = $("input[name='mdlPriceSame']").val();
+		
+		if(parseInt(mdlPriceSame)>parseInt(mdlPriceTeam)){
+			return '批发价不能低于同业价';
+		}
+	}
+	
+	
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+  var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+});
+</script>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

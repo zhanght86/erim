@@ -1,0 +1,177 @@
+<!-- 导游-->
+<div class="tab-right-div">
+    <div class="tab-top">
+        <span class="tab-top-item subline">国内导游</span>
+		<span class="tab-top-item">国际·港澳台导游</span>
+    </div>
+    <div class="tab-main">
+        <div class="tab-main-div show pd-top15">
+			<form id="form_daoyou" method="post" action="$appRoot/$cpyno/daoyou.html">
+                <label class="tab-label">
+                    <span class="tab-span">类型</span>
+                    <select class="tab-select" id="guide" name="gdlServer" onchange="guoneiSelect(this)">
+                        <option value="01">国内地陪</option>
+                        <option value="02">国内全陪</option>
+    					<!--<option value="03">国际·港澳台领队</option>
+                        <option value="04">国际·港澳台地陪</option>-->
+                    </select>
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span" id="guonei_city1">目的城市:</span>
+					<span class="tab-span" id="guonei_city2" style="display:none">出发城市:</span>
+                    <input class="tab-input home-city" type="text" name="gdlLocalCityVo">
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span">性别:</span>
+                    <select class="tab-select" name="gdlSex">
+    					<option value="">不限</option>
+                        <option value="01">女</option>
+                        <option value="02">男</option>
+                    </select>
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span">公司评级:</span>
+                    <select class="tab-select" name="gdlCompanyRating">
+    					<option value="">不限</option>
+                        <option value="01">佳旅三星</option>
+                        <option value="02">佳旅四星</option>
+                        <option value="03">佳旅五星</option>
+                        <option value="04">形象大使</option>
+                    </select>
+                </label>
+                <label class="tab-label">
+                    <span class="tab-span">服务时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="gpeDate">
+                </label>
+                <label class="tab-label" style="display:none">
+                    <span class="tab-span">服务结束:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+                </label>
+    			<!--<a href="$appRoot/$cpyno/daoyou.html" target="_blank">立即搜索</a>-->
+                <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+			</form>
+		<!--	<div class="tab-hot">
+				<form id="form_daoyou_gdlLocalCityVo" method="post" action="$appRoot/$cpyno/daoyou.html">
+                    <span class="tab-span mt4"><strong>热门目的地</strong></span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','北京');$('#form_daoyou_gdlLocalCityVo').submit();">北京</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','张家界');$('#form_daoyou_gdlLocalCityVo').submit();">张家界</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','桂林');$('#form_daoyou_gdlLocalCityVo').submit();">桂林</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','三亚');$('#form_daoyou_gdlLocalCityVo').submit();">三亚</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','丽江');$('#form_daoyou_gdlLocalCityVo').submit();">丽江</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','昆明');$('#form_daoyou_gdlLocalCityVo').submit();">昆明</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','大连');$('#form_daoyou_gdlLocalCityVo').submit();">大连</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','西安');$('#form_daoyou_gdlLocalCityVo').submit();">西安</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','扬州');$('#form_daoyou_gdlLocalCityVo').submit();">扬州</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','杭州');$('#form_daoyou_gdlLocalCityVo').submit();">杭州</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','广州');$('#form_daoyou_gdlLocalCityVo').submit();">广州</span>
+    				<span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','上海');$('#form_daoyou_gdlLocalCityVo').submit();">上海</span>
+                   <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','成都');$('#form_daoyou_gdlLocalCityVo').submit();">成都</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','武汉');$('#form_daoyou_gdlLocalCityVo').submit();">武汉</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','香港');$('#form_daoyou_gdlLocalCityVo').submit();">香港</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','台湾');$('#form_daoyou_gdlLocalCityVo').submit();">台湾</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','澳门');$('#form_daoyou_gdlLocalCityVo').submit();">澳门</span>
+                    <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','泰国');$('#form_daoyou_gdlLocalCityVo').submit();">泰国</span>
+    				 <span class="tab-hot-a" onclick="$('#gdlLocalCityVo').attr('value','');$('#form_daoyou_gdlLocalCityVo').submit();">更多</span>
+					<input type="hidden" name="gdlLocalCityVo" value="" id="gdlLocalCityVo" />
+				</form>
+            </div>-->
+			
+        </div>
+		<div class="tab-main-div pd-top15">
+			<form id="form_daoyou_guoji" method="post" action="$appRoot/$cpyno/daoyou.html">
+            <label class="tab-label">
+                <span class="tab-span">类型</span>
+                <select class="tab-select" id="foreign-guide" name="gdlServer" onchange="guojiSelect(this)">
+                   <option value="03">国际·港澳台领队</option>
+                   <option value="04">国际·港澳台地陪</option>
+                </select>
+            </label>
+			<label class="tab-label" id="label_city1">
+                <span class="tab-span" id="city_guoji">出发城市:</span>
+                <input class="tab-input home-city" type="text" name="gdlForienCityVo" id="city_guoji1">
+            </label>
+			<label class="tab-label" id="label_city2" style="display:none">
+                <span class="tab-span" id="city_guoji">目的城市:</span>
+                <input class="tab-input foreign-city" type="text" name="" id="city_guoji2">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">性别:</span>
+                 <select class="tab-select" name="gdlSex">
+    					<option value="">不限</option>
+                        <option value="01">女</option>
+                        <option value="02">男</option>
+                 </select>
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">公司评级:</span>
+                <select class="tab-select" name="gdlCompanyRating">
+    					<option value="">不限</option>
+                        <option value="01">佳旅三星</option>
+                        <option value="02">佳旅四星</option>
+                        <option value="03">佳旅五星</option>
+                        <option value="04">形象大使</option>
+                    </select>
+            </label>
+           <label class="tab-label">
+                    <span class="tab-span">服务时间:</span>
+                    <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="gpeDate">
+                </label>
+            <label class="tab-label" style="display:none">
+                <span class="tab-span">服务结束:</span>
+                <input type="text" class="tab-input laydate-icon" onclick="laydate();">
+            </label>
+			<!--<a href="$appRoot/$cpyno/daoyou.html" target="_blank">立即搜索</a>-->
+            <button type="submit" value="立即搜索" class="tab-submit">立即搜索</button>
+			<div class="tab-hot" style="display:none">
+                <span class="tab-span mt4"><strong>热门目的地</strong></span>
+                <a href="#" title="" target="_blank" class="tab-hot-a">北京</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">张家界</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">桂林</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">三亚</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">丽江</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">昆明</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">大连</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">西安</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">扬州</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">杭州</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">广州</a>
+				<a href="#" title="" target="_blank" class="tab-hot-a">上海</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">成都</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">武汉</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">香港</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">台湾</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">澳门</a>
+                <a href="#" title="" target="_blank" class="tab-hot-a">泰国</a>
+				<a href="#" title="" target="_blank" class="tab-hot-a">更多</a>
+            </div>
+			</form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+function guoneiSelect(obj){
+	var selectval = $(obj).children('option:selected').val();
+	if(selectval == '01'){
+		$("#guonei_city1").css('display','block'); 
+		$("#guonei_city2").css('display','none'); 
+	}else{
+		$("#guonei_city1").css('display','none'); 
+		$("#guonei_city2").css('display','block'); 
+	}
+}
+function guojiSelect(obj){
+	var selectval = $(obj).children('option:selected').val();
+	if(selectval == '03'){
+		$("#label_city1").css('display','block'); 
+		$("#label_city2").css('display','none'); 
+		$("#city_guoji1").attr("name","gdlForienCityVo");
+		$("#city_guoji2").attr("name","");
+	}else{
+		$("#label_city1").css('display','none'); 
+		$("#label_city2").css('display','block');
+		$("#city_guoji1").attr("name","");
+		$("#city_guoji2").attr("name","gdlForienCityVo");
+	}
+}
+</script>
+<!-- /导游-->

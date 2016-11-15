@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.e-rimming</groupId>
+        <artifactId>erim-parent</artifactId>
+        <version>0.0.2</version>
+        <relativePath>../erim-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>P15009909</artifactId>
+    <packaging>jar</packaging>
+    <name>E-rimming :: P15009909 :: sz Common</name>
+
+    <dependencies>
+        <!--================================================================================ -->
+        <!-- erimming -->
+        <dependency>
+            <groupId>com.e-rimming</groupId>
+            <artifactId>erim-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming</groupId>
+            <artifactId>erim-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming</groupId>
+            <artifactId>erim-web</artifactId>
+        </dependency>
+        
+        <!-- alipay -->
+        <dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+		</dependency>
+		
+		<!-- send -->
+		 <dependency>
+		   <groupId>com.e-rimming.third</groupId>
+		   <artifactId>bcloud</artifactId>
+		   <version>1.0</version> 
+	     </dependency>
+	     
+         <!-- java mail -->
+          <dependency>
+              <groupId>javax.mail</groupId>
+              <artifactId>mail</artifactId>
+          </dependency>
+        <!-- velocity -->
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>velocity-tools</artifactId>
+        </dependency>
+    </dependencies>
+</project>

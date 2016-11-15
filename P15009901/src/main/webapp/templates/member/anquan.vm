@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+    #set($title='账户安全')
+    #parse("member/common/head.vm")
+    
+    <body>
+        <div class="indexwrap">
+            #parse("common/head.vm")
+
+            <!--dwp html start-->
+            <div class="box_cb mb20"></div>
+            <div class="g_cont">
+                #parse("member/common/left.vm")
+				
+                <div class="g_fl_lt">
+                    <div class="g_u_block pb20 mb20">
+                        <div class="line_block pl20 pt20">
+                            <p class="u_tit_2 pb10">
+                                建议您启用全部安全设置，以保障账户安全
+                            </p>
+                            <p class="u_txt_1">
+                                上次登录ip：河北石家庄 (IP地址：106.114.4.168) 2015-09-10 11:06:53
+                            </p>
+                        </div>
+                        <div class="pl20 pt20 pb116">
+                            <p class="u_txt_1 pb20"><img src="$staticRoot/images/use_03.jpg"><span class="w140">登录密码</span><span class="w400">密码安全度：<em><b class="on">弱</b><b>中</b><b>强</b></em></span><a href="#">修改密码</a>
+                            </p>
+                            <p class="u_txt_1 pb20"><img src="$staticRoot/images/use_03.jpg"><span class="w140">手机验证</span><span class="w400">手机158****0418已通过验证</span><a href="#">修改手机</a>
+                            </p>
+                            <p class="u_txt_1 pb20"><img src="$staticRoot/images/use_03.jpg"><span class="w140">邮箱验证</span><span class="w400">邮箱z****e@qq.com已通过验证</span><a href="#">设置邮箱</a>
+                            </p>
+                            <p class="u_txt_1 pb20"><img src="$staticRoot/images/use_06.jpg"><span class="w140">安全问题</span><span class="w400">安全问题用于您找回密码，进一步提升您的账户安全性</span><a href="#">设置</a>
+                            </p>
+                            <p class="u_txt_1 pb20"><img src="$staticRoot/images/use_06.jpg"><span class="w140">身份认证</span><span class="w400">身份认证用于提升账户安全性</span><a href="#">填写认证信息</a>
+                            </p>
+                        </div>
+                        <div class="box_cb"></div>
+                    </div>
+
+                </div>
+                <div class="box_cb"></div>
+            </div>
+            <!--dwp html end-->
+
+            #parse("common/footer.vm")
+        </div>
+        
+        <script>
+            $(".on").removeClass('on');
+            $("#menu_box2 a").eq(1).attr("class","on");
+        </script>
+    </body>
+</html>

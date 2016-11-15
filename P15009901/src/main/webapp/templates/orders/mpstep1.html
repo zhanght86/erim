@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>user index</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/dingdan.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/h5.js"></script>
+</head>
+<body>
+
+
+	<header class="mb10">
+	  <div class="head_cont clearfix">
+			<a href="#"><img class="img_block" src="images/step_03.jpg" title="" alt=""></a>
+			<span class="nav_mini"><a href="#">会员中心</a>|<a href="#">网站首页</a></span>
+	  </div>
+</header>
+	<div class="g_cont">
+		<img class="mb10" src="images/step_05.jpg" title="进度：填写信息" alt="进度：填写信息">
+	  <div class="g_lt_l">
+        <div class="g_block_2 mb10">
+          <h3 class="g_tit_1 mb20">订单信息</h3>
+          	<div class="form_block pl90"><a href="#" style="margin-left:550px;">修改></a></div>
+          	<div class="form_block pl90"><img class="img_block" style="margin-left:8px;" src="images/tt_2.jpg"></div>
+       	  <div class="form_block pl90"><label>产品类型：</label>张家界大峡谷成人门票（含大门票+游船+保险）</div>
+          <div class="form_block pl90"><label>出游日期：</label>
+          <input type="text" class="sang_Calender" style=" background-image:url(images/tt_5.jpg); background-position:right; background-repeat:no-repeat; position: absolute; z-index:999;" maxlength="10" /></div>
+		  <script type="text/javascript" src="js/datetime.js"></script>
+          <!--<div style="text-align:center;margin:150px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>-->
+  	  	  <div class="form_block pl90"><label>门票数量：</label><img class="img_block" style="margin-bottom:-5px; height:25px; margin-top:5px;" src="images/tt_3.jpg">
+          <input type="text" class="select_2" value="3" style="text-align:center; width:30px; margin-top:-8px; margin-left:-7px;" maxlength="10">
+          <img class="img_block" style="margin-bottom:-7px; margin-left:-7px; margin-top:-3px; height:27px;" src="images/tt_4.jpg">
+          </div></div>
+        
+        <div class="g_block_2 mb10">
+		  <h3 class="g_tit_1 mb20" style="position: inherit;">联系人信息<span class="box_2" style="font-size:12px; margin-left:220px;">登录一键设置联系人信息，<a href="#">立即注册</a>，已是佳佳会员，<a href="#">立即登录</a></span></h3>
+		  <div class="form_block pl90"><label>姓名：</label><input class="select_1" type="text" placeholder="联系人姓名"></div>
+		  <div class="form_block pl90"><label>手机号码：</label><input type="text" placeholder="接受验证信息和订单号码">
+						 <input type="button" id="btn" class="ml20" value="发送验证码" /> <span class="error">*</span>
+			<script type="text/javascript">
+var wait=60;
+document.getElementById("btn").disabled = false;  
+function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");  
+			o.style.cssText="background-color:#FAAF4B;";        
+            o.value="发送验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+			o.style.cssText="background-color:#c8c8c8;";
+            o.value= "("+ wait + ")重新发送";
+            wait--;
+            setTimeout(function() {
+                time(o)
+            },
+            1000)
+        }
+}
+document.getElementById("btn").onclick=function(){time(this);}
+</script></div>
+				<div class="form_block pl90 mb20 on_error"><label>验证码：</label><input type="text"/> <span class="error">验证码错误请重新输入</span></div>
+	    </div>
+            <div class="g_block_2 mb20">
+            <h3 class="g_tit_1 mb20">取票人信息</h3>
+            <div class="form_block pl90"><span class="box_2" style="margin-left:-5px;">取票人姓名：</span>
+            <input class="select_1" style="margin-left:5px;" type="text" placeholder="请填写取票人姓名"></div>
+            <div class="form_block pl90"><span class="box_2" style="margin-left:-5px;">取票人手机：</span>
+            <input class="select_1" type="text" style="margin-left:5px;" placeholder="请填写取票人手机号码"></div>
+            </div>
+            <div class=" g_block_2">
+            	<h3 class="g_tit_1 mb20">入园保障</h3>
+                <div class="form_block p190"><span class="box_2" style="margin-left:85px;"><img class="img_block" src="images/s_07.png"></span>
+                  <span class="box_2">
+                      <form name="form1" style="margin-left:115px; margin-top:-23px; font-size:13px; width:504px;" method="post" action="">
+                        在线成功预定此门票，如非因游客原因（不可抗力除外）导致不能正常凭票入园，<br>
+                        XX在收到有课反馈后10分钟内未能解决，游客可直接购买全价票入园。XX将协<br>
+                        助退票并全额退换游客已支付未能使用的门票款，领补偿差价（差价一游客景区实<br>
+                        际购票价与XX之间的差价为准）。情有可原务必保留当天入园的有效凭证。
+                      </form>
+                  </span>
+                </div>
+            </div> 
+            <div class="form_block2 pl90 mb100">
+			<p class="g_txt_1" style="margin-top:30px;"><label><input name="Fruit" type="checkbox" />&nbsp;&nbsp;&nbsp;同意佳佳旅行网服务条款 <a href="#">查看条款</a> 并核实你所填写信息无误 </label></p><br>
+				<input style="margin-right:-150px; margin-left:150px;" type="submit" value="提交信息">
+		</div></div>
+            <div class="g_lt_r">
+                <div class="g_block_2 mb10">
+                <h3 class="g_tit_1 mb20">结算详情</h3>
+                <div class="g_txt_1 mb10">
+                <img class="img_block;" style="margin-left:24px;" src="images/tt_1.jpg"></div>
+                <div class="g_txt_1 mb10">
+                <p style="font-size:12px; margin-left:24px;"><a href="#">张家界大峡成人门票</a>
+                <br>
+                	产品名称：张家界大峡谷门票套餐B<br>
+                    产品详情：成人门票+游船票+人身意外险<br>
+                  </p>
+                  </div>
+              </div>
+              <div class="g_block_5 pl18 pr18">
+                    <h3 class="g_tit_2 mb10">结算信息</h3>
+                    <ul class="g_list_1">
+                        <li>成人票<span>￥29.9×2</span>
+                        <li>成人票<span>￥29.9×2</span>
+                    </ul>
+                <p class="add_mon" style="margin-top:50px; margin-bottom:20px;">支付总额<span><em>￥</em>29.9</span></p>
+              </div>
+      </div>
+           
+</div></div>
+		<div class="cb"></div>
+		<footer>
+			<p>Copyright © 2002-2014  版权所有  北京佳旅联合国际旅行社有限公司   苏ICP证B2-20100204  旅行社业务许可证：L-JS-CJ00070	</p>
+		</footer>
+	</div>
+	
+</body>
+</html>
+ 

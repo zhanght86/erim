@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>佳旅联合</title>
+    <meta name="keywords" content="注册页面" />
+    <meta name="description" content="注册页面" />
+	
+    #parse("company/regedit/common.vm")
+</head>
+<body>
+    <div class="register">
+    	<div class="reg_head">
+    		<div class="reg_heada">
+    			<img src="$staticRoot/images/logotop.jpg" alt="logo">
+    		</div>
+    	</div>
+    	<div class="content">
+			<form method="post" id="form1">
+        		<div class="content_top">
+        			<img src="$staticRoot/images/menu_3.png" alt="登录资料">
+        		</div>
+        		<div class="content_line">
+        			<span>登录名称:</span>
+        			<div class="content_liner">
+        				<input type="text" class="validate[required,custom[onlyLetterNumber]]" onblur="checkUser();" id="zxUserLoginname" name="zxUserLoginname" />
+        				<span style="color:red;">*</span>
+        			</div>
+        		</div>
+        		<div class="content_line">
+        			<span>登录密码:</span>
+        			<div class="content_liner">
+        				<input type="password" class="text-input validate[required,minSize[6],maxSize[20]]" id="pwd" name="password" />
+        				<span style="color:red;">*</span>
+        			</div>
+        		</div>
+        		<div class="content_line">
+        			<span>确认密码:</span>
+        			<div class="content_liner">
+        				<input type="password" class="text-input validate[condRequired[pwd],equals[pwd]]" name="zxUserPassword" />
+        				<span style="color:red;">*</span>
+        			</div>
+        		</div>
+        		<div class="content_btn2">
+    				<!-- <button type="button" class="prev" onclick="javascript:regUtil.load('$appRoot/company/regedit/updateBusiness?cpyId=' + $!cpyId);">上一步</button> -->
+        			<button type="button" onclick="javascript:regedit();">确定</button>
+        		</div>
+			</form>	
+    	</div>
+    	<div class="footer">
+    		版权所有&nbsp;&copyright&nbsp;北京佳旅联合科技有限公司
+    	</div>
+    </div>
+	<script>
+		function regedit(){
+			var formid  = "form1";
+			var url     = "$appRoot/company/regedit/saveUser";
+			var loadurl = "$appRoot/company/regedit/success";
+			$('#'+formid).validationEngine({
+                scroll       			: true,
+                showOneMessage			: true,
+                focusFirstField			: true   
+            });
+    		//如果验证通过则提交
+    		if($('#'+formid).validationEngine('validate')){
+    			var data = $("#"+formid).serialize();
+    			$.post(url, data, function(response) {
+    				if (response == '0') {
+    					alert("服务器繁忙，请稍后！");
+    				} else if (response == '1') {
+    					setTimeout(function() {
+    						window.location = loadurl;
+    					}, 1000);
+    				}
+    			}, "json");
+    		}
+		}
+	
+		//检查
+		function checkUser(){
+			var loginname = $("#zxUserLoginname").val();
+			if(""!=loginname){
+				$.post("$appRoot/company/regedit/ajaxCheckLoginName?loginanme="+loginname,function(data){
+    				if(data==1){
+    					 alert("用户名存在,请重新输入");
+    					 $("#zxUserLoginname").val("");
+						 $("#zxUserLoginname").focus();
+
+    				}
+    			},'json');
+			}
+		} 
+		
+    </script>
+</body>
+</html>

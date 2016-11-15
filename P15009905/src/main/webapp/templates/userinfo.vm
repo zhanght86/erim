@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>个人资料</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+</head>
+<body>
+    <div class="userinfo_top">
+		<span style="margin:20px 0 0 30px;font-size:30px;">
+			$guideInfo.gdlName
+        </span>
+		<!--
+        <img class="userinfo_head" src="$staticRoot/img/photo.png"/>
+        <a>
+            <img class="mail_btn" src="$staticRoot/img/mail.png" />
+        </a>
+		-->
+        <div class="sign">$!guideInfo.gdlSignature</div>
+    </div>
+    <div class="edit_btn">
+        <a href="$appRoot/profilePage">
+            <img src="$staticRoot/img/editInfo_btn.png" />
+        </a>
+        <a href="$appRoot/updPassPage">
+            <img src="$staticRoot/img/edit_password.png" />
+        </a>
+    </div>
+    <table class="info_table">
+        <tr>
+            <th><strong>我的姓名：</strong></th>
+            <td>$guideInfo.gdlName</td>
+        </tr>
+        <tr>
+            <th><strong>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</strong></th>
+            <td>#vtext($guideInfo.gdlSex,'C003')</td>
+        </tr>
+		<!-- 
+        <tr>
+            <th><strong>服务类型：</strong></th>
+            <td>#vtextarray($!guideInfo.gdlServer,'C101')</td>
+        </tr> -->
+        <tr>
+            <th><strong>服务类型：</strong></th>
+            <td>
+				<strong>服务地区</strong>
+				<!-- 国内地陪
+				$!guideInfo.gdlLocalCity -->
+				<!-- 国内全陪
+				$!guideInfo.gdlNationalCity -->
+				<!-- 国际港澳台领队
+				$!guideInfo.gdlLeaderCity
+				#if($guideInfo.gdlDestination == '04')
+					$!guideInfo.gdlDestinationCountry
+				#else
+					#vtextarray($!guideInfo.gdlDestination,'C108')
+				#end -->
+				<!-- 国际地陪
+				#if($guideInfo.gdlGaidLokal == '04')
+					$!guideInfo.gdlGaidCountry
+				#else
+					#vtextarray($guideInfo.gdlGaidLokal,'C108')
+				#end -->
+			</td>
+        </tr>
+		#if($erim.contains($guideInfo.gdlServer,'01'))
+		<tr>
+            <th>国内地陪：</th>
+            <td>
+				<!-- 国内地陪 -->
+				$!guideInfo.gdlLocalCity
+			</td>
+        </tr>
+		#end
+		#if($erim.contains($!guideInfo.gdlServer,'02'))
+		<tr>
+            <th>国内全陪：</th>
+            <td>
+				<!-- 国内全陪 -->
+				$!guideInfo.gdlNationalCity
+			</td>
+        </tr>
+		#end
+		#if($erim.contains($!guideInfo.gdlServer,'03'))
+		<tr>
+            <th>国际/港澳台领队：</th>
+            <td>
+				<!-- 国际港澳台领队 -->
+				$!guideInfo.gdlLeaderCity
+				#if($guideInfo.gdlDestination == '04')
+					$!guideInfo.gdlDestinationCountry
+				#else
+					#vtextarray($!guideInfo.gdlDestination,'C108')
+				#end
+			</td>
+        </tr>
+		#end
+		#if($erim.contains($!guideInfo.gdlServer,'04'))
+		<tr>
+            <th>国际地陪：</th>
+            <td>
+				<!-- 国际地陪 -->
+				#if($guideInfo.gdlGaidLokal == '04')
+					$!guideInfo.gdlGaidCountry
+				#else
+					#vtextarray($guideInfo.gdlGaidLokal,'C108')
+				#end
+			</td>
+        </tr>
+		#end
+        <tr>
+            <th><strong>服务语种：</strong></th>
+            <td>#vtextarray($guideInfo.gdlLanguage,'C102') $guideInfo.gdlRest</td>
+        </tr>
+        <tr>
+            <th><strong>导游证号：</strong></th>
+            <td>$guideInfo.gdlCertificate 
+			<a>
+				<img src="$staticRoot/img/card.png" style="width: 26px;vertical-align: middle;" />
+            </a>
+				<img src="$staticRoot/img/auth.png" style="width: 30px;" />
+            </td>
+        </tr>
+        <tr>
+            <th><strong>导游级别：</strong></th>
+            <td>#vtextarray($!guideInfo.gdlGrade,'C092')</td>
+        </tr>
+        <tr>
+            <th><strong>工作年限：</strong></th>
+            <td>#vtextarray($!guideInfo.gdlAge,'C114')</td>
+        </tr>
+        <tr>
+            <th><strong>自我介绍：</strong></th>
+            <td>$!guideInfo.gdlIntroduction</td>
+        </tr>
+    </table>
+    <!-- footer -->
+    <div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5_focus.png"/>
+        </a>
+    </div>
+</body>
+</html>

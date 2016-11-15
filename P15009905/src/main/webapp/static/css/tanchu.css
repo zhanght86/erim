@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+.tanchu {
+	width: 100%;
+	border: 1px #ededed solid;
+	border-radius: 3px;
+	font-size: 16px;
+	background: #ffffff;
+	font-family: "微软雅黑";
+	margin: 0 auto;
+}
+
+.biaoti {
+	text-align: center;
+	height: 50px;
+	border-bottom: 1px #c8c8c8 solid;
+	width: 100%;
+	line-height: 50px;
+}
+
+.wenben {
+	width: 100%;
+	border-bottom: 1px #c8c8c8 solid;
+	line-height: 50px;
+	height: 51px;
+}
+
+.wenben a {
+	color: #101010;
+	text-decoration: none;
+	padding-left: 5px;
+}
+
+.wenben span {
+	font-size: 12px;
+	color: #999;
+}
+
+.wenben p {
+	float: left;
+	padding-left: 5px;
+	vertical-align: middle;
+	line-height: 20px;
+}
+
+.biao {
+	float: left;
+	margin-left: 20px;
+	display: inline;
+	height: 40px;
+}
+
+.clear {
+	clear: both;
+}
+
+.anniu {
+	text-align: center;
+	width: 50%;
+	float: left;
+}
+
+.anniu a {
+	display: block;
+}
+
+.yanse {
+	color: #F00;
+}
+
+.shuxian {
+	border-right: 1px #f6f6f6 solid;
+}
+
+.anniu1 {
+	padding: 3px 0px;
+}
+
+.jine {
+	border: none;
+	font-zize: 16px;
+	font-family: "微软雅黑";
+	color: #666;
+	line-height: 48px;
+	padding-left: 5px;
+}
+
+.xiangq {
+	border-bottom: 1px #e6e6e6 solid;
+}

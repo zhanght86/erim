@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht1">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">帮助中心</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">帮助中心</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>预定流程</p>
+								<div class="about_guib" style="display:none">
+									<ul>
+										<li>来源：佳旅联合旅行社&nbsp;&nbsp;&nbsp;&nbsp;时间：2015-12-14&nbsp;&nbsp;&nbsp;&nbsp;点击：120</li>
+									</ul>
+								</div>
+								<div class="about_guic">
+									<p><span>摘要: </span>预定流程
+									</p>
+								</div>
+									<div class="b_mian">
+		<div class="b_center">
+    		<h2 class="b_title_h2">第一步：网上预订（或电话预订）</h2>
+    		<ul>
+    			<li>您可以选择电话预订或者网站预订，提交您的出游意向. </li>
+    			<li>如果您的单位或家庭包团出游，要求独立成团（私人订制），最好选择电话预订形式提出您的需求。</li>
+    		</ul>
+		</div>
+		<div class="b_center">
+    		<h2 class="b_title_h2">第二步：需求确认</h2>
+    		<ul>
+    			<li>我们会根据您所提出的需求，安排我社工作人员与您联系，以确认是否可以成行。 </li>
+    		</ul>
+		</div>	
+		<div class="b_center">
+    		<h2 class="b_title_h2">第三步：签约付款</h2>
+    		<ul>
+    			<li>签约可以到门店签约、传真签约、也可以上门签约。 </li>
+    			<li>付款可以到店付款、银行转账、支付宝、财付通等形式支付。</li> 			
+    		</ul>
+		</div>
+		<div class="b_center">
+    		<h2 class="b_title_h2">第四步：出团通知</h2>
+    		<ul>
+    			<li>在您出游前1--3日，我们会提前给您发送出团通知单，注明您在哪里集合，什么时候出发，导游联系方式，注意事项等。 </li>			
+    		</ul>
+		</div>
+		<div class="b_center">
+    		<h2 class="b_title_h2">第五步：开心出游。</h2>
+			<ul><li>您在旅途中遇到任何问题，可以与当地导游保持沟通，也可与我社工作人员或业务人员联系。</li></ul>
+		</div>
+		
+	</div>
+    <div class="clear"></div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+</body>
+</html>

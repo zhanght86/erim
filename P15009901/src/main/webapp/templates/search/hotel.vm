@@ -1,0 +1,140 @@
+<!-- 酒店-->
+<div class="tab-right-div">
+    <div class="tab-top">
+        <span class="tab-top-item subline">国内酒店</span>
+        <span class="tab-top-item">国际·港澳台酒店</span>
+    </div>
+    <div class="tab-main">
+        <div class="tab-main-div show pd-top15">
+			<form id="form_jiudian_guonei" method="post" action="$appRoot/$cpyno/jiudian.html">
+            <label class="tab-label">
+                <span class="tab-span">目的城市:</span>
+                <input class="tab-input home-city" type="text" name="hdlCityVo">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">关键词:</span>
+                <input class="tab-input" type="text" name="hdlName">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">酒店档次:</span>
+                <select class="tab-select" name="hdlLevel">
+                    <option value=""></option>
+					<option value="01" #if($!hotel.hdlLevel=="01") selected #end>三星/舒适</option>
+					<option value="02" #if($!hotel.hdlLevel=="02") selected #end>四星/高档</option>
+					<option value="03" #if($!hotel.hdlLevel=="03") selected #end>五星/豪华</option>
+					<option value="04" #if($!hotel.hdlLevel=="04") selected #end>经济型商务酒店</option>
+					<option value="05" #if($!hotel.hdlLevel=="05") selected #end>豪华型商务酒店</option>
+					<option value="06" #if($!hotel.hdlLevel=="06") selected #end>经济型客栈</option>
+					<option value="07" #if($!hotel.hdlLevel=="07") selected #end>高档客栈</option>
+					<option value="08" #if($!hotel.hdlLevel=="08") selected #end>豪华客栈</option>
+					<option value="09" #if($!hotel.hdlLevel=="09") selected #end>其他</option>
+                </select>
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">入住日期:</span>
+                <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="hnpDate" value="$!hotel.hnpDate">
+            </label>
+            <label class="tab-label" style="display:none">
+                <span class="tab-span">退房日期:</span>
+                <input type="text" class="tab-input laydate-icon" onclick="laydate()">
+            </label>
+            <button type="submit" class="tab-submit">立即搜索</button>
+            <div class="tab-hot" stlye="display:none" >
+                <span class="tab-span mt4"><strong>热门城市</strong></span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','张家界'); $('#form_jiudian_guonei_2').submit();">张家界</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','长沙'); $('#form_jiudian_guonei_2').submit();">长沙</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','北京'); $('#form_jiudian_guonei_2').submit();">北京</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','上海'); $('#form_jiudian_guonei_2').submit();">上海</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','广州'); $('#form_jiudian_guonei_2').submit();">广州</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','深圳'); $('#form_jiudian_guonei_2').submit();">深圳</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','成都'); $('#form_jiudian_guonei_2').submit();">成都</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','杭州'); $('#form_jiudian_guonei_2').submit();">杭州</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','南京'); $('#form_jiudian_guonei_2').submit();">南京</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','三亚'); $('#form_jiudian_guonei_2').submit();">三亚</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','厦门'); $('#form_jiudian_guonei_2').submit();">厦门</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value','青岛'); $('#form_jiudian_guonei_2').submit();">青岛</span>
+                <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value',''); $('#form_jiudian_guonei_2').submit();">更多</span>
+				<br clear="left"/>
+				<span class="tab-span mt4"><strong>特色酒店</strong></span>
+				#foreach($item in $hotelfeatures.keySet())
+					#if($velocityCount<7)
+					 <span class="tab-hot-a" onclick="$('#hdlCharacteristic').attr('value','$item'); $('#hdlCityVo').attr('value','');$('#form_jiudian_guonei_2').submit();">$hotelfeatures.get($item)</span>
+					#end
+				#end
+				<span class="tab-hot-a"  onclick="$('#hdlCharacteristic').attr('value','');$('#hdlCityVo').attr('value',''); $('#form_jiudian_guonei_2').submit();">更多</span>
+            </div>
+			</form>
+			<form id="form_jiudian_guonei_2" method="post" action="$appRoot/$cpyno/jiudian.html">
+				<input type="hidden" name="hdlCharacteristic" id="hdlCharacteristic"/>
+				<input type="hidden" name="hdlCityVo" id="hdlCityVo"/>
+			</form>
+        </div>
+		
+		
+        <div class="tab-main-div pd-top15">
+			<form id="form_jiudian_guoji" method="post" action="$appRoot/$cpyno/jiudian.html">
+            <label class="tab-label">
+                <span class="tab-span">目的城市:</span>
+                <input class="tab-input foreign-city" type="text" name="hdlForeignCity">
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">关键词:</span>
+                <input class="tab-input" type="text" name="hdlName" >
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">酒店档次:</span>
+                <select class="tab-select" name="hdlLevel">
+                    <option value=""></option>
+					<option value="01" #if($!hotel.hdlLevel=="01") selected #end>三星/舒适</option>
+					<option value="02" #if($!hotel.hdlLevel=="02") selected #end>四星/高档</option>
+					<option value="03" #if($!hotel.hdlLevel=="03") selected #end>五星/豪华</option>
+					<option value="04" #if($!hotel.hdlLevel=="04") selected #end>经济型商务酒店</option>
+					<option value="05" #if($!hotel.hdlLevel=="05") selected #end>豪华型商务酒店</option>
+					<option value="06" #if($!hotel.hdlLevel=="06") selected #end>经济型客栈</option>
+					<option value="07" #if($!hotel.hdlLevel=="07") selected #end>高档客栈</option>
+					<option value="08" #if($!hotel.hdlLevel=="08") selected #end>豪华客栈</option>
+					<option value="09" #if($!hotel.hdlLevel=="09") selected #end>其他</option>
+                </select>
+            </label>
+            <label class="tab-label">
+                <span class="tab-span">入住日期:</span>
+                <input type="text" class="tab-input laydate-icon" onclick="laydate();" name="hnpDate" value="$!hotel.hnpDate">
+            </label>
+            <label class="tab-label" style="display:none">
+                <span class="tab-span">退房日期:</span>
+                <input type="text" class="tab-input laydate-icon" onclick="laydate()">
+            </label>
+			<!--<a href="$appRoot/$cpyno/jiudian.html" target="_blank">立即搜索</a>-->
+            <button type="submit" class="tab-submit">立即搜索</button>
+			<div class="tab-hot">
+                <span class="tab-span mt4"><strong>热门目的地</strong></span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','香港');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">香港</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','澳门');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">澳门</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','台湾');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">台湾</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','首尔');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">首尔</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','曼谷');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">曼谷</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','芭提雅');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">芭提雅</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','新加坡');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">新加坡</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','巴厘岛');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">巴厘岛</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','马尔代夫');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">马尔代夫</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value','夏威夷');   $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">夏威夷</span>
+                <span class="tab-hot-a" onclick="$('#hdlForeignCity2').attr('value',''); $('#hdlCharacteristic2').attr('value',''); $('#form_jiudian_guoji_2').submit();">更多</span>
+				<br clear="left"/>
+				<span class="tab-span mt4"><strong>特色酒店</strong></span>
+                #foreach($item in $hotelfeatures.keySet())
+					#if($velocityCount<7)
+					 <span class="tab-hot-a" onclick="$('#hdlCharacteristic2').attr('value','$item'); $('#hdlForeignCity2').attr('value','');$('#form_jiudian_guoji_2').submit();">$hotelfeatures.get($item)</span>
+					#end
+				#end
+				<span class="tab-hot-a"  onclick="$('#hdlCharacteristic2').attr('value','');$('#hdlForeignCity2').attr('value',''); $('#form_jiudian_guoji_2').submit();">更多</span>
+            </div>
+			</form>
+			<form id="form_jiudian_guoji_2" method="post" action="$appRoot/$cpyno/jiudian.html">
+				<input type="hidden" name="hdlCharacteristic" id="hdlCharacteristic2"/>
+				<input type="hidden" name="hdlForeignCity" id="hdlForeignCity2" />
+			</form>
+        </div>
+	
+    </div>
+</div>
+<!-- /酒店-->

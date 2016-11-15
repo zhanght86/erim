@@ -1,0 +1,130 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+			  <div class="rdivv">
+				<div class="newadd">
+					<div class="newfood_suptop">
+						<img src="$staticRoot/images/htfood.png">
+					    <span>新增套餐</span>
+						<div class="cb"></div>
+						<div class="g_line"></div>
+					</div>
+					<form method="post" id="form1">
+		            <input type="hidden" value="$cafeteriaPackage.id" name="id"/>
+					<div class="newadd_ct">
+						<div class="newadd_ctl">
+							<span>产品编号：</span>
+							<div class="newadd_ctlr">
+								$!cafeteriaPackage.cdlID
+							</div>
+						</div>
+						<div class="newadd_ctl">
+							<span>套餐名称：</span>
+							<div class="newadd_ctlr">
+								$!cafeteriaPackage.cpeName
+							</div>
+						</div>
+						<div class="newadd_ctl">
+							<span>适用用人数：</span>
+								<div>
+									$!cafeteriaPackage.cpePersonMin
+									<span>人</span>
+								</div>
+								<span>至</span>
+								<div>
+									$!cafeteriaPackage.cpePersonMax
+									<span>人</span>
+								</div>
+						</div>
+						<div class="djj_ctll">
+							<span>套餐内容:</span>
+							<div class="newadd_ctlrql">
+								
+									<div class="newadd_boxtop">
+									<span class="newadd_boxtopa">
+										菜品一：
+									</span>
+									<span class="newadd_boxtopb">可选</span>
+									$!cafeteriaPackage.cpeContentNum
+									
+									<span class="newadd_boxtopb">道</span>
+									<span class="newadd_boxtopb">单价</span>
+									$!cafeteriaPackage.cpeEachPrice
+									<span class="newadd_boxtopb">元/道</span>
+								</div>
+								<div class="newadd_boxl">
+									<span class="newadd_boxla" >菜品类型</span>
+									<span class="newadd_boxlb">菜品名称</span>
+									<span class="newadd_boxlc">规格</span>
+									<span class="newadd_boxld">菜品图片</span>
+								</div>
+								<div class="newadd_boxl">
+									$!cafeteriaPackage.cpeCafeteriaType
+									$!cafeteriaPackage.cpeCafeteriaName
+									$!cafeteriaPackage.cpeCafeteriaNorms
+									<div class="newadd_boxld">
+										$!cafeteriaPackage.cpeCafeteriaImg
+										
+									</div>
+								</div>
+								<div class="newadd_boxl">
+								  <div class="newadd_boxld">
+									$!cafeteriaPackage.cpeCafeteriaImg
+									
+								  </div>
+								</div>
+									<div class="newadd_boxl">
+										<p>小计:500元</p>
+									</div>
+								
+								<div class="newadd_footer">
+										套餐单点总价：600元
+								</div>
+							</div>
+						  </div>
+							<div class="djj_ctl">
+								<span>有效期:</span>
+								<div class="djj_ctlrq">
+									$!cafeteriaPackage.cpeStartTime
+									<span>至</span>
+									$!cafeteriaPackage.cpeEndTime
+								</div>
+							</div>
+							<div class="djj_ctll">
+								<span>套餐说明:</span>
+								<div class="djj_ctlrql">
+									$!cafeteriaPackage.cpeIntroduction
+								</div>
+							</div>
+							<div class="djj_ctll">
+								<span>购买须知:</span>
+								<div class="djj_ctlrql">
+									$!cafeteriaPackage.cpeBuyKnow
+								</div>
+							</div>
+							<div class="djj_ctll">
+								<span>预约提醒:</span>
+								<div class="djj_ctlrql">
+									$!cafeteriaPackage.cpeMessage
+								</div>
+							</div>
+							<div class="djj_ctll">
+								<span>温馨提示:</span>
+								<div class="djj_ctlrql">
+									$!cafeteriaPackage.cpeFriendlyTips
+								</div>
+							</div>
+							<div class="djj_ctll">
+								<span>商家其他服务:</span>
+								<div class="djj_ctlrql">
+									$!cafeteriaPackage.cpeService
+								</div>
+							</div>
+							<div class="djj_ctl">
+								<span></span>
+								<div class="djj_ctlrq">
+									<button type="button" class="djj_sub" onclick="index.searchform('form1','$appRoot/cafeteria/package/list');">返回</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+              </div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>佳旅联合</title>
+    <meta name="keywords" content="注册页面" />
+    <meta name="description" content="注册页面" />
+	
+    #parse("company/regedit/common.vm")
+</head>
+<body>
+    <div class="register">
+    	<div class="reg_head">
+    		<div class="reg_heada">
+    			<img src="$staticRoot/images/logotop.jpg" alt="logo">
+    		</div>
+    	</div>
+    	<div class="content">
+    		<div class="content_top">
+    			<img src="$staticRoot/images/menu_4.png" alt="登录资料">
+    		</div>
+            <div class="content_ct">
+                <img alt="提交成功" src="$staticRoot/images/pic.jpg">
+                <center><a style="color:#5484e6" href="http://www.jialvlianhe.com">返回http://www.jialvlianhe.com</a></center><br><br>
+                <div class="content_ctfont">
+                    <p>尊敬的客户，您的信息已经提交到我们的信息库，为了确保您的利益，我们会对所有旅游同业资质真伪进行审核，并向您的公司账户转账随机金额以供验证(1个工作日内)，审核结果会以邮件的形式发送到您的邮箱，请注意查收！</p>
+                </div>
+			</div>
+    	</div>
+    	<div class="footer">
+    		版权所有&nbsp;&copyright&nbsp;北京佳旅联合科技有限公司
+    	</div>
+    </div>
+</body>
+</html>

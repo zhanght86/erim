@@ -1,0 +1,349 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/yuding.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+
+<!-- 导游专用JS引用 -->
+<script type="text/javascript" src="$staticRoot/js/product/guide.js"></script>
+<script type="text/javascript"> 
+	// 国内地陪
+    $('#newline_ctllrbb').hide();
+	// 国内全陪
+	$('#newline_ctllrbb1').hide();
+	// 国际港澳台领队
+	$('#newline_ctllrbid').hide();
+	$('#newline').hide();
+	$('#newline1').hide();
+	// 国际港澳台地陪
+	$('#div_trainl_ctctbl').hide();
+	$('#newline_ctllra1').hide();
+	
+ 	// 语种其他隐藏
+	$('.gdlLangua').hide();
+	
+   	autoquery();
+	
+    function autoquery() {
+     	var guojiastr = $("#guojiaforqueryId").html();
+        var arr = guojiastr.split(",");
+        $(".autoquerycountry").autocomplete(arr);
+    }
+	
+	//账户是否重复
+	function checkloginame(data){
+		var loginname = data.val();
+		if(""!=loginname){
+    		$.post("$appRoot/guide/detail/view?loginanme="+loginname,function(data){
+    			if(data==1){
+    				wxcalert("账户存在,请重新输入");
+    				$("#gdlMobileUsers").val("");
+    				$("#gdlMobileUsers").focus();
+    			}
+    		},'json');
+		}
+	}
+</script>
+<div class="rdivv">
+	<div class="newfood">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/aa_1.png">
+			<span>新增导游（领队）</span>   
+			<div class="cb"></div>
+			<div class="g_line"></div>
+	   	</div>
+		<div class="doadmin_top">
+			<form method="post" id="form1">
+				<div class="doadmin_topl">
+					<div class="doadmin_toplboxa" style="margin-left:17px;">
+						<span style="width:93px;">姓名：</span>
+						<div class="doadmin_toplbra" style="width:130px;">
+							<input type="text" name="gdlName" class="validate[required,maxSize[30]]"><span>*</span>
+						</div>
+					</div>
+				</div>
+				<div class="carinfo_ctbl1" style="float:left;width:100%;">
+					<span style="width:135px;">性别：</span>
+					<div class="carinfo_ctblr">
+						<select name="gdlSex" class="validate[required]" style="width:122px;">
+							#foreach($item in $sex.keySet())
+								<option value="$item">$sex.get($item)</option>
+							#end
+						</select>
+						<span style="margin-left:7px;color:red;">*</span>
+					</div>
+				</div>
+				<div class="doadmin_topl">
+					<div class="doadmin_toplboxa" style="margin-left:17px;">
+						<span style="width:93px;">手机号：</span>
+						<div class="doadmin_toplbra" style="width:130px;">
+							<input type="text" onblur="checkloginame($(this));" id="gdlMobileUsers" class="w200 validate[required,custom[integer],mixSize[11],maxSize[11]]" name="gdlMobileUsers" />
+							<span style="width:300px;">*(手机导游登录账号，不可修改，请认真填写)</span>
+						</div>
+					</div>
+				</div>
+				<div class="carinfo_ctbl1" style="float:left;width:100%;">
+					<span style="width:135px;">从业时间：</span>
+					<div class="carinfo_ctblr">
+						<select name="gdlAge" class="validate[required]" style="width:122px;">
+							#foreach($item in $age.keySet())
+								<option value="$item">$age.get($item)</option>
+							#end
+						</select><span style="margin-left:7px;color:red;">*</span>
+					</div>
+				</div>
+    			<div class="doadmin_topl">
+        			<div class="doadmin_toplboxa" style="margin:10px 0px 0 17px; width:500px;">
+    					<span style="width:93px;">导游/领队证号：</span>
+    					<div class="doadmin_toplbra" style="width:165px;">
+    						<input type="text" style="width:150px;" name="gdlCertificate" placeholder="例如：D-0000-000000" class="validate[required,maxSize[14]]" >
+    						<span style="color:red;margin: 0px;float: right;margin-top:5px;">*</span>
+    					</div>
+        			</div>
+    			</div>
+				<div class="doadmin_topl">
+        			<div class="doadmin_toplboxa" style="margin:10px 0px 0 17px; width:500px;">
+    					<span style="width:93px;">籍贯(国籍)：</span>
+    					<div class="doadmin_toplbra" style="width:165px;">
+    						<input type="text" style="width:150px;" name="gdlNativePlace" placeholder="例如：河北石家庄" class="validate[required,maxSize[40]]" >
+    						<span style="color:red;margin: 0px;float: right; margin-top:5px;">*</span>
+    					</div>
+        			</div>
+    			</div>
+				<!--　国内地陪 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－-->
+				<div class="newline_ctlla">
+					<span style="line-height: 42px;">服务类型：</span>
+					#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+					<div class="newline_ctllra">
+						<label><input type="checkbox" class="validate[minCheckbox[1]]" name="gdlServer" value="01" /><strong> 国内地陪</strong></label></br>
+					</div>
+					#end
+    			</div>
+				<div class="doadmin_topl" id="newline_ctllrbb">
+					<div class="doadmin_toplboxb" style="width:800px;">
+						<span style="width:159px;">目的地：</span>
+						<div style="float:left;margin-top:-15px;width:467px;">
+        					<div class="city_box mt15">
+								#customProvince('gdlLocalProvince','gdlLocalProvince','yuding_date','1','','gdlLocalCity','gdlLocalCounty','','')
+    							<span class="yuding-spanl">省</span>
+    							<select class="yuding_date" name="gdlLocalCity" id="gdlLocalCity" style="width:103px;" onchange="custom.town($(this),'gdlLocalCounty');"></select>
+    							<span class="yuding-spanl">市</span>
+    							<select class="yuding_date" name="gdlLocalCounty" id="gdlLocalCounty" style="width:103px;"></select>
+    							<span class="yuding-spanl">县</span>
+    							<a href="javascript:void(0)" class="a_button">+</a>
+        					</div>
+						</div>
+					</div>
+				</div>
+				<!--　国内全陪 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－-->
+				#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+    			<div class="newline_ctlla" >
+    				<span></span>
+    				<div class="newline_ctllra"  style="float:left;">
+    					<label><input type="checkbox" class="validate[minCheckbox[1]]" name="gdlServer" value="02" /><strong>国内全陪</strong></label></br>
+    				</div>
+    			</div>
+				#end
+				<div class="doadmin_topl"  id="newline_ctllrbb1">
+					<div class="doadmin_toplboxb2" style="width:800px;">
+						<span style="width:159px;"> 出发地：</span>
+						<div style="float:left;margin-top:-15px;width:467px;">
+        					<div class="city_boxx mt15">
+								#customProvince('gdlNationalProvince','gdlNationalProvince','yuding_date','1','','gdlNationalCity','gdlNationalCounty','','')
+    							<span class="yuding-spanl">省</span>
+    							<select class="yuding_date" name="gdlNationalCity" id="gdlNationalCity" style="width:103px;" onchange="custom.town($(this),'gdlNationalCounty');"></select>
+    							<span class="yuding-spanl">市</span>
+    							<select class="yuding_date" name="gdlNationalCounty" id="gdlNationalCounty" style="width:103px;"></select>
+    							<span class="yuding-spanl">县</span>
+        						<a href="javascript:void(0)" class="a_button">+</a>
+        					</div>
+						</div>
+					</div>
+				</div>
+				<!--　国际／港澳台领队 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－-->
+				#if($erim.isNotEmpty($!userBussiness.cbsRanProvince1))
+    			<div class="newline_ctlla">
+        			<span></span>
+        			<div class="newline_ctllra">
+    					<label><input type="checkbox" class="validate[minCheckbox[1]]" name="gdlServer" value="03" /><strong>国际/港澳台领队</strong></label></br>
+    				</div>
+            	</div>
+				#end
+				<div class="doadmin_topl" id="newline_ctllrbid">
+					<div class="doadmin_toplboxb3" style="width:800px;">
+						<span style="width:159px;">出发地：</span>
+						<div style="float:left;margin-top:-15px;width:467px;">
+        					<div class="city_boxa mt15">
+								#lockProvince('gdlLeaderProvince','gdlLeaderProvince','yuding_date','1','','gdlLeaderCity','gdlLeaderCounty','','')
+    							<span class="yuding-spanl">省</span>
+    							<select class="yuding_date" name="gdlLeaderCity" id="gdlLeaderCity" style="width:103px;" onchange="lock.town($(this),'gdlLeaderCounty');"></select>
+    							<span class="yuding-spanl">市</span>
+    							<select class="yuding_date" name="gdlLeaderCounty" id="gdlLeaderCounty" style="width:103px;"></select>
+    							<span class="yuding-spanl">县</span>
+    							<a href="javascript:void(0)" class="a_button">+</a>
+        					</div>
+						</div>
+					</div>
+				</div>
+    			<div class="newline_ctllrb mt15" id="newline">
+        			<div class="carinfo_ctbl6">
+                        <span style="font-weight:bold;width:210px;">目的地：</span>
+        				#foreach($item in $state.keySet())
+        					<label class="carinfo_ctbl6"> 
+        						<input type="checkbox" class="validate[minCheckbox[1]]" name="gdlDestination" value="$item"> $state.get($item)
+        					</label>
+        				#end
+        			</div>
+    		  	</div>
+    			<div class="carinfo_ctblr mt15" id="newline1" style="width:500px;">
+    				<span class="span1" style="width:228px;">国家</span>
+    				<div style="float:left; margin-top:-15px;width:232px;">
+    					<div class="carinfo_ctblr_a" style="margin-top:15px;float:right;width:227px;">
+    						<div class="doadmin_toplbra" style="width:130px;">
+    							<input type="text" style="width:150px;" name="gdlDestinationCountry" class="validate[maxSize[20]] autoquerycountry" >
+    						</div>
+            				<a class="a_button" style="float:right;" href="javascript:void(0)">+</a>
+                        </div>
+    				</div>
+                </div>
+				<!-- 国际港澳台地陪  ------------------------------------------------------－－－－－－－－－－－－－－－－－－----------->
+				#if($erim.isNotEmpty($!userBussiness.cbsRanInterna))
+                <div class="newline_ctlla">
+        			<span></span>
+        			<div class="newline_ctllra">
+        				<label><input type="checkbox" class="validate[minCheckbox[1]]" name="gdlServer" value="04" /><strong>国际/港澳台地陪</strong></label></br>
+        			</div>
+        		</div>
+				#end
+                <div class="newline_ctllrb mt15" id="newline_ctllra1">
+        			<div class="carinfo_ctbl6">
+        				<span style="font-weight:bold;width:210px;">目的地：</span>
+        				#foreach($item in $state.keySet())
+							#if($erim.contains($!userBussiness.cbsRanInterna,$item))
+        					<label class="carinfo_ctbl6"> 
+							#else
+        					<label class="carinfo_ctbl6" hidden> 
+							#end
+    							<input type="checkbox" class="validate[minCheckbox[1]]" name="gdlGaidLokal" value="$item"> $state.get($item)
+        					</label>
+        				#end
+        			</div>
+        		</div>
+        		<div class="carinfo_ctblr mt15" id="div_trainl_ctctbl" style="width:500px;">
+        			<span class="span1"style="width:228px;">国家</span>
+    				<div style="float:left; margin-top:-15px;width:228px;">
+    					<div class="carinfo_ctblr_a" style="margin-top:15px;float:right;width:227px;">
+							<div class="doadmin_toplbra" style="width:130px;">
+    							<input type="text" style="width:150px;" name="gdlGaidCountry" class="validate[maxSize[20]] autoquerycountry" >
+    						</div>
+    						<a class="a_button a" name="gdlGaidCountry" style="float:right;" href="javascript:void(0)">+</a>
+                        </div>
+    				</div>
+        		</div>
+                <div class="newline_ctlla">
+        			<span style="line-height: 42px;">语种：</span>
+        			<div class="newline_ctllra" style="width:400px;" id="language">
+    					#foreach($item in $language.keySet())
+    						<label class="checkbox inline"> 
+    							<input class="validate[minCheckbox[1],maxCheckbox[5]] checkbox" type="checkbox" name="gdlLanguage" value="$item"> $language.get($item)
+        	             	</label>
+						#end
+						<span style="color:red; margin-top:0px;">*</span>
+    					<div class="input_right newline_ctllr4 gdlLangua" id="gdlLangua" >
+    						<input type="text" class="w200 lab_input validate[maxSize[10]]" name="gdlRest" style="width:100px;"/>
+    						<a class="a_button" href="javascript:void(0)">+</a>
+    					</div>
+                    </div>
+        	   	</div>
+            	<div class="doadmin_topl">
+                	<div class="doadmin_toplboxb" style="margin-left:16px;margin-top:10px;">
+                		<span style="line-height: 33px;">公司评级：</span>
+                		<div class="doadmin_toplbrb">
+                			<select name="gdlCompanyRating" class="validate[required]">
+								<option></option>
+                				#foreach($item in $rating.keySet())
+									<option value="$item">$rating.get($item)</option>
+								#end
+                			</select>
+							<!-- 
+								注释原因：大波哥让去掉必填。
+                				<span style="margin-top:1px; margin-left: 6px;">*</span>
+							-->
+                		</div>
+                    </div>
+            	</div>
+                <div class="newline_ctlla" style="margin-top:10px;">
+                	<span style="line-height: 42px;">导游(领队)等级：</span>
+                	<div class="newline_ctllraaa">
+                		#foreach($item in $grade.keySet())
+                        <label class="checkbox inline"> 
+                			<input  type="radio" name="gdlGrade" #if($item  == '01') checked #end value="$item" /> $grade.get($item)
+                        </label>
+                		#end
+                    </div>
+                </div>
+            	<div class="newfood_ct">
+                    <div class="carinfo_ctbl">
+            			<span></span>
+                        <div class="carinfo_ctblrbtn" style="width:360px;margin-bottom:80px;margin-left:-22px;margin-top:10px;">
+                            <button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/guide/detail/insert','$appRoot/guide/detail/list');" >提交</button>
+                            <button class="carinfo_qu" type="reset">重置</button>
+            				<button class="carinfo_qu" type="button" onclick="index.load(page.url);">返回</button>
+                        </div>
+                    </div>
+            	</div>
+			</form>
+		</div>
+	</div>
+</div>
+##隐藏
+<div style="display:none">
+	<!-- 国内地陪 省市县 复制 模板 ------------------------------------>
+	<div class="city_box mt15" id="div_city_demo" style="width:671px;text-align:right;float:unset">
+		#* 
+		<select class="yuding_date" city="province1" name="gdlLocalProvince">
+			<option value=""></option>
+			#foreach($item in $provinces)
+				<option value="$item.regionNo">$item.regionName</option>
+			#end
+		</select>
+		<span class="yuding-spanl">省</span>
+		<select class="yuding_date" city="city1" name="gdlLocalCity">
+			<option></option>
+		</select>
+		<span class="yuding-spanl">市</span>
+		<select class="yuding_date" city="county1" name="gdlLocalCounty">
+			<option></option>
+		</select>
+		<span class="yuding-spanl">县</span>
+		*# 
+		#customProvince('gdlLocalProvince','gdlLocalProvince1','yuding_date','1','','gdlLocalCity1','gdlLocalCounty1','','')
+		<span class="yuding-spanl">省</span>
+		<select class="yuding_date" name="gdlLocalCity" id="gdlLocalCity1" style="width:103px;" onchange="custom.town($(this),'gdlLocalCounty1');"></select>
+		<span class="yuding-spanl">市</span>
+		<select class="yuding_date" name="gdlLocalCounty" id="gdlLocalCounty1" style="width:103px;"></select>
+		<span class="yuding-spanl">县</span>
+		<a href="javascript:void(0)" class="a_button">+</a>
+	</div>
+	
+	<!-- 国内全陪 省市县 复制 模板 ------------------------------------>
+	<div class="city_boxx mt15" id="div_city_national" style="width:671px;text-align:right;float:unset">
+		#customProvince('gdlNationalProvince','gdlNationalProvince1','yuding_date','1','','gdlNationalCity1','gdlNationalCounty1','','')
+		<span class="yuding-spanl">省</span>
+		<select class="yuding_date" name="gdlNationalCity" id="gdlNationalCity1" style="width:103px;" onchange="custom.town($(this),'gdlNationalCounty1');"></select>
+		<span class="yuding-spanl">市</span>
+		<select class="yuding_date" name="gdlNationalCounty" id="gdlNationalCounty1" style="width:103px;"></select>
+		<span class="yuding-spanl">县</span>
+		<a href="javascript:void(0)" class="a_button">+</a>
+	</div>
+	
+	<!-- 国际港澳台领队 省市县 复制 模板 ------------------------------------>
+	<div class="city_boxa mt15" id="div_city_leader" style="width:671px;text-align:right;float:unset">
+		
+		#lockProvince('gdlLeaderProvince','gdlLeaderProvince1','yuding_date','1','','gdlLeaderCity1','gdlLeaderCounty1','','')
+		<span class="yuding-spanl">省</span>
+		<select class="yuding_date" name="gdlLeaderCity" id="gdlLeaderCity1" style="width:103px;" onchange="lock.town($(this),'gdlLeaderCounty1');"></select>
+		<span class="yuding-spanl">市</span>
+		<select class="yuding_date" name="gdlLeaderCounty" id="gdlLeaderCounty1" style="width:103px;"></select>
+		<span class="yuding-spanl">县</span>
+		<a href="javascript:void(0)" class="a_button">+</a>
+	</div>
+</div>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>	

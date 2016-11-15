@@ -1,0 +1,61 @@
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/ren.png" alt="门票同业产品管理" title="门票同业产品管理">门票同业产品管理</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+    	<div class="input_block clearfix">
+    		<div class="label_left">所在地区：</div>
+    		<div class="input_right input_right_wauto">
+    			<input class="w150" name="tdlCity">
+    			<label class="ml35">景点名称：</label>
+    			<input class="w200" name="tdlName">
+    			<label class="ml35">景点级别：</label>
+    			<select class="w150" name="tdlScenicLevel">
+    				<option></option>
+    				#foreach($item in $level.keySet())
+                       <option value="$item">$level.get($item)</option>
+            		#end
+    			</select>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix mb20">
+    		<div class="label_left">公司/品牌名称： </div>
+    		<div class="input_right input_right_wauto">
+    			<input class="w135" name=""><button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/sametown/ticket/detail');">查 询</button>
+    		</div>
+    	</div>
+	</form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>产品编号</td>
+					<td>所在地区</td>
+					<td>景点名称</td>
+					<td>景点级别</td>
+					<td>价格/数量</td>
+					<td>公司/品牌名称</td>
+					<td>联系电话</td>
+					<td>在线交流</td>
+					<td>在线预定</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $ticketList)
+    				<tr>
+    					<td>$!item.tdlCode</td>
+    					<td>$!item.tdlCity</td>
+    					<td><a href="#">$!item.tdlName</a></td>
+    					<td>$!item.tdlScenicLevel</td>
+    					<td></td>
+    					<td></td>
+    					<td>$!item.tdlIphone</td>
+    					<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.tdlQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+    					<td><a href="#">预定</a></td>
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

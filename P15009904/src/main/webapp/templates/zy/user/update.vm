@@ -1,0 +1,69 @@
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/user1.png">修改用户
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		<input type="hidden" value="$!zySystemUser.id" name="id"/>
+		<div class="input_block clearfix">
+    		<div class="label_left">登录名：</div>
+    		<div class="input_right">
+                <input type="text" class="w200 validate[required,maxSize[100]]" readonly  value="$!zySystemUser.zyUserLoginname" name="zyUserLoginname" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">真实姓名：</div>
+    		<div class="input_right">
+    			<input type="text" class="w200 validate[required,maxSize[150]]" value="$!zySystemUser.zyUserRealname" name="zyUserRealname" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">联系方式：</div>
+    		<div class="input_right">
+    			<input type="text" class="w200 validate[maxSize[150]]" value="$!zySystemUser.zyUserTel" name="zyUserTel" />
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="input_block clearfix">
+        		<div class="label_left">合作用户：</div>
+        		<div class="input_right">
+        			<select class="w200" name="zyIsCooperation" disabled >
+                        <option value="0"  #if('0' == $!zySystemUser.zyIsCooperation) selected #end>否</option>
+						<option value="1"  #if('1' == $!zySystemUser.zyIsCooperation) selected #end>是</option>
+        			</select>
+        		</div>
+        	</div>
+    	</div>
+		<div class="input_block clearfix" id="div_role">
+    		<div class="input_block clearfix">
+        		<div class="label_left">角色：</div>
+        		<div class="input_right">
+        			<select class="w200" name="zyRoleId">
+        				#foreach($item in $roleList)
+                            <option value="$item.id"  #if($item.id == $!zySystemUser.zyRoleId) selected #end>$item.zyRoleName</option>
+    					#end
+        			</select>
+        		</div>
+        	</div>
+    	</div>
+    	<div class="button_block clearfix">
+    		<button class="y_but ml35" id="btn" type="button" onclick="subform.update('form1', '$appRoot/zy/user/update');">提交</button>
+			<button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+    	</div>
+	</form>
+</div>
+
+<script >
+	//是否合作用户 如果是合作用户隐藏角色
+	$("select[name='zyIsCooperation']").change(function(){
+		roleval($(this).val());
+	});
+	
+	//是否合作用户
+	roleval($!zySystemUser.zyIsCooperation);
+	
+	function roleval(roleval){
+		if('1' == roleval) $("#div_role").hide();
+		else      		   $("#div_role").show();
+	}
+</script>

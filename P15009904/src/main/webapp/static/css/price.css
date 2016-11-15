@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+.fangliang_date{border-left:1px solid #ccc;border-top:1px solid #ccc;background-color:#fff;}
+.fangliang_date th{width:138px;background-color:#ccc;height:30px;fong-size:14px;}
+.fangliang_date td{width:138px;}
+.fangliang_date ul li{width:137px;height:74px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;float:left;position:relative;}
+.fangliang_date ul li .date_d{position:absolute;top:0;left:0;display:block;height:30px;width:30px;background-color:#d09e64;border-radius:0px 0px 8px;font-size:16px;color:#fff;font-weight:bold;text-align:center;line-height:30px;}
+.fangliang_date ul li .mess_box{padding-top:3px;padding-left:60px;color:#444;}
+.fangliang_date ul li .icon{display:block;position:absolute;top:50px;left:5px;width:20px;height:20px;}
+.fangliang_date ul li .click_box{width:90px;height:47px;border:1px solid #ccc;line-height:22px;padding-top:3px;padding-left:10px;background-color:#fff;position:absolute;left:32px; top:70px;z-index:9995; box-shadow:0 0 2px #ccc;margin-top: -48px;}
+.fangliang_date ul li .click_box a{color:#0069CA;display:inline-block;width:100%;}
+.fangliang_date ul li.close_li{background-color:#fab4b4;}
+.fangliang_date ul li.finish_li{background-color:#dcdcdc;}
+.fangliang_date ul li.close_li .icon{background:url(../images/lj_03.png) no-repeat left top;}
+.fangliang_date ul li.finish_li .icon{background:url(../images/ljgl_04.png) no-repeat left top;}
+.fangliang_date td.td_fxxz{border-right:1px solid #ccc;padding:15px 0 15px 20px;font-weight:bold;}
+.fangliang_date td.td_fxxz input{vertical-align:middle;margin:0 8px 0 30px;}
+.input_block .input_right_wauto{width:auto;}
+.date_m{float:left;width:275px;height:40px;padding:10px 0 0 24px;border:1px solid #ccc;border-bottom:none;background-color:#fff;border-radius:8px 8px 0 0;margin-right:308px;}
+.date_m a{}
+.date_m span{display:inline-block;width:193px;height:30px;font-size:16px;font-weight:bold;text-align:center;line-height:30px;vertical-align:top;}
+.date_close{width:400px;float:left;}
+.date_close input{z-index:9999;height:28px;width:80px;background:#fff url(../images/tt_5.jpg) no-repeat 90px 6px;border:1px solid #ccc;padding-right:30px;padding-left:5px;cursor: pointer;}
+.date_close button{border:none;background-color:#f56464;height:28px;padding:0 10px;color:#fff;border-radius:5px;margin-left:15px;}
+.nobg_block{border:1px solid #ccc;padding-left:15px;}
+.nobg_block .input_block .input_right{width:480px;}
+.nobg_block .input_block .input_right span img{ vertical-align:middle;}
+.input_block .w50{display:inline-block;width:50px;}
+.input_block .w70{display:inline-block;width:70px;}
+.input_block .w68{display:inline-block;width:68px;}
+.min_mess_box{position:relative;width:965px;height:30px;line-height:30px;}
+.min_mess_box button{background-color:#969696;border:none;height:30px;border-radius:5px;color:#fff;padding:0 23px;font-size:12px;}
+.min_mess_box span{text-align:right;position:absolute;right:0;}
+.min_mess_box span img{vertical-align:middle;margin-left:20px;}
+.win_box_edit{display:none;background-color:#fff;width:205px;height:225px;font-size:12px;line-height:30px;position:fixed;top:50%;left:50%;margin-left:-110px;margin-top:-120px;border:1px solid #ccc;padding-top:23px;padding-left:10px;z-index:10000;}
+.win_box_edit .input_block{margin-bottom:5px;}
+.win_box_edit .esc_a{font-size:18px;position:absolute;top:-5px;right:5px;color:#f56464;}
+.win_box_edit label{display:inline-block;line-height:30px;height:30px; vertical-align:bottom;}
+/** 2015.11.09 宁晓强 特色餐专用*/
+.win_box_edit_cpc{display:none;background-color:#fff;width:205px;height:250px;font-size:12px;line-height:30px;position:fixed;top:50%;left:50%;margin-left:-110px;margin-top:-120px;border:1px solid #ccc;padding-top:23px;padding-left:10px;z-index:10000;}
+.win_box_edit_cpc .input_block{margin-bottom:5px;}
+.win_box_edit_cpc .esc_a{font-size:18px;position:absolute;top:-5px;right:5px;color:#f56464;}
+.win_box_edit_cpc label{display:inline-block;line-height:30px;height:30px; vertical-align:bottom;}
+.win_box_bg{display:none;width:100%;height:100%;position:fixed;background-color:rgb(0, 0, 0);left:0px;top:0px;opacity:0.8;filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);z-index: 9999;}
+/** 2015.10.22	宁晓强	量价模块样式，没发现作用*/
+/*
+.fangliang_date ul li .mess_box .sj_j{color:#32c832;}
+.input_block .w190{width:190px;}
+.win_box_edit2{width:500px;height:370px;margin-left:-250px;margin-top:-185px;}
+.win_box_edit2 .input_block .label_left{width:80px;}
+.win_box_edit2 .input_block .input_right{width:auto;}
+.fangliang_date ul li .mess_box .sj_j{color:#32c832;}
+.input_block .w190{width:190px;}
+.win_box_edit2{width:500px;height:370px;margin-left:-250px;margin-top:-185px;}
+.win_box_edit2 .input_block .label_left{width:80px;}
+.win_box_edit2 .input_block .input_right{width:auto;}
+.tab_block{width:455px;}
+.tab_block .tab_a a{display:inline-block;height:29px;line-height:28px;color:#fff;font-size:14px;padding:0 15px;background-color:#969696;border:1px solid #ccc;border-radius:5px 5px 0 0;}
+.tab_block .tab_a a.on{background-color:#d09e64;border-bottom:1px solid #d09e64;}
+.tab_block table{width:455px;border-right:1px solid #ccc;border-radius:0 4px 5px 5px;}
+.tab_block table th{background-color:#d09e64;height:33px;color:#fff;}
+.tab_block table td{background-color:#fff;height:30px; text-align:center;border-left:1px solid #ccc;border-bottom:1px solid #ccc;}
+.tab_block table th.rt{border-radius:0 4px 0 0;}
+.tab_block table td.rb{border-radius:0 0 5px 0;}
+.tab_block table td.lb{border-radius:0 0 0 5px;}
+.tab_block .tab_2{display:none;}
+.button_block_w1060{width:1060px;}
+.flt_box{width:530px;float:left;}
+
+.bg_block .input_block .input_right_wauto{width:auto;}
+.green_box{background-color:#baf59e;display:inline-block;width:20px;height:20px;vertical-align:middle;}
+.fb_table .input_right .y_but,.bg_block .input_right .y_but{border:none;height:22px;border-radius:5px;float:right;color:#FFF;padding:0px 10px;
+font-size:12px;background-color:#d09e64;}
+.input_right .b_but{border:none;height:22px;border-radius:5px;float:right;color:#FFF;padding:0px 10px;
+font-size:12px;background-color:#969696;float:right;}
+.flt_box .bg_block{border:1px solid #ccc;padding-bottom:0;}
+.bg_block table{border-top:1px solid #ccc;}
+.bg_block table th{height:24px;}
+.bg_block table th.red{color:#f56464;}
+.bg_block table td{height:38px;text-align:center;border-top:1px solid #ccc;border-right:1px solid #ccc;}
+.bg_block table td.pitch_on{background-color:#baf59e;}
+.bg_block table td:last-child{border-right:none;}
+.fb_table{}
+.fb_table th{height:26px;padding-bottom:10px;}
+.fb_table td{min-width:380px;vertical-align:top;padding:0 20px;}
+.fb_table .input_block .label_left{width:100px;}
+.input_block .input_right span img{vertical-align:middle;}
+.tel_mess_block p{padding:3px 0;line-height:20px;}
+.tel_mess_block p input{border:1px solid #ccc;height:18px;width:360px;line-height:20px;}
+.tel_mess_block .edit_p input,.tel_mess_block table input{width:60px;margin:0 5px;padding:0 2px;}
+.tel_mess_block .edit_p input.tel{width:80px;}
+.tel_mess_block .tel_con,.tel_mess_center .tel_con,.tel_con_1{box-shadow:0 0 3px #ccc;background-color:#fff;border-radius:5px;padding:15px 15px;width:400px;}
+.tel_con table td,.tel_con_1 table td{vertical-align:top;padding:3px 0;line-height:20px;}
+.tel_con table td p,.tel_con_1 table td p{padding:0;}
+
+.ml5{margin-left:5px;}.mt_15{margin-top:-15px;}.mt_10{margin-top:-10px;}.mr60{margin-right:60px;}
+.ml55{margin-left:75px;}*/
+.mb16{margin-bottom:16px;}.mb25{margin-bottom:25px;}.pt10{padding-top:10px;}.pt15{padding-top:15px;}.mr20{margin-right:20px;}
+ /*王赛机票量价2015-10-05td_fxxz*/

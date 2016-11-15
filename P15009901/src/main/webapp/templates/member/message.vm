@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+    #set($title='个人资料')
+    #parse("member/common/head.vm")
+    <body>
+        <div class="indexwrap">
+            #parse("common/head.vm")
+
+            <!--dwp html start-->
+            <div class="box_cb mb20"></div>
+            <div class="g_cont">
+                #parse("member/common/left.vm")
+                
+                <div class="g_fl_lt">
+                    <div class="g_u_block pt20 pl20 pb20 mb20">
+
+                        <p class="u_tit_2 pb10">
+                            联系方式
+                        </p>
+                        <p class="u_txt_1 pb10">
+                            手机：158****0418<a class="ml15 mr50" href="#">修改</a>邮箱：z****e@qq.com<a class="ml15" href="#">修改</a>
+                        </p>
+                        <p class="u_tit_2 pb10">
+                            个人资料
+                        </p>
+                        <p class="u_txt_1">
+                            <span class="w155">真实姓名：朱建乐</span>证件号码：166************6666
+                        </p>
+                        <p class="u_txt_1 pb20">
+                            <span class="w155">性别：男</span>生日：1991年1月1日
+                        </p>
+                        <a href="#" class="u_but">编辑</a>
+                        <div class="u_tupian pt40">
+
+                            <div class="img_w100">
+                                <img class="mb20" src=""$staticRoot/images/user_img_03.jpg">
+                                <a href="#" class="u_but">选择图片</a>
+                            </div>
+                            <img class="img_block" src=""$staticRoot/images/us_03.jpg">
+                            <div class="img_w180">
+                                <img src=""$staticRoot/images/us_06.jpg">
+                                <span>180×180像素</span>
+                            </div>
+                            <div class="img_w100">
+                                <img src=""$staticRoot/images/us_09.jpg">
+                                <span>100×100像素</span>
+                            </div>
+                            <div class="img_w50">
+                                <img src=""$staticRoot/images/us_12.jpg">
+                                <span>50×50像素</span>
+                            </div>
+                        </div>
+                        <div class="box_cb"></div>
+                    </div>
+
+                </div>
+                <div class="box_cb"></div>
+            </div>
+            <!--dwp html end-->
+
+            #parse("common/footer.vm")
+        </div>
+        
+        <script>
+            $(".on").removeClass('on');
+            $("#menu_box2 a").eq(0).attr("class","on");
+        </script>
+    </body>
+</html>

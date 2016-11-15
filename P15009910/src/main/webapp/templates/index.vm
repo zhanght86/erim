@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>佳旅联合-佣金管理系统应用平台</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+
+
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/register.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/zh.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/welcome.css">
+<script type="text/javascript" src="$staticFilePlug/jquery/jquery-1.7.2.min.js"></script>
+<!--<script type="text/javascript" src="$staticRoot/js/jquery-1.9.1.min.js"></script>-->
+<!--<script type="text/javascript" src="$staticRoot/js/jquery-2.0.3.min.js"></script>-->
+
+<!--验证框架js-->
+<link rel="stylesheet" type="text/css" href="$staticFilePlug/jqueryValidationEngine/2.6.2/css/validationEngine.jquery.css"/>
+<script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine.min.js"></script>
+<script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine-zh_CN.js"></script>
+
+<!--自定义-->
+<script type="text/javascript" src="$staticRoot/js/index.js"></script>
+<script type="text/javascript" src="$staticRoot/js/page.js"></script>
+<script type="text/javascript" src="$staticRoot/js/form.js"></script>
+<script type="text/javascript" src="$staticRoot/js/list.js"></script>
+
+<!--弹出窗口-->
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/confirm/css/xcConfirm.css"/>
+<script src="$staticRoot/js/confirm/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+		
+
+<script type="text/javascript">
+    $(function() {
+        $(".subNav").click(function() {
+            $(this).toggleClass("currentDd").siblings(".subNav").removeClass("currentDd");
+            $(this).toggleClass("currentDt").siblings(".subNav").removeClass("currentDt");
+
+            // 修改数字控制速度， slideUp(500)控制卷起速度
+            //$(".navContent").removeClass("showH").slideUp(500);
+			$(this).next(".navContent").addClass("showH").slideToggle(500,function(){
+				showHeight=$(".showH").height();
+				srcHeight=$(window).height()-130;
+				conHeight=517+showHeight;
+				$(".cont_height").css("height",conHeight);
+				$(".g_left_block").css("height",srcHeight);
+			}).siblings(".navContent").removeClass("showH").slideUp(500);
+        });
+    });
+    $(document).ready(function() {
+        $(".g_menu li").click(function() {
+            $(this).addClass("on").siblings().removeClass("on");
+        });
+        $(".edit_password").click(function() {
+            $(".win_box_bg").show();
+            $(".win_box_edit_password").show();
+        });
+        $(".add_subaccount").click(function() {
+            $(".win_box_bg").show();
+            $(".win_box_add_subaccount").show();
+        });
+        $(".add_substation").click(function() {
+            $(".win_box_bg").show();
+            $(".win_box_add_substation").show();
+        });
+        $(".edit_password_cancel").click(function() {
+            $(".win_box_bg").hide();
+            $(".win_box_edit_password").hide();
+            $(".win_box_add_subaccount").hide();
+            $(".win_box_add_substation").hide();
+        });
+        $(".win_box_bg").click(function() {
+            $(".win_box_bg").hide();
+            $(".win_box_edit_password").hide();
+            $(".win_box_add_subaccount").hide();
+            $(".win_box_add_substation").hide();
+        });
+    });
+	
+	//弹出内容封装
+	function wxcalert(txt){
+		window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.info);
+	}
+	
+</script>
+
+</head>
+<body bgcolor="#f1f1f1">
+	
+	<!--head-->
+	#parse("common/head.vm")
+<div class="g_cont clearfix">
+	
+    <!--left-->
+	#parse("common/left.vm")
+    <div class="g_right_block">
+        <div class="zh_block"> </div>
+    </div>
+</div>
+<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+<script type="text/javascript" src="$staticRoot/js/ZeroClipboard/ZeroClipboard.js"></script>
+<script>
+
+	$(".zh_block").load('$appRoot/welcome');
+</script>
+
+</body>
+</html>

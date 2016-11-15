@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lineorder">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="lorCode != null and lorCode != ''">	 and 	lor_code 			like "%"#{lorCode}"%"</if>  
+			<if test="cpyId != null">		                 and 	cpy_id 		        = #{cpyId}</if>
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageLine" resultType="lineOrderBean">
+		SELECT
+			id ,
+			lor_code             AS lorCode,
+			lor_createetime      AS lorCreateetime,
+			lor_createuser       AS lorCreateuser,
+			lor_comment          AS lorComment,
+			lor_telephone        AS lorTelephone,
+			lor_money_total      AS lorMoneyTotal,
+			lor_money_update     AS lorMoneyUpdate,
+			lor_pay_online       AS lorPayOnline,
+			lor_pay_offline      AS lorPayOffline,
+			lor_pay_money        AS lorPayMoney,
+			lor_ntype            AS lorNtype,
+			lor_ip               AS lorIp,
+			lor_is_through       AS lorIsThrough,
+			lor_total_price      AS lorTotalPrice,
+			cpy_id               AS cpyId
+		FROM
+			line_order
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageLineCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			line_order
+		<include refid="sql_query" />
+	</select>
+	<!-- 接单/拒接 -->
+	<update id="receiveOrRefuse" parameterType="LineOrderBean">
+		UPDATE
+			line_order
+		SET
+			lor_ntype = #{lorNtype}
+		WHERE
+			id = #{id}
+	</update>
+	
+</mapper>

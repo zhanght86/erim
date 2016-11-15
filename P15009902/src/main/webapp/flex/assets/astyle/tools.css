@@ -1,0 +1,35 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+/*全局ToolTip默认样式*/
+mx|ToolTip
+{
+	font-size:13;
+	font-family:宋体;
+	creationCompleteEffect: effectZoomFade;
+}
+
+.head
+{
+	top:0px;
+	left:0px;
+	right:0px;
+	color:#FFFFFF;
+	backgroundColor:#2D2D2D;
+	fontWeight:bold;
+}
+
+.menu
+{
+	top:29px;
+	left:0px;
+	bottom:0px;
+}
+
+.tab
+{
+	top:29px;
+	right:0px;
+	bottom:0px;
+}

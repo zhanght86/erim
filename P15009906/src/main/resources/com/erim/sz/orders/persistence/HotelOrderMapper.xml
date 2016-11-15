@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelorder">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="cpyId != null">			                and 	cpy_id		 		 = 	 #{cpyId}</if>
+			<if test="hloNum != null and hloNum != ''">	        and 	hlo_num 			 =   #{hloNum}</if>  
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageOrder" resultType="hotelOrderBean">
+		SELECT
+			id ,
+			hdl_id           AS hdlId,
+			cpy_id           AS cpyId,
+			hlo_num          AS hloNum,
+			hlo_price_total  AS hloPriceTotal,
+			hld_createuser   AS hldCreateuser,
+			hld_createtime   AS hldCreatetime,
+			hld_ntype        AS hldNtype,
+			cpy_id           AS  cpyId
+		FROM
+			hotel_order
+		<include refid="sql_query" />	
+	</select>
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageOrderCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			hotel_order
+			
+	</select>
+	
+</mapper>

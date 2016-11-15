@@ -1,0 +1,117 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ticket/ticket.css">
+<div class="rdivv">
+	<div class="newline">
+		<p class="tit_1 ml20 pt20"><img src="$staticRoot/images/htj.png" alt="修改票类" title="修改票类">修改票类&nbsp;景点:&nbsp;$!detailBean.tdlName</p>
+		<div class="cb"></div>
+		<div class="g_line mb15"></div>
+		<div class="ticket_ct">
+			<div class="ticket_ctl" style="min-width:550px;">
+				<form method="post" id="form1">
+        			<input type="hidden" value="$!ticketclass.id" name="id"/>
+    				<div class="ticket_ctll ml0">
+    					<span style="font-weight:bold">票类名称:</span>
+    					<div class="ticket_ctllb">
+    						<div class="ticket_ctlla">
+    							<input type="text" name="tdlTicket" class="validate[required,maxSize[50]]" value="$!ticketclass.tdlTicket">
+    						</div>
+    					</div>
+    				</div>
+    				<span style="margin-left:338px;margin-buttom:10px;color:#59b2fe;font-size:14px;">同样规则的票类可统一添加</span>
+    				<div class="ticket_ctll ml0" style="margin-top:-15px;">
+    					<div class="ticket_ctllbiger" style="margin-left:50px;margin-top:20px;">
+    						<div class="ticket_ctllbox show">
+    							<div class="ticket_ctllbl">
+    								<span>费用说明:</span>
+    								<textarea name="tdlMoneyshow" placeholder="内容限500字以内" class="validate[required,maxSize[1000]]">$!ticketclass.tdlMoneyshow</textarea><p class="pred">*</p>
+    							</div>
+    							<div class="ticket_ctllbl">
+    								<span>兑票方式:</span>
+    								<textarea name="tdlExpiry" placeholder="内容限500字以内" class="validate[required,maxSize[1000]]">$!ticketclass.tdlExpiry</textarea><p class="pred">*</p>
+    							</div>
+    							<div class="ticket_ctllbl">
+    								<span>预定限制:</span>
+    								<textarea name="tdlLimited" placeholder="内容限500字以内" class="validate[required,maxSize[1000]]">$!ticketclass.tdlLimited</textarea><p class="pred">*</p>
+    							</div>
+    							<div class="ticket_ctllbl">
+    								<span>退改规则:</span>
+    								<textarea name="tdlChange" placeholder="内容限500字以内" class="validate[required,maxSize[1000]]">$!ticketclass.tdlChange</textarea><p class="pred">*</p>
+    							</div>
+    							<div class="ticket_ctllbl">
+    								<span>补充说明:</span>
+    								<textarea name="tdlSupplement" placeholder="内容限500字以内" class="validate[maxSize[1000]]">$!ticketclass.tdlSupplement</textarea>
+    							</div>
+            					<div class="carinfo_ctbl" style="">
+                                    <div class="carinfo_ctblrbtn">
+                                         <button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/ticketclass/detail/insert','$appRoot/ticketclass/detail/insertticket?tdlId=$!detailBean.id');">提交</button>
+    									 <button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+                                    </div>
+            				    </div>
+    					    </div>
+    					</div>
+    				</div>
+    			</form>
+			</div>
+			<div class="ticket_ctr">
+				<div class="ticket_ctrl" style="margin-left:15px;">
+					<span><strong>票类管理</strong></span>
+				</div>
+				<div class="carad_ctrtable">
+					<table cellspacing="0" cellspadding="0" style="margin-left:15px;margin-top:20px;min-width:500px;">
+						<thead>
+							<tr>
+								<td>票类名称</td>
+								<td>票类管理</td>
+								#if($shiro.hasPermission("PRODUCT_TICKET_CLASS_DELETE")) 
+									<td>上架状态</td>
+								#end
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $classList)
+							    <tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+    								<td>$!item.tdlTicket</td>
+    								<td class="carad_a">
+										<a href="javascript:index.load('$appRoot/ticketclass/detail/view?id=$!item.id&tdlId=$!item.tdlId&tdlTickettype=!item.tdlTickettype');">查看/修改</a>
+										#if($shiro.hasPermission("PRODUCT_TICKET_PRICE")) 
+											<a href="javascript:index.load('$appRoot/ticket/price/ticketPricePage?portal=01&tclId=$!item.id&tdlId=$!item.tdlId');" class="priceadmin">量/价管理</a>
+										#end
+										<!--<a href="javascript:index.delload('$appRoot/ticketclass/detail/delete?id=$!item.id','$appRoot/ticketclass/detail/insertticket');">删除</a> -->
+									</td>
+									#if($shiro.hasPermission("PRODUCT_TICKET_CLASS_DELETE")) 
+    									<td>
+    										<div class="wrapper">
+                                                   <div class="imageContainer1">
+            											#if($!item.tdlDelStatus == '1')
+                                                            <span><img src="$staticRoot/images/lvdui.png"/></span>
+                                                            <a href="javascript:index.load('$appRoot/ticketclass/detail/delete?id=$item.id&tdlDelStatus=0');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+            											#end 
+            											#if($!item.tdlDelStatus == '0')
+            												<a href="javascript:index.load('$appRoot/ticketclass/detail/delete?id=$item.id&tdlDelStatus=1');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+            												<span><img src="$staticRoot/images/hongcuo.png"/></span>
+            											#end
+                                                   </div>
+                                             </div>
+    									 </td>
+									#end
+								</tr>
+							#end
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+
+	
+	
+	/*门票须知*/
+	$(".ticket_ctllb li").click(function(){
+    	var liindex = $('.ticket_ctllb li').index(this);
+    	$(this).css({"background":"#fff"}).siblings().css({"background":"#ccc"});
+        $('.ticket_ctllbiger .ticket_ctllbox').eq(liindex).show(0).siblings(".ticket_ctllbiger .ticket_ctllbox").hide(0);
+    });
+	
+	
+</script>

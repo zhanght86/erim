@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>汽车详情页_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/car_list.css">
+		<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+		<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<div class="carcenter">
+			<!--<div class="cartop">
+				<div class="cartopl">
+					<img src="$staticRoot/images/listcar.png">
+				</div>
+				<div class="cartopr">
+					<div class="cartoprname">
+						$!texiDetail.tdlName
+					</div>
+					<div class="cartoprl">
+						<div class="cartoprlp">
+							<span>品牌/名称：</span>
+							<span>$!texiDetail.tdlName</span>
+						</div>
+						<div class="cartoprlp">
+							<span>车型：</span>
+							<span>$!texiDetail.tdlType</span>
+						</div>
+						<div class="cartoprlp">
+							<span>最大乘客人数：</span>
+							<span>$!texiDetail.tdlNum</span>
+						</div>
+					</div>
+					<div class="cartoprl">
+						<div class="cartoprlp">
+							<span>购买日期：</span>
+							<span>$!texiDetail.tdlCreatecardate</span>
+						</div>
+						<div class="cartoprlp">
+							<span>汽车排量：</span>
+							<span>$!texiDetail.tdlTextpail</span>
+						</div>
+						<div class="cartoprlp">
+							<span>手自档：</span>
+							<span>$!texiDetail.tdlTextgear</span>
+						</div>
+					</div>
+					<div class="cartoprl">
+						<div class="cartoprlp">
+							<span>车辆档次：</span>
+							<span>$!texiDetail.tdlTexttype</span>
+						</div>
+						div class="cartoprlp">
+							<span>可同时接单数量：</span>
+							<span>
+								#if($!texiDetail.tdlJiedan != '' && $!texiDetail.tdlJiedan != '0')
+								    $!texiDetail.tdlJiedan
+								#else
+                                    <a href="javascript:;">请详询商家</a>
+								#end
+							</span>
+						</div
+                    </div>
+					
+					<div class="cartoprl">
+						<div class="cartoplx">
+							<span>
+								价格包括：
+							</span>
+							<span>每日8小时，100公里内的油费</span>
+						</div>
+					</div>
+					<div class="cartoprl">
+						<div class="cartoprlp">
+							<span>超里程：</span>
+							<span>2.5元/公里</span>
+						</div>
+						<div class="cartoprlp">
+							<span>超时费：</span>
+							<span>30元/小时</span>
+						</div>
+					</div>
+					
+					<div class="cartoprlq">
+						<div class="cartoprlj">
+							<span>价格：</span>
+							<label><strong>443</strong>RMB/天</label>
+						</div>
+						<a href="$appRoot/$cpyno/texi/carorder/$texiDetail.id" target="_blank">立即预订</a>
+					</div>
+				</div>
+				-->
+			<div class="cartop">
+    			<div class="g_crumbs" style="margin-top:-24px;">
+                    <a href="$appRoot/$cpyno/car.html">租车</a>&gt;$!texiDetail.tdlName
+                </div>
+			<div class="hlxqct_topl">
+				#if($!texiDetail.tdlImgAppearance != '')
+					<img class="carxiang-img" src="$staticFileRes$texiDetail.tdlImgAppearance" title="" alt="">
+				#else
+					<img class="carxiang-img" src="$staticRoot/images/isnull.png" title="" alt="">
+				#end
+				<div class="b_car_topright" style="margin-left:35px;">
+                    <p class="b_car_title" style="float:left;">$!texiDetail.tdlName<span class="b_bianhao">产品编码：$!texiDetail.tdlCode</span></p>					
+                    <ul>
+                    	<li><span>车型：</span>$!texiDetail.tdlType</li>
+                    	<li><span>乘坐人数：</span>$!texiDetail.tdlNum</li>
+                    	<li><span>汽车排量：</span>$!texiDetail.tdlTextpail</li>
+                    	<li><span>购买日期：</span>$!texiDetail.tdlCreatecardate</li>
+                    	<li><span>车辆档次：</span>$!texiDetail.tdlTexttype</li>
+                    	<li><span>手自档：</span>$!texiDetail.tdlTextgear</li>
+						<li><span>用车方式：</span>自驾</li>
+                    </ul>
+				</div>
+				</div>
+            </div>
+				
+			<!--<div class="carcter">
+				<div class="carctertop">
+					<span>预订须知</span>
+				</div>
+				<div class="carcterct">
+					<div class="carcterctbox">
+						<div class="carcterctboxl">
+							订单包含：
+						</div>
+						<div class="carcterctboxr">
+							<p>租车基本费用：租车基本费用(fees)</p><br>
+							<p>不限里程：不限里程(Unlimted mileage)</p><br>
+							<p>车损盗抢险：车损盗抢险：Loss Damages Waiver,缩写LDW</p><br>
+						</div>
+					</div>
+					<div class="carcterctbox">
+						<div class="carcterctboxl">
+							保险说明：
+						</div>
+						<div class="carcterctboxr">
+							<p>租车基本费用：租车基本费用(fees)</p><br>
+							<p>不限里程：不限里程(Unlimted mileage)</p><br>
+							<p>车损盗抢险：车损盗抢险：Loss Damages Waiver,缩写LDW</p><br>
+						</div>
+					</div>
+					<div class="carcterctbox">
+						<div class="carcterctboxl">
+							燃油政策：
+						</div>
+						<div class="carcterctboxr">
+							<p>租车基本费用：租车基本费用(fees)</p><br>
+							<p>不限里程：不限里程(Unlimted mileage)</p><br>
+							<p>车损盗抢险：车损盗抢险：Loss Damages Waiver,缩写LDW</p><br>
+						</div>
+					</div>
+					<div class="carcterctbox">
+						<div class="carcterctboxl">
+							订单条款：
+						</div>
+						<div class="carcterctboxr">
+							<p>租车基本费用：租车基本费用(fees)</p><br>
+							<p>不限里程：不限里程(Unlimted mileage)</p><br>
+							<p>车损盗抢险：车损盗抢险：Loss Damages Waiver,缩写LDW</p><br>
+						</div>
+					</div>
+				</div>
+						</div>-->
+			
+			<div class="box_cb mb20"></div>
+            	<p class="g_tab">
+            		<a class="tab_1 on" href="javascript:void(0);" name="more">半天用车</a>
+            		<a class="tab_2" href="javascript:void(0);">全天用车</a>
+            	<p>
+			<div class="tab_block b_fl">
+	                <div class="block_tab_1">
+	                    <table class="b_table_1">
+	                    	<tbody>
+	                    		<tr>
+	                    			<th>用车方式</th>
+	                    			<th>限小时</th>
+	                    			<th>限公里</th>
+	                    			<th>价格</th>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>半天</td>
+	                    			<td>$!texiDrive.zjlHfLimit小时</td>
+	                    			<td>$!texiDrive.zjlHfLimitKm公里</td>
+	                    			<td class="b_td_red">
+										<span class="b_span_top">
+											#if($texiDrivePrice2)
+    											￥</span>
+    												$!texiDrivePrice2.tdpRetailPrice
+        										 <span>/半天
+												#else
+												 </span>今日暂停出租<span>
+											#end 
+										</span>
+									</td>
+									 <!-- <td class="b_border-right"><a class="b_td_bgred" href="$appRoot/$cpyno/texi/carorder">预订</a></td>--> 
+                                    <td class="b_border-right"><a class="b_td_bgred" href="javascript:void(0)" onclick="ordertips()">预订</a></td>                    		
+	                    		</tr>
+	                    	</tbody>
+	                    </table>
+	                    <div class="b_div_w1140">
+							#if($erim.isNotEmpty($!texiDrive.zjlHfCostShow) )
+								<h2 class="notes-title">
+    								费用说明：
+                                </h2>
+    							<pre>$!texiDrive.zjlHfCostShow</pre>
+							#end
+							
+							<!--开始-->
+							#if($erim.isNotEmpty($!texiDrive.zjlHfBackNotice) )
+							<h2 class="notes-title">
+								取还车须知：
+                            </h2>
+							<pre>$!texiDrive.zjlHfBackNotice</pre>
+							#end
+							
+							<h2 class="notes-title">
+								用车信息
+                            </h2>
+							<div class="notes-line">
+								<span class="notes-stitle">取车方式</span>
+								<span class="notes-stext">$!texiDrive.zjlHfTakePlace</span>
+                            </div>
+							#if(!$erim.contains($!texiDrive.zjlHfTakePlace,'上门'))
+								<div class="notes-line">
+    								<span class="notes-stitle">取车地点</span>
+    								<span class="notes-stext">$!texiDrive.zjlHfTakeAddress</span>
+                                </div>	
+							#end
+							
+							<div class="notes-line">
+								<span class="notes-stitle">还车方式</span>
+								<span class="notes-stext">$!texiDrive.zjlHfBackPlace</span>
+                            </div>
+							#if(!$erim.contains($!texiDrive.zjlHfBackPlace,'上门'))
+								<div class="notes-line">
+    								<span class="notes-stitle">还车地点</span>
+    								<span class="notes-stext">$!texiDrive.zjlHfBackAddress</span>
+                                </div>
+							#end
+							#if($erim.isNotEmpty($!texiDrive.zjlHfBreachNotice) )
+							<h2 class="notes-title">
+								违章须知：
+                            </h2>
+							<pre>$!texiDrive.zjlHfBreachNotice</pre>
+							#end
+							#if($erim.isNotEmpty($!texiDrive.zjlHfInsuranceNotice) )
+							<h2 class="notes-title">
+								保险说明：
+                            </h2>
+							<pre>$!texiDrive.zjlHfInsuranceNotice</pre>
+							#end
+							#if($erim.isNotEmpty($!texiDrive.zjlHfUpdateNotice) )
+							<h2 class="notes-title">
+								更改/取消订单说明：
+                            </h2>
+							<pre>$!texiDrive.zjlHfUpdateNotice</pre>
+							#end
+							#if($erim.isNotEmpty($!texiDrive.zjlHfSpecialNote) )
+							<h2 class="notes-title">
+								特别备注：
+                            </h2>
+							<pre>$!texiDrive.zjlHfSpecialNote</pre>
+							#end
+	                	</div>
+	                </div>
+	                <div class="block_tab_2"style="display: none;padding:0;">
+	                    <table class="b_table_1">
+	                    	<tbody>
+	                    		<tr>
+	                    			<th>用车方式</th>
+	                    			<th>限小时</th>
+	                    			<th>限公里</th>
+	                    			<th>价格</th>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>全天</td>
+	                    			<td>$!texiDrive.zjlDay小时</td>
+	                    			<td>$!texiDrive.zjlLimit公里</td>
+	                    			<td class="b_td_red">
+										<span class="b_span_top">
+											#if($texiDrivePrice1)
+    											￥</span>
+    												$!texiDrivePrice1.tdpRetailPrice
+        										 <span>/全天
+												#else
+												 </span>今日暂停出租<span>
+											#end 
+										</span>
+									</td>
+                                    <td class="b_border-right"><a  href="javascript:void(0)" onclick="ordertips()" class="b_td_bgred">预订</a></td>                   		
+	                    		</tr>
+	                    	</tbody>
+	                    </table>
+	                    <div class="b_div_w1140">
+							<h2 class="notes-title">
+								费用说明：
+                            </h2>
+							<pre>$!texiDrive.zjlCostShow</pre>
+							<!--开始-->
+							<h2 class="notes-title">
+								取还车须知：
+                            </h2>
+							<pre>$!texiDrive.zjlBackShow</pre>
+							<h2 class="notes-title">
+								用车信息
+                            </h2>
+							<div class="notes-line">
+								<span class="notes-stitle">取车方式</span>
+								<span class="notes-stext">$!texiDrive.ZjlTakePlace</span>
+                            </div>
+							#if(!$erim.contains($!texiDrive.ZjlTakePlace,'上门'))
+								<div class="notes-line">
+    								<span class="notes-stitle">取车地点</span>
+    								<span class="notes-stext">$!texiDrive.zjlTakeAddress</span>
+                                </div>
+							#end
+							
+							<div class="notes-line">
+								<span class="notes-stitle">还车方式</span>
+								<span class="notes-stext">$!texiDrive.zjlBackPlace</span>
+                            </div>
+							#if(!$erim.contains($!texiDrive.zjlBackPlace,'上门'))
+								<div class="notes-line">
+								<span class="notes-stitle">还车地点</span>
+								<span class="notes-stext">$!texiDrive.zjlBackAddress</span>
+                            </div>
+							#end
+							<h2 class="notes-title">
+								违章须知：
+                            </h2>
+							<pre>$!texiDrive.zjlBreachNotice</pre>
+							<h2 class="notes-title">
+								保险说明：
+                            </h2>
+							<pre>$!texiDrive.zjlInsuranceNotice</pre>
+							<h2 class="notes-title">
+								更改/取消订单说明：
+                            </h2>
+							<pre>$!texiDrive.zjlUpdateNotice</pre>
+							#if($erim.isNotEmpty($!texiDrive.zjlSpecialNotice) )
+							<h2 class="notes-title">
+								特别备注：
+                            </h2>
+							<pre>$!texiDrive.zjlSpecialNotice</pre>
+							#end
+	                	</div>
+	                </div>
+             	</div>
+			 <div class="box_cb"></div>
+			
+		</div>
+		#parse("common/footer.vm")
+	</div>
+</body>
+</html>
+  <script type="text/javascript" src="$staticRoot/js/jquery.SuperSlide.js"></script>
+<script type="text/javascript">
+function ordertips(){
+	alert('对不起，预定功能暂不开放');
+}
+</script>

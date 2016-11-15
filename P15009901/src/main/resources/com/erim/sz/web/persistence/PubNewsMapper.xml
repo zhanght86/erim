@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pubnews">
+	
+	<!-- 查询列 -->
+	<sql id="sql_column">
+		pub_news.id,
+		pub_news.new_title        AS newTitle,
+		pub_news.new_content      AS newContent,
+		pub_news.new_createtime   AS newCreatetime,
+		pub_news.new_createuser   AS newCreateuser,
+		pub_news.cpy_id			 AS cpyId,
+		pub_news.new_click		 AS newClick,
+		pub_news.new_type		 AS newType,
+		pub_news.new_is_check	 AS newIsCheck,
+		pub_news.new_is_delstatus AS newIsDelstatus, 
+		pub_news.new_is_show		 AS newIsShow
+	</sql>
+	<sql id="COMPANYDETAIL">
+			cpy.cpy_name 	  		 AS cpyName,
+			cpy.cpy_telephone 		 AS cpyTelephone,
+			cpy.cpy_brand 	  		 AS cpyBrand,
+			cpy.cpy_email 	         AS ccpEmail
+	</sql>
+	<!-- 查询条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1 and new_is_delstatus = '1'
+			<if test="newTitle != null and newTitle != ''"> and new_title like "%"#{newTitle}"%" </if>
+			<if test="newType != null and newType != ''"> and new_type = #{newType} </if>
+			<if test="newIsShow != null and newIsShow != ''"> and new_is_show = #{newIsShow} </if>
+			<if test="cpyId != null and cpyId != ''"> and cpy_id = #{cpyId} </if>
+		</where>
+	</sql>
+	
+	<!-- 查询列表 -->
+	<select id="selectPageNews" resultType="pubNewsBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			pub_news
+			<include refid="sql_query" />
+		ORDER BY 
+			new_is_delstatus
+		DESC,
+			new_is_check
+		DESC,
+			new_createtime
+		DESC,
+		   new_is_show
+		DESC
+	</select>
+	
+	<!-- 查询总数 -->
+	<select id="selectPageNewsCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			pub_news
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 根据ID查询一条数据 -->
+	<select id="getPubNewsById" resultType="pubNewsBean">
+		SELECT
+			<include refid="sql_column" />,
+			<include refid="COMPANYDETAIL" />
+		FROM
+			pub_news 
+		LEFT JOIN
+			company_detail cpy
+		ON 
+			cpy.id = pub_news.cpy_id
+		WHERE
+			pub_news.id = #{id}
+	</select>
+	
+	<!-- 是否门户显示 -->
+	<update id="updateIsShow">
+		UPDATE
+			pub_news
+		SET
+			new_is_show = #{newIsShow}
+		WHERE
+			id = #{id}
+	</update>
+	<!-- 点击次数-->
+	<update id="click">
+		UPDATE
+			pub_news
+		SET
+			new_click = new_click + 1
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

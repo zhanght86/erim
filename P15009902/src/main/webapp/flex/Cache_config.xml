@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+    <!-- 当version为alway的时候一直从服务器端加载 -->
+    
+    <!-- produce -->
+    <data id="index" version="20140521" />
+    <data id="ModuleLogon" version="20140521" />
+    <data id="tools" version="20140521" /> 
+    
+</root>

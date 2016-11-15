@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="texidriveprice">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			and tdp_is_open = '02'
+			<if test="zjlType != null	and zjlType != ''">			     and 	zjl_type 		=   #{zjlType} </if>
+			<if test="tdpDate != null	and tdpDate != ''">	             and 	tdp_date 	    =   #{tdpDate} </if>
+			<if test="zjlId != null	and zjlId != ''">	                 and 	zjl_id 	    =   #{zjlId} </if>
+			
+		</where>
+	</sql>
+	
+	<sql id="sql_column">
+		id ,
+		zjl_type                 AS zjlType,
+		tdp_date                 AS tdpDate,
+		tdp_week                 AS tdpWeek,
+		tdp_retail_price          AS tdpRetailPrice,
+		tdp_price_show          AS tdpPriceShow,
+		tdp_cancel_indent         AS tdpCancelIndent,
+		tdp_create_time           AS tdpCreateTime
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTexiDrivePrice" resultType="texiDrivePriceBean">
+		SELECT
+			<include refid="sql_column" />
+ 		FROM
+			texi_drive_price
+		<include refid="sql_query" />
+		ORDER BY 
+			tdp_create_time desc
+	</select>
+
+	
+</mapper>

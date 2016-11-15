@@ -1,0 +1,28 @@
+
+	<div class="g_block_2 g_block_7 mb20">
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+						<th>支付金额</th>
+						<th>运维费比例</th>
+						<th>返利金额</th>
+						<th>支付时间</th>
+			</tr>
+			#foreach($item in $listYw)
+				<tr>
+					<td>$!item.cpyPrice</td>
+                    <td>$!item.pybBackNum</td>
+					<td>$!item.pybBackPrice</td>
+					<td>$!item.pybCreatetime</td>
+              </tr>
+              #end
+		</table>
+		<div class="g_right mr50 mb20" style="float:left;">
+			<a class="red_a ml25 back" href="javascript:index.load('$appRoot/priceback/yw/show');">返回</a>
+		</div>
+		#parse("common/page.vm")
+	</div>
+<script type="text/javascript">
+	$("table tr:even").each(function(){
+		$(this).css("background-color","#fbfbfb");
+	})
+</script>

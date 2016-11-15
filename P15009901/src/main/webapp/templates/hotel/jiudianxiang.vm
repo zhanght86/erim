@@ -1,0 +1,678 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>酒店详情_$!mallWeb.webTitle服务平台</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/hlxq.css">
+	<script type="text/javascript" src= "$staticRoot/js/jquery.min.js"></script> 
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<div class="hlxq_ct">
+			<div class="g_crumbs">
+                <a href="$appRoot/$cpyno/jiudian.html">酒店</a>&gt;$!hotel.hdlName 
+            </div>
+			<div class="hlxqct_toplt">
+				<div class="hlxqct_toplth">
+					<h1><span class="cheng_lx">【$!hotel.hdlLevel】</span>$!hotel.hdlName #if($hotel.hdlEnglish && $!hotel.hdlEnglish != '')<span style="font-size:15px;">($!hotel.hdlEnglish)</span>#end</h1>
+				</div>
+				<p>
+					<span class="b_bianhao_mr20">产品编码：$!hotel.hdlCode</span>
+					$!hotel.hdlAddress<!--【<a href="#">$!hotel.hdlProvince省$!hotel.hdlCity</a>】-->
+				</p>
+			</div>
+			<div class="hlxqct_top" style="margin-top:-10px;">
+				<div class="hlxqct_topl">
+					
+					<div class="hlxqct_toplc">
+						<div class="foucebox">
+				            <div class="bd">
+				                <div class="showDiv">
+				                    <a href="#">
+        								#if($!hotel.hdlImg1 != '')
+        									<img src="$staticFileRes$hotel.hdlImg1" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+									</a>
+				                    <!-- <div class="foucebox_bg "></div>
+									<div>
+                                   <h2><a href="#"> One Direction 《Kiss You》</a></h2> 
+				                </div>-->
+				            </div>
+                            
+				            <div class="showDiv">
+                                <a href="#">
+									#if($!hotel.hdlImg2 != '')
+    									<img src="$staticFileRes$hotel.hdlImg2" title="" alt="">
+    								#else
+    									<img src="$staticRoot/images/isnull.png" title="" alt="">
+    								#end	
+								</a>
+                               <!--  <div class="foucebox_bg"></div>
+                                <div><h2><a href="#">欧美歌手 《The 40 Sexiest Music Videos of 2012》</a></h2></div>-->
+				          </div>
+                        
+				        <div class="showDiv">
+                            <a href="#">
+								#if($!hotel.hdlImg3 != '')
+									<img src="$staticFileRes$hotel.hdlImg3" title="" alt="">
+								#else
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								#end
+							</a>
+                           <!-- <div class="foucebox_bg"></div>
+                             <div><h2><a href="#">Sori 《Dual Life》</a></h2></div>-->
+				        </div>
+                        
+				        <div class="showDiv">
+                            <a href="#">
+								#if($!hotel.hdlImg4 != '')
+									<img src="$staticFileRes$hotel.hdlImg4" title="" alt="">
+								#else
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								#end
+							</a>
+                           <!-- <div class="foucebox_bg"></div>
+                             <div><h2><a href="#"> Super Junior 《BREAK DOWN</a></h2></div>-->
+				        </div>
+				        </div>
+				        <div class="hd">
+				            <ul>
+				                <li class=" ">
+				                    <a href="#">
+				                        #if($!hotel.hdlImg1 != '')
+        									<img src="$staticFileRes$hotel.hdlImg1" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                      <!--   <span class="txt">Kiss You</span>
+				                        <span class="txt_bg"></span>-->
+				                        <span class="mask"></span>
+				                    </a>
+				                </li>
+				                <li class=" ">
+				                    <a href="#">
+				                        #if($!hotel.hdlImg2 != '')
+        									<img src="$staticFileRes$hotel.hdlImg2" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                        <!--    <span class="txt">The 40 Sexiest Music Videos of 2012</span>
+				                        <span class="txt_bg"></span>-->
+				                        <span class="mask"></span>
+				                    </a>
+				                </li>
+				                <li class="on">
+				                    <a href="#">
+				                        #if($!hotel.hdlImg3 != '')
+        									<img src="$staticFileRes$hotel.hdlImg3" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                       <!--   <span class="txt">Dual Life</span>
+				                        <span class="txt_bg"></span>-->
+				                        <span class="mask"></span>
+				                    </a>
+				                </li>
+				                <li>
+				                    <a href="#">
+				                        #if($!hotel.hdlImg4 != '')
+        									<img src="$staticFileRes$hotel.hdlImg4" title="" alt="">
+        								#else
+        									<img src="$staticRoot/images/isnull.png" title="" alt="">
+        								#end
+				                   <!--      <span class="txt">BREAK DOWN</span>
+				                        <span class="txt_bg"></span>-->
+				                        <span class="mask"></span>
+				                    </a>
+				                </li>
+				            </ul>
+				        </div>
+				        </div>
+					</div>
+				</div>
+			<!--	<div class="hlxqct_topr">
+					<img src="$staticRoot/images/menpiao.jpg" border="0" usemap="#planetmap" alt="Planets" style="margin-top:75px; width:300px; height:250px;">
+					<map name="planetmap" id="planetmap">
+					<area shape="rect" coords="0,0,100,35" href ="http://www.dashimoxing.com/001/" alt="Sun" />
+					</map>
+				</div>
+				-->
+<div style="height:auto;" class="hlxqct_topr">
+	<h2 style="color:#EB6464;font-size:24px;text-align:left;padding-bottom:8px;border-bottom:1px dotted #dedede;">￥$!hotel.hnpRetailPrice元起<span style="color:#323232;padding-left:30px;">电话：$!hotel.hdlTelephone</span></h2>	
+	
+	<table style="font-size:14px;">
+		<tbody>		
+		<tr>
+			<td style="width:70px;vertical-align:top;padding:5px;"><strong style="font-size:14px;color:#FAAF4B;">酒店特色:</strong></td>	
+			<td style="vertical-align:top;font-size:14px;padding:5px 0;">
+				$erim.subString($!hotel.hdlCharacteristic,30)
+			</td>	
+		</tr>
+		<tr>
+			<td style="width:70px;vertical-align:top;padding:5px;"><strong style="font-size:14px;color:#FAAF4B;">酒店设施:</strong></td>	
+			<td style="vertical-align:top;font-size:14px;padding:5px 0;">
+				$erim.subString($!hotel.hdlFacilities,50)
+			</td>	
+		</tr>
+		<tr>
+			<td style="width:70px;vertical-align:top;padding:5px;"><strong style="font-size:14px;color:#FAAF4B;">酒店服务:</strong></td>	
+			<td style="vertical-align:top;font-size:14px;padding:5px 0;">
+				$erim.subString($!hotel.hdlService,50)
+			</td>	
+		</tr>
+	</tbody>
+	</table>
+</div>
+
+			</div>
+			<div class="hlxqct_ct" style="float:left;">
+				<div class="hlxqct_cttop">
+					<ul>
+						<li class="hlxqct_cttoplihover">酒店预订</li>
+						<li>酒店详情</li>
+						#if($erim.isNotEmptyList($!listPark) || $erim.isNotEmptyList($!listMeet) || $erim.isNotEmptyList($!listcarteria))
+							<li>会议室/餐厅/停车场</li>
+						#end
+					</ul>
+				</div>
+				<div class="hlxqct_ctct">
+					<div class="hlxqct_ctctc">
+						<div class="hlxqct_ctctl b_fl">
+							#*
+							<div class="hlxqct_ctcttop">
+								<span>入住时间</span><input type="text"> <span>离店时间</span><input type="text">
+								<button type="submit">确定</button>
+							</div>
+							*#
+							<div class="hlxqctctl_ct ">
+								<ul class="hlxqctctl_cttop b_fl" style="height:30px;">
+									<li class="m1 b_m1">房型</li>
+									<li class="m2 b_m2" style="width:400px;">房间信息</li>
+									<li class="m3 b_m3"  style="line-height:25px;text-align:left;padding:5px;">床型</li>
+									<li class="m5">实时价格</li>
+									<li class="m7 b_m7">&nbsp;</li>
+								</ul>
+								#foreach($item in $listRoom)
+    								<ul class="hlxqctctl_cttoc b_fl">
+    									<li class="m1 hl1 b_m1">
+    										<a href="javascript:void(0)" rel="$staticFileRes$item.hheImg1" class="preview">
+												#if($!item.hheImg1 != '')
+													<img style="width:50px;height:50px;" src="$staticFileRes$item.hheImg1" alt="画廊图片"/>
+												#else
+													<img style="width:50px;height:50px;" src="$staticRoot/images/isnull.png" title="" alt="">
+												#end
+											</a>
+    										<span style="position:relative;top:14px;">$!item.hheName</span>
+    									</li>
+    									<li class="m2 b_m2 mmd" style="width:400px;">
+											<a href="javascript:;">
+    										<div class="m2box b_m2">
+    											<span>建筑面积:$!item.hheArea平方米</span>
+    											<span>楼层:$!item.hheLayerstart -- $!item.hheLayerend层</span>
+    										</div>
+    										<div class="m2box b_m2">
+    											<span>最多入住人数:$!item.hhePresonnum人</span>
+												<!--
+    											<span>接机服务:有</span>-->
+    										</div>
+        									<div class="m2box show_ahover">
+    											<span>可否加床:#vtext($!item.hheIsAddbed,'C029')</span>
+    											<span>是否有窗户:#vtext($!item.hheIsWindow,'C000')</span>
+    											<span>是否有阳台:#vtext($!item.hheBalcony,'C000')</span>
+    											<span>一次性用品:#vtext($!item.hheYes,'C000')</span>
+    											<span>房间设施:#vtextarray($!item.hheDevice,'C027')</span>
+    										</div>
+    										</a>
+									</li>
+
+    									<li class="m3 b_m3" style="line-height:25px;text-align:left;padding:5px;">$!item.hdlBedtype</li>
+    									<!--<li class="m5">#if($erim.contains($!item.hheDevice,'15')) 有  #else 无 #end</li>-->
+										<li class="m5">
+											#if( $item.hnpRetailPrice )
+                                                <font style="color:#f00;font-weight:bold;font-size:14px;"> ￥ $!item.hnpRetailPrice </font>
+    									     #else
+                                                 <font style="color:#f00;font-weight:bold;font-size:14px;">今日暂停出售</font>
+    										 #end
+										</li>
+    									<li class="m7 b_m7">
+											<input type="hidden" name="hheId" value="$!item.id"/>
+											<a class="chakan_a" href="javascript:void(0);">查看</a>
+										</li>
+    								</ul>
+									<!-- 量价信息 -->
+								#end
+							</div>
+						</div>
+					</div>
+					<div class="hlxqct_ctctc" style="display:none">
+						<div class="hlxqct_ctctr">
+							<h2 class="notes-title">
+								酒店介绍
+                            </h2>
+							<pre>$!hotel.hdlDescribe</pre>
+							<!--开始-->
+							<h2 class="notes-title">
+								酒店位置
+                            </h2>
+							<div class="notes-line">
+								<span class="notes-stitle">详细地址</span>
+								<span class="notes-stext">$!hotel.hdlAddress</span>
+                            </div>
+							#if($!hotel.hdlDistrict != '')
+    							<div class="notes-line">
+    								<span class="notes-stitle">所属商圈</span>
+    								<span class="notes-stext">$!hotel.hdlDistrict</span>
+                                </div>
+							#end
+							#if($!hotel.hdlFeature != '')
+    							<div class="notes-line">
+    								<span class="notes-stitle">附近景点</span>
+    								<span class="notes-stext">$!hotel.hdlFeature</span>
+                                </div>
+							#end
+							#if($!hotel.hdlNearSite != '')
+    							<div class="notes-line">
+    								<span class="notes-stitle">附近机场/车站</span>
+    								<span class="notes-stext">$!hotel.hdlNearSite</span>
+                                </div>
+							#end
+							#if($!hotel.hdlPosition != '')
+    							<div class="notes-line">
+    								<span class="notes-stitle">公交/地铁</span>
+    								<span class="notes-stext">$!hotel.hdlPosition</span>
+                                </div>
+							#end
+							#if($!hotel.hdlMark != '')
+    							<div class="notes-line">
+    								<span class="notes-stitle">医院/学校/行政单位</span>
+    								<span class="notes-stext">$!hotel.hdlMark</span>
+                                </div>
+							#end
+							#if($erim.isNotEmpty($!hotel.hdlLocation))
+    							<h2 class="notes-title">
+    								交通位置
+                                </h2>
+    							<pre>$!hotel.hdlLocation</pre>
+							#end
+							<h2 class="notes-title">
+								酒店信息
+                            </h2>							
+							<div class="notes-line">
+								<span class="notes-stitle">酒店电话</span>
+								<span class="notes-stext">$!hotel.hdlTelephone</span>
+                            </div>
+							<div class="notes-line">
+								<span class="notes-stitle">酒店档次</span>
+								<span class="notes-stext">$!hotel.hdlLevel</span>
+                            </div>
+							<div class="notes-line">
+								<span class="notes-stitle">房间总数</span>
+								<span class="notes-stext">$!hotel.hdlRoomNum间</span>
+                            </div>
+							<div class="notes-line">
+								<span class="notes-stitle">开业时间</span>
+								<span class="notes-stext">$!hotel.hdlStart</span>
+                            </div>
+							#if($erim.isNotEmpty($!hotel.hdlRenovationDate))
+    							<div class="notes-line">
+    								<span class="notes-stitle">最近装修时间</span>
+    								<span class="notes-stext">$!hotel.hdlRenovationDate</span>
+                                </div>
+							#end
+							<div class="notes-line">
+								<span class="notes-stitle">酒店特色</span>
+								<span class="notes-stext">$!hotel.hdlCharacteristic</span>
+                            </div>
+							<div class="notes-line">
+								<span class="notes-stitle">酒店设施</span>
+								<span class="notes-stext">$!hotel.hdlFacilities</span>
+                            </div>
+							<div class="notes-line">
+								<span class="notes-stitle">网络设施</span>
+								<span class="notes-stext">$!hotel.hdlNetWork</span>
+                            </div>
+							<div class="notes-line">
+								<span class="notes-stitle">酒店服务</span>
+								<span class="notes-stext">$!hotel.hdlService</span>
+                            </div>
+								<span class="notes-stitle">可接受信用卡</span>
+								<span class="notes-stext">
+									#foreach($cd in $!hdlCreditcard)
+    									#if($!cd == '01')
+    										<img src="$staticRoot/images/jd_03.png" title="国内发行银联卡">
+    									#elseif($!cd == '02')
+    										<img src="$staticRoot/images/jd_05.png" title="JCB"/>
+    									#elseif($!cd == '03')
+    										<img src="$staticRoot/images/jd_07.png" title="大来（Diners Club）"/>
+    									#elseif($!cd == '04')
+    										<img src="$staticRoot/images/jd_09.png" title="运通（AMEX）"/>
+    									#elseif($!cd == '05')
+    										<img src="$staticRoot/images/jd_15.png" title="威士（VISA）"/>
+    									#elseif($!cd == '06')
+    										<img src="$staticRoot/images/jd_16.png" title="万事达（Master）"/>
+    									#elseif($!cd == '07')
+    										不接受信用卡
+    									#end
+									#end
+								</span>
+						</div>
+					</div>
+					
+					<!--会议室/餐厅/停车场 2015-11-19-->
+					<div class="hlxqct_ctctc" style="display:none;">
+						<div class="hlxqct_ctctr hlxqct_ctctr_p0">
+						#if($erim.isNotEmptyList($!listMeet))
+    						<h3 class="g_title_3 pl10 pt20">会议室</h3>
+    						<table class="g_table_1 Clear" cellpadding="0" cellspacing="0" border="0" width="100%">
+    							<tr>
+    								<th width="20%">会议室名称</th>
+    								<th width="15%">会议室面积</th>
+    								<th width="10%">可容纳人数</th>
+    								<th width="24%">会议室设施</th>
+    								<th width="15%">摆放形式</th>
+    								<th width="25%">最近装修时间</th>
+    							</tr>
+    							#foreach($item in $listMeet)
+        							<tr>
+        								<td class="td_2 tc_img" align="left">
+											<a href="javascript:void(0)" rel="$staticFileRes$item.hmgImg" class="preview">
+												#if($!item.hmgImg != '')
+													<img style="width:50px;height:50px;" src="$staticFileRes$item.hmgImg">
+												#else
+													<img style="width:50px;height:50px;" src="$staticRoot/images/isnull.png" title="" alt="">
+												#end
+											</a>
+											<span style="position:relative;top:14px;">$!item.hmgName</span>
+										</td>
+        								<td>$!item.hmgArea平方米</td>
+        								<td>$!item.hmgPersonnum -- $!item.hmgPersonNumEnd人</td>
+        								<td>$!item.hmgIsTea</td>
+        								<td>$!item.hmgShape</td>
+        								<td>$!item.hmgRenovationDate</td>
+        							</tr>
+    							#end
+                            </table>
+						#end
+						<div class="box_cb mb30 mb10"></div>
+						#if($erim.isNotEmptyList($!listcarteria))
+    						<h3 class="g_title_3 pl10 pt20">餐厅</h3>
+    						<table class="g_table_1 Clear" cellpadding="0" cellspacing="0" border="0" width="100%">
+    							<tr>
+    								<th width="20%">餐厅名称</th>
+    								<th width="15%">餐厅面积</th>
+    								<th width="10%">可容纳人数</th>
+    								<th width="15%">餐厅类型</th>
+    							</tr>
+    							#foreach($item in $listcarteria)
+        							<tr>
+        								<td class="td_2 tc_img" align="left">
+											<a href="javascript:void(0)" rel="$staticFileRes$item.hmgCafeteriaimg" class="preview">
+												#if($!item.hmgCafeteriaimg != '')
+													<img style="width:50px;height:50px;" src="$staticFileRes$item.hmgCafeteriaimg">
+												#else
+													<img style="width:50px;height:50px;" src="$staticRoot/images/isnull.png" title="" alt="">
+												#end
+											</a>
+											<span style="position:relative;top:14px;">$!item.hmgCafeterianame</span>
+										</td>
+        								<td>$!item.hmgCafeteriaarea平方米</td>
+        								<td>$!item.hmgCafeterianum -- $!item.hmgCafeterianumend人</td>
+        								<td>$!item.hmgCafeteriatype</td>
+        							</tr>
+    							#end
+    						</table>
+						#end
+						<div class="box_cb mb30 mb10"></div>
+						#if($erim.isNotEmptyList($!listPark))
+    						<h3 class="g_title_3 pl10 pt20">停车场</h3>
+    						<table class="g_table_1 Clear mb20" cellpadding="0" cellspacing="0" border="0" width="100%">
+    							<tr>
+    								<th width="20%">停车场名称</th>
+    								<th width="15%">停车场面积</th>
+    								<th width="10%">停车场类型</th>
+    								<th width="24%">小型车位数量</th>
+    								<th width="15%">大型车位数量</th>
+    								<th width="25%">停车费用</th>
+    							</tr>
+    							#foreach($item in $listPark)
+        							<tr>
+        								<td class="td_2 tc_img" align="left">
+											<a href="javascript:void(0)" rel="$staticFileRes$item.hpbImag" class="preview">
+												#if($!item.hpbImag != '')
+													<img style="width:50px;height:50px;" src="$staticFileRes$item.hpbImag">
+												#else
+													<img style="width:50px;height:50px;" src="$staticRoot/images/isnull.png" title="" alt="">
+												#end
+											</a>
+											<span style="position:relative;top:14px;">$!item.hpbName</span>
+										</td>
+        								<td>$!item.hpbArea平方米</td>
+        								<td>$!item.hpbType</td>
+        								<td>$!item.hpbCarNum个</td>
+        								<td>$!item.hpbBusNum个</td>
+        								<td>$!item.hpbCost</td>
+        							</tr>
+    							#end
+    						</table>
+						#end
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		#parse("common/footer.vm")
+		</div>
+		<!-- 
+		<div class="chakan_cont pt13 pb10 clearfix">
+        	<div class="riqi ml20 mr30 clearfix">
+            	<table class="xuanze" cellpadding="0" cellspacing="0" border="0" style="border-bottom:none;">
+                	<tbody>
+                    	<tr>
+                            <td class="w200 blue_a white">选择入住日期</td>
+                            <td>
+                            	<span class="sjleft"><img src="$staticRoot/images/sanjiaoleft.jpg"></span><p class="date-title">2015年8月</p><span class="sjright"><img src="$staticRoot/images/sanjiaoright.jpg"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            	<table cellpadding="0" cellspacing="0" border="0" style="border-top:none;">
+                    <tbody>
+                        <tr>
+                            <th class="red">日</th>
+                            <th>一</th>
+                            <th>二</th>
+                            <th>三</th>
+                            <th>四</th>
+                            <th>五</th>
+                            <th class="borderright red">六</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <p class="shu">1</p><span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="shu">2</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">3</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">4</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">5</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td class="red_bg">
+                                <p class="shu">6</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">7</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">8</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="shu">9</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">10</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">11</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td class="red_bg">
+                                <p class="shu">12</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="red">余：3间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">13</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">14</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">15</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="shu">16</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">17</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">18</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td class="yellow_bg">
+                                <p class="shu">今</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">20</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">21</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">22</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="shu">23</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">24</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">25</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">26</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">27</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                            <td>
+                                <p class="shu">28</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：30间</span></p></span>
+                            </td>
+                             <td>
+                                <p class="shu">29</p>
+                                <span class="jian"><p><span class="yellow">￥2000</span><br><span class="blue">余：0间</span></p></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="hui">
+                                <p class="shu">30</p><span class="jian"><p><span class="white">￥2000</span><br><span class="white">余：30间</span></p></span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+        		</tbody>
+            </table>
+        	</div>
+        
+        	<div class="chakan_right pt35">
+        		<p>入住时长：共<span class="font_cheng"><b>2</b></span>天</p>
+        		<p>总价格：<span class="font_hong"><b>￥559</b></span></p>
+        		<p class="font_hui">*注：入住时间一般为所选第一天的当天下午（具体时间以酒
+        　　店提供的信息为准）</p>
+        		<a href="$appRoot/$cpyno/texi/carorder"class="yuding_but mt75 ml350">预订</a>
+        	</div>
+        </div>	
+		-->
+</body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script> 
+<script type="text/javascript" src="$staticRoot/js/jquery.SuperSlide.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    	$(".chakan_a").click(function() {
+			var id = $(this).parent().find("input[name='hheId']").val();
+    		if($(this).text() == "查看") {
+    			$(".chakan_block").remove();
+    			$(this).parent().parent().after("<div class='chakan_block'></div>");
+    			$(".chakan_block").animate({height:"auto"});
+    			//$(".chakan_cont").clone().appendTo(".chakan_block").show();
+				$(".chakan_block").load("$appRoot/$cpyno/hotel/jiudianxiang/liangjiaxiang?hheId=" + id);
+    			$(".chakan_a").text("查看");
+    			$(this).text("收起");
+    		} else {
+    			$(".chakan_block").animate({height:"0px"});
+    			$(".chakan_cont").css("border","none;")
+    			$(this).text("查看");
+    		}
+    	});
+    });
+</script>

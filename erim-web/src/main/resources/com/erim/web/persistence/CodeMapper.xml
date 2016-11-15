@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="code">
+
+    <!-- 查询所有数据，用于DataService单例数据systemCode生成 -->
+    <select id="selectAllCode" resultType="codeBean">
+        SELECT
+            code_id         AS codeId,
+            code_key        AS codeKey,
+            code_value      AS codeValue,
+            code_no         AS codeNo,
+            code_mark       AS codeMark
+        FROM
+            tm_system_code
+        ORDER BY
+            code_id,code_no
+    </select>
+    
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.1//EN"  
+        "http://tuckey.org/res/dtds/urlrewrite3.1.dtd">
+
+<urlrewrite>
+
+	<!-- 热门精选 -->
+	<rule> <from>/jingxuan.html</from> 		 <to>/line/jingxuan</to>       		  </rule>
+
+	<!-- 主题推荐 -->
+	<rule> <from>/zhuti.html</from>     	 <to>/line/zhuti</to>          		  </rule>
+
+	<!-- 当地旅游 -->
+	<rule> <from>/lvyou.html</from>    		 <to>/ground/lvyou</to>        		  </rule>
+
+	<!-- 超级自由行 -->
+	<rule> <from>/superfree.html</from> 	 <to>/superfree/superfree</to> 		  </rule>
+
+	<!-- 旅游资讯 -->
+	<rule> <from>/news.html</from>      	 <to>/news/news</to>           		  </rule>
+
+	<!-- 关于我们 -->
+	<rule> <from>/abouts.html</from>    	 <to>/help/abouts</to>         		  </rule>
+	
+	<!-- 联系我们 -->
+	<rule> <from>/contact.html</from>   	 <to>/help/contact</to>        		  </rule>
+
+	<!-- 专线详情 -->
+	<rule> <from>/line/(.*).html</from> 	 <to>/line/zhutixiang/$1</to>  		  </rule>
+	
+	<!-- 酒店 -->
+	<rule> <from>/jiudian.html</from>   	 <to>/hotel/jiudian</to>       		  </rule>
+	
+	<!-- 特色餐 -->
+	<rule> <from>/tesecan.html</from>   	 <to>/cafeteria/tesecan</to>   		  </rule>
+	
+	<!-- 签证 -->
+	<rule> <from>/qianzhengxiang.html</from> <to>/management/qianzheng</to>  </rule>
+	
+	<!-- 机票 -->
+	<rule> <from>/jipiao.html</from>         <to>/planeticket/jipiao</to>         </rule>
+	
+	<!-- 租车 -->
+	<rule> <from>/car.html</from>            <to>/texi/car</to> 				  </rule>
+	
+	<!-- 门票 -->
+	<rule> <from>/menpiao.html</from>        <to>/ticket/menpiao</to>			  </rule>
+	
+	<!-- 导游 -->
+	<rule> <from>/daoyou.html</from>         <to>/guide/daoyou</to>               </rule>
+	
+	<!-- 登录 -->
+	<rule> <from>/login.html</from>			 <to>/login/login</to>				  </rule>
+	
+	<!-- 注册 -->
+	<rule> <from>/registerPage.html</from>   <to>/login/registerPage</to>         </rule>
+	<rule> <from>/register.html</from>   	 <to>/login/register</to>         	  </rule>
+	
+	<!-- 会员中心 -->
+	<rule> <from>/member/index.html</from>   <to>/member/index</to>         	  </rule>
+</urlrewrite> 

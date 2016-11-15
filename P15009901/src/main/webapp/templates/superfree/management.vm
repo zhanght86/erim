@@ -1,0 +1,52 @@
+<div class="cjzyqianzheng">
+	<div class="cjzyqianzhengtop">
+		<img src="$staticRoot/images/chaoji9.jpg"> <a
+			href="$appRoot/$cpyno/qianzhengxiang.html"><span>签证</span></a>
+		<div class="cjzy_qianzhengtop">
+			<ul>
+				<li><a href="javascript:void(0)" onclick="$('#mdlAddress2').attr('value','韩国');$('#mdlNtype').attr('value','');$('#form_management').submit();">韩国</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#mdlAddress2').attr('value','泰国');$('#mdlNtype').attr('value','');$('#form_management').submit();">泰国</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#mdlAddress2').attr('value','美国');$('#mdlNtype').attr('value','');$('#form_management').submit();">美国</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#mdlAddress2').attr('value','日本');$('#mdlNtype').attr('value','');$('#form_management').submit();">日本</a></li>
+				<li><a href="javascript:void(0)" onclick="$('#mdlAddress2').attr('value','');$('#mdlNtype').attr('value','');$('#form_management').submit();">更多</a></li>
+				<form id="form_management" method="post" action="$appRoot/$cpyno/qianzhengxiang.html">
+					<input type="hidden" id="mdlAddress2" name="mdlAddress"/>
+                </form>
+			</ul>
+		</div>
+	</div>
+	<div class="cjzyqianzhengcontent">
+		<!--		<div class="cjzyqianzhengleft">
+			<ul>
+				<li><span>签证分类</span></li>
+				<li><a href="#">个人旅游签证</a></li>
+				<li><a href="#">个人旅游签证</a></li>
+				<li><a href="#">个人旅游签证</a></li>
+			</ul>
+	</div>-->
+		<div class="cjzyqianzhengright">
+			#foreach($item in $managementList)
+				<div class="cjzy_qianzhengbox">
+    				<div class="cjzyqzrctbox">
+    					<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id" target="_blank" alt="" title="$item.mdlName"> 
+							#if($!item.mdlFlag)
+								<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id" target="_blank">
+									<img src="$staticRoot$item.mdlFlag" title="" alt="">
+								</a>
+							#else
+								<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id" target="_blank">
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								</a>
+							#end
+    						<div class="cjzyqzrctboxbox">
+    							<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id" target="_blank"><span class="cjzyqzrctboxq" title="$item.mdlName" style="cursor:pointer" >$erim.subString($item.mdlName,10)</span> </a>
+								<span class="cjzyqzrctboxm"><label>￥$erim.emptyDefault($item.mdlPriceSeal,'0')</label>起</span>
+    						</div>
+    					</a>
+    				</div>
+    			</div>
+			#end
+		</div>
+	</div>
+	<img src="$staticRoot/images/chaoji11.jpg" class="cjzyqianzhengimg">
+</div>

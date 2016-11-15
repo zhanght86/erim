@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zxsellcooperation">
+	
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			zx_sell_cooperation
+		(
+			cid,
+			cpy_id,
+			sell_cpy_id,
+			zsc_is_coopertion,
+			zsc_createtime,
+			zsc_createuser
+		)
+		(
+			SELECT
+			line_detail.id,
+			line_detail.cpy_id,
+			#{cpyId},
+			#{zscIsCoopertion},	
+			#{zscCreatetime},	
+			#{zscCreateuser}
+		FROM
+			line_detail
+		WHERE
+			line_detail.cpy_id in (
+				select
+					cpy_id
+				from
+					com_bus_region
+				where
+					cbr_bus_type = '02'
+				and 
+					com_bus_region.cbr_county in (
+						SELECT
+							company_business.cbs_county
+						FROM
+							company_business
+						WHERE
+							cbs_province IS NOT NULL
+						AND company_business.cpy_id = #{cpyId}
+						AND cbs_province != ''
+						AND cbs_county is NOT null 
+						AND cbs_county != ''
+					)
+				OR com_bus_region.cbr_city  in (
+					SELECT
+						company_business.cbs_city
+					FROM
+						company_business
+					WHERE
+						cbs_province IS NOT NULL
+					AND company_business.cpy_id = #{cpyId}
+					AND cbs_province != ''
+					AND (cbs_county is null or cbs_county = '')
+				)
+				OR com_bus_region.cbr_province  in (
+					SELECT
+						company_business.cbs_province
+					FROM
+						company_business
+					WHERE
+						(cbs_city is null or cbs_city = '')
+					AND company_business.cpy_id = #{cpyId}
+					and cbs_province IS NOT NULL
+					AND cbs_province != ''
+				)
+			)
+		)
+	</insert>
+	
+	<!-- 清除纪录 -->
+	<delete id="deleteBySellId">
+		DELETE FROM
+			zx_sell_cooperation
+		WHERE
+			sell_cpy_id = #{cpyId}
+	</delete>
+</mapper>

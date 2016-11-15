@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pubsametown">
+
+	<!-- 删除企业下所有同城同业 -->
+	<delete id="deletecpyId">
+		DELETE FROM	
+			pub_sametown
+		WHERE
+			cpyid_to = #{cpyId}
+	</delete>
+
+	<!-- 插入酒店 -->
+	<insert id="insertHotel">
+		INSERT INTO
+			pub_sametown (cid,cpyid_from,cpyid_to,ntype)
+		(
+			select
+				hotel_detail.id,
+				hotel_detail.cpy_id,
+				#{cpyId},
+				'HOTEL'
+			from
+				hotel_detail
+			where
+				hotel_detail.hdl_is_del_status = '02'
+			AND	
+			(
+				(
+					hotel_detail.hdl_county in 
+						(select cbs_ran_county1 from company_business where cpy_id = #{cpyId} and cbs_ran_county1 != '' and cbs_ran_county1 is not null) 
+				or  hotel_detail.hdl_county in 
+						(select cbs_ran_county2 from company_business where cpy_id = #{cpyId} and cbs_ran_county2 != '' and cbs_ran_county2 is not null)
+				or  hotel_detail.hdl_county in 
+						(select cbs_ran_county3 from company_business where cpy_id = #{cpyId} and cbs_ran_county3 != '' and cbs_ran_county3 is not null)
+				or  hotel_detail.hdl_county in 
+						(select cbs_ran_county4 from company_business where cpy_id = #{cpyId} and cbs_ran_county4 != '' and cbs_ran_county4 is not null)
+				or  hotel_detail.hdl_county in
+						(select cbs_ran_county5 from company_business where cpy_id = #{cpyId} and cbs_ran_county5 != '' and cbs_ran_county5 is not null)
+				)
+				or
+				(
+					hotel_detail.hdl_city in 
+						(select cbs_ran_city1 from company_business where cpy_id = #{cpyId} and cbs_ran_city1 != '' and cbs_ran_city1 is not null and (cbs_ran_county1 is null or cbs_ran_county1 = ''))
+				or  hotel_detail.hdl_city in
+						(select cbs_ran_city2 from company_business where cpy_id = #{cpyId} and cbs_ran_city2 != '' and cbs_ran_city2 is not null and (cbs_ran_county2 is null or cbs_ran_county2 = ''))
+				or  hotel_detail.hdl_city in 
+						(select cbs_ran_city3 from company_business where cpy_id = #{cpyId} and cbs_ran_city3 != '' and cbs_ran_city3 is not null and (cbs_ran_county3 is null or cbs_ran_county3 = ''))
+				or  hotel_detail.hdl_city in 
+						(select cbs_ran_city4 from company_business where cpy_id = #{cpyId} and cbs_ran_city4 != '' and cbs_ran_city4 is not null and (cbs_ran_county4 is null or cbs_ran_county4 = ''))
+				or  hotel_detail.hdl_city in
+						(select cbs_ran_city5 from company_business where cpy_id = #{cpyId} and cbs_ran_city5 != '' and cbs_ran_city5 is not null and (cbs_ran_county5 is null or cbs_ran_county5 = ''))
+				)
+				or
+				(
+					hotel_detail.hdl_province in
+						(select cbs_ran_province1 from company_business where cpy_id = #{cpyId} and cbs_ran_province1 != '' and cbs_ran_province1 is not null and (cbs_ran_city1 is null or cbs_ran_city1 = ''))
+				or  hotel_detail.hdl_province in
+						(select cbs_ran_province2 from company_business where cpy_id = #{cpyId} and cbs_ran_province2 != '' and cbs_ran_province2 is not null and (cbs_ran_city2 is null or cbs_ran_city2 = ''))
+				or  hotel_detail.hdl_province in
+						(select cbs_ran_province3 from company_business where cpy_id = #{cpyId} and cbs_ran_province3 != '' and cbs_ran_province3 is not null and (cbs_ran_city3 is null or cbs_ran_city3 = ''))
+				or  hotel_detail.hdl_province in
+						(select cbs_ran_province4 from company_business where cpy_id = #{cpyId} and cbs_ran_province4 != '' and cbs_ran_province4 is not null and (cbs_ran_city4 is null or cbs_ran_city4 = ''))
+				or  hotel_detail.hdl_province in
+						(select cbs_ran_province5 from company_business where cpy_id = #{cpyId} and cbs_ran_province5 != '' and cbs_ran_province5 is not null and (cbs_ran_city5 is null or cbs_ran_city5 = ''))
+				)
+				or
+					hotel_detail.hdl_external in (
+						select cbs_ran_interna from company_business where cbs_ran_interna != '' and cbs_ran_interna is not null and cpy_id = #{cpyId}
+					)
+				or (
+					hotel_detail.hdl_foreign in (
+						select cbs_ran_state1 from company_business where cpy_id = #{cpyId} and cbs_ran_state1 !='' and cbs_ran_state1 is not null
+					)
+					or 
+					hotel_detail.hdl_foreign in (
+						select cbs_ran_state2 from company_business where cpy_id = #{cpyId} and cbs_ran_state2 !='' and cbs_ran_state2 is not null
+					)
+					or 
+					hotel_detail.hdl_foreign in (
+						select cbs_ran_state3 from company_business where cpy_id = #{cpyId} and cbs_ran_state3 !='' and cbs_ran_state3 is not null
+					)
+					or 
+					hotel_detail.hdl_foreign in (
+						select cbs_ran_state4 from company_business where cpy_id = #{cpyId} and cbs_ran_state4 !='' and cbs_ran_state4 is not null
+					)
+				or 
+					hotel_detail.hdl_foreign in (
+						select cbs_ran_state5 from company_business where cpy_id = #{cpyId} and cbs_ran_state5 !='' and cbs_ran_state5 is not null
+					)
+				)
+			)
+			group by  cpy_id
+		)
+	</insert>
+	
+	<!-- 插入门票 -->
+	<insert id="insertTicket">
+		INSERT INTO
+			pub_sametown (cid,cpyid_from,cpyid_to,ntype)
+		(
+			select
+				ticket_detail.id,
+				ticket_detail.cpy_id,
+				#{cpyId},
+				'TICKET'
+			from
+				ticket_detail
+			where
+				ticket_detail.tdl_is_del_status = '1'
+			AND	
+			((
+				ticket_detail.tdl_county in 
+					(select cbs_ran_county1 from company_business where cpy_id = #{cpyId} and cbs_ran_county1 != '' and cbs_ran_county1 is not null) 
+			or  ticket_detail.tdl_county in 
+					(select cbs_ran_county2 from company_business where cpy_id = #{cpyId} and cbs_ran_county2 != '' and cbs_ran_county2 is not null)
+			or  ticket_detail.tdl_county in 
+					(select cbs_ran_county3 from company_business where cpy_id = #{cpyId} and cbs_ran_county3 != '' and cbs_ran_county3 is not null)
+			or  ticket_detail.tdl_county in 
+					(select cbs_ran_county4 from company_business where cpy_id = #{cpyId} and cbs_ran_county4 != '' and cbs_ran_county4 is not null)
+			or  ticket_detail.tdl_county in
+					(select cbs_ran_county5 from company_business where cpy_id = #{cpyId} and cbs_ran_county5 != '' and cbs_ran_county5 is not null)
+			)
+			or
+			(
+				ticket_detail.tdl_city in 
+					(select cbs_ran_city1 from company_business where cpy_id = #{cpyId} and cbs_ran_city1 != '' and cbs_ran_city1 is not null and (cbs_ran_county1 is null or cbs_ran_county1 = ''))
+			or  ticket_detail.tdl_city in
+					(select cbs_ran_city2 from company_business where cpy_id = #{cpyId} and cbs_ran_city2 != '' and cbs_ran_city2 is not null and (cbs_ran_county2 is null or cbs_ran_county2 = ''))
+			or  ticket_detail.tdl_city in 
+					(select cbs_ran_city3 from company_business where cpy_id = #{cpyId} and cbs_ran_city3 != '' and cbs_ran_city3 is not null and (cbs_ran_county3 is null or cbs_ran_county3 = ''))
+			or  ticket_detail.tdl_city in 
+					(select cbs_ran_city4 from company_business where cpy_id = #{cpyId} and cbs_ran_city4 != '' and cbs_ran_city4 is not null and (cbs_ran_county4 is null or cbs_ran_county4 = ''))
+			or  ticket_detail.tdl_city in
+					(select cbs_ran_city5 from company_business where cpy_id = #{cpyId} and cbs_ran_city5 != '' and cbs_ran_city5 is not null and (cbs_ran_county5 is null or cbs_ran_county5 = ''))
+			)
+			or
+			(
+				ticket_detail.tdl_province in
+					(select cbs_ran_province1 from company_business where cpy_id = #{cpyId} and cbs_ran_province1 != '' and cbs_ran_province1 is not null and (cbs_ran_city1 is null or cbs_ran_city1 = ''))
+			or  ticket_detail.tdl_province in
+					(select cbs_ran_province2 from company_business where cpy_id = #{cpyId} and cbs_ran_province2 != '' and cbs_ran_province2 is not null and (cbs_ran_city2 is null or cbs_ran_city2 = ''))
+			or  ticket_detail.tdl_province in
+					(select cbs_ran_province3 from company_business where cpy_id = #{cpyId} and cbs_ran_province3 != '' and cbs_ran_province3 is not null and (cbs_ran_city3 is null or cbs_ran_city3 = ''))
+			or  ticket_detail.tdl_province in
+					(select cbs_ran_province4 from company_business where cpy_id = #{cpyId} and cbs_ran_province4 != '' and cbs_ran_province4 is not null and (cbs_ran_city4 is null or cbs_ran_city4 = ''))
+			or  ticket_detail.tdl_province in
+					(select cbs_ran_province5 from company_business where cpy_id = #{cpyId} and cbs_ran_province5 != '' and cbs_ran_province5 is not null and (cbs_ran_city5 is null or cbs_ran_city5 = ''))
+			)
+			or
+				ticket_detail.tdl_nation in (
+					select cbs_ran_interna from company_business where cbs_ran_interna != '' and cbs_ran_interna is not null and cpy_id = #{cpyId}
+				)
+			or (
+				ticket_detail.tdl_countyone in (
+					select cbs_ran_state1 from company_business where cpy_id = #{cpyId} and cbs_ran_state1 !='' and cbs_ran_state1 is not null
+				)
+				or 
+				ticket_detail.tdl_countyone in (
+					select cbs_ran_state2 from company_business where cpy_id = #{cpyId} and cbs_ran_state2 !='' and cbs_ran_state2 is not null
+				)
+				or 
+				ticket_detail.tdl_countyone in (
+					select cbs_ran_state3 from company_business where cpy_id = #{cpyId} and cbs_ran_state3 !='' and cbs_ran_state3 is not null
+				)
+				or 
+				ticket_detail.tdl_countyone in (
+					select cbs_ran_state4 from company_business where cpy_id = #{cpyId} and cbs_ran_state4 !='' and cbs_ran_state4 is not null
+				)
+			or 
+				ticket_detail.tdl_countyone in (
+					select cbs_ran_state5 from company_business where cpy_id = #{cpyId} and cbs_ran_state5 !='' and cbs_ran_state5 is not null
+				)
+			)
+			)
+			group by  cpy_id
+		)
+	</insert>
+	
+	<!-- 插入租车-->
+	<insert id="insertTexi">
+	INSERT INTO
+			pub_sametown (cid,cpyid_from,cpyid_to,ntype)
+		(
+			
+		select
+				texi_detail.id,
+				texi_detail.cpy_id,
+				#{cpyId},
+				'TEXI'
+			from
+				texi_detail
+			where
+				texi_detail.tdl_is_del_status = '02'
+			AND	
+			((
+				texi_detail.tdl_county in 
+					(select cbs_ran_county1 from company_business where cpy_id = #{cpyId} and cbs_ran_county1 != '' and cbs_ran_county1 is not null) 
+			or  texi_detail.tdl_county in 
+					(select cbs_ran_county2 from company_business where cpy_id = #{cpyId} and cbs_ran_county2 != '' and cbs_ran_county2 is not null)
+			or  texi_detail.tdl_county in 
+					(select cbs_ran_county3 from company_business where cpy_id = #{cpyId} and cbs_ran_county3 != '' and cbs_ran_county3 is not null)
+			or  texi_detail.tdl_county in 
+					(select cbs_ran_county4 from company_business where cpy_id = #{cpyId} and cbs_ran_county4 != '' and cbs_ran_county4 is not null)
+			or  texi_detail.tdl_county in
+					(select cbs_ran_county5 from company_business where cpy_id = #{cpyId} and cbs_ran_county5 != '' and cbs_ran_county5 is not null)
+			)
+			or
+			(
+				texi_detail.tdl_city in 
+					(select cbs_ran_city1 from company_business where cpy_id = #{cpyId} and cbs_ran_city1 != '' and cbs_ran_city1 is not null and (cbs_ran_county1 is null or cbs_ran_county1 = ''))
+			or  texi_detail.tdl_city in
+					(select cbs_ran_city2 from company_business where cpy_id = #{cpyId} and cbs_ran_city2 != '' and cbs_ran_city2 is not null and (cbs_ran_county2 is null or cbs_ran_county2 = ''))
+			or  texi_detail.tdl_city in 
+					(select cbs_ran_city3 from company_business where cpy_id = #{cpyId} and cbs_ran_city3 != '' and cbs_ran_city3 is not null and (cbs_ran_county3 is null or cbs_ran_county3 = ''))
+			or  texi_detail.tdl_city in 
+					(select cbs_ran_city4 from company_business where cpy_id = #{cpyId} and cbs_ran_city4 != '' and cbs_ran_city4 is not null and (cbs_ran_county4 is null or cbs_ran_county4 = ''))
+			or  texi_detail.tdl_city in
+					(select cbs_ran_city5 from company_business where cpy_id = #{cpyId} and cbs_ran_city5 != '' and cbs_ran_city5 is not null and (cbs_ran_county5 is null or cbs_ran_county5 = ''))
+			)
+			or
+			(
+				texi_detail.tdl_province in
+					(select cbs_ran_province1 from company_business where cpy_id = #{cpyId} and cbs_ran_province1 != '' and cbs_ran_province1 is not null and (cbs_ran_city1 is null or cbs_ran_city1 = ''))
+			or  texi_detail.tdl_province in
+					(select cbs_ran_province2 from company_business where cpy_id = #{cpyId} and cbs_ran_province2 != '' and cbs_ran_province2 is not null and (cbs_ran_city2 is null or cbs_ran_city2 = ''))
+			or  texi_detail.tdl_province in
+					(select cbs_ran_province3 from company_business where cpy_id = #{cpyId} and cbs_ran_province3 != '' and cbs_ran_province3 is not null and (cbs_ran_city3 is null or cbs_ran_city3 = ''))
+			or  texi_detail.tdl_province in
+					(select cbs_ran_province4 from company_business where cpy_id = #{cpyId} and cbs_ran_province4 != '' and cbs_ran_province4 is not null and (cbs_ran_city4 is null or cbs_ran_city4 = ''))
+			or  texi_detail.tdl_province in
+					(select cbs_ran_province5 from company_business where cpy_id = #{cpyId} and cbs_ran_province5 != '' and cbs_ran_province5 is not null and (cbs_ran_city5 is null or cbs_ran_city5 = ''))
+			)
+			or
+				texi_detail.tdl_external in (
+					select cbs_ran_interna from company_business where cbs_ran_interna != '' and cbs_ran_interna is not null and cpy_id = #{cpyId}
+				)
+			or (
+				texi_detail.tdl_foreign in (
+					select cbs_ran_state1 from company_business where cpy_id = #{cpyId} and cbs_ran_state1 !='' and cbs_ran_state1 is not null
+				)
+				or 
+				texi_detail.tdl_foreign in (
+					select cbs_ran_state2 from company_business where cpy_id = #{cpyId} and cbs_ran_state2 !='' and cbs_ran_state2 is not null
+				)
+				or 
+				texi_detail.tdl_foreign in (
+					select cbs_ran_state3 from company_business where cpy_id = #{cpyId} and cbs_ran_state3 !='' and cbs_ran_state3 is not null
+				)
+				or 
+				texi_detail.tdl_foreign in (
+					select cbs_ran_state4 from company_business where cpy_id = #{cpyId} and cbs_ran_state4 !='' and cbs_ran_state4 is not null
+				)
+			or 
+				texi_detail.tdl_foreign in (
+					select cbs_ran_state5 from company_business where cpy_id = #{cpyId} and cbs_ran_state5 !='' and cbs_ran_state5 is not null
+				)
+			)
+			)
+			group by  cpy_id
+		)
+	</insert>
+	
+	<!-- 插入特色餐-->
+	<insert id="insertCafeteria">
+	INSERT INTO
+			pub_sametown (cid,cpyid_from,cpyid_to,ntype)
+	 
+		(
+			select
+				cafeteria_detail.id,
+				cafeteria_detail.cpy_id,
+				#{cpyId},
+				'CAFETERIA'
+			from
+				cafeteria_detail
+			where
+				cafeteria_detail.cdl_is_del_status = '1'
+			AND	
+			((
+				cafeteria_detail.cdl_county in 
+					(select cbs_ran_county1 from company_business where cpy_id = #{cpyId} and cbs_ran_county1 != '' and cbs_ran_county1 is not null) 
+			or  cafeteria_detail.cdl_county in 
+					(select cbs_ran_county2 from company_business where cpy_id = #{cpyId} and cbs_ran_county2 != '' and cbs_ran_county2 is not null)
+			or  cafeteria_detail.cdl_county in 
+					(select cbs_ran_county3 from company_business where cpy_id = #{cpyId} and cbs_ran_county3 != '' and cbs_ran_county3 is not null)
+			or  cafeteria_detail.cdl_county in 
+					(select cbs_ran_county4 from company_business where cpy_id = #{cpyId} and cbs_ran_county4 != '' and cbs_ran_county4 is not null)
+			or  cafeteria_detail.cdl_county in
+					(select cbs_ran_county5 from company_business where cpy_id = #{cpyId} and cbs_ran_county5 != '' and cbs_ran_county5 is not null)
+			)
+			or
+			(
+				cafeteria_detail.cdl_city in 
+					(select cbs_ran_city1 from company_business where cpy_id = #{cpyId} and cbs_ran_city1 != '' and cbs_ran_city1 is not null and (cbs_ran_county1 is null or cbs_ran_county1 = ''))
+			or  cafeteria_detail.cdl_city in
+					(select cbs_ran_city2 from company_business where cpy_id = #{cpyId} and cbs_ran_city2 != '' and cbs_ran_city2 is not null and (cbs_ran_county2 is null or cbs_ran_county2 = ''))
+			or  cafeteria_detail.cdl_city in 
+					(select cbs_ran_city3 from company_business where cpy_id = #{cpyId} and cbs_ran_city3 != '' and cbs_ran_city3 is not null and (cbs_ran_county3 is null or cbs_ran_county3 = ''))
+			or  cafeteria_detail.cdl_city in 
+					(select cbs_ran_city4 from company_business where cpy_id = #{cpyId} and cbs_ran_city4 != '' and cbs_ran_city4 is not null and (cbs_ran_county4 is null or cbs_ran_county4 = ''))
+			or  cafeteria_detail.cdl_city in
+					(select cbs_ran_city5 from company_business where cpy_id = #{cpyId} and cbs_ran_city5 != '' and cbs_ran_city5 is not null and (cbs_ran_county5 is null or cbs_ran_county5 = ''))
+			)
+			or
+			(
+				cafeteria_detail.cdl_province in
+					(select cbs_ran_province1 from company_business where cpy_id = #{cpyId} and cbs_ran_province1 != '' and cbs_ran_province1 is not null and (cbs_ran_city1 is null or cbs_ran_city1 = ''))
+			or  cafeteria_detail.cdl_province in
+					(select cbs_ran_province2 from company_business where cpy_id = #{cpyId} and cbs_ran_province2 != '' and cbs_ran_province2 is not null and (cbs_ran_city2 is null or cbs_ran_city2 = ''))
+			or  cafeteria_detail.cdl_province in
+					(select cbs_ran_province3 from company_business where cpy_id = #{cpyId} and cbs_ran_province3 != '' and cbs_ran_province3 is not null and (cbs_ran_city3 is null or cbs_ran_city3 = ''))
+			or  cafeteria_detail.cdl_province in
+					(select cbs_ran_province4 from company_business where cpy_id = #{cpyId} and cbs_ran_province4 != '' and cbs_ran_province4 is not null and (cbs_ran_city4 is null or cbs_ran_city4 = ''))
+			or  cafeteria_detail.cdl_province in
+					(select cbs_ran_province5 from company_business where cpy_id = #{cpyId} and cbs_ran_province5 != '' and cbs_ran_province5 is not null and (cbs_ran_city5 is null or cbs_ran_city5 = ''))
+			)
+			or
+				cafeteria_detail.cdl_external in (
+					select cbs_ran_interna from company_business where cbs_ran_interna != '' and cbs_ran_interna is not null and cpy_id = #{cpyId}
+				)
+			or (
+				cafeteria_detail.cdl_foreign in (
+					select cbs_ran_state1 from company_business where cpy_id = #{cpyId} and cbs_ran_state1 !='' and cbs_ran_state1 is not null
+				)
+				or 
+				cafeteria_detail.cdl_foreign in (
+					select cbs_ran_state2 from company_business where cpy_id = #{cpyId} and cbs_ran_state2 !='' and cbs_ran_state2 is not null
+				)
+				or 
+				cafeteria_detail.cdl_foreign in (
+					select cbs_ran_state3 from company_business where cpy_id = #{cpyId} and cbs_ran_state3 !='' and cbs_ran_state3 is not null
+				)
+				or 
+				cafeteria_detail.cdl_foreign in (
+					select cbs_ran_state4 from company_business where cpy_id = #{cpyId} and cbs_ran_state4 !='' and cbs_ran_state4 is not null
+				)
+			or 
+				cafeteria_detail.cdl_foreign in (
+					select cbs_ran_state5 from company_business where cpy_id = #{cpyId} and cbs_ran_state5 !='' and cbs_ran_state5 is not null
+				)
+			)
+			)
+			group by  cpy_id
+		)
+	</insert>
+	
+	<!-- 插入当地游-->
+	<insert id="insertGround">
+		INSERT INTO
+				pub_sametown (cid,cpyid_from,cpyid_to,ntype)
+		 
+			(
+			select
+				ground_detail.id,
+				ground_detail.cpy_id,
+				#{cpyId},
+				'GROUND'
+			from
+				ground_detail
+			where
+				ground_detail.gdd_is_del_status = '1'
+			AND	
+			((
+				ground_detail.gdd_county in 
+					(select cbs_ran_county1 from company_business where cpy_id = #{cpyId} and cbs_ran_county1 != '' and cbs_ran_county1 is not null) 
+			or  ground_detail.gdd_county in 
+					(select cbs_ran_county2 from company_business where cpy_id = #{cpyId} and cbs_ran_county2 != '' and cbs_ran_county2 is not null)
+			or  ground_detail.gdd_county in 
+					(select cbs_ran_county3 from company_business where cpy_id = #{cpyId} and cbs_ran_county3 != '' and cbs_ran_county3 is not null)
+			or  ground_detail.gdd_county in 
+					(select cbs_ran_county4 from company_business where cpy_id = #{cpyId} and cbs_ran_county4 != '' and cbs_ran_county4 is not null)
+			or  ground_detail.gdd_county in
+					(select cbs_ran_county5 from company_business where cpy_id = #{cpyId} and cbs_ran_county5 != '' and cbs_ran_county5 is not null)
+			)
+			or
+			(
+				ground_detail.gdd_city in 
+					(select cbs_ran_city1 from company_business where cpy_id = #{cpyId} and cbs_ran_city1 != '' and cbs_ran_city1 is not null and (cbs_ran_county1 is null or cbs_ran_county1 = ''))
+			or  ground_detail.gdd_city in
+					(select cbs_ran_city2 from company_business where cpy_id = #{cpyId} and cbs_ran_city2 != '' and cbs_ran_city2 is not null and (cbs_ran_county2 is null or cbs_ran_county2 = ''))
+			or  ground_detail.gdd_city in 
+					(select cbs_ran_city3 from company_business where cpy_id = #{cpyId} and cbs_ran_city3 != '' and cbs_ran_city3 is not null and (cbs_ran_county3 is null or cbs_ran_county3 = ''))
+			or  ground_detail.gdd_city in 
+					(select cbs_ran_city4 from company_business where cpy_id = #{cpyId} and cbs_ran_city4 != '' and cbs_ran_city4 is not null and (cbs_ran_county4 is null or cbs_ran_county4 = ''))
+			or  ground_detail.gdd_city in
+					(select cbs_ran_city5 from company_business where cpy_id = #{cpyId} and cbs_ran_city5 != '' and cbs_ran_city5 is not null and (cbs_ran_county5 is null or cbs_ran_county5 = ''))
+			)
+			or
+			(
+				ground_detail.gdd_province in
+					(select cbs_ran_province1 from company_business where cpy_id = #{cpyId} and cbs_ran_province1 != '' and cbs_ran_province1 is not null and (cbs_ran_city1 is null or cbs_ran_city1 = ''))
+			or  ground_detail.gdd_province in
+					(select cbs_ran_province2 from company_business where cpy_id = #{cpyId} and cbs_ran_province2 != '' and cbs_ran_province2 is not null and (cbs_ran_city2 is null or cbs_ran_city2 = ''))
+			or  ground_detail.gdd_province in
+					(select cbs_ran_province3 from company_business where cpy_id = #{cpyId} and cbs_ran_province3 != '' and cbs_ran_province3 is not null and (cbs_ran_city3 is null or cbs_ran_city3 = ''))
+			or  ground_detail.gdd_province in
+					(select cbs_ran_province4 from company_business where cpy_id = #{cpyId} and cbs_ran_province4 != '' and cbs_ran_province4 is not null and (cbs_ran_city4 is null or cbs_ran_city4 = ''))
+			or  ground_detail.gdd_province in
+					(select cbs_ran_province5 from company_business where cpy_id = #{cpyId} and cbs_ran_province5 != '' and cbs_ran_province5 is not null and (cbs_ran_city5 is null or cbs_ran_city5 = ''))
+			)
+			or
+				ground_detail.gdd_countylocation in (
+					select cbs_ran_interna from company_business where cbs_ran_interna != '' and cbs_ran_interna is not null and cpy_id = #{cpyId}
+				)
+			or (
+				ground_detail.gdd_majorcountries in (
+					select cbs_ran_state1 from company_business where cpy_id = #{cpyId} and cbs_ran_state1 !='' and cbs_ran_state1 is not null
+				)
+				or 
+				ground_detail.gdd_majorcountries in (
+					select cbs_ran_state2 from company_business where cpy_id = #{cpyId} and cbs_ran_state2 !='' and cbs_ran_state2 is not null
+				)
+				or 
+				ground_detail.gdd_majorcountries in (
+					select cbs_ran_state3 from company_business where cpy_id = #{cpyId} and cbs_ran_state3 !='' and cbs_ran_state3 is not null
+				)
+				or 
+				ground_detail.gdd_majorcountries in (
+					select cbs_ran_state4 from company_business where cpy_id = #{cpyId} and cbs_ran_state4 !='' and cbs_ran_state4 is not null
+				)
+			or 
+				ground_detail.gdd_majorcountries in (
+					select cbs_ran_state5 from company_business where cpy_id = #{cpyId} and cbs_ran_state5 !='' and cbs_ran_state5 is not null
+				)
+			)
+			)
+			group by  cpy_id
+		)
+	</insert>
+	
+	<!-- 插入导游-->
+	<insert id="insertGuide">
+	
+		INSERT INTO
+				pub_sametown (cid,cpyid_from,cpyid_to,ntype)
+			(
+			select
+				guide_detail.id,
+				guide_detail.cpy_id,
+				#{cpyId},
+				'GUIDE'
+			from
+				guide_detail
+			where
+				guide_detail.gdl_is_del_status = '1'
+			AND	
+			((
+				guide_detail.gdl_local_county like 
+					CONCAT('%',(select cbs_ran_county1 from company_business where cpy_id = #{cpyId} and cbs_ran_county1 != '' and cbs_ran_county1 is not null) ,'%')
+			or  guide_detail.gdl_local_county like
+					CONCAT('%',(select cbs_ran_county2 from company_business where cpy_id = #{cpyId} and cbs_ran_county2 != '' and cbs_ran_county2 is not null),'%')
+			or  guide_detail.gdl_local_county like 
+					CONCAT('%',(select cbs_ran_county3 from company_business where cpy_id = #{cpyId} and cbs_ran_county3 != '' and cbs_ran_county3 is not null),'%')
+			or  guide_detail.gdl_local_county like 
+					CONCAT('%',(select cbs_ran_county4 from company_business where cpy_id = #{cpyId} and cbs_ran_county4 != '' and cbs_ran_county4 is not null),'%')
+			or  guide_detail.gdl_local_county like
+					CONCAT('%',(select cbs_ran_county5 from company_business where cpy_id = #{cpyId} and cbs_ran_county5 != '' and cbs_ran_county5 is not null),'%')
+			)
+			or
+			(
+				guide_detail.gdl_local_city like 
+					CONCAT('%',(select cbs_ran_city1 from company_business where cpy_id = #{cpyId} and cbs_ran_city1 != '' and cbs_ran_city1 is not null and (cbs_ran_county1 is null or cbs_ran_county1 = '')),'%')
+			or  guide_detail.gdl_local_city like
+					CONCAT('%',(select cbs_ran_city2 from company_business where cpy_id = #{cpyId} and cbs_ran_city2 != '' and cbs_ran_city2 is not null and (cbs_ran_county2 is null or cbs_ran_county2 = '')),'%')
+			or  guide_detail.gdl_local_city like 
+					CONCAT('%',(select cbs_ran_city3 from company_business where cpy_id = #{cpyId} and cbs_ran_city3 != '' and cbs_ran_city3 is not null and (cbs_ran_county3 is null or cbs_ran_county3 = '')),'%')
+			or  guide_detail.gdl_local_city like 
+					CONCAT('%',(select cbs_ran_city4 from company_business where cpy_id = #{cpyId} and cbs_ran_city4 != '' and cbs_ran_city4 is not null and (cbs_ran_county4 is null or cbs_ran_county4 = '')),'%')
+			or  guide_detail.gdl_local_city like
+					CONCAT('%',(select cbs_ran_city5 from company_business where cpy_id = #{cpyId} and cbs_ran_city5 != '' and cbs_ran_city5 is not null and (cbs_ran_county5 is null or cbs_ran_county5 = '')),'%')
+			)
+			or
+			(
+				guide_detail.gdl_local_province like
+					CONCAT('%',(select cbs_ran_province1 from company_business where cpy_id = #{cpyId} and cbs_ran_province1 != '' and cbs_ran_province1 is not null and (cbs_ran_city1 is null or cbs_ran_city1 = '')),'%')
+			or  guide_detail.gdl_local_province like
+					CONCAT('%',(select cbs_ran_province2 from company_business where cpy_id = #{cpyId} and cbs_ran_province2 != '' and cbs_ran_province2 is not null and (cbs_ran_city2 is null or cbs_ran_city2 = '')),'%')
+			or  guide_detail.gdl_local_province like
+					CONCAT('%',(select cbs_ran_province3 from company_business where cpy_id = #{cpyId} and cbs_ran_province3 != '' and cbs_ran_province3 is not null and (cbs_ran_city3 is null or cbs_ran_city3 = '')),'%')
+			or  guide_detail.gdl_local_province like
+					CONCAT('%',(select cbs_ran_province4 from company_business where cpy_id = #{cpyId} and cbs_ran_province4 != '' and cbs_ran_province4 is not null and (cbs_ran_city4 is null or cbs_ran_city4 = '')),'%')
+			or  guide_detail.gdl_local_province like
+					CONCAT('%',(select cbs_ran_province5 from company_business where cpy_id = #{cpyId} and cbs_ran_province5 != '' and cbs_ran_province5 is not null and (cbs_ran_city5 is null or cbs_ran_city5 = '')),'%')
+			)
+			or
+				guide_detail.gdl_gaid_lokal in (
+					select cbs_ran_interna from company_business where cbs_ran_interna != '' and cbs_ran_interna is not null and cpy_id = #{cpyId}
+				)
+			or (
+				guide_detail.gdl_gaid_country in (
+					select cbs_ran_state1 from company_business where cpy_id = #{cpyId} and cbs_ran_state1 !='' and cbs_ran_state1 is not null
+				)
+				or 
+				guide_detail.gdl_gaid_country in (
+					select cbs_ran_state2 from company_business where cpy_id = #{cpyId} and cbs_ran_state2 !='' and cbs_ran_state2 is not null
+				)
+				or 
+				guide_detail.gdl_gaid_country in (
+					select cbs_ran_state3 from company_business where cpy_id = #{cpyId} and cbs_ran_state3 !='' and cbs_ran_state3 is not null
+				)
+				or 
+				guide_detail.gdl_gaid_country in (
+					select cbs_ran_state4 from company_business where cpy_id = #{cpyId} and cbs_ran_state4 !='' and cbs_ran_state4 is not null
+				)
+			or 
+				guide_detail.gdl_gaid_country in (
+					select cbs_ran_state5 from company_business where cpy_id = #{cpyId} and cbs_ran_state5 !='' and cbs_ran_state5 is not null
+				)
+			)
+			)
+			group by  cpy_id
+		)
+	</insert>
+</mapper>

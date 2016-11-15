@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/zh.css">
+##<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+
+<div class="zh_block">
+	<ul class="list_main">
+	
+		<li>
+			<dl class="clearfix">
+				<dd>已介绍</dd>
+				<dt><span>$!totalCount</em>家</span></dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>返平台</dd>
+				<dt><span>$!data.yjServeMoney</em>元</span></dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>返现金</dd>
+				<dt><span>$!data.yjServeMoney</em>元</span></dt>
+			</dl>
+		</li>
+	</ul>
+</div>
+<div class="win_box_bg"></div>
+
+</div>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pubnotice">
+
+	<!-- 根据ID查询 -->
+	<select id="selectById" resultType="PubNoticeBean">
+		SELECT 
+			id 					AS id,
+			pne_ntype           AS pneNtype,					
+			pne_title 	        AS pneTitle,
+			pne_content 	    AS pneContent,
+			pne_createtime      AS pneCreatetime,
+			pne_createuser 	    AS pneCreateuser,
+			pne_is_show 	    AS pneIsShow,
+			pne_num_ll          AS pneNumLl
+		FROM
+			pub_notice
+		WHERE
+			 id = #{id}
+	</select>
+	
+	<select id="selectList" resultType="PubNoticeBean">
+		SELECT
+			id 					AS id,
+			pne_ntype           AS pneNtype,					
+			pne_title 	        AS pneTitle,
+			pne_content 	    AS pneContent,
+			pne_createtime      AS pneCreatetime,
+			pne_createuser 	    AS pneCreateuser,
+			pne_is_show 	    AS pneIsShow,
+			pne_num_ll          AS pneNumLl
+		FROM
+			pub_notice
+		WHERE
+			pne_ntype = #{pneNtype}
+		ORDER BY
+			pne_createtime desc
+		LIMIT 
+			10 
+	</select>
+</mapper>

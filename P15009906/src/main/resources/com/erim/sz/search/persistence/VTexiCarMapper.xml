@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="vtexicar">
+	
+	<sql id="sql_column">
+		id,
+		tdl_id  AS tdlId,
+		cvalue  AS cvalue,
+		remark  AS remark,
+		money   AS money,
+		content AS content,
+		ntype   AS ntype
+	</sql>	
+	
+	<!-- 根据租车id 查询车辆包含信息 -->
+	<select id="selectTexiCar" resultType="vTexiCarBean">
+		SELECT
+			<include refid="sql_column"></include>
+		FROM
+			v_texi_car
+		WHERE
+			tdl_id = #{tdlId}
+	</select>
+</mapper>

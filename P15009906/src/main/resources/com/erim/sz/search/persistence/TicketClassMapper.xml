@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ticketclass">
+
+	<!-- 不显示分页 -->
+	<select id="selectTicket" resultType="ticketClassBean">
+		SELECT
+			id,
+			tdl_id						AS tdlId,
+			tdl_ticket					AS tdlTicket,
+			tdl_moneyshow			    AS tdlMoneyshow,
+			tdl_expiry					AS tdlExpiry,
+			tdl_limited					AS tdlLimited,
+			tdl_change					AS tdlChange,
+			tdl_supplement				AS tdlSupplement,
+			tdl_del_status				AS tdlDelStatus,
+			tdl_creattime				AS tdlCreattime
+		FROM
+			ticket_class
+		WHERE
+			tdl_id = #{tdlId} 
+	  	ORDER BY 
+	  		tdl_del_status
+	    DESC,
+			tdl_creattime 
+	  	DESC
+	</select>
+	
+</mapper>

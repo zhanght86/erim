@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>签证列表页_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+    <link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+    <link rel="bookmark" href="$staticRoot/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+<!--dwp html start-->
+		<div class="box_cb"></div>
+		<!--导航-->
+          #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+		<form id="form1" method="post" action="$appRoot/$cpyno/qianzhengxiang.html">
+		<div class="search-menu">
+    		<div class="search-div">
+				<label class="search-lab" style="width:280px;">
+            		<span class="smenu-title">日期：</span>
+            		<input type="text" class="search-input laydate-icon" onclick="laydate();" name="mdlDate" value="$!manament.mdlDate">
+            	</label>
+    			<label class="search-lab" style="width:280px;">
+    				<span class="smenu-title">国家：</span>  
+    				<input type="text" class="search-input" name="mdlAddress" value="$!manament.mdlAddress">
+    			</label>
+    			<button class="search-btn" value="" type="submit" onclick="$appRoot/$cpyno/qianzhengxiang.html">搜索</button>
+    		</div>
+    		<dl class="smenu-li">
+    			<dt class="smenu-title">送签领馆：</dt>
+    			<dd class="smenu-items">
+    				<span class="no-num  #if("" == $!manament.mdlSend || ! $manament.mdlSend) item-hover #end" onclick="$('#mdlSend').attr('value',''); $('#form1').submit();">不限</span>
+    				<div class="smenu-right">
+						#foreach($item in $send.keySet())
+							<span class="smenu-item #if($!manament.mdlSend == $item) item-hover #end "id="a_level_$item.id" onclick="$('#mdlSend').attr('value','$item'); $('#form1').submit();">$send.get($item)</span>
+    					#end
+    				</div>
+    				<span class="smenu-item-more">更多</span>
+    			</dd>
+    		</dl>
+			<dl class="smenu-li ">
+    			<dt class="smenu-title">签证类型：</dt>
+    			<dd class="smenu-items">
+    				<span class="no-num  #if("" == $!manament.mdlNtype || ! $manament.mdlNtype) item-hover #end" onclick="$('#mdlNtype').attr('value',''); $('#form1').submit();">不限</span>
+					#foreach($item in $ntype.keySet())
+						<span class="smenu-item #if($!manament.mdlNtype == $item) item-hover #end" id="a_level_$item.id" onclick="$('#mdlNtype').attr('value','$item'); $('#form1').submit();">$ntype.get($item)</span>
+    				#end
+    			</dd>
+    		</dl>
+			<dl class="smenu-li last">
+    			<dt class="smenu-title">面试：</dt>
+    			<dd class="smenu-items">
+    				<span class="no-num  #if("" == $!manament.mdlInterview || ! $manament.mdlInterview) item-hover #end" onclick="$('#mdlInterview').attr('value',''); $('#form1').submit();">不限</span>
+					#foreach($item in $!models.keySet())
+						<span class="smenu-item #if($!manament.mdlInterview == $item) item-hover #end"  onclick="$('#mdlInterview').attr('value','$item'); $('#form1').submit();">$!models.get($item)</span>
+    				#end
+    			</dd>
+    		</dl>
+    	</div>
+		<input type="hidden" name="mdlSend" id="mdlSend" value="$!manament.mdlSend"/>
+		<input type="hidden" name="mdlInterview" id="mdlInterview" value="$!manament.mdlInterview">
+		<input type="hidden" name="mdlNtype" id="mdlNtype" value="$!manament.mdlNtype">
+		</form>
+        <div class="g_cont pt25" style="clear:both">
+        	<div class="g_left_rt">
+				<ul class="g_list_2">
+					#foreach($item in $managementList)
+    					<li>
+								#if($!item.mdlFlag)
+									<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id?mdlDate=$!manament.mdlDate" target="_blank"><img src="$staticRoot$item.mdlFlag" title="" alt=""></a>
+								#else
+									<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id?mdlDate=$!manament.mdlDate" target="_blank"><img src="$staticRoot/images/visa1.jpg" title="" alt=""></a>
+								#end
+    						<div class="desc_txt">
+    							<p class="title"><a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id?mdlDate=$!manament.mdlDate" target="_blank" title="$!item.mdlAddress（$!item.mdlSend送签）">$!item.mdlAddress（$!item.mdlSend送签）</a></p>
+    							<p><span class="b_hui_mr10">签证类型:</span>$!item.mdlNtype</p>
+								<p><span class="b_hui_mr10">可停留天数:</span>$!item.mdlStay天</p>
+								<p><span class="b_hui_mr10">有效期:</span>$!item.mdlValidity月</p>
+								<p><span class="b_hui_mr10">入境次数:</span>$!item.mdlNum</p>
+								<p><span class="b_hui_mr10">办理时长:</span>收集材料后需$!item.mdlLong天</p>
+    						<!--<p><span class="b_hui_mr10 b_rw48">供应商</span>$!item.cpyId</p>-->
+    						</div>
+    						<div class="tool_block">
+    							<p class="price-d pt20">
+									#if($!item.mdlPriceSeal == 0)
+										<em>暂无量价</em>
+									#end
+									#if($!item.mdlPriceSeal != 0)
+										<em>￥$item.mdlPriceSeal</em>起
+									#end
+								</p>
+    							<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id?mdlDate=$!manament.mdlDate" target="_blank">查看</a>
+    						</div>
+    						<div class="box_cb"></div>
+    					</li>
+					#end
+				</ul>
+				#parse("common/page.vm")
+            </div>
+			
+			#parse("common/hot.vm")
+            
+            <div class="box_cb"></div>
+        </div>
+<!--dwp html end-->
+        
+		#parse("common/footer.vm")
+	</div>
+</body>
+</html>
+<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".g_nav_box .nav_1").on("click","a",function(){
+		if($(this).parent().hasClass("nav_price2")||$(this).parent().parent().hasClass("nav_price2"))
+		{$(".select_list .a_1").addClass("del_s").html($(this).text()+" &times;");
+			em_sh();}
+		if($(this).parent().hasClass("nav_price")||$(this).parent().parent().hasClass("nav_price"))
+		{$(".select_list .a_2").addClass("del_s").html($(this).text()+" &times;");
+			em_sh();}
+		if($(this).parent().hasClass("nav_way")||$(this).parent().parent().hasClass("nav_way"))
+		{$(".select_list .a_3").addClass("del_s").html($(this).text()+" &times;");
+			em_sh();}
+		if($(this).hasClass("on"))
+		{return true;}
+		else if($(this).parent().hasClass("a_box_show"))
+		{$(this).addClass("on").siblings().removeClass("on");
+			$(this).parent().siblings().removeClass("on");
+		}else{$(this).addClass("on").siblings().removeClass("on");}
+	})
+	$(".g_nav_box .nav_1").on("click","#no_seed",function(){
+		$(".select_list .a_1").html($(this).text()+" &times;");
+		$(".select_list .a_1").removeClass("del_s");
+		$(this).siblings('.a_box_show').children().removeClass("on");
+		em_sh();})
+	$(".g_nav_box .nav_1").on("click","#no_seed2",function(){
+		$(".select_list .a_2").html($(this).text()+" &times;");
+		$(".select_list .a_2").removeClass("del_s");
+		$(this).siblings('.a_box_show').children().removeClass("on");
+		em_sh();})
+	$(".g_nav_box .nav_1").on("click","#no_seed3",function(){
+		$(".select_list .a_3").html($(this).text()+" &times;");
+		$(".select_list .a_3").removeClass("del_s");
+		$(this).siblings('.a_box_show').children().removeClass("on");
+		em_sh();})
+	$(".select_list").on("click","span",function(){
+		cName=$(this).attr('class');
+		switch(cName){
+			case "a_1 del_s":
+				$("#no_seed").addClass('on').siblings().children().removeClass('on');
+				$(this).removeClass("del_s");
+				break;
+			case "a_2 del_s":
+				$("#no_seed2").addClass('on').siblings().children().removeClass('on');
+				$(this).removeClass("del_s");
+				break;
+			case "a_3 del_s":
+				$("#no_seed3").addClass('on').siblings().children().removeClass('on');
+				$(this).removeClass("del_s");
+				break;
+			default:
+				return false;
+		}
+		em_sh();
+	})
+	
+	
+var currentHeight = $("#mybox").css("height");
+
+//Set height to auto
+$("#mybox").css("height","auto");
+
+//Store auto height
+var animateHeight = $("#mybox").css("height");
+
+//Put height back
+$("#mybox").css("height", currentHeight);
+
+//Do animation with animateHeight
+$("#mybox").animate({
+     height: animateHeight
+     }, 500);
+	
+		$(".g_nav_box .nav_1").on("click",".more_but",function(){
+			if($(this).text()=="+更多"){
+				
+				var currentHeight = $(this).parent().css("height");
+				$(this).parent().css("height","auto");
+				var animateHeight = $(this).parent().css("height");
+				$(this).parent().css("height", currentHeight);
+				$(this).parent().animate({height: animateHeight});
+				//$(this).animate({"color":"#ffffff"});
+				$(this).text("- 收缩");
+			}else{
+				$(this).parent().animate({height:"24px"});
+				$(this).text("+更多");
+			}
+		})
+	function em_sh(){
+		if($(".select_list span").hasClass("del_s")){
+			$(".select_list em").hide();
+		}else{
+			$(".select_list em").show();
+		}
+	}
+});
+
+$(function(){
+		if('$!manament.mdlSend' != ''){
+			$(".smenu-item-more").text("收起");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").show();
+		}else{
+			$(".smenu-item-more").text("更多");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").hide();
+		}
+
+});
+
+</script>

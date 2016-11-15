@@ -1,0 +1,75 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jd_03.png" alt="房型管理" title="房型管理">房型管理</p>
+	<div class="g_line mb30"></div>
+	<div class="input_block clearfix mb30">
+		<form method="post" id="form1">
+    		<div class="label_leftw" style="margin-left:17px;">房型名称：</div>
+    		<div class="input_right">
+    			<input class="w150" name="hheName" value="$!roomBean.hheName"/>
+                &nbsp;
+    			<label class="ml35">上架状态：</label>
+    			<select class="w90" name="hheIsDelStatus">
+    				<option #if($roomBean.hheIsDelStatus == '') selected #end value=""></option>
+    				<option #if($roomBean.hheIsDelStatus == '02') selected #end value="02">上架</option>
+    				<option #if($roomBean.hheIsDelStatus == '01') selected #end value="01">下架</option>
+    			</select>
+				<button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/hotel/room/listPage');">&nbsp;查 询&nbsp;</button>
+           </div>
+        </form>
+	</div>
+	<div class="g_line mb20 ml20"></div>
+	<div class="input_block clearfix mb20">
+		<div class="label_left"></div>
+		<div class="input_right add_but_box ml35">
+			<button class="y_but b_ml23 pl0" type="button" onclick="index.load('$appRoot/hotel/room/insertPage?hdlId=$hdlId');">+ 新增房型</button>
+		</div>
+	</div>
+	<div class="carad_ctrtable" style="width:90%;margin-left:32px;">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>房型名称</td>
+					<td>可入住人数</td>
+					<td>房间面积</td>
+					<td>房间数</td>
+					<td>房间管理</td>
+					<td>上线状态</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $roomList)
+				<tr #if($velocityConunt % 2 != 0) class="ttr" #end>
+					<td>$!item.hheName</td>
+					<td>$!item.hhePresonnum 人</td>
+					<td>$!item.hheArea 平方米</td>
+					<td>$!item.hheHomenum 间</td>
+					<td class="carad_a">
+						<a href="javascript:index.load('$appRoot/hotel/room/updatePage?id=$!item.id');">查看/修改</a>
+					</td>
+					<td class="carad_img">
+						#if($!item.hheIsDelStatus == '02')
+                            <img src="$staticRoot/images/htcar2.png"> &nbsp;
+    						<a href="javascript:index.load('$appRoot/hotel/room/updateStatus?id=$!item.id&hheIsDelStatus=01&hdlId=$!hdlId');">
+								<img src="$staticRoot/images/htcar3.png">
+							</a> 
+						#end
+						#if($!item.hheIsDelStatus == '01')
+    						<a href="javascript:index.load('$appRoot/hotel/room/updateStatus?id=$!item.id&hheIsDelStatus=02&hdlId=$!hdlId');">
+								<img src="$staticRoot/images/htcar4.png" />
+							</a> &nbsp;  
+    						<img src="$staticRoot/images/htcar5.png">
+						#end
+					</td>
+				</tr>
+				#end
+			</tbody>
+		</table>
+	<!--	#parse("common/page.vm") -->
+		<div class="carinfo_ctbl">
+        	 <div class="carinfo_ctblrbtn">
+        		<button  type="button" onclick="index.load(page.url);"  style="float:left;"  class="carinfo_qu">返回</button>
+        	 </div>
+        </div>
+	</div>
+</div>

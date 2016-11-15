@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>user index</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/dingdan.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/h5.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$(".delete_a").live("click",function(){
+		$(this).parent().parent().remove();
+		//return false;
+		for(var i=0;i<=$(".posi_block").length;i++)
+		{
+			$(".posi_con1 em").eq(i).text(i+1);
+		}		
+	})
+	$(".a_button3").bind("click",function(){
+		var num1=$(".posi_con1").length+1;
+		$(this).parent().before("<div class='posi_block pl30'><div class='form_block pl60'><label>姓名：</label><input class='select_1' type='text' placeholder='姓名必须和证件名一致'> <span class='error'>*</span></div><div class='form_block pl60'><label>乘客类型：</label><label style='margin-left:-25px;'><input name='RadioGroup"+num1+1+"' type='radio' id='RadioGroup"+num1+1+"_0' value='成人票' checked>成人票</label><label><input type='radio' name='RadioGroup"+num1+1+"' id='RadioGroup"+num1+1+"_1' value='儿童票'>儿童票</label> </div><div class='form_block pl60'><label>证件类型：</label><select class='select_2' style='height:23px;'><option>二代身份证</option></select> <input class='select_1' type='text' placeholder='请填写正确的证件号码'> <span class='error'>*</span></div><div class='posi_con1' style='margin-left:30px;'>"+num1+"<a class='delete_a' href='javascript:void(0);'>&times;</a></div><div class='g_line mb20 mr100'></div></div>");
+		return false;
+	})
+})
+</script>
+</head>
+<body>
+
+	<header class="mb10">
+	  <div class="head_cont clearfix">
+			<a href="#"><img class="img_block" src="images/step_03.jpg" title="" alt=""></a>
+			<span class="nav_mini"><a href="#">会员中心</a>|<a href="#">网站首页</a></span>
+	  </div>
+</header>
+	<div class="g_cont">
+		<img class="mb10" src="images/step_05.jpg" title="进度：填写信息" alt="进度：填写信息">
+	  <div class="g_lt_l">
+       <div class="g_block_2 mb10">
+		  <h3 class="g_tit_1 mb20" style="position: inherit;">联系人信息<span class="box_2 ml220 fs12">登录一键设置联系人信息，<a href="#">立即注册</a>，已是佳佳会员，<a href="#">立即登录</a></span></h3>
+		  <div class="form_block pl90"><label>姓名：</label><input class="select_1" type="text" placeholder="联系人姓名"></div>
+		  <div class="form_block pl90"><label>手机号码：</label><input type="text" placeholder="接受验证信息和订单号码">
+						 <input type="button" id="btn" class="ml20" value="发送验证码" /> <span class="error">*</span>
+			<script type="text/javascript">
+var wait=60;
+document.getElementById("btn").disabled = false;  
+function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");  
+			o.style.cssText="background-color:#FAAF4B;";        
+            o.value="发送验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+			o.style.cssText="background-color:#c8c8c8;";
+            o.value= "("+ wait + ")重新发送";
+            wait--;
+            setTimeout(function() {
+                time(o)
+            },
+            1000)
+        }
+}
+document.getElementById("btn").onclick=function(){time(this);}
+</script></div>
+				<div class="form_block pl90 mb20 on_error"><label>验证码：</label><input type="text"/> <span class="error">验证码错误请重新输入</span></div>
+	    </div>
+		<div class="g_block_2 mb20">
+            <h3 class="g_tit_1 mb20">乘机人信息</h3>
+            <div class="posi_block pl30">
+				<div class="form_block pl60"><label>姓名：</label><input class="select_1" type="text" placeholder="姓名必须和证件名一致"/> <span class="error">*</span></div>
+				<div class="form_block pl60"><label>乘客类型：</label><label class="select_2_2">
+					<input name='RadioGroup1' type='radio' value="成人票" checked>成人票</label>
+					<label><input type='radio' name='RadioGroup1' value="儿童票">儿童票</label> 
+				</div>
+				<div class="form_block pl60"><label>证件类型：</label><select class='posi_block select_2_2' style="height:23px;"><option>二代身份证</option></select>
+					<input class="select_1" type="text" placeholder='请填写正确的证件号码'/><span class="error"> *</span>
+				</div>
+				<div class="posi_con1 ml30">1</div>
+				<div class="g_line mb20 mr100"></div>
+			</div>
+            <div class="posi_block pl30">
+            	<div class='form_block pl60'><label>姓名：</label><input class="select_1" type='text' placeholder='姓名必须和证件名一致'/> <span class='error'>*</span></div>
+            	<div class='form_block pl60'><label>乘客类型：</label><label class="select_2_2">
+					<input name='RadioGroup2' type='radio' id='RadioGroup2_0' value="成人票" checked>成人票</label>
+					<label><input type='radio' name='RadioGroup2' id='RadioGroup2_1' value="儿童票">儿童票</label> 
+				</div>
+            	<div class='form_block pl60'><label>证件类型：</label><select class='posi_block select_2'><option>二代身份证</option></select>
+					<input class="select_1" type='text' placeholder='请填写正确的证件号码'/>
+					<span class='error'>*</span>
+				</div>
+           		<div class='posi_con1 ml30'>2<a class='delete_a' href='javascript:void(0);'>&times;</a></div>
+            	<div class='g_line mb20 mr100'></div>
+			</div>
+            <p class="pl120 ml130 mb30"><a class="a_button3" href="javascript:void(0);">添加乘客</a></p>
+		</div>
+        <div class=" g_block_2">
+            	<h3 class="g_tit_1 mb20">发票信息</h3>
+                <div class="form_block pl90">
+                    <label class="select_2_2"><input name="RadioGroup3" type="radio" id="RadioGroup3_0" value="" checked> 快递送达<strong class="cfs">¥10</strong></label>                 
+                    <label> <input type="radio" name="RadioGroup3" value="" id="RadioGroup3_1"> 个人领取</label>
+              </div>
+                <div class="add_mon mb10"><hr class="hr1" /></div>
+                <div class="form_block pl90"><label>配送信息：</label>订单金额度发票</div>
+                <div class="form_block pl90"><label>收件人：</label><input class="select_1" type="text" placeholder="收件人姓名"></div>
+                <div class="form_block pl90"><label>手机号码：</label><input class="select_1" type="text" placeholder="手机号码"></div>
+                <div class="form_block pl90"><label>派送地址：</label><select class="sel_1" ><option>河北省</option></select>
+                <select class="sel_1"><option>石家庄市</option></select>
+                <input class="select_1" type="text"></div>
+             	<div class="form_block pl90"><label>邮编：</label><input class="select_2" type="text" placeholder="邮编"></div>
+            </div> 
+            <div class="form_block2 pl90 mb100">
+			<p class="g_txt_1 mt30"><label><input name="Fruit" type="checkbox" />&nbsp;&nbsp;&nbsp;同意佳佳旅行网服务条款 <a href="#">查看条款</a> 并核实你所填写信息无误 </label></p><br>
+				<input class="a_button ml150" type="submit" value="提交信息">
+		</div></div>
+            <div class="g_lt_r">
+                <div class="g_block_2 mb10">
+                <h3 class="g_tit_1 mb20">结算详情</h3>
+                <div class="g_txt_1 mb10">
+                <img class="img_block;" style="margin-left:24px;" src="images/tt_6.jpg"></div>
+                <div class="g_txt_1 mb10">
+					<p class="ml30"><a href="#"><font color="#FF9933;">改退签规则</font></a>
+						<a class="ml80" href="#"><font color="#FF9933;">修改航班></font></a>
+					</p>
+                </div>
+              </div>
+              <div class="g_block_5 pl18 pr18">
+                    <h3 class="g_tit_2 mb10">结算信息</h3>
+                    <ul class="g_list_1">
+                        <li>成人票<span>¥ 29.9×2</span>
+                        <li>快递费用<span>¥ 10×1</span>
+                    </ul>
+                <p class="add_mon mt50 mb20 pt20" >支付总额<span><font size="+2">¥</font> 29.9</span></p>
+              </div>
+      </div>
+           
+</div></div>
+		<div class="cb"></div>
+		<footer>
+			<p>Copyright © 2002-2014  版权所有  北京佳旅联合国际旅行社有限公司   苏ICP证B2-20100204  旅行社业务许可证：L-JS-CJ00070	</p>
+		</footer>
+	</div>
+	
+</body>
+</html>
+ 

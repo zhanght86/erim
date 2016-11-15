@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>特价详情内容页</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css"
+	href="$staticRoot/css/headerfooter.css">
+<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript"
+	language="javascript"></script>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+
+		<!--dwp html start-->
+		<div class="g_cont">
+			<h1 class="g_title_1">
+				【土家蜜月】$line.ldlName<a class="download" href="#" title="">下载文本行程</a>
+			</h1>
+
+			<div class="imgshow_box">
+				<ul id="img_block" class="img_block">
+					<li><a href="#" title="" target="_blank"><img
+							src="$staticRoot/images/tem_img/11.jpg" title="" alt="" /></a></li>
+					<li><a href="#" title="" target="_blank"><img
+							src="$staticRoot/images/tem_img/1.jpg" title="" alt="" /></a></li>
+					<li><a href="#" title="" target="_blank"><img
+							src="$staticRoot/images/tem_img/111.jpg" title="" alt="" /></a></li>
+					<li><a href="#" title="" target="_blank"><img
+							src="$staticRoot/images/tem_img/1111.jpg" title="" alt="" /></a></li>
+				</ul>
+				<ul id="img_menu" class="img_menu">
+					<li><img src="$staticRoot/images/tem_img/11.jpg" title=""
+						alt="" /></li>
+					<li><img src="$staticRoot/images/tem_img/1.jpg" title=""
+						alt="" /></li>
+					<li><img src="$staticRoot/images/tem_img/111.jpg" title=""
+						alt="" /></li>
+					<li class="last"><img
+						src="$staticRoot/images/tem_img/1111.jpg" title="" alt="" /></li>
+				</ul>
+			</div>
+			<div class="date_box">
+				<dl class="list_1">
+					<dt>线路概要：</dt>
+					<dd>
+						<span>故宫博物院</span> &gt; <span>阳明山国家公园</span> &gt; <span>清境农场日月潭</span>
+						&gt; <br>
+						<span>奋起湖风景区</span> &gt; <span>阿里山六合夜市</span> &gt; <span>D5西子湾风景区</span>
+						&gt; <span>猫鼻头公园</span> &gt; <span>龙磐公园</span><a href="#more">
+							&gt; [路线详情]</a>
+					</dd>
+					<div class="box_cb mb10"></div>
+					<dt>出发城市：</dt>
+					<dd class="dd_bold">石家庄</dd>
+				</dl>
+				<div class="box_cb mb10"></div>
+				<div class="date_block mb10">
+					<img src="$staticRoot/images/tem_img/d_03.jpg">
+				</div>
+				<p class="tel_p">
+					贵宾热线<strong>400 - 6666 - 666</strong><a href="#" title="">立即预订</a>
+				</p>
+			</div>
+			<div class="box_cb mb20"></div>
+			<p class="g_tab">
+				<a class="tab_1 on" href="javascript:void(0);" name="more">行程安排</a><a
+					class="tab_2" href="javascript:void(0);">景点特色</a><a class="tab_3"
+					href="javascript:void(0);">费用包含</a><a class="tab_4"
+					href="javascript:void(0);">预订通知</a>
+			<p>
+			<div class="tab_block">
+				<div class="block_tab_1">
+					<div class="left">
+						<ul id="menu">
+							<li class="on"><a href="#1">第1天</a></li>
+							<li><a href="#2">第2天</a></li>
+							<li><a href="#3">第3天</a></li>
+							<li><a href="#4">第4天</a></li>
+							<li><a href="#5">第5天</a></li>
+							<li><a href="#6">第6天</a></li>
+							<li><a href="#7">第7天</a></li>
+							<li><a href="#8">第8天</a></li>
+							<li><a href="#9">第9天</a></li>
+							<li><a href="#10">第10天</a></li>
+						</ul>
+					</div>
+
+					<div class="right">
+						<div class="block" id="block_1">
+							<a name="1"></a>
+							<h3 class="g_title_2">
+								第一天<span class="way_line">上海 &rarr; 苏黎世</span>
+							</h3>
+							<div class="desc_block">
+								<div class="txt_desc">
+									<p>(0)由于近期台湾入台证配额非常紧张，根据实际情况可能会让您更改通行证上的签注类型，这样有利于最后的成行。敬请谅解。</p>
+									<br>
+									<p>
+										(1)<strong>飞行时间:</strong> 约2小时<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;航班:
+										由上海搭乘班机到桃园（具体航班信息请在预订下一步中查看）
+									</p>
+									<br>
+									<p>
+										(2)<strong>前往酒店:</strong> 当地酒店双人标间
+									</p>
+								</div>
+								<div class="img_desc">
+									<img src="$staticRoot/images/tem_img/111.jpg">
+								</div>
+								<div class="box_cb"></div>
+							</div>
+						</div>
+						<div class="block" id="block_2">
+							<a name="2"></a>
+							<h3 class="g_title_2">
+								第二天<span class="way_line">苏黎世 &rarr; 琉森</span>
+							</h3>
+							<div class="desc_block">
+								<div class="txt_desc">
+									<dl>
+										<dt>07：00 用餐时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">早餐:
+											酒店内</dd>
+										<dt>08：00 行驶时间: 约30分钟 | 游览时间: 约2小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											[台北故宫博物院]<br>
+											故宫博物院为中国宫殿式建筑，一、二、三层为展览陈列空间，四楼为休憩茶座——三希堂。其典藏了历代文物艺术精粹，大致可分为青铜器、书画、陶瓷器、图书典籍、工艺品和宫廷类文物等，几乎涵盖了整部五千年的中国历史，数量达65万5千多件。台北故宫博物院因此拥有“中华文化宝库”的美名。
+										</dd>
+										<dt>10：30 用餐时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">午餐:
+											中式团餐</dd>
+										<dt>13：00 行驶时间: 约2小时30分钟 | 游览时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											[阳明山国家公园]<br>
+											阳明山公园原名草山，因盛产茅草得名，后为纪念王阳明先生而改名。它泛指大屯山、七星山、纱帽山、小观音山所构成的山区，范围相当广大，阳明山公园是全台最大、景色最美的郊野公园。
+										</dd>
+
+										<dt>16：30 行驶时间: 约30分钟 | 购物时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											美妆<br>彩妆、药妆、护肤品。
+										</dd>
+										<dt>18：00 用餐时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">晚餐:
+											中式团餐</dd>
+										<dt>19：00行驶时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											前往酒店:<br>当地酒店双人标间
+										</dd>
+									</dl>
+								</div>
+								<div class="img_desc">
+									<img src="$staticRoot/images/tem_img/111.jpg">
+								</div>
+								<div class="box_cb"></div>
+							</div>
+						</div>
+						<div class="block" id="block_3">
+							<a name="3"></a>
+							<h3 class="g_title_2">
+								第三天<span class="way_line">上海 &rarr; 苏黎世</span>
+							</h3>
+							<div class="desc_block">
+								<div class="txt_desc">
+									<p>(0)由于近期台湾入台证配额非常紧张，根据实际情况可能会让您更改通行证上的签注类型，这样有利于最后的成行。敬请谅解。</p>
+									<br>
+									<p>
+										(1)<strong>飞行时间:</strong> 约2小时<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;航班:
+										由上海搭乘班机到桃园（具体航班信息请在预订下一步中查看）
+									</p>
+									<br>
+									<p>
+										(2)<strong>前往酒店:</strong> 当地酒店双人标间
+									</p>
+								</div>
+								<div class="img_desc">
+									<img src="$staticRoot/images/tem_img/111.jpg">
+								</div>
+								<div class="box_cb"></div>
+							</div>
+						</div>
+
+						<div class="block" id="block_4">
+							<a name="4"></a>
+							<h3 class="g_title_2">
+								第四天<span class="way_line">苏黎世 &rarr; 琉森</span>
+							</h3>
+							<div class="desc_block">
+								<div class="txt_desc">
+									<dl>
+										<dt>07：00 用餐时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">早餐:
+											酒店内</dd>
+										<dt>08：00 行驶时间: 约30分钟 | 游览时间: 约2小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											[台北故宫博物院]<br>
+											故宫博物院为中国宫殿式建筑，一、二、三层为展览陈列空间，四楼为休憩茶座——三希堂。其典藏了历代文物艺术精粹，大致可分为青铜器、书画、陶瓷器、图书典籍、工艺品和宫廷类文物等，几乎涵盖了整部五千年的中国历史，数量达65万5千多件。台北故宫博物院因此拥有“中华文化宝库”的美名。
+										</dd>
+										<dt>10：30 用餐时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">午餐:
+											中式团餐</dd>
+										<dt>13：00 行驶时间: 约2小时30分钟 | 游览时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											[阳明山国家公园]<br>
+											阳明山公园原名草山，因盛产茅草得名，后为纪念王阳明先生而改名。它泛指大屯山、七星山、纱帽山、小观音山所构成的山区，范围相当广大，阳明山公园是全台最大、景色最美的郊野公园。
+										</dd>
+
+										<dt>16：30 行驶时间: 约30分钟 | 购物时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											美妆<br>彩妆、药妆、护肤品。
+										</dd>
+										<dt>18：00 用餐时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">晚餐:
+											中式团餐</dd>
+										<dt>19：00行驶时间: 约1小时</dt>
+										<dd style="padding-left: 45px; margin-bottom: 10px;">
+											前往酒店:<br>当地酒店双人标间
+										</dd>
+									</dl>
+								</div>
+								<div class="img_desc">
+									<img src="$staticRoot/images/tem_img/111.jpg">
+								</div>
+								<div class="box_cb"></div>
+							</div>
+						</div>
+					</div>
+					<div class="box_cb"></div>
+				</div>
+				<div class="block_tab_2">$erim.emptyDefault($!line.ldlFeatures,'无')</div>
+				<div class="block_tab_3">$erim.emptyDefault($!line.ldlMoneyContain,'无')</div>
+				<div class="block_tab_4">$erim.emptyDefault($!line.ldlScheduleLimit,'无')</div>
+			</div>
+		</div>
+		<!--dwp html end-->
+		#parse("common/footer.vm")
+</body>
+</html>

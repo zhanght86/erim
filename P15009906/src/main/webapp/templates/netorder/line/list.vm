@@ -1,0 +1,88 @@
+	<form method="post" id="form1">
+    	<div class="g_block_2 mb20">
+			<div class="input_block clearfix mb0">
+    		<div class="input_right input_right_wauto">
+				<label class="ml25">产品编码：</label>
+				<input class="w130" "name="ldlCode">
+				<label class="ml25">涉及专线：</label>
+				<select class="w130" name="ldlProductStandard">
+					<option value=""></option>
+                    #foreach($item in $standard.keySet())
+						<option value="$item" #if($groundList.ldlProductStandard == $item) selected #end>$standard.get($item)</option>
+                    #end
+				</select>
+				<label class="ml25">线路名称：</label>
+				<input class="w150" name="ldlName">
+				<label class="ml25">同业识别：</label>
+				<select class="w130" name="ldlProductStandard">
+					<option value=""></option>
+                    #foreach($item in $standard.keySet())
+						<option value="$item" #if($groundList.ldlProductStandard == $item) selected #end>$standard.get($item)</option>
+                    #end
+				</select>
+				<br><br>
+				<label class="ml25">主要景点：</label>
+				<input class="w130 mr10"><a id="qq_add" href="javascript:void(0);">+</a>
+				
+				<span class="red_a ml25"  type="button" onclick="index.searchform('form1','$appRoot/orders/line/list');" >查询</span>
+			</div> 
+    	</div>
+    </div>
+	</form>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>产品编码</th>
+				<th>出发城市</th>
+				<th>线路名称</th>
+				<th>行程天数</th>
+				<th>产品主题</th>
+				<th>大交通</th>
+				<th>产品形态</th>
+				<th>产品标准</th>
+				<th>公司/品牌</th>
+				<th>负责人/电话</th>
+				<th>计调/电话</th>
+                <th>在线交谈</th>
+			</tr>
+			#foreach($item in $hotelList)
+				<tr>
+                  	<td>$!item.ldlCode</td>
+                    <td>$!item.ldlCity</td>
+					<td>$!item.ldlName</td>
+                    <td>没有</td>
+					<td>$!item.ldlProType1</td>
+					<td>$!item.ldlBigTraffic</td>
+					<td>$!item.ldlProductForm</td>
+					<td>$!item.ldlProductStandard</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cdlPeopleQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+				</tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>
+	  <script type="text/javascript">
+		$(document).ready(function(){
+			var clickNum=0;
+			$("#qq_add").click(function(){
+				if(clickNum<3){
+    				var hCont=$(this).prev().clone().val("");
+    				$(this).before(hCont);
+    				clickNum++;
+				}else{
+					$(this).html("<span class='ts_xxx' style='color:red;line-height:20px;'>最多可添4个</span>");
+					$(".ts_xxx").animate({opacity:"0"},2000,function(){
+						$(".ts_xxx").remove();
+				$(this).hide();
+					});
+					
+				}
+				
+			})
+		})
+   </script>

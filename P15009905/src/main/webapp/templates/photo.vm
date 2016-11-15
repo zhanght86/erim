@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>相册管理</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+    <script type="text/javascript">
+		$(function () {
+			// 上传图片个数
+			var num = $("#photo1 .photo_count").children().length;
+			$(".gallery_index").html(num+"/5");
+			
+        	// 当点击图片时
+        	$("#photo1 .photo_count img").click(function() {
+				var srcStr = $(this).attr("src");
+				$("#img1").attr("src", srcStr);
+        	});
+	
+			// 点击上传图片
+			$("#add_btn img").click(function() {
+				if (num >= 5) {
+    				alert("图片个数已达上限");
+    				return;
+				}
+				$("#reportimg1").click();
+			});
+			
+			// 点击上传
+			var guiId = '$!id';
+    		$(":button").click(function () {
+    	        ajaxFileUpload(guiId);
+    		});
+			
+			// 上传
+			$("#reportimg1").change(function() {
+                var str = $(this).val()
+				if (str != '') {
+					// 执行上传
+					photoUpload(guiId);
+				}
+			});
+			
+			var photo_id = 0;
+			
+			// 删除图片
+			$(".remove_btn_photo_div").click(function() {
+				$("#remove_popup").show();
+				photo_id = $(this).attr("id");
+			});
+			
+			// 确认
+			$(".shuxian").click(function(){
+				$.post(_appRoot + "/photo/delete?id="+photo_id, function(data){
+					if (data == 0) {
+						alert("服务器繁忙");
+					} else {
+						window.location = _appRoot + "/photo";
+					}
+				},'json')
+			});
+		});
+    </script>
+</head>
+<body>
+	#parse("common/photoUpload.vm")
+    <!-- header -->
+    <div class="header">
+        相册管理
+    </div>
+    <!-- content -->
+    <div class="content">
+        <div class="gallery_wraper">
+            <div class="gallery_big">
+				#if($!firstImg)
+				<img id="img1" src="$staticRoot$firstImg" />
+				#end
+            </div>
+            <div class="gallery_split"></div>
+            <div class="gallery">
+                <div id="photo1">
+    				#foreach($item in $guidePhoto)
+						<div style="position:relative">
+    						<div class="photo_count">
+            					<img style="height:50px;" src="$staticRoot$item.gptImgUrl" />
+                            </div>
+    						##<div style="margin-left:-25px;" class="remove_btn_photo_div" id="$item.id">
+    						<div style="margin-left:-20px" class="remove_btn_photo_div" id="$item.id">
+        						<img class="remove_btn_photo" src="$staticRoot/img/del.png" />
+                            </div>
+						</div>
+    				#end
+				</div>
+				<!-- 用户看到的上传组件 -->
+                <a id="add_btn">
+                    <img style="height:50px;width:22%;margin:5px;" src="$staticRoot/img/gallery_add_btn.jpg"/>
+                </a>
+				<div class="gallery_index">0/5</div>
+				<div style="height:200px;">
+                </div>
+				<!-- 真实上传组件 -->
+				<div hidden>
+        			<input type="file" accept="image/*" id="reportimg1" name="reportimg1"/>
+					<input type="button" id="photoBtn" value="上传" />
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- 选择照片来源 -->
+    <div id="photo_popup" class="popup_wraper">
+        <div class="tanchu">
+            <div class="wenben">
+                <a onclick=' $("#photo_popup").hide();'>从手机相册</a>
+            </div>
+            <div class="wenben">
+                <a onclick=' $("#photo_popup").hide();'>拍照</a>
+            </div>
+            <div class="wenben">
+                <a onclick=' $("#photo_popup").hide();'>返回</a>
+            </div>
+        </div>
+    </div>
+	<!-- 是否删除图片 -->
+	<div id="remove_popup" class="popup_wraper">
+        <div class="tanchu">
+            <div class="biaoti">是否删除？</div>
+            <div class="wenben anniu1">
+                <div class="anniu">
+                    <a onclick='$("#remove_popup").hide();' class="shuxian" style="color:#900">确定</a>
+                </div>
+                <div class="anniu">
+                    <a onclick='$("#remove_popup").hide();'>取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4_focus.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5.png"/>
+        </a>
+    </div>
+</body>
+</html>

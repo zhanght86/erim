@@ -1,0 +1,330 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ticket/ticket.css">
+<script type="text/javascript" src="$staticRoot/js/product/price.js"></script>
+<script>
+ 	//零售价和批发价的比较
+	function comparison(field, rules, i, options){
+        var tplCombinationPrice    = $("input[name='tplCombinationPrice']").val();
+		
+		var tplRetailPrice = $("input[name='tplRetailPrice']").val();
+		
+		if(parseInt(tplCombinationPrice) * 1.03 >= parseInt(tplRetailPrice)){
+            return '零售价必须大于批发价的3%';
+        }
+    }
+	
+	//同业价和批发价的比较
+	function comparison1(field, rules, i, options){
+        var tplCombinationPrice    = $("input[name='tplCombinationPrice']").val();
+		
+		var tplTradePrice =$("input[name='tplTradePrice']").val();
+		
+		if(parseInt(tplTradePrice)>parseInt(tplCombinationPrice)){
+            return '批发价必须大于或等于同业价';
+    	}
+    }
+	
+	//弹框零售价和批发价的比较
+	function comparisonMin(field, rules, i, options){
+        var tplCombinationPrice = $("#update_tplCombinationPrice").val();
+		
+		var tplRetailPrice = $("#update_tplRetailPrice").val();
+		
+		if(parseInt(tplCombinationPrice) * 1.03 >= parseInt(tplRetailPrice)){
+            return '零售价必须大于批发价的3%';
+        }
+    }
+	
+	//弹框同业价和批发价的比较
+	function comparisonMin1(field, rules, i, options){
+        var tplCombinationPrice = $("#update_tplCombinationPrice").val();
+		
+		var tplTradePrice =$("#update_tplTradePrice").val();
+		
+		if(parseInt(tplTradePrice)>parseInt(tplCombinationPrice)){
+            return '批发价必须大于或等于同业价';
+    	}
+    }
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jd_3.png" alt="量/价管理" title="量/价管理">$!tdlName 量/价管理</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/ticket/price/ticketPricePage?portal=03');">
+				<img src="$staticRoot/images/jd_7.png">
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/ticket/price/ticketPricePage?portal=02');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+		<div class="date_close pt10">
+			<form method="post" id="form3">
+    			<input type="text" class="validate[required]" name="start" id="start" onclick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+    			<input type="text" class="validate[required]" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start\',{m:1});}'})" />
+    			<button type="button" class="carinfo_sub" onclick="javascript:price.batchStop('form3','$appRoot/ticket/price/updateBatchIsOpen');">批量停售</button>
+            </form>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">票类名称：$!tclName</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="tpl_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.tplSign == '0')
+								<li class="finish_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_tplSign" value="$!item.tplSign">
+									<input type="hidden" name="date_tplTradePrice" value="$!item.tplTradePrice">
+									<input type="hidden" name="date_tplCombinationPrice" value="$!item.tplCombinationPrice">
+									<input type="hidden" name="date_tplRetailPrice" value="$!item.tplRetailPrice">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+										#if($shiro.hasPermission("PRODUCT_TICKET_NUM"))
+    										<!-- 量 -->
+        									#if($!item.tplIsSign == '01')
+    											不限量<br>
+    										#else
+    											量：$!item.tplSign 张<br>
+    										#end
+										#end
+										#if($shiro.hasPermission("PRODUCT_TICKET_COST"))
+        									同：$!item.tplTradePrice 元<br>
+        									批：$!item.tplCombinationPrice 元<br>
+        									零：$!item.tplRetailPrice 元
+										#end
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.tplIsOpen == '01')
+    							<li class="close_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_tplSign" value="$!item.tplSign">
+									<input type="hidden" name="date_tplTradePrice" value="$!item.tplTradePrice">
+									<input type="hidden" name="date_tplCombinationPrice" value="$!item.tplCombinationPrice">
+									<input type="hidden" name="date_tplRetailPrice" value="$!item.tplRetailPrice">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+										#if($shiro.hasPermission("PRODUCT_TICKET_NUM"))
+    										<!-- 量 -->
+        									#if($!item.tplIsSign == '01')
+    											不限量<br>
+    										#else
+    											量：$!item.tplSign 张<br>
+    										#end
+										#end
+										#if($shiro.hasPermission("PRODUCT_TICKET_COST"))
+        									同：$!item.tplTradePrice 元<br>
+        									批：$!item.tplCombinationPrice 元<br>
+        									零：$!item.tplRetailPrice 元
+										#end
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_tplSign" value="$!item.tplSign">
+									<input type="hidden" name="date_tplTradePrice" value="$!item.tplTradePrice">
+									<input type="hidden" name="date_tplCombinationPrice" value="$!item.tplCombinationPrice">
+									<input type="hidden" name="date_tplRetailPrice" value="$!item.tplRetailPrice">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										#if($shiro.hasPermission("PRODUCT_TICKET_NUM"))
+    										<!-- 量 -->
+        									#if($!item.tplIsSign == '01')
+    											不限量<br>
+    										#else
+    											量：$!item.tplSign 张<br>
+    										#end
+										#end
+										#if($shiro.hasPermission("PRODUCT_TICKET_COST"))
+        									同：$!item.tplTradePrice 元<br>
+        									批：$!item.tplCombinationPrice 元<br>
+        									零：$!item.tplRetailPrice 元
+										#end
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load('$appRoot/ticketclass/detail/insertticket?tdlId=$!tdlId');">返回</button>
+		<span>
+			<img src="$staticRoot/images/wuqiong.png" /> 不限量 
+			<img src="$staticRoot/images/ljgl_03.png" /> 正常出售 
+			<img src="$staticRoot/images/ljgl_01.png" /> 已停售
+			<img src="$staticRoot/images/ljgl_02.png" /> 已售完
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+		<span><b>票类/价格管理:</b></span>
+		<div class="cb"></div>
+		<div class="bg_block nobg_block">
+			<form method="post" id="form1">
+    			<div class="cb"></div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">日期：</div>
+    				<div class="input_righted11">
+							<input type="text" class="w80 validate[required] text-input" name="start" id="start1" onclick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+							<input type="text" class="w80 validate[required] text-input" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start1\',{m:1});}'})" />
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">按周选择：</div>
+    				<div class="input_right">
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="0">全选</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="1">周一</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="2">周二</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="3">周三</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="4">周四</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="5">周五</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="6">周六</label>
+						<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="7">周日</label>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+				#if($shiro.hasPermission("PRODUCT_TICKET_NUM"))
+    			<div class="input_block clearfix">
+    				<div class="label_left">可售票数：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110 tpl_sign_is">
+							<input type="text" class="w108 validate[required,custom[integer],maxSize[3],min[1]]" name="tplSign" placeholder="0" />
+						</span>
+						<span style="margin-left:-20px">张</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+						<label class="w65 ml15">
+							<input type="checkbox" name="tplIsSign" value="01" />不限量
+						</label>
+    				</div>
+    			</div>
+				#end
+				#if($shiro.hasPermission("PRODUCT_TICKET_COST"))
+    			<div class="input_block clearfix">
+    				<div class="label_left">同业价：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w95">
+							<input type="text" class="w65 validate[required,custom[integer],maxSize[6],min[1],max[100000]]" name="tplTradePrice" placeholder="0" />元/张
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+						<label class="ml15">批发价：</label>
+						<span class="tishi_box w95">
+							<input type="text" class="w65 validate[required,custom[integer],maxSize[6],max[100000],funcCall[comparison1]]" name="tplCombinationPrice" placeholder="0" />元/张
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml15">零售价：</label>
+						<span class="tishi_box w95">
+							<input type="text" class="w65 validate[required,custom[integer],maxSize[6],max[100000],funcCall[comparison]]" name="tplRetailPrice" placeholder="0" />元/张
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">可选服务：</div>
+    				<div class="input_right">
+    					保险 <span class="tishi_box w90">
+							<input type="text" class="w50 validate[custom[integer],maxSize[6],max[100000]]" name="tplInsurePrice" placeholder="0">元/人
+						</span>
+						<input type="text" class="w200  validate[maxSize[40]]" name="tplExplain" placeholder="说明：限40字以内" />
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">提前预订时间：</div>
+    				<div class="input_right">
+    					<label class="w50">
+                            <input type="radio" name="tplDateType" value="02" checked>当日</input>
+						</label>
+						<input type="text" name="tplSameH" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" style="width:70px;height:28px;margin-top:4px;">
+						</span> (时间)之前					
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">&nbsp;</div>
+    				<div class="input_right">
+    					<label class="w65">
+                            <input type="radio" name="tplDateType" value="01">游玩前</input>
+						</label>
+						<input type="text" class="validate[required,custom[integer],maxSize[2],min[1]]" name="tplForwardH" style="width:70px;height:28px;margin-top:4px;">
+						</span> (天)
+    				</div>
+    			</div>
+				#end
+    			<div class="button_block clearfix">
+					<button class="y_but ml35" id="btn" type="button" onclick="javascript:price.sub('btn', 'form1', '$appRoot/ticket/price/insertPrice', '$appRoot/ticket/price/ticketPricePage?portal=04')">&nbsp;提交&nbsp;</button>
+					<button class="b_but ml35" type="button" onclick="javascript:index.load('$appRoot/ticket/price/ticketPricePage?portal=04')">&nbsp;重 置&nbsp;</button>
+				</div>
+			</form>
+		</div>
+	</div><div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	<form method="post" id="form2">
+    	<div class="input_block clearfix">
+    		<div class="input_right">
+				<input type="hidden" name="id" id="update_id" />
+				#if($shiro.hasPermission("PRODUCT_TICKET_NUM"))
+    			<div class="mb15">
+					<label class="ml15">可售票数：</label>
+					<span class="tishi_box w90">
+						<input type="text" class="w65 validate[required,maxSize[3]]" name="tplSign" placeholder="0" id="update_tplSign" />张
+					</span>
+				</div>
+				#end
+				#if($shiro.hasPermission("PRODUCT_TICKET_COST"))
+    			<div class="mb15">
+					<label class="ml15">同业价格：</label>
+					<span class="tishi_box w110">
+						<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" name="tplTradePrice" placeholder="0" id="update_tplTradePrice" />元/张
+					</span>
+				</div>
+    			<div class="mb15">
+					<label class="ml15">批发价格：</label>
+					<span class="tishi_box w110">
+						<input type="text" class="w65 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparisonMin1]]" name="tplCombinationPrice" placeholder="0" id="update_tplCombinationPrice" />元/张
+					</span>
+				</div>
+    			<div class="mb15">
+					<label class="ml15">零售价格：</label>
+					<span class="tishi_box w110">
+						<input type="text" class="w65 validate[required,custom[integer],maxS[100000],maxSize[6],funcCall[comparisonMin]]" name="tplRetailPrice" placeholder="0" id="update_tplRetailPrice" />元/张
+					</span>
+				</div>
+				#end
+    		</div>
+    	</div>
+    	<div class="button_block button_block_wauto clearfix">
+			<button class="y_but ml15 mr20" type="button" id="tplQueding">提交</button>
+			<button class="b_but" type="button" id="tplQuxiao">取 消</button>
+		</div>
+    </form>
+</div>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="texidrive">
+	<!-- 自驾查询 -->
+	<select id="selectByDriveId" resultType="texiDriveBean">
+	  SELECT
+	     	id,
+			zjl_type 							AS zjlType,
+			zjl_place_car 	                    AS zjlPlaceCar,
+			zjl_province 	                    AS zjlProvince,
+			zjl_city 	                    	AS zjlCity,
+			zjl_place_car 	                    AS zjlPlaceCar,
+			zjl_hf_limit                        AS zjlHfLimit,
+			zjl_hf_limit_km                    	AS zjlHfLimitKm,
+			zjl_hf_take_place 		            AS zjlHfTakePlace,
+			zjl_hf_take_address                	AS zjlHfTakeAddress,
+			zjl_hf_back_place 					AS zjlHfBackPlace,
+			zjl_hf_back_address 			    AS zjlHfBackAddress,
+			zjl_hf_cost_show           			AS zjlHfCostShow,
+			zjl_hf_back_notice             		AS zjlHfBackNotice,
+			zjl_hf_breach_notice          		AS zjlHfBreachNotice,
+			zjl_hf_insurance_notice  			AS zjlHfInsuranceNotice,
+			zjl_hf_update_notice 			    AS zjlHfUpdateNotice,
+			zjl_hf_special_note 		        AS zjlHfSpecialNote,
+			zjl_limit            		        AS zjlLimit,
+			Zjl_take_place      			    AS ZjlTakePlace,
+			zjl_take_address                    AS zjlTakeAddress,
+			zjl_back_place                      AS zjlBackPlace,
+			zjl_back_address                    AS zjlBackAddress,
+			zjl_cost_show 		            	AS zjlCostShow,
+			zjl_back_show           			AS zjlBackShow,
+			zjl_breach_notice        			AS zjlBreachNotice,
+			zjl_insurance_notice 		        AS zjlInsuranceNotice,
+			zjl_update_notice 		            AS zjlUpdateNotice,
+			zjl_special_notice 		            AS zjlSpecialNotice,
+			zjl_day								AS zjlDay
+	  FROM
+	      texi_drive
+	  WHERE
+	      id = #{id}
+   </select>
+   <!-- 自驾查询 -->
+	<select id="selectList" resultType="texiDriveBean">
+	  SELECT
+	     	id,
+			zjl_type 							AS zjlType,
+			zjl_place_car 	                    AS zjlPlaceCar,
+			zjl_province 	                    AS zjlProvince,
+			zjl_city 	                    	AS zjlCity,
+			zjl_place_car 	                    AS zjlPlaceCar,
+			zjl_hf_limit                        AS zjlHfLimit,
+			zjl_hf_limit_km                    	AS zjlHfLimitKm,
+			zjl_hf_take_place 		            AS zjlHfTakePlace,
+			zjl_hf_take_address                	AS zjlHfTakeAddress,
+			zjl_hf_back_place 					AS zjlHfBackPlace,
+			zjl_hf_back_address 			    AS zjlHfBackAddress,
+			zjl_hf_cost_show           			AS zjlHfCostShow,
+			zjl_hf_back_notice             		AS zjlHfBackNotice,
+			zjl_hf_breach_notice          		AS zjlHfBreachNotice,
+			zjl_hf_insurance_notice  			AS zjlHfInsuranceNotice,
+			zjl_hf_update_notice 			    AS zjlHfUpdateNotice,
+			zjl_hf_special_note 		        AS zjlHfSpecialNote,
+			zjl_limit            		        AS zjlLimit,
+			Zjl_take_place      			    AS ZjlTakePlace,
+			zjl_take_address                    AS zjlTakeAddress,
+			zjl_back_place                      AS zjlBackPlace,
+			zjl_back_address                    AS zjlBackAddress,
+			zjl_cost_show 		            	AS zjlCostShow,
+			zjl_back_show           			AS zjlBackShow,
+			zjl_breach_notice        			AS zjlBreachNotice,
+			zjl_insurance_notice 		        AS zjlInsuranceNotice,
+			zjl_update_notice 		            AS zjlUpdateNotice,
+			zjl_special_notice 		            AS zjlSpecialNotice,
+			zjl_day								AS zjlDay
+	  FROM
+	      texi_drive
+	  WHERE
+	      tdl_id = #{tdlId}
+   </select>
+</mapper>

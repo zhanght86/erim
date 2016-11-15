@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TicketClass">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="tdlId != null  and tdlId != ''">	and 	tdl_id 	 =  #{tdlId} </if>
+		</where>
+	</sql>
+	<sql id="sql_column_price">
+		id						AS  priceId,
+		tcl_id					AS	tclId,
+		tcl_type				AS	tclType,
+		tpl_date				AS	tplDate,
+		tpl_is_open				AS	tplIsOpen,
+		tpl_week				AS	tplWeek,
+		tpl_sign				AS	tplSign,
+		tpl_is_sign				AS	tplIsSign,
+		tpl_trade_price			AS	tplTradePrice,
+		tpl_combination_price	AS	tplCombinationPrice,
+		tpl_retail_price		AS	tplRetailPrice,
+		tpl_insure_price		AS	tplInsurePrice,
+		tpl_Explain				AS	tplExplain,
+		tpl_date_type			AS	tplDateType,
+		tpl_same_h				AS	tplSameH,
+		tpl_same_m				AS	tplSameM,
+		tpl_forward_d			AS	tplForwardD,
+		tpl_forward_h			AS	tplForwardH,
+		tpl_forward_m			AS	tplForwardM,
+		tpl_create_time			AS	tplCreateTime,
+		tpl_create_user			AS	tplCreateUser,
+		cpy_id					AS	cpyId
+	</sql>
+	<sql id="sql_column">
+			id,
+			tdl_id						AS tdlId,
+			tdl_ticket					AS tdlTicket,
+			tdl_limited					AS tdlLimited,
+			tdl_moneyshow			    AS tdlMoneyshow,
+			tdl_expiry					AS tdlExpiry,
+			tdl_change					AS tdlChange,
+			tdl_supplement				AS tdlSupplement,
+			tdl_del_status				AS tdlDelStatus,
+			tdl_creattime				AS tdlCreattime
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="ticketClassBean">
+	select 
+		 	<include refid="sql_column" />
+			<if test="tplDate != null  and tplDate != ''">	
+			,(
+				select 
+					a.tpl_retail_price 
+				from 
+				(
+					select 
+						tdl_id,tcl_id ,tpl_retail_price, tpl_create_time 
+					from 
+						ticket_price 
+					where 
+						tpl_is_open = '02'
+						and tpl_date = #{tplDate} 
+					order by 
+						tpl_create_time desc 
+				) a
+				where a.tcl_id = ticket_class.id
+				ORDER BY a.tpl_create_time desc
+				limit 1
+			
+			) as tplRetailPrice,
+			(
+				select 
+					a.tpl_date_type 
+				from 
+				(
+					select 
+						tdl_id,tcl_id ,tpl_retail_price, tpl_create_time ,tpl_date_type
+					from 
+						ticket_price 
+					where 
+						tpl_is_open = '02'
+						and tpl_date =#{tplDate} 
+					order by 
+						tpl_create_time desc 
+				) a
+				where a.tcl_id = ticket_class.id
+				ORDER BY a.tpl_create_time desc
+				limit 1
+			
+			) as tplDateType,
+			(
+				select 
+					a.tpl_forward_h 
+				from 
+				(
+					select 
+						tdl_id,tcl_id ,tpl_retail_price, tpl_create_time ,tpl_forward_h
+					from 
+						ticket_price 
+					where 
+						tpl_is_open = '02'
+						and tpl_date =#{tplDate} 
+					order by 
+						tpl_create_time desc 
+				) a
+				where a.tcl_id = ticket_class.id
+				ORDER BY a.tpl_create_time desc
+				limit 1
+			
+			) as tplForwardH,
+			(
+				select 
+					a.tpl_same_h 
+				from 
+				(
+					select 
+						tdl_id,tcl_id ,tpl_retail_price, tpl_create_time ,tpl_same_h
+					from 
+						ticket_price 
+					where 
+						tpl_is_open = '02'
+						and tpl_date =#{tplDate} 
+					order by 
+						tpl_create_time desc 
+				) a
+				where a.tcl_id = ticket_class.id
+				ORDER BY a.tpl_create_time desc
+				limit 1
+			
+			) as tplSameH
+			</if>
+		from ticket_class
+		<include refid="sql_query" />
+	</select>
+	<select id="selectone" resultType="ticketClassBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			ticket_class
+		WHERE 
+			id = #{id}
+	</select>
+	
+</mapper>

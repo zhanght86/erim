@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="malldestination">
+	
+	<!-- 查询 -->
+	<select id="selectList" resultType="mallDestinationBean">
+		SELECT
+			id		       AS id,
+			cpy_id		   AS cpyId,
+			mdn_name	   AS mdnName,
+			mdn_createtime AS mdnCreatetime,
+			mdn_regioncode as mdnRegionCode,
+			mdn_regionlevel as mdnRegionLevel
+		FROM
+			mall_destination
+		WHERE
+			cpy_id = #{cpyId}
+		ORDER BY 
+			mdn_createtime asc
+	</select>
+	
+</mapper>

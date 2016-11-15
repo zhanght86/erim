@@ -1,0 +1,75 @@
+<form id="form1" method="post">
+	<div class="g_block_2 mb20">
+		<div class="input_block clearfix mb0">
+			<div class="input_right input_right_wauto">
+				<label>选择角色：</label>
+				<select name="roleid" class="w130">
+					<option value=""></option>
+					#foreach($item in $listRole)
+						<option value="$item.id">$item.sellRoleName</option>
+					#end
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th style="width:10%;">模块</th>
+				<th style="width:10%;">子模块</th>
+				<th>功能</th>
+			</tr>
+    			#foreach($item in $listFunc)
+    				#foreach($childitem in $item.childListSellSystemFuncBean)
+    					<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+    						#if($velocityCount == 1)
+        					<td rowspan="$item.childSize" style="border-right:1px solid #e2e2e2;">$item.sellFuncName</td>
+        					#end
+    						<td style="text-align:left;padding-left:20px;">$childitem.sellFuncName</td>
+    						<td style="text-align:left;padding-left:20px;">
+        						#foreach($rescource in $childitem.childListSellSystemFuncRescourceBean)
+    							<label>
+                                <input style="margin-left:30px;margin-right:5px;" type="checkbox" name="rescourceCode" value="$rescource.sellFuncRescourceCode"/>$rescource.sellFuncRescourceName 
+    					        </label>
+    							#end
+        					</td>
+    					</tr>
+    				#end
+				#end
+		</table>
+			<div class="content_btn2 " style="text-align: left; padding-left:50px; padding-bottom: 30px;width: 1000px; " >
+    				<!-- <button type="button" class="prev" onclick="javascript:regUtil.load('$appRoot/company/regedit/updateBusiness?cpyId=' + $!cpyId);">上一步</button> -->
+			<center>
+			<button type="button" class="red_a ml25"   onclick="javascript:regedit();" style="background-color:#CCCCCC;" >取消</button>
+			<button type="button" class="red_a ml25" style="margin-left:40px;"  onclick="javascript:regedit();">确定</button>
+			</center>
+           </div>
+	</div>
+</form>
+<script type="text/javascript">
+	//点击查询
+	$("select[name='roleid']").change(function(){
+		$("input[name='rescourceCode']").attr("checked",false);
+		//获取要查询角色值
+		var roleval = $("select[name='roleid']").val();
+		if(null != roleval && "" != roleval){
+			//获取角色对应权限
+			$.post("$appRoot/sell/func/ajaxGetFunByRoleid", {roleid:roleval},function(data){
+				//解析数组
+				$.each(data,function(i,item){
+					$("input[name='rescourceCode'][value='"+item.sellFuncCode+"']").attr("checked",'checked');
+				});
+			},'json');
+		}
+	});
+	
+	function regedit(){
+		var role = $("select[name='roleid']").val();
+		if("" == role){
+			wxcalert('请选择角色!');
+		}else{
+			form.sub("form1","$appRoot/sell/func/insert");
+		}
+	}
+</script>

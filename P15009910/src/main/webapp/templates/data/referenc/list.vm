@@ -1,0 +1,43 @@
+	<div class="g_block_2 mb20">
+		<div class="input_block clearfix mb0">
+			<div class="input_right input_right_wauto">
+				<form class="form-search" id="form11">
+				省：<input class="input-medium search-query" type="text"  name="sstProvince" />
+				市：<input class="input-medium search-query" type="text"  name="sstCity"/>
+				县：<input class="input-medium search-query" type="text"  name="sstCode"/>				
+				
+				<button type="button" class="red_a ml25"  onclick="index.searchform('form11','$appRoot/yj/data/list');">&nbsp;查 询&nbsp;</button>
+			</form> 
+			</div>
+		</div>
+	</div>
+	<div class="g_block_2 g_block_7 mb20">
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th style="width:75px">序号</th>
+				<th style="width:75px">省</th>
+				<th style="width:75px">市</th>
+				<th>名称</th>
+				<th>地址</th>
+				<th>电话</th>
+			</tr>
+			#foreach($item in $dataList)
+				<tr>
+              	    <td>$!item.id</td>
+                    <td>$!item.sstProvince</td>
+					<td>$!item.sstCity</td>
+					<td>$!item.sstName</td>
+                    <td>$!item.sstAddress</td>
+					<td>$!item.sstTelephone</td>
+                    ##<td>$date.format('yyyy年MM月dd日',$!item.sstTimestamp)</td>
+              </tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>
+<script type="text/javascript">
+	$("table tr:even").each(function(){
+		$(this).css("background-color","#fbfbfb");
+	})
+</script>

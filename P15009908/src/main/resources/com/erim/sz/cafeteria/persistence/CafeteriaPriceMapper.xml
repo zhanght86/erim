@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriaprice">
+	
+	<!-- 过滤条件 -->
+	<sql id="sql_query">
+		1 = 1
+		<!-- 套餐ID-->
+		<if test = "cpeId != null and cpeId != ''"> AND cpe_id = #{cpeId} </if>
+		<!-- 日期 -->
+		<if test = "cpcDate != null and cpcDate != ''"> AND cpc_date = #{cpcDate} </if>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		cpe_id					AS	cpeId,
+		cpe_name				AS	cpeName,
+		cpc_date				AS	cpcDate,
+		cpc_is_open				AS	cpcIsOpen,
+		cpc_week				AS	cpcWeek,
+		cpc_sign				AS	cpcSign,
+		cpc_is_sign				AS	cpcIsSign,
+		cpc_combination_price	AS	cpcCombinationPrice,
+		cpc_retail_price		AS	cpcRetailPrice,
+		cpc_explain				AS	cpcExplain,
+		cpc_create_time			AS	cpcCreateTime,
+		cpc_create_user			AS	cpcCreateUser,
+		cpy_id					AS	cpyId,
+		cpc_trade_price         AS  cpcTradePrice
+	</sql>
+	
+	<!-- 查询 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="cafeteriaPriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				cafeteria_price
+			ORDER BY
+				cpc_create_time
+			DESC
+		) t 
+		GROUP BY
+			t.cpcDate,
+			t.cpeId
+		HAVING
+			t.cpeId = #{bean.cpeId}
+			<!-- 日期 -->
+			AND t.cpcDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		INSERT INTO
+			cafeteria_price (
+				cpe_id,
+				cdl_id,
+				cpe_name,
+				cpc_date,
+				cpc_is_open,
+				cpc_week,
+				<if test = "cpcSign != null">
+					cpc_sign,
+				</if>
+				cpc_is_sign,
+				<if test = "cpcTradePrice != null or cpcCombinationPrice != null or cpcRetailPrice != null">
+					cpc_trade_price,
+					cpc_combination_price,
+					cpc_retail_price,
+				</if>
+				cpc_explain,
+				cpc_create_time,
+				cpc_create_user,
+				cpy_id
+			) VALUES (
+				#{cpeId},
+				#{cdlId},
+				#{cpeName},
+				#{cpcDate},
+				#{cpcIsOpen},
+				#{cpcWeek},
+				<if test = "cpcSign != null">
+					#{cpcSign},
+				</if>
+				#{cpcIsSign},
+				<if test = "cpcTradePrice != null or cpcCombinationPrice != null or cpcRetailPrice != null">
+					#{cpcTradePrice},
+					#{cpcCombinationPrice},
+					#{cpcRetailPrice},
+				</if>
+				#{cpcExplain},
+				#{cpcCreateTime},
+				#{cpcCreateUser},
+				#{cpyId}
+			)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		update
+			cafeteria_price
+		SET
+			cpc_sign					= #{cpcSign},
+			cpc_is_sign					= #{cpcIsSign},
+			cpc_combination_price		= #{cpcCombinationPrice},
+			cpc_retail_price			= #{cpcRetailPrice},
+			cpc_trade_price             = #{cpcTradePrice},
+			cpc_is_open					= '02'
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 更改是否出售状态 -->
+	<update id="updateIsOpen">
+		UPDATE
+			cafeteria_price
+		SET
+			cpc_is_open		= #{cpcIsOpen}
+		WHERE
+			id 	= #{id}
+	</update>
+	
+	<!-- 批量修改是否出售状态 -->
+	<update id="updateBatchIsOpen" parameterType="java.util.Map">
+		
+		UPDATE
+			cafeteria_price
+		SET
+			cpc_is_open		= #{bean.cpcIsOpen}
+		WHERE
+			cpe_id 			= #{bean.cpeId}
+			<!-- 日期 -->
+			AND cpc_date IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</update>
+</mapper>

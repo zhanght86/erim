@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mallweb">
+	
+	<!-- 查询 -->
+	<select id="findId" resultType="mallWebBean">
+		SELECT
+			id 				 AS id,
+			cpy_id 		     AS cpyId,
+			web_title 		 AS webTitle,
+			web_logo 		 AS webLogo,
+			web_kh 			 AS webKh,
+			web_cpyname 	 AS webCpyname,
+			web_img1 		 AS webImg1,
+			web_img2 	     AS webImg2,
+			web_img3 	     AS webImg3,
+			web_img4         AS webImg4,
+			web_teletephone  AS webTeletephone,
+			web_card 		 AS webCard,
+			web_lvyoucard    AS webLvyoucard,
+			web_cpyaddress   AS webCpyaddress,
+			web_cpytelephone AS webCpytelephone,
+			web_createtime   AS webCreatetime,
+			web_createuser   AS webCreateuser,
+			web_qq			 AS webQq
+		FROM
+			mall_web
+		WHERE
+			cpy_id  = #{cpyId}
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			mall_web
+		(
+			cpy_id,
+			web_title,
+			web_logo,
+			web_kh,
+			web_cpyname,
+			web_img1,
+			web_img2,
+			web_img3,
+			web_img4,
+			web_teletephone,
+			web_card,
+			web_lvyoucard,
+			web_cpyaddress,
+			web_cpytelephone,
+			web_createtime,
+			web_createuser,
+			web_qq
+		)
+		VALUES
+		(
+			#{cpyId},
+			#{webTitle},
+			#{webLogo},
+			#{webKh},
+			#{webCpyname},
+			#{webImg1},
+			#{webImg2},
+			#{webImg3},
+			#{webImg4},
+			#{webTeletephone},
+			#{webCard},
+			#{webLvyoucard},
+			#{webCpyaddress},
+			#{webCpytelephone},
+			#{webCreatetime},
+			#{webCreateuser},
+			#{webQq}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			mall_web
+		SET
+			web_title        = #{webTitle},
+			web_logo         = #{webLogo},
+			web_kh           = #{webKh},
+			web_cpyname      = #{webCpyname},
+			web_img1         = #{webImg1},
+			web_img2         = #{webImg2},
+			web_img3         = #{webImg3},
+			web_img4         = #{webImg4},
+			web_teletephone  = #{webTeletephone},
+			web_card         = #{webCard},
+			web_lvyoucard    = #{webLvyoucard},
+			web_cpyaddress   = #{webCpyaddress},
+			web_cpytelephone = #{webCpytelephone},
+			web_createtime   = #{webCreatetime},
+			web_createuser   = #{webCreateuser},
+			web_qq			 = #{webQq}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

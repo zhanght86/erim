@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelprice">
+	
+	<!-- 查询数据 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="hotelPriceBean">
+		SELECT * FROM (
+			SELECT
+				id,
+				hhe_id 					AS hheId,
+				cpy_id 					AS cpyId,
+				hdl_id 					AS hdlId,
+				hnp_date 				AS hnpDate,
+				hnp_is_open 			AS hnpIsOpen,
+				hnp_week 				AS hnpWeek,
+				hnp_breakfast 			AS hnpBreakfast,
+				hnp_trade_price 		AS hnpTradePrice,
+				hnp_combination_price 	AS hnpCombinationPrice,
+				hnp_retail_price 		AS hnpRetailPrice,
+				hnp_sign 				AS hnpSign,
+				hnp_start_h 			AS hnpStartH,
+				hnp_start_m 			AS hnpStartM,
+				hnp_end_h 				AS hnpEndH,
+				hnp_end_m 				AS hnpEndM,
+				hnp_service 			AS hnpService,
+				hnp_sell_time 			AS hnpSellTime,
+				hnp_sell_h 				AS hnpSellH,
+				hnp_sell_m 				AS hnpSellM,
+				hnp_create_user 		AS hnpCreateUser,
+				hrp_createtime 			AS hnpCreatetime
+			FROM
+				hotel_room_price
+			ORDER BY 
+				hrp_createtime 
+			DESC
+		) t
+		GROUP BY
+			t.hnpDate,
+			t.hheId
+		HAVING
+			<!-- 房型ID -->
+			t.hheId = #{bean.hheId} 
+			<!-- 日期 -->
+			and t.hnpDate  &gt;= date_format(now(),'%Y-%m-%d')
+			AND t.hnpDate IN 
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+			
+	</select>
+	
+</mapper>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelmeeting">
+	
+	<!-- 查询条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="hdlId != null and hdlId != ''">   	and 	    hdl_id 	     =   #{hdlId} 	</if>
+		</where>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		hmg_name          		AS hmgName,
+		hmg_area          		AS hmgArea,
+		hmg_personnum     		AS hmgPersonnum,
+		hmg_personnum_end 		AS hmgPersonNumEnd,
+		hmg_is_tea        		AS hmgIsTea,
+		hmg_shape		  		AS hmgShape,
+		hmg_renovation_date     AS hmgRenovationDate,
+		hdl_id            		AS hdlId,
+		hmg_img 			    AS hmgImg
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageHotelMeeting" resultType="hotelMeetingBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_meeting
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageHotelMeetingCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			hotel_meeting
+	</select>
+	
+	<!-- 根据ID查询一条信息 -->
+	<select id="selectMeetingById" resultType="hotelMeetingBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_meeting
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 根据酒店ID查询一条信息 -->
+	<select id="selectMeetingByHotelId" resultType="hotelMeetingBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_meeting
+		WHERE
+			hdl_id = #{id}
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert">
+		INSERT INTO
+			hotel_meeting
+			(
+				hmg_name,
+				hmg_area,
+				hmg_personnum,
+				hmg_personnum_end,
+				hmg_is_tea,
+				hmg_shape,
+				hmg_renovation_date,
+				hmg_img,
+				hdl_id
+			)
+		VALUES
+			(
+				#{hmgName},
+				#{hmgArea},
+				#{hmgPersonnum},
+				#{hmgPersonNumEnd},
+				#{hmgIsTea},
+				#{hmgShape},
+				#{hmgRenovationDate},
+				#{hmgImg},
+				#{hdlId}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			hotel_meeting
+		SET
+			hmg_name 			= #{hmgName},
+			hmg_area 			= #{hmgArea},
+			hmg_personnum 		= #{hmgPersonnum},
+			hmg_personnum_end 	= #{hmgPersonNumEnd},
+			hmg_is_tea 			= #{hmgIsTea},
+			hmg_shape 			= #{hmgShape},
+			hmg_renovation_date = #{hmgRenovationDate},
+			hmg_img 			= #{hmgImg}
+		WHERE
+			id = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			hotel_meeting
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<!--上下架 -->
+	<delete id="delet" parameterType="int">
+		UPDATE
+			hotel_meeting
+		SET
+			hmg_is_del_status 	 = #{hmgIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	
+</mapper>

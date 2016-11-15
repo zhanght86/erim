@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sendPrice">
+	
+	<sql id="sql_query">
+		1 = 1	
+		<!-- 日期 -->
+		<if test = "tspDate != null and tspDate != ''"> AND tsp_date = #{tspDate} </if>
+		<!-- 线路ID -->
+		<if test = "sendId != null and sendId != ''"> AND send_id = #{sendId} </if>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		send_id 					AS sendId,
+		send_type 					AS sendType,
+		tsp_date 					AS tspDate,
+		tsp_is_open 				AS tspIsOpen,
+		tsp_week 					AS tspWeek,
+		tsp_sign 					AS tspSign,
+		tsp_trade_price 			AS tspTradePrice,
+		tsp_combination_price 		AS tspCombinationPrice,
+		tsp_retail_price 			AS tspRetailPrice,
+		tsp_sell_h 					AS tspSellH,
+		tsp_sell_m 					AS tspSellM,
+		tsp_sell_price 				AS tspSellPrice,
+		tsp_price_show 				AS tspPriceShow,
+		tsp_cancel_indent 			AS tspCancelIndent,
+		tsp_create_time 			AS tspCreateTime,
+		tsp_create_user 			AS tspCreateUser
+	</sql>
+	
+	<!-- 查询数据  -->
+	<select id="selectSendPriceList" parameterType="java.util.Map" resultType="texiSendPriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid = "sql_column" />
+			FROM
+				texi_send_price
+			ORDER BY
+				tsp_create_time
+			DESC
+		) t
+		GROUP BY
+			t.tspDate,
+			t.sendId
+		HAVING
+			t.sendId = #{bean.sendId} 
+			<!-- 日期 -->
+			AND t.tspDate IN 
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="texiSendPriceBean">
+		INSERT INTO
+			texi_send_price (
+				cpy_id,
+				send_id,
+				send_type,
+				tsp_date,
+				tsp_is_open,
+				tsp_week,
+				<if test = "tspSign != null">
+					tsp_sign,
+				</if>
+				<if test = "tspTradePrice != null or tspCombinationPrice != null or tspRetailPrice != null">
+					tsp_trade_price,
+					tsp_combination_price,
+					tsp_retail_price,
+				</if>
+				tsp_sell_h,
+				tsp_sell_m,
+				tsp_sell_price,
+				tsp_price_show,
+				tsp_cancel_indent,
+				tsp_create_time,
+				tsp_create_user
+			) VALUES (
+				#{cpyId},
+				#{sendId},
+				#{sendType},
+				#{tspDate},
+				#{tspIsOpen},
+				#{tspWeek},
+				<if test = "tspSign != null">
+					#{tspSign},
+				</if>
+				<if test = "tspTradePrice != null or tspCombinationPrice != null or tspRetailPrice != null">
+					#{tspTradePrice},
+					#{tspCombinationPrice},
+					#{tspRetailPrice},
+				</if>
+				#{tspSellH},
+				#{tspSellM},
+				#{tspSellPrice},
+				#{tspPriceShow},
+				#{tspCancelIndent},
+				#{tspCreateTime},
+				#{tspCreateUser}
+			)
+	</insert>
+	
+	<!-- 开关房 -->
+	<update id="updateIsOpen">
+		UPDATE
+			texi_send_price
+		SET
+			tsp_is_open 	= #{tspIsOpen}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 修改房量 -->
+	<update id="updatePrice">
+		UPDATE
+			texi_send_price
+		SET
+			tsp_sign 				= #{tspSign},
+			tsp_trade_price 		= #{tspTradePrice},
+			tsp_combination_price 	= #{tspCombinationPrice},
+			tsp_retail_price 		= #{tspRetailPrice},
+			tsp_is_open				= '02'
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 批量关房 -->
+	<update id="updateBatchOpen">
+		UPDATE
+			texi_send_price
+		SET
+			tsp_is_open				= #{tspIsOpen}
+		WHERE
+			<include refid = "sql_query" />
+	</update>
+</mapper>

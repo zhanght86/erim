@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht1">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">帮助中心</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">帮助中心</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>如何登录</p>
+								<div class="about_guib" style="display:none">
+									<ul>
+										<li>来源：佳旅联合旅行社&nbsp;&nbsp;&nbsp;&nbsp;时间：2015-12-14&nbsp;&nbsp;&nbsp;&nbsp;点击：120</li>
+									</ul>
+								</div>
+								<div class="about_guic">
+									<p><span>摘要: </span>如何登录
+									</p>
+								</div>
+									<div class="b_mian">
+                                		<div style="width:958px;margin:10px auto;">
+                                		<h2 style="margin:20px 10px;font-size:20px;text-align:left;font-weight:normal">请在登录页面填写相应内容，包含：您已经注册的手机号，密码和验证码，再点击登录就OK了，<br>
+                                				如果您不记得您的密码请点击忘记密码来重新设置您的密码，<br>如果您还没有注册，请点击注册，并在相应的页面填写需要的内容</h2>
+                                            <img src="$staticRoot/images/login.png" alt="登录" title="登录" width="958"/>
+                                		</div>
+                                    <div class="clear"></div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+</body>
+</html>

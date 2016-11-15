@@ -1,0 +1,33 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/zh.css">
+##<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+
+<div class="zh_block">
+	<ul class="list_main">
+	
+		
+		<li>
+			<dl class="clearfix">
+				<dd>运维费</dd>
+				<dt><span>一级代理返利：<em>$data.yjFirstTotalMoney</em>元</span><span>介绍合作列表：</span><a href="javascript:index.load('$appRoot/data/return/firstDetail');" class="win_5">查看明细</a>
+					 <span>二级代理返利：<em>$data.yjSecondTotalMoney</em>元</span><span>介绍合作列表：</span><a href="javascript:index.load('$appRoot/data/return/secondDetail');" class="win_5">查看明细</a>
+				</dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>总计</dd>
+				<dt>
+                     <span>一级代理共计：<em>$data.yjFirstTotalMoney</em>元</span><span>已提现：</span><em>$data.yjFirstMoney</em>元</span> <span>余额：<em>$data.yjFirstBalance</em>元</span>
+					<a href="javascript:void(0);" class="win_5">申请提现</a>
+					<br/>
+					 <span>二级代理共计：<em>$data.yjSecondTotalMoney</em>元</span><span>已提现：</span><em>$data.yjSecondMoney</em>元</span><span>余额：<em>$data.yjSecondBalance</em>元</span>
+										<a href="javascript:void(0);" class="win_5">申请提现</a>
+
+				</dt>
+			</dl>
+		</li>
+	</ul>
+</div>
+<div class="win_box_bg"></div>
+
+</div>

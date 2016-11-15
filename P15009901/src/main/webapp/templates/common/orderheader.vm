@@ -1,0 +1,7 @@
+
+    <header class="mb10">
+        <div class="head_cont clearfix">
+            <a href="$appRoot/$cpyno/member/message"><img class="img_block" src="$staticRoot/images/step_03.jpg" title="" alt=""></a>
+            <span class="nav_mini"><a href="#">会员中心</a>|<a href="$appRoot/$cpyno/index.html">网站首页</a></span>
+        </div>
+    </header>

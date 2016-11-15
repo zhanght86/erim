@@ -1,0 +1,102 @@
+<div class="rdivv">
+	<div class="tese">
+		<div class="tesetop4">			
+		</div>
+		<div class="tesetop2">
+			<form class="form-search" method="post" id="form1">
+    			<div class="teseline">
+			    <span>城市：</span> <input type="text" name="" value="" />
+				</div>
+				<div class="teseline">
+			      <span>公司名称：</span><input  name="" value="" type="text" />
+				  </div>
+				<div class="teseline">
+				    <span>负责人：</span><input  name="" value="" type="text" />
+					</div>
+				<div class="teseline">
+					<span>计调：</span><input  name="" value="" type="text" /><br><br>
+							</div>
+				<div class="teseline">
+					<span>销售状态：</span>
+    				<select name="hdlIsDelStatus"  value="$!hotelDetail.gddIsDelStatus" style="width:200px;height:28px;"  class="searchSelect">
+						<option value=""></option>
+				        <option name="gddIsDelStatus" value="1" id="img">在售</option>
+                        <option name="gddIsDelStatus" value="0" id="png">待售</option>
+    				</select>
+					</div>
+				         <button onclick="index.load('$appRoot/cafeteria/detail/insertPage');"></button>
+				</form>
+		</div>
+		 <div class="tesetop3"></div>
+		  <div class="tesenew">
+			<button onclick="index.load('$appRoot/company/cooperation/insertPage');"></button>
+		</div>
+	<div class="tesect">
+		<div class="tesetable">
+			<table border="0" cellspadding="0" cellspacing="0">
+				<thead>
+						<tr>
+						<th>全选</th>
+						<th>城市</th>
+						<th>公司名称</th>
+						<th>公司性质</th>
+						<th>公司地址</th>
+						<th>负责人</th>
+						<th>计调</th>
+						<th>在线客服</th>
+						<th>合作状态</th>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($item in $lineList)
+	                  <tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+	                    <td><input class="radio validate[required]" type="checkbox" id="agree" name="agree" data-prompt-position="centerRight:80,0"></dd></td>
+	                    <td>$!item.ldlName</td>
+						<td><a class="dwp_f_a" href="javascript:void(0);" style="text-align:left">$!item.ldlAttribute1<span>$!item.ldlName<br />QQ：9857235<br />地址：河北石家庄翟营大街56号</span></a></td>
+						<td>$!item.ldlName</td>
+						<td><a class="dwp_f_a" href="javascript:void(0);" style="text-align:left">$!item.ldlAttribute1<span>$!item.ldlName<br />QQ：9857235<br />地址：河北石家庄翟营大街56号</span></a></td>
+						<td><a class="dwp_f_a" href="javascript:void(0);" style="text-align:left">$!item.ldlAttribute1<span>$!item.ldlName<br />QQ：9857235<br />地址：河北石家庄翟营大街56号</span></a></td>
+					    <td><a class="dwp_f_a" href="javascript:void(0);" style="text-align:left">$!item.ldlAttribute1<span>$!item.ldlName<br />QQ：9857235<br />地址：河北石家庄翟营大街56号</span></a></td>
+					    <td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.ldlKeyword&Site=在线客服&Menu=yes"><img border=0 SRC="static\images\button_old_101.gif" alt="在线交流"></a></td>
+					    <td>
+							已结
+						</td>
+	                  </tr>
+	              #end
+				</tbody>
+			</table>
+			 #parse("common/page.vm")
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<script src="/static/js/jquery.dynamic-rows.min.js"></script>
+<script>
+var imageObject = {
+	clickSwap : function(obj) {
+		obj.click(function() {
+			var activeImage = $(this).children('img.active');
+			activeImage.removeClass('active');
+			if (activeImage.next().length > 0) {
+				activeImage.next().addClass('active');
+			} else {
+				$(this).children('img:first-child').addClass('active');
+			}
+			return false;
+		});
+	}
+};
+$(function() {
+	imageObject.clickSwap($('.imageContainer'));
+});
+</script>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){$('.dwp_f_a').mouseover(function(){
+$(this).parent().css('position','relative');$(this).parent().css('z-index','2');$(this).children().show();})
+$('.dwp_f_a').mouseout(function(){$(this).parent().css('position','inherit');$(this).parent().css('z-index','0');$(this).children().hide();})})
+</script>
+
+		

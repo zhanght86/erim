@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pricebackyj">
+
+	<!-- 查询总数 -->
+	<select id="selectCooperation"  resultType="int">
+		SELECT
+			count(1)
+		FROM
+			price_back_yj
+		WHERE
+			yj_user_code = #{yjUserCode}
+	</select>
+	
+	<!-- 服务费返利 -->
+	<select id="selectPybPrice" resultType="priceBackYjBean">
+		SELECT
+			id,
+			cpy_id 	  	   AS cpyId,
+			yj_user_code   AS yjUserCode,
+			pyb_createtime AS pybCreatetime,
+			pyb_createuser AS pybCreateuser,
+			pyb_price      AS pybPrice,
+			pyb_ntype      AS pybNtype
+		FROM
+			price_back_yj
+		WHERE
+			yj_user_code = #{yjUserCode}
+	</select>
+</mapper>

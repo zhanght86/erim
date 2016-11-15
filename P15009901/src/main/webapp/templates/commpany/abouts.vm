@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>公司介绍_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			<div class="about_left">
+				<div class="about_gs" id="gongsi1" onclick="show_about(this.id,'rigrht1')">公司介绍</div>
+			</div>
+			<!--/left-->
+			<!--right-->
+			 <div class="about_right" id="rigrht1">
+				<!--公司介绍-->
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">公司介绍</span>
+						<ul class="gbodyer_ul">
+							<li><a title="" href="#">旅游资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li><a title="" href="#">资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a title="" href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>生物医药等四大领域将获重点支持</p>
+								<div class="about_guib">
+									<ul>
+										<li>来源：</li>
+										<li>时间： 2014-03-22</li>
+										<li>14:30：26</li>
+										<li>点击： 1</li>
+									</ul>
+								</div>
+								<div class="about_guic">
+									<p><span>摘要: </span>上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南
+									明确，今年将指南明确。
+									上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明确。
+									。
+									上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明确。
+									</p>
+								</div>
+								<div class="about_cen">
+									<p> 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。</p>
+									<p> 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。</p>
+									<p> 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。</p>
+									<p> 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。 上海市昨日发布2014年度创新科技行动计划国内科技领域合作领域项目指南，指南明确，今年将指南明
+									确。</p>
+								</div>
+							</div>
+					   </div>
+					</div>
+				</div>
+				<!--/公司介绍-->
+			 </div>
+			 <div id="rigrht2" class="inner">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">新闻资讯</span>
+						<ul class="gbodyer_ul">
+							<li><a title="" href="#">旅游资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li><a title="" href="#">资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a title="" href="#">首页</a></li>
+						</ul>
+					</div>
+					<ul class="gbodyer_rgt_list">
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">1港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">港澳台合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">粤港合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">粤港合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+					</ul>
+					<div class="gbodyer_rgtbot">
+						<ul>
+							<li class="gbodyer_lia">共31页</li>
+							<li class="gbodyer_lia"><a title="" href="#">上一页</a></li>
+							<li class="gbodyer_lib"><a title="" href="#">1</a></li>
+							<li class="gbodyer_lib"><a title="" href="#">2</a></li>
+							<li class="gbodyer_lia"><a title="" href="#">下一页</a></li>
+						</ul>
+					</div>
+				</div>
+			 </div>
+			 <div id="rigrht3" class="inner">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">新闻资讯</span>
+						<ul class="gbodyer_ul">
+							<li><a title="" href="#">旅游资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li><a title="" href="#">资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a title="" href="#">首页</a></li>
+						</ul>
+					</div>
+					<ul class="gbodyer_rgt_list">
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">2中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">中国美国合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">粤港合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">粤港合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+					</ul>
+					<div class="gbodyer_rgtbot">
+						<ul>
+							<li class="gbodyer_lia">共31页</li>
+							<li class="gbodyer_lia"><a title="" href="#">上一页</a></li>
+							<li class="gbodyer_lib"><a title="" href="#">1</a></li>
+							<li class="gbodyer_lib"><a title="" href="#">2</a></li>
+							<li class="gbodyer_lia"><a title="" href="#">下一页</a></li>
+						</ul>
+					</div>
+				</div>
+			 </div>
+			 <div id="rigrht4" class="inner">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">新闻资讯</span>
+						<ul class="gbodyer_ul">
+							<li><a title="" href="#">旅游资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li><a title="" href="#">资讯</a></li>
+							<li><img title="" alt="" scr="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a title="" href="#">首页</a></li>
+						</ul>
+					</div>
+					<ul class="gbodyer_rgt_list">
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">3日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+						<li>
+							<span class="gbodyer_rgtbt"><a title="" href="$appRoot/$cpyno/commpany/abouts">日韩合作共建生物医药基地</a></span>
+							<span class="gbodyer_rgtsj">2014-03-22 15:44:17</span>
+						</li>
+					</ul>
+					<div class="gbodyer_rgtbot">
+						<ul>
+							<li class="gbodyer_lia">共31页</li>
+							<li class="gbodyer_lia"><a title="" href="#">上一页</a></li>
+							<li class="gbodyer_lib"><a title="" href="#">1</a></li>
+							<li class="gbodyer_lib"><a title="" href="#">2</a></li>
+							<li class="gbodyer_lia"><a title="" href="#">下一页</a></li>
+						</ul>
+					</div>
+				</div>
+			 </div>
+		 <!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+
+
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script> 

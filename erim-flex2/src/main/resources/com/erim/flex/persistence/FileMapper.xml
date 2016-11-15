@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file">
+
+    <!-- 查询本页数据，用于显示当前页 -->
+    <select id="selectPage" parameterType="hashMap" resultType="fileBean">
+        SELECT
+            file_id             AS id,
+            file_name           AS name,
+            file_batch          AS batch,
+            file_size           AS size,
+            file_path           AS path,
+            file_suffix         AS suffix
+        FROM
+            tm_system_file
+        <where>
+            <if test="id != null">and file_id like "%"#{id}"%"</if>
+            <if test="name != null">and file_name like "%"#{name}"%"</if>
+            <if test="batch != null">and file_batch like "%"#{batch}"%"</if>
+            <if test="path != null">and file_path like "%"#{path}"%"</if>
+            <if test="suffix != null">and file_suffix like "%"#{suffix}"%"</if>
+        </where>
+        <if test="qrysort != null">order by ${qrysort} ${qrymode}</if>
+    </select>
+
+    <!-- 查询总数，用于页面分页 -->
+    <select id="selectCount" parameterType="hashMap" resultType="int">
+        SELECT
+            count(1)
+        FROM
+            tm_system_file
+        <where>
+            <if test="id != null">and file_id like "%"#{id}"%"</if>
+            <if test="name != null">and file_name like "%"#{name}"%"</if>
+            <if test="batch != null">and file_batch like "%"#{batch}"%"</if>
+            <if test="path != null">and file_path like "%"#{path}"%"</if>
+            <if test="suffix != null">and file_suffix like "%"#{suffix}"%"</if>
+        </where>
+    </select>
+
+    <!-- 根据批次号查询文件集合 -->
+    <select id="selectEntitysByBatch" parameterType="String" resultType="fileBean">
+        SELECT
+            file_id         AS id,
+            file_name       AS name,
+            file_batch      AS batch,
+            file_size       AS size,
+            file_path       AS path,
+            file_suffix     AS suffix
+        FROM
+            tm_system_file
+        WHERE
+            file_batch = #{batch}
+    </select>
+
+    <!-- 根据文件ID查询文件 -->
+    <select id="selectEntityById" parameterType="String" resultType="fileBean">
+        SELECT
+            file_id         AS id,
+            file_name       AS name,
+            file_batch      AS batch,
+            file_size       AS size,
+            file_path       AS path,
+            file_suffix     AS suffix
+        FROM
+            tm_system_file
+        WHERE
+            file_id = #{id}
+    </select>
+    
+    <!-- 批量增加 -->
+    <insert id="insertbatch" parameterType="hashMap">
+        INSERT INTO 
+            tm_system_file(file_id,file_name,file_batch,file_size,file_path,file_suffix)
+        VALUES
+        <foreach collection="fileitems" item="item" separator=",">
+            (#{item.id},#{item.name},#{item.batch},#{item.size},#{item.path},#{item.suffix})
+        </foreach>
+    </insert>
+    
+    <!-- 修改 -->
+    <update id="update" parameterType="fileBean">
+        UPDATE 
+            tm_system_file
+        SET
+            file_name = #{name},
+            file_path = #{path},
+            file_suffix = #{suffix}
+        WHERE
+            file_id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,337 @@
+<div class="chakan_cont_price pt13 clearfix">
+	<div class="riqi ml20 mr30">
+    	<table class="xuanze" cellpadding="0" cellspacing="0" border="0" style="border-bottom:none;">
+        	<tbody>
+            	<tr>
+                    <td class="w200 blue_a white">选择参观日期</td>
+                    <td>
+						<form id="form1">
+							<input type="hidden" name="tclId" value="$!tclId" />
+							<input type="hidden" name="year" value="$!year" />
+							<input type="hidden" name="month" value="$!month" />
+                        	<span class="sjleft liangjiaxiang_left">
+    						<!--	<a href="javascript:void(0);" class="liangjiaxiang_left">-->
+									<img src="$staticRoot/images/sanjiaoleft.jpg" />
+							<!--	</a>-->
+    						</span>
+    						<p class="date-title">$year 年 $month 月</p>
+    						<span class="sjright liangjiaxiang_right">
+    						<!--	<a href="javascript:void(0);" class="liangjiaxiang_right">-->
+									<img src="$staticRoot/images/sanjiaoright.jpg" />
+							<!--	</a>-->
+    						</span>
+						</form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    	<table cellpadding="0" cellspacing="0" border="0" style="border-top:none;">
+            <tbody id="price_body">
+                <tr>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th class="red">六</th>
+                    <th class="borderright red">日</th>
+                </tr>
+                <tr style="cursor:pointer">
+                    #foreach($item in $priceList)
+						<!-- 停售 -->
+						#if($!item.tplIsOpen == '01')
+							<td class="hui">
+								<!-- 是否为今天 -->
+								#if($!item.isUpdate == '02')
+									<span class="shu">今</span>
+								#else
+									<span class="shu">$!item.day</span>
+								#end
+										<span class="b_date_topright white">￥$!item.tplRetailPrice</span><br>
+										<!--<span class="b_date_bottom white">余：$!item.tplIsSign张</span>-->
+										<span class="b_date_bottom white">已停售</span>
+                            </td>
+						<!-- 出售 -->
+						#elseif($!item.tplIsOpen == '02')
+							<!--剩余票数为0-->
+							#if($!item.tplSign == '0' || $!item.tplSign == 0 || $!item.isPredetermine == '0')
+								<!-- 是否为今天 -->
+    							#if($!item.isUpdate == '02')
+        							<td class="hui">
+                                        <span class="shu">今</span>
+    							#else
+        							<td class="hui">
+                                        <span class="shu">$!item.day</span>
+    							#end
+    										<span class="b_date_topright white">￥$!item.tplRetailPrice</span><br>
+											#if($!item.tplSign == '0' || $!item.tplSign == 0)
+            									<span class="b_date_bottom white">已售完</span>
+            								#elseif($!item.isPredetermine == '0')
+            									<span class="b_date_bottom white">已过期</span>
+            								#end	
+                                </td>
+							#else
+								<!-- 是否为今天 -->
+    							#if($!item.isUpdate == '02')
+        							<td class="yellow_bg">
+                                        <span class="shu">今</span>
+										<input type="hidden" id="tplInsurePrice_jin" value="$!item.tplInsurePrice" />
+    									<input type="hidden" id="tplExplain_jin" value="$!item.tplExplain" />
+    									<input type="hidden" id="tplDateType" value="$!item.tplDateType" />
+        								<input type="hidden" id="tplSameH" value="$!item.tplSameH" />
+        								<input type="hidden" id="tplForwardH" value="$!item.tplForwardH" />
+    							#else
+        							<td class="price_td">
+                                        <span class="shu">$!item.day</span>
+    							#end
+    								<!-- 被选中的数据  01为未选中 02已选中-->
+    								<input type="hidden" name="isChecked" value="01" />
+    								<!--<input type="hidden" name="tplIsOpen" value="$!item.tplIsOpen" />-->
+    								<input type="hidden" name="tplRetailPrice" value="$!item.tplRetailPrice" />
+									<input type="hidden" name="tplInsurePrice" value="$!item.tplInsurePrice" />
+    								<input type="hidden" name="tplExplain" value="$!item.tplExplain" />
+    								<input type="hidden" name="tplDateType" value="$!item.tplDateType" />
+    								<input type="hidden" name="tplSameH" value="$!item.tplSameH" />
+    								<input type="hidden" name="tplForwardH" value="$!item.tplForwardH" />
+    								<span class="b_date_topright yellow">￥$!item.tplRetailPrice</span><br>
+                					<!-- 房量为0 -->
+    								#if($!item.hnpSign == '0')
+    									<span class="b_date_bottom red">余：$!item.tplSign张</span>
+    								#else
+    									#if($!item.tplIsSign == '01')
+    										<span class="b_date_bottom blue">不限量</span>
+    									#else
+    										<span class="b_date_bottom blue">余：$!item.tplSign张</span>
+											<input type="hidden" name="tplSign" value="$!item.tplSign" />
+    									#end
+    										<input type="hidden" name="tplIsOpen" value="$!item.tplIsOpen" />
+    								#end
+                                </td>
+							#end
+							
+						<!-- 无数据 -->
+						#else
+							#if($!item.isUpdate == '02')
+								<td class="yellow_bg">
+								<span class="shu">今</span>
+							#else
+								<td class="price_td">
+								<span class="shu">$!item.day</span>
+							#end
+							</td>
+						#end
+						<!-- 为周日时换行 -->
+						#if($!{velocityCount} == 7 || $!{velocityCount} == 14 || $!{velocityCount} == 21 || $!{velocityCount} == 28 || $!{velocityCount} == 35)
+                            </tr>
+                            <tr style="cursor:pointer">
+    					#end
+					#end
+                </tr>
+    		</tbody>
+        </table>
+	</div>
+    <div class="chakan_right pt35" style="width:370px;">
+        <p>购票数量：<span class="goupiao_num"><input type="text" id="goupiao_numid">张</span><span id="numTips"></span></p>
+		<p style="margin-left:10px;">总价格：<span class="font_hong"><b class="day_price">￥0</b></span></p>
+		<p>费用说明：<!--<span class="w400 ml100 mt-20">-->$!ticketClass.tdlMoneyshow<!--</span>--></p>
+		<a href="javascript:void(0)" class="yuding_but ml270 mt40" style="width:75px;margin-left:321px;" onclick="ordertips()">预订</a>
+    </div>
+    <div class="chakan_cont_wxy b_chakan_cont">
+    	<div class="notes-line">
+    		<span class="notes-stitle">兑票方式</span>
+    		<span class="notes-stext"><pre>$!ticketClass.tdlExpiry</pre></span>
+    	</div>
+    	<div class="notes-line">
+    		<span class="notes-stitle">预订限制</span>
+    		<span class="notes-stext"><pre>$!ticketClass.tdlLimited</pre></span>
+    	</div>
+		<div class="notes-line">
+    		<span class="notes-stitle">退改规则</span>
+    		<span class="notes-stext"><pre>$!ticketClass.tdlChange</pre></span>
+    	</div>
+		<div class="notes-line">
+    		<span class="notes-stitle" >可选服务</span>
+			<span class="notes-stext" id="kexuanfuwu" style="font-size:14px;"></span>
+		</div>
+		<div class="notes-line">
+    		<span class="notes-stitle">提前预定时间</span>
+    		<span class="notes-stext" id="yudingtime" style="font-size:14px;"></span>
+    	</div>
+		#if($erim.isNotEmpty($!ticketClass.tdlSupplement))
+    		<div class="notes-line">
+        		<span class="notes-stitle">补充说明</span>
+        		<span class="notes-stext"><pre id="bcsm">$!ticketClass.tdlSupplement</pre></span>
+    		</div>
+		#end
+	</div>
+</div>
+<input type="hidden" id="price_dan" value="" />
+<input type="hidden" id="tplSign_remain" value="" />
+<script type="text/javascript">
+$("#goupiao_numid").blur(function(){
+	var countNum = $(this).val();
+	var tplSign_remain = $("#tplSign_remain").val();
+	var price_dan = $("#price_dan").val();
+	if(price_dan == 0){
+		$(this).val(1);
+		alert("请选择参观日期");
+		return false;
+	}
+	if(parseInt(tplSign_remain) <= 0 ){
+		alert("已售完");
+	}else if(parseInt(tplSign_remain) > 0 && (parseInt(countNum) >  parseInt(tplSign_remain))){
+		$("#numTips").html("可选"+tplSign_remain+"张");
+		$(this).val(1);
+		$(".day_price").text("￥"+parseInt(price_dan));
+	}else{
+    	
+    	var totalPirce = parseInt(countNum)*parseInt(price_dan);
+    	$(".day_price").text("￥"+totalPirce);
+	}
+});
+	$(document).ready(function() {
+			//可选服务字段显示
+			var tplInsurePrice = $("#tplInsurePrice_jin").val();
+			var tplExplain = $("#tplExplain_jin").val();
+			var kexuanfuwu = '';
+			if(tplInsurePrice == null){
+				kexuanfuwu = "未选择日期";
+			}else if(tplInsurePrice != null && tplInsurePrice != ''){
+				kexuanfuwu = "保险"+tplInsurePrice+"元/人  "+tplExplain;
+			}else{
+				kexuanfuwu = "无";
+			}
+			$("#kexuanfuwu").html(kexuanfuwu);
+			//提前预定时间字段显示
+			var tplDateType = $("#tplDateType").val();
+			var ss = "";
+			if(tplDateType == null){
+				ss = "未选择日期";
+			}
+			if(tplDateType == '01'){
+				ss =  "游玩前" +$("#tplForwardH").val()+"天" ;
+			}
+			
+			if(tplDateType == '02'){
+				if($("#tplSameH").val() != null && $("#tplSameH").val() != ''){
+					ss =  "当日" +$("#tplSameH").val()+"(时间)之前" ;
+				}else{
+					ss =  "无需预定";
+				}
+				
+			}
+			$("#yudingtime").html(ss);
+			
+		// 时间向后选择
+    	$(".liangjiaxiang_left").click(function() {
+		
+			var tclId = $("#form1").find("input[name='tclId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+		
+    		$(".chakan_block").load("$appRoot/$cpyno/ticket/menpiaoxiang/skipDate?tclId=" + tclId + "&start=" + year + "&end=" + month + "&portal=02");
+    	});
+		// 时间向前选择
+		$(".liangjiaxiang_right").click(function() {
+			var tclId = $("#form1").find("input[name='tclId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+			
+    		$(".chakan_block").load("$appRoot/$cpyno/ticket/menpiaoxiang/skipDate?tclId=" + tclId + "&start=" + year + "&end=" + month + "&portal=01");
+    	});
+		
+		// 总价格
+		var price = 0;
+		// 点击事件
+		$("#price_body").find("td").click(function() {
+			
+			
+			// 是否出售
+			var hnpIsOpen = $(this).find("input[name='tplIsOpen']").val();
+			if (hnpIsOpen != '02') {
+				return;
+			}
+			// 价格
+			var retailPrice = $(this).find("input[name='tplRetailPrice']").val();
+			// 是否为已选中
+			var isChecked = $(this).find("input[name='isChecked']").val();
+			if (isChecked == '02') { // 已选中为02
+				// 改为未选中
+				$(this).find("input[name='isChecked']").val("01");
+				// 去除颜色的class
+				$(this).removeClass("red_bg");
+				// 总价格
+				//price = parseInt(price) - parseInt(retailPrice);
+				price = 0;
+				//默认单价置为0
+				$("#price_dan").val(0);
+				$(".day_price").text("￥"+price);
+			} else if (isChecked == '01') { // 未选中为01
+				// 改为选中状态
+				$(this).find("input[name='isChecked']").val("02");
+				// 设置颜色的class
+				$(this).addClass("red_bg");
+				//设置其他的日期为未选中状态
+				$(this).parent().siblings().children().find("input[name='isChecked']").val("01");
+				$(this).siblings().find("input[name='isChecked']").val("01");
+				//设置其他的日期颜色的class
+				$(this).parent().siblings().children().removeClass("red_bg");
+				$(this).siblings().removeClass("red_bg");
+				// 总价格
+				var countNum2 = $("#goupiao_numid").val();
+				if(countNum2 == ''){
+					countNum2 = 1;
+				}
+				//购买数量大于剩余数量 
+				var tplSign = $(this).find("input[name='tplSign']").val();//剩余数量
+				if(tplSign == null){
+					 $("#numTips").html("不限量");
+					 price = parseInt(countNum2)*parseInt(retailPrice);
+				}else if(tplSign != null && (parseInt(countNum2) > parseInt(tplSign))){
+					 $("#goupiao_numid").val(1);
+					 price = parseInt(retailPrice);
+					 $("#numTips").html("可选"+tplSign+"份");
+				}else{
+    				price = parseInt(countNum2)*parseInt(retailPrice);
+    				$("#numTips").html("可选"+tplSign+"份");
+				}
+				$("#price_dan").val(retailPrice);
+    			$("#tplSign_remain").val($(this).find("input[name='tplSign']").val());
+    			$(".day_price").text("￥"+price);
+			}
+		
+			
+			//可选服务字段显示
+			var tplInsurePrice2 = $(this).find("input[name='tplInsurePrice']").val();
+			var tplExplain2 = $(this).find("input[name='tplExplain']").val();
+			var kexuanfuwu2 = "";
+			if(tplInsurePrice2 != null && tplInsurePrice2 != ''){
+				kexuanfuwu2 = "保险"+tplInsurePrice2+"人/元  "+tplExplain2;
+			}else{
+				kexuanfuwu2 = "无";
+			}
+			$("#kexuanfuwu").html(kexuanfuwu2);
+			//提前预定时间字段显示
+			var tplDateType = $(this).find("input[name='tplDateType']").val();
+			var s = "";
+			if(tplDateType == '01'){
+				s =  "游玩前" +$(this).find("input[name='tplForwardH']").val()+"天" ;
+			}
+			if(tplDateType == '02'){
+				var hh = $(this).find("input[name='tplSameH']").val();
+				if(hh != null && hh != ''){
+					s =  "当日" +hh+"(时间)之前" ;
+				}else{
+					s =  "无需预定" ;
+				}
+				
+			}
+			$("#yudingtime").html(s);
+		});
+	});
+	
+	
+function ordertips(){
+	alert('对不起，预定功能暂不开放');
+}
+</script>

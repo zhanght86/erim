@@ -1,0 +1,120 @@
+	<form method="post" id="form1">
+		<div class="search_block clearfix">
+				<div class="input_bg">
+					
+					<div class="input_block clearfix" style="margin-bottom:0;">
+						<div class="input_right input_right_wauto">
+							<label class="ml25 pl10">常用车次：</label>
+							<input class="w130">
+						<label class="ml25 pl10">出发城市 ：</label>
+							<input class="w130">
+								<label class="ml25 pl10">目的城市 ：</label>
+							<input class="w130">
+								<label class="ml25 pl10"> 公司品牌 /名称：</label>
+							<input class="w130">
+							<span class="red_a ml25">查询</span>
+						</div>
+					</div>
+					
+				</div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">席别</span></li>
+						<li class="second"><a class="on">不限</a></li>
+						<li><a>软卧</a></li>
+						<li><a>硬卧</a></li>
+						<li><a>软座</a></li>
+						<li><a>硬座</a></li>
+						<li><a>豪华软卧</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				
+			</div>
+		<a class="big_more_a">更多查询项</a>
+   </form>
+         <div class="g_block_2 g_block_7 mb20">
+			<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<th>车次</th>
+    				<th>出发城市</th>
+    				<th>目的城市</th>
+					<th>公司/品牌名称</th>
+    				<th>负责人/电话</th>
+    				<th>计调/电话</th>
+                    <th>在线交谈</th>
+    				<th>常出车次</th>
+				</tr>
+				#foreach($item in $transticketList)
+					<tr>
+                        <td>$!item.ttdNo</td>
+            			<td>$!item.ttdStartAddress</td>
+                        <td>$!item.ttdArrivedAddress</td>
+						<td>$!item.cpyName</td>
+            			<td>$!item.cpyTelephone</td>
+    					<td>$!item.ccpName / $!item.ccpTelephone</td>
+            			<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cdlPeopleQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+    					<!--<td><a href="javascript:index.load('$appRoot/reservation/transticket/page')">预订</a></td>-->
+						<td><a class="chakan_a" href="javascript:void(0);">查看</a></td>
+                    </tr>
+				#end
+				</table>
+				#parse("common/page.vm")
+			</div>
+
+	<div class="chakan_cont clearfix">
+            <table class="fl_list_g" cellpadding="0" cellspacing="0">
+				<tr class="fl_list_t">
+                	<td class="w130">车次 </td>
+					<td class="w150">出发城市</td>
+					<td class="w150">出发时间 </td>
+					<td class="w150">目的城市</td>
+					<td class="w150">到达时间</td>
+					<td class="w150">席别</td>
+				</tr>
+				<tr>
+                	<td class="w130">k3524</td>
+					<td class="w150">石家庄站</td>
+					<td class="w150">2015-11-27 18:30 </td>
+					<td class="w150">上海 </td>
+					<td class="w150">2015-11-27 18:30 </td>
+					<td class="w150">硬座 </td>
+				</tr>
+				<tr>
+                	<td class="w130">k3524</td>
+					<td class="w150">石家庄站</td>
+					<td class="w150">2015-11-27 18:30 </td>
+					<td class="w150">上海 </td>
+					<td class="w150">2015-11-27 18:30 </td>
+					<td class="w150">硬座 </td>
+				</tr>
+            </table><br>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".select_block").each(function(){
+		if($(this).height()>90){
+			$(this).children(".more_a").show();
+			$(this).css({"height":"40px","overflow":"hidden"});
+		}
+	})
+	/*酒店预订*/
+	$(".chakan_a").click(function(){
+		if($(this).text()=="查看"){
+			$(".chakan_block").parent().parent().remove();
+			$(this).parent().parent().after("<tr><td colspan = '8' style='height:0;'><div class='chakan_block'></div></td></tr>");
+			var el2 = $(".chakan_block"),curHeight = el2.height(),autoHeight = el2.css('height','auto').height()+$(".chakan_cont").height()+5;
+			el2.height(curHeight).animate({height: autoHeight}, 500);
+			$(".chakan_cont").clone().appendTo(".chakan_block").show();
+			$(".chakan_a").text("查看").css("background-color","#EB6464");
+			$(this).text("查看中").css("background-color","#969696");
+		}
+		else{
+			$(".chakan_block").animate({height:"0px"},function(){
+				$(".chakan_block").parent().parent().remove();
+			});
+			$(this).text("查看").css("background-color","#EB6464");
+		}
+	})
+})
+</script>

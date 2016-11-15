@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht1">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">帮助中心</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">帮助中心</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>半自助游</p>
+								<div class="about_guib" style="display:none">
+									<ul>
+										<li>来源：佳旅联合旅行社&nbsp;&nbsp;&nbsp;&nbsp;时间：2015-12-14&nbsp;&nbsp;&nbsp;&nbsp;点击：120</li>
+									</ul>
+								</div>
+								<div class="about_guic">
+									<p><span>摘要: </span>半自助游
+									</p>
+								</div>
+									<div class="b_mian">
+		<div class="b_center">
+    	<h2 class="b_title_h2">半自助游是什么？</h2>
+    		<ul>
+    			<li>“半自助”半自助产品是介于跟团游与自助游之间的产品，为您搭配好大交通、酒店、当地行程和其他单项服务，超过产品规定的人数还将赠送领队服务。此类产品既有充足的自由活动时间，又有专业的导游带您游览观光。
+备注：自助游通常就是自己或跟朋友去旅游，酒店等都要自己预定，线路也都是自己拟订的，也就是说想去哪儿就去哪儿。
+ </li>    			
+    		</ul>
+		</div>
+	</div>
+    <div class="clear"></div>
+
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+</body>
+</html>

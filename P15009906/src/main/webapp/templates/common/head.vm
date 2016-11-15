@@ -1,0 +1,23 @@
+<div class="g_head clearfix">
+    <div class="logo_block" style="width:800px;" >
+        ##<a href="#"><img src="$staticRoot/images/index_03.jpg"></a>
+		<span style="font-size:28px;color:#09A2FB;line-height:80px;">$!userCompany.cpyName </span>
+    </div>
+    <div class="htopr">
+        <span>$userName</span>
+		<a href="javascript:index.load('$appRoot/welcome');" class="signout">首页</a>&nbsp;&nbsp;
+		<a href="javascript:index.load('$appRoot/cpy/detail');" class="signout">企业信息</a>&nbsp;&nbsp; 
+        <a href="$appRoot/loginOut" class="signout">退出</a>&nbsp;&nbsp;
+        <a class="edit_password" href="javascript:index.load('$appRoot/sell/user/updatePadPage');">修改密码</a>
+    </div>
+</div>
+<div class="g_crumbs">
+	#if($erim.isNotEmpty($!lockmessage))
+		<a href="javascript:;" style="color:yellow;padding-left:50px;">$lockmessage</a>
+	#else
+        <span class="data_span">今天是&nbsp;&nbsp;$erim.nowDate()</span><span class="crumbs_span">您的位置：<span id="titleSpan">首页</span></span>
+    	
+    	&nbsp;&nbsp;&nbsp;&nbsp;
+    	<a href="http://www.jialvlianhe.com/$userCompany.cpyCode" style="color:white" target="_blank">我的门户('http://www.jialvlianhe.com/$userCompany.cpyCode')</a>
+	#end
+</div>

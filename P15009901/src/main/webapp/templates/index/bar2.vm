@@ -1,0 +1,975 @@
+<div class="indexbar">
+    <!--bar左边右边-->
+    <div class="indexwrapone">
+        <div class="all-sort-list">
+            <div class="item bo">
+                <div class="itembox itheme">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">主题游</a><a href="#" target="_blank">周末</a>
+                            <a href="#" target="_blank">海岛</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">蜜月</a><a href="#" target="_blank">亲子</a>
+                            <a href="#" target="_blank">爸妈游</a><a href="#" target="_blank">海岛</a>
+                            <a href="#" target="_blank">古城镇</a><a href="#" target="_blank">美食</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">主题游</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">蜜月</a></em><em><a
+                                href="#" target="_blank">亲子</a></em><em><a href="#"
+                                target="_blank">海岛</a></em><em><a href="#" target="_blank">周末游</a></em><em><a
+                                href="#" target="_blank">古城镇</a></em><em><a href="#"
+                                target="_blank">温泉</a></em><em><a href="#" target="_blank">爸妈游</a></em><em><a
+                                href="#" target="_blank">美食</a></em><em><a href="#"
+                                target="_blank">旅行购</a></em><em><a href="#" target="_blank">高端游</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox local">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">北京周边旅游</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">山西文化游</a><a href="#"
+                            target="_blank">名山胜水</a><a href="#" target="_blank">白石山</a><a
+                            href="#" target="_blank">八里沟</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                按天数分
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">一日游</a></em><em><a
+                                href="#" target="_blank">二日游</a></em><em><a href="#"
+                                target="_blank">三日游</a></em><em><a href="#" target="_blank">三日以上</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore2">
+                            <dt>
+                                名山胜水
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">白石山</a></em><em><a
+                                href="#" target="_blank">棒槌山</a></em><em><a href="#"
+                                target="_blank">八里沟</a></em><em><a href="#" target="_blank">云台山</a></em><em><a
+                                href="#" target="_blank">北九水</a></em><em><a href="#"
+                                target="_blank">北戴河</a></em><em><a href="#" target="_blank">驼梁山</a></em><em><a
+                                href="#" target="_blank">岐山湖</a></em><em><a href="#"
+                                target="_blank">芦芽山</a></em><em><a href="#" target="_blank">蟒河</a></em><em><a
+                                href="#" target="_blank">天河山</a></em><em><a href="#"
+                                target="_blank">五岳寨</a></em><em><a href="#" target="_blank">百里峡</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                城市
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">邯郸</a></em><em><a
+                                href="#" target="_blank">北京</a></em><em><a href="#"
+                                target="_blank">焦作</a></em><em><a href="#" target="_blank">泰安</a></em><em><a
+                                href="#" target="_blank">青岛</a></em><em><a href="#"
+                                target="_blank">烟台</a></em><em><a href="#" target="_blank">威海</a></em><em><a
+                                href="#" target="_blank">秦皇岛</a></em><em><a href="#"
+                                target="_blank">承德</a></em><em><a href="#" target="_blank">太原</a></em><em><a
+                                href="#" target="_blank">新乡</a></em><em><a href="#"
+                                target="_blank">日照</a></em><em><a href="#" target="_blank">保定</a></em><em><a
+                                href="#" target="_blank">张家口</a></em><em><a href="#"
+                                target="_blank">邢台</a></em><em><a href="#" target="_blank">赵县</a></em><em><a
+                                href="#" target="_blank">忻州</a></em><em><a href="#"
+                                target="_blank">长治</a></em><em><a href="#" target="_blank">晋中</a></em><em><a
+                                href="#" target="_blank">临汾</a></em><em><a href="#"
+                                target="_blank">石家庄</a></em><em><a href="#" target="_blank">兴隆县</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                古镇
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">乔家大院</a></em><em><a
+                                href="#" target="_blank">平遥古城</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                草原
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">丰宁坝上草原</a></em><em><a
+                                href="#" target="_blank">木兰草原</a></em><em><a href="#"
+                                target="_blank">乌兰草原</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore6">
+                            <dt>
+                                游乐园
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">山海关欢乐海洋公园</a></em><em><a
+                                href="#" target="_blank">南藏河国际娱乐中心</a></em><em><a href="#"
+                                target="_blank">水立方</a></em><em><a href="#" target="_blank">十渡拒马乐园</a></em><em><a
+                                href="#" target="_blank">奥林匹克大道公园</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore7">
+                            <dt>
+                                热吻景观
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">故宫</a></em><em><a
+                                href="#" target="_blank">颐和园</a></em><em><a href="#"
+                                target="_blank">八达岭长城</a></em><em><a href="#" target="_blank">避暑山庄风景区</a></em><em><a
+                                href="#" target="_blank">天坛</a></em><em><a href="#"
+                                target="_blank">北京国际鲜花港</a></em><em><a href="#"
+                                target="_blank">定陵</a></em><em><a href="#" target="_blank">栈桥</a></em><em><a
+                                href="#" target="_blank">集发农业观光园</a></em><em><a href="#"
+                                target="_blank">鸽子窝公园</a></em><em><a href="#" target="_blank">海战馆</a></em><em><a
+                                href="#" target="_blank">大汗行宫</a></em><em><a href="#"
+                                target="_blank">定远舰</a></em><em><a href="#" target="_blank">皇城相府</a></em><em><a
+                                href="#" target="_blank">安北将军佟国纲目</a></em><em><a href="#"
+                                target="_blank">红山军马场十二座连营风景区</a></em><em><a href="#"
+                                target="_blank">七星湖</a></em><em><a href="#" target="_blank">赵州桥</a></em><em><a
+                                href="#" target="_blank">隆兴寺</a></em><em><a href="#"
+                                target="_blank">须弥福寿之庙</a></em><em><a href="#"
+                                target="_blank">普陀宗乘之庙</a></em><em><a href="#"
+                                target="_blank">平遥古城</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore8">
+                            <dt>
+                                山西文化游
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">常家庄园</a></em><em><a
+                                href="#" target="_blank">芦芽山</a></em><em><a href="#"
+                                target="_blank">平遥古城</a></em><em><a href="#" target="_blank">皇城相府生态文化旅游区</a></em><em><a
+                                href="#" target="_blank">山西壶口瀑布</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore9">
+                            <dt>
+                                游玩方式
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">周边跟团</a></em><em><a
+                                href="#" target="_blank">周边自驾</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox nation">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">国内旅游</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">张家界</a><a href="#" target="_blank">云南</a>
+                            <a href="#" target="_blank">厦门</a><a href="#" target="_blank">西藏</a>
+                            <a href="#" target="_blank">三亚</a><a href="#" target="_blank">亚龙湾</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">海南</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">三亚</a></em><em><a
+                                href="#" target="_blank">天涯海角</a></em><em><a href="#"
+                                target="_blank">海口</a></em><em><a href="#" target="_blank">亚龙湾</a></em><em><a
+                                href="#" target="_blank">娱支洲岛</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore2">
+                            <dt>
+                                <a href="#" target="_blank">云南</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">香格里拉</a></em><em><a
+                                href="#" target="_blank">昆明</a></em><em><a href="#"
+                                target="_blank">丽江</a></em><em><a href="#" target="_blank">西双版纳</a></em><em><a
+                                href="#" target="_blank">大理</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                <a href="#" target="_blank">四川</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">成都</a></em><em><a
+                                href="#" target="_blank">九寨沟</a></em><em><a href="#"
+                                target="_blank">黄龙</a></em><em><a href="#" target="_blank">都江堰</a></em><em><a
+                                href="#" target="_blank">稻城亚丁</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                华东
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">南京</a></em><em><a
+                                href="#" target="_blank">西塘</a></em><em><a href="#"
+                                target="_blank">周庄</a></em><em><a href="#" target="_blank">千岛湖</a></em><em><a
+                                href="#" target="_blank">杭州</a></em><em><a href="#"
+                                target="_blank">扬州</a></em><em><a href="#" target="_blank">西湖</a></em><em><a
+                                href="#" target="_blank">黄山</a></em><em><a href="#"
+                                target="_blank">上海</a></em><em><a href="#" target="_blank">台州</a></em><em><a
+                                href="#" target="_blank">西口</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                东北
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">哈尔滨</a></em><em><a
+                                href="#" target="_blank">长白山</a></em><em><a href="#"
+                                target="_blank">雪乡</a></em><em><a href="#" target="_blank">亚布力滑雪</a></em><em><a
+                                href="#" target="_blank">长春</a></em><em><a href="#"
+                                target="_blank">松花湖</a></em><em><a href="#" target="_blank">吉林</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                新疆
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">吐鲁番</a></em><em><a
+                                href="#" target="_blank">天山天池风景区</a></em><em><a href="#"
+                                target="_blank">乌鲁木齐</a></em><em><a href="#" target="_blank">喀什</a></em><em><a
+                                href="#" target="_blank">禾木</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                山东
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">青岛</a></em><em><a
+                                href="#" target="_blank">日照</a></em><em><a href="#"
+                                target="_blank">威海</a></em><em><a href="#" target="_blank">泰山</a></em><em><a
+                                href="#" target="_blank">蓬莱</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                河南
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">少林寺</a></em><em><a
+                                href="#" target="_blank">龙门天池风景区</a></em><em><a href="#"
+                                target="_blank">云台山</a></em><em><a href="#" target="_blank">郑州</a></em><em><a
+                                href="#" target="_blank">洛阳</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                陕西
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">华山</a></em><em><a
+                                href="#" target="_blank">秦始皇兵马俑</a></em><em><a href="#"
+                                target="_blank">西安</a></em><em><a href="#" target="_blank">黄河壶口瀑布</a></em><em><a
+                                href="#" target="_blank">华清池</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                江西
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">三清山</a></em><em><a
+                                href="#" target="_blank">庐山</a></em><em><a href="#"
+                                target="_blank">龙虎山</a></em><em><a href="#" target="_blank">井冈山</a></em><em><a
+                                href="#" target="_blank">嫯源县</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                西藏
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">拉萨</a></em><em><a
+                                href="#" target="_blank">林芝</a></em><em><a href="#"
+                                target="_blank">布达拉宫</a></em><em><a href="#" target="_blank">珠峰大本营</a></em><em><a
+                                href="#" target="_blank">可可西里</a></em><em><a href="#"
+                                target="_blank">波密</a></em><em><a href="#" target="_blank">墨脱</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                湖南
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">凤凰古城</a></em><em><a
+                                href="#" target="_blank">长沙</a></em><em><a href="#"
+                                target="_blank">韶山</a></em><em><a href="#" target="_blank">岳阳</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                广西
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">桂林</a></em><em><a
+                                href="#" target="_blank">涠洲岛</a></em><em><a href="#"
+                                target="_blank">阳溯县</a></em><em><a href="#" target="_blank">北海</a></em><em><a
+                                href="#" target="_blank">漓江</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                福建
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">厦门</a></em><em><a
+                                href="#" target="_blank">鼓浪屿</a></em><em><a href="#"
+                                target="_blank">武夷山</a></em><em><a href="#" target="_blank">永定土楼</a></em><em><a
+                                href="#" target="_blank">曾厝垵</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                内蒙古
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">希拉穆仁草原</a></em><em><a
+                                href="#" target="_blank">呼和浩特</a></em><em><a href="#"
+                                target="_blank">鄂尔多斯</a></em><em><a href="#" target="_blank">额济纳旗</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                西北
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">青海湖</a></em><em><a
+                                href="#" target="_blank">敦煌</a></em><em><a href="#"
+                                target="_blank">兰州市</a></em><em><a href="#" target="_blank">西宁</a></em><em><a
+                                href="#" target="_blank">甘南</a></em><em><a href="#"
+                                target="_blank">银川</a></em><em><a href="#" target="_blank">嘉峪关</a></em><em><a
+                                href="#" target="_blank">茶卡盐湖</a></em><em><a href="#"
+                                target="_blank">宁夏</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                湖北
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">武当山</a></em><em><a
+                                href="#" target="_blank">三峡大坝</a></em><em><a href="#"
+                                target="_blank">黄鹤楼</a></em><em><a href="#" target="_blank">武汉</a></em><em><a
+                                href="#" target="_blank">十堰</a></em><em><a href="#"
+                                target="_blank">神农架</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                贵州
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">南江大峡谷</a></em><em><a
+                                href="#" target="_blank">黄果树瀑布</a></em><em><a href="#"
+                                target="_blank">贵阳</a></em><em><a href="#" target="_blank">遵义</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                重庆
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">仙女山</a></em><em><a
+                                href="#" target="_blank">武隆</a></em><em><a href="#"
+                                target="_blank">大足石刻</a></em><em><a href="#" target="_blank">黑山谷</a></em><em><a
+                                href="#" target="_blank">重庆奉节白帝城</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                广东
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">深圳</a></em><em><a
+                                href="#" target="_blank">广东</a></em><em><a href="#"
+                                target="_blank">长隆欢乐世界</a></em><em><a href="#"
+                                target="_blank">香江野生动物世界</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                北京
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">天安门</a></em><em><a
+                                href="#" target="_blank">故宫</a></em><em><a href="#"
+                                target="_blank">颐和园</a></em><em><a href="#" target="_blank">八达岭长城</a></em><em><a
+                                href="#" target="_blank">天坛</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                河北
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">北戴河</a></em><em><a
+                                href="#" target="_blank">白洋淀</a></em><em><a href="#"
+                                target="_blank">木兰围场</a></em><em><a href="#" target="_blank">秦皇岛</a></em><em><a
+                                href="#" target="_blank">承德</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore5">
+                            <dt>
+                                山西
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">云冈石窟</a></em><em><a
+                                href="#" target="_blank">恒山</a></em><em><a href="#"
+                                target="_blank">乔家大院</a></em><em><a href="#" target="_blank">五台山</a></em><em><a
+                                href="#" target="_blank">平遥古城</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox wenter">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">夏令营</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">感恩</a><a href="#" target="_blank">励志</a>
+                            <a href="#" target="_blank">英语</a><a href="#" target="_blank">历史</a>
+                            <a href="#" target="_blank">文学</a><a href="#" target="_blank">奥数</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">夏令营</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">感恩</a></em><em><a
+                                href="#" target="_blank">励志</a></em><em><a href="#"
+                                target="_blank">英语</a></em><em><a href="#" target="_blank">历史</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox ouzhou">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">欧洲</a><a href="#" target="_blank">美洲</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">瑞士</a><a href="#" target="_blank">法国</a>
+                            <a href="#" target="_blank">英国</a><a href="#" target="_blank">希腊</a>
+                            <a href="#" target="_blank">意大利</a><a href="#" target="_blank">西班牙</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">欧洲</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">法国</a></em><em><a
+                                href="#" target="_blank">瑞士</a></em><em><a href="#"
+                                target="_blank">意大利</a></em><em><a href="#" target="_blank">英国</a></em><em><a
+                                href="#" target="_blank">爱尔兰</a></em><em><a href="#"
+                                target="_blank">荷兰</a></em><em><a href="#" target="_blank">德国</a></em><em><a
+                                href="#" target="_blank">比利时</a></em><em><a href="#"
+                                target="_blank">奥地利</a></em><em><a href="#" target="_blank">俄罗斯</a></em><em><a
+                                href="#" target="_blank">捷克共和国</a></em><em><a href="#"
+                                target="_blank">匈牙利</a></em><em><a href="#" target="_blank">斯洛伐克</a></em><em><a
+                                href="#" target="_blank">芬兰</a></em><em><a href="#"
+                                target="_blank">瑞典</a></em><em><a href="#" target="_blank">西班牙</a></em><em><a
+                                href="#" target="_blank">葡萄牙</a></em><em><a href="#"
+                                target="_blank">希腊</a></em><em><a href="#" target="_blank">丹麦</a></em><em><a
+                                href="#" target="_blank">挪威</a></em><em><a href="#"
+                                target="_blank">摩纳哥</a></em><em><a href="#" target="_blank">克罗地亚</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore2">
+                            <dt>
+                                <a href="#" target="_blank">热门玩法</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">一国深度</a></em><em><a
+                                href="#" target="_blank">两国深度</a></em><em><a href="#"
+                                target="_blank">特色三国</a></em><em><a href="#" target="_blank">多国连线</a></em><em><a
+                                href="#" target="_blank">法瑞意</a></em><em><a href="#"
+                                target="_blank">法瑞意+1</a></em><em><a href="#" target="_blank">东欧系列</a></em><em><a
+                                href="#" target="_blank">北欧系列</a></em><em><a href="#"
+                                target="_blank">俄罗斯</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                <a href="#" target="_blank">美洲</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">美国</a></em><em><a
+                                href="#" target="_blank">黄石公园</a></em><em><a href="#"
+                                target="_blank">尼亚加拉大瀑布</a></em><em><a href="#"
+                                target="_blank">美国东海岸</a></em><em><a href="#" target="_blank">美国西海岸</a></em><em><a
+                                href="#" target="_blank">洛杉矶好莱坞环球影城</a></em><em><a href="#"
+                                target="_blank">加拿大</a></em><em><a href="#" target="_blank">佛罗里达</a></em><em><a
+                                href="#" target="_blank">墨西哥</a></em><em><a href="#"
+                                target="_blank">巴西</a></em><em><a href="#" target="_blank">阿根廷</a></em><em><a
+                                href="#" target="_blank">智利</a></em><em><a href="#"
+                                target="_blank">秘鲁</a></em><em><a href="#" target="_blank">夏威夷</a></em><em><a
+                                href="#" target="_blank">巴哈马</a></em><em><a href="#"
+                                target="_blank">牙买加</a></em><em><a href="#" target="_blank">关岛</a></em><em><a
+                                href="#" target="_blank">哥伦比亚</a></em><em><a href="#"
+                                target="_blank">加州迪士尼乐园</a></em><em><a href="#"
+                                target="_blank">科罗拉多大峡谷</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                <a href="#" target="_blank">热门玩法</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">美国西海岸+夏威夷</a></em><em><a
+                                href="#" target="_blank">美国西海岸</a></em><em><a href="#"
+                                target="_blank">美国东西海岸+夏威夷</a></em><em><a href="#"
+                                target="_blank">阳光佛罗里达</a></em><em><a href="#"
+                                target="_blank">美国东西海岸连线</a></em><em><a href="#"
+                                target="_blank">夏威夷一地</a></em><em><a href="#" target="_blank">关岛一地</a></em><em><a
+                                href="#" target="_blank">加拿大一地</a></em><em><a href="#"
+                                target="_blank">美国东海岸</a></em><em><a href="#" target="_blank">黄石公园</a></em><em><a
+                                href="#" target="_blank">激情美国穿越游</a></em><em><a href="#"
+                                target="_blank">美国+加拿大</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox hanguo">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">韩国</a><a href="#" target="_blank">日本</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">大阪</a><a href="#" target="_blank">首尔</a>
+                            <a href="#" target="_blank">东京</a><a href="#" target="_blank">济州岛</a>
+                            <a href="#" target="_blank">北海道</a><a href="#" target="_blank">京都</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">韩国</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">首尔</a></em><em><a
+                                href="#" target="_blank">济州岛</a></em><em><a href="#"
+                                target="_blank">江原道</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore2">
+                            <dt>
+                                <a href="#" target="_blank">热门玩法</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">首尔+济州岛</a></em><em><a
+                                href="#" target="_blank">首尔一地</a></em><em><a href="#"
+                                target="_blank">济州岛一地</a></em><em><a href="#" target="_blank">首尔+江原道</a></em><em><a
+                                href="#" target="_blank">首尔+济州岛+釜山</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                <a href="#" target="_blank">日本</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">东京</a></em><em><a
+                                href="#" target="_blank">大阪</a></em><em><a href="#"
+                                target="_blank">京都</a></em><em><a href="#" target="_blank">北海道</a></em><em><a
+                                href="#" target="_blank">冲绳</a></em><em><a href="#"
+                                target="_blank">福冈</a></em><em><a href="#" target="_blank">静冈</a></em><em><a
+                                href="#" target="_blank">福山</a></em><em><a href="#"
+                                target="_blank">神户市</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                热门玩法
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">东京+籍根+京都+大阪</a></em><em><a
+                                href="#" target="_blank">本州+北海道</a></em><em><a href="#"
+                                target="_blank">东京+北海道</a></em><em><a href="#"
+                                target="_blank">北海道一地</a></em><em><a href="#" target="_blank">东京一地</a></em><em><a
+                                href="#" target="_blank">大阪一地</a></em><em><a href="#"
+                                target="_blank">冲绳一地</a></em><em><a href="#" target="_blank">九州一地</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox dongnanya">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">东南亚</a><a href="#" target="_blank">南亚</a>
+                            <a href="#" target="_blank">泰国</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">普吉岛</a><a href="#" target="_blank">新加坡</a>
+                            <a href="#" target="_blank">塞班岛</a><a href="#" target="_blank">曼谷</a>
+                            <a href="#" target="_blank">皇帝岛</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">泰国</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">普吉岛</a></em><em><a
+                                href="#" target="_blank">清迈</a></em><em><a href="#"
+                                target="_blank">曼谷</a></em><em><a href="#" target="_blank">甲米</a></em><em><a
+                                href="#" target="_blank">苏梅岛</a></em><em><a href="#"
+                                target="_blank">皮皮岛</a></em><em><a href="#" target="_blank">皇帝岛</a></em><em><a
+                                href="#" target="_blank">沙美岛</a></em><em><a href="#"
+                                target="_blank">华欣</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore2">
+                            <dt>
+                                <a href="#" target="_blank">热门玩法</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">曼谷+芭提雅</a></em><em><a
+                                href="#" target="_blank">曼谷+芭提雅+清迈</a></em><em><a href="#"
+                                target="_blank">曼谷+苏梅岛</a></em><em><a href="#"
+                                target="_blank">普吉岛+甲米</a></em><em><a href="#"
+                                target="_blank">清迈一地</a></em><em><a href="#" target="_blank">曼谷+芭提雅+普吉岛</a></em><em><a
+                                href="#" target="_blank">普吉岛+椰子岛</a></em><em><a href="#"
+                                target="_blank">普吉岛+PP岛</a></em><em><a href="#"
+                                target="_blank">泰国+新加坡+马来西亚</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                <a href="#" target="_blank">东南亚</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">巴厘岛</a></em><em><a
+                                href="#" target="_blank">新加坡</a></em><em><a href="#"
+                                target="_blank">菲律宾</a></em><em><a href="#" target="_blank">沙巴</a></em><em><a
+                                href="#" target="_blank">文莱</a></em><em><a href="#"
+                                target="_blank">蓝梦岛</a></em><em><a href="#" target="_blank">吉隆岛</a></em><em><a
+                                href="#" target="_blank">塞班岛</a></em><em><a href="#"
+                                target="_blank">柬埔寨</a></em><em><a href="#" target="_blank">马来西亚</a></em><em><a
+                                href="#" target="_blank">越南</a></em><em><a href="#"
+                                target="_blank">下龙湾</a></em><em><a href="#" target="_blank">吴哥</a></em><em><a
+                                href="#" target="_blank">芽庄市</a></em><em><a href="#"
+                                target="_blank">槟城</a></em><em><a href="#" target="_blank">宿雾</a></em><em><a
+                                href="#" target="_blank">蒲河岛</a></em><em><a href="#"
+                                target="_blank">吴哥隆</a></em><em><a href="#" target="_blank">圣淘沙</a></em><em><a
+                                href="#" target="_blank">兰卡威</a></em><em><a href="#"
+                                target="_blank">富国岛</a></em><em><a href="#" target="_blank">岘港</a></em><em><a
+                                href="#" target="_blank">长滩岛</a></em><em><a href="#"
+                                target="_blank">帕劳群岛</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                热门玩法
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">新加坡+民丹岛</a></em><em><a
+                                href="#" target="_blank">沙巴一地</a></em><em><a href="#"
+                                target="_blank">宿雾薄荷</a></em><em><a href="#" target="_blank">文莱+沙巴</a></em><em><a
+                                href="#" target="_blank">文莱一地</a></em><em><a href="#"
+                                target="_blank">新加坡+马来西亚</a></em><em><a href="#"
+                                target="_blank">新加坡市区</a></em><em><a href="#" target="_blank">吉隆坡一地</a></em><em><a
+                                href="#" target="_blank">兰卡威一地</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                <a href="#" target="_blank">南亚</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">不丹</a></em><em><a
+                                href="#" target="_blank">尼泊尔</a></em><em><a href="#"
+                                target="_blank">斯里兰卡</a></em><em><a href="#" target="_blank">印度</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                热门玩法
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">不丹尼泊尔连线</a></em><em><a
+                                href="#" target="_blank">印北金三角</a></em><em><a href="#"
+                                target="_blank">印度全景</a></em><em><a href="#" target="_blank">印度尼泊尔连线</a></em><em><a
+                                href="#" target="_blank">尼泊尔全景</a></em><em><a href="#"
+                                target="_blank">斯里兰卡中部山区茶园之旅</a></em><em><a href="#"
+                                target="_blank">斯里兰卡文化之旅</a></em><em><a href="#"
+                                target="_blank">斯里兰卡西南海滨之旅</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox honghong">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">香港</a><a href="#" target="_blank">澳门</a>
+                            <a href="#" target="_blank">台湾</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">香港岛</a><a href="#" target="_blank">香港迪士尼乐园</a>
+                            <a href="#" target="_blank">日月潭</a><a href="#" target="_blank">台北</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">港澳</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">香港</a></em><em><a
+                                href="#" target="_blank">海洋公园</a></em><em><a href="#"
+                                target="_blank">香港迪士尼公园</a></em><em><a href="#"
+                                target="_blank">铜锣湾</a></em><em><a href="#" target="_blank">香港维多利亚</a></em><em><a
+                                href="#" target="_blank">澳门</a></em><em><a href="#"
+                                target="_blank">新界</a></em><em><a href="#" target="_blank">香港岛</a></em><em><a
+                                href="#" target="_blank">氹仔</a></em><em><a href="#"
+                                target="_blank">九龙半岛</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore2">
+                            <dt>
+                                <a href="#" target="_blank">热门玩法</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">港澳两地+双园</a></em><em><a
+                                href="#" target="_blank">港澳两地+海洋公园</a></em><em><a href="#"
+                                target="_blank">港澳两地+香港迪士尼乐园</a></em><em><a href="#"
+                                target="_blank">港澳两地(港进澳出)</a></em><em><a href="#"
+                                target="_blank">港澳两地(澳进港出)</a></em><em><a href="#"
+                                target="_blank">澳门一地</a></em><em><a href="#" target="_blank">香港一地</a></em><em><a
+                                href="#" target="_blank">香港一地+双园</a></em><em><a href="#"
+                                target="_blank">香港一地+海洋公园</a></em><em><a href="#"
+                                target="_blank">香港一地+香港迪士尼乐园</a></em><em><a href="#"
+                                target="_blank">香港一地(往返直飞)</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                <a href="#" target="_blank">台湾</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">台北故宫博物馆</a></em><em><a
+                                href="#" target="_blank">日月潭</a></em><em><a href="#"
+                                target="_blank">阿里山</a></em><em><a href="#" target="_blank">101大楼</a></em><em><a
+                                href="#" target="_blank">垦丁国家公园</a></em><em><a href="#"
+                                target="_blank">淡水老街</a></em><em><a href="#" target="_blank">中正纪念堂</a></em><em><a
+                                href="#" target="_blank">台北市</a></em><em><a href="#"
+                                target="_blank">高雄市</a></em><em><a href="#" target="_blank">花莲县</a></em><em><a
+                                href="#" target="_blank">垦丁</a></em><em><a href="#"
+                                target="_blank">太鲁阁公园</a></em><em><a href="#" target="_blank">清境农场</a></em><em><a
+                                href="#" target="_blank">野柳地质公园</a></em><em><a href="#"
+                                target="_blank">九份</a></em><em><a href="#" target="_blank">北投温泉</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                热门玩法
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">台湾环岛</a></em><em><a
+                                href="#" target="_blank">东台湾(莲花太鲁阁/花东纵谷)</a></em><em><a
+                                href="#" target="_blank">台北+高雄+垦丁</a></em><em><a href="#"
+                                target="_blank">中台湾(阿里山/日月潭/清境农场)</a></em><em><a href="#"
+                                target="_blank">台北湾(台北/野柳/九份/淡水)</a></em><em><a href="#"
+                                target="_blank">台北+花莲</a></em><em><a href="#" target="_blank">台北一地</a></em><em><a
+                                href="#" target="_blank">台湾+香港</a></em><em><a href="#"
+                                target="_blank">高雄+垦丁</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="itembox zhongdong">
+                    <div class="itemboxfont">
+                        <div class="itemboxfonta">
+                            <a href="#" target="_blank">澳洲</a><a href="#" target="_blank">中东非洲</a>
+                        </div>
+                        <div class="itemboxfontb">
+                            <a href="#" target="_blank">新西兰</a><a href="#" target="_blank">斐济</a>
+                            <a href="#" target="_blank">土耳其</a><a href="#" target="_blank">澳大利亚</a>
+                            <a href="#" target="_blank">悉尼</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list clearfix">
+                    <div class="subitem">
+                        <dl class="fore1">
+                            <dt>
+                                <a href="#" target="_blank">澳洲</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">澳大利亚</a></em><em><a
+                                href="#" target="_blank">新西兰</a></em><em><a href="#"
+                                target="_blank">凯恩斯</a></em><em><a href="#" target="_blank">斐济</a></em><em><a
+                                href="#" target="_blank">悉尼</a></em><em><a href="#"
+                                target="_blank">墨尔本</a></em><em><a href="#" target="_blank">黄金海岸</a></em><em><a
+                                href="#" target="_blank">布里斯班</a></em><em><a href="#"
+                                target="_blank">皇后镇</a></em><em><a href="#" target="_blank">福克斯冰川</a></em><em><a
+                                href="#" target="_blank">基督城</a></em><em><a href="#"
+                                target="_blank">奥克兰</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore2">
+                            <dt>
+                                <a href="#" target="_blank">热门玩法</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">澳新连线</a></em><em><a
+                                href="#" target="_blank">澳新南北岛</a></em><em><a href="#"
+                                target="_blank">新西兰南北岛</a></em><em><a href="#"
+                                target="_blank">新西兰南北岛+冰川</a></em><em><a href="#"
+                                target="_blank">新西兰南北岛+岛屿湾</a></em><em><a href="#"
+                                target="_blank">新西兰南岛深度</a></em><em><a href="#"
+                                target="_blank">OUTLET</a></em><em><a href="#"
+                                target="_blank">品质游</a></em><em><a href="#" target="_blank">澳新凯墨南北岛全景</a></em><em><a
+                                href="#" target="_blank">纯玩无购物</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore3">
+                            <dt>
+                                <a href="#" target="_blank">中东非洲</a>
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">土耳其</a></em><em><a
+                                href="#" target="_blank">埃及</a></em><em><a href="#"
+                                target="_blank">塞舌尔</a></em><em><a href="#" target="_blank">毛里求斯</a></em><em><a
+                                href="#" target="_blank">突尼斯</a></em><em><a href="#"
+                                target="_blank">南非</a></em><em><a href="#" target="_blank">迪拜</a></em><em><a
+                                href="#" target="_blank">肯尼亚</a></em><em><a href="#"
+                                target="_blank">以色列</a></em><em><a href="#" target="_blank">伊朗</a></em><em><a
+                                href="#" target="_blank">坦桑尼亚</a></em><em><a href="#"
+                                target="_blank">摩洛哥</a></em><em><a href="#" target="_blank">阿拉伯联合酋长国</a></em><em><a
+                                href="#" target="_blank">马达加斯加</a></em>
+                            </dd>
+                        </dl>
+                        <dl class="fore4">
+                            <dt>
+                                热门玩法
+                            </dt>
+                            <dd>
+                                <em><a href="#" target="_blank">土耳其全景10日</a></em><em><a
+                                href="#" target="_blank">迪拜超值游</a></em><em><a href="#"
+                                target="_blank">埃及+迪拜</a></em><em><a href="#" target="_blank">土耳其深度游</a></em><em><a
+                                href="#" target="_blank"></a></em><em><a href="#"
+                                target="_blank">678星住宿</a></em><em><a href="#"
+                                target="_blank">南非+迪拜</a></em><em><a href="#" target="_blank">土耳其经典9日</a></em><em><a
+                                href="#" target="_blank">多国连线</a></em>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--bar左边右边结束-->
+    <!--中间轮转开始-->
+    <div id="indexmain-wrap">
+        <div id="indexmain">
+            <div class="content">
+                <!--图片轮播-->
+                <div class="hot_wrap">
+                    <div id="target" class="tbui_slideshow_container">
+                        <ul class="tbui_slideshow_list">
+                            <li>
+                                <a href="#" target="_blank" target="_blank"> <img
+                                src="$staticRoot/images/1.jpg" /> </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" target="_blank"> <img
+                                src="$staticRoot/images/2.jpg" /> </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" target="_blank"> <img
+                                src="$staticRoot/images/3.jpg" /> </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" target="_blank"> <img
+                                src="$staticRoot/images/4.jpg" /> </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" target="_blank"> <img
+                                src="$staticRoot/images/banner5.jpg" /> </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="slide_bg"></div>
+                    <!--导航条的结构-->
+                    <ul id="controller">
+                        <li>
+                            1
+                        </li>
+                        <li>
+                            2
+                        </li>
+                        <li>
+                            3
+                        </li>
+                        <li>
+                            4
+                        </li>
+                        <li>
+                            5
+                        </li>
+                    </ul>
+                </div>
+                <div class="left-wrap"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

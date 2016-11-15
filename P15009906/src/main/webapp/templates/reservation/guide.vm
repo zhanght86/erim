@@ -1,0 +1,87 @@
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">联系人信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">姓名：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left w80">手机号码：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+	</div>
+    <div class="cb"></div>
+    <div class="g_block_2 g_block_1 mb20 mr20">
+        <p class="g_tit_1 mb10">订单信息</p>
+        <p>导游姓名：王健<span class="left50">性别：男</span></p>
+            <div class="input_block top10">
+                <div class="input_right">
+                    <label>服务语种：国语/俄语</label>
+                </div>
+                <div class="input_right left20">
+                    <label class="p112">预订日期：</label>
+                    <input class="w130 riqi">
+                </div>
+            </div>
+        <p>预约时间：组团社</p>
+        <p>费用说明：服务费用 380/天 时间为9小时，超时费50元<span class="hui_span ml80">预订导游特殊情况，不能出国，可更换导游的类型</span></p>
+            <div class="addhiteaml">
+                服务类型：
+            </div>
+            <div class="addhiteamr">
+                <label><input type="checkbox"><span>国内地陪</span></label>
+                <label><input type="checkbox"><span>国内全陪</span></label>
+            </div>
+        <div class="cb"></div>
+        <div class="addinfo">
+            <div class="adddinfol">
+                备注信息：
+            </div>
+            <div class="adddinfor">
+                <textarea cols="40" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="g_right w515"><a class="hui2_a" href="javascript:void(0);">取消</a><a class="red_a ml25" href="javascript:void(0);">提交订单</a></div>
+<script type="text/javascript">
+$(document).ready(function(){
+$(".cw_cha_kan").click(function(){
+	$(".win_box_bg").show();
+	$(".win_box_edit2").show();
+	return false;
+});
+$(".hui_a").click(function(){
+	$(".win_box_bg").hide();
+	$(".win_box_edit2").hide();
+	return false;
+});
+$(".tab_a_2 a").click(function(){
+$(this).addClass("on").siblings().removeClass("on");
+$(".tab_con").children('div').eq($(this).index()).addClass("tab_show").siblings().removeClass("tab_show");
+});
+ $(".remen_top li").click(function(){
+		$(this).addClass('on').siblings().removeClass('on');
+    	  var index = $(".remen_top li").index($(this));
+        $('.remen_ct .remen_box').eq(index).show(0).siblings(".remen_ct .remen_box").hide(0);
+    });
+ /*同城同业机票查询国内国际*/
+	$(".same_topn label").click(function(){
+    	var liindex = $('.same_topn label').index(this);
+        $('.same_toph .same_tophb').eq(liindex).show(0).siblings(".same_toph .same_tophb").hide(0);
+	    $('.same_topct .same_topctb').eq(liindex).show(0).siblings(".same_topct .same_topctb").hide(0);
+    });
+    /*同城同业机票查询国内*/
+	$(".same_tophbn label").click(function(){
+    	var liindex = $('.same_tophbn label').index(this);
+        $('.same_topctn .same_topctnb').eq(liindex).show(0).siblings(".same_topctn .same_topctnb").hide(0);
+    });
+    /*同城同业机票查询国际*/
+	$(".same_tophbi label").click(function(){
+    	var liindex = $('.same_tophbi label').index(this);
+        $('.same_topcti .same_topctib').eq(liindex).show(0).siblings(".same_topcti .same_topctib").hide(0);
+    });
+})
+</script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+    <head>
+        <title></title>
+        <meta name="google" value="notranslate" />         
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <!-- browser icon -->
+        <link rel="icon" href="../images/erimming.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="../images/erimming.ico" type="image/x-icon" />
+
+        <style type="text/css" media="screen"> 
+            html,body{height:100%;}
+            body{margin:0;padding:0;overflow:hidden;text-align:center;background-color:#ffffff;}
+            object:focus{outline:none;}
+            #flashContent{display:none;}
+        </style>
+        
+        <link rel="stylesheet" type="text/css" href="history/history.css" />
+        <script type="text/javascript" src="history/history.js"></script>
+        <script type="text/javascript" src="swfobject.js"></script>
+        
+        <script type="text/javascript" src="http://admin.jialvlianhe.com/ueditor/1.4.3/ueditor.all.js"></script>
+        <script type="text/javascript" src="http://admin.jialvlianhe.com/ueditor/1.4.3/ueditor.config.erim.js"></script>
+        <script type="text/javascript" src="http://admin.jialvlianhe.com/js/jquery-1.7.2.min.js"></script>
+        
+        <script type="text/javascript">
+        // 加载flash文件
+        var swfVersionStr = "11.1.0";
+        var xiSwfUrlStr = "playerProductInstall.swf";
+        var flashvars = {};
+        var params = {};
+        params.quality = "high";
+        params.bgcolor = "#ffffff";
+        params.allowscriptaccess = "sameDomain";
+        params.allowfullscreen = "true";
+        var attributes = {};
+        attributes.id = "index";
+        attributes.name = "index";
+        attributes.align = "middle";
+        swfobject.embedSWF(
+            "index.swf", "flashContent", 
+            "100%", "100%", 
+            swfVersionStr, xiSwfUrlStr, 
+            flashvars, params, attributes);
+        swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+        // 移动富文本编辑器
+        function moveIFrame(x,y,w,h){
+            $('#iframediv').css('left',x);
+            $('#iframediv').css('top',y);
+            $('#iframediv').width(w);
+            $('#iframediv').height(h);
+            $('#iframe').width(w-2);
+            $('#iframe').height(h-4);
+        }
+        // 隐藏富文本编辑器
+        function hideIFrame(){
+            $('#iframediv').css('visibility','hidden');
+            setEditor('');
+        }
+        // 显示富文本编辑器
+        function showIFrame(){
+            $('#iframediv').css('visibility','visible');
+            iframe.focus();
+        }
+        // 获取文本编辑器内容
+        function getEditor(){
+            return iframe.window.getEditorContent();
+        }
+        // 设置文本编辑器内容
+        function setEditor(content){
+            iframe.window.setEditorContent(content+'');
+        }
+        </script>
+    </head>
+    <body>
+        <div id="iframediv" style="position:absolute;background-color:transparent;border:0px;visibility:hidden;padding-top:2px;">
+            <iframe id="iframe" name="iframe" src="http://admin.jialvlianhe.com/ueditor.html" frameborder="0" style="padding:0px;"></iframe>
+        </div>
+        <div id="flashContent">
+            <p>
+                To view this page ensure that Adobe Flash Player version 
+                11.1.0 or greater is installed. 
+            </p>
+            <script type="text/javascript"> 
+                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
+            </script> 
+        </div>
+        <noscript>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="index">
+                <param name="movie" value="index.swf" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="index.swf" width="100%" height="100%">
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+                    <p> 
+                        Either scripts and active content are not permitted to run or Adobe Flash Player version
+                        11.1.0 or greater is not installed.
+                    </p>
+                <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+        </noscript>     
+   </body>
+</html>

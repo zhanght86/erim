@@ -1,0 +1,190 @@
+<div class="indexbar">
+    <!--bar左边右边-->
+    <div class="indexwrapone">
+        <div class="all-sort-list">
+            #foreach($item in $listmall)
+				#if($item.mspLevel==1)
+    				<div class="item">
+                        <div class="itembox $item.mspImgClass">
+                            <div class="itemboxfont">
+                                <div class="itemboxfonta">
+                                    <a href="$appRoot/$cpyno/line/list" target="_blank">$item.mspName</a>
+                                </div>
+                                <div class="itemboxfontb">
+									#foreach($obj in $item.listCode)
+										#if($velocityCount < 6)
+											
+                							#if($item.id==1 || $item.id==4)
+                								<a href="$appRoot/$cpyno/line/list?1=1${item.queryLink}$obj.codeKey" target="_blank">$obj.codeValue</a>
+                							#else
+                								<a href="$appRoot/$cpyno/line/list?1=1${item.queryLink}$obj.codeValue" target="_blank">$obj.codeValue</a>
+											#end
+											
+											##<a href="$appRoot/$cpyno/line/list?ldlProductine=$obj.codeValue" target="_blank">$obj.codeValue</a>
+										#end
+            						#end
+									#* 
+									#set($c2 = 0)
+    								#foreach($c1 in $listmall)
+    									#if($c1.mspId == $item.id && $c1.mspLevel==2)
+											#set($c2 = $c2+1)
+											#if($c2 < 6)
+												<a href="$appRoot/$cpyno/line/list" target="_blank">$c1.mspName</a>
+											#end
+    									#end
+									#end
+									*#
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-list clearfix">
+                            <div class="subitem">
+								#foreach($obj in $item.listCode)
+									<dl class="fore${velocityCount}">
+										<dt > 
+											<a href="$appRoot/$cpyno/line/list" target="_blank">$obj.codeValue</a>
+										</dt>
+										<dd>
+											#set($iii = '')
+											#foreach($line in $listLine)
+												##主题游&nbsp;&nbsp;&nbsp;周末&nbsp;&nbsp;&nbsp;海岛
+												#if($item.id == 1)
+													#if($!erim.contains($!line.ldlProType1,$!obj.codeKey))
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##周边旅游
+												#elseif($item.id == 2)
+													#if($!line.ldlPerimeterIs=='02' && $!erim.contains($!line.ldlSpecialLine,$!obj.codeValue))
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##国内旅游
+												#elseif($item.id == 3)
+													#if($!line.ldlPerimeterIs=='01' && $!erim.contains($!line.ldlSpecialLine,$!obj.codeValue))
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##学生活动
+												#elseif($item.id == 4)
+													#if($!erim.contains($!line.ldlGame,$!obj.codeKey))
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##欧洲&nbsp;&nbsp;&nbsp;美洲
+												#elseif($item.id == 5)
+													#if($!line.ldlSpecialLine == $!obj.codeValue)
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##韩国&nbsp;&nbsp;&nbsp;日本&nbsp;&nbsp;&nbsp;朝鲜
+												#elseif($item.id == 6)
+													#if($!line.ldlSpecialLine == $!obj.codeValue)
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##东南亚&nbsp;&nbsp;&nbsp;南亚&nbsp;&nbsp;&nbsp;泰国
+												#elseif($item.id == 7)
+													#if($!line.ldlSpecialLine == $!obj.codeValue)
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##香港&nbsp;&nbsp;&nbsp;澳门&nbsp;&nbsp;&nbsp;台湾
+												#elseif($item.id == 8)
+													#if($!line.ldlSpecialLine == $!obj.codeValue)
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												##澳洲&nbsp;&nbsp;&nbsp;中东非洲
+												#elseif($item.id == 9)
+													#if($!line.ldlSpecialLine == $!obj.codeValue)
+														#set($iii = $iii + '+' + $line.ldlProductine)
+													#end
+												#end
+											#end
+											
+											#if($erim.isNotEmpty($iii))
+												#foreach($e in $erim.splitReplaceSame($iii,'+'))
+													<em><a href="$appRoot/$cpyno/line/list?ldlProductine=$e" target="_blank">$e</a></em>
+												#end
+											#end
+                                        </dd>
+                                    </dl>
+        						#end
+								#* 
+    							#foreach($c1 in $listmall)
+    								#if($c1.mspId == $item.id )
+                                        <dl class="fore${velocityCount}">
+                                            <dt>
+                                                <a href="$appRoot/$cpyno/line/list" target="_blank">$c1.mspName</a>
+                                            </dt>
+                                            <dd>
+    											#foreach($c2 in $listmall)
+    												#if($c2.mspId == $c1.id )
+    													<em><a href="$appRoot/$cpyno/line/list" target="_blank">$c2.mspName</a></em>
+    												#end
+    											#end
+                                            </dd>
+                                        </dl>
+    								#end
+								#end
+								*#
+                            </div>
+                        </div>
+                    </div>
+				#end
+			#end
+        </div>
+    </div>
+    <!--bar左边右边结束-->
+    <!--中间轮转开始-->
+    <div id="indexmain-wrap">
+        <div id="indexmain">
+            <div class="content">
+                <!--图片轮播-->
+                <div class="hot_wrap">
+                    <div id="target" class="tbui_slideshow_container">
+                        <ul class="tbui_slideshow_list">
+							#if($erim.isNotEmpty($!mallWeb.webImg1))
+                                <li>
+                                   <a href="$appRoot/$cpyno/jingxuan.html?searchModel=1" target="_blank"><img src="$!mallWeb.webImg1" /> </a>
+                                </li>
+							#end
+							#if($erim.isNotEmpty($!mallWeb.webImg2))
+                                <li>
+                                     <a href="$appRoot/$cpyno/lvyou.html?searchModel=2" target="_blank"><img src="$!mallWeb.webImg2" /> </a>
+                                </li>
+							#end
+							#if($erim.isNotEmpty($!mallWeb.webImg3))
+                                <li>
+                                     <a href="$appRoot/$cpyno/superfree.html?searchModel=3" target="_blank"><img src="$!mallWeb.webImg3" /> </a>
+                                </li>
+							#end
+							#if($erim.isNotEmpty($!mallWeb.webImg4))
+                                <li>
+                                     <a href="#" target="_blank"><img src="$!mallWeb.webImg4" /> </a>
+                                </li>
+							#end
+                        </ul>
+                    </div>
+                    <div class="slide_bg"></div>
+                    <ul id="controller">
+                        #if($erim.isNotEmpty($!mallWeb.webImg1))
+                            <li>
+                                1
+                            </li>
+						#end
+						#if($erim.isNotEmpty($!mallWeb.webImg2))
+                            <li>
+                                2
+                            </li>
+						#end
+						#if($erim.isNotEmpty($!mallWeb.webImg3))
+                            <li>
+                               3
+                            </li>
+						#end
+						#if($erim.isNotEmpty($!mallWeb.webImg4))
+                            <li>
+                                4
+                            </li>
+						#end
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

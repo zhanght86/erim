@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="managementprice">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			and mdl_price_seal is not null
+			 <if test="mdlId != null and mdlId  != ''">				and 	mdl_id 			=  #{mdlId}</if>
+			 <if test="mdlDate != null and mdlDate  != ''">			and 	mdl_date 			=  #{mdlDate}</if>
+		</where>
+	</sql>
+	
+	<sql id="sql_column">
+		mdl_id 					AS mdlId,
+		mdl_name 				AS mdlName,
+		mdl_is_open 			AS mdlIsOpen,
+		mdl_date 				AS mdlDate,
+		mdl_price_seal 			AS mdlPriceSeal,
+		mdl_create_time 		AS mdlCreateTime,
+		mdl_cost_show 		    AS mdlCostShow
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageManagementPrice" resultType="managementPriceBean">
+		SELECT
+			<include refid="sql_column"/>
+		FROM
+			management_price
+			
+		<include refid="sql_query" />
+		ORDER BY 
+			mdl_create_time desc
+	</select>
+
+</mapper>

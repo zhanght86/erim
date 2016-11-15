@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>佳旅联合</title>
+    <meta name="keywords" content="注册页面" />
+    <meta name="description" content="注册页面" />
+    #parse("company/regedit/common.vm")
+    <script type="text/javascript">
+    	$(function() {
+    		//初始化省市县
+    		regUtil.initProvince(110000,'cpyProvince','cpyCity','cpyCounty');
+			
+    		$("#content_nbox1").show();
+    		// 当点击是否国内时
+    		$("input[name='cpyIsInland']").change(function() {
+    			var a = $(this).val();
+    			if (a == '02') {
+        			$("#content_nbox1").show();
+        			$("#content_nbox2").hide();
+    			}
+    			if (a == '01') {
+    				$("#content_nbox1").hide();
+    				$("#content_nbox2").show();
+    			}
+    		});
+			
+			// 当选择国际
+			$("input[name='cpyExternal']").change(function() {
+				var a = $("input[name='cpyExternal']:checked").val();
+				if (a == '04') {
+					$(".content_inter").show();
+				} else {
+					$(".content_inter").hide();
+				}
+			});
+        
+    		uploadify('uploadify','cpyImg','filespan','fileQueue');
+    	});
+    </script>
+</head>
+<body>
+    <div class="register">
+    	<div class="reg_head">
+    		<div class="reg_heada">
+    			<img src="$staticRoot/images/logotop.jpg" alt="logo">
+    		</div>
+    	</div>
+    	<div class="content">
+			<form method="post" id="form1">
+        		<div class="content_top">
+        			<img src="$staticRoot/images/menu_1.png" alt="基本信息">
+        		</div>
+				<input type="hidden" value="$!yjUserCode" name="yjUserCode"/>
+        		<div class="content_line">
+        			<span>公司名称:</span>
+        			<div class="content_liner">
+        				<input type="text" name="cpyName" class="validate[required,maxSize[30]]" />
+						<span style="color:red;">*</span>
+        			</div>
+        		</div>
+        		<div class="content_line">
+        			<span>品牌名称:</span>
+        			<div class="content_liner">
+        				<input type="text" name="cpyBrand" class="validate[maxSize[30]]"/>
+        				<span></span>
+        			</div>
+        		</div>
+        		<div class="content_line">
+        			<span>公司电话:</span>
+        			<div class="content_liner">
+        				<input type="text" name="cpyTelephone" class="validate[required,custom[phone]]" />
+        				<span style="color:red;">*</span>
+        			</div>
+        		</div>
+                <div class="content_line">
+                    <span>负责人姓名:</span>
+                    <div class="content_liner">
+                        <input type="text" class="validate[required,maxSize[10]]" name="ccpName" />
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+                <div class="content_line">
+                    <span>负责人QQ:</span>
+                    <div class="content_liner">
+                        <input type="text" name="ccpQq" class="validate[required,custom[qq]]" />
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+                <div class="content_line">
+                    <span>负责人电话:</span>
+                    <div class="content_liner">
+                        <input type="text" name="ccpTelephone" class="validate[required,custom[phone]]" />
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+                <div class="content_line">
+                    <span>公司传真:</span>
+                    <div class="content_liner">
+                        <input type="text" name="cpyFax" class="validate[maxSize[30]]" />
+                        <span></span>
+                    </div>
+                </div>
+                <div class="content_line">
+                    <span>公司邮箱:</span>
+                    <div class="content_liner">
+                        <input type="text" name="cpyEmail" class="validate[required,custom[email]]"/>
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+				<div class="content_line">
+                    <span>公司LOGO:</span>
+                    <div class="content_liner position_re">
+                        <input name="cpyImg" value="" type="hidden" id="cpyImg"/>
+                    	<input name="file" id="uploadify" contenteditable="false" size="30" type="file"/>
+        				<span id="filespan"></span>
+        				<div id="fileQueue"></div>
+                    </div>
+                </div>
+                <div class="content_line">
+                    <span>公司地址:</span>
+                    <div class="content_liner">
+                        <label><input type="radio" name="cpyIsInland" value="02" checked />国内</label>
+                        <label>
+							<input type="radio" name="cpyIsInland" value="01" />国际/港澳台
+						</label>
+                    </div>
+                </div>
+                <div class="content_nation">
+                    <div class="content_nbox" id="content_nbox1">
+                        <div class="content_laddre show">
+                            <span></span>
+                            <div class="content_address">
+                                <select name="cpyProvince">
+    								#foreach($item in $provinces)
+    									<option value="$item.regionNo">$item.regionName</option>
+    								#end
+                                </select>
+                                <span>省</span>
+                                <select name="cpyCity"></select>
+                                <span>市</span>
+                                <select name="cpyCounty"></select>
+                                <span>区/县</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_nbox" id="content_nbox2">
+                        <div class="content_laddre">
+                            <span></span>
+							<div class="content_liner">
+                                <label><input type="radio" name="cpyExternal" value="01" />香港</label>
+                                <label><input type="radio" name="cpyExternal" value="02" />澳门</label>
+                                <label>
+									<input type="radio" name="cpyExternal" value="03" />台湾
+								</label>
+                            </div>
+                        </div>
+                        <div class="content_laddre">
+                            <span></span>
+							<div class="content_liner">
+                                <label>
+									<input type="radio" name="cpyExternal" value="04" />国际
+								</label>
+                                <div class="content_inter">
+                                    <div class="content_address">
+										<input type="text" class="gj_d_gj validate[required,maxSize[20]]" name="cpyForeign" />
+                                        <span>国家</span>
+										<input type="text" class="gj_d_gj validate[required,maxSize[20]]" name="cpyForeignCity"/>
+                                        <span>城市</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content_line">
+                    <span></span>
+                    <div class="content_liner">
+                        <input type="text" name="cpyAddress" class="validate[required,maxSize[50]]" placeholder="详细地址" />
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+        		<div class="content_btn2">
+        			<button type="button" onclick="javascript:regUtil.regedit('form1', '$appRoot/company/regedit/saveInfo', '$appRoot/company/regedit/business');">下一步</button>
+        		</div>
+			</form>
+    	</div>
+    	<div class="footer">
+    		版权所有&nbsp;&copyright&nbsp;北京佳旅联合科技有限公司
+    	</div>
+    </div>
+</body>
+</html>

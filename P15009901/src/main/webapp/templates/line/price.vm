@@ -1,0 +1,211 @@
+<div class="riqi">
+	<table class="xuanze" cellpadding="0" cellspacing="0" border="0">
+		<tbody>
+		<tr>
+			<td class="w200 blue_a white">选择游玩日期</td>
+			<td>
+				<form id="form1">
+					<input type="hidden" name="tdlId" value="$!tdlId" />
+					<input type="hidden" name="year" value="$!year" />
+					<input type="hidden" name="month" value="$!month" />
+    				<span class="sjleft liangjiaxiang_left">
+    				<!--	<a href="javascript:void(0);" class="liangjiaxiang_left">-->
+							<img src="$staticRoot/images/sanjiaoleft.jpg" />
+					<!--	</a>-->
+                    </span>
+                    <p class="date-title">$year 年 $month 月</p>
+                    <span class="sjright liangjiaxiang_right">
+                    <!--	<a href="javascript:void(0);" class="liangjiaxiang_right">-->
+							<img src="$staticRoot/images/sanjiaoright.jpg" />
+					<!--	</a>-->
+                    </span>
+                </form>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tbody id="price_body">
+		<tr>
+			<th>一</th>
+			<th>二</th>
+			<th>三</th>
+			<th>四</th>
+			<th>五</th>
+			<th class="red">六</th>
+			<th class="borderright red">日</th>
+		</tr>
+		<tr style="cursor:pointer">
+			#foreach($item in $priceList)
+				<!-- 停售 -->
+				#if($!item.lpeIsOpen == '01')
+					<td class="hui">
+						<!-- 是否为今天 -->
+						#if($!item.isUpdate == '02')
+							<span class="shu">今</span>
+						#else
+							<span class="shu">$!item.day</span>
+						#end
+								<span class="b_date_topright white">￥$!item.lpeRetailAdult</span><br>
+								<span class="b_date_bottom white">余:$!item.lpeSign位</span>
+                    </td>
+				<!-- 出售 -->
+				#elseif($!item.lpeIsOpen == '02')
+					<!--可售票数为0-->
+					#if($!item.lpeSign == '0' || $!item.lpeSign == 0 || $!item.isPredetermine == '0')
+						<!-- 是否为今天 -->
+    					#if($!item.isUpdate == '02')
+    						<td class="hui">
+                                <span class="shu">今</span>
+    					#else
+    						<td class="hui">
+                                <span class="shu">$!item.day</span>
+    					#end
+    								<span class="b_date_topright white">￥$!item.lpeRetailAdult</span><br>
+        							#if($!item.lpeSign == '0' || $!item.lpeSign == 0)
+    									<span class="white">已售完</span>
+    								#elseif($!item.isPredetermine == '0')
+    									<span class="white">已过期</span>
+    								#end
+                        </td>
+					#else
+						<!-- 是否为今天 -->
+    					#if($!item.isUpdate == '02')
+    						<td class="yellow_bg">
+                                <span class="shu">今</span>
+    					#else
+    						<td class="price_td">
+                                <span class="shu">$!item.day</span>
+    					#end
+    						<!-- 被选中的数据  01为未选中 02已选中-->
+    						<input type="hidden" name="isChecked" value="01" />
+    						<input type="hidden" name="lpeIsOpen" value="$!item.lpeIsOpen" />
+    							<input type="hidden" name="lpeRetailAdult" value="$!item.lpeRetailAdult" />
+    							<input type="hidden" name="lpeRetailChild" value="$!item.lpeRetailChild" />
+    							<input type="hidden" name="lpeIsUpgrade"   value="$!item.lpeIsUpgrade" />
+    							<input type="hidden" name="lpeUpgradeCont" value="$!item.lpeUpgradeCont" />
+    							<input type="hidden" name="lpeUpgradeAdult" value="$!item.lpeUpgradeAdult" />
+    							<input type="hidden" name="lpeSinglePrice" value="$!item.lpeSinglePrice" />
+								<input type="hidden" name="lpeSingleShow" value="$!item.lpeSingleShow" />
+								<input type="hidden" name="lpeInsurePrice" value="$!item.lpeInsurePrice" />
+								<input type="hidden" name="lpeInsureShow" value="$!item.lpeInsureShow" />
+    								<span class="b_date_topright yellow">￥$!item.lpeRetailAdult</span><br>
+        							<!-- 房量为0 -->
+    								#if($!item.lpeSign == '0')
+    									<span class="b_date_bottom red">余:$!item.lpeSign位</span>
+    								#else
+    									<span class="b_date_bottom blue">余:$!item.lpeSign位</span>
+    								#end
+                        </td>
+					#end
+					
+				<!-- 无数据 -->
+				#else
+					#if($!item.isUpdate == '02')
+						<td class="yellow_bg">
+						<p class="shu">今</p>
+					#else
+						<td class="price_td">
+						<p class="shu">$!item.day</p>
+					#end
+					</td>
+				#end
+				<!-- 为周日时换行 -->
+				#if($!{velocityCount} == 7 || $!{velocityCount} == 14 || $!{velocityCount} == 21 || $!{velocityCount} == 28 || $!{velocityCount} == 35)
+                    </tr>
+                    <tr style="cursor:pointer">
+				#end
+			#end
+		</tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+		// 时间向后选择
+    	$(".liangjiaxiang_left").click(function() {
+		
+			var tdlId = $("#form1").find("input[name='tdlId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+    		$(".line_open_price").load("$appRoot/$cpyno/line/price/date?tdlId=" + tdlId + "&start=" + year + "&end=" + month + "&portal=02");
+    	});
+		// 时间向前选择
+		$(".liangjiaxiang_right").click(function() {
+			var tdlId = $("#form1").find("input[name='tdlId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+    		$(".line_open_price").load("$appRoot/$cpyno/line/price/date?tdlId=" + tdlId + "&start=" + year + "&end=" + month + "&portal=01");
+    	});
+	
+		
+		// 点击事件
+		$("#price_body").find("td").click(function() {
+			// 是否出售
+			var lpeIsOpen = $(this).find("input[name='lpeIsOpen']").val();
+			if (lpeIsOpen != '02') {
+				return;
+			}
+			
+			// 是否为已选中
+			var isChecked = $(this).find("input[name='isChecked']").val();
+			
+			if (isChecked == '02') {
+				// 改为未选中
+				$(this).find("input[name='isChecked']").val("01");
+				// 去除颜色的class
+				$(this).removeClass("red_bg");
+			} else {
+				//设置其他的日期为未选中状态
+				$(this).siblings().find("input[name='isChecked']").val("01");
+				//设置其他的日期颜色的class
+				$(this).parent().siblings().children().removeClass("red_bg");
+				$(this).siblings().removeClass("red_bg");
+				// 改为选中状态
+				$(this).find("input[name='isChecked']").val("02");
+				// 设置颜色的class
+				$(this).addClass("red_bg");
+				setCode($(this));
+			}
+		})
+	});
+	function setCode(obj){
+		var lpeRetailAdult   = $(obj).find("input[name=lpeRetailAdult").val();
+		var lpeRetailChild   = $(obj).find("input[name=lpeRetailChild").val();
+		var lpeIsUpgrade     = $(obj).find("input[name=lpeIsUpgrade").val();
+		var lpeUpgradeCont   = $(obj).find("input[name=lpeUpgradeCont").val();
+		var lpeUpgradeAdult  = $(obj).find("input[name=lpeUpgradeAdult").val();
+		var lpeSinglePrice   = $(obj).find("input[name=lpeSinglePrice").val();
+		var lpeSingleShow    = $(obj).find("input[name=lpeSingleShow").val();
+		var lpeInsurePrice   = $(obj).find("input[name=lpeInsurePrice").val();
+		var lpeInsureShow    = $(obj).find("input[name=lpeInsureShow").val();
+		if(lpeRetailAdult != null && lpeRetailAdult != ''){
+			$("#adultP").html("￥"+lpeRetailAdult+"元");
+		}
+		if(lpeRetailChild != null && lpeRetailChild != ''){
+			$("#childP").html("￥"+lpeRetailChild+"元");
+		}else{
+			$("#childP").html("无");
+		}
+		if(lpeIsUpgrade != null && lpeIsUpgrade == '01'){
+			$("#shengjiP").html("不可升级");
+		}else if(lpeIsUpgrade != null && lpeIsUpgrade == '02'){
+			if(lpeUpgradeCont != null && lpeUpgradeCont != ''){
+				$("#shengjiP").html("可升级至 ："+lpeUpgradeCont+" 加：￥"+lpeUpgradeAdult+"元");
+			}
+		}
+		if(lpeSinglePrice != null && lpeSinglePrice != ''){
+			$("#danfangchaP").html("￥"+lpeSinglePrice+"元  "+lpeSingleShow);
+		}else{
+			$("#danfangchaP").html("无");
+		}
+		if(lpeInsurePrice != null && lpeInsurePrice != ''){
+			$("#baoxianP").html("￥"+lpeInsurePrice+"元  "+lpeInsureShow);
+		}else{
+			$("#baoxianP").html("无");
+		}
+	
+	}
+</script>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zysystemuser">
+	
+	<!-- 根据登录名查询对象 -->
+	<select id="selectUserByLoginname" resultType="zySystemUserBean">
+		SELECT
+			users.id               	AS    id,
+			zy_user_loginname     	AS    zyUserLoginname,
+			zy_user_password      	AS    zyUserPassword,
+			zy_user_realname      	AS    zyUserRealname,
+			zy_user_tel           	AS    zyUserTel,
+			zy_role_id            	AS    zyRoleId,
+			zy_last_login_time    	AS    zyLastLoginTime,
+			zy_last_login_ip      	AS    zyLastLoginIp,
+			zy_last_login_address 	AS	  zyLastLoginAddress,
+			zy_is_through         	AS    zyIsThrough,
+			zy_is_cooperation	   	AS    zyIsCooperation,
+			zy_is_del_status	   	AS    zyIsDelStatus,
+			roles.zy_role_name    	AS    zyRoleName,
+			roles.cpy_id           	AS    cpyId,
+			company.cpy_name       	AS    cpyName,
+			company.cpy_img        	AS    cpyImg,
+			company.cpy_brand      	AS    cpyBrand
+		FROM
+			zy_system_user users
+		LEFT JOIN
+			zy_system_role roles
+		ON
+			users.zy_role_id = roles.id
+		LEFT JOIN
+			company_detail  company
+		ON
+			company.id = roles.cpy_id
+		WHERE 
+			zy_user_loginname = #{zyUserLoginname} 
+	</select>
+	
+	<select id="selectUserById" resultType="zySystemUserBean">
+		SELECT
+			id                     AS    id,
+			zy_user_loginname     AS    zyUserLoginname,
+			zy_user_password      AS    zyUserPassword,
+			zy_user_realname      AS    zyUserRealname,
+			zy_user_tel           AS    zyUserTel,
+			zy_role_id            AS    zyRoleId,
+			zy_last_login_time    AS    zyLastLoginTime,
+			zy_last_login_ip      AS    zyLastLoginIp,
+			zy_last_login_address AS	 zyLastLoginAddress,
+			zy_is_through         AS    zyIsThrough,
+			zy_is_cooperation	   AS    zyIsCooperation,
+			zy_is_del_status	   AS    zyIsDelStatus
+		FROM
+			zy_system_user
+		WHERE
+			id = #{id}
+	</select>
+	
+	<sql id="sql_query">
+		<where>
+			1=1
+			<if test="cpyId != null and cpyId != ''"> and cpy_id = #{cpyId}  </if>
+			<if test="zyUserRealname != null 	and zyUserRealname != ''">	and zy_user_realname =       #{zyUserRealname}</if>
+		</where>
+	</sql>
+	
+	<!-- 分页查询 -->
+	<select id="selectPage" resultType="zySystemUserBean">
+		SELECT
+			id                     AS    id,
+			zy_user_loginname     AS    zyUserLoginname,
+			zy_user_password      AS    zyUserPassword,
+			zy_user_realname      AS    zyUserRealname,
+			zy_user_tel           AS    zyUserTel,
+			zy_role_id            AS    zyRoleId,
+			zy_last_login_time    AS    zyLastLoginTime,
+			zy_last_login_ip      AS    zyLastLoginIp,
+			zy_last_login_address AS	 zyLastLoginAddress,
+			zy_is_through         AS    zyIsThrough,
+			cpy_id				   AS    cpyId,
+			zy_is_cooperation	   AS    zyIsCooperation,
+			zy_is_del_status	   AS    zyIsDelStatus
+		FROM
+			zy_system_user
+		<include refid="sql_query" />
+		ORDER BY 
+			zy_is_del_status
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			zy_system_user
+			
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE 
+			zy_system_user
+		SET
+			zy_user_realname  = #{zyUserRealname},
+			zy_user_tel       = #{zyUserTel},
+			zy_role_id        = #{zyRoleId}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 修改登陆信息 -->
+	<update id="updateLogin">
+		UPDATE 
+			zy_system_user
+		SET
+			zy_last_login_time	    = #{zyLastLoginTime},
+			zy_last_login_ip       = #{zyLastLoginIp},
+			zy_last_login_address  = #{zyLastLoginAddress}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		UPDATE 
+			zy_system_user
+		SET
+			zy_is_del_status  = #{zyIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			zy_system_user
+			(
+				zy_user_loginname,
+				zy_user_password,
+				zy_user_realname,
+				zy_user_tel,
+				zy_role_id,
+				zy_last_login_time,
+				zy_last_login_ip,
+				zy_is_through,
+				cpy_id,
+				zy_is_cooperation,
+				zy_is_del_status
+			)
+			VALUES
+			(
+				#{zyUserLoginname},
+				#{zyUserPassword},
+				#{zyUserRealname},
+				#{zyUserTel},
+				#{zyRoleId},
+				#{zyLastLoginTime},
+				#{zyLastLoginIp},
+				#{zyIsThrough},
+				#{cpyId},
+				#{zyIsCooperation},
+				#{zyIsDelStatus}
+			)
+	</insert>
+	
+	<!-- 查询所有用户 -->
+	<select id="selectUserByRoleId" resultType="zySystemUserBean">
+		SELECT
+			id                     	AS    id,
+			zy_user_loginname     	AS    zyUserLoginname,
+			zy_user_password      	AS    zyUserPassword,
+			zy_user_realname      	AS    zyUserRealname,
+			zy_user_tel           	AS    zyUserTel,
+			zy_role_id            	AS    zyRoleId,
+			zy_last_login_time    	AS    zyLastLoginTime,
+			zy_last_login_ip      	AS    zyLastLoginIp,
+			zy_last_login_address 	AS	  zyLastLoginAddress,
+			zy_is_through         	AS    zyIsThrough,
+			cpy_id				   	AS    cpyId,
+			zy_is_cooperation	   	AS    zyIsCooperation
+		FROM
+			zy_system_user
+		WHERE
+			zy_role_id = #{zyRoleId}
+	</select>
+	
+	<!-- 修改密码 -->
+	<update id="updatePsd">
+		UPDATE 
+			zy_system_user
+		SET
+			zy_user_password = #{zyUserPassword}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 根据企业ID删除用户信息 -->
+	<delete id="deleteUserByCpyId">
+		DELETE FROM
+			zy_system_user
+		WHERE
+			cpy_id = #{cpyId}
+	</delete>
+</mapper>

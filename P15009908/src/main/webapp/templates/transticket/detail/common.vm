@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/train.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/yuding.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/transticket/transticket.css">
+	
+<!--火车票-->
+	<div class="newadd">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/htt1.png">
+			<span>常出车次</span>
+		</div>
+		<div class="carad_ctrtable">
+			<table cellspacing="0" cellspadding="0">
+				<thead>
+					<tr>
+						<td>车次</td>
+						<td>出发城市</td>
+						<td>出发时间</td>
+						<td>目的城市</td>
+						<td>到达时间</td>
+						<td>席别</td>
+						<!--<td>上架状态</td>-->
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($item in $listtransticketnum)
+    					<tr>
+							<td>$item.tdlNo</td>
+    						<td>$item.tdlStartStation</td>
+    						<td>$item.tdlStartTime</td>
+    						<td>$item.tdlArrivedStation</td>
+    						<td>$item.tdlArrivedTime</td>
+    						<td>$item.tdlNtype</td>
+    					    <!--<td class="carad_img">
+								#if($!item.tdlIsDelStatus == '02')
+                                    <span><img src="$staticRoot/images/lvdui.png"/></span>
+                                    <a href="javascript:index.load('$appRoot/transticket/num/xj?id=$item.id&tdlIsDelStatus=01');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+    							#end
+    							#if($!item.tdlIsDelStatus == '01')
+    								<a href="javascript:index.load('$appRoot/transticket/num/xj?id=$item.id&tdlIsDelStatus=02');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+    								<span><img src="$staticRoot/images/hongcuo.png"/></span>
+    							#end
+							</td>-->
+    					</tr>
+					#end
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--/火车票-->

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mallweb">
+	
+	<!-- 查询 -->
+	<select id="selectMallWebByCid" resultType="mallWebBean">
+		SELECT
+			id 				 AS id,
+			cpy_id 		     AS cpyId,
+			web_title 		 AS webTitle,
+			web_logo 		 AS webLogo,
+			web_kh 			 AS webKh,
+			web_cpyname 	 AS webCpyname,
+			web_img1 		 AS webImg1,
+			web_img2 	     AS webImg2,
+			web_img3 	     AS webImg3,
+			web_img4         AS webImg4,
+			web_teletephone  AS webTeletephone,
+			web_card 		 AS webCard,
+			web_qq			 AS webQq,
+			web_lvyoucard    AS webLvyoucard,
+			web_cpyaddress   AS webCpyaddress,
+			web_cpytelephone AS webCpytelephone,
+			web_createtime   AS webCreatetime,
+			web_createuser   AS webCreateuser
+		FROM
+			mall_web
+		WHERE
+			cpy_id  = #{cpyId}
+	</select>
+</mapper>

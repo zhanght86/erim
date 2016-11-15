@@ -1,0 +1,45 @@
+<div class="rdivv">
+	<div class="tese">
+		<div class="tesetop4">			
+		</div>
+		<div class="tesetop2">
+			<form class="form-search" method="post" id="form1">
+    			<div class="teseline">
+    				<span>名称：</span>
+    				<input class="input-medium search-query" name="mdlName" value="$!planeticketDetail.mdlName" type="text" />
+    			</div>
+    			<button type="button" onclick="index.searchform('form1','$appRoot/zx/user/list');"></button>
+            </form>
+		</div>
+		<div class="tesetop3"></div>
+		<div class="tesenew">
+			<button onclick="index.load('$appRoot/zx/user/insertPage');"></button>
+		</div>
+
+		<div class="tesect">
+			<div class="tesetable">
+				<table border="0" cellspadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>ID</th>
+    						<th>名称</th>
+    						<th>登录名</th>
+    						<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($item in $userList)
+        	                  <tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+        	                  	<td>$item.id</td>
+        			            <td>$!item.zxUserRealname</td>
+        			            <td>$item.zxUserLoginname</td>
+        						<td><a href="javascript:index.load('$appRoot/zx/user/updatePage?id=$item.id');">修改</a></td>
+        	                  </tr>
+        	              #end
+					</tbody>
+				</table>
+				#parse("common/page.vm")
+			</div>
+		</div>
+	</div>
+</div>

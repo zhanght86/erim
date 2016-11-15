@@ -1,0 +1,155 @@
+/* CSS Document */
+.W{ width:1200px;}
+*{ 
+padding:0px;
+margin:0px;
+}
+body{ font-family:'微软雅黑'；}
+.fl{ float:left;}
+.banner{
+	width:100%; 
+	height:120px;}
+.about_contnet{height:692px; margin-top:30px;}	
+.about_left{ width:200px; height:692px; float:left;}
+.about_right{width:980px; height:692px; margin-left:0px; float:left;}	
+.about_about{ width:200px; height:50px;}
+.about_gs{width:200px; height:32px;color:#FFF;line-height:32px; font-size:14px; cursor:pointer; background:url(../images/background1.jpg) no-repeat; margin-bottom:8px;text-align:center;}
+
+.about_news{ width:200px; height:68px; background:#fff;text-align:left;line-height:68px;}
+.about_news>span{margin-left:20px;  color:#666; font-size:20px; }
+.about_news img{ float:left; margin-top:20px;margin-left:20px;}
+.about_zx{text-align:center; margin-bottom:8px;width:200px; height:32px; background: url(../images/background2.jpg) no-repeat; color:#FFF;line-height:32px; font-size:14px; cursor:pointer;}
+.about_gongsi{ width:980px; height:50px; background:#f6f6f6; border-bottom:1px solid #c3c3c3;}
+.about_gongsi>img{ margin-left:25px;}
+.about_gsjs{ width:150px; border-bottom:2px solid #277fb1;;height:48px; line-height:60px; color:#666; font-size:18px; font-weight:800; float:left;}
+.about_weizhi{ width:240px; height:50px;float:right; line-height:50px; text-align:left;font-size:12px; color:#333333;}
+.about_weizhi span{ font-weight:bold;}
+.about_inner{ width:980px; height:642px;}
+.about_gui{ width:980px; margin-top:30px; float:left;}
+.inner{display:none;}
+
+/*文章内容*/
+.about_guia{ color:#323232;}
+.about_guia>p{ width:980px; line-height:50px; height:50px; font-size:20px; font-weight:bold; text-align:center; border-bottom:1px solid #e5e5e5;}
+.about_guib{ margin-top:10px; height:30px; background:#f9f9f9; border:1px solid #efefef; line-height:30px;text-align:center;}
+.about_guib ul{ margin:0 auto; height:30px;text-align:center;width:800px;}
+.about_guic { height:50px; border:1px dashed #e5e5e5; margin-top:15px;}
+.about_guic p{ text-align:left; text-indent:2em; line-height:20px;margin-top:16px;}
+.about_guic p span{ color:#fe6601;}
+
+.about_cen{ margin-top:10px; padding:0 25px; font-size:14px;}
+.about_cen>p{ margin-top:10px; line-height:20px; text-align:left; text-indent:2em; font-size:14px; color:#666;}
+
+/*新闻列表内容*/
+
+/*新闻列表右边*/
+div.gbodyer_rgt{
+    width: 976px;
+    height: 642px;
+    height:auto;
+    float: left;
+    margin-left: 20px;
+    background: url(../images/lb_bg.jpg) no-repeat;
+    background-position: 0px 0px;
+}
+div.gbodyer_rgt_top{
+
+    height:50px;
+    margin-top: 10px;
+    border-bottom: 1px solid #bdbdbd;
+}
+span.gbodyer_news{
+    width: 180px;
+    height: 48px;
+    border-bottom: 2px solid #2880b0;
+    display: block;
+    float: left;
+    margin-left: 50px;
+    font-size: 20px;
+    line-height: 48px;
+    padding-left: 20px;
+}
+ul.gbodyer_ul{
+    float:left;
+    width: 300px;
+    margin-left: 400px;
+    
+}
+.gbodyer_fx{
+	padding-top:1px;
+	height:30px;
+	
+	}
+ul.gbodyer_ul li{
+    float: right;
+    margin: 0 5px;
+    line-height: 40px;
+}
+ul.gbodyer_ul li a{
+    color: #323232;
+}
+ul.gbodyer_rgt_list{
+    width: 945px;
+    margin-top: 15px;
+    height: 535px;
+    padding-left: 35px;
+}
+ul.gbodyer_rgt_list li a{
+	color:#323232;
+	
+	}
+ul.gbodyer_rgt_list li{
+    
+    height: 40px;
+    line-height: 40px;
+    background: url(../images/li_bg.jpg) no-repeat;
+    background-position: 5px;
+    border-bottom: 1px dashed #c9c9c9;
+}
+span.gbodyer_rgtbt{
+	float:left;
+    padding-left: 20px;
+    text-align:left;
+}
+span.gbodyer_rgtbt a:hover{
+    color: #5a85b2;
+}
+span.gbodyer_rgtsj{
+    float: right;
+    line-height: 40px;
+    padding-right: 10px;
+}
+div.gbodyer_rgtbot{
+    height: 30px;
+}
+div.gbodyer_rgtbot>ul{
+    float: right;
+    margin-top: 10px;
+}
+div.gbodyer_rgtbot>ul li{
+    float: left;
+    margin:0 4px;
+    line-height: 20px;
+    text-align: center;
+}
+div.gbodyer_rgtbot> ul li a{
+    display: block;
+}
+div.gbodyer_rgtbot>ul li a:hover{
+    background: #5a85b2;
+    color: #fff;
+}
+.gbodyer_lia{
+    width: 58px;
+    height: 20px;
+
+}
+.gbodyer_lia, .gbodyer_lib{
+    background: url(../images/gbot_bg.jpg) repeat-x;
+    border: 1px solid #c9c9c9;
+}
+.gbodyer_lib{
+    width: 29px;
+    height: 20px;
+    
+}

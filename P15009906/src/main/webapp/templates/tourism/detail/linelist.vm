@@ -1,0 +1,40 @@
+	<div class="g_block_1 mb20">
+		<p class="g_tit_1 mb10">产品商信息</p>
+		<p>公司名称：$!company.cpyName</p>
+		<p>推广品牌：$!company.cpyBrand</p>
+		<p>负责人名称：$!company.ccpName</p>
+		<p>联系方式：$!company.ccpTelephone</p>
+		<p>QQ：$!company.ccpQq</p>
+		<p>计调：$!company.cbsOperator</p>
+		<p>QQ：$!company.cbsOperatorQq</p>
+		<p>传真：$!company.cpyFax</p>
+		<p>邮箱：$!company.cpyEmail</p>
+		<p>办公地址：$!company.cpyAddress</p>
+	</div>
+	<div class="g_block_2 mb20">
+		<p class="g_tit_1 mb10">产品商信息</p>
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>产品编码</th>
+				<th>产品名称</th>
+				<th>行程天数</th>
+				<th>大交通</th>
+				<th>产品形态</th>
+				<th>产品标准</th>
+				<th>同行识别</th>
+			</tr>
+			
+			#foreach($item in $listLine)
+    			<tr>
+    				<td>$item.ldlCode</td>
+    				<td><a target=blank href="http://www.jialvlianhe.com/$userCompany.cpyCode/line/tejiaxiang/$item.id?searchModel=1">$!item.ldlName</a></td>
+    				<td>$!item.zdyDate</td>
+    				<td>#vtext($!item.ldlBigTraffic,'C115')+#vtext($!item.ldlBigTraffic1,'C115')</td>
+    				<td>#vtext($!item.ldlProductForm,'C072')</td>
+    				<td>#vtext($!item.ldlProductStandard,'C074')</td>
+    				<td>#vtext($!item.ldlSameSign,'C091')</td>
+    			</tr>
+			#end
+		</table>
+		<div class="g_right"><a class="hui_a" href="javascript:index.load('$appRoot/company/detail/suppliers');">返回</a></div>
+	</div>

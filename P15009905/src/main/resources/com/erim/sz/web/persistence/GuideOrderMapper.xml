@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guideorder">
+
+	<!-- 查询所有数据 -->
+	<select id="selectGuide" resultType="guideOrderBean">
+	SELECT
+			id ,
+			gor_code        AS gorCode,
+			gdl_totalprice  AS gdlTotalprice,
+			gdl_issure      AS gdlIssure,
+			gdl_pay_online  AS gdlPayOnline,
+			gdl_pay_offline AS gdlPayOffline,
+			gdl_pay_money   AS gdlPayMoney,
+			gdl_ntype       AS gdlNtype,
+			gdl_createtime  AS gdlCreatetime,
+			gdl_createuser  AS gdlCreateuser,
+			gdl_is_through  AS gdlIsThrough
+		FROM
+			guide_order
+	</select>
+</mapper>

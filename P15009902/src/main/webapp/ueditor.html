@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>文件管理</title>
+<script type="text/javascript" src="http://admin.jialvlianhe.com/ueditor/1.4.3/ueditor.config.erim.js"></script>
+<script type="text/javascript" src="http://admin.jialvlianhe.com/ueditor/1.4.3/ueditor.all.js"></script>
+<script type="text/javascript" src="http://admin.jialvlianhe.com/js/jquery-1.7.2.min.js"></script>
+</head>
+<style type="text/css" media="screen">
+html,body{height:100%;}
+body{margin:0;padding:0px;overflow:auto;background-color:#ffffff;}
+#editor{height:100%;width:100%;}
+</style>
+<body>
+<script type="text/plain" id="editor"></script>
+<script type="text/javascript">
+var editor;
+function getEditorContent(){
+    return editor.getContent();
+};
+function setEditorContent(content){
+    editor.setContent(content);
+};
+function initEditor(content){
+    editor = UE.getEditor('editor',{
+        fullscreen : true,
+        initialContent : content
+    });
+};
+$(document).ready(function(){
+    initEditor('');
+});
+</script>
+</body>
+</html>

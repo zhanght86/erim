@@ -1,0 +1,459 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/management/management.css">
+<script type="text/javascript">
+
+    $(document).ready(function(){
+    	$(".visaa_lrtop li").click(function(){
+    		var liindex = $('.visaa_lrtop li').index(this);
+    	 	$(this).css({"background":"#fff"}).siblings().css({"background":"#ccc"});
+    		$('.visaa_lrbbiger .visaa_lrbox').eq(liindex).show(0).siblings(".visaa_lrbbiger .visaa_lrbox").hide(0);
+    	});
+    })
+	
+	/*
+	var a = $("input[name='mdlAddress']").val();
+	if (a != "") {
+		$.post("/dictionary/one/value?codeValue=" + a,function(data) {
+			$("#guoqiPic").attr("src","$staticRoot" + data);
+		}, 'json');
+	}
+	*/
+	
+	//变更国籍 国旗替换
+	#* 
+	$("input[name='mdlAddress']").blur(function(){
+		var status = $(this).val();
+		if(status != undefined){
+			$("#guoqiPic").attr("src","$staticRoot"+status);
+		}
+	});
+	*#
+	
+	//添加送签地
+	$("#send  .visaa .a_button").live("click",function(){
+    	var stu_num = $(this).parent().parent().find(".input_right").length;
+		var stu_num=$(this).parent().parent().children().length;
+        if($(this).text()=="-"){
+            $(this).parent().remove();
+        }
+        if (stu_num > 6) {return;}
+    	if($(this).text()=="+") {
+        	$(this).parent().after('<div class="visaa" style="text-align:right;float:left;margin-top:15px;"><select name="mdlSend" style="width:180px;height:30px;">#foreach($item in $send.keySet())<option value="$item" >$send.get($item)</option>#end</select><a href="javascript:void(0)" class="a_button xl_bg_ccc" style="float:right;">-</a></div>');
+        }
+  	});
+	
+</script>
+<div class="rdivv">
+	<!-- 签证管理 -->
+	<div class="visaadmin">
+		<div class="visaadmin_suptop">
+			<img src="$staticRoot/images/htv.png" />
+			<span>修改签证</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<form method="post" id="form1" style="width:400px;">
+			<input type="hidden" value="$managementDetail.id" name="id"/>
+			<div class="visaadmin_ct">
+				<div class="visaa_line">
+					<span>签证名称：</span>
+					<input type="text" calss="" style="width:150px;height:28px;" name="mdlName" value="$!managementDetail.mdlName"/>
+					<span style="color:#f00; width:5px; float:none;margin-left:5px;">*</span>
+				</div>
+				<div class="visaa_line">
+					<span>国家：</span>
+					<input type="text" class="validate[required]" style="width:150px;height:28px;" id="Address" name="mdlAddress" value="$!managementDetail.mdlAddress"/>
+					<span style="color:#f00; width:5px; float:none;margin-left:5px;">*</span>
+					<!--	<select name="mdlAddress" style="width:180px;height:30px;">
+						#foreach($item in $guojia)
+							<option value="$item.codeKey" #if($item.codeKey == $!managementDetail.mdlAddress) selected #end status="$item.codeMark">$item.codeValue</option>
+						#end
+					</select>-->
+				</div>
+				<!-- 
+    			<div class="visaa_line">
+    				<span>国旗：</span>
+    				<img id="guoqiPic" src="$staticRoot/images/flag/China.png">
+    			</div>
+				-->
+    		    <div class="visaa_line" id="send" style="width:500px;">
+    				<span>送签地：</span>
+    				<div class="visaa" style="float:left;width:300px;margin-top:-15px;">
+						<!-- #set($i=$math.sub($velocityCount,1)) -->
+                		<div style="float:left;width:300px;margin-top:15px;">
+    						<select name="mdlSend" style="width:180px;height:30px;float:left">
+            					 #foreach($item in $send.keySet())
+									 <option value="$item" #if($!managementDetail.mdlSend == $item) selected #end>$send.get($item)</option>
+            					 #end
+                            </select>
+                		</div>
+    			    </div>
+    			</div>
+    			<div class="visaa_line">
+    				<span>签证类型：</span>
+    				<div class="visaa_liner">
+        				#foreach($item in $models.keySet())
+        					<label class="checkbox inline"> 
+                                <input class="input-xlarge"  class="validate[minCheckbox[1]] checkbox"  type="radio"   name="mdlNtype" value="$item" #if($erim.contains($!managementDetail.mdlNtype,$item)) checked #end>$models.get($item)
+                            </label>
+        				#end
+        				<span style="color:red;margin-left:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="visaa_line">
+    				<span>入境次数：</span>
+    				<div class="visaa_liner">
+						#foreach($item in $entry.keySet())
+							<label class="checkbox inline"> 
+								<input class="input-xlarge"  class="validate[minCheckbox[1]] checkbox"  type="radio" #if($erim.contains($!managementDetail.mdlNum,$item)) checked #end name="mdlNum" value="$item">$entry.get($item)
+                           	</label>
+						#end
+    				</div>
+    			</div>
+    			<div class="visaa_line">
+    				<span>办理时长：</span>
+    				<div class="visaa_liner">
+    					<span style="margin-left:0;">收集材料后需</span>
+    					<input type="text"  name="mdlLong" class="validate[required,custom[integer],min[1],max[365]]" value="$!managementDetail.mdlLong">
+    					<span>个工作日</span><span style="color:red;">*</span>
+    				</div>
+    			</div>
+    			<div class="visaa_line">
+    				<span>可停留天数：</span>
+    				<div class="visaa_liner">
+    					<input type="text" name="mdlStay" class="validate[required,custom[integer],min[1],max[365]]" value="$!managementDetail.mdlStay">
+    					<span>天</span>
+						<span style="color:red;">*</span>
+    					<span style="margin-left:40px;">签证有效期：</span>
+    					<input type="text" name="mdlValidity" class="validate[required,custom[integer],min[1],max[24]]" value="$!managementDetail.mdlValidity">
+						<span style="margin-left:-20px;">个</span>
+    					<span>月</span>
+						<span style="color:red;">*</span>
+    				</div>
+    			</div>
+    			<div class="visaa_line">
+    				<span>面签：</span>
+    				<div class="visaa_liner">
+    					#foreach($item in $face.keySet())
+    						<label class="checkbox inline"> 
+								<input class="input-xlarge" class="validate[minCheckbox[1]] checkbox"  type="radio" #if($erim.contains($!managementDetail.mdlInterview,$item)) checked #end  name="mdlInterview" value="$item">$face.get($item)
+    		               	</label>
+                        #end
+    				</div>
+    			</div>
+    			<!--<div class="visaa_line">
+    				<span>预定方式：</span>
+    				<div class="visaa_liner">
+    					#foreach($item in $scheduled.keySet())
+    						<label class="checkbox inline"> 
+    			            <input class="input-xlarge" class="validate[minCheckbox[1]] checkbox"  type="checkbox" #if($erim.contains($!managementDetail.mdlScheduled,$item)) checked #end  name="mdlScheduled" value="$item">$scheduled.get($item)
+    		               </label>
+                        #end
+    				</div><span style=" color:red;margin-left:-375px;float: left; margin-top:2px;">*</span>
+    			</div>-->
+    			<!-- <div class="visaa_line">
+    				<span>可受理人群:</span>
+    				<div class="visaa_liner">
+    					#foreach($item in $attestor.keySet())
+    					<label class="checkbox inline" > 
+    				    <input type="checkbox" class="validate[minCheckbox[1]] checkbox"  name="mdlAttestor" value="$item" #if($erim.contains($!managementDetail.mdlAttestor,$item)) checked #end> $attestor.get($item)</label>
+    					#end
+    					<span style="color:red;">*</span>
+    				</div>
+    			</div>-->
+    			<div class="visaa_line">
+    				<span>签证材料：</span>
+    			</div>
+				<div class="visaa_line">
+					<div class="visaa_linera">
+    					<div class="visaa_lrtop">
+    						<ul>
+    							<li name="caidan" value="01" id="visaa_lrtopli">在职</li>
+    							<li name="caidan" value="02">自由职业</li>
+    							<li name="caidan" value="03">在校学生</li>
+    							<li name="caidan" value="04">退休人员</li>
+    							<li name="caidan" value="05" style="margin-right:0;">学龄前儿童</li>
+    						</ul>
+    					</div>
+    					<div class="visaa_lrbbiger">
+    						#set($mmlNtype = {"1":"在职","2":"自由职业","3":"在校学生","4":"退休人员","5":"学龄前儿童"})
+    						#foreach($i in $mmlNtype.keySet())
+    						<div class="visaa_lrbox #if($velocityCount==1) show #end">
+    							#if($mapMaterial.get(${i}) && $mapMaterial.get(${i}).size()>0)
+    								#foreach($item in $mapMaterial.get(${i}))
+    								<div class='visaa_lrboxsa' style="display:none">
+    									<input type="hidden" name="mmlId1" value=""/>
+    									<input type="hidden" name="mmlNtype1" value="$item.mmlNtype"/>
+    									<div class='visaa_lrboxl'>
+    										<span>材料名称:</span>
+    										<div class='visaa_lrboxlr'>
+    											<input type='text' class='w212' name="mmlMaterial1">
+                                                <a class="a113" href='javascript:void(0)' class="a_button">+</a>
+                                 			</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>材料说明:</span>
+    										<div class='visaa_lrboxlr'>
+                                        		<textarea name="mmlKnow1" style="width:420px;height:90px;"></textarea>
+    										</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>上传图片:</span>
+                                            <div class='visaa_lrboxlr'>
+    											<input name="mmlImg1" value="" type="hidden" id="mmlImg1_${i}_1_1"/>
+    											<input name="file" id="uploadify1_${i}_1_1" contenteditable="false" size="30" type="file" />
+    											<span id="filespan1_${i}_1_1"></span>
+    											<div id="fileQueue1_${i}_1_1"></div>
+                                            </div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>上传文本:</span>
+                                            <div class='visaa_lrboxlr'>
+    											<input name="mmlText1" value="" type="hidden" id="mmlImg1_${i}_2_1"/>
+    											<input name="file" id="uploadify1_${i}_2_1" contenteditable="false" size="30" type="file" />
+    											<span id="filespan1_${i}_2_1"></span>
+    											<div id="fileQueue1_${i}_2_1"></div>
+                                            </div>
+    									</div>
+    								</div>
+    								<div class='visaa_lrboxsa'>
+    									<input type="hidden" name="mmlId" value="$item.id"/>
+    									<input type="hidden" name="mmlNtype" value="$item.mmlNtype"/>
+    									<div class='visaa_lrboxl'>
+    										<span>材料名称:</span>
+    										<div class='visaa_lrboxlr'>
+                                                <input type='text' class='w212' value="$item.mmlMaterial" name="mmlMaterial">
+    											#if($velocityCount == 1)
+    												<a class="a113"  href='javascript:void(0)' class="a_button">+</a>
+    											#else
+    												<a class="a113" cid='$item.id'  href='javascript:void(0)' style="background-color:#ccc;">-</a>
+    											#end
+    										</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>材料说明:</span>
+    										<div class='visaa_lrboxlr'>
+                                        		<textarea name="mmlKnow" style="width:420px;height:90px;">$item.mmlKnow</textarea>
+    										</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+                                            <span>上传图片:</span>
+                                            <div class='visaa_lrboxlr'>
+    											#if("$!item.mmlImg" == "")
+                									<input name="mmlImg" type="hidden" id="mmlImg_${i}_1_$velocityCount"/>
+                									<input name="uploadify$velocityCount" id="uploadify_${i}_1_$velocityCount" contenteditable="false" size="30" type="file" />
+                                				#else
+                									<input name="mmlImg" value="$!item.mmlImg" type="hidden" id="mmlImg_${i}_1_$velocityCount"/>
+                									<input name="uploadify$velocityCount" id="uploadify_${i}_1_$velocityCount" contenteditable="false" size="30" type="file" />
+                									<img class="img200" src="$staticFileRes$item.mmlImg" /><a href="javascript:uploadDelete('uploadify_${i}_1_$velocityCount','filespan_${i}_1_$velocityCount','$!item.mmlImg','mmlImg_${i}_1_$velocityCount');">删除图片</a>
+                								#end
+    												<span id="filespan_${i}_1_$velocityCount"></span>
+    												<div id="fileQueue_${i}_1_$velocityCount"></div>
+    										</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>上传文本:</span>
+    										<div class='visaa_lrboxlr'>
+    											#if("$!item.mmlText" == "")
+    												<input name="mmlText" type="hidden" id="mmlImg_${i}_2_$velocityCount"/>
+    												<input name="uploadify$velocityCount" id="uploadify_${i}_2_$velocityCount" contenteditable="false" size="30" type="file" />
+    											#else
+    												<input name="mmlText" value="$!item.mmlText" type="hidden" id="mmlImg_${i}_2_$velocityCount"/>
+    												<input name="uploadify$velocityCount" id="uploadify_${i}_2_$velocityCount" contenteditable="false" size="30" type="file" />
+    												<a>$item.mmlImg</a>
+    												<a href="javascript:uploadDelete('uploadify_${i}_2_$velocityCount','filespan_${i}_2_$velocityCount','$!item.mmlImg','mmlImg_${i}_2_$velocityCount');">删除文件</a>
+    											#end
+    											<span id="filespan_${i}_2_$velocityCount"></span>
+    											<div id="fileQueue_${i}_2_$velocityCount"></div>
+    										</div>
+    									</div>
+    								</div>
+    								#end
+    							#else
+        							<div class='visaa_lrboxsa'>
+        								<input type="hidden" name="mmlNtype" value="$mmlNtype.get(${i})"/>
+    									<div class='visaa_lrboxl'>
+    										<span>材料名称:</span>
+    										<div class='visaa_lrboxlr'>
+    											<input type='text' class='w212' name="mmlMaterial">
+                                                <a href='javascript:void(0)' class="a_button">+</a>
+    										</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>材料说明:</span>
+    										<div class='visaa_lrboxlr'>
+                                        		<textarea name="mmlKnow" style="width:420px;height:90px;"></textarea>
+    										</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>上传图片:</span>
+    										<div class='visaa_lrboxlr'>
+    											<input name="mmlImg" value="" type="hidden" id="mmlImg_${i}_1_1"/>
+    											<input name="file" id="uploadify_${i}_1_1" contenteditable="false" size="30" type="file" />
+    											<span id="filespan_${i}_1_1"></span>
+    											<div id="fileQueue_${i}_1_1"></div>
+    										</div>
+    									</div>
+    									<div class='visaa_lrboxl'>
+    										<span>上传文本:</span>
+    										<div class='visaa_lrboxlr'>
+    											<input name="mmlText" value="" type="hidden" id="mmlImg_${i}_2_1"/>
+    											<input name="file" id="uploadify_${i}_2_1" contenteditable="false" size="30" type="file" />
+    											<span id="filespan_${i}_2_1"></span>
+    											<div id="fileQueue_${i}_2_1"></div>
+    										</div>
+										</div>
+									</div>
+    							#end
+							</div>
+        					#end
+    					</div>
+					</div>
+				</div>
+			</div>
+    		<div class="visaa_line">
+    			<span>受理范围：</span>
+    			<div class="visaa_liner">
+    				<textarea name="mdlProvince" class="validate[required,maxSize[2000]] ">$!managementDetail.mdlProvince</textarea><span style="color:red;">*</span>
+    			</div>
+    		</div>
+    		<div class="visaa_line">
+    			<span>签证类型说明：</span>
+    			<div class="visaa_liner">
+    				<textarea name="mdlResponsibility" class="validate[required,maxSize[2000]] ">$!managementDetail.mdlResponsibility</textarea><span style="color:red;">*</span>
+    			</div>
+    		</div>
+    		<div class="visaa_line">
+    			<span>预订须知：</span>
+    			<div class="visaa_liner">
+    				<textarea name="mdlOrderKnow" class="validate[required,maxSize[2000]] ">$!managementDetail.mdlOrderKnow</textarea><span style="color:red;">*</span>
+    			</div>
+    		</div>
+    		<div class="visaa_line">
+    			<span>办理流程：</span>
+    			<div class="visaa_liner">
+    				<textarea name="mdlMoneyContain" class="validate[required,maxSize[2000]] ">$!managementDetail.mdlMoneyContain</textarea><span style="color:red;">*</span>
+    			</div>
+    		</div>
+    		<div class="visaa_line">
+    			<span>补充说明：</span>
+    			<div class="visaa_liner">
+    				<textarea name="mdladdInstruction" class="validate[maxSize[2000]] ">$!managementDetail.mdladdInstruction</textarea>
+    			</div>
+    		</div>
+    		<div class="carinfo_ctbl" style="margin-left:90px;">
+        		<div class="carinfo_ctblrbtn pb80">
+        			<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/management/detail/update','$appRoot/management/detail/list');">提交</button>
+        			<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+        		</div>
+    	    </div>
+  		</form>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script>
+    $(function(){
+    	//dictionary.autocomplete('Address','guoqiPic');
+		
+		//初始化上传图片控件
+		for(var i = 1; i< 6; i++){
+			for(var j = 1; j< 3; j++){
+				##uploadify('uploadify_'+i+'_'+j+'_1','mmlImg_'+i+'_'+j+'_1','filespan_'+i+'_'+j+'_1','fileQueue_'+i+'_'+j+'_1');
+				if(j==1){
+					uploadify('uploadify_'+i+'_'+j+'_1','mmlImg_'+i+'_'+j+'_1','filespan_'+i+'_'+j+'_1','fileQueue_'+i+'_'+j+'_1');
+				}else{
+					uploadifydoc('uploadify_'+i+'_'+j+'_1','mmlImg_'+i+'_'+j+'_1','filespan_'+i+'_'+j+'_1','fileQueue_'+i+'_'+j+'_1');				
+				}
+			}
+		}
+		
+		#foreach($i in $mmlNtype.keySet())
+			#if($mapMaterial.get(${i}) && $mapMaterial.get(${i}).size()>0)
+				#foreach($item in $mapMaterial.get(${i}))
+    				uploadify('uploadify_${i}_1_$velocityCount','mmlImg_${i}_1_$velocityCount','filespan_${i}_1_$velocityCount','fileQueue_${i}_1_$velocityCount');
+    				uploadifydoc('uploadify_${i}_2_$velocityCount','mmlImg_${i}_2_$velocityCount','filespan_${i}_2_$velocityCount','fileQueue_${i}_2_$velocityCount');
+    				
+    				#if("$item.mmlImg" != "")
+                		$("#uploadify_${i}_1_$velocityCount").hide();
+                	#end
+            		#if("$item.mmlText" != "")
+            			$("#uploadify_${i}_2_$velocityCount").hide();
+                	#end	
+				#end
+			#end
+		#end
+
+		
+		var idx = 10;
+    	/*签证材料添加*/
+    	$(".visaa_lrboxl .visaa_lrboxlr .a113").die("click").live("click",function(){
+    		if($(this).text()=="+"){
+				//最多上传10个
+    			var objn=$(this).parent().parent().parent().children().length;
+				if(objn>9) return;
+				
+				var index = 0;
+				
+				var hh = $(this).parents(".visaa_lrboxsa").prev().html();
+				
+				if(hh.indexOf('在职') > -1)  	 { index = 1; }
+				if(hh.indexOf('自由职业') > -1)   { index = 2; }
+				if(hh.indexOf('在校学生') > -1)   { index = 3; }
+				if(hh.indexOf('退休人员') > -1)   { index = 4; }
+				if(hh.indexOf('学龄前儿童') > -1)  { index = 5; }
+				
+				hh = hh.replace('mmlId1','mmlId');
+				hh = hh.replace('mmlNtype1','mmlNtype');
+				hh = hh.replace('mmlMaterial1','mmlMaterial');
+				hh = hh.replace('mmlKnow1','mmlKnow');
+				hh = hh.replace(/mmlImg1/gm,'mmlImg');
+				hh = hh.replace(/uploadify1/gm,'uploadify');
+				hh = hh.replace(/filespan1/gm,'filespan');
+				hh = hh.replace(/fileQueue1/gm,'fileQueue');
+				hh = hh.replace('mmlText1','mmlText');
+				
+				hh = hh.replace("+","-").replace("<a","<a style='background-color:#ccc' ");
+    			hh = hh.replace("uploadify_"+index+"_1_1","uploadify_"+index+"_1_"+idx);
+    			hh = hh.replace("mmlImg_"+index+"_1_1","mmlImg_"+index+"_1_"+idx);
+    			hh = hh.replace("filespan_"+index+"_1_1","filespan_"+index+"_1_"+idx);
+    			hh = hh.replace("fileQueue_"+index+"_1_1","fileQueue_"+index+"_1_"+idx);
+    			
+    			hh = hh.replace("uploadify_"+index+"_2_1","uploadify_"+index+"_2_"+idx);
+    			hh = hh.replace("mmlImg_"+index+"_2_1","mmlImg_"+index+"_2_"+idx);
+    			hh = hh.replace("filespan_"+index+"_2_1","filespan_"+index+"_2_"+idx);
+    			hh = hh.replace("fileQueue_"+index+"_2_1","fileQueue_"+index+"_2_"+idx);
+				
+				hh = "<div class='visaa_lrboxsa'>" + hh + "</div>";
+				
+				$(this).parent().parent().parent().parent().append(hh);
+				
+				//初始化
+				$("#mmlImg_"+index+"_1_"+idx).attr("value","");
+				$("#mmlImg_"+index+"_2_"+idx).attr("value","");
+				$("#filespan_"+index+"_1_"+idx).html("");
+				$("#filespan_"+index+"_2_"+idx).html("");
+			
+				uploadify('uploadify_'+index+'_1_'+idx,'mmlImg_'+index+'_1_'+idx,'filespan_'+index+'_1_'+idx,'fileQueue_'+index+'_1_'+idx);
+				uploadifydoc('uploadify_'+index+'_2_'+idx,'mmlImg_'+index+'_2_'+idx,'filespan_'+index+'_2_'+idx,'fileQueue_'+index+'_2_'+idx);
+				
+				idx++ ;
+    		}else{
+				var cid = $(this).attr("cid");
+				
+				if(undefined != cid){
+					var url = "$appRoot/management/detail/deleteMaterial?id="+cid;
+					$.post(url,function(){},'json');
+				}
+				
+    			$(this).parent().parent().parent().remove();
+    		}
+    	});
+		
+		/*签证材料*/
+    	$(".visaa_lrtop li").die("click").click(function(){
+    		var liindex = $('.visaa_lrtop li').index(this);
+    		
+    		$(this).css({"background":"#fff"}).siblings().css({"background":"#ccc"});
+    		$('.visaa_lrbbiger .visaa_lrbox').eq(liindex).show(0).siblings(".visaa_lrbbiger .visaa_lrbox").hide(0);
+    	});
+    });
+</script>

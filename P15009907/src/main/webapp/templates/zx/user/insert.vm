@@ -1,0 +1,70 @@
+<div class="jd_block pb80">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/user1.png">添加用户
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		<div class="input_block clearfix">
+    		<div class="label_left">登录名：</div>
+    		<div class="input_right">
+                <input type="text" onblur="checkloginame($(this));" id="zxUserLoginname" class="w200 validate[required,maxSize[100]]" name="zxUserLoginname" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">初始密码：</div>
+    		<div class="input_right">
+    			<input type="password" class="w200 	validate[required]" id="zxUserPassword" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">确认密码：</div>
+    		<div class="input_right">
+    			<input type="password" class="w200 	validate[required,equals[zxUserPassword]]"  name="zxUserPassword" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left">真实姓名：</div>
+    		<div class="input_right">
+    			<input type="text" class="w200 validate[required,maxSize[150]]" name="zxUserRealname" /><span class="mess_star_red">*</span>
+    		</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="label_left">联系方式：</div>
+    		<div class="input_right">
+    			<input type="text" class="w200 validate[maxSize[150]]" name="zxUserTel" />
+    		</div>
+    	</div>
+		<div class="input_block clearfix" id="div_role">
+    		<div class="input_block clearfix">
+        		<div class="label_left">角色：</div>
+        		<div class="input_right">
+        			<select class="w200" name="zxRoleId">
+        				#foreach($item in $roleList)
+                            <option value="$item.id">$item.zxRoleName</option>
+    					#end
+        			</select>
+        		</div>
+        	</div>
+    	</div>
+    	<div class="button_block clearfix">
+    		<button class="y_but ml35" type="button" onclick="subform.update('form1', '$appRoot/zx/user/insert');">提交</button>
+			<button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+    	</div>
+	</form>
+</div>
+	
+<script >
+	//用户名是否重复
+	function checkloginame(data){
+		var loginname = data.val();
+		if(""!=loginname){
+    		$.post("$appRoot/company/regedit/ajaxCheckLoginName?loginanme="+loginname,function(data){
+    			if(data==1){
+    				 alert("用户名存在,请重新输入");
+    				 $("#zxUserLoginname").val("");
+    				 $("#zxUserLoginname").focus();
+    			}
+    		},'json');
+		}
+	}
+</script>

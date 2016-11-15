@@ -1,0 +1,108 @@
+	<p class="tab_a_2"><a class="on" id="a1" href="javascript:index.load('$appRoot/mall/hot/show?mhtNtype=1');">周边旅游</a><a id="a2" href="javascript:index.load('$appRoot/mall/hot/show?mhtNtype=2');">国内旅游</a><a id="a3" href="javascript:index.load('$appRoot/mall/hot/show?mhtNtype=3');">港澳台/日韩朝/东南亚</a><a  id="a4" href="javascript:index.load('$appRoot/mall/hot/show?mhtNtype=4');">俄罗斯/欧洲/美洲</a><a  id="a5" href="javascript:index.load('$appRoot/mall/hot/show?mhtNtype=5');">澳洲/中东/非洲</a>
+	</p>
+ 	<div class="g_block_2 mb20" id="tab_a_block">
+		<div class="tab_con">
+			<div class="tab_n tab_show">
+        		<div>
+					#* 
+					<form method="post" id="form1">
+						<input type="hidden" name="mhtNtype" value="$mallhot.mhtNtype"/>
+						
+            			<div class="input_block clearfix">
+            				<div class="input_right input_right_wauto">
+            					<label>所属专线：</label>
+            					<input class="w130">
+            					<label class="ml38">目的地：</label>
+            					<input class="w130">
+            					<label class="ml25">主要景点：</label>
+            					<input class="w130">
+            					<label class="ml25">线路名称：</label>
+            					<input class="w130">
+            				</div>
+            			</div>
+            			<div class="input_block clearfix mt_10">
+            				<div class="input_right input_right_wauto">
+            					<label>产品形态：</label>
+            					<select class="w90"><option></option></select>
+            					<label class="ml25">供应商名称/品牌：</label>
+            					<input class="w130">
+            					<label class="ml35">负责人：</label>
+            					<input class="w90"><span class="red_a ml25">查询</span>
+            				</div>
+            			</div>
+					 </form>
+					 *#
+        			<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+        				<tr>
+        					<th style="min-width:80px;">已选<span id="span_choose">0</span>个</th>
+        					<th style="width:75px;">产品编码</th>
+            				<th style="width:75px;">所属专线</th>
+            				<th>线路名称</th>
+            				<th style="width:75px;">行程天数</th>
+            				<th style="width:75px;">大交通</th>
+            				<th style="width:75px;">产品形态</th>
+            				<th style="width:75px;">产品标准</th>
+            				<th style="width:140px;">同行识别</th>
+        				</tr>
+						#foreach($item in $lineList)
+            				<tr>
+            					<td><input type="checkbox" name="child_box" value="$!item.id"></td>
+            					<td>$!item.ldlCode</td>
+        						<td>$!item.ldlSpecialLine</td>
+        						<td> <a href="http://www.jialvlianhe.com/$userCompany.cpyCode/line/zhutixiang/$item.id" target="_blank" title="点击打开外网展示">$!item.ldlName</a></td>
+                                <td>$!item.zdyDate 天</td>
+        						<td>#vtext($!item.ldlBigTraffic,'C115')+#vtext($!item.ldlBigTraffic1,'C115')</td>
+                				<td>#vtext($!item.ldlProductForm,'C072')</td>
+                				<td>#vtext($!item.ldlProductStandard,'C074')</td>
+                				<td>#vtext($!item.ldlSameSign,'C091')</td>
+            				</tr>
+						#end
+        			</table>
+        			<div class="tpage mb20">
+        				<div class="tpagel tpage2 pl0"><span class="select_mess"><img src="$staticRoot/images/sd_03.jpg">请在此选择您热门精选模块需要展示的产品（只能选择7个）</span></div>
+        			</div>
+        			<div class="g_right"><a class="red_a ml25" href="javascript:insert();">确定</a></div>
+        		</div>
+			</div>
+		</div>
+	</div>
+		
+	<script >
+		var v_ntype = 1;
+		//默认上次选择的功能
+		#if($mallhot.mhtNtype)
+			$("a[class='on']").removeClass('on');
+			$("#a$mallhot.mhtNtype").attr("class","on");
+			v_ntype = '$mallhot.mhtNtype';
+		#end
+
+		//点击事件
+		$("input[name='child_box']").click(function(){
+			var len = $("input[name='child_box']:checked").length;
+			if(len>7) {wxcalert('只能选择7个'); $(this).prop('checked',false);}
+			else{ $("#span_choose").html(len); }
+		});
+
+		var checkedLength = 0;
+		//循环
+		#foreach($item in $listHot)
+			$("input[name='child_box'][value='$item.lineId']").prop('checked',true);
+			checkedLength++;
+		#end
+		$("#span_choose").html(checkedLength);
+
+		
+		//insert
+		function insert(){
+			var chooseInput = "";
+			//获取所有选中的
+			$.each($("input[name='child_box']:checked"),function(){
+				chooseInput += $(this).val()+",";
+			});
+			if(""!=chooseInput){ chooseInput = chooseInput.substring(0,chooseInput.length-1)};
+			
+			var url  = "$appRoot/mall/hot/insert";
+			var data = {'lineId':chooseInput,'mhtNtype':v_ntype};
+			$.post(url,data,function(){wxcalert('保存成功!');},'json');
+		}
+    </script>

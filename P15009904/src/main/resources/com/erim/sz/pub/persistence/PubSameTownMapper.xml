@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pubsametown">
+
+	<!-- 插入所有 -->
+	<insert id="insert">
+		INSERT INTO
+			pub_sametown
+		(
+			cid,
+			cpyid_from,
+			cpyid_to,
+			ntype
+		)
+		values(
+			#{cid},
+			#{cpyidFrom},
+			#{cpyidTo},
+			#{ntype}
+		)
+	</insert>
+
+	<!-- 增加 -->
+	<insert id="insertAll">
+		INSERT INTO
+			pub_sametown
+		(
+			cid,
+			cpyid_from,
+			cpyid_to,
+			ntype
+		)
+		(
+			select 
+				#{cid},
+				#{cpyidFrom},
+				id,
+				#{ntype}
+			from 
+				company_detail
+			where
+				cpy_roe = '1'		
+		)
+	</insert>
+
+	<!-- 查询数组 -->
+	<select id="selectList" resultType="pubSametownBean">
+		SELECT
+			id,
+			cid         AS cid,
+			cpyid_from  AS cpyidFrom,
+			cpyid_to    AS cpyidTo,
+			ntype		AS ntype
+		FROM
+			pub_sametown
+		WHERE
+			1=1
+			<if test="cid != null">      and  cid         = #{cid}</if>
+			<if test="ntype != null">    and  ntype       = #{ntype}</if>
+			<if test="cpyidFrom != null">and  cpyid_from  = #{cpyidFrom}</if>
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			pub_sametown
+		WHERE
+			cpyid_to = #{cpyidTo}
+		AND
+			cid = #{cid}
+	</delete>
+	
+	<!-- 删除公司 -->
+	<delete id="deleteAll" parameterType="int">
+		DELETE FROM
+			pub_sametown
+		WHERE
+			cpyid_from = #{cpyidFrom}
+		AND
+			ntype	   = #{ntype}
+		AND
+			cid        = #{cid}
+	</delete>
+	
+	<!-- 批量增加 -->
+	<insert id="insertList">
+		INSERT INTO
+			pub_sametown
+			(
+				cid,
+				cpyid_from,
+				cpyid_to,
+				ntype
+			)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+				#{item.cid},	
+				#{item.cpyidFrom},	
+				#{item.cpyidTo},	
+				#{item.ntype}
+			)
+		</foreach>
+	</insert>
+	
+</mapper>

@@ -1,0 +1,293 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<script type="text/javascript" src="$staticRoot/js/product/price.js"></script>
+<script>
+	//零售价和批发价比较
+	function comparison(field, rules, i, options){
+		// 批发价
+    	var hnpCombinationPrice = $("input[name='tspCombinationPrice']").val();
+		// 零售价
+		var hnpRetailPrice = $("input[name='tspRetailPrice']").val();
+		
+		if(parseInt(hnpCombinationPrice) * 1.05 >= parseInt(hnpRetailPrice)){
+            return '零售价必须大于批发价的5%';
+        }
+	}
+	//批发价和同业价比较
+	function comparison1(field, rules, i, options){
+		// 批发价
+    	var hnpCombinationPrice = $("input[name='tspCombinationPrice']").val();
+		// 同业价
+		var hnpTradePrice = $("input[name='tspTradePrice']").val();
+		
+		if(parseInt(hnpTradePrice)>parseInt(hnpCombinationPrice)){
+			return '批发价必须大于或等于同业价';
+		}
+	}
+	//零售价和批发比较
+	function comparisonMin(field, rules, i, options){
+		// 批发价
+    	var hnpCombinationPrice = $("#update_tspCombinationPrice").val();
+		// 零售价
+		var hnpRetailPrice = $("#update_tspRetailPrice").val();
+		
+		if(parseInt(hnpCombinationPrice) * 1.05 >= parseInt(hnpRetailPrice)){
+            return '零售价必须大于批发价的5%';
+        }
+	}
+	//同业价和批发价比较
+	function comparisonMin1(field, rules, i, options){
+		// 批发价
+    	var hnpCombinationPrice = $("#update_tspCombinationPrice").val();
+		// 同业价
+		var hnpTradePrice = $("#update_tspTradePrice").val();
+		
+		if(parseInt(hnpTradePrice)>parseInt(hnpCombinationPrice)){
+			return '批发价必须大于或等于同业价';
+		}
+	}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/jd_3.png" alt="量/价管理" title="量/价管理">$!tdlName 车辆/价格管理</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/texi/send/sendPricePage?dicPortal=03');">
+				<img src="$staticRoot/images/jd_7.png">
+			</a>
+			<!-- 当前日期 -->
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/texi/send/sendPricePage?dicPortal=02');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+		<div class="date_close pt10">
+			<form method="post" id="form3">
+    			<input type="text" class="validate[required]" name="start"id="start" onClick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+    			<input type="text" class="validate[required]" name="end" onClick="WdatePicker({minDate:'#F{$dp.$D(\'start\',{m:1});}'})" />
+    			<button type="button" class="carinfo_sub" onclick="javascript:price.batchStop('form3','$appRoot/texi/send/updateBatchIsOpen');">批量停租</button>
+            </form>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">接/送类型：
+				<label class="w90">$!sendType</label>
+			</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="tsp_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.tspSign == '0')
+								<li class="finish_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_tspSign" value="$!item.tspSign">
+									<input type="hidden" name="date_tspTradePrice" value="$!item.tspTradePrice">
+									<input type="hidden" name="date_tspCombinationPrice" value="$!item.tspCombinationPrice">
+									<input type="hidden" name="date_tspRetailPrice" value="$!item.tspRetailPrice">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tspSign 辆<br>
+    									同：$!item.tspTradePrice 元<br>
+    									批：$!item.tspCombinationPrice 元<br>
+    									零：$!item.tspRetailPrice 元</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.tspIsOpen == '01')
+    							<li class="close_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_tspSign" value="$!item.tspSign">
+									<input type="hidden" name="date_tspTradePrice" value="$!item.tspTradePrice">
+									<input type="hidden" name="date_tspCombinationPrice" value="$!item.tspCombinationPrice">
+									<input type="hidden" name="date_tspRetailPrice" value="$!item.tspRetailPrice">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.tspSign 辆<br>
+    									同：$!item.tspTradePrice 元<br>
+    									批：$!item.tspCombinationPrice 元<br>
+    									零：$!item.tspRetailPrice 元
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_tspSign" value="$!item.tspSign">
+									<input type="hidden" name="date_tspTradePrice" value="$!item.tspTradePrice">
+									<input type="hidden" name="date_tspCombinationPrice" value="$!item.tspCombinationPrice">
+									<input type="hidden" name="date_tspRetailPrice" value="$!item.tspRetailPrice">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										量：$!item.tspSign 辆<br>
+    									同：$!item.tspTradePrice 元<br>
+    									批：$!item.tspCombinationPrice 元<br>
+    									零：$!item.tspRetailPrice 元
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button class="carinfo_qu ml35" style="cursor:pointer" type="button" onclick="javascript:index.load('$appRoot/texi/send/list?tdlId=$!texiID');">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png"> 正常出租
+			<img src="$staticRoot/images/ljgl_01.png"> 已停租
+			<img src="$staticRoot/images/ljgl_02.png"> 已全部租出
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+		<span><b>车辆/价格管理:</b></span>
+		<div class="cb"></div>
+		<div class="bg_block nobg_block">
+			<form method="post" id="form1">
+    			<div class="cb"></div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">日期：</div>
+    				<div class="input_righted11">
+    						<input type="text" class="w80 validate[required] text-input" name="start" id="start1" onClick="WdatePicker({minDate:'%y-%M-%d'})"/>&nbsp; 至 &nbsp;
+    						<input type="text" class="w80 validate[required] text-input" name="end" onClick="WdatePicker({minDate:'#F{$dp.$D(\'start1\',{m:1});}'})" />
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">按周选择：</div>
+    				<div class="input_right">
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="0">全选</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="1">周一</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="2">周二</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="3">周三</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="4">周四</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="5">周五</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="6">周六</label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="7">周日</label>
+						<span style="color:red;margin-top:-25px;">*</span>
+					</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">可同时接单：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110 ">
+							<input type="text" name="tspSign" class="w90 validate[required,custom[integer],maxSize[3],min[1]]" placeholder="0" />辆
+						</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">同业价：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w100">
+    						<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" name="tspTradePrice" placeholder="0" />元/辆
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml10">批发价：</label>
+    					<span class="tishi_box w100">
+    						<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6],funcCall[comparison1]]" name="tspCombinationPrice" placeholder="0" />元/辆
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    					<label class="ml10">零售价：</label>
+    					<span class="tishi_box w100">
+    						<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6],funcCall[comparison]]" name="tspRetailPrice" placeholder="0" />元/辆
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">加收费用：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w80">
+    						<input type="text" class="w50" name="tspSellH" placeholder="00" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})"/>
+    					</span>
+    					 后加收 
+    					<span class="tishi_box w80">
+    						<input type="text" class="w50 validate[custom[integer],maxSize[5],min[1]]" name="tspSellPrice" placeholder="0" />元
+    					</span>
+    				</div>
+    			</div>
+				<!--
+				<div class="input_block clearfix">
+    				<div class="label_left">费用说明：</div>
+    				<div class="input_right">
+                        <textarea class="w350 h90 validate[required,maxSize[1000]]" name="tspPriceShow"></textarea>
+						<span style="color:red">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">取消订单限制：</div>
+    				<div class="input_right">
+							 <textarea class="w350 h90 validate[required,maxSize[1000]]" name="tspCancelIndent"></textarea>
+    					<span style="margin-left:3px;color:red;">*</span>
+    				</div>
+				</div> -->
+    			<div class="button_block clearfix">
+    				<button class="y_but ml35" id="btn" type="button" onclick="javascript:price.sub('btn', 'form1', '$appRoot/texi/send/insertPrice', '$appRoot/texi/send/sendPricePage?dicPortal=04')">&nbsp;提交&nbsp;</button>
+    				<button class="b_but ml35" type="button" onclick="javascript:index.load('$appRoot/texi/send/sendPricePage?dicPortal=04')">&nbsp;重置&nbsp;</button>
+    			</div>
+			</form>
+		</div>
+	</div>
+	<div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	<form method="post" id="form2">
+    	<div class="input_block clearfix">
+    		<div class="input_right">
+				<input type="hidden" name="id" id="update_id"/>
+    			<div class="mb15">
+    				<label class="ml15">可同时接单：</label>
+    				<span class="tishi_box w90">
+    					<input type="text" class="w65 validate[required,custom[integer],maxSize[3]]" name="tspSign" id="update_tspSign" />辆
+    				</span>
+    			</div>
+    			<div class="mb15">
+    				<label class="ml15">同业价格：</label>
+    				<span class="tishi_box w110">
+    					<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],maxSize[6]]" name="tspTradePrice" id="update_tspTradePrice" />元/辆
+    				</span>
+    			</div>
+    			<div class="mb15">
+    				<label class="ml15">批发价格：</label>
+    				<span class="tishi_box w110">
+    					<input type="text" class="w65 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparisonMin1]]" name="tspCombinationPrice" id="update_tspCombinationPrice" />元/辆
+    				</span>
+    			</div>
+    			<div class="mb15">
+    				<label class="ml15">零售价格：</label>
+    				<span class="tishi_box w110">
+    					<input type="text" class="w65 validate[required,custom[integer],max[100000],maxSize[6],funcCall[comparisonMin]]" name="tspRetailPrice" id="update_tspRetailPrice" />元/辆
+    				</span>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="button_block button_block_wauto clearfix">
+    		<button class="y_but ml15 mr20" type="button" id="tspQueding">确 定</button>
+    		<button class="b_but" type="button" id="tspQuxiao">取 消</button>
+    	</div>
+	</form>
+</div>

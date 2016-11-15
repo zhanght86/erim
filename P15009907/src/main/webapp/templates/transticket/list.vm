@@ -1,0 +1,215 @@
+<script type="text/javascript">
+	//初始化省为北京市
+	var initProvinceId = 1;
+	//初始化省市县
+	regUtil.initProvince(110000,'tdlProvince','tdlCity','tdlCounty');
+	
+	//国内/国际港澳台切换
+	$('#szd02').hide();
+	
+	$('#gddInland01').click(function() {
+		$('#szd02').hide();
+		$('#szd01').show();
+	});
+	$('#gddInland02').click(function() {
+		$('#szd01').hide();
+		$('#szd02').show();
+	});
+	
+	//点击国际显示国家城市
+	$('#county01').hide();
+	
+	$('#county').click(function(){
+		$('#county01').toggle();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county02').click(function(){
+		$('#county01').hide();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county03').click(function(){
+		$('#county01').hide();
+	});
+	
+	//点击香港、澳门和台湾的时候，国家和城市文本框隐藏
+	$('#county04').click(function(){
+		$('#county01').hide();
+	});
+	//点击国内时候，国家和城市文本框隐藏
+	$('#gddInland01').click(function(){
+		$('#county01').hide();
+	});
+</script>
+<div class="doadmin">
+	<div class="newfood_suptop">
+		<img src="$staticRoot/images/htcar1.png">
+		<span>租车管理</span>
+		<div class="g_line">
+		</div>
+	</div>
+	<div class="coadmin_top">
+		<form method="post" id="form1">
+            <div class="doadmin_topl">
+    			<div class="doadmin_toplbox">
+                    <span>所在区域:</span>
+                    <label>
+                        <input type="radio" id="gddInland01" name="tdlInland" value="02" checked="checked" /> 国内
+    				</label>
+                    <label>
+                        <input type="radio" id="gddInland02" name="tdlInland" value="01" /> 国际/港澳台
+    				</label>
+                </div>
+    		</div>
+			<div class="doadmin_topl">
+				<div class="doadmin_toplbox" id="szd01">
+					<span>所在城市:</span>
+					<div class="doadmin_toplbrb">
+                        <select name="tdlProvince" style="width:100px;height:30px;">
+							<option value=""></option>
+        					#foreach($item in $provinces)
+                                <option value="$item.regionNo">$item.regionName</option>
+        					#end
+                        </select>
+						<span style="float:right;margin-right:-8px;">省</span>
+                        <select type="text" class="w90" name="tdlCity" style="width:100px;height:30px;float:right;margin-right:-134px;">
+						</select>
+						<span style="float:right;margin-right:-163px;">市</span>
+					</div>
+				</div>	
+				<div class="doadmin_toplbox" id="szd02">
+					<span>所在城市:</span>
+					<div class="doadmin_toplbrb" style="width:240px;">
+        				<label>
+                            <input class="w100" type="radio" id="county02" name="tdlExternal" value="01" />香港&nbsp;
+							<input class="w100" type="radio" id="county03" name="tdlExternal" value="02" />澳门&nbsp;
+                            <input class="w100" type="radio" id="county04" name="tdlExternal" value="03" />台湾&nbsp;
+                            <input class="w100" type="radio" id="county" name="tdlExternal" value="04" />国际&nbsp;
+        				</label>
+                    </div>
+            	</div>
+				<div class="co_nationdiv" id="county01">
+					<input type="text" name="tdlForeign" value="$!texiDetail.tdlForeign" style="width:120px;height:25px">
+					<span>国家</span>
+					<input type="text" name="tdlForeignCity" value="$!texiDetail.tdlForeignCity" style="width:120px;height:25px">
+					<span>城市</span>
+				</div>
+				<div class="doadmin_toplboxb">
+					<span>车型:</span>
+					<div class="doadmin_toplbrb">
+						<select  name="tdlType" class="searchSelect">
+							<option value=""></option>
+                            #foreach($item in $models.keySet())
+								<option value="$item" #if($texiDetail.tdlType == $item) selected #end>$models.get($item)</option>
+                            #end
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="doadmin_topl">
+    			<div class="doadmin_toplboxb">
+    				<span>汽车档次:</span>
+    				<div class="doadmin_toplbrb">
+    					<select  name="tdlTexttype" class="searchSelect">
+							<option value=""></option>
+                            #foreach($item in $texitype.keySet())
+								<option value="$item" #if($texiDetail.tdlTexttype == $item) selected #end>$texitype.get($item)</option>
+                            #end
+						</select>
+    				</div>
+    			</div>
+				<div class="doadmin_toplboxb">
+    				<span>可乘人数:</span>
+    				<div class="doadmin_toplbrb">
+                        <select  name="tdlNum" class="searchSelect">
+							<option value=""></option>
+                            #foreach($item in $textzuo.keySet())
+								<option value="$item" #if($texiDetail.tdlNum == $item) selected #end>$textzuo.get($item)</option>
+                            #end
+						</select>
+    				</div>
+    			</div>
+				<button type="button" class="doadmin_see" onclick="index.searchform('form1','$appRoot/texi/detail/list');">查询</button>
+			</div>
+			</div>
+		</form>
+	<div class="g_line">
+	</div>
+		<div class="carad_ct">
+			<div class="carad_ctbtn">
+			   <button onclick="index.load('$appRoot/texi/detail/insertPage');">+新增车辆</button>
+            </div>
+		</div>
+		<div class="doadmin_ct">
+			<div class="carad_ct">
+				<div class="carad_ctrtable">
+					<table cellspacing="0" cellspadding="0">
+						<thead>
+							<tr>
+								<td>产品编号</td>
+								<td>所在城市</td>
+								<td>汽车品牌</td>
+								<td>汽车档次</td>
+								<td>车型</td>
+								<td>可乘人数</td>
+								<td>租车管理</td>
+								<td>操作人管理</td>
+								<td>上架状态</td>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $texiList)
+        						<tr>
+    								<td>$!item.tdlCode</td>
+									#if($!item.tdlInland == '01')
+											#if($!item.tdlExternal == '04')
+												<td>$!item.tdlForeignCity</td>
+											#else
+												<td>$!item.tdlExternal</td>
+											#end
+            						#elseif($!item.tdlInland == '02')
+										<td>$!item.tdlCity</td>
+									#else
+										<td></td>
+									#end
+    								<td>$!item.tdlBrand</td>
+    								<td>$!item.tdlTexttype</td>
+									<td>$!item.tdlType</td>
+									<td>$!item.tdlNum</td>
+    								<td>
+										<a href="javascript:index.load('$appRoot/texi/send/list?tdlId=$item.id');">固定接送</a>
+										<a href="javascript:index.load('$appRoot/texi/car/showcar?tdlId=$!item.id');">包车</a>
+										<a href="javascript:index.load('$appRoot/texi/drive/showdrive?tdlId=$!item.id');">自驾</a>
+										<a href="javascript:index.load('$appRoot/texi/detail/updatePage?id=$!item.id');">查看/修改</a>
+										<a href="javascript:index.nextPage('$appRoot/town/detail/setsametown?ntype=$sametownntype&cid=$item.id');">同业管理</a>
+									</td>
+									<td>
+										<a href="javascript:index.load('$appRoot/cus/func/addChildUser?ntype=$sametownntype&cid=$item.id');">权限设置</a>
+									</td>
+									<td>                       
+        								<div class="wrapper">
+                                               <div class="imageContainer1">
+        											#if($!item.tdlIsDelStatus == '02')
+                                                        <span><img src="$staticRoot/images/lvdui.png"/></span>
+                                                        <a href="javascript:index.load('$appRoot/texi/detail/delete?id=$item.id&tdlIsDelStatus=01');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+        											#end 
+        											#if($!item.tdlIsDelStatus == '01')
+        												<a href="javascript:index.load('$appRoot/texi/detail/delete?id=$item.id&tdlIsDelStatus=02');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+        												<span><img src="$staticRoot/images/hongcuo.png"/></span>
+        											#end
+                                               </div>
+                                         </div>
+            						</td>
+    							</tr>
+    						#end
+					  </tbody>
+					</table>
+					#parse("common/page.vm")
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--/合作管理-->
+	

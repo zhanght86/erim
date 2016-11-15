@@ -1,0 +1,257 @@
+	<form method="post" id="form1">
+	<div class="search_block clearfix">
+				<div class="input_bg">
+					
+					<div class="input_block clearfix" style="margin-bottom:0;">
+						<div class="input_right input_right_wauto">
+							<label class="ml25 pl10"> 城市：</label>
+							<input class="w130">
+							<label class="ml35">住房日期：</label>
+							<input class="w130"><label class="ml10">至</label><input class="w130 ml10">
+							<span class="red_a ml25">查询</span>
+						</div>
+					</div>
+				
+				</div>
+				<div class="select_block">
+					<ul class="select_cont clearfix">
+						<li class="first"><span class="span_tit">位置</span></li>
+						<li class="second"><a class="on">不限</a></li>
+						<li><a>商业区<em class="icon_img"></em></a></li>
+						<li><a>机场/火车站<em class="icon_img"></em></a></li>
+						<li><a>公交/地铁<em class="icon_img"></em></a></li>
+						<li><a>医院/学校/行政单位<em class="icon_img"></em></a></li>
+						<li><a>景点<em class="icon_img"></em></a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				<div class="show_block">
+					<div>
+						<a>房山风景区</a>
+						<a>公主坟、五棵松、石景山游乐园地区</a>
+						<a>国贸地区</a>
+						<a>国展中心地区</a>
+						<a>果园环岛、通州区</a>
+						<a>后海、南锣鼓巷地区</a>
+						<a>怀柔风景区</a>
+						<a>欢乐谷游乐区</a>
+						<a>劲松、潘家园</a>
+						<span class="more_cona"></span>
+					</div>
+					<div>
+						<a>南苑机场</a>
+						<a>首都国际机场</a>
+						<a>北京火车站</a>
+						<a>北京西站</a>
+						<a>北京南站</a>
+						<a>北京北站</a>
+						<a>北京东火车站</a>
+						<span class="more_cona"></span>
+					</div>
+					<div>
+						<a>1号线</a>
+						<a>2号线外环</a>
+						<a>4号线</a>
+						<a>5号线</a>
+						<a>8号线</a>
+						<a>10号线</a>
+						<a>13号线</a>
+						<a>八通线</a>
+						<a>机场快轨</a>
+						<a>15号线</a>
+						<a>昌平线</a>
+						<a>亦庄线</a>
+						<a>大兴线</a>
+						<a>房山线</a>
+						<a>9号线</a>
+						<a>6号线</a>
+						<a>14号线</a>
+						<span class="more_cona"></span>
+					</div>
+					<div>
+						<a>号线</a>
+						<a>号线外环</a>
+						<a>号线</a>
+						<a>号线</a>
+						<a>号线</a>
+						<a>号线</a>
+						<a>号线</a>
+						<a>八通线</a>
+						<a>机场快轨</a>
+						<a>15号线</a>
+						<a>昌平线</a>
+						<a>亦庄线</a>
+						<a>大兴线</a>
+						<a>房山线</a>
+						<a>9号线</a>
+						<a>6号线</a>
+						<a>14号线</a>
+						<a>号线</a>
+						<a>号线</a>
+						<a>八通线</a>
+						<a>机场快轨</a>
+						<a>15号线</a>
+						<a>昌平线</a>
+						<a>亦庄线</a>
+						<a>大兴线</a>
+						<a>房山线</a>
+						<a>9号线</a>
+						<a>6号线</a>
+						<a>14号线</a>
+						<span class="more_cona"></span>
+					</div>
+					<div>
+						<a>故宫</a>
+						<a>颐和园</a>
+						<a>天安门广场</a>
+						<a>天坛</a>
+						<a>圆明园</a>
+						<a>恭王府</a>
+						<a>南锣鼓巷</a>
+						<a>北海公园</a>
+						<a>什刹海</a>
+						<a>景山公园</a>
+						<a>王府井</a>
+						<a>慕田峪长城</a>
+						<a>欢乐谷</a>
+						<a>恭王府</a>
+						<a>南锣鼓巷</a>
+						<a>北海公园</a>
+						<a>什刹海</a>
+						<a>景山公园</a>
+						<a>王府井</a>
+						<a>慕田峪长城</a>
+						<a>欢乐谷</a>
+						<a>大栅栏</a>
+						<a>雍和宫</a>
+						<span class="more_cona"></span>
+					</div>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">价格</span></li>
+						<li class="second"><a class="on">不限</a></li>
+						<li><a>¥150以下</a></li>
+						<li><a>¥150-300</a></li>
+						<li><a>¥301-450</a></li>
+						<li><a>¥451-600</a></li>
+						<li><a>¥600以上</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">档次</span></li>
+						<li class="second"><a class="on">不限</a></li>
+						<li><a>二星级及以下/经济</a></li>
+						<li><a>三星级/舒适</a></li>
+						<li><a>四星级/高档</a></li>
+						<li><a>五星级/豪华</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">特色</span></li>
+						<li class="second"><a class="on">不限</a></li>
+						<li><a>亲子出游</a></li>
+						<li><a>休闲度假</a></li>
+						<li><a>客栈</a></li>
+						<li><a>公寓</a></li>
+						<li><a>精品酒店</a></li>
+						<li><a>农家乐</a></li>
+						<li><a>青年旅舍</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">设施</span></li>
+						<li class="second"><a class="on">不限</a></li>
+						<li><a>免费无线</a></li>
+						<li><a>免费有线</a></li>
+						<li><a>含早餐</a></li>
+						<li><a>三人/家庭房</a></li>
+						<li><a>大床</a></li>
+						<li><a>双床</a></li>
+						<li><a>停车场</a></li>
+						<li><a>游泳池</a></li>
+						<li><a>接送服务</a></li>
+						<li><a>健身房</a></li>
+						<li><a>穿梭机场班车</a></li>
+						<li><a>新开业/新装修</a></li>
+						<li><a>含早餐</a></li>
+						<li><a>三人/家庭房</a></li>
+						<li><a>大床</a></li>
+						<li><a>双床</a></li>
+						<li><a>停车场</a></li>
+						<li><a>游泳池</a></li>
+						<li><a>接送服务</a></li>
+						<li><a>健身房</a></li>
+						<li><a>穿梭机场班车</a></li>
+						<li><a>新开业/新装修</a></li>
+						<li><a>三人/家庭房</a></li>
+						<li><a>大床</a></li>
+						<li><a>双床</a></li>
+						<li><a>停车场</a></li>
+						<li><a>游泳池</a></li>
+						<li><a>接送服务</a></li>
+						<li><a>健身房</a></li>
+						<li><a>穿梭机场班车</a></li>
+						<li><a>新开业/新装修</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				
+			</div>
+		<a class="big_more_a">更多查询项</a>
+	</form>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>订单号</th>
+				<th>订单时间</th>
+				<th>租车目的地</th>
+				<th>汽车品牌/名称</th>
+				<th>订单内容</th>
+				<th>联系人</th>
+				<th>联系电话</th>
+				<th>销售价格</th>
+				<th>选择供应商</th>
+				<th>订单状态</th>
+				<th>接单状态</th>
+				<th>支付状态</th>
+				<th>备注</th>
+			</tr>
+			#foreach($item in $texiList)
+				<tr>
+                  	<td>$!item.torCode</td>
+					<td>$!date.format('yyyy-MM-dd HH:mm:ss',$!item.torCreatetime)</td>
+					<td>没有</td>
+                    <td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>$!item.torIssure</td>
+					<td>$!item.torNtype</td>
+					<td>$!item.torPayMoney</td>
+					<td>没有</td>
+				</tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".select_block").each(function(){
+		if($(this).height()>90){
+			$(this).children(".more_a").show();
+			$(this).css({"height":"40px","overflow":"hidden"});
+		}
+	})
+})
+</script>

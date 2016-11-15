@@ -1,0 +1,171 @@
+<style >
+	.divimg146 > img{
+		width:146px !important;
+	}
+</style>
+	<form id="form1" method="post">
+    	<div class="g_block_2 mb20">
+    		<p class="g_tit_1 mb15">网站抬头</p>
+    		<div class="input_block clearfix">
+				<div class="input_right input_right_wauto">
+					<label class="ml30">添加Logo：</label>
+    				<div style="float:right" class="divimg146">
+    					#vfile("webLogo","webLogo","$!mallweb.webLogo")
+					</div>
+    			</div>
+    		</div>
+			<div class="input_block clearfix">
+				<div class="input_right input_right_wauto">
+					<label class="ml30">在线QQ：</label>
+					
+					#if($erim.isNotEmpty($!listQq))
+    					#foreach($item in $listQq)
+    						<input class="w90 mr10" name="webQq" value="$!item">
+    						#if($velocityCount == $listQq.size())
+    							<a id="qq_add" href="javascript:void(0);">+</a>
+    						#end
+						#end
+					#else
+						<input class="w90 mr10" name="webQq" value="$!mallweb.webQq"><a id="qq_add" href="javascript:void(0);">+</a>
+					#end
+    			</div>
+    		</div>
+			<div class="input_block clearfix">
+				<div class="input_right input_right_wauto">
+    				<label class="ml30">网站名称：</label>
+    				<input class="w130" name="webTitle" value="$!mallweb.webTitle">
+    				<label class="ml25">公司名称：</label>
+    				<input class="w130" name="webCpyname" value="$!mallweb.webCpyname">
+					<label class="ml25">客服电话：</label>
+    				<input class="w130" name="webKh" value="$!mallweb.webKh">
+					<label class="ml25">公司地址：</label>
+    				<input class="w130" name="webCpyaddress" value="$!mallweb.webCpyaddress">
+    			</div>
+			</div>
+    		##<div class="g_right"><a class="red_a ml25" href="javascript:void(0);">确定</a></div>
+    	</div>
+    	<div class="g_block_2 mb20">
+    		<p class="g_tit_1 mb15">首页轮播</p>
+    		<ul class="img_list_1 clearfix mb20">
+    		 	<li cid="1" class="on"><span><img id="img1" 
+					#if ($!mallweb.webImg1 !='http://file.jialvlianhe.com/template/img/1.jpg')
+				      src="$!mallweb.webImg1"
+					#end
+					>
+                    </span></li>   <input type="hidden" name="webImg1" value="$!mallweb.webImg1"/>
+    			<li cid="2"><span><img id="img2"
+					#if ($!mallweb.webImg2 !='http://file.jialvlianhe.com/template/img/2.jpg')
+				      src="$!mallweb.webImg2"
+					#end
+					>
+				</span></li>    	      <input type="hidden" name="webImg2" value="$!mallweb.webImg2"/>
+    			<li cid="3"><span><img id="img3" 
+                    #if ($!mallweb.webImg3 !='http://file.jialvlianhe.com/template/img/3.jpg')
+				      src="$!mallweb.webImg3"
+					#end
+                  ></span></li>			  <input type="hidden" name="webImg3" value="$!mallweb.webImg3"/>
+    			<!--<li cid="4"><span><img id="img4" src="$!mallweb.webImg4"></span></li>			  <input type="hidden" name="webImg4" value="$!mallweb.webImg4"/>-->
+    		</ul>
+			<p class="g_tit_1 mb15">推荐图片</p>
+    		<dl class="img_up_block clearfix">
+    			<dd style="width:912px;">
+					#foreach($item in $listImage)
+						#if ($!item.id <=4)
+        			    	<span><label><input type="radio" name="mieId" inp="$!item.mieImageurl" value="$!item.id"><img src="$!item.mieImageurl" style="height:100px;"></label></span>
+						#end		
+					#end
+    			</dd>
+				<dd style="width:912px;display:none">
+					#foreach($item in $listImage)
+						#if ($!item.id >=5 and $!item.id <=8 )
+        				  <span><label><input type="radio" name="mieId" inp="$!item.mieImageurl" value="$!item.id"><img src="$!item.mieImageurl" style="height:100px;"></label></span>
+						#end		
+					#end
+    			</dd>
+				<dd style="width:912px;display:none">
+					#foreach($item in $listImage)
+					#if ($!item.id >=9 and $!item.id <=12 )
+        				<span><label><input type="radio" name="mieId" inp="$!item.mieImageurl" value="$!item.id"><img src="$!item.mieImageurl" style="height:100px;"></label></span>
+					#end			
+					#end
+    			</dd>
+				<!--<dd style="width:912px;display:none">
+					#foreach($item in $listImage)
+						#if ($!item.id >=12 and $!item.id <=16 )
+        				 <span><label><input type="radio" name="mieId" inp="$!item.mieImageurl" value="$!item.id"><img src="$!item.mieImageurl" style="height:100px;"></label></span>
+						#end		
+					#end
+    			</dd> -->
+    		</dl>
+    	</div>
+    	
+		
+    	<div class="g_block_2 mb20">
+    		<p class="g_tit_1 mb15">网站末端</p>
+    		<div class="input_block clearfix">
+    			<div class="input_right input_right_wauto">
+					
+    				<label class="ml25">营业执照号：</label>
+    				<input class="w150" name="webCard" value="$!mallweb.webCard">
+    				<label class="ml25">旅行社经营许可证号：</label>
+    				<input class="w150" name="webLvyoucard" value="$!mallweb.webLvyoucard">
+					<label style="margin-left:50px;">24小时应急电话：</label>
+    				<input class="w150" style="width:250px;" name="webTeletephone" value="$!mallweb.webTeletephone">
+    			</div>
+    		</div>
+    		
+    		<div class="input_block clearfix">
+    			<div class="input_right input_right_wauto"></div>
+				<!--<div class="g_right"><a class="red_a ml25" href="javascript:form.sub('form1','$appRoot/mall/web/update');">确定</a></div>-->
+    		</div>
+    	</div>
+		
+    	<div class="g_right mr50 mb20">
+			<a class="red_a ml25" href="javascript:form.sub('form1','$appRoot/mall/web/update');">确定</a>
+			<a class="red_a ml25" target="_blank" href="http://www.jialvlianhe.com/$userCompany.cpyCode">预览</a>
+		</div>
+	</form>
+   <script type="text/javascript">
+		$(document).ready(function(){
+		
+					
+			//点击推荐
+			$("input[name='mieId']").click(function(){
+				var inp = $(this).attr("inp");
+				var data = $(".img_list_1 > li[class='on']").find("img").attr("src",inp);
+				
+				var mie  = $(".img_list_1 > li[class='on']").attr("cid");
+				$("input[name='webImg"+mie+"']").attr("value",inp);
+			});
+			
+			//切换图片
+			$(".img_list_1 li").click(function(){
+				var cid = $(this).attr("cid");
+				$(this).addClass("on").siblings().removeClass("on")		
+				
+				$("input[name='mieId']").attr("checked",false);
+				$(".img_up_block dd").eq(cid-1).show().siblings().hide();
+			})
+			
+			//在线qq
+			var clickNum=0;
+			#if($erim.isNotEmpty($!listQq))
+				clickNum=$!listQq.size();
+			#end
+			$("#qq_add").click(function(){
+				if(clickNum<4){
+    				var hCont=$(this).prev().clone().val("");
+    				$(this).before(hCont);
+    				clickNum++;
+				}else{
+					$(this).html("<span class='ts_xxx' style='color:red;line-height:20px;'>最多可添4个</span>");
+					$(".ts_xxx").animate({opacity:"0"},2000,function(){
+						$(".ts_xxx").remove();
+				$(this).hide();
+					});
+					
+				}
+				
+			})
+		})
+   </script>

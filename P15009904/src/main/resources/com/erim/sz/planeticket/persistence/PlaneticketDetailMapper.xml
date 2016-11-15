@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="planeticketdetail">
+	
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="cpyId != null and cpyId != ''">			     		 and 	cpy_id 				=       #{cpyId}				</if>
+			<if test="ptdNo != null and ptdNo != ''">			     		 and 	ptd_no 				like 	"%"#{ptdNo}"%"   	</if>
+			<if test="ptdCompany != null and ptdCompany != ''">	     		 and 	ptd_company 		like 	"%"#{ptdCompany}"%" </if>
+			<if test="ptdNumber != null and ptdNumber != ''">	    		 and 	ptd_number 			like 	"%"#{ptdNumber}"%"  </if>
+			<if test="ptdEndCity != null and ptdEndCity != ''">	    		 and 	ptd_end_city 		=       #{ptdEndCity}	  	</if>
+			<if test="ptdStartCity != null and ptdStartCity != ''">			 and 	ptd_start_city 		=       #{ptdStartCity}	  	</if>
+			<if test="ptdNtype != null and ptdNtype != ''">			 		 and 	ptd_ntype 			=       #{ptdNtype}	  		</if>
+			<if test="ptdIsDelStatus != null and ptdIsDelStatus != ''">	     and 	ptd_is_del_status 	=       #{ptdIsDelStatus}	</if>
+			<if test="ptdStartState != null and ptdStartState != ''">	     and 	ptd_start_state 	=       #{ptdStartState}</if>
+			<if test="ptdEndState != null and ptdEndState != ''">	         and 	ptd_end_state 	    =       #{ptdEndState}</if>
+			<if test="ptdStartTown != null and ptdStartTown != ''">	         and 	ptd_start_town 	    =       #{ptdStartTown}</if>
+			<if test="ptdEndTown != null and ptdEndTown != ''">	             and 	ptd_end_town 	    =       #{ptdEndTown}</if>
+			<if test="ptdForeign != null and ptdForeign != ''">	             and 	ptd_foreign 	    like 	"%"#{ptdForeign}"%"</if>
+			<if test="ptdForeigncity != null and ptdForeigncity != ''">	     and 	ptd_foreigncity 	like 	"%"#{ptdForeigncity}"%"</if>
+			<if test="ptdEndforeign != null and ptdEndforeign != ''">	     and 	ptd_endforeign 	    like 	"%"#{ptdEndforeign}"%"</if>
+			<if test="ptdEndforeigncity != null and ptdEndforeigncity != ''"> and ptd_endforeigncity 	like 	"%"#{ptdEndforeigncity}"%"</if>
+		</where>
+	</sql>
+	
+	<!-- 查询同城同业  -->
+	<sql id="sql_query_persistence">
+			1 = 1
+			<if test="id != null and id != ''">			     		         and 	id 				    =       #{id}</if>
+			<if test="ptdNo != null and ptdNo != ''">			     		 and 	ptd_no 				like "%"#{ptdNo}"%"   	  </if>
+			<if test="ptdCompany != null and ptdCompany != ''">	     		 and 	ptd_company 		like "%"#{ptdCompany}"%"  </if>
+			<if test="ptdNumber != null and ptdNumber != ''">	    		 and 	ptd_number 			like "%"#{ptdNumber}"%"  </if>
+			<if test="ptdEndCity != null and ptdEndCity != ''">	    		 and 	ptd_end_city 		=       #{ptdEndCity}	  </if>
+			<if test="ptdStartCity != null and ptdStartCity != ''">			 and 	ptd_start_city 		=       #{ptdStartCity}	  </if>
+			<if test="ptdNtype != null and ptdNtype != ''">			 		 and 	ptd_ntype 			=       #{ptdNtype}	  </if>
+			<if test="ptdIsDelStatus != null and ptdIsDelStatus != ''">	     and 	ptd_is_del_status 	=       #{ptdIsDelStatus}</if>
+			<if test="ptdStartState != null and ptdStartState != ''">	     and 	ptd_start_state 	=       #{ptdStartState}</if>
+			<if test="ptdEndState != null and ptdEndState != ''">	         and 	ptd_end_state 	    =       #{ptdEndState}</if>
+			<if test="ptdStartTown != null and ptdStartTown != ''">	         and 	ptd_start_town 	    =       #{ptdStartTown}</if>
+			<if test="ptdEndTown != null and ptdEndTown != ''">	             and 	ptd_end_town 	    =       #{ptdEndTown}</if>
+			<if test="ptdForeign != null and ptdForeign != ''">	             and 	ptd_foreign 	    like "%"#{ptdForeign}"%"</if>
+			<if test="ptdForeigncity != null and ptdForeigncity != ''">	     and 	ptd_foreigncity 	like "%"#{ptdForeigncity}"%"</if>
+			<if test="ptdEndforeign != null and ptdEndforeign != ''">	     and 	ptd_endforeign 	    like "%"#{ptdEndforeign}"%"</if>
+			<if test="ptdEndforeigncity != null and ptdEndforeigncity != ''"> and ptd_endforeigncity 	like "%"#{ptdEndforeigncity}"%"</if>
+	</sql>
+	
+	<sql id="COMPANYDETAIL">
+			cpy.cpy_name 	  AS cpyName,
+			cpy.cpy_telephone AS cpyTelephone,
+			cpy.cpy_brand 	  AS cpyBrand,
+			ccp.cbs_operator         AS ccpName,
+			ccp.cbs_operator_phone   AS ccpTelephone,
+			cpy.cpy_email 	         AS ccpEmail,
+			ccp.cbs_operator_qq      AS ccpQq
+	</sql>
+	<sql id="sql_column">
+		id 					 AS id,
+		cpy_id 				 AS cpyId,
+		ptd_no 				 AS ptdNo,
+		ptd_company 		 AS ptdCompany,
+		ptd_number 			 AS ptdNumber,
+		ptd_is_international AS ptdIsInternational,
+		ptd_model 			 AS ptdModel,
+		ptd_start_city 		 AS ptdStartCity,
+		ptd_start_time		 AS ptdStartTime,
+		ptd_start_terminal 	 AS ptdStartTerminal,
+		ptd_end_city 		 AS ptdEndCity,
+		ptd_end_time 		 AS ptdEndTime,
+		ptd_end_terminal 	 AS ptdEndTerminal,
+		ptd_cost_food 		 AS ptdCostFood,
+		ptd_cost_maching 	 AS ptdCostMaching,
+		ptd_cost_fuel 		 AS ptdCostFuel,
+		ptd_createtime 	 	 AS ptdCreatetime,
+		ptd_createuser 		 AS ptdCreateuser,
+		ptd_is_del_status 	 AS ptdIsDelStatus,
+		ptd_class_economy    AS ptdClassEconomy,
+		ptd_class_business 	 AS ptdClassBusiness,
+		ptd_start_town 		 AS ptdStartTown,
+		ptd_end_town 		 AS ptdEndTown,
+		ptd_end_stay 		 AS ptdEndStay,
+		ptd_end_ntype 		 AS ptdEndNtype,
+		ptd_start_state 	 AS ptdStartState,
+		ptd_end_state		 AS ptdEndState,
+		ptd_ntype			 AS ptdNtype,
+		ptd_foreign          AS ptdForeign,
+		ptd_foreigncity      AS ptdForeigncity,
+		ptd_endforeign		 AS ptdEndforeign,
+		ptd_endforeigncity   AS ptdEndforeigncity,
+		ptd_startprovince    AS ptdStartProvince,
+		ptd_endprovince      AS ptdEndProvince,
+		ptd_yesno            AS ptdYesno,
+		ptd_guojia           AS ptdGuojia,
+		ptd_province         AS ptdProvince,
+		ptd_city             AS ptdCity,
+		ptd_town             AS ptdTown,
+		ptd_jing_foreign     AS ptdJingforeign,
+		ptd_jing_city        AS ptdJingcity,
+		ptd_first_class		 AS ptdFirstClass,
+		ptd_scheduled        AS ptdScheduled
+		
+	</sql>
+	
+	<!-- 同业资源 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTown" resultType="planeticketDetailBean">
+		SELECT
+		    planeticket.id 		 AS id,
+			planeticket.cpy_id 	 AS cpyId,
+			ptd_no 				 AS ptdNo,
+			ptd_company 		 AS ptdCompany,
+			ptd_number 			 AS ptdNumber,
+			ptd_is_international AS ptdIsInternational,
+			ptd_model 			 AS ptdModel,
+			ptd_start_city 		 AS ptdStartCity,
+			ptd_start_time		 AS ptdStartTime,
+			ptd_start_terminal 	 AS ptdStartTerminal,
+			ptd_end_city 		 AS ptdEndCity,
+			ptd_end_time 		 AS ptdEndTime,
+			ptd_end_terminal 	 AS ptdEndTerminal,
+			ptd_cost_food 		 AS ptdCostFood,
+			ptd_cost_maching 	 AS ptdCostMaching,
+			ptd_cost_fuel 		 AS ptdCostFuel,
+			ptd_createtime 	 	 AS ptdCreatetime,
+			ptd_createuser 		 AS ptdCreateuser,
+			ptd_is_del_status 	 AS ptdIsDelStatus,
+			ptd_class_economy    AS ptdClassEconomy,
+			ptd_class_business 	 AS ptdClassBusiness,
+			ptd_start_town 		 AS ptdStartTown,
+			ptd_end_town 		 AS ptdEndTown,
+			ptd_end_stay 		 AS ptdEndStay,
+			ptd_end_ntype 		 AS ptdEndNtype,
+			ptd_start_state 	 AS ptdStartState,
+			ptd_end_state		 AS ptdEndState,
+			ptd_ntype			 AS ptdNtype,
+			ptd_foreign          AS ptdForeign,
+			ptd_foreigncity      AS ptdForeigncity,
+			ptd_endforeign		 AS ptdEndforeign,
+			ptd_endforeigncity   AS ptdEndforeigncity,
+			ptd_startprovince    AS ptdStartProvince,
+			ptd_endprovince      AS ptdEndProvince,
+			ptd_yesno            AS ptdYesno,
+			ptd_guojia           AS ptdGuojia,
+			ptd_province         AS ptdProvince,
+			ptd_city             AS ptdCity,
+			ptd_town             AS ptdTown,
+			ptd_jing_foreign     AS ptdJingforeign,
+			ptd_jing_city        AS ptdJingcity,
+			ptd_first_class		 AS ptdFirstClass,
+			<if test="preDate != null and preDate!= ''">
+			(SELECT
+				a.pre_trade_price
+				FROM
+					(
+						SELECT
+							gdl_id,
+							ptd_class,
+							pre_trade_price
+						FROM
+							planeticket_price
+						WHERE 
+							pre_date = #{preDate}
+						AND
+							pre_is_open = '02'
+						ORDER BY
+							pre_create_time DESC
+					) a
+				WHERE
+					a.gdl_id = planeticket.id
+				GROUP BY
+					a.ptd_class
+				ORDER BY
+					a.pre_trade_price
+				LIMIT 1
+			)  AS  preTradePrice,
+			
+			(SELECT
+				a.pre_sign
+				FROM
+					(
+						SELECT
+							gdl_id,
+							ptd_class,
+							pre_sign,
+							pre_trade_price
+						FROM
+							planeticket_price
+						WHERE 
+							pre_date = #{preDate}
+						AND
+							pre_is_open = '02'
+						ORDER BY
+							pre_create_time DESC
+					) a
+				WHERE
+					a.gdl_id = planeticket.id
+				GROUP BY
+					a.ptd_class
+				ORDER BY
+					a.pre_trade_price
+				LIMIT 1
+			)  AS  preSign,
+			</if>
+			ptd_scheduled        AS ptdScheduled,
+			<include refid = "COMPANYDETAIL" />
+		FROM
+			planeticket_detail    planeticket
+		LEFT JOIN
+			company_detail cpy
+		ON 
+			planeticket.cpy_id = cpy.id
+		LEFT JOIN
+			company_business ccp
+		ON 
+			ccp.cpy_id = planeticket.cpy_id
+		WHERE
+			ptd_is_del_status = '1'
+		AND
+			planeticket.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'PLANETICKET' 
+			)
+		AND
+			<include refid="sql_query_persistence"/>
+	</select>
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTownCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			planeticket_detail planeticket
+		WHERE
+			ptd_is_del_status = '1'
+	     	
+	     AND
+			planeticket.id in (
+				select 
+					st.cid 
+				from 
+					pub_sametown st 
+				where 
+					st.cpyid_from != #{cpyId} 
+				and 
+					st.cpyid_to    = #{cpyId}
+				and 
+					st.ntype       = 'PLANETICKET' 
+			)
+	</select>
+	<!-- 不分页查询所有数据 -->
+	<select id="selectPlaneticket" resultType="planeticketDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_detail
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPagePlaneticket" resultType="planeticketDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_detail
+			
+		<include refid="sql_query" />
+		ORDER BY 
+			ptd_is_del_status
+		DESC,
+			ptd_createtime
+		DESC
+		
+	</select>
+	<!-- 根据id查询实体 -->
+	<select id="selectBeanByPriId" resultType="planeticketDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			planeticket_detail
+		WHERE
+			id = #{id}
+	</select>
+
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPagePlaneticketCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			planeticket_detail
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="planeticketDetailBean">
+	INSERT INTO
+			planeticket_detail
+			(
+				cpy_id,
+				ptd_no,
+				ptd_company,
+				ptd_number,
+				ptd_is_international,
+				ptd_model,
+				ptd_start_city,
+				ptd_start_time,
+				ptd_start_terminal,
+				ptd_end_city,
+				ptd_end_time,
+				ptd_end_terminal,
+				ptd_cost_food,
+				ptd_cost_maching,
+				ptd_cost_fuel,
+				ptd_createtime,
+				ptd_createuser,
+				ptd_is_del_status,
+				ptd_class_economy,
+				ptd_class_business,
+				ptd_start_town,
+				ptd_end_town,
+				ptd_end_stay,
+				ptd_end_ntype,
+				ptd_start_state,
+				ptd_end_state,
+				ptd_ntype,
+				ptd_foreign,
+				ptd_foreigncity,
+				ptd_endforeign,
+				ptd_endforeigncity,
+				ptd_startprovince,
+				ptd_endprovince,
+				ptd_yesno,
+				ptd_guojia,
+				ptd_province,
+				ptd_city,
+				ptd_town,
+				ptd_jing_foreign,
+				ptd_jing_city,
+				ptd_first_class,
+				ptd_scheduled
+			)
+		VALUES
+			(
+				#{cpyId},
+				#{ptdNo},
+				#{ptdCompany},
+				#{ptdNumber},
+				#{ptdIsInternational},
+				#{ptdModel},
+				#{ptdStartCity},
+				#{ptdStartTime},
+				#{ptdStartTerminal},
+				#{ptdEndCity},
+				#{ptdEndTime},
+				#{ptdEndTerminal},
+				#{ptdCostFood},
+				#{ptdCostMaching},
+				#{ptdCostFuel},
+				#{ptdCreatetime},
+				#{ptdCreateuser},
+				#{ptdIsDelStatus},
+				#{ptdClassEconomy},
+				#{ptdClassBusiness},
+				#{ptdStartTown},
+				#{ptdEndTown},
+				#{ptdEndStay},
+				#{ptdEndNtype},
+				#{ptdStartState},
+				#{ptdEndState},
+				#{ptdNtype},
+				#{ptdForeign},
+				#{ptdForeigncity},
+				#{ptdEndforeign},
+				#{ptdEndforeigncity},
+				#{ptdStartProvince},
+				#{ptdEndProvince},
+				#{ptdYesno},
+				#{ptdGuojia},
+				#{ptdProvince},
+				#{ptdCity},
+				#{ptdTown},
+				#{ptdJingforeign},
+				#{ptdJingcity},
+				#{ptdFirstClass},
+				#{ptdScheduled}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			planeticket_detail
+		SET
+			ptd_company 		 = #{ptdCompany},
+			ptd_number 		     = #{ptdNumber},
+			ptd_is_international = #{ptdIsInternational},
+			ptd_model		     = #{ptdModel},
+			ptd_start_city		 = #{ptdStartCity},
+			ptd_start_time 		 = #{ptdStartTime},
+			ptd_start_terminal 	 = #{ptdStartTerminal},
+			ptd_end_city 		 = #{ptdEndCity},
+			ptd_end_time 		 = #{ptdEndTime},
+			ptd_end_terminal	 = #{ptdEndTerminal},
+			ptd_cost_food 		 = #{ptdCostFood},
+			ptd_cost_maching 	 = #{ptdCostMaching},
+			ptd_cost_fuel 		 = #{ptdCostFuel},
+			ptd_createtime		 = #{ptdCreatetime},
+			ptd_class_economy    = #{ptdClassEconomy},
+			ptd_class_business   = #{ptdClassBusiness},
+			ptd_start_town 		 = #{ptdStartTown},
+			ptd_end_town 		 = #{ptdEndTown},
+			ptd_end_stay 		 = #{ptdEndStay},
+			ptd_end_ntype	     = #{ptdEndNtype},
+			ptd_start_state 	 = #{ptdStartState},
+			ptd_end_state 	     = #{ptdEndState},
+			ptd_foreign          = #{ptdForeign},
+			ptd_foreigncity      = #{ptdForeigncity},
+			ptd_endforeign		 = #{ptdEndforeign},
+			ptd_endforeigncity   = #{ptdEndforeigncity},
+			ptd_startprovince    = #{ptdStartProvince},
+			ptd_endprovince      = #{ptdEndProvince},
+			ptd_yesno            = #{ptdYesno},
+			ptd_guojia           = #{ptdGuojia},
+			ptd_province         = #{ptdProvince},
+			ptd_city             = #{ptdCity},
+			ptd_town             = #{ptdTown},
+			ptd_jing_foreign     = #{ptdJingforeign},
+			ptd_jing_city        = #{ptdJingcity},
+			ptd_first_class		 = #{ptdFirstClass},
+			ptd_scheduled        = #{ptdScheduled}
+		WHERE
+			id = #{id}
+	</update>
+    <!-- 更新产品编号 -->
+	<update id="updatecode">
+		UPDATE
+			planeticket_detail
+		SET
+			ptd_no  =  #{ptdNo}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 删除 
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			planeticket_detail
+		WHERE
+			id = #{id}
+	</delete>-->
+	
+	<!-- 上下架 -->
+	<delete id="deletebean" parameterType="int">
+		UPDATE
+			planeticket_detail
+		SET
+			ptd_is_del_status 	 = #{ptdIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	<!-- 修改 -->
+	<update id="update1">
+		UPDATE
+			planeticket_detail
+		SET
+			ptd_scheduled        = #{ptdScheduled}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

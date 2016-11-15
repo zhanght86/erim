@@ -1,0 +1,67 @@
+<div class="indexsale">
+	<div class="indexsaletop">
+		<span><a href="javascript:void(0)">热门精选</a></span>
+		<ul>
+			<li class="indexsaletopullihover">周边旅游</li>
+			<li>国内旅游</li>
+			<li>港澳台/日韩朝/东南亚</li>
+			<li>俄罗斯/欧洲/美洲</li>
+			<li>澳洲/中东/非洲</li>
+		</ul>
+	</div>
+	<div class="indexsalecenterbiger">
+		#foreach($list in $tj.keySet())
+			<div  #if($velocityCount == 1) class="indexsalecenter show" #else class="indexsalecenter" #end>
+    			<div class="indexsalecter">
+        			#foreach($item in $tj.get($list))
+        				#if($velocityCount==1)
+    						<div class="indexscterl">
+            					<div class="indexsalecenterleft">
+									
+            						<a href="$appRoot/$cpyno/line/tejiaxiang/${item.id}?searchModel=1" target="_blank" title="$!item.ldlName"> 
+										#if($!item.ldlPicture != '')
+                							<img src="$staticFileRes$!item.ldlPicture"/>
+                						#else
+                							<img src="$staticRoot/images/pic1.jpg" title="" alt="">
+                						#end
+            							<div class="indexsalecenterleftfont">
+            								<p>$erim.subString($!item.ldlName,30)</p>
+            								<div class="indexsalecenterleftfontqian">
+            									<span class="indexsalecenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.lpeRetailAdult,'0')</label>起</span>
+            								</div>
+            							</div>
+            						</a>
+            					</div>
+            				</div>
+    					#end
+					#end
+					<div class="indexsalecenterright">
+    					#foreach($item in $tj.get($list))
+    						#if($velocityCount > 1)
+    							#set($index = ${velocityCount} - 1)
+            					<div #if($index % 3 == 0) class="indexscterrbox boxmarginright" #else class="indexscterrbox" #end>
+            						<div class="indexsalecenterrightbox">
+										<a href="$appRoot/$cpyno/line/tejiaxiang/${item.id}?searchModel=1" target="_blank" title="$!item.ldlName">
+                							#if($!item.ldlPicture != '')
+                    							<img src="$staticFileRes$!item.ldlPicture"/>
+                    						#else
+                    							<img src="$staticRoot/images/pic7.jpg" title="" alt="">
+                    						#end
+                							<div class="indexsalecenterrightboxfont">
+                								<p>$erim.subString($!item.ldlName,17)</p>
+                								<div class="indexsalecenterrightboxfontqian">
+                									<span class="indexsalecenterrightboxfontqianm"><label>￥$erim.emptyDefault($item.lpeRetailAdult,'0')</label>起</span>
+                								</div>
+                							</div>
+										</a>
+            						</div>
+            					</div>
+    						#end
+    					#end
+    				</div>
+				</div>
+			</div>
+		#end
+	</div>
+	<img src="$staticRoot/images/tejiabar.gif">
+</div>

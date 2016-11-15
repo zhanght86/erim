@@ -1,0 +1,96 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/guide/guide.css">
+<div class="addhotel">
+      <div  class="addhltop">
+        <span>查看导游信息</span>
+      </div>
+	  <div class="cb"></div>
+	   <div class="g_line"></div>
+	<form method="post" id="form1">
+		<input type="hidden" value="$guideDetail.id" name="id"/>
+		<div class="addhotelc">
+			<div class="addhotelcbox">
+				<div class="addhotelcboxl">导游姓名</div>
+				<div class="controls">
+					$!guideDetail.gdlName
+				</div>
+			</div>
+			<div class="addhotelcbox">
+				<div class="addhotelcboxl">导游编号</div>
+				<div class="controls">
+					$!guideDetail.gdlCode
+				</div>
+			</div>
+			<div class="addhotelcbox">
+				<div class="addhotelcboxl">导游级别</div>
+				<div class="controls">
+					$!guideDetail.gdlStars
+				</div>
+			</div>
+			<div class="addhotelcbox">
+				<div class="addhotelcboxl">工作年限</div>
+				<div class="controls">
+					$!guideDetail.gdlAge
+				</div>
+			</div>
+			<div class="addhotelcbox">
+				<div class="addhotelcboxl">性别</div>
+				<div class="controls">
+					#if($!guideDetail.gdlSex == '02')
+						女
+					#end
+					#if($!guideDetail.gdlSex == '01')
+						男
+					#end
+				</div>
+			</div>
+		  <div class="addhotelcbox">
+				<div class="addhotelcboxl">自我介绍</div>
+				<div class="controls">
+					$!guideDetail.gdlIntroduction
+				</div>
+			</div>
+        <div class="addhotelcbox">
+				<div class="addhotelcboxl">服务承诺</div>
+				<div class="controls">
+					$!guideDetail.gdlService
+				</div>
+			</div>
+			 <div class="addhotelcbox">
+				<div class="addhotelcboxl">服务城市</div>
+				<div class="controls">
+					$!guideDetail.gdlServiceRegion
+				</div>
+			</div>
+			 <div class="addhotelcbox">
+				<div class="addhotelcboxl">服务语种</div>
+				<div class="controls">
+					$!guideDetail.gdlLanguage
+				</div>
+			</div>
+		<div class="addhotelcbox">
+				<div class="addhotelcboxl">组团社佣金</div>
+				<div class="controls">
+					$!guideDetail.gdlPrice
+				</div>
+			</div>
+			<div class="addhotelcbox">
+				<div class="addhotelcboxl">外观图</div>
+				<div class="controls">
+					$!guideDetail.gdlImgPerson
+				</div>
+			</div>
+			
+			<div class="addhotelcbox">
+				<div class="addhotelcboxl">导游证</div>
+				<div class="controls">
+					$!guideDetail.gdlImgCard
+				</div>
+			</div>
+       <div class="addsubmit">
+    	    <a href="javascript:index.load(page.url);" class="back"></a>
+    	 </div>
+		 </div>
+       </form>
+   </div>
+<script > uploadify('uploadify');</script>
+<script > uploadify('uploadify1');</script>

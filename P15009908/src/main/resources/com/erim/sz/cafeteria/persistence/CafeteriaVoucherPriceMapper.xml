@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriavoucherprice">
+	
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			cafeteria_voucher_price (
+				djq_id,
+				cvp_price_total,
+				cvp_price_town,
+				cvp_price_sale,
+				cvp_price_retail,
+				cvp_createtime
+			) VALUES
+	 		<foreach collection="list" item="item" index="index" separator="," >  
+        		(
+		        	#{item.djqId},
+					#{item.cvpPriceTotal},
+					#{item.cvpPriceTown},
+					#{item.cvpPriceSale},
+					#{item.cvpPriceRetail},
+					#{item.cvpCreatetime}
+        		)  
+    		</foreach>  
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			cafeteria_voucher_price
+		SET
+			cvp_price_total  = #{cvpPriceTotal},
+			cvp_price_town   = #{cvpPriceTown},
+			cvp_price_sale   = #{cvpPriceSale},
+			cvp_price_retail = #{cvpPriceRetail}
+		WHERE
+			id = #{id}
+	</update>
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+			cafeteria_voucher_price
+		WHERE
+			id = #{id}
+	</delete>
+	<!-- 查询 -->
+	<select id="showList" resultType="cafeteriaVoucherPriceBean">
+		SELECT
+			id               AS id,
+			djq_id           AS djqId,
+			cvp_price_total  AS cvpPriceTotal,
+			cvp_price_town   AS cvpPriceTown,
+			cvp_price_sale   AS cvpPriceSale,
+			cvp_price_retail AS cvpPriceRetail
+		FROM
+			cafeteria_voucher_price
+		WHERE
+			djq_id = #{djqId}
+	</select>
+</mapper>

@@ -1,0 +1,50 @@
+<div class="cjzyxtesecan">
+	<div class="cjzytesecantop">
+		<img src="$staticRoot/images/chaoji10.jpg"> 
+			<a href="$appRoot/$cpyno/tesecan.html" target="_blank">
+				<span>特色餐</span>
+			</a>
+		<div class="cjzyx_tstop">
+			<ul>
+				<li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','北京');$('#form_tescan2').submit();">北京</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','张家界');$('#form_tescan2').submit();">张家界</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','桂林');$('#form_tescan2').submit();">桂林</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','三亚');$('#form_tescan2').submit();">三亚</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','丽江');$('#form_tescan2').submit();">丽江</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','昆明');$('#form_tescan2').submit();">昆明</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','大连');$('#form_tescan2').submit();">大连</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','西安');$('#form_tescan2').submit();">西安</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','扬州');$('#form_tescan2').submit();">扬州</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','杭州');$('#form_tescan2').submit();">杭州</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','广州');$('#form_tescan2').submit();">广州</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','上海');$('#form_tescan2').submit();">上海</a></li>
+                <li><a href="javascript:void(0)" onclick="$('#cdlCityVo2').attr('value','');$('#form_tescan2').submit();">更多</a></li>
+    			<form id="form_tescan2" method="post" action="$appRoot/$cpyno/tesecan.html">
+    				<input type="hidden" name="cdlCityVo" id="cdlCityVo2" />
+                </form>
+			</ul>
+		</div>
+	</div>
+	<div class="cjzytesecancontent">
+		#foreach($item in $cafeteriaList)
+		<div #if($velocityCount  % 5 == 0) class="cjzytscctrctbox cjzy_tsboxmarginr" #else class="cjzytscctrctbox" #end>
+			<div class="cjzy_tscbox">
+				<a href="$appRoot/$cpyno/cafeteria/tesecanxiang/$item.id" target="_blank" alt="" title="">
+					#if($!item.cdlImg1 != '')
+						<img src="$staticFileRes$item.cdlImg1" title="" alt="">
+					#else
+						<img src="$staticRoot/images/isnull.png" title="" alt="">
+					#end
+					<div class="cjzytscctrctbfont">
+						<a href="$appRoot/$cpyno/cafeteria/tesecanxiang/$item.id" target="_blank" alt="" title="$!item.cdlName"> 
+							<span class="cjzytscctrctbfontname">$!item.cdlName</span> 
+							<!--a href="#" class="cjzytscctrctbfontreserve">预订</a--> 
+							<span class="cjzytscctrctbfontmoney">起<label>￥$erim.emptyDefault($item.cpcRetailPrice,'0')</label></span>
+						</a>
+					</div>
+				</a>
+			</div>
+		</div>
+		#end
+	</div>
+</div>

@@ -1,0 +1,176 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/jipiao.css">
+	
+<style type="text/css">
+    .tab_block{width:455px;}
+    .tab_block .tab_a a{display:inline-block;height:29px;line-height:28px;color:#fff;font-size:14px;padding:0 15px;background-color:#969696;border:1px solid #ccc;border-radius:5px 5px 0 0;}
+    .tab_block .tab_a a.on{background-color:#d09e64;border-bottom:1px solid #d09e64;}
+    .tab_block table{width:455px;border-right:1px solid #ccc;border-radius:0 4px 5px 5px;}
+    .tab_block table th{background-color:#d09e64;height:33px;color:#fff;}
+    .tab_block table td{background-color:#fff;height:30px; text-align:center;border-left:1px solid #ccc;border-bottom:1px solid #ccc;}
+    .tab_block table th.rt{border-radius:0 4px 0 0;}
+    .tab_block table td.rb{border-radius:0 0 5px 0;}
+    .tab_block table td.lb{border-radius:0 0 0 5px;}
+    .tab_block .tab_2{display:none;}
+    .button_block_w1060{width:1060px;}
+    .flt_box{width:530px;float:left;}
+    .ml55{margin-left:75px;}
+</style>
+
+<div class="jd_block">
+	<p class="tit_1 ml35"><img src="$staticRoot/images/jp_03.png" alt="添加往返-直飞/中转机票" title="添加往返-直飞/中转机票">添加往返-直飞/中转机票</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form3">
+		
+		<input type="hidden" value="$planeticket.id" name="id"/>
+    	<div class="input_block clearfix">
+    		<div class="label_left">国内/国际：</div>
+    		<div class="input_right">
+    			<label class="w65"><input type="radio" value="1" name="ptrIsInternational" #if($planeticket.ptrIsInternational == '1') checked  #end>国内</label>
+    			<label class="w65"><input type="radio" value="2" name="ptrIsInternational" #if($planeticket.ptrIsInternational == '2') checked  #end>国际</label>
+    		</div>
+    	</div>
+    	<div class="flt_box ml55">
+    		<div class="input_block clearfix mb20">
+    			<div class="input_right input_right_wauto">
+    			<strong>去程出发：</strong> <select class="w130"><option>北京</option></select>&nbsp; 国家/省： &nbsp;<select class="w130"><option>曼谷</option></select>市/区
+    			</div>
+    		</div>
+    		<div class="input_block clearfix mb20">
+    			<div class="input_right input_right_wauto">
+    			<strong>去程到达：</strong> <select class="w130"><option>北京</option></select>&nbsp; 国家/省： &nbsp;<select class="w130"><option>曼谷</option></select>市/区
+    			</div>
+    		</div>
+    		<div class="tab_block mb40">
+    			<p class="tab_a"><a class="on" href="#">直飞</a><a href="#">中转</a></p>
+    				<table class="tab_1" cellpadding="0" cellspacing="0" border="0">
+    					<tr>
+    						<th></th>
+    						<th>航班号</th>
+    						<th>出发城市</th>
+    						<th>出发时间</th>
+    						<th>落地城市</th>
+    						<th class="rt">落地时间</th>
+    					</tr>
+    					#foreach($item in $listPlaneticket)
+        					<tr>
+        						<td>&nbsp;<input type="radio" #if($planeticket.ptrStartPtdid == $!item.id) checked  #end name="ptrStartPtdid" value="$!item.id">&nbsp;</td>
+        						<td>$!item.ptdNumber</td>
+        						<td>$!item.ptdStartCity/$!item.ptdStartTown</td>
+        						<td>$!item.ptdStartTime</td>
+        						<td>$!item.ptdEndCity/$!item.ptdEndTown</td>
+        						<td>$!item.ptdEndTime</td>
+        					</tr>
+    					#end
+    				</table>
+    				<table class="tab_2" cellpadding="0" cellspacing="0" border="0">
+    					<tr>
+    						<th></th>
+    						<th>航班号</th>
+    						<th>出发城市</th>
+    						<th>出发时间</th>
+    						<th>中转城市</th>
+    						<th>落地城市</th>
+    						<th class="rt">落地时间</th>
+    					</tr>
+    					#foreach($item in $listPlaneticketZz)
+        					<tr>
+        						<td>&nbsp;<input type="radio" #if($planeticket.ptrStartZzid == $!item.id) checked  #end name="ptrStartZzid" value="$!item.id">&nbsp;</td>
+        						<td>$!item.ptdNumber</td>
+        						<td>$!item.ptdStartCity/$!item.ptdStartTown</td>
+        						<td>$!item.ptdStartTime</td>
+    							<td></td>
+        						<td>$!item.ptdEndCity/$!item.ptdEndTown</td>
+        						<td>$!item.ptdEndTime</td>
+        					</tr>
+    					#end
+    				</table>
+    		</div>
+    	</div>
+    	<div class="flt_box" style="margin-left:74px;">
+    		<div class="input_block clearfix mb20">
+    			<div class="input_right input_right_wauto"><strong>返程出发：</strong> 
+    					<select class="w130"><option>曼谷</option></select>&nbsp; 国家/省： &nbsp;<select class="w130"><option>北京</option></select>市/区
+    			</div>
+    		</div>
+    		<div class="input_block clearfix mb20">
+    			<div class="input_right input_right_wauto"><strong>返程到达：</strong> 
+    					<select class="w130"><option>曼谷</option></select>&nbsp; 国家/省： &nbsp;<select class="w130"><option>北京</option></select>市/区
+    			</div>
+    		</div>
+    		<div class="tab_block mb40">
+    			<p class="tab_a"><a class="on" href="#">直飞</a><a href="#">中转</a></p>
+    				<table class="tab_1" cellpadding="0" cellspacing="0" border="0">
+    					<tr>
+    						<th></th>
+    						<th>航班号</th>
+    						<th>出发城市</th>
+    						<th>出发时间</th>
+    						<th>落地城市</th>
+    						<th class="rt">落地时间</th>
+    					</tr>
+    					#foreach($item in $listPlaneticket)
+        					<tr>
+        						<td>&nbsp;<input type="radio" name="ptrEndPtdid"  #if($planeticket.ptrEndPtdid == $!item.id) checked  #end value="$!item.id" >&nbsp;</td>
+        						<td>$!item.ptdNumber</td>
+        						<td>$!item.ptdStartCity/$!item.ptdStartTown</td>
+        						<td>$!item.ptdStartTime</td>
+        						<td>$!item.ptdEndCity/$!item.ptdEndTown</td>
+        						<td>$!item.ptdEndTime</td>
+        					</tr>
+    					#end
+    				</table>
+    				<table class="tab_2" cellpadding="0" cellspacing="0" border="0">
+    					<tr>
+    						<th></th>
+    						<th>航班号</th>
+    						<th>出发城市</th>
+    						<th>出发时间</th>
+    						<th>中转城市</th>
+    						<th>落地城市</th>
+    						<th class="rt">落地时间</th>
+    					</tr>
+    					#foreach($item in $listPlaneticketZz)
+        					<tr>
+        						<td>&nbsp;<input type="radio" name="ptrEndZzid"  #if($planeticket.ptrEndZzid == $!item.id) checked  #end value="$!item.id">&nbsp;</td>
+        						<td>$!item.ptdNumber</td>
+        						<td>$!item.ptdStartCity/$!item.ptdStartTown</td>
+        						<td>$!item.ptdStartTime</td>
+    							<td></td>
+        						<td>$!item.ptdEndCity/$!item.ptdEndTown</td>
+        						<td>$!item.ptdEndTime</td>
+        					</tr>
+    					#end
+    				</table>
+    		</div>
+    		<div class="cb"></div>
+        	<div class="button_block clearfix button_block_w1060" style="width:455px;">
+        		<button class="y_but ml35" type="button" onclick="subform.update('form3','$appRoot/planeticket/return/update');">提交</button>
+        		<button class="b_but ml35" type="button" onclick="index.load('$appRoot/planeticket/return/list');">返回</button>
+        	</div>
+    	</div>
+	</form>
+</div>
+	
+<script >
+	//启程直飞
+	$("input[name='ptrStartPtdid']").click(function(){
+		$("input[name='ptrStartZzid']").removeAttr('checked');
+	});
+	
+	//启程往返
+	$("input[name='ptrStartZzid']").click(function(){
+		$("input[name='ptrStartPtdid']").removeAttr('checked');
+	});
+	
+	//返程直飞
+	$("input[name='ptrEndPtdid']").click(function(){
+		$("input[name='ptrEndZzid']").removeAttr('checked');
+	});
+	
+	//返程往返
+	$("input[name='ptrEndZzid']").click(function(){
+		$("input[name='ptrEndPtdid']").removeAttr('checked');
+	});
+	
+	
+</script>

@@ -1,0 +1,372 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/jipiao.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/planeticket/planeticket.css">
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jp_03.png" alt="添加机票" title="添加机票">添加单程直飞航班机票
+	</p>
+	<form method="post" id="form1">
+		<div class="g_line"></div>
+		<div class="flt_box mr60">
+			<span class="ml55"><b></b></span>
+			<div class="cb"></div>
+			<div class="input_block clearfix">
+				<div class="label_left w130">机票类型：</div>
+				<div class="input_right input_right_wauto">
+					<label class="w110"><input type="radio" id="start1" name="ptdIsInternational" value="01" checked />国内</label> 
+					<label><input type="radio"  id="start2" name="ptdIsInternational" value="02" />国际·港澳台</label>
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">所属航空公司：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w200 validate[required,maxSize[20]]" name="ptdCompany">
+                </div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">航班号：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w200 validate[required,maxSize[10]]" name="ptdNumber">
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">机型：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w200 validate[required,maxSize[10]]" name="ptdModel">
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<!--<div class="input_block clearfix">
+				<div class="label_left">经济舱：</div>
+				<div class="input_right input_right_wauto">
+					<span class="tishi_box w130">
+						<input type="text" class="w110 validate[required,custom[integer],min[1],maxSize[3]]" name="ptdClassEconomy">个</span> 座位 
+				</div><span style="margin-left:10px;margin-top:1px;color:red;">*</span>
+            </div>
+			<div class="input_block clearfix">
+				<div class="label_left">商务舱 ：</div>
+				<div class="input_right input_right_wauto">
+						<span class="tishi_box w130">
+						<input type="text" class="w110 validate[custom[integer],min[1],maxSize[3]]" name="ptdClassBusiness">个</span> 座位
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">头等舱 ：</div>
+				<div class="input_right input_right_wauto">
+						<span class="tishi_box w130">
+						<input type="text" class="w110 validate[custom[integer],min[1],maxSize[3]]" name="ptdFirstClass">个</span> 座位
+				</div>
+			</div> -->
+			<div class="input_block clearfix">
+				<div class="label_left">出发国家：</div>
+				<div class="input_right input_right_wauto">
+					<label class="w110"><input type="radio" id="start1" onclick="$('#start_gj').hide();$('#start_gn').show();$('#county').hide();" name="ptdStartState" value="01" checked />国内</label> 
+					<label><input type="radio" id="start" onclick="$('#start_gj').show();$('#start_gn').hide();$('#county').hide();" name="ptdStartState" value="02" />国际·港澳台</label>
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix" id="start_gn">
+				<div class="label_left">出发地：</div>
+				<div class="input_right input_right_wauto">
+					<select class="w90" name="ptdStartProvince">
+						#foreach($item in $provinces)
+						<option value="$item.regionNo">$item.regionName</option> #end
+					</select> 
+					<span>省</span> <select name="ptdStartCity" style="width: 90px;"></select>市<span style="margin-left:10px;color:red;">*</span>
+				</div>
+			</div>
+			<div class="input_block clearfix" id="start_gj">
+				<div class="label_left">出发地：</div>
+				<div class="input_right input_right_wauto">
+					<label style="width:55px">
+                         <input type="radio" name="ptdStartTown" value="01" checked="checked">香港
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="ptdStartTown" value="02"> 澳门
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="ptdStartTown" value="03">台湾
+					</label>
+					<label style="width:55px">
+                        <input type="radio" name="ptdStartTown" value="04">国际
+					</label>
+				</div>
+			</div>
+			
+			<div class="input_block clearfix" id="county">
+				<div class="label_left">出发地：</div>
+				<div class="input_right input_right_wauto">
+					<!--
+					<select class="w90" name="ptdForeign">
+						<option value=""></option> 
+						#foreach($item in $country.keySet())
+							<option value="$item">$country.get($item)</option> 
+						#end
+					</select> <span> 国家</span> <select name="ptdForeigncity"style="width: 90px;"></select>-->
+					<input type="text" name="ptdForeign" class="validate[required,maxSize[10]] autoquerycountry">国家<input type="text" name="ptdForeigncity" class="validate[required,maxSize[10]]">城市
+				</div>
+			</div>
+			
+			
+			<div class="input_block clearfix">
+				<div class="label_left">起飞时间：</div>
+				<div class="input_right input_right_wauto">
+					<input type="text" class="w200 validate[required]" name="ptdStartTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})">
+                </div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">起飞机场/航站楼：</div>
+				<div class="input_right input_right_wauto">
+					<input type="text" class="w200 validate[required,maxSize[10]]" name="ptdStartTerminal">
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+            <div class="input_block clearfix">
+               <div class="label_left">是否经停：</div>
+			   <div class="input_right input_right_wauto">
+			   <label>
+				<input type="radio" name="ptdYesno" value="01" checked/>否
+               </label>
+			   <label>
+				<input type="radio" name="ptdYesno" value="02"/>是
+               </label>
+			</div>
+            </div>
+			<div class="input_block clearfix" id="guojia">
+				<div class="label_left">经停国家：</div>
+				<div class="input_right input_right_wauto">
+					<label class="w110"><input type="radio" id="guonei" name="ptdGuojia"  value="01"/>国内</label> 
+					<label><input type="radio" id="guoji" name="ptdGuojia" value="02" />国际·港澳台</label>
+				</div>
+			</div>
+			<div class="input_block clearfix" id="jingting_gn">
+				<div class="label_left">经停省市：</div>
+				<div class="input_right input_right_wauto">
+					<select class="w90" name="ptdProvince">
+						#foreach($item in $provinces)
+						<option value="$item.regionNo">$item.regionName</option> #end
+					</select> 
+					<span>省</span>
+					<select name="ptdCity" style="width:90px;"></select>市<span style="margin-left:10px;color:red;">*</span>
+				</div>
+			</div>
+			<div class="input_block clearfix" id="jingting_gj">
+				<div class="label_left">经停地区：</div>
+				<div class="input_right input_right_wauto">
+					<label style="width:55px">
+                         <input type="radio" name="ptdTown" value="01">香港
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="ptdTown" value="02"> 澳门
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="ptdTown" value="03">台湾
+					</label>
+					<label style="width:55px">
+                        <input type="radio" name="ptdTown" value="04">国际
+					</label>
+				</div>
+			</div>
+				<div class="input_block clearfix" id="jingting">
+				<div class="label_left">经停国家：</div>
+				<div class="input_right input_right_wauto">
+					<input type="text" name="ptdJingforeign" class="validate[required,maxSize[10]] autoquerycountry">国家
+					<input type="text" name="ptdJingcity"  class="validate[required,maxSize[10]]">城市
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">到达国家：</div>
+				<div class="input_right input_right_wauto">
+					<label class="w110"><input type="radio" id="end1" onclick="$('#end_gj').hide();$('#end_gn').show();$('#county01').hide();" name="ptdEndState" value="01" checked />国内</label> 
+					<label><input type="radio" id="end2" onclick="$('#end_gj').show();$('#end_gn').hide();$('#county01').hide();" name="ptdEndState" value="02" />国际·港澳台</label>
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix" id="end_gn">
+				<div class="label_left">目的地：</div>
+				<div class="input_right input_right_wauto">
+					<select class="w90" name="ptdEndProvince">
+						#foreach($item in $provinces)
+						<option value="$item.regionNo">$item.regionName</option> #end
+					</select> <span>省</span> <select name="ptdEndCity" style="width:90px;"></select>市<span style="margin-left:10px;color:red;">*</span>
+				</div>
+			</div>
+			<div class="input_block clearfix" id="end_gj">
+				<div class="label_left">目的地：</div>
+				<div class="input_right input_right_wauto">
+					<label style="width:55px">
+                         <input type="radio" name="ptdEndTown" value="01" checked="checked">香港
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="ptdEndTown" value="02"> 澳门
+					</label>
+                    <label style="width:55px">
+                        <input type="radio" name="ptdEndTown" value="03">台湾
+					</label>
+					<label style="width:55px">
+                        <input type="radio" name="ptdEndTown" value="04">国际
+					</label>
+				</div>
+			</div>
+			
+			
+			<div class="input_block clearfix" id="county01">
+				<div class="label_left">目的地：</div>
+				<div class="input_right input_right_wauto">
+					<!--
+					<select class="w90" name="endForeign">
+						<option value=""></option> 
+						#foreach($item in $country.keySet())
+							<option value="$item">$country.get($item)</option> 
+						#end
+					</select> <span> 国家</span> <select name="endForeignCity"style="width: 90px;"></select>-->
+					<input type="text" name="ptdEndforeign" class="validate[required,maxSize[10]] autoquerycountry">国家<input type="text" name="ptdEndforeigncity" class="validate[required,maxSize[10]]">城市
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">落地时间：</div>
+				<div class="input_right input_right_wauto">
+					<input type="text" class="w200 validate[required]" name="ptdEndTime"
+						onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})"> 
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">落地机场/航站楼：</div>
+				<div class="input_right input_right_wauto">	
+					<input type="text" class="w200 validate[required,maxSize[10]]" name="ptdEndTerminal">
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">飞机餐：</div>
+				<div class="input_right input_right_wauto">
+					#foreach($item in $models.keySet()) <label class="checkbox inline">
+						<input class="input-xlarge" type="radio" name="ptdCostFood" #if($item == '01') checked #end
+						value="$item">$models.get($item)
+					</label> #end
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<!--<div class="input_block clearfix">
+				<div class="label_left">预定方式：</div>
+				<div class="input_right input_right_wauto">
+					#foreach($item in $scheduled.keySet()) 
+					  <label class="checkbox inline">
+						  <input class="input-xlarge validate[minCheckbox[1]] checkbox" type="checkbox" name="ptdScheduled" #if($item == '01') checked #end value="$item">$scheduled.get($item)
+					  </label>
+					#end
+				</div><span style=" color:red;margin-left:8px;float: left; margin-top:7px;">*</span>
+			</div>-->
+			<div class="input_block clearfix">
+				<div class="label_left">总时长：</div>
+				<div class="input_right input_right_wauto">	
+					<input type="text" class="w200 validate[required,maxSize[10]]" name="ptdEndStay">
+				</div><span style="margin-left:10px;color:red;">*</span>
+			</div>
+			<!-- 
+			<div class="input_block clearfix">
+				<div class="label_left">机场建设费：</div>
+				<div class="input_right input_right_wauto">
+					<input type="text" class="w200 validate[required,custom[integer],min[1],maxSize[5]]"
+						name="ptdCostMaching" ><span style="margin-left:-20px;font-size:14;">元</sapn>
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left">燃油附加费：</div>
+				<div class="input_right input_right_wauto">
+					<input type="text" class="w200 validate[required,custom[integer],min[1],maxSize[5]]"
+						name="ptdCostFuel" ><span style="margin-left:-20px;font-size:14;">元</sapn>
+				</div>
+			</div>-->
+			<div class="carinfo_ctbl">
+    			<div class="carinfo_ctblrbtn pb80" style="width:360px; margin-left:48px;">
+    				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/planeticket/detail/insert','$appRoot/planeticket/detail/list');">提交</button>
+    				<button type="reset" class="carinfo_qu">重置</button>
+    				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+    			</div>
+    		</div>
+		</div>
+	</form>
+</div>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>	
+<script type="text/javascript">
+	//初始化省为北京市
+	var initProvinceId = 1;
+	//初始化省市县
+	regUtil.initProvince(110000, 'ptdStartProvince', 'ptdStartCity');
+	//初始化省市县
+	regUtil.initProvince(110000, 'ptdEndProvince', 'ptdEndCity');
+	//初始化省市县
+	regUtil.initProvince(110000, 'ptdProvince', 'ptdCity');
+
+	//默认国内 国际线路隐藏
+	$("#start_gj").hide();
+	$("#end_gj").hide();
+	$("#county").hide();
+	$("#county01").hide();
+	//点击国际时出现国家和城市文本框
+	$("input[name='ptdStartTown']").change(function(){
+		var a = $("input[name='ptdStartTown']:checked").val();
+		if(a == '04'){
+			$("#county").show();
+		}else{
+			$("#county").hide();
+		}
+	});
+	//点击国际时出现国家和城市文本框
+	$("input[name='ptdEndTown']").change(function(){
+		var a = $("input[name='ptdEndTown']:checked").val();
+		if(a == '04'){
+			$("#county01").show();
+		}else{
+			$("#county01").hide();
+		}
+	});
+	//初始化国家
+	$("select[name='ptdForeign']").change(function() {
+		index.country($(this).val(), $("select[name='ptdForeignCity']"));
+	});
+	$("select[name='endForeign']").change(function() {
+		index.country($(this).val(), $("select[name='endForeignCity']"));
+	});
+	//是否经停
+	  //默认隐藏经停国内国际
+	  $("#guojia").hide();
+	  $("#jingting_gn").hide();
+	  $("#jingting_gj").hide();
+	  $("#jingting").hide();
+	  //当点击是时显示国内国际
+	  $("input[name='ptdYesno']").change(function(){
+	  var a = $("input[name='ptdYesno']:checked").val();
+	     if(a == '02'){
+		    $('#guojia').show();
+		 }else{
+            $('#guojia').hide();			 
+		 }
+	  });
+	  //当点击国国内时
+	  $("input[name='ptdGuojia']").change(function(){
+	   var a = $("input[name='ptdGuojia']:checked").val();
+	   if (a == '01'){
+	      $('#jingting_gn').show();
+		  $('#jingting_gj').hide();
+	   } else{
+	      $('#jingting_gn').hide();
+		  $('#jingting_gj').show();
+	   }
+	  });
+	    //当点击国际时
+	  $("input[name='ptdTown']").change(function(){
+	    var a = $("input[name='ptdTown']:checked").val();
+		if (a == '04'){
+		   $('#jingting').show();
+		}else{
+		   $('#jingting').hide();
+		}
+	  });
+	  
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+   autoquery();
+});
+function autoquery(){
+ 	var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+}
+</script>

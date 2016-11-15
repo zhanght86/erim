@@ -1,0 +1,64 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".g_block_1").on("click",".red_a",function(){
+		if($(this).text()=="添加房型"){
+			$(this).text('删除房型').css("background-color","#ccc");
+			$(this).parent().parent().parent().after("<div class='qz_add_block'><div class='input_block clearfix'><div class='label_left w80'>房间类型：</div><div class='input_right input_right_wauto'><input class='w200'></div></div><div class='input_block clearfix'><div class='label_left w80'>房间数量：</div><div class='input_right input_right_wauto'><span class='tishi_box w80'><input type='text' class='w60'>间</span><a class='red_a' href='javascript:void(0);'>添加房型</a></div></div></div>");
+			
+		}else{
+			$(this).parent().parent().parent().remove();
+		}
+	})
+})
+</script>
+</head>
+<body bgcolor="#f1f1f1">
+<div class="zh_block">
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">联系人信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">姓名：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+			<div class="label_left w80">手机号码：</div>
+			<div class="input_right input_right_wauto">
+				<input class="w200">
+			</div>
+		</div>
+		<div class="input_block clearfix">
+				<div class="label_left w80">入住日期：</div>
+				<div class="input_right">
+					<input type="text" class="w90 riqi"> 至 <input type="text" class="w90 riqi">
+				</div>
+		</div>
+	</div>
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">订单信息</p>
+		<div class="qz_add_block">
+			<div class="input_block clearfix">
+				<div class="label_left w80">房间类型：</div>
+				<div class="input_right input_right_wauto">
+					<input class="w200">
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="label_left w80">房间数量：</div>
+				<div class="input_right input_right_wauto">
+					<span class="tishi_box w80"><input type="text" class="w60">间</span><a class="red_a" href="javascript:void(0);">添加房型</a>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div class="g_block_1 mb20 pt11 pb10">
+		<p class="g_tit_1 mb15">其他信息</p>
+		<div class="input_block clearfix">
+			<div class="label_left w80">备注：</div>
+			<div class="input_right">
+				<textarea class="w200" style="height:50px;"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="g_right w515"><a class="hui2_a" href="javascript:void(0);">取消</a><a class="red_a ml25" href="javascript:void(0);">提交订单</a></div>

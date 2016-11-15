@@ -1,0 +1,160 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+		   <div class="rdivv">
+				<div class="newfood">
+				  <div class="newfood_suptop">
+					<img src="$staticRoot/images/htfood.png">
+					<span>新增餐厅</span>
+					<div class="cb"></div>
+					<div class="g_line"></div>
+				  </div>
+                  </div>
+				<form method="post" id="form1">
+					
+				  <div class="newfood_top">
+					   <span>国家:</span>
+				       <label><input type="radio" name="newfood" checked="checked">国内</label>
+				       <label><input type="radio" name="newfood">国际·港澳台</label>
+				  </div>
+				<div class="newfood_ct">
+					  <div class="newfood_box show">
+						<div class="carinfo_ctbl">
+							<span>餐厅名称:</span>
+						    <div>
+								$!CafeteriaDetail.cdlName
+					        </div>
+					    </div>
+						<div class="carinfo_ctbl">
+							   <span>主打菜系:</span>
+							  $!CafeteriaDetail.cdlSort
+						</div>
+						<div class="carinfo_ctbl">
+							<span>所在城市:</span>
+							<div class="">
+								    $!CafeteriaDetail.cdlProvince
+								<span>省</span>
+							     	$!CafeteriaDetail.cdlCity
+								<span>市</span>
+								    $!CafeteriaDetail.cdlCounty
+								<span>区/县</span>
+							</div>
+						</div>
+						<div class="carinfo_ctbl">
+							<span>详细地址:</span>
+							<div>
+								$!CafeteriaDetail.cdlAddress
+							</div>
+						</div>
+						<div class="carinfo_ctbl">
+							<span>地图经度:</span>
+							<div>
+								$!CafeteriaDetail.cdlX
+								
+							</div>
+						</div>
+						<div class="carinfo_ctbl">
+							<span>地图纬度:</span>
+							<div >
+								$!CafeteriaDetail.cdlY
+							</div>
+						</div>
+						<div class="carinfo_ctbl">
+						<span>餐厅电话:</span>
+								$!CafeteriaDetail.cdlTelephone
+				    	</div>
+						<div class="carinfo_ctbl">
+						<span>所属商圈:</span>
+								<div class="carinfo_ctblra">
+								</div>
+						</div>
+						<div class="carinfo_ctbl">
+						<span>营业时间：</span>
+							   <div class="carfixed_ctblr">
+								$!CafeteriaDetail.cdlOpenTime
+									<span>至</span>
+									$!CafeteriaDetail.cdlCloseTime
+								</div>
+						</div>
+						<div class="newfood_ctrbl">
+							<span class="newfood_ctrbll">推荐理由：</span>
+							  <div class="newfood_ctblr">
+								$!CafeteriaDetail.cdlReason
+							  </div>
+						</div>
+						<div class="carinfo_ctbl">
+							<span>网络设置:</span>
+							<div class="newfood_web">
+								$!CafeteriaDetail.cdlInternet
+							</div>
+						</div>
+						<div class="carinfo_ctbl">
+						<span>可同时用餐人数:</span>
+								$!CafeteriaDetail.cdlEatPeople &nbsp;人
+								
+				    	</div>
+						<div class="carinfo_ctbl">
+							<span>停车场:</span>
+							<div class="newfood_web">
+								$!CafeteriaDetail.cdlStopCar
+							</div>
+						</div>
+						<div class="newfood_ctrbl">
+							<span class="newfood_ctrbll">餐厅介绍：</span>
+							<div class="newfood_ctblr">
+								$!CafeteriaDetail.cdlIntroduce
+							</div>
+						</div>
+						<div class="newfood_ctrbl">
+							<span class="newfood_ctrbll">通知公告：</span>
+							<div class="newfood_ctblr">
+								$!CafeteriaDetail.cdlNotice
+							</div>
+						</div>
+						<div class="newfood_ctblc">
+							<span>汽车图片:</span>
+							<div class="newfood_ctblrc">
+								<img src="$staticRoot/images/htcar12.png">
+								<img src="$staticRoot/images/htcar12.png">
+								<img src="$staticRoot/images/htcar12.png">
+								<img src="$staticRoot/images/htcar12.png">
+							</div>
+						</div>
+						<div class="newfood_suptop">
+							<span>不在外网展示，仅供同行参考</span>
+							<div class="g_line">
+							</div>
+						</div>
+						<div class="carinfo_ctbl">
+							<span>餐厅业务:</span>
+							<div class="newfood_web">
+								$!CafeteriaDetail.cdlBusiness
+							</div>
+						</div>
+						<div class="carinfo_ctbl">
+							<span>最低起订早餐标准:</span>
+                               $!CafeteriaDetail.cdlOrderNorme 元/人起
+						</div>
+						<div class="carinfo_ctbl">
+							<span>最低起订正餐标准:</span>
+								 $!CafeteriaDetail.cdlOrderNormz 元/人起
+						</div>
+						<div class="carinfo_ctbl">
+							<span>可同时接单数量:</span>
+								$!CafeteriaDetail.cdlReceiveNum
+						</div>
+						 <div class="carinfo_ctbl">
+							<span></span>
+    						<div class="carinfo_ctblrbtn">
+    							<button  type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+    						</div>
+						</div>
+				   </div>
+               </div>
+           </form>
+       </div>
+		<script type="text/javascript"> 
+
+	//初始化省为北京市
+	var initProvinceId = 1;
+	//初始化市县
+	index.regionAll(initProvinceId,"select[name='cdlCity']","select[name='cdlCounty']");
+</script>

@@ -1,0 +1,31 @@
+<!--预定方式 -->
+<div class="newline">
+    <div class="newline_suptop">
+        <img src="$staticRoot/images/dd_ci_03.png">
+        <span>预订方式</span>
+        <div class="cb"></div>
+		<div class="g_line"></div>
+    </div>
+		<form method="post" id="form1">
+			<input type="hidden" name="id" value="$lineDetail.id"></input>
+			 <div style="clear:both;"></div>
+			<div class="newline_ctllal" style="float:left; width:75%;">
+				<span>预订方式：</span>
+                <div class="newline_ctllra">
+                    #foreach($item in $scheduled.keySet())
+        				<label class="w90"> 
+            				<input type="checkbox" class="validate[required] checkbox" name="ldlScheduled" value="$item" #if($erim.contains($!lineDetail.ldlScheduled,$item)) checked #end> $scheduled.get($item)
+        				</label>
+					#end<span style="color:red;margin-left:-10px;">*</span>
+				</div>
+            </div>
+            <div class="carinfo_ctbl">
+                <div class="carinfo_ctblrbtn pb80" style="width:425px;">
+                    <button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1', '$appRoot/line/detail/scheduled','$appRoot/line/detail/list')"> 提交</button>
+                    <button type="button" class="carinfo_qu" onclick="index.load(page.url);"> 返回</button>
+                </div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- /新增线路 -->

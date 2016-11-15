@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guiderecord">
+	
+	<sql id="sql_query">
+		<where>
+			1=1
+			<if test="gdlId != null and gdlId !=''"> and gdl_id = #{gdlId}</if>
+		</where>
+	</sql>
+	
+	<!-- 查询 -->
+	<select id="getListRcordByBean" resultType="guideRecordBean">
+		SELECT
+			id             AS id,
+			gdl_id         AS gdlId,
+			grd_remark     AS grdRemark,
+			grd_img1       AS grdImg1,
+			grd_img2       AS grdImg2,
+			grd_img3       AS grdImg3,
+			grd_createtime AS grdCreatetime
+		FROM
+			guide_record
+		WHERE
+			gdl_id = #{gdlId}	
+		ORDER BY
+			grd_createtime desc
+		LIMIT
+			5
+	</select>
+</mapper>

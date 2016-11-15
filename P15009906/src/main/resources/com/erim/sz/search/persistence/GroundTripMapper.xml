@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="groundtrip">
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="tripByTxiId" resultType="groundTriplBean">
+		SELECT
+			id,
+            tdl_id                AS tdlId,
+	        gdd_line			  AS gddLine,
+	        gdd_tool		      AS gddTool,
+	        gdd_am				  AS gddAm,
+	        gdd_lunch			  AS gddLunch,
+	        gdd_afternoon		  AS gddAfternoon,
+	        gdd_dinner			  AS gddDinner,
+	        gdd_supplement		  AS gddSupplement,
+	        gdd_img1			  AS gddImg1,
+	        gdd_img2			  AS gddImg2,
+	        gdd_lineup			  AS gddLineup
+		FROM
+			ground_trip
+	    WHERE 
+	        tdl_id = #{tdlId}
+	    
+	</select>
+	
+</mapper>

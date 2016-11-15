@@ -1,0 +1,257 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<script type="text/javascript"> 
+	
+	// 点击国内、国际港澳台时，国内国际相关选项的切换
+	$("input[name='tdlInland']").change(function() {
+		var inland = $("input[name='tdlInland']:checked").val();
+		if (inland == '02') {
+    		$('#county01').hide();
+    		$('#szd01').show();
+    		$('#szd02').hide();
+		} else {
+    		$('#szd01').hide();
+    		$('#szd02').show();
+		}
+	});
+	
+	// 点击港澳台国际,国家和城市的隐藏和切换
+	$("input[name='tdlExternal']").change(function() {
+		var external = $("input[name='tdlExternal']:checked").val();
+		if (external == '04') {
+			$('#county01').show();
+		} else {
+			$('#county01').hide();
+		}
+	});
+	
+	// 默认情况下，国家输入框是否显示
+	var external = $("input[name='tdlExternal']:checked").val();
+	if(external == '04') {
+		// 国家城市隐藏
+		$('#county01').show();
+	} else {
+		// 国家城市隐藏
+		$('#county01').hide();
+	}
+	
+	// 默认情况下，显示国内 或者 国际
+	var inland = $("input[name='tdlInland']:checked").val();
+	if(inland == '02') {
+		// 国内显示
+		$('#szd01').show();
+		// 国际港澳条隐藏
+		$('#szd02').hide();
+		var prov = $("select[name='tdlProvince']").val();
+		if(prov == '') {
+			regUtil.initProvince(0, 'tdlProvince', 'tdlCity', 'tdlCounty');
+		} else {
+			regUtil.initProvince(prov, 'tdlProvince','tdlCity','tdlCounty', '$!TexiDetail.tdlCity', '$!TexiDetail.tdlCounty');
+		}
+	} else if(inland == '01') {
+		//国内隐藏
+		$('#szd01').hide();
+		//国际港澳台显示
+		$('#szd02').show();
+		//初始化省市县
+		regUtil.initProvince(0,'tdlProvince','tdlCity','tdlCounty');
+	} else {
+		//国际港澳条隐藏
+		$('#szd02').hide();
+		//国家城市隐藏
+		$('#county01').hide();
+		var prov = $("select[name='tdlProvince']").val();
+		if(prov == '') {
+			regUtil.initProvince(0,'tdlProvince','tdlCity','tdlCounty');
+		} else {
+			regUtil.initProvince(prov, 'tdlProvince', 'tdlCity', 'tdlCounty', '$!TexiDetail.tdlCity', '$!TexiDetail.tdlCounty');
+		}
+	}
+	
+	/*
+    $(document).ready(function(){
+    	$("#zc_lx").change(function(){
+    		if($("#zc_lx").val()=="01")	{
+    			$("#zc_lx2").css("display","inline-block");
+    			$("#zc_lx22").css("display","none");
+    			$("#zc_lx3").css("display","inline-block");
+    		}
+    		if($("#zc_lx").val()=="02" || $("#zc_lx").val()=="03")	{
+    			$("#zc_lx22").css("display","inline-block");
+    			$("#zc_lx2").css("display","none");
+    			$("#zc_lx3").css("display","none");
+    		}
+    	})
+    })*/
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/ren.png" alt="同业资源租车" title="同业资源租车">同业资源租车<br></p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+		#* 
+		<div class="doadmin_topl">
+			<div class="doadmin_toplbox">
+				<span>所在区域：</span>
+				<label>
+					<input type="radio" name="tdlInland" #if($TexiDetail.tdlInland == '02') checked #end value="02" /> 国内
+				</label>
+                <label>
+                    <input type="radio" name="tdlInland" #if($TexiDetail.tdlInland == '01') checked #end value="01" /> 国际/港澳台
+				</label>
+            </div>
+		</div>
+		*#
+		<div class="doadmin_topl" style="margin-bottom:20px;">
+			<div class="doadmin_toplbox" id="szd01" style="width:500px;">
+				<span>所在城市：</span>
+				<div class="doadmin_toplbrb" style="width:350px;">
+                    <select name="tdlProvince" style="float:none;width:90px;">
+						<option value=""></option>
+    					#foreach($item in $provinces)
+                            <option value="$item.regionNo" #if($TexiDetail.tdlProvince == $item.regionNo) selected #end>$item.regionName</option>
+    					#end
+                    </select>
+					<em class="w20">省</em>
+					<select type="text" class="w90" name="tdlCity" style="float:none;width:90px;">
+					</select> 市
+					<select type="text" class="w90" name="tdlCounty" style="float:none;width:90px;">
+					</select> 区县
+				</div>
+			</div>	
+			<div class="doadmin_toplbox" id="szd02">
+				<span>所在城市：</span>
+				<div class="doadmin_toplbrb" style="width:300px;">
+    				<label>
+                        <input type="radio" name="tdlExternal" #if($TexiDetail.tdlExternal == '01') checked #end value="01" /> 香港&nbsp;
+					</label>
+					<label>
+						<input type="radio" name="tdlExternal" #if($TexiDetail.tdlExternal == '02') checked #end value="02" /> 澳门&nbsp;
+					</label>
+					<label>
+                        <input type="radio" name="tdlExternal" #if($TexiDetail.tdlExternal == '03') checked #end value="03" /> 台湾&nbsp;
+					</label>
+					<label>
+                        <input type="radio" name="tdlExternal" #if($TexiDetail.tdlExternal == '04') checked #end value="04" /> 国际&nbsp;
+    				</label>
+                </div>
+        	</div>
+			<div class="co_nationdiv" id="county01">
+				<span>国家:</span>
+				<input type="text" name="tdlForeign" value="$!TexiDetail.tdlForeign" style="width:120px;height:25px;">
+				<span>城市:</span>
+				<input type="text" name="tdlForeignCity" value="$!TexiDetail.tdlForeignCity" style="width:120px;height:25px">
+			</div>
+			<div class="doadmin_toplboxb" style="margin-left:-35px;">
+				<span style="font-weight:400">车型：</span>
+				<div class="doadmin_toplbrb">
+					<select style="width:150px;" name="tdlType" class="searchSelect">
+						<option value=""></option>
+                        #foreach($item in $models.keySet())
+							<option value="$item" #if($TexiDetail.tdlType == $item) selected #end>$models.get($item)</option>
+                        #end
+					</select>
+				</div>
+			</div>
+		</div>
+    	<div class="input_block clearfix mb20">
+    		<div class="input_right input_right_wauto" style="margin-left:45px;">
+    			<label class="ml10" style="margin-right:3px;">产品编码： </label>
+				<input type="text" value="$!TexiDetail.tdlCode" class="w80" name="tdlCode">
+				<!-- 
+				<label class="ml10" style="margin-right:3px;">租车日期： </label>
+    			<span class="tishi_box w110" name="" onClick="WdatePicker()" style="position:relative;">
+    				<input type="text" class="w80" style="width:108px;background:url($staticRoot/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer">
+				</span>
+				-->
+    			<label class="ml35">乘坐人数：</label>
+    			<select  name="tdlNum" class="w130">
+					<option value=""></option>
+                    #foreach($item in $textzuo)
+						<option #if($item.codeKey == $TexiDetail.tdlNum) selected #end value="$item.codeKey">$item.codeValue</option>
+                    #end
+    			</select>
+				<label class="ml35">档次： </label>
+    			<select name="tdlTexttype" class="w130">
+					<option value=""></option>
+                    #foreach($item in $texitype.keySet())
+						<option #if($item == $TexiDetail.tdlTexttype) selected #end value="$item">$texitype.get($item)</option>
+                    #end
+    			</select>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="input_right input_right_wauto" style="margin-left:900px;margin-top:-50px;">
+				<!--
+    			<label class="ml10" style="margin-right:3px;">租车类型：</label>
+    			<select id="zc_lx" class="w130">
+    				 <option></option>
+    				 <option value="01">接送</option>
+                     <option value="02">包车</option>
+    				 <option value="03">自驾</option>
+    			</select>
+    			<select id="zc_lx2" class="w130 ml35" style="display:none;">
+					<option class="js_con"></option>
+    				 <option class="js_con">接机</option>
+                     <option class="js_con">送机</option>
+    				 <option class="js_con">接站</option>
+                     <option class="js_con">送站</option>
+    				 <option class="js_con">固定接送</option>
+    			</select>
+    			<select id="zc_lx22" class="w130 ml35" style="display:none;">
+					 <option></option>
+    				 <option>全天</option>
+                     <option>半天</option>
+    			</select>
+    			<select id="zc_lx3" class="w130 ml35" style="display:none;">
+					 <option></option>
+    				 <option>桥东-火车站</option>
+    			</select>
+				-->
+    			<button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/texi/detail/sametown');">查 询</button>
+            </div>
+        </div>
+	</form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>产品编码</td>
+					<td>所在地区</td>
+					<td>汽车品牌/名称</td>
+					<td>汽车档次</td>
+					<td>车型</td>
+					<td>价格/数量</td>
+					<td>租车类型</td>
+					<td>乘坐人数</td>
+					<td>公司/品牌名称</td>
+					<td>联系人/电话</td>
+					<td>在线交流</td>
+					<!-- 
+					<td>在线预定</td>
+					-->
+				</tr>
+			</thead>
+			<tbody>
+			#foreach($item in $texiList)
+    				<tr>
+    					<td>$!item.tdlCode</td>
+    					<td>$!item.tdlCity</td>
+    					<td><a href="$webRoot/texi/carxiang/$item.id" target="_blank" title="点击查看外网展示">$!item.tdlBrand$item.tdlName</a></td>
+    					<td>$!item.tdlTexttype</td>
+    					<td>$!item.tdlType</td>
+						<td>
+							<a href="javascript:price.sametown('$appRoot/texi/price/getIsApply?id=$!item.id','$appRoot/texi/price/showPage?portal=01&id=$!item.id');">查看量/价</a>
+						</td>
+						<td>$!item.applyType</td>
+    					<td>$!item.tdlNum</td>
+    					<td>$!item.cpyName / $!item.cpyBrand</td>
+    					<td>$!item.ccpName / $!item.ccpTelephone</td>
+						<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+						<!--<td><a href="javascript:index.load('$appRoot/texi/order/insert')">预订</a></td>-->
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

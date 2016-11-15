@@ -1,0 +1,381 @@
+	<script type="text/javascript">
+		   //省市县级联选择
+	index.initProvince(110000,'tdlProvince','tdlCity','tdlCounty','','');
+	$('#disp01').hide();
+	$('#disp02').hide();
+	$('#disp03').hide();
+	$('#disp04').hide();
+	$('#disp05').hide();
+	$('#disp06').hide();
+	$('#disp07').hide();
+	$('#disp$!texiDetail.allTexiIdType').show();
+	
+	//获取国内国际的值
+	var a = $("input[name='tdlInland']:checked").val();
+	//为国内时
+	if(a == '02'){
+		$('#dq_gn_block').show();//国内显示
+		$('#dq_gj_block').hide();//国际隐藏
+		var prive = $("select[name='tdlProvince']").val();//获取省的值
+		var city = $("input[name='city']").val();//获取市的值
+		var county = $("input[name='county']").val();//获取县的值
+		//初始化省市县
+		if(prive == ''){
+			//初始化省市县
+			index.initProvince(110000,'tdlProvince','tdlCity','tdlCounty');
+		}else{
+			//初始化省市县
+			index.initProvince(prive,'tdlProvince','tdlCity','tdlCounty',city,county);
+		}
+	}else if(a == '01'){
+		$('#dq_gn_block').hide();//国内隐藏
+		$('#dq_gj_block').show();//国际港澳台显示
+		//初始化省市县
+		index.initProvince(110000,'tdlProvince','tdlCity','tdlCounty');
+	}else{
+		$("input[name='tdlInland']").get(0).checked=true;  
+		$('#dq_gn_block').show();//国内隐藏
+		$('#dq_gj_block').hide();//国际隐藏
+		var prive = $("select[name='tdlProvince']").val();//获取省的值
+		var city = $("input[name='city']").val();//获取市的值
+		var county = $("input[name='county']").val();//获取县的值
+		//初始化省市县
+		if(prive == ''){
+			//初始化省市县
+			index.initProvince(110000,'tdlProvince','tdlCity','tdlCounty');
+		}else{
+			//初始化省市县
+			index.initProvince(prive,'tdlProvince','tdlCity','tdlCounty',city,county);
+		}
+	}
+	//是否为国际港澳台
+	var c = $("input[name='tdlExternal']:checked").val();
+	if(c == '04'){
+		$('#gj_block').show();//国家城市隐藏
+	}else{
+		$('#gj_block').hide();//国家城市隐藏
+	}
+   </script>
+   <!--租车-->
+	<form method="post" id="form1" class="mb10" action ="$appRoot/search/texi/list">
+    	<div class="search_block clearfix" style="height:auto;">
+				<div class="input_bg">
+					<div class="input_block clearfix" style="margin-bottom:0;">
+						<div class="input_right input_right_wauto">
+							<label class="ml15 pl10">地区：</label>
+                            <label><input type="radio" id="dq_gn" name="tdlInland" value="02" #if($texiDetail.tdlInland == '02') checked #end>国内</label>
+							<label><input type="radio" id="dq_gj" name="tdlInland" value="01" #if($texiDetail.tdlInland == '01') checked #end>国际/港澳台 </label>
+                            <span id="dq_gn_block" class="ml15"  style="display:none; ">
+								<select class="w80" name="tdlProvince">
+									<option value=""></option>
+									#foreach($item in $provinces)
+        								<option value="$item.regionNo" #if($texiDetail.tdlProvince == $item.regionNo) selected #end>$item.regionName</option> 
+        							#end
+								</select> 省
+								<select class="w80" name="tdlCity">
+								</select> 市
+								<select class="w80" name="tdlCounty">
+								</select> 区/县
+							</span>
+							<span id="dq_gj_block" class="ml15" style="display:none;">	
+								<label>
+									<input type="radio" name="tdlExternal" value="01" #if($texiDetail.tdlExternal == '01') checked #end> 香港 
+								</label>
+								<label>
+									<input type="radio" name="tdlExternal" value="02" #if($texiDetail.tdlExternal == '02') checked #end> 澳门
+								</label>
+								<label>
+									<input type="radio" name="tdlExternal" value="03" #if($texiDetail.tdlExternal == '03') checked #end> 台湾 
+								</label>
+								<label>
+									<input id="gj" type="radio" name="tdlExternal" value="04" #if($texiDetail.tdlExternal == '04') checked #end> 国际 
+								</label>
+								<span id="gj_block" style="display:none;">
+									<input  class="w80" name="tdlForeign" value="$!texiDetail.tdlForeign">   
+									<label class="ml10 pl10">城市：</label>
+									<input id="gj_block" class="w80" name="tdlForeignCity" value="$!texiDetail.tdlForeignCity">
+								</span>
+							</span>
+							<div class="cb mb5"></div>
+							<label class="ml25 pl10 bx">产品编码：</label>
+								<input class="w90" name="tdlCode" value="$!texiDetail.tdlCode">
+							<!--
+							<label class="ml35 pl10 bx">租车日期：</label>
+								<input class="w90" name="" value="" onclick="WdatePicker({minDate:'%y-%M-%d'})">
+							-->
+							<span class="red_a ml25" type="button" onclick="index.searchform('form1','$appRoot/search/texi/list');">查询</span>
+						</div>
+					</div>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont clearfix" style="padding-left:76px;">
+						<li class="first" style="width:55px;"><span class="span_tit">租车类型</span></li>
+						<li><a class="smenu-item item-hover #if("" == $!texiDetail.allTexiIdType || ! $texiDetail.allTexiIdType)  on  #end" onclick="$('#allTexiIdType').attr('value','');">不限</a></li>
+					
+						<li><a class="smenu-item item-hover #if("01" == $!texiDetail.allTexiIdType)   on  #end" onclick="$('#allTexiIdType').attr('value','01');">接机<em class="icon_img"></em></a></li>
+						<li><a class="smenu-item item-hover #if("02" == $!texiDetail.allTexiIdType)   on  #end" onclick="$('#allTexiIdType').attr('value','02');">送机<em class="icon_img"></em></a></li>
+						<li><a class="smenu-item item-hover #if("03" == $!texiDetail.allTexiIdType)   on  #end" onclick="$('#allTexiIdType').attr('value','03');">接站<em class="icon_img"></em></a></li>
+						<li><a class="smenu-item item-hover #if("04" == $!texiDetail.allTexiIdType)   on  #end" onclick="$('#allTexiIdType').attr('value','04');">送站<em class="icon_img"></em></a></li>
+						<li><a class="smenu-item item-hover #if("05" == $!texiDetail.allTexiIdType)   on  #end" onclick="$('#allTexiIdType').attr('value','05');">固定接送<em class="icon_img"></em></a></li>
+						<li><a class="smenu-item item-hover #if("06" == $!texiDetail.allTexiIdType)   on  #end" onclick="$('#allTexiIdType').attr('value','06');">包车<em class="icon_img"></em></a></li>
+						<li><a class="smenu-item item-hover #if("07" == $!texiDetail.allTexiIdType )  on  #end" onclick="$('#allTexiIdType').attr('value','07');">自驾<em class="icon_img"></em></a></li>
+										
+					</ul>
+				</div>
+				<div class="show_block">
+					<div id="disp01" style="display:block;"><!--接机-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml25 pl10">机场：</label>
+    							<input class="w130" name="gdlStart" value="$!texiDetail.gdlStart">
+    							<label class="ml25 pl10">目的地：</label>
+    							<input class="w130" name="gdlEnd" value="$!texiDetail.gdlEnd">
+    							<label class="ml25 pl10" >用车日期：</label>
+    							<input class="w130" name="tspDate1" value="$!texiDetail.tspDate1" onclick="WdatePicker({minDate:'%y-%M-%d'})">
+    						</span>
+						</span>
+					</div>
+					<div id="disp02"><!--送机-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml25 pl10">出发地：</label>
+    							<input class="w130" name="gdlMachine" value="$!texiDetail.gdlMachine" >
+    							<label class="ml25 pl10" >机场：</label>
+    							<input class="w130" name="gdlMachineback" value="$!texiDetail.gdlMachineback">
+    							<label class="ml25 pl10">用车日期：</label>
+    							<input class="w130" name="tspDate2" value="$!texiDetail.tspDate2" onclick="WdatePicker({minDate:'%y-%M-%d'})">
+    						</span>
+						</span>
+					</div>
+					<div id="disp03"><!--接站-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml25 pl10">车站：</label>
+    							<input class="w130" name="gdlStation" value="$!texiDetail.gdlStation">
+    							<label class="ml25 pl10">目的地：</label>
+    							<input class="w130" name="gdlStationup" value="$!texiDetail.gdlStationup">
+    							<label class="ml25 pl10">用车日期：</label>
+    							<input class="w130" name="tspDate3" value="$!texiDetail.tspDate3"  onclick="WdatePicker({minDate:'%y-%M-%d'})">
+    						</span>
+						</span>
+					</div>
+					<div id="disp04"><!--送站-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml25 pl10">出发地：</label>
+    							<input class="w130" name="gdlStationback" value="$!texiDetail.gdlStationback">
+    							<label class="ml25 pl10">车站：</label>
+    							<input class="w130" name="gdlStationnup" value="$!texiDetail.gdlStationnup" >
+    							<label class="ml25 pl10">用车日期：</label>
+    							<input class="w130" name="tspDate4" value="$!texiDetail.tspDate4" onclick="WdatePicker({minDate:'%y-%M-%d'})">
+    						</span>
+						</span>
+					</div>
+					<div id="disp05"><!--固定接送-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml25 pl10">出发地：</label>
+    							<input class="w130" name="gdlStartcity" value="$!texiDetail.gdlStartcity">
+    							<label class="ml25 pl10">目的地：</label>
+    							<input class="w130" name="gdlEndcity" value="$!texiDetail.gdlEndcity">
+    							<label class="ml25 pl10">用车日期：</label>
+    							<input class="w130" name="tspDate5" value="$!texiDetail.tspDate5"  onclick="WdatePicker({minDate:'%y-%M-%d'})">
+    						</span>
+						</span>
+					</div>
+					<div id="disp06"><!--包车-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml10 pl10">用车日期：</label>
+    							<input class="w110" name="tcpDate1" value="$!texiDetail.tcpDate1" onclick="WdatePicker({minDate:'%y-%M-%d'})">
+								
+                               <!--</a></li>-->
+    						</span>
+    					</span>
+					</div>
+					<div id="disp07"><!--自驾-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml25 pl10" name="zjlTakePlaceVo" value="$!texiDetail.zjlTakePlaceVo"  >取车地点：</label>
+    							<input class="w130">
+    							<label class="ml25 pl10">还车地点：</label>
+    							<input class="w130" name="zjlBackPlaceVo" value="$!texiDetail.zjlBackPlaceVo" >
+								<label class="ml25 pl10" >用车日期：</label>
+    							<input class="w130" name="tdpDate1" value="$!texiDetail.tdpDate1" onclick="WdatePicker({minDate:'%y-%M-%d'})" >
+								<label class="ml10 pl10 mr10">是否异地还车:</label>
+								<input name="tdlHuanche" value="02" type="radio" class="mr10" style="border:none;" #if($texiDetail.tdlHuanche == '02') checked #end>支持
+								<input name="tdlHuanche" value="01" type="radio" class="mr10 ml15" style="border:none;" #if($texiDetail.tdlHuanche == '01') checked #end>不支持	
+									
+    						</span>
+    					</span>
+					</div>
+				</div>
+                <div class="cb"></div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">选择车型</span></li>
+						<li class="second bx">
+							<a class="smenu-item item-hover #if($erim.isEmpty($!texiDetail.tdlType))  on  #end" onclick="$('#tdlType').attr('value',''); index.searchform('form1','$appRoot/search/texi/list');">不限</a>
+						</li>		
+						<li>
+							#foreach($item in $models.keySet())
+							   <a class="smenu-item item-hover #if($!texiDetail.tdlType == $item) on #end" id="a_level_$item.id" onclick="$('#tdlType').attr('value','$item'); index.searchform('form1','$appRoot/search/texi/list');">$models.get($item)</a>
+            				#end
+						</li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				#* 
+				<div class="select_block">
+					<ul class="select_cont clearfix">
+						<li class="first"><span class="span_tit">乘车人数</span></li>
+						<li class="second bx"><a class="on">不限</a></li>
+						<li><a>4人</a></li>
+						<li><a>6人</a></li>
+						<li><a>8人</a></li>
+						<li><a>10人</a></li>
+						<li><a>12人</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				*#
+				<div class="select_block">
+					<ul class="select_cont clearfix">
+						<li class="first"><span class="span_tit">租车档次</span></li>
+						<li class="second bx"><a class="smenu-item item-hover #if("" == $!texiDetail.tdlTexttype || ! $texiDetail.tdlTexttype)  on  #end" onclick="$('#tdlTexttype').attr('value',''); index.searchform('form1','$appRoot/search/texi/list');">不限</a></li>
+						<li>
+							#foreach($item in $texitype.keySet())
+							   <a class="smenu-item item-hover #if($!texiDetail.tdlTexttype == $item) on #end" id="a_level_$item.id" onclick="$('#tdlTexttype').attr('value','$item'); index.searchform('form1','$appRoot/search/texi/list');">$texitype.get($item)</a>
+            				#end
+						</li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+		</div>
+	<!--<a class="big_more_a" >更多查询项</a>-->
+	<input type="hidden" name="tdlType" id="tdlType" value="$!texiDetail.tdlType"/>
+	<input type="hidden" name="tdlTexttype" id="tdlTexttype" value="$!texiDetail.tdlTexttype"/>
+	<input type="hidden" name="city" value="$!texiDetail.tdlCity" />
+	<input type="hidden" name="county" value="$!texiDetail.tdlCounty" />
+	<!--租车类型选项，01-05表示接机到自驾，见字典，06表示包车，07表示自驾-->
+	<input type="hidden" name="allTexiIdType" id="allTexiIdType" value="$!texiDetail.allTexiIdType" />
+	
+	
+</form>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th style="min-width:80px">产品编码</th>
+    			<th style="min-width:75px">所在城市</th>
+    			<th style="min-width:150px">品牌/名称</th>
+    			<th style="min-width:75px">汽车档次</th>
+    			<th style="min-width:75px">车型</th>
+    			<th style="min-width:200px">公司/品牌</th>
+               <!-- <th>负责人/电话</th> -->
+                <th style="min-width:100px">计调/电话</th>
+                <th style="min-width:80px">在线交谈</th>
+				<th style="min-width:75px">预订</th>
+			</tr>
+			#foreach($item in $texiList)
+				<tr>
+                  	<td>$!item.tdlCode</td>
+					<td>#vregion($!item.tdlCity)  $!item.tdlForeignCity #vtextarray($!item.tdlExternal,'C108')</td>
+					<!--<td><a href="$webRoot/texi/carxiang/$item.id">$!item.tdlBrand$!item.tdlName</a></td>-->
+					<td><a class="clistctma_ctl" href="javascript:void(0);">$!item.tdlBrand $!item.tdlName</a></td>
+					<td>#vtext($!item.tdlTexttype,'C056')</td>
+					<td>#vtext($!item.tdlType,'C018')</td>
+					<td>$!item.cpyName / $!item.cpyBrand</td>
+    				<td>$!item.cbsOperator / $!item.cbsOperatorPhone</td>
+                    <td>
+    					#if($erim.isNotEmpty($!item.ccpQq))
+    						<a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.ccpQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a>
+    					#end
+    				</td>
+					<!--<td><a href="javascript:index.load('$appRoot/reservation/texi/page')">预订</a></td>-->
+					<td>
+						#if($item.listVTexiCarBean.size()>0)
+							<a class="chakan_a" href="javascript:void(0);">查看</a>
+						#else
+							无类型
+						#end
+					</td>
+				</tr>
+				<tr style="display:none;" tid="tr_detail">
+    				<td colspan = '9' style='height:0;'>
+    					<div class='chakan_block1'>
+    						<div class="chakan_jdxx clearfix">
+                        	 	<div class="b_div_h35">
+                                    <ul style="margin:0px;padding:0px;clear:both">
+                                        <li><span class="mr20" style="font-size:16px;">$!item.tdlName</span><span class=" mr20">#vtext($!item.tdlTexttype,'C056')</span></li>
+                                    </ul>
+                                    <a class="close_a" href="javascript:void(0);"></a>
+                                </div>
+                                <div class="b_div_h270 pl24">
+                        			<br>
+										#if($erim.isNotEmpty($!item.tdlType))
+                                    <p><span>车型：</span>#vtext($!item.tdlType,'C018')</p>
+										#end
+										#if($erim.isNotEmpty($!item.tdlNum))
+                                    <p><span>乘坐人数：</span>#vtext($!item.tdlNum,'C065')</p>
+									#end
+										#if($erim.isNotEmpty($!item.tdlTexttype))
+                        			<p><span>汽车档次：</span>#vtext($!item.tdlTexttype,'C056')</p>
+									#end
+										#if($erim.isNotEmpty($!item.tdlTextpail))
+                        			<p><span>汽车排量：</span>#vtext($!item.tdlTextpail,'C060')</p>
+									#end
+										#if($erim.isNotEmpty($!item.tdlTextgear))
+                                    <p><span>手自档：</span>#vtext($!item.tdlTextgear,'C057')</p>
+									#end
+                                    ##<p><span>如果是自驾：添加 “可否异地还车”</span>是</p>
+                        			<br>
+                                </div>
+                            </div>
+    					</div>	
+    				</td>
+    			 </tr>
+    			 <tr tid="tr_list" style="display:none;">
+    				<td colspan = '9'>
+    					<div class='chakan_block'>
+    						<div class="chakan_cont clearfix">
+                                <table class="fl_list_g" cellpadding="0" cellspacing="0">
+                    				<tr class="fl_list_t">
+                                    	<td class="w100">类型</td>
+                    					<td class="w130">基本信息</td>
+                    					<td class="w130">费用说明</td>
+                    					<td class="w130">服务说明</td>
+                    					<td colspan="6" class="date_td">
+											<img width="10" class="first" cid="-1" src="$staticRoot/images/aas_03.png" onclick="search.fiveDate('span_month_${velocityCount}','${item.allTexiIdType}','$!{item.id}',$(this).attr('cid'),'TEXI');">
+    										<span class="date_cont" date="$nowDate" id="span_month_$velocityCount"></span>
+    										<script>
+    											search.fiveDate('span_month_${velocityCount}','${item.allTexiIdType}','$!{item.id}',0,'TEXI');
+    										</script>
+    										<img width="10" class="last" cid="1" src="$staticRoot/images/aas_05.png" onclick="search.fiveDate('span_month_${velocityCount}','${item.allTexiIdType}','$!{item.id}',$(this).attr('cid'),'TEXI');">
+										</td>
+                    				</tr>
+									#foreach($vtexi in $item.listVTexiCarBean)
+                        				<tr>
+                                        	<td class="w100">$vtexi.cvalue</td>
+                        					<td class="w130"><span title="$!vtexi.remark">$erim.subString($!vtexi.remark,20)</span></td>
+                        					<td class="w130"><span title="$!vtexi.money">$erim.subString($!vtexi.money,20)</span></td>
+                        					<td class="w130"><span title="$!vtexi.content">$erim.subString($!vtexi.content,20)</span></td>
+                        					<td class="w90" id="w90_$!{item.id}_$!{vtexi.id}_$!{vtexi.ntype}_0"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{vtexi.id}_$!{vtexi.ntype}_1"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{vtexi.id}_$!{vtexi.ntype}_2"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{vtexi.id}_$!{vtexi.ntype}_3"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{vtexi.id}_$!{vtexi.ntype}_4"></td>
+    										<td class="w90" id="w90_$!{item.id}_$!{vtexi.id}_$!{vtexi.ntype}_5"></td>
+                        				</tr>
+									#end
+                                </table>              
+                    			<a class="a_zhifu" href="#">预订</a><br><br><br>
+                  		  </div>
+    					</div>
+    				</td>
+    			 </tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="managementmaterial">
+	
+	<!-- 插入数组 -->
+	<insert id="insertListMaterial">
+		INSERT INTO
+			management_material
+		(
+			cpy_id,
+			mdl_id,
+			mml_material,
+			mml_know,
+			mml_text,
+			mml_img,
+			mml_createtime,
+			mml_ntype
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+				#{item.cpyId},
+				#{item.mdlId},
+				#{item.mmlMaterial},
+				#{item.mmlKnow},
+				#{item.mmlText},
+				#{item.mmlImg},
+				#{item.mmlCreatetime},
+				#{item.mmlNtype}
+			)
+		</foreach>
+	</insert>
+	
+	<!-- 查询 -->
+	<select id="selectListByMdlId" resultType="managementMaterialBean">
+		SELECT
+			id             AS id,
+			cpy_id         AS cpyId,
+			mdl_id         AS mdlId,
+			mml_material   AS mmlMaterial,
+			mml_know       AS mmlKnow,
+			mml_text       AS mmlText,
+			mml_img        AS mmlImg,
+			mml_createtime AS mmlCreatetime,
+			mml_ntype      AS mmlNtype
+		FROM
+			management_material
+		WHERE
+			mdl_id = #{mdlId}
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		INSERT INTO
+			management_material
+		(
+			cpy_id,
+			mdl_id,
+			mml_material,
+			mml_know,
+			mml_text,
+			mml_img,
+			mml_createtime,
+			mml_ntype
+		)
+		VALUES
+		(
+			#{cpyId},
+			#{mdlId},
+			#{mmlMaterial},
+			#{mmlKnow},
+			#{mmlText},
+			#{mmlImg},
+			#{mmlCreatetime},
+			#{mmlNtype}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			management_material
+		SET
+			mdl_id = #{mdlId},
+			mml_material = #{mmlMaterial},
+			mml_know = #{mmlKnow},
+			mml_text = #{mmlText},
+			mml_img = #{mmlImg},
+			mml_ntype = #{mmlNtype}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 删除材料 -->
+	<delete id="deleteById">
+		DELETE FROM
+			management_material
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>

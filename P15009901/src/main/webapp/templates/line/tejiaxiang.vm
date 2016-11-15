@@ -1,0 +1,495 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>线路详情_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+<script src="$staticRoot/js/wxy_pop.js" type="text/javascript" language="javascript"></script>
+</head>
+<body>
+  <div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+		<!--dwp html start-->
+        <div class="g_cont">
+			<div class="g_crumbs">
+                <a href="$appRoot/$cpyno/jingxuan.html">热门线路</a>&gt;$!line.ldlName
+            </div>
+        	<h1 class="g_title_1" style="margin-top:-10px;">$!line.ldlName</h1>
+                  	
+        	<div class="imgshow_box">
+				<div id="tFocus">
+					<div id="tbox">
+						<div class="prev" id="prev"></div>
+						<div class="next" id="next"></div>
+						<a class="mark_left" href="javascript:;" id="markLeft"></a>
+						<a class="mark_right" href="javascript:;" id="markRight"></a>
+						<ul id="tFocus-pic">
+							#if($erim.isNotEmpty($!line.ldlPicture))
+								<li><a href="#" target="_blank"><img src="$staticFileRes$!line.ldlPicture" alt="" /></a></li>
+							#else
+								<li><a href="#" target="_blank"><img src="$staticRoot/images/isnull.png" alt="" /></a></li>
+							#end
+							
+							#foreach($item in $imglist)
+								#if($erim.isNotEmpty($item))
+								<li><a href="#" target="_blank"><img src="$staticFileRes$!item" alt="" /></a></li>
+								#end
+							#end
+						</ul>
+					</div>
+					<div id="tFocusBtn">
+						<a href="javascript:void(0);" id="tFocus-leftbtn"></a>
+						<div id="tFocus-btn">
+							<ul>
+								#if($erim.isNotEmpty($!line.ldlPicture))
+									<li class="active"><img src="$staticFileRes$!line.ldlPicture" alt="" /></li>
+								#else
+									<li class="active"><img src="$staticRoot/images/isnull.png" alt="" /></li>
+								#end
+								#foreach($item in $imglist)
+									#if($erim.isNotEmpty($item))
+										<li><img src="$staticFileRes$!item" alt="" /></li>
+									#end
+								#end
+							</ul>
+						</div>
+						<a href="javascript:void(0);" id="tFocus-rightbtn"></a>
+					</div>
+				</div>
+				<div class="box_cb mb10"></div>
+				<!-- 量价 -->
+				<div class="line_open_price">
+                </div>
+            </div>
+            <div class="date_box">
+				<div class="box_scoll">
+					<span class="wxy_span_num"><strong>出发城市：</strong></span>
+					<span class="wxy_span_num"><strong>
+    					#if($!line.ldlInternation == '2')
+    						#if($!line.ldlCountylocation == '01')
+								香港
+							#elseif($!line.ldlCountylocation == '02')
+								澳门
+							#elseif($!line.ldlCountylocation == '03')
+								台湾
+							#else
+								$!line.ldlDeparturecity
+    						#end
+    					#else
+                           $!line.ldlCity
+    					#end
+					</strong></span>
+					<span class="wxy_span_num b_ml30">产品编码：</span>
+					<span class="wxy_span_num b_fz12">$!line.ldlCode</span>
+                    <a class="download b_download_a" href="$appRoot/$cpyno/line/detail/exportWord?id=$!line.id" title="">下载文本行程</a>
+					<br clear="left">
+					<div class="box_cb mb10"></div>
+					<div class="wxy_div_dotted">
+						<label class="wxy_lab"><span class="wxy_span_small">￥</span> <span class="wxy_span_money">$!lineprice.lpeRetailAdult</span>元
+							<div class="money-hide">
+								成人价：<font color="red" font-size="14px;">￥$!lineprice.lpeRetailAdult</font>元
+								#if($erim.isNotEmpty($!lineprice.lpeRetailChild))
+                                    <br>儿童价：<font color="red" font-size="14px;">￥$!lineprice.lpeRetailChild</font>元
+								#end
+								#if($!lineprice.lpeIsUpgrade == '01')
+									<br>升级服务：不可升级
+								#elseif($!lineprice.lpeIsUpgrade == '02' && $!lineprice.lpeUpgradeCont != '')
+                                    <br>可升级至 ：$!lineprice.lpeUpgradeCont  &nbsp;&nbsp;加：<font color="red" font-size="14px;">$!lineprice.lpeUpgradeAdult</font>元
+								#end
+								#if($erim.isNotEmpty($!lineprice.lpeSinglePrice))
+                                    <br>单房差：<font color="red" font-size="14px;">￥$!lineprice.lpeSinglePrice</font>元
+								#end
+                            </div>
+                        </label>						
+
+						
+						<a href="#" class="wxy_a_show"><span class="wxy_round">?</span>起价说明
+						<div class="wxy_a_hide">
+							本起价是可选出发日期中，按双人出行共住一间房核算的最低单人价格。产品价格会根据您所选择的出行日期、出行人数、入住酒店房型航班或交通以及所选附加服务的不同而有所差别
+						</div>
+						</a>
+					</div>
+					<br clear="left">
+				<!--	<div class="box_cb mb10"></div>
+					<dl class="wxy_dl_hd">
+						<dt>促销活动:</dt><dd><span>1.网站下单满8000返800(仅成人、儿童可享)</span><span>2.10人以上报团每人返1000元(仅有成人可享)</span><span>3.提前15天预订返300元</span></dd>
+					</dl>-->
+					<div class="box_cb mb10"></div>
+					<dl class="wxy_dl_cpts">
+						<dt>产品标准:</dt>
+						<dd><span>$!line.ldlProductStandard</span></dd>
+					</dl>
+					<div class="box_cb mb10"></div>
+					<dl class="wxy_dl_cpts">
+						<dt>产品形态:</dt>
+						<dd><span>$!line.ldlProductForm</span></dd>
+					</dl>
+					<div class="box_cb mb10"></div>
+					<dl class="list_1">
+						<dt>产品特色:</dt>
+						<dd style="width:425px;margin-top:-10px;">
+						#foreach($item in $ldlFeature)
+							<span style="border: 1px solid #ccc;background:#fff;color:#323232;margin-top:10px;">
+								$item 
+							</span>  
+						#end
+						</dd>	
+					</dl>
+					<!--是否属于学生活动 02：是 01：否-->
+					#if($!line.ldlYesno == '02' )
+						#if($erim.isNotEmpty($!ldlGame) || $erim.isNotEmpty($!ldlAddGame))
+    					<div class="box_cb mb10"></div>
+    					<dl class="list_1">
+    						<dt>学生活动:</dt>
+    						<dd style="width:425px;margin-top:-10px;">
+        						#if($erim.isNotEmpty($!ldlGame))
+    								#foreach($item in $ldlGame)
+    									<span style="border: 1px solid #ccc;background:#fff;color:#323232;margin-top:10px;">
+    									$item
+    									</span>
+    								#end
+                    				#foreach($item in $ldlAddGame)
+    									<span style="border: 1px solid #ccc;background:#fff;color:#323232;margin-top:10px;">
+    									$item
+    									</span>
+    								#end
+                    			#end
+    						</dd>	
+    					</dl>
+    					#end
+					#else
+						#if($erim.isNotEmpty($!ldlProType1) || $erim.isNotEmpty($!ldlProType2))
+    					<div class="box_cb mb10"></div>
+    					<dl class="list_1">
+    						<dt>产品主题:</dt>
+    						<dd style="width:425px;margin-top:-10px;">
+        						#if($erim.isNotEmpty($!ldlProType1))
+    								#foreach($item in $ldlProType1)
+    									<span style="border: 1px solid #ccc;background:#fff;color:#323232;margin-top:10px;">
+    									$item
+    									</span>
+    								#end
+                    				#foreach($item in $ldlProType2)
+    									<span style="border: 1px solid #ccc;background:#fff;color:#323232;margin-top:10px;">
+    									$item
+    									</span>
+    								#end
+                    			#end
+    						</dd>	
+    					</dl>
+    					#end
+					#end
+					
+					<div class="box_cb mb10"></div>
+					<dl class="wxy_dl_cpts">
+						<dt>交通方式:</dt>
+                        <dd>去程-#vtext($!line.ldlBigTraffic,'C115')&nbsp;&nbsp;</dd>
+						<dd>返程-#vtext($!line.ldlBigTraffic1,'C115')</dd>
+					</dl>
+					<div class="box_cb mb10"></div>
+					<dl class="wxy_dl_cpts">
+						<dt>客人构成:</dt>
+                        <dd>#vtext($!line.ldlGuest,'C110')</dd>
+					</dl>
+					<div class="box_cb mb10"></div>
+					<dl class="list_1">
+						<dt>主要景点:</dt>
+						<dd>
+							#foreach($item in $ldlAttraction)
+							<span>
+								$item 
+							</span>  
+							#end
+							&gt;<a href="#more">[显示详情]</a>
+						</dd>				
+					</dl>
+					<div class="box_cb mb10"></div>
+					#if($erim.isNotEmpty($!line.ldlRecommend))
+    					<div class="wxy_div_cpjl">
+    						<h1><img src="$staticRoot/images/btn_hand.png">产品经理推荐：</h1>
+    						<div class="box_cb mb10"></div>
+    						<pre><span class="wxy_span_cpjlt">$!line.ldlRecommend</span></pre>
+    					</div>
+					#end
+				</div>
+				<div class="box_cb mb10"></div>
+                <p class="tel_p"><img class="wxy_img_phone" src="$staticRoot/images/btn_phone.png" title="" alt="">贵宾热线<strong>$!mallWeb.webKh</strong><a href="javascript:void(0);" onclick="ordertips();" title="">立即预订</a></p>
+            </div>
+			<div class="box_cb mb20"></div>
+			  <div style="line-height:30px;font-size:14px;width:1198px;">
+				
+					成人价：<font font-size="14px;" color="red" id="adultP">￥$!lineprice.lpeRetailAdult元</font>
+    				<span id="child">&nbsp; 儿童价：
+    					<font font-size="14px;" color="red" id="childP">
+    						#if($erim.isNotEmpty($!lineprice.lpeRetailChild))
+    							￥$!lineprice.lpeRetailChild元
+    						#else  无
+    						#end
+    					</font>
+    				</span>
+    				<span id="shengji">&nbsp; 升级服务：
+    					<font font-size="14px;" color="red" id="shengjiP">
+    						#if($!lineprice.lpeIsUpgrade == '01')
+    							不可升级
+    						#elseif($!lineprice.lpeIsUpgrade == '02' && $!lineprice.lpeUpgradeCont != '')
+    							可升级至 ：$!lineprice.lpeUpgradeCont  &nbsp;&nbsp;加：￥$!lineprice.lpeUpgradeAdult元
+    						#else
+								无
+							#end
+    					</font>
+    				</span>
+    				<span id="danfangcha">&nbsp; 单房差：
+    					<font font-size="14px;" color="red" id="danfangchaP">
+    						#if($erim.isNotEmpty($!lineprice.lpeSinglePrice))
+    							￥$!lineprice.lpeSinglePrice元  $!lineprice.lpeSingleShow
+    						#else
+    							无
+    						#end
+    					</font>
+    				</span>
+					<span id="danfangcha">&nbsp; 保险：
+    					<font font-size="14px;" color="red" id="baoxianP">
+    						#if($erim.isNotEmpty($!lineprice.lpeInsurePrice))
+    							￥$!lineprice.lpeInsurePrice元   $!lineprice.lpeInsureShow
+    						#else
+    							无
+    						#end
+    					</font>
+    				</span>
+				</div>
+            <div class="box_cb mb20"></div>
+          <p class="g_tab">
+			#if($linetrip && $linetrip.size() >=1)
+			<a class="tab_1 on" href="javascript:void(0);" name="more">行程安排</a>
+			<a class="tab_2" href="javascript:void(0);">行程特色</a>
+			<a class="tab_3" href="javascript:void(0);">费用说明</a>
+			<a class="tab_4" href="javascript:void(0);">预订须知</a>
+			#else
+			<a class="tab_1 on" href="javascript:void(0);">费用说明</a>
+			<a class="tab_2" href="javascript:void(0);">预订须知</a>
+			#end
+		  <p>
+          <div class="tab_block" style="float:left;">
+			#if($linetrip && $linetrip.size() >=1)
+          	<div class="block_tab_1">
+                <div class="left">
+                    <ul id="menu">
+						#foreach($item in $linetrip)
+							<li #if($!{velocityCount} == 1) class="on" #end><a href="#$!{velocityCount}">第$!{velocityCount}天</a></li>
+						#end 
+                    </ul>
+                </div>
+
+                <div class="right" style="width:1074px;">
+                   #foreach($item in $linetrip)
+                    <div class="block" id="block_$!{velocityCount}"><a name="$!{velocityCount}"></a>
+                        <h3 class="g_title_2">第$!{velocityCount}天
+							<span class="way_line">
+								$!item.ltpStartplace
+								
+								##vtextarrayab($!item.ldlTripTraffic,'C076','<span class="wxy-title1">···','···</span>',$!item.ltpEndplace,'','','')
+								#vtextarrayabimg($!item.ldlTripTraffic,'C076','&nbsp;&nbsp;<img src="','"/>&nbsp;&nbsp;',$!item.ltpEndplace,'','','')
+							</span>
+						</h3>
+						#if($erim.isNotEmpty($!item.ltpRoad1))
+                            <div class="desc_block" style="padding-left:10px;">
+    							<span class="wxy_title">上午</span>
+                            	<div class="txt_desc">
+                                	$!item.ltpRoad1
+                                </div>
+								#if($erim.isNotEmpty($!item.gddImg1))
+                              		<div class="img_desc">
+                                    	<img src="$staticFileRes$!item.gddImg1">
+                                    </div>
+								#end
+                                <div class="box_cb"></div>
+                            </div>
+						#end
+						#if($erim.isNotEmpty($!item.ltpRoadTrip1))
+    						<div class="desc_block" style="padding:0 10px;">
+    							<span class="wxy_title">中餐</span>
+                            	<div class="txt_desc">
+                                	$!item.ltpRoadTrip1
+                                </div>
+                                <div class="box_cb"></div>
+                            </div>
+						#end
+						#if($erim.isNotEmpty($!item.ltpFood1))
+    						<div class="desc_block" style="padding-left:10px;">
+    							<span class="wxy_title">下午</span>
+                            	<div class="txt_desc">
+                                	$!item.ltpFood1
+                                </div>
+								#if($erim.isNotEmpty($!item.gddImg2))
+                              		<div class="img_desc">
+                                    	<img src="$staticFileRes$!item.gddImg2">
+                                    </div>
+								#end
+                                <div class="box_cb"></div>
+                            </div>
+						#end
+						#if($erim.isNotEmpty($!item.ltpFoodTrip1))
+    						<div class="desc_block" style="padding:0 10px 10px;">
+    							<span class="wxy_title">晚餐</span>
+                            	<div class="txt_desc">
+                                	$!item.ltpFoodTrip1
+                                </div>
+                                <div class="box_cb"></div>
+                            </div>
+						#end
+						#if($erim.isNotEmpty($!item.ltpRemark))
+    						<div class="desc_block" style="padding:0 10px 10px;">
+    							<span class="wxy_title">补充说明</span>
+                            	<div class="txt_desc" style="width:950px;">
+                                	$!item.ltpRemark
+                                </div>
+                                <div class="box_cb"></div>
+                            </div>
+						#end
+                    </div>
+					#end 
+                    
+                </div>
+                <div class="box_cb"></div>
+            </div>
+            <div class="block_tab_2" style="width:1158px;margin:0;padding:20px;">
+				<img alt="行程特色" title="行程特色" src="$staticRoot/images/ground.png" style="width:70px; height:70px;float:left;margin-left:30px;margin-right:40px;">
+				<div class="wxy_jdts" style="float:left;width:900px;">
+					$!line.ldlFeatures
+				</div>
+            </div>
+			#end
+            <div class="#if($linetrip && $linetrip.size() >=1) block_tab_3 #else block_tab_1 #end" style="padding:20px 46px 40px 44px;width:1108px;float:left;">
+				#if($erim.isNotEmpty($line.ldlMoneyContain))
+					<h2 class="notes-title">
+    					费用包含
+                    </h2>
+    				<pre>$!line.ldlMoneyContain</pre>
+				#end
+				#if($erim.isNotEmpty($line.ldlMoneyContainOff))
+    				<h2 class="notes-title">
+    					费用不含
+                    </h2>
+					<pre>$!line.ldlMoneyContainOff</pre>
+				#end
+				#if($erim.isNotEmpty($line.ldlExpense))
+					<h2 class="notes-title">
+    					推荐自费
+                    </h2>
+					<pre>$!line.ldlExpense</pre>
+				#end
+    				<!--开始-->
+            </div>
+            <div class="#if($linetrip && $linetrip.size() >=1) block_tab_4 #else block_tab_2 #end" style="padding:20px 46px 40px 44px;width:1108px;float:left;">
+					#if($erim.isNotEmpty($line.ldlScheduleLimit))
+    					<h2 class="notes-title">
+        					预订限制
+                        </h2>
+                        <pre>$!line.ldlScheduleLimit</pre>
+					#end
+    				<!--开始-->
+					#if($erim.isNotEmpty($line.ldlScheduleTravel))
+    					<h2 class="notes-title">
+        					出行须知
+                        </h2>
+    					<pre>$!line.ldlScheduleTravel</pre>
+					#end
+					#if($erim.isNotEmpty($line.ldlScheduleBreak))
+    					<h2 class="notes-title">
+        					旅行社违约
+                        </h2>
+    					<pre>$!line.ldlScheduleBreak</pre>
+					#end 
+					#if($erim.isNotEmpty($line.ldlScheduleBreak1))
+    					<h2 class="notes-title">
+        					消费者违约
+                        </h2>
+    					<pre>$!line.ldlScheduleBreak1</pre>
+					#end
+					#if($erim.isNotEmpty($line.gddRule))
+        				<h2 class="notes-title">
+        					退改规则
+                        </h2>
+    					<pre>$!line.gddRule</pre>
+					#end
+					#if($erim.isNotEmpty($line.ldlNotes))
+    					<h2 class="notes-title">
+        					补充说明
+                        </h2>
+    					<pre>$!line.ldlNotes</pre>
+					#end
+					#if($erim.isNotEmpty($line.ldlRemind))
+    					<h2 class="notes-title">
+        					特别提醒
+                        </h2>
+    					<pre>$!line.ldlRemind</pre>
+					#end
+    				<!--结束-->
+            </div>
+          </div>
+        </div>
+<!--dwp html end-->
+        #parse("common/footer.vm")
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	Focus()
+
+	$(document).ready(function() {
+		
+		var id = '$!line.id'
+		$(".line_open_price").load("$appRoot/$cpyno/line/price?tdlId="+id);
+	
+	});
+</script>
+<!--script type="text/javascript">addLoadEvent(Focus());</script--->
+<script type="text/javascript">
+
+var i=0;
+var int=self.setInterval("show()",2000)
+function show(){
+	
+	  $("#img_menu li").click(function(){ 
+	    $(this).addClass("on").siblings().removeClass("on");
+		i=$(this).index(); })
+	  
+	  if(i<=$("#img_menu li").length-1)
+	  {	  $("#img_block li").eq(i).fadeIn(800);
+		  $("#img_block li").eq(i).siblings().fadeOut(800);
+		  $("#img_menu li").eq(i).addClass("on").siblings().removeClass("on");
+		  i=i+1;  }
+	  else
+	  {	  i=0;
+		  $("#img_block li").eq(i).fadeIn(800);
+		  $("#img_block li").eq(i).siblings().fadeOut(800);
+		  $("#img_menu li").eq(i).addClass("on").siblings().removeClass("on");
+		  i=i+1;  } }
+		  
+$(window).scroll(function(){
+	var nb=$(".right .block").length;
+	var bid="#block_"+nb;
+	var zsh=$(window).scrollTop();
+	var zh=$($(bid)).offset().top;
+	if(zsh>=640 && zsh<=zh)
+	{$("#menu").css({"position":"fixed","top":"200px"});	}
+	else{$("#menu").css("position","inherit");	}
+	
+	for(var n=1; n<=nb; n++)
+	{	$("#menu li").eq(n-1).css("display","block");
+		var bidq="#block_"+n;
+		var bhq=$($(bidq)).offset().top-300;
+		if(zsh>=bhq){$("#menu li").eq(n-1).addClass('on').siblings().removeClass("on");	}} });
+		
+function ordertips(){
+	alert('对不起，预定功能暂不开放');
+}
+</script>

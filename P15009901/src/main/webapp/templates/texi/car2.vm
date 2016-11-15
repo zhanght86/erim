@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>汽车列表页_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/car_list.css">
+<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".clistctma_ctl").on("click",".close_chakan_a",function(){
+		$(this).parents(".chakan_block_zc").hide();
+		$(".chakan_a").text("预订").css("background-color","#EB6464");
+	})
+})
+function test1(obj,priceId){
+		if($(obj).text()=="预订"){
+			$(".chakan_block_zc").hide();
+			$(obj).parents(".clistctma_ctlcbox").next(".chakan_block_zc").show();
+			$(".chakan_block_zc").load("$appRoot/$cpyno/texi/sendprice2?id=" + priceId);
+			$(".chakan_a").text("预订").css("background-color","#EB6464");
+			$(obj).text("预订中").css("background-color","#969696");
+			
+		}
+		else{
+			$(obj).parents(".clistctma_ctlcbox").next(".chakan_block_zc").hide();
+			$(obj).text("预订").css("background-color","#EB6464");
+		}
+
+}
+</script>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--导航-->
+        #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+		<!--头部-->
+		#parse("common/head.vm")
+    		<div class="car_list">
+    			<div class="clst_top">
+    				<ul>
+    					<li id="s1" curl="$appRoot/$cpyno/texi/car1.html" >接机</li>
+    					<li id="s2" curl="$appRoot/$cpyno/texi/car2.html"  class="clst_topli">送机</li>
+    					<li id="s3" curl="$appRoot/$cpyno/texi/car3.html" >接站</li>
+    					<li id="s4" curl="$appRoot/$cpyno/texi/car4.html" >送站</li>
+    					<li id="s5" curl="$appRoot/$cpyno/texi/car5.html" class="baoche">包车</li>
+    					<li id="s6" curl="$appRoot/$cpyno/texi/car6.html" class="zijia">自驾</li>
+						<li id="s7" style="border-right:none" curl="$appRoot/$cpyno/texi/car7.html" >固定线路</li>
+    				</ul>
+					<span class="local-nation #if( $!text.tdlInland == '01') on #end" onclick="$('#tdlInland').attr('value','01'); $('#form2').submit();">国际</span>
+                    <span class="local-nation #if(!$text.tdlInland || $!text.tdlInland == '02') on #end" onclick="$('#tdlInland').attr('value','02'); $('#form2').submit();">国内</span>
+    			</div>
+    			<div class="clist_biger">
+    				<!--接机-->
+    				<!--送机-->
+    				<div class="clist_ct show">
+						<form id="form2" method="post" action="$appRoot/$cpyno/texi/car2.html">
+							<input type="hidden" value="2" name="searchType" />
+        					<div class="clist_ct_sendair">
+        						<div class="clistctsa_top">
+        							<div class="clistctsa_topf">
+    									<label class="search-lab" style="margin-left:37px">
+                                            <span class="search-span"><strong>出发地点:</strong></span>
+                                            <input type="text" class="search-input" name="gdlMachine" value="$!text.gdlMachine">
+                                        </label>
+        								<label class="search-lab">
+                                            <span class="search-span"><strong>送达机场:</strong></span>
+                                            <input type="text" class="search-input" name="gdlMachineback" value="$!text.gdlMachineback">
+                                        </label>
+        								<label class="search-lab">
+                                            <span class="search-span"><strong>用车日期:</strong></span>
+                                            <input type="text" class="search-input laydate-icon" onclick="laydate();" name="tspDate" value="$!text.tspDate">
+                                        </label>									
+        								<button class="search-btn" value="" type="submit">搜索</button>
+        							</div>
+        							<ul class="csaselect">
+								        <li class="csaselect-list">		
+											<dl style="width:auto;">
+        										<dt><strong>车型:</strong></dt>
+        										<dd class="#if("" == $!text.tdlType || ! $text.tdlType) csaselect-all csaselected #end" onclick="$('#tdlType2').attr('value',''); $('#form2').submit();"><a href="javascript:void(0)" style="margin-left:10px;">不限</a></dd>
+												<div class="cmsselectdiv" style="width:1000px;">
+        											#foreach($item in $tdltype.keySet())
+                										<dd class="#if($!text.tdlType == $item) csaselect-all csaselected #end" id="a_level_$item.id" onclick="$('#tdlType2').attr('value','$item'); $('#form2').submit();"><a href="javascript:void(0)">$tdltype.get($item)</a></dd>
+													#end
+												</div>
+											</dl>
+									    </li>
+        								<li class="csaselect-list">
+        									<dl id="csaselect1">
+        										<dt><strong>车辆档次:</strong></dt>
+        										<dd class="#if('' == $!text.tdlTexttype || ! $text.tdlTexttype)  csaselect-all csaselected #end"><a href="javascript:void(0)"  onclick="$('#tdlTexttype2').attr('value',''); $('#form2').submit();" style="margin-left:10px;">不限</a></dd>
+        										<div class="cmsselectdiv">
+    												#foreach($item in $texitype.keySet())
+    													<dd class="#if($!text.tdlTexttype == $item) csaselect-all csaselected #end" ><a href="javascript:void(0)" id="a_level_$item.id" onclick="$('#tdlTexttype2').attr('value','$item'); $('#form2').submit();">$texitype.get($item)</a></dd>
+        											#end
+        										</div>
+        									</dl>
+        								</li>
+        								<li class="csaselect-list">
+        									<dl id="csaselect3">
+        										<dt><strong>可乘人数:</strong></dt>    
+        										<dd class="#if(!$text.tdlNum || $!text.tdlNum == '') csaselect-all csaselected #end" onclick="$('#tdlNum2').attr('value',''); $('#tdlNumCompare2').attr('value',0); $('#form2').submit();"><a href="javascript:void(0)" style="margin-left:10px;">不限</a></dd>
+        										<dd class="#if($!text.tdlNum == '4' && $!text.tdlNumCompare == 0 ) csaselect-all csaselected #end" onclick="$('#tdlNum2').attr('value','4'); $('#tdlNumCompare2').attr('value',0); $('#form2').submit();"><a href="javascript:void(0)">4人</a></dd>
+        										<dd class="#if($!text.tdlNum == '6' && $!text.tdlNumCompare == 0)  csaselect-all csaselected #end" onclick="$('#tdlNum2').attr('value','6'); $('#tdlNumCompare2').attr('value',0); $('#form2').submit();"><a href="javascript:void(0)">6人</a></dd>
+        										<dd class="#if($!text.tdlNum == '8'  && $!text.tdlNumCompare == 0) csaselect-all csaselected #end"  onclick="$('#tdlNum2').attr('value','8'); $('#tdlNumCompare2').attr('value',0); $('#form2').submit();"><a href="javascript:void(0)">8人</a></dd>
+        										<dd class="#if($!text.tdlNum == '10' && $!text.tdlNumCompare == 0) csaselect-all csaselected #end"  onclick="$('#tdlNum2').attr('value','10'); $('#tdlNumCompare2').attr('value',0); $('#form2').submit();"><a href="javascript:void(0)">10人</a></dd>
+        										<dd class="#if($!text.tdlNum == '13' && $!text.tdlNumCompare == 0) csaselect-all csaselected #end"  onclick="$('#tdlNum2').attr('value','13'); $('#tdlNumCompare2').attr('value',0); $('#form2').submit();"><a href="javascript:void(0)">13人</a></dd>
+        										<dd class="#if($!text.tdlNum == '21' && $!text.tdlNumCompare == 0) csaselect-all csaselected #end"  onclick="$('#tdlNum2').attr('value','21'); $('#tdlNumCompare2').attr('value',0); $('#form2').submit();"><a href="javascript:void(0)">21人</a></dd>
+        										<dd class="#if($!text.tdlNum == '21' && $!text.tdlNumCompare == 1) csaselect-all csaselected #end"  onclick="$('#tdlNum2').attr('value','21'); $('#tdlNumCompare2').attr('value',1); $('#form2').submit();"><a href="javascript:void(0)">21人以上</a></dd>
+        									</dl>
+        								</li>
+        							</ul>
+        						</div>
+    							<!--主体-->
+            					<div class="clistctma_ct">
+            						<!--左边-->
+            						<div class="clistctma_ctl">
+            							<!--<div class="clistctma_ctltop">
+            								<div class="clistctma_ctldeft">默认</div>
+            								<div class="clistctma_ctlm">
+            									<input type="text" value="最低价" onfocus="if (value =='最低价'){value =''}" onblur="if (value ==''){value='最低价'}" autocomplete="off">~<input type="text" value="最高价" onfocus="if (value =='最高价'){value =''}" onblur="if (value ==''){value='最高价'}" autocomplete="off">
+            								</div>
+            								<span class="clistctma_ctlc">轿车</span>
+            								<span class="clistctma_ctlc">越野</span>
+            								<span class="clistctma_ctlc">客车</span>
+            								<span class="clistctma_ctlc">其他</span>
+            							</div>-->
+            							#foreach($item in $texiList)
+            								<div class="clistctma_ctlcbox">
+            									<div class="clistctma_boxl">
+            										#if($!item.tdlImgAppearance != '')
+                    									<img src="$staticFileRes$item.tdlImgAppearance" title="" alt="">
+                    								#else
+                    									<img src="$staticRoot/images/isnull.png" title="" alt="">
+                    								#end
+            									</div>
+            									<div class="clistctma_boxm">
+            										<div class="clistctma_boxmf">
+            											<span>$!item.tdlName</span>
+            										</div>
+            										<div class="clistctma_boxmi">
+                                                        <span style="width:110px; margin-right:10px;"><strong>车型：</strong>$!item.tdlType</span>
+            											<span style="width:100px;"><strong>乘坐人数：</strong>$!item.tdlNum</span>
+            											<span style="width:150px;"><strong>车辆档次：</strong>$!item.tdlTexttype</span>
+            											<span style="width:110px; margin-right:10px;"><strong>汽车排量：</strong>$!item.tdlTextpail</span>
+            											<span style="width:100px;"><strong>手自档：</strong>$!item.tdlTextgear</span>
+            											<span style="width:150px;"><strong>购买日期：</strong>$!item.tdlCreatecardate</span>
+            										</div>
+            									</div>
+            									<div class="clistctma_boxr">
+            										<label><span>￥$!item.tspRetailPrice</span></label>
+            										<a class="chakan_a" href="javascript:void(0);" onclick="test1($(this),$!item.priceId)">预订</a>
+            										<!--包车<a class="chakan_a" href="$appRoot/$cpyno/texi/carxiang/$item.id">查看</a>-->
+            									</div>
+            								</div>
+    										<div class="chakan_block chakan_block_zc">
+    										
+    										</div>
+            							#end
+            						</div>
+            						<!--/左边-->
+            						<!--/右边-->
+									#parse("common/hot.vm")
+            						<span class="car_list_page"><div class="g_xpage"> #parse("common/page.vm")</div></span>
+            					</div>
+    						</div>
+							<input type="hidden" name="tdlType" id="tdlType2" value="$!text.tdlType"/>
+                			<input type="hidden" name="tdlTexttype" id="tdlTexttype2" value="$!text.tdlTexttype"/>
+							<input type="hidden" name="tdlNum" id="tdlNum2" value="$!text.tdlNum"/>
+							<input type="hidden" name="tdlNumCompare" id="tdlNumCompare2" value="$!text.tdlNumCompare"/><!-- 0:相等 1：大于-->
+							<input type="hidden" name="tdlInland" id="tdlInland" value="$!text.tdlInland"/><!--国际：01 国内：02 -->
+						</form>
+    				</div>
+    				<!--/送机-->
+    				<!--接站-->
+    				
+    				<!--/接站-->
+    				<!--送站-->
+    				
+    				<!--/送站-->
+    				<!--包车-->
+    				
+    				<!--/包车-->
+    				<!--自驾-->
+    				
+    				<!--/自驾-->
+					<!--固定线路-->
+    				
+    				<!--/固定线路-->
+    			</div>
+    		</div>
+			
+	</div>
+	#parse("common/footer.vm")
+<input type="hidden" value="$!searchType" id="searchType" />	
+
+</body>
+</html>
+
+<script type="text/javascript" src="$staticRoot/js/car_list.js"></script>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="aboutus">
+	
+	<!-- 查询最新的一条信息 -->
+	<select id="selectAboutUs" resultType="aboutUsBean">
+		SELECT
+			id,
+			cpy_id			AS	cpyId,
+			sau_remark		AS	sauRemark,
+			sau_createtime	AS	sauCreatetime,
+			sau_createuser	AS	sauCreateuser
+		FROM
+			sell_about_us
+		WHERE
+			cpy_id = #{cpyId}
+		ORDER BY
+			sau_createtime
+		DESC
+		LIMIT 1
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert">
+  		INSERT INTO
+			sell_about_us (
+				sau_remark,
+				cpy_id,
+				sau_createtime,
+				sau_createuser
+			) VALUES (
+				#{sauRemark},
+				#{cpyId},
+				#{sauCreatetime},
+                #{sauCreateuser}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			sell_about_us
+		SET
+		 	sau_remark      = #{sauRemark}
+	   	WHERE
+			id = #{id}
+	</update>
+	
+</mapper>

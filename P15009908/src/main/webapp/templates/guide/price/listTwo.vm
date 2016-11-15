@@ -1,0 +1,265 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/guide/guide.css">
+<script type="text/javascript" src="$staticRoot/js/product/price.js"></script>
+<script>
+	//组团价和直客价的比较
+	function comparison(field, rules, i, options){
+		// 组团价
+    	var hnpCombinationPrice = $("input[name='gpeClusterPrice']").val();
+		// 直客价
+		var hnpRetailPrice = $("input[name='gpeGuestPrice']").val();
+		
+		if(parseInt(hnpCombinationPrice) * 1.05 >= parseInt(hnpRetailPrice)){
+            return '直客价必须大于或等于组团价的5%';
+        }
+	}
+	//弹框直客价和组团价比较
+	function comparisonMin(field, rules, i, options){
+		// 组团价
+    	var hnpCombinationPrice = $("#update_gpeClusterPrice").val();
+		// 直客价
+		var hnpRetailPrice = $("#update_gpeGuestPrice").val();
+		
+		if(parseInt(hnpCombinationPrice) * 1.05 >= parseInt(hnpRetailPrice)){
+            return '直客价必须大于组团价的5%';
+        }
+	}
+	
+	// 当选择服务类型时
+	$("input[name='isInternal']").change(function() {
+		var a = $("input[name='isInternal']:checked").val();
+		index.load("$appRoot/guide/price/list?portal=05&isInternal=" + a);
+	});
+	
+	// 当选择服务类型时
+	$("input[name='gdlServiceCode']").change(function() {
+		var a = $("input[name='gdlServiceCode']:checked").val();
+		index.load("$appRoot/guide/price/list?portal=05&isInternal=" + a);
+	});
+	
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jd_3.png" alt="量/价管理" title="量/价管理" />导服费管理
+	</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/guide/price/list?portal=03');">
+				<img src="$staticRoot/images/jd_7.png">
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/guide/price/list?portal=02');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+		<div class="date_close pt10">
+			<form method="post" id="form3">
+    			<input type="text" class="validate[required]" name="start"id="start" onclick="WdatePicker({minDate:'%y-%M-%d'})" />&nbsp; 至 &nbsp;
+    			<input type="text" class="validate[required]" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start\',{m:1});}'})" />
+    			<button type="button" onclick="javascript:price.batchStop('form3','$appRoot/guide/price/updateBatchIsOpen');">批量停团</button>
+            </form>
+		</div>
+	</div>
+	<table class="fangliang_date fangliang_date_dy ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">
+				导游姓名：$!gdlName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：$!sex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务类型：#foreach($item in $isInternal) <label class="w90"><input type="radio" #if($!currIsInternal == $!item.gdlServiceCode) checked #end name="isInternal" value="$item.gdlServiceCode" >$!item.gdlServiceName</input></label>#end
+			</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="gpe_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.gpeIsOpen == '01')
+    							<li class="close_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_gpeFloorPrice" value="$!item.gpeFloorPrice">
+									<input type="hidden" name="date_gpeClusterPrice" value="$!item.gpeClusterPrice">
+									<input type="hidden" name="date_gpeGuestPrice" value="$!item.gpeGuestPrice">
+									<input type="hidden" name="date_gpeDate" value="$!item.gpeDate">
+									<input type="hidden" name="date_gdlId" value="$!item.gdlId">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+										<br>
+    									组团：$!item.gpeClusterPrice元<br>
+    									直客：$!item.gpeGuestPrice元
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+									<input type="hidden" name="isUpdate" value="$!item.isUpdate">
+									<input type="hidden" name="date_id" value="$!item.id">
+									<input type="hidden" name="date_gpeFloorPrice" value="$!item.gpeFloorPrice">
+									<input type="hidden" name="date_gpeClusterPrice" value="$!item.gpeClusterPrice">
+									<input type="hidden" name="date_gpeGuestPrice" value="$!item.gpeGuestPrice">
+									<input type="hidden" name="date_gpeDate" value="$!item.gpeDate">
+									<input type="hidden" name="date_gdlId" value="$!item.gdlId">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										<br>
+    									组团：$!item.gpeClusterPrice元<br>
+    									直客：$!item.gpeGuestPrice元
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load('$appRoot/guide/detail/list');">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png" /> 可带团
+			<img src="$staticRoot/images/ljgl_01.png" /> 已排团
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;">
+		<span><b>导服费管理</b></span>
+		<div class="cb"></div>
+		<div class="bg_block nobg_block">
+			<form method="post" id="form1">
+    			<div class="cb"></div>
+				<div class="input_block clearfix">
+    				<div class="label_left">服务类型：</div>
+    				<div class="input_right">
+						#foreach($item in $isInternal) 
+							<label class="w120">
+								<input type="radio" #if($!currIsInternal == $!item.gdlServiceCode) checked #end name="gdlServiceCode" value="$item.gdlServiceCode">$!item.gdlServiceName</input>
+							</label>
+						#end
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">日期：</div>
+    				<div class="input_righted11">
+						<input type="text" class="w80 validate[required]" name="start" id="start1" onclick="WdatePicker({minDate:'%y-%M-%d'})" /> &nbsp; 至 &nbsp;
+						<input type="text" class="w80 validate[required]" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'start1\',{m:1});}'})" />
+					    <span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">按周选择：</div>
+    				<div class="input_right">
+                        <label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="0">全选</input></label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="1">周一</input></label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="2">周二</input></label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="3">周三</input></label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="4">周四</input></label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="5">周五</input></label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="6">周六</input></label>
+    					<label class="w50"><input class="validate[minCheckbox[1]]" type="checkbox" name="week" value="7">周日</input></label><span style="color:red;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">档期管理：</div>
+    				<div class="input_right">
+    					<label>
+    						<input type="radio" name="gpeIsOpen" value="02" class="ml15" checked /> 有  
+    					</label> 
+    					<label class="ml15">
+    						<input type="radio" name="gpeIsOpen" value="01" /> 无
+    					</label>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">组团价：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+    						<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],funcCall[comparison1]]" name="gpeClusterPrice" placeholder="0" />元/天
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">直客价：</div>
+    				<div class="input_right">
+    					<span class="tishi_box w110">
+    						<input type="text" class="w65 validate[required,custom[integer],max[100000],min[1],funcCall[comparison]]" name="gpeGuestPrice" placeholder="0" />元/天
+    					</span>
+						<span style="color:red;margin-top:-25px;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">服务费包括：</div>
+    				<div class="input_right">
+    					<textarea class="w350 h90 validate[required,maxSize[1000]]" name="gpeService"></textarea>
+						<span style="color:red;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">服务说明：</div>
+    				<div class="input_right">
+                        <textarea class="w350 h90 validate[required,maxSize[1000]]" name="gpeServiceShow"></textarea>
+						<span style="color:red;">*</span>
+    				</div>
+    			</div>
+    			<div class="input_block clearfix">
+    				<div class="label_left">预约有效时间：</div>
+    				<div class="input_right">
+    					<label class="w"><input type="radio" name="gpeAppointType" value="02" checked />提前 </label>
+    					<span class="tishi_box w90">
+    						<input type="text" class="w88 validate[required,custom[integer],maxSize[4],min[1]]" name="gpeAppointNum"  placeholder="0" />
+    					</span>
+						<span style="margin-left:-20px;">天</span> 接受预约
+    					<label class="w255 ml35">
+    						<input type="radio" name="gpeAppointType" value="01" />空档期随时预约<br>
+    					</label>
+    				</div>
+    			</div>
+    			<div class="button_block clearfix">
+    				<button class="y_but ml35" id="btn" type="button" onclick="javascript:price.sub('btn', 'form1', '$appRoot/guide/price/insert', '$appRoot/guide/price/list?portal=04')">&nbsp;提交&nbsp;</button>
+    				<button class="b_but ml35" type="button" onclick="javascript:index.load('$appRoot/guide/price/list?portal=04')">&nbsp;重 置&nbsp;</button>
+    			</div>
+			</form>
+		</div>
+	</div>
+	<div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit" style="height:170px;">
+	<form method="post" id="form2">
+		<a class="esc_a" href="javascript:void(0);">&times;</a>
+        <input type="hidden" name="id" id="update_id" ></input>
+		<div class="input_block clearfix ml15">
+			<!-- 隐藏，废弃，勿删 -->
+			<input type="hidden" name="gpeFloorPrice" id="update_gpeFloorPrice" />
+    		<div class="input_right mb20">
+    			组团价：<span class="tishi_box w110">
+    				<input type="text" class="w70 validate[required,custom[integer],max[100000],min[1]]" name="gpeClusterPrice" id="update_gpeClusterPrice" />元/天
+    			</span>
+    		</div>
+    		<div class="input_right">
+    			直客价：<span class="tishi_box w110">
+    				<input type="text" class="w70 validate[required,custom[integer],max[100000],min[1],funcCall[comparisonMin]]" name="gpeGuestPrice" id="update_gpeGuestPrice" />元/天
+    			</span>
+    		</div>
+    	</div>
+    	<div class="cb mb25"></div>
+    	<div class="button_block button_block_wauto clearfix">
+    		<button class="y_but ml15 mr20" type="button" id="gpeQueding">确 定</button>
+    		<button class="b_but" type="button" id="gpeQuxiao">取 消</button>
+    	</div>
+	</form>
+</div>

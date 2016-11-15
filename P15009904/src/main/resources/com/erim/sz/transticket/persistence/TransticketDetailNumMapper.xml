@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="transticketdetailnum">
+	
+	<!-- 查询 -->
+	<select id="select" resultType="transticketDetailNumBean">
+		SELECT
+			id 					AS id,
+			ttd_id 			    AS ttdId,
+			tdl_start_station   AS tdlStartStation,
+			tdl_no              AS tdlNo,
+			tdl_start_time      AS tdlStartTime,
+			tdl_arrived_station AS tdlArrivedStation,
+			tdl_arrived_time    AS tdlArrivedTime,
+			tdl_is_del_status   AS tdlIsDelStatus,
+			tdl_createtime      AS tdlCreatetime,
+			tdl_createuser      AS tdlCreateuser,
+			tdl_ntype			AS tdlNtype
+		FROM
+			transticket_detail_num
+		WHERE
+			ttd_id = #{ttdId}
+		ORDER BY 
+			tdl_is_del_status
+		DESC
+	</select>
+	<!-- 插入 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			transticket_detail_num
+		(
+			ttd_id,
+			tdl_start_station,
+			tdl_no,
+			tdl_start_time,
+			tdl_arrived_station,
+			tdl_arrived_time,
+			tdl_is_del_status,
+			tdl_createtime,
+			tdl_createuser,
+			tdl_ntype
+		)
+		VALUES
+		(
+			#{ttdId},
+			#{tdlStartStation},
+			#{tdlNo},
+			#{tdlStartTime},
+			#{tdlArrivedStation},
+			#{tdlArrivedTime},
+			#{tdlIsDelStatus},
+			#{tdlCreatetime},
+			#{tdlCreateuser},
+			#{tdlNtype}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			transticket_detail_num
+		SET
+			ttd_id			    = #{ttdId},
+			tdl_start_station 	= #{tdlStartStation},
+			tdl_no			    = #{tdlNo},
+			tdl_start_time 		= #{tdlStartTime},
+			tdl_arrived_station = #{tdlArrivedStation},
+			tdl_arrived_time 	= #{tdlArrivedTime},
+			tdl_ntype			= #{tdlNtype}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+			transticket_detail_num
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<!-- 上下架 -->
+	<update id="xj">
+		UPDATE
+			transticket_detail_num
+		SET
+			tdl_is_del_status 	= #{tdlIsDelStatus}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

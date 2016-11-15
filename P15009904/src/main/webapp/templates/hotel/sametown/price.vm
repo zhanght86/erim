@@ -1,0 +1,110 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotel/hotel.css">
+<script type="text/javascript">
+	// 当选择房型时刷新页面
+	$("input[name='hheId_sametown']").change(function() {
+		var hheId = $("input[name=hheId_sametown]:checked").val();
+		index.load('hotel/price/listPagePortal?portal=09&hheId='+hheId);
+	});
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jd_3.png" alt="查看量/价" title="查看量/价" />$!hotelName 查看量/价
+	</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<!-- 当前日期切换 --------------------------------------->
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/hotel/price/listPagePortal?portal=08');">
+				<img src="$staticRoot/images/jd_7.png" />
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/hotel/price/listPagePortal?portal=07');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">
+				房型选择：
+				#foreach($item in $roomList)
+    				<label class="w90">
+                        <input type="radio" #if($!roomID == $!item.id) checked #end name="hheId_sametown" value="$item.id" >$!item.hheName</input>
+    				</label>
+				#end
+			</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							<!-- 空 -->
+							#if($!item.hnpSign == '0')
+								<li class="finish_li">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.hnpSign 间<br>
+    									同：$!item.hnpTradePrice 元<br>
+    									批：$!item.hnpCombinationPrice 元<br>
+    									零：$!item.hnpRetailPrice 元</div>
+    								<span class="icon"></span>
+            					</li>
+							<!-- 关房 -->
+							#elseif($!item.hnpIsOpen == '01')
+    							<li class="close_li">
+    								<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									量：$!item.hnpSign 间<br>
+    									同：$!item.hnpTradePrice 元<br>
+    									批：$!item.hnpCombinationPrice 元<br>
+    									零：$!item.hnpRetailPrice 元
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							<!-- 开房 -->
+							#else
+								<li class="open_li">
+            						<span class="date_d">$!item.day</span>
+            						<div class="mess_box">
+										量：$!item.hnpSign 间<br>
+    									同：$!item.hnpTradePrice 元<br>
+    									批：$!item.hnpCombinationPrice 元<br>
+    									零：$!item.hnpRetailPrice 元
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load('$appRoot/hotel/detail/sametown');">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png" /> 已开房（正常出售）
+			<img src="$staticRoot/images/ljgl_01.png" /> 已关房（暂不出售）
+			<img src="$staticRoot/images/ljgl_02.png" /> 已售完
+		</span>
+	</div>
+	<div class="carad_ctrtable carfixed_ctrtable ml35 mb40" style="width:620px;"></div>
+	<div class="cb"></div>
+</div>

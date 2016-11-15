@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="linedetail">
+	<sql id="sql_query">
+		 <where>
+			1 = 1
+			    <if test="cpyId != null">		                                        and 	cpy_id 		            	= #{cpyId}</if>
+			     <!--线路名称查询 -->
+			    <if test="ldlName != null           and ldlName != '' ">	            and 	ldl_name 					like 	"%"#{ldlName}"%"</if> 
+			     <!--产品编码查询 -->
+		     	<if test="ldlCode != null           and ldlCode != '' ">		        and 	ldl_code	                like 	"%"#{ldlCode}"%"</if>
+		     	 <!--产品编号查询 -->
+		     	<if test="ldlCode1 != null          and ldlCode1 != '' ">		        and 	ldl_code1	                like 	"%"#{ldlCode1}"%"</if>
+		     	 <!--上下架查询 -->
+		        <if test="ldlIsDelStatus != null    and ldlIsDelStatus != ''">	        and 	ldl_is_del_status           = #{ldlIsDelStatus}</if>
+		         <!--国际港澳台查询 -->
+		        <if test="ldlCountylocation != null and ldlCountylocation != ''">		and 	ldl_countylocation 	        =       #{ldlCountylocation}</if>
+		         <!--国内外查询 -->
+		        <if test="ldlInternation != null 	and ldlInternation != ''">			and 	ldl_internation 	        =       #{ldlInternation}</if>
+		         <!--城市查询 -->
+		        <if test="ldlCity != null 			and ldlCity != ''">					and 	ldl_city 			        like 	"%"#{ldlCity}"%"</if>
+		         <!--国际城市查询 -->
+		     	<if test="ldlDeparturecity != null   and ldlDeparturecity != ''">	    and 	ldl_departurecity 	        like 	"%"#{ldlDeparturecity}"%"</if>
+		     	 <!--国际国家查询 -->
+		     	<if test="ldlMajorcountries != null  and ldlMajorcountries != ''">		and 	ldl_majorcountries 	        like 	"%"#{ldlMajorcountries}"%"</if>
+		     	 <!--产品形态查询 -->
+		     	<if test="ldlProductForm != null 	 and ldlProductForm != ''">			and 	ldl_product_form 	        =       #{ldlProductForm}</if>
+		 </where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageLine" resultType="lineDetailBean">
+		SELECT
+			line_detail.id ,
+			ldl_name                 AS ldlName,
+			ldl_big_traffic1         AS ldlBigTraffic1,
+			ldl_code                 AS ldlCode,
+			ldl_code1                AS ldlCode1,
+			ldl_guest                AS ldlGuest,
+			ldl_province             AS ldlProvince,
+			ldl_city                 AS ldlCity,
+			ldl_county               AS ldlCounty,
+			ldl_startplace_address   AS ldlStartplaceAddress,
+			ldl_preferential         AS ldlPreferential,
+			ldl_startdate            AS ldlStartdate,
+			ldl_enddate              AS ldlEnddate,
+			ldl_createdate           AS ldlCreatedate,
+			ldl_attribute1           AS ldlAttribute1,
+			ldl_perimeter_is         AS ldlPerimeterIs,
+			ldl_perimeter_detail     AS ldlPerimeterDetail,
+			ldl_starttime            AS ldlStarttime,
+			ldl_startaddress         AS ldlStartaddress,
+			ldl_notes                AS ldlNotes,
+			ldl_characteristic       AS ldlCharacteristic,
+			ldl_money_contain        AS ldlMoneyContain,
+			ldl_money_contain_off    AS ldlMoneyContainOff,
+			ldl_project              AS ldlProject,
+			ldl_schedule_limit       AS ldlScheduleLimit,
+			ldl_schedule_break       AS ldlScheduleBreak,
+			ldl_schedule_break1      AS ldlScheduleBreak1,
+			ldl_schedule_travel      AS ldlScheduleTravel,
+			ldl_createuser           AS ldlCreateuser,
+			ldl_price_sametown       AS ldlPriceSametown,
+			ld_is_through            AS ldIsThrough,
+			ld_through_time          AS ldThroughTime,
+			ld_through_user          AS ldThroughUser,
+			ldl_ntype			     AS ldlNtype,
+			ldl_big_traffic          AS ldlBigTraffic,
+			ldl_is_del_status        AS ldlIsDelStatus,
+			ldl_picture              AS ldlPicture,
+			ldl_special_line         AS ldlSpecialLine,
+			ldl_product_form         AS ldlProductForm,
+			ldl_product_standard     AS ldlProductStandard,
+			ldl_remind               AS ldlRemind,
+			ldl_expense              AS ldlExpense,
+			ldl_remark               AS ldlRemark,
+			ldl_attraction           AS ldlAttraction,
+			ldl_same_sign            AS ldlSameSign,
+			ldl_pro_type1            AS ldlProType1,
+			ldl_pro_type2            AS ldlProType2,
+			ldl_mark                 AS ldlMark,
+			ldl_starttime1           AS ldlStarttime1,
+			ldl_set                  AS ldlSet,
+			ldl_yesno                AS ldlYesno,
+			ldl_game                 AS ldlGame,
+			ldl_addgame              AS ldlAddgame,
+			cpy_id				     AS cpyId,
+			ldl_internation          AS ldlInternation,
+			ldl_countylocation       AS ldlCountylocation,
+			ldl_majorcountries       AS ldlMajorcountries,
+			ldl_departurecity        AS ldlDeparturecity,
+			ldl_productine           AS ldlProductine,
+			ldl_features             AS ldlFeatures,
+			ldl_recommend            AS ldlRecommend,
+			ldl_feature              AS ldlFeature,
+			ldl_scheduled           AS ldlScheduled,
+			(select count(1) from line_trip where line_trip.tdl_id = line_detail.id) zdyDate
+		FROM
+			line_detail
+		<include refid="sql_query" />
+		  ORDER BY
+			ldl_is_del_status
+		 DESC,
+			ldl_createdate
+		 DESC
+	</select>
+	<select id="selectBeanByPriId" resultType="lineDetailBean">
+	SELECT
+			id ,
+			ldl_name                 AS ldlName,
+			ldl_big_traffic1         AS ldlBigTraffic1,
+			ldl_guest                AS ldlGuest,
+			ldl_code1                AS ldlCode1,
+			ldl_province             AS ldlProvince,
+			ldl_city                 AS ldlCity,
+			ldl_county               AS ldlCounty,
+			ldl_startplace_address   AS ldlStartplaceAddress,
+			ldl_preferential         AS ldlPreferential,
+			ldl_startdate            AS ldlStartdate,
+			ldl_enddate              AS ldlEnddate,
+			ldl_attribute1           AS ldlAttribute1,
+			ldl_perimeter_is         AS ldlPerimeterIs,
+			ldl_perimeter_detail     AS ldlPerimeterDetail,
+			ldl_starttime            AS ldlStarttime,
+			ldl_startaddress         AS ldlStartaddress,
+			ldl_notes                AS ldlNotes,
+			ldl_ntype			     AS ldlNtype,
+			ldl_characteristic       AS ldlCharacteristic,
+			ldl_money_contain        AS ldlMoneyContain,
+			ldl_money_contain_off    AS ldlMoneyContainOff,
+			ldl_project              AS ldlProject,
+			ldl_schedule_limit       AS ldlScheduleLimit,
+			ldl_schedule_break       AS ldlScheduleBreak,
+			ldl_schedule_break1      AS ldlScheduleBreak1,
+			ldl_schedule_travel      AS ldlScheduleTravel,
+			ldl_createuser           AS ldlCreateuser,
+			ldl_price_sametown       AS ldlPriceSametown,
+			ld_is_through            AS ldIsThrough,
+			ld_through_time          AS ldThroughTime,
+			ld_through_user          AS ldThroughUser,
+			cpy_id				     AS cpyId,
+			ldl_code                 AS ldlCode,
+			ldl_big_traffic          AS ldlBigTraffic,
+			ldl_picture              AS ldlPicture,
+			ldl_is_del_status        AS ldlIsDelStatus,
+			ldl_special_line         AS ldlSpecialLine,
+			ldl_product_form         AS ldlProductForm,
+			ldl_product_standard     AS ldlProductStandard,
+			ldl_remind               AS ldlRemind,
+	        ldl_remark               AS ldlRemark,
+	        ldl_attraction           AS ldlAttraction,
+			ldl_same_sign            AS ldlSameSign,
+			ldl_pro_type1            AS ldlProType1,
+			ldl_pro_type2            AS ldlProType2,
+		    ldl_mark                 AS ldlMark,
+			ldl_starttime1           AS ldlStarttime1,
+			ldl_set                  AS ldlSet,
+			ldl_yesno                AS ldlYesno,
+			ldl_game                 AS ldlGame,
+			ldl_addgame              AS ldlAddgame,
+			ldl_expense              AS ldlExpense,
+			ldl_internation          AS ldlInternation,
+			ldl_countylocation       AS ldlCountylocation,
+			ldl_majorcountries       AS ldlMajorcountries,
+			ldl_departurecity        AS ldlDeparturecity,
+			ldl_productine           AS ldlProductine,
+			ldl_features             AS ldlFeatures,
+			ldl_recommend            AS ldlRecommend,
+			ldl_scheduled            AS ldlScheduled,
+			ldl_feature              AS ldlFeature
+		FROM
+			line_detail
+		WHERE
+			id = #{id}
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageLineCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			line_detail
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="lineDetailBean">
+		INSERT INTO
+			line_detail
+			(
+				ldl_name,
+				ldl_createdate,
+				ldl_big_traffic1,
+				ldl_pro_type1,
+				ldl_pro_type2,
+				ldl_guest,
+				ldl_code1,
+				ldl_province,
+				ldl_city,
+				ldl_county,
+				ldl_startplace_address,
+				ldl_preferential,
+				ldl_startdate,
+				ldl_enddate,
+				ldl_attribute1,
+				ldl_perimeter_is,
+				ldl_perimeter_detail,
+				ldl_starttime,
+				ldl_startaddress,
+				ldl_notes,
+				ldl_characteristic,
+				ldl_money_contain,
+				ldl_money_contain_off,
+				ldl_project,
+				ldl_schedule_limit,
+				ldl_schedule_break,
+				ldl_schedule_break1,
+				ldl_schedule_travel,
+				ldl_createuser,
+				ldl_price_sametown,
+				cpy_id,
+				ldl_ntype,			    
+			    ldl_code,
+			    ldl_picture,
+		     	ldl_big_traffic,
+				ldl_special_line,
+				ldl_product_form,
+				ldl_product_standard,
+				ldl_remind,
+				ldl_expense,
+                ldl_attraction,
+			    ldl_same_sign,
+			    ldl_mark,
+			    ldl_starttime1,
+			    ldl_set,
+			    ldl_yesno,
+			    ldl_game,
+			    ldl_addgame,
+                ldl_remark,
+                ldl_internation,
+		    	ldl_countylocation,
+			    ldl_majorcountries,
+		    	ldl_departurecity,
+		    	ldl_productine
+			)
+		VALUES
+			(
+				#{ldlName},
+				#{ldlCreatedate},
+				#{ldlBigTraffic1},
+				#{ldlProType1},
+				#{ldlProType2},
+				#{ldlGuest},
+				#{ldlCode1},
+				#{ldlProvince},
+				#{ldlCity},
+				#{ldlCounty},
+				#{ldlStartplaceAddress},
+				#{ldlPreferential},
+				#{ldlStartdate},
+				#{ldlEnddate},
+				#{ldlAttribute1},
+				#{ldlPerimeterIs},
+				#{ldlPerimeterDetail},
+				#{ldlStarttime},
+				#{ldlStartaddress},
+				#{ldlNotes},
+				#{ldlCharacteristic},
+				#{ldlMoneyContain},
+				#{ldlMoneyContainOff},
+				#{ldlProject},
+				#{ldlScheduleLimit},
+				#{ldlScheduleBreak},
+				#{ldlScheduleBreak1},
+				#{ldlScheduleTravel},
+				#{ldlCreateuser},
+				#{ldlPriceSametown},
+				#{cpyId},
+				#{ldlNtype},
+			    #{ldlCode},
+			    #{ldlPicture},
+			    #{ldlBigTraffic},
+				#{ldlSpecialLine},
+				#{ldlProductForm},
+				#{ldlProductStandard},
+				#{ldlRemind},
+				#{ldlExpense},
+                #{ldlAttraction},
+			    #{ldlSameSign},
+			    #{ldlMark},
+			    #{ldlStarttime1},
+			    #{ldlSet},
+			    #{ldlYesno},
+			    #{ldlGame},
+			    #{ldlAddgame},
+                #{ldlRemark},
+                #{ldlInternation},
+			    #{ldlCountylocation},
+			    #{ldlMajorcountries},
+			    #{ldlDeparturecity},
+			    #{ldlProductine}
+			)
+	</insert>
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			line_detail
+		SET
+		    ldl_code1                 = #{ldlCode1},
+ 	        ldl_name                  = #{ldlName},
+	        ldl_pro_type1             = #{ldlProType1},
+	        ldl_pro_type2             = #{ldlProType2},
+	        ldl_big_traffic1          = #{ldlBigTraffic1},
+			ldl_province              = #{ldlProvince},
+			ldl_city                  = #{ldlCity},
+			ldl_county                = #{ldlCounty},
+			ldl_startplace_address    = #{ldlStartplaceAddress},
+			ldl_preferential          = #{ldlPreferential},
+			ldl_startdate             = #{ldlStartdate},
+			ldl_enddate               = #{ldlEnddate},
+			ldl_attribute1            = #{ldlAttribute1},
+			ldl_attribute2            = #{ldlAttribute2},
+			ldl_perimeter_is          = #{ldlPerimeterIs},
+			ldl_perimeter_detail      = #{ldlPerimeterDetail},
+			ldl_starttime             = #{ldlStarttime},
+			ldl_startaddress          = #{ldlStartaddress},
+			ldl_notes                 = #{ldlNotes},
+			ldl_characteristic        = #{ldlCharacteristic},
+			ldl_money_contain         = #{ldlMoneyContain},
+			ldl_money_contain_off     = #{ldlMoneyContainOff},
+			ldl_project               = #{ldlProject},
+			ldl_schedule_limit        = #{ldlScheduleLimit},
+			ldl_schedule_break        = #{ldlScheduleBreak},
+			ldl_schedule_travel       = #{ldlScheduleTravel},
+			ldl_price_sametown        = #{ldlPriceSametown},
+			ld_is_through             = #{ldIsThrough},
+			ldl_ntype                 = #{ldlNtype},
+			ldl_schedule_break1       = #{ldlScheduleBreak1},
+			ldl_big_traffic           = #{ldlBigTraffic},
+			ldl_special_line          = #{ldlSpecialLine},
+			ldl_attraction            = #{ldlAttraction},
+			ldl_product_form          = #{ldlProductForm},
+			ldl_product_standard      = #{ldlProductStandard},
+			ldl_remind                = #{ldlRemind},
+			ldl_expense               = #{ldlExpense},
+			ldl_remark                = #{ldlRemark},
+			ldl_mark                  = #{ldlMark},
+			ldl_starttime1            = #{ldlStarttime1},
+			ldl_set                   = #{ldlSet},
+			ldl_yesno                 = #{ldlYesno},
+			ldl_game                  = #{ldlGame},
+			ldl_addgame               = #{ldlAddgame},
+			ldl_same_sign             = #{ldlSameSign},
+			ldl_internation           = #{ldlInternation},
+			ldl_countylocation        = #{ldlCountylocation},
+			ldl_majorcountries        = #{ldlMajorcountries},
+			ldl_departurecity         = #{ldlDeparturecity},
+			ldl_productine            = #{ldlProductine},
+			ldl_picture               = #{ldlPicture}
+		WHERE
+			id = #{id}
+	</update>
+	<!-- 修改 -->
+	<update id="updatetrip" parameterType="lineDetailBean">
+		UPDATE
+			line_detail
+		SET
+			ldl_features             = #{ldlFeatures},
+			ldl_recommend            = #{ldlRecommend},
+			ldl_feature              = #{ldlFeature}
+		WHERE
+			id = #{id}
+	</update>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			line_detail
+		WHERE
+			id=#{id}
+	</delete>
+	<!-- 更新编码 -->
+	<update id="lineupdatecode">
+	UPDATE
+	     line_detail
+	SET 
+	     ldl_code    = #{ldlCode}
+   WHERE
+	         id      = #{id} 
+	</update>
+	<!-- 上下架-->
+	<delete id="delet" parameterType="int">
+		UPDATE
+			line_detail
+		SET
+			ldl_is_del_status 	 = #{ldlIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	
+	
+	<!-- 复制一条当地游基础信息 
+	<insert id="copyLineDetail" useGeneratedKeys="true" keyProperty="id" parameterType="lineDetailBean">
+		INSERT INTO 
+			line_detail
+			(
+				ldl_name,
+				ldl_createdate,
+				ldl_big_traffic1,
+				ldl_pro_type1,
+				ldl_pro_type2,
+				ldl_guest,
+				ldl_code1,
+				ldl_province,
+				ldl_city,
+				ldl_county,
+				ldl_startplace_address,
+				ldl_preferential,
+				ldl_startdate,
+				ldl_enddate,
+				ldl_attribute1,
+				ldl_perimeter_is,
+				ldl_perimeter_detail,
+				ldl_starttime,
+				ldl_startaddress,
+				ldl_notes,
+				ldl_characteristic,
+				ldl_money_contain,
+				ldl_money_contain_off,
+				ldl_project,
+				ldl_schedule_limit,
+				ldl_schedule_break,
+				ldl_schedule_break1,
+				ldl_schedule_travel,
+				ldl_createuser,
+				ldl_price_sametown,
+				cpy_id,
+				ldl_ntype,			    
+			    ldl_code,
+			    ldl_picture,
+		     	ldl_big_traffic,
+				ldl_special_line,
+				ldl_product_form,
+				ldl_product_standard,
+				ldl_remind,
+				ldl_expense,
+                ldl_attraction,
+			    ldl_same_sign,
+			    ldl_mark,
+			    ldl_starttime1,
+			    ldl_set,
+			    ldl_yesno,
+			    ldl_game,
+			     ldl_addgame,
+                ldl_remark,
+                ldl_internation,
+		    	ldl_countylocation,
+			    ldl_majorcountries,
+		    	ldl_departurecity,
+		    	ldl_productine,
+		    	ldl_features,
+		    	ldl_feature,
+		    	ldl_recommend 
+			)
+		  SELECT
+				ldl_name,
+				ldl_createdate,
+				ldl_big_traffic1,
+				ldl_pro_type1,
+				ldl_pro_type2,
+				ldl_guest,
+				ldl_code1,
+				ldl_province,
+				ldl_city,
+				ldl_county,
+				ldl_startplace_address,
+				ldl_preferential,
+				ldl_startdate,
+				ldl_enddate,
+				ldl_attribute1,
+				ldl_perimeter_is,
+				ldl_perimeter_detail,
+				ldl_starttime,
+				ldl_startaddress,
+				ldl_notes,
+				ldl_characteristic,
+				ldl_money_contain,
+				ldl_money_contain_off,
+				ldl_project,
+				ldl_schedule_limit,
+				ldl_schedule_break,
+				ldl_schedule_break1,
+				ldl_schedule_travel,
+				ldl_createuser,
+				ldl_price_sametown,
+				cpy_id,
+				ldl_ntype,			    
+			    ldl_code,
+			    ldl_picture,
+		     	ldl_big_traffic,
+				ldl_special_line,
+				ldl_product_form,
+				ldl_product_standard,
+				ldl_remind,
+				ldl_expense,
+                ldl_attraction,
+			    ldl_same_sign,
+			    ldl_mark,
+			    ldl_starttime1,
+			    ldl_set,
+			    ldl_yesno,
+			    ldl_game,
+			     ldl_addgame,
+                ldl_remark,
+                ldl_internation,
+		    	ldl_countylocation,
+			    ldl_majorcountries,
+		    	ldl_departurecity,
+		    	ldl_productine,
+		    	ldl_features,
+		    	ldl_feature,
+		    	ldl_recommend 
+			FROM 
+				line_detail
+			WHERE
+				id = #{id}
+	</insert>-->
+	<!-- 复制成功后更改部分字段 
+	<update id="updateCopyGround">
+		UPDATE
+			line_detail
+		SET
+			ldl_code			= #{ldlCode},
+			ldl_is_del_status	= #{ldlIsDelStatus},
+			ldl_createdate		= #{ldlCreatedate}
+		WHERE
+			id					= #{id}
+	</update>-->
+	
+	<!-- 预定方式 -->
+	<update id="update1">
+		UPDATE
+			line_detail
+		SET
+			ldl_scheduled       = #{ldlScheduled}
+		WHERE
+			id = #{id}
+	</update>
+</mapper>

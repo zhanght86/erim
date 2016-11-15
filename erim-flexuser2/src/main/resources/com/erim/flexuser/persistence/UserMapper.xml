@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+	<!-- 查询所有数据，用于生成下拉列表的数据源 -->
+	<select id="selectAll" parameterType="hashMap" resultType="userBean">
+		SELECT
+			user_id         AS userId,
+			role_id			AS roleId,
+			user_name       AS userName,
+			user_realname   AS userRealname
+		FROM
+			tm_system_user
+		ORDER BY
+			user_name
+	</select>
+
+	<!-- 根据用户名查找用户信息，用于用户登录 -->
+	<select id="selectEntityByName" parameterType="hashMap" resultType="userBean">
+		SELECT
+			user_id          AS userId,
+			user_name        AS userName,
+			user_pswd        AS userPswd,
+			user_realname    AS userRealname,
+			user_phone       AS userPhone,
+			user_tel         AS userTel,
+			user_email       AS userEmail,
+			user_address     AS userAddress,
+            user_card_no     AS userCardNo,
+            user_born_date   AS userBornDate,
+			user_auth        AS userAuth,
+            user_sex         AS userSex,
+			user_state       AS userState,
+			user_access_type AS userAccessType,
+			role_id			 AS roleId,
+            dept_id          AS deptid
+		FROM
+			tm_system_user
+		WHERE
+			user_name = #{userName}
+	</select>
+
+	<!-- 查询本页数据，用于显示当前页，不显示id为1的数据，即不显示admin -->
+	<select id="selectPage" parameterType="hashMap" resultType="userBean">
+    	SELECT
+			user_id          AS userId,
+			user_name        AS userName,
+			user_realname    AS userRealname,
+			user_phone       AS userPhone,
+			user_tel         AS userTel,
+			user_email       AS userEmail,
+			user_address     AS userAddress,
+            user_card_no     AS userCardNo,
+            user_born_date   AS userBornDate,
+			user_auth        AS userAuth,
+            user_sex         AS userSex,
+			user_state       AS userState,
+			user_access_type AS userAccessType,
+			role_id			 AS roleId,
+            dept_id          AS deptid
+		FROM
+			tm_system_user
+		<where>
+			<if test="userId != null">and user_id = #{userId}</if>
+			<if test="userName != null">and user_name like "%"#{userName}"%"</if>
+			<if test="userRealname != null">and user_realname like "%"#{userRealname}"%"</if>
+			<if test="userPhone != null">and user_phone like "%"#{userPhone}"%"</if>
+			<if test="userTel != null">and user_tel like "%"#{userTel}"%"</if>
+			<if test="userEmail != null">and user_email like "%"#{userEmail}"%"</if>
+            <if test="userAddress != null">and user_address like "%"#{userAddress}"%"</if>
+            <if test="userCardNo != null">and user_card_no like "%"#{userCardNo}"%"</if>
+            <if test="userBornDate != null">and user_born_date = #{userBornDate}</if>
+            <if test="userSex != null">and user_sex = #{userSex}</if>
+			<if test="userState != null">and user_state = #{userState}</if>
+			<if test="userAccessType != null">and user_access_type = #{userAccessType}</if>
+			<if test="roleId != null">and role_id = #{roleId}</if>
+            <if test="deptid != null">and dept_id = #{deptid}</if>
+		AND user_id != 1
+		</where>
+		<if test="qrysort != null">order by ${qrysort} ${qrymode}</if>
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectCount" parameterType="hashMap" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			tm_system_user
+		<where>
+			<if test="userId != null">and user_id = #{userId}</if>
+			<if test="userName != null">and user_name like "%"#{userName}"%"</if>
+			<if test="userRealname != null">and user_realname like "%"#{userRealname}"%"</if>
+			<if test="userPhone != null">and user_phone like "%"#{userPhone}"%"</if>
+			<if test="userTel != null">and user_tel like "%"#{userTel}"%"</if>
+			<if test="userEmail != null">and user_email like "%"#{userEmail}"%"</if>
+            <if test="userAddress != null">and user_address like "%"#{userAddress}"%"</if>
+            <if test="userCardNo != null">and user_card_no like "%"#{userCardNo}"%"</if>
+            <if test="userBornDate != null">and user_born_date = #{userBornDate}</if>
+            <if test="userSex != null">and user_sex = #{userSex}</if>
+			<if test="userState != null">and user_state = #{userState}</if>
+			<if test="userAccessType != null">and user_access_type = #{userAccessType}</if>
+			<if test="roleId != null">and role_id = #{roleId}</if>
+            <if test="deptid != null">and dept_id = #{deptid}</if>
+		AND user_id != 1
+		</where>
+	</select>
+
+    <!-- 增加 -->
+    <insert id="insert" parameterType="hashMap">
+        INSERT INTO 
+            tm_system_user(user_id,user_name,user_pswd,user_realname,
+			user_phone,user_tel,user_email,user_address,user_card_no,user_born_date,
+			user_sex,user_state,user_access_type,role_id,dept_id) 
+        VALUES
+            ( #{userId}, #{userName}, #{userPswd}, #{userRealname}, 
+            #{userPhone}, #{userTel}, #{userEmail}, #{userAddress}, #{userCardNo}, #{userBornDate}, 
+			#{userSex}, #{userState}, #{userAccessType}, #{roleId}, #{deptId} )
+    </insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="hashMap">
+		UPDATE
+			tm_system_user
+		SET
+			user_realname = #{userRealname},
+			user_phone = #{userPhone},
+			user_tel = #{userTel},
+			user_email = #{userEmail},
+            user_address = #{userAddress},
+            user_card_no = #{userCardNo},
+            user_born_date = #{userBornDate},
+			user_sex = #{userSex},
+			user_access_type = #{userAccessType},
+			role_id = #{roleId},
+            dept_id = #{deptId}
+		WHERE
+			user_id = #{dataitems[0].userId}
+	</update>
+    
+	<!-- 授权 -->
+	<update id="auth" parameterType="hashMap">
+		UPDATE
+			tm_system_user
+		SET
+			user_auth = #{userAuth}
+		WHERE
+			user_id = #{dataitems[0].userId}
+    </update>
+	
+    <!-- 个人信息修改 -->
+    <update id="supdate" parameterType="hashMap">
+        UPDATE
+            tm_system_user
+        SET
+            user_realname = #{userRealname},
+            user_phone = #{userPhone},
+            user_email = #{userEmail}
+        WHERE
+            user_id = #{userId}
+    </update>
+
+	<!-- 强行改密 -->
+	<update id="updatepswd" parameterType="hashMap">
+		UPDATE
+			tm_system_user
+		SET
+			user_pswd = #{userPswd}
+		WHERE
+			user_id = #{dataitems[0].userId}
+	</update>
+
+    <!-- 禁用、启用用户 -->
+    <update id="enable" parameterType="hashMap">
+        UPDATE 
+            tm_system_user
+        SET
+        	user_state = #{userState}
+        WHERE
+            user_id 
+        IN
+            <foreach collection="dataitems" item="item"  open="(" separator="," close=")">  
+                #{item.userId}
+            </foreach>
+    </update>
+    
+    <!-- 个人密码修改 -->
+    <update id="supdatepswd" parameterType="hashMap">
+        UPDATE
+            tm_system_user
+        SET
+            user_pswd = #{userPswd}
+        WHERE
+            user_id = #{userId}
+    </update>
+
+	<!-- 批量删除 -->
+	<delete id="delete" parameterType="hashMap">
+		DELETE FROM
+			tm_system_user
+		WHERE
+			user_id 
+		IN
+			<foreach collection="dataitems" item="item"  open="(" separator="," close=")">#{item.userId}</foreach>
+	</delete>
+
+	<!-- 验证“用户名”是否重复 -->
+	<select id="verifyUserName" parameterType="String" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			tm_system_user
+		WHERE
+			user_name = #{userName}
+	</select>
+
+	<!-- 验证“邮箱”是否重复 -->
+	<select id="verifyUserEmail" parameterType="String" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			tm_system_user
+		WHERE
+			user_email = #{userEmail}
+	</select>
+</mapper>

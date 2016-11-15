@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hoteldetail">
+	<sql id="sql_query">
+		<if test="hdlName != null     and hdlName != ''">				    and 	(hdl_name like "%"#{hdlName}"%" or hdl_address like "%"#{hdlName}"%")</if>
+		<if test="hdlProvince != null and hdlProvince != ''">			    and 	hdl_province 			=    #{hdlProvince}   </if>
+		<if test="hdlLevel != null	  and hdlLevel != ''">			        and 	hdl_level 				=    #{hdlLevel}      </if>
+		<if test="hdlCharacteristic != null and hdlCharacteristic != ''"  >	and 	hdl_characteristic 		like "%"#{hdlCharacteristic}"%"</if> 
+		<if test="hdlFacilities != null and hdlFacilities != ''">		    and 	hdl_facilities 			like "%"#{hdlFacilities}"%"</if> 
+		<if test="hdlService != null and hdlService != ''">					and 	hdl_service 			like "%"#{hdlService}"%"</if>
+		<if test="hdlKeyword != null and hdlKeyword != ''">					and 	hdl_keyword 			like "%"#{hdlKeyword}"%"</if>
+		<if test="hdlCity != null and hdlCity != ''">			            and 	hdl_city 		        =    #{hdlCity}</if>
+		<!-- 页面传值为hdlForeignCity 国家城市公用一个字段-->
+		<if test="hdlForeignCity != null and hdlForeignCity != ''">			and 	(hdl_foreign_city 		like "%"#{hdlForeignCity}"%" or hdl_foreign like "%"#{hdlForeignCity}"%")</if>
+		<!--<if test="hdlForeign != null and hdlForeign != ''">					and 	hdl_foreign		 		like "%"#{hdlForeign}"%"</if>-->
+		<if test="hdlExternal != null and hdlExternal != ''">			    and 	hdl_external 		    = #{hdlExternal}</if>
+		<if test="hdlAddress != null and hdlAddress != ''">			        and 	hdl_address 		    like "%"#{hdlAddress}"%"</if>
+		
+		<!--<if test="hnpDate != null and hnpDate != ''">			            and 	a.hnp_date 		    like "%"#{hnpDate}"%"</if>
+		 没有房型的不展示 
+		and 
+			hotel.id in (
+					SELECT
+						hotel_room.hdl_id
+					FROM
+						hotel_room
+			)-->
+	</sql>
+	<sql id="sql_column">
+		hotel_detail.id,
+		hotel_detail.hdl_name             AS hdlName,
+		hotel_detail.hdl_code             AS hdlCode,
+		hotel_detail.hdl_province         AS hdlProvince,
+		hotel_detail.hdl_city             AS hdlCity,
+		hotel_detail.hdl_county           AS hdlCounty,
+		hotel_detail.hdl_address          AS hdlAddress,
+		hotel_detail.hdl_telephone        AS hdlTelephone,
+		hotel_detail.hdl_feature          AS hdlFeature,
+		hotel_detail.hdl_mark             AS hdlMark,
+		hotel_detail.hdl_region           AS hdlRegion,
+		hotel_detail.hdl_position         AS hdlPosition,
+		hotel_detail.hdl_district         AS hdlDistrict,
+		hotel_detail.hdl_level            AS hdlLevel,
+		hotel_detail.hdl_characteristic   AS hdlCharacteristic,
+		hotel_detail.hdl_renovation_date  AS hdlRenovationDate,
+		hotel_detail.hdl_facilities       AS hdlFacilities,
+		hotel_detail.hdl_facilities_other AS hdlFacilitiesOther,
+		hotel_detail.hdl_room_num         AS hdlRoomNum,
+		hotel_detail.hdl_game             AS hdlGame,
+		hotel_detail.hdl_game_other       AS hdlGameOther,
+		hotel_detail.hdl_food             AS hdlFood,
+		hotel_detail.hdl_creditcard       AS hdlCreditcard,
+		hotel_detail.hdl_service          AS hdlService,
+		hotel_detail.hdl_describe         AS hdlDescribe,
+		hotel_detail.hdl_img1             AS hdlImg1,
+		hotel_detail.hdl_img2             AS hdlImg2,
+		hotel_detail.hdl_img3             AS hdlImg3,
+		hotel_detail.hdl_img4             AS hdlImg4,
+		hotel_detail.hdl_img5             AS hdlImg5,
+		hotel_detail.hdl_createtime       AS hdlCreatetime,
+		hotel_detail.hdl_createuser       AS hdlCreateuser,
+		hotel_detail.hdl_is_through       AS hdlIsThrough,
+		hotel_detail.hdl_through_time     AS hdlThroughTime,
+		hotel_detail.hdl_through_user     AS hdlThroughUser,
+		hotel_detail.hdl_keyword		  AS hdlKeyword,
+		hotel_detail.cpy_id		          AS cpyId,
+		hotel_detail.hdl_network       	  AS hdlNetWork,
+		hotel_detail.hdl_is_start   	  AS hdlStart,
+		hotel_detail.hdl_near_site		  AS hdlNearSite,
+		hotel_detail.hdl_location         AS hdlLocation,
+		hotel_detail.hdl_is_del_status    AS hdlIsDelStatus,
+		hotel_detail.hdl_english          AS hdlEnglish
+	</sql>
+	<sql id="COMPANYDETAIL">
+			cpy.cpy_name 	  		 AS cpyName,
+			cpy.cpy_telephone 		 AS cpyTelephone,
+			cpy.cpy_brand 	  		 AS cpyBrand,
+			ccp.cbs_operator         AS ccpName,
+			ccp.cbs_operator_phone   AS ccpTelephone,
+			cpy.cpy_email 	         AS ccpEmail,
+			ccp.cbs_operator_qq      AS ccpQq
+	</sql>
+	<!-- 查询本页数据，用于显示当前页
+	<select id="selectPageHotel" resultType="hotelDetailBean">
+		select * from (
+			SELECT
+				<include refid="sql_column" />
+				, (SELECT code_value FROM tm_system_code WHERE code_id = 'C022' AND code_key = hdl_level)        dicLevel
+				, (SELECT region_name FROM tm_system_region WHERE region_pid = '0' AND region_id = hdl_province) dicCity
+				, <include refid = "COMPANYDETAIL" />
+				,min(hrp.hnp_retail_price) as hnpRetailPrice
+			FROM
+				hotel_detail hotel
+				LEFT JOIN
+				company_detail cpy
+			ON 
+				hotel.cpy_id = cpy.id
+			LEFT JOIN
+				company_business ccp
+			on 
+				ccp.cpy_id = hotel.cpy_id
+			LEFT JOIN
+				hotel_room_price hrp
+			on 
+				hrp.hdl_id = hotel.id 
+			WHERE
+			    hdl_is_del_status = '02'
+			<include refid="sql_query" />
+			group by hotel.id
+		
+		) a
+		where 1=1 
+		<if test="hdlPrice1 != null">			and 	a.hnpRetailPrice 		&gt;=  #{hdlPrice1}</if>
+		<if test="hdlPrice2 != null">			and 	a.hnpRetailPrice 		&lt;=  #{hdlPrice2}</if>
+		
+	</select> -->
+	
+	<select id="selectPageHotel" resultType="hotelDetailBean">
+		select * from 
+		(
+			select 
+				<include refid="sql_column" />,a.hnp_retail_price as hnpRetailPrice 
+			from 
+				hotel_detail 
+			left join 
+			(
+				select 
+					hdl_id,min(hnp_retail_price) as hnp_retail_price 
+				from 
+				(
+					select 
+						a.* ,b.hnp_retail_price,b.hnp_date 
+					from 
+						hotel_room a
+					left join 
+					(
+						select 
+							c1.*
+						from 
+							hotel_room_price c1 
+						join 
+						(
+							select 
+								c2.hhe_id,max(c2.hrp_createtime) as hrp_createtime,c2.hnp_date  
+							from 
+								hotel_room_price c2 
+							group by 
+								c2.hnp_date ,c2.hhe_id
+						 ) c2
+						on 
+							c1.hhe_id = c2.hhe_id
+						and c1.hrp_createtime = c2.hrp_createtime
+						and c1.hnp_date = c2.hnp_date
+						where 
+							c1.hnp_date = #{hnpDate}
+						GROUP BY  
+							c1.hhe_id
+			
+					 ) b
+					on a.id = b.hhe_id
+					group by a.id 
+				) d
+				group by hdl_id 
+			
+			) a
+			on 
+				hotel_detail.id = a.hdl_id 
+			where 
+				hotel_detail.hdl_is_del_status = '02'
+			<include refid="sql_query" />
+		) a
+		where 1=1
+		<if test="hdlPrice1 != null">			and 	a.hnpRetailPrice 		&gt;=  #{hdlPrice1}</if>
+		<if test="hdlPrice2 != null">			and 	a.hnpRetailPrice 		&lt;=  #{hdlPrice2}</if>
+		and a.hnpRetailPrice is not null
+	</select>
+	
+	<!-- 根据id查询酒店 -->
+	<select id="selectBeanByPriId" resultType="hotelDetailBean">
+		select 
+			hotel_detail.*,a.hnp_retail_price as hnpRetailPrice 
+		from 
+		(
+			select 
+				<include refid="sql_column" /> 
+			from 
+				hotel_detail 
+			where 
+				id = #{id}
+		) hotel_detail
+		left join 
+		(
+			select hdl_id,min(hnp_retail_price) as hnp_retail_price from 
+			(
+				select a.* ,b.hnp_retail_price,b.hnp_date 
+				from hotel_room a
+				left join 
+				(
+					select c1.* 
+					from hotel_room_price c1 
+					join 
+					(
+						select c2.hhe_id,max(c2.hrp_createtime) as hrp_createtime,c2.hnp_date  
+						from hotel_room_price c2 
+						group by c2.hnp_date ,c2.hhe_id
+
+					) c2
+					on c1.hhe_id = c2.hhe_id
+					and c1.hrp_createtime = c2.hrp_createtime
+					and c1.hnp_date = c2.hnp_date
+					where c1.hnp_date = #{hnpDate}
+					GROUP BY  c1.hhe_id
+		
+				) b
+				on a.id = b.hhe_id
+				group by a.id 
+			) d
+			group by hdl_id 
+		
+		) a
+		on hotel_detail.id = a.hdl_id 
+		
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageHotelCount" resultType="int">
+		select count(1) 
+		from 
+		(
+			select * from 
+			(
+				select 
+					a.hnp_retail_price as hnpRetailPrice 
+				from 
+					hotel_detail 
+				left join 
+				(
+					select 
+						hdl_id,min(hnp_retail_price) as hnp_retail_price 
+					from 
+					(
+						select 
+							a.* ,b.hnp_retail_price,b.hnp_date 
+						from 
+							hotel_room a
+						left join 
+						(
+							select 
+								c1.*
+							from 
+								hotel_room_price c1 
+							join 
+							(
+								select 
+									c2.hhe_id,max(c2.hrp_createtime) as hrp_createtime,c2.hnp_date  
+								from 
+									hotel_room_price c2 
+								group by 
+									c2.hnp_date ,c2.hhe_id
+							 ) c2
+							on 
+								c1.hhe_id = c2.hhe_id
+							and c1.hrp_createtime = c2.hrp_createtime
+							and c1.hnp_date = c2.hnp_date
+							where 
+								c1.hnp_date =  #{hnpDate}
+							GROUP BY  
+								c1.hhe_id
+				
+						 ) b
+						on a.id = b.hhe_id
+						group by a.id 
+					) d
+					group by hdl_id 
+				
+				) a
+				on 
+					hotel_detail.id = a.hdl_id 
+				where 
+					hotel_detail.hdl_is_del_status = '02'
+				<include refid="sql_query" />
+			) a
+			where 1=1
+			<if test="hdlPrice1 != null">			and 	a.hnpRetailPrice 		&gt;=  #{hdlPrice1}</if>
+			<if test="hdlPrice2 != null">			and 	a.hnpRetailPrice 		&lt;=  #{hdlPrice2}</if>
+			and a.hnpRetailPrice is not null
+		) a
+	</select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriaprice">
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		cpe_id					AS	cpeId,
+		cpe_name				AS	cpeName,
+		cpc_date				AS	cpcDate,
+		cpc_is_open				AS	cpcIsOpen,
+		cpc_week				AS	cpcWeek,
+		cpc_sign				AS	cpcSign,
+		cpc_is_sign				AS	cpcIsSign,
+		cpc_combination_price	AS	cpcCombinationPrice,
+		cpc_retail_price		AS	cpcRetailPrice,
+		cpc_explain				AS	cpcExplain,
+		cpc_create_time			AS	cpcCreateTime,
+		cpc_create_user			AS	cpcCreateUser,
+		cpy_id					AS	cpyId,
+		cpc_trade_price         AS  cpcTradePrice
+	</sql>
+	
+	<!-- 查询 -->
+	<select id="listCafeteriaPrice" resultType="cafeteriaPriceBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			cafeteria_price
+		WHERE
+			cpe_id = #{cpeId}
+		AND
+			cpc_date between #{startDate} and #{endDate}
+	</select>
+	
+</mapper>

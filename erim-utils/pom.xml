@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.e-rimming</groupId>
+        <artifactId>erim-parent</artifactId>
+        <version>0.0.2</version>
+        <relativePath>../erim-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>erim-utils</artifactId>
+    <packaging>jar</packaging>
+    <name>E-rimming :: Module :: Utils</name>
+
+    <dependencies>
+        <!--==================================================================================== -->
+        <!-- spring，用于spring工具类 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- hibernate，用于hibernate validator工具类 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- servlet，用于spring工具类 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- apache -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.httpcomponents</groupId>
+        	<artifactId>httpcore</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.httpcomponents</groupId>
+        	<artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- java utils -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- json -->
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>alibaba-fastjson</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- log -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- flex blazeds -->
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-proxy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-remoting</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-rds-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-opt</artifactId>
+        </dependency>
+        <!--================================================================================ -->
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- erimming -->
+        <dependency>
+            <groupId>com.e-rimming</groupId>
+            <artifactId>erim-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>

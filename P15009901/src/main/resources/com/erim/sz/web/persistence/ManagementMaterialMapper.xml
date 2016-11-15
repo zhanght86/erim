@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="managementmaterial">
+	
+	<select id="selectListByMdlId" resultType="managementMaterialBean">
+		SELECT
+			id             AS id,
+			cpy_id         AS cpyId,
+			mdl_id         AS mdlId,
+			mml_material   AS mmlMaterial,
+			mml_know       AS mmlKnow,
+			mml_text       AS mmlText,
+			mml_img        AS mmlImg,
+			mml_createtime AS mmlCreatetime,
+			mml_ntype      AS mmlNtype
+		FROM
+			management_material
+		WHERE
+			mdl_id = #{mdlId}
+	</select>
+	
+	<select id="selectListByMdlIdAndType" resultType="managementMaterialBean">
+		SELECT
+			id             AS id,
+			cpy_id         AS cpyId,
+			mdl_id         AS mdlId,
+			mml_material   AS mmlMaterial,
+			mml_know       AS mmlKnow,
+			mml_text       AS mmlText,
+			mml_img        AS mmlImg,
+			mml_createtime AS mmlCreatetime,
+			mml_ntype      AS mmlNtype
+		FROM
+			management_material
+		WHERE
+			mdl_id = #{mdlId}
+			and mml_ntype = #{mmlNtype}
+	</select>
+	
+</mapper>

@@ -1,0 +1,57 @@
+	<form method="post" id="form1">
+    	<div class="g_block_2 mb20">
+    		<div class="input_right input_right_wauto">
+				<label>产品编码：</label>
+					<input class="w130" name="ptdNo" value="$!planeticketDetail.ptdNo">
+					<label class="ml25">航空公司：</label>
+					<input class="w130" name="ptdCompany" value="$!planeticketDetail.ptdCompany" >
+					<label class="ml25">航班号：</label>
+					<input class="w130" name="ptdNumber" value="$!planeticketDetail.ptdNumber">
+                    <label class="ml25">舱位类型：</label>
+					<select class="w150" name="ptdClassEconomy">
+						<option></option>
+						 #foreach($item in $ptdspace.keySet())
+							<option value="$item" #if($planeticketDetail.ptdClassEconomy == $item) selected #end>$ptdspace.get($item)</option>
+			              #end
+					</select>
+					<span class="red_a ml25"  type="button" onclick="index.searchform('form1','$appRoot/search/planeticket/list');" >查询</span>
+			  </div> 
+    	</div>
+    </div>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>产品编码</th>
+                <th>航空公司</th>
+                <th>航班号</th>
+                <th>起飞城市/时间</th>
+                <th>经停城市/历时</th>
+                <th>落地城市/时间</th>
+                <th>舱位类型</th>
+                <th>价格</th>
+                <th>公司/品牌</th>
+                <th>负责人/电话</th>
+                <th>计调/电话</th>
+                <th>在线交谈</th>
+			</tr>
+			#foreach($item in $planeticketList)
+				<tr>
+                  	<td>$!item.ptdNo</td>
+                    <td>$!item.ptdCompany</td>
+					<td>$!item.ptdNumber</td>
+                    <td>$!item.ptdStartCity$!item.ptoStartTime</td>
+					<td>$!item.ptdEndStay</td>
+					<td>$!item.ptdEndCity$!item.ptoEndTime</td>
+					<td>$!item.ptdClassEconomy</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td>没有</td>
+					<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cdlPeopleQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+				</tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>

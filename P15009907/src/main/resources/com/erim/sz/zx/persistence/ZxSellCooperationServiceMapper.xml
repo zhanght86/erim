@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zxsellcooperation">
+	
+	<!-- 查询 -->
+	<select id="select" resultType="zxSellCooperationBean">
+		SELECT
+			id 				  AS id,
+			cid				  AS cid,
+			cpy_id            AS cpyId,
+			sell_cpy_id 	  AS sellCpyId,
+			zsc_is_coopertion AS zscIsCoopertion,
+			zsc_createtime    AS zscCreatetime,
+			zsc_createuser 	  AS zscCreateuser,
+			zsc_cooperiontime AS zscCooperiontime,
+			zsc_cooperionuser AS zscCooperionuser
+		FROM
+			zx_sell_cooperation
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			zx_sell_cooperation
+		(
+			cid,
+			cpy_id,
+			sell_cpy_id,
+			zsc_is_coopertion,
+			zsc_createtime,
+			zsc_createuser,
+			zsc_cooperiontime,
+			zsc_cooperionuser
+		)
+		VALUES
+		(
+			#{cid},
+			#{cpyId},
+			#{sellCpyId},
+			#{zscIsCoopertion},
+			#{zscCreatetime},
+			#{zscCreateuser},
+			#{zscCooperiontime},
+			#{zscCooperionuser}
+		)
+	</insert>
+	
+	<!-- 删除企业组团 -->
+	<delete id="delete">
+		DELETE FROM
+			zx_sell_cooperation
+		WHERE
+			cpy_id = #{cpyId}
+		AND
+			cid	   = #{cid}
+		<if test="sellCpyId != null and sellCpyId != ''">
+			AND
+				sell_cpy_id = #{sellCpyId}
+		</if>
+	</delete>
+	
+	<!-- 插入LIST -->
+	<insert id="insertList">
+		INSERT INTO
+			zx_sell_cooperation
+		(
+			cid,
+			cpy_id,
+			sell_cpy_id,
+			zsc_is_coopertion,
+			zsc_createtime,
+			zsc_createuser,
+			zsc_cooperiontime,
+			zsc_cooperionuser
+		)
+		(
+			select 
+				#{cid},
+				#{cpyId},
+				company_detail.id,
+				#{zscIsCoopertion},
+				#{zscCreatetime},
+				#{zscCreateuser},
+				#{zscCooperiontime},
+				#{zscCooperionuser}
+			from 
+				company_detail
+			 where cpy_roe = '2'
+		)
+	</insert>
+</mapper>

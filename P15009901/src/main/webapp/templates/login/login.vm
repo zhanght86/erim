@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>登录_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="$staticRoot/css/login.css">
+		<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+        <script type="text/javascript" src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="$staticRoot/js/h5.js"></script>
+		<script type="text/javascript">
+    		$(function() {
+        		$('#imgObj').click(function() {
+        			changeValidateCode();
+        		});
+        		function changeValidateCode() {
+        			$("#imgObj").attr("src","$appRoot/$cpyno/check/code?id=" + Math.random());
+        		}
+        	});
+        </script>
+    </head>
+    <body>
+        <header>
+            <a href="#"><img class="img_logo" src="$staticRoot/images/as_03.jpg" ></a>
+            <p class="p_login">
+                <a href="$appRoot/$cpyno/login.html">登录</a> | <a  href="$appRoot/$cpyno/abouts.html">帮助中心</a>
+            </p>
+        </header>
+		<form method="post" action="$appRoot/$cpyno/login/login">
+            <div class="g_cont">
+                <div class="login_block">
+                    <h1 class="title_p">会员登录</h1>
+                    <div class="input_box">
+                        <input type="text" name="mluLoginname" id="field4" placeholder="请输入手机号">
+                    </div>
+                    <div class="input_box input_box2">
+                        <input type="password" name="mluPassword" placeholder="请输入密码">
+                    </div>
+                    <div class="yz_b">
+                        <input type="text" placeholder="请输入验证码">
+                        <!-- <img src="$staticRoot/images/s_03.jpg"> -->
+						<img src="$appRoot/$cpyno/check/code" id="imgObj" alt="验证码">
+                    </div>
+                    <div class="txt_box">
+                        <a href="#">忘记密码？</a>
+						<span style="color:red;">$!errorMsg</span>
+                    </div>
+    				
+                    <div class="submit_box">
+                        <input type="submit" value="登录" />
+                    </div>
+                    <div class="txt_box2">
+                        您还没有佳旅旅游网账号？<a href="$appRoot/$cpyno/registerPage.html">免费注册</a>
+                    </div>
+                </div>
+            </div>
+		</form>
+        <footer>
+            Copyright © 2002-2014  版权所有  北京佳旅联合国际旅行社有限公司   苏ICP证B2-20100204  旅行社业务许可证：L-JS-CJ00070
+        </footer>
+    </body>
+
+</html>

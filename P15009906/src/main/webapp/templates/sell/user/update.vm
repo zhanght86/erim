@@ -1,0 +1,40 @@
+<div class="addhotel">
+	<div class="addhltop">
+		<p class="g_tit_1 mb15">新增用户</p>
+	</div>
+	<form method="post" id="form1">
+		<input type="hidden" value="$sellSystemUser.id" name="id"/>
+    	<div class="input_block clearfix">
+    		<div class="input_right input_right_wauto">
+        		<label class="ml30">登录账号：</label>
+        		<input type="text" readonly value="$sellSystemUser.sellUserLoginname" name="sellUserLoginname" class="validate[required]"><span style="color:red;margin-left:5px;">*</span>
+        	</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="input_right input_right_wauto">
+        		<label class="ml30">真实姓名：</label>
+        		<input type="text" value="$!sellSystemUser.sellUserRealname" name="sellUserRealname" class="validate[required]"><span style="color:red;margin-left:5px;">*</span>
+        	</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="input_right input_right_wauto">
+        		<label class="ml30">联系方式：</label>
+        		<input type="text" value="$!sellSystemUser.sellUserTel" name="sellUserTel"><span style="color:red;margin-left:5px;">*</span>
+        	</div>
+    	</div>
+		<div class="input_block clearfix">
+    		<div class="input_right input_right_wauto">
+        		<label class="ml30">所属角色：</label>
+        		<select name="sellRoleId" style="width:100px;">
+    				#foreach($item in $roleList)
+                        <option value="$item.id" #if($item.id == $sellSystemUser.sellRoleId) selected #end>$item.sellRoleName</option>
+					#end
+    			</select>
+        	</div>
+    	</div>
+	 </form>
+	<div class="g_right mr50 mb20" style="float:left;">
+		<a class="red_a ml25 back" style="background-color:#CCCCCC;" href="javascript:index.load(page.url);">返回</a>
+		<a class="red_a ml25" href="javascript:form.sub('form1','$appRoot/sell/user/update');">确认</a>
+	</div>
+</div>

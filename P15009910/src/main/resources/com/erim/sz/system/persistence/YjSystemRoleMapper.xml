@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="yjsystemrole">
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		yj_system_role
+		(
+			yj_role_name,
+			cpy_id
+		)
+		VALUES
+		(
+			#{yjRoleName},
+			#{cpyId}
+		)
+	</insert>
+	<!-- 根据id查询角色 -->
+	<select id="selectBeanById" resultType="yjSystemRoleBean">
+		SELECT
+			id 			    AS id,
+			yj_role_name  AS yjRoleName,
+			cpy_id          AS cpyId
+		FROM
+			yj_system_role
+		WHERE
+			id = #{id}
+	</select>
+	<!--修改 -->
+	<update id="update">
+		UPDATE
+			yj_system_role
+		SET
+			yj_role_name = #{yjRoleName}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<sql id="sql_column">
+		<where>
+			1=1
+			<if test="cpyId != null and cpyId != '' "> and cpy_id = #{cpyId} </if>
+		</where>
+	</sql>
+	
+	<!-- 分页查询 -->
+	<select id="selectPage" resultType="yjSystemUserBean">
+		
+		SELECT
+			id 			    AS id,
+			yj_role_name  AS yjRoleName,
+			cpy_id          AS cpyId
+		FROM
+			yj_system_role
+		<include refid="sql_column" />
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			yj_system_role
+		<include refid="sql_column" />
+	</select>
+	
+	<select id="selectYjSystemRoleByCpyId" resultType="yjSystemUserBean">
+		SELECT
+			id 			    AS id,
+			yj_role_name  AS yjRoleName,
+			cpy_id          AS cpyId
+		FROM
+			yj_system_role
+		WHERE
+			cpy_id = #{cpyId}
+	</select>
+</mapper>

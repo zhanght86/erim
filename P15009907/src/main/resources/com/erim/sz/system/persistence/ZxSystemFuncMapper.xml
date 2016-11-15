@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zxsystemfunc">
+	<select id="selectFuncByCode" resultType="zxSystemFuncBean">
+		SELECT
+			id                        AS id,
+			zx_func_code              AS zxFuncCode,
+			zx_func_parentcode 	      AS zxFuncParentcode,
+			zx_func_name 			  AS zxFuncName,
+			zx_func_action 	          AS zxFuncAction,
+			zx_func_img               AS zxFuncImg,
+			zx_func_order             AS zxFuncOrder
+		FROM
+			zx_system_func
+		WHERE
+			zx_func_code in 
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+				 #{item}  
+			</foreach>  
+		ORDER BY
+			zx_func_order
+	</select>
+
+	<!-- 查询所有 -->
+	<select id="selectAll" resultType="zxSystemFuncBean">
+		
+		SELECT
+			id                        AS id,
+			zx_func_code              AS zxFuncCode,
+			zx_func_parentcode 	      AS zxFuncParentcode,
+			zx_func_name 		 	  AS zxFuncName,
+			zx_func_action 	          AS zxFuncAction,
+			zx_func_img               AS zxFuncImg,
+			zx_func_order             AS zxFuncOrder
+		FROM
+			zx_system_func
+		ORDER BY
+			zx_func_order
+	</select>
+	<!-- 根据登录名查询对象 -->
+	<select id="selectFuncByParentcode" resultType="zxSystemFuncBean">
+		
+		SELECT
+			id                        AS id,
+			zx_func_code              AS zxFuncCode,
+			zx_func_parentcode 	      AS zxFuncParentcode,
+			zx_func_name 			  AS zxFuncName,
+			zx_func_action 	          AS zxFuncAction,
+			zx_func_img               AS zxFuncImg,
+			zx_func_order             AS zxFuncOrder
+		FROM
+			zx_system_func
+		WHERE
+			zx_func_parentcode = #{zxFuncParentcode}
+		ORDER BY
+			zx_func_order
+	</select>
+</mapper>

@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+<div class="rdivv">
+<div class="newfood">
+	<div class="newfood_suptop">
+		<img src="$staticRoot/images/htfood.png" />
+		<span><span1 style="color:red;">$!businessDetail.cdlName</span1></span>
+		<div class="cb"></div>
+	   <div class="g_line"></div>
+	</div>
+	<input type="hidden" value="$businessDetail.id" name="id"/>
+	<div class="newfood_ct carinfo_ct_w700">
+		<div class="newfood_box show">
+			<div class="cb"></div>
+			<div class="g_line"></div>
+			<div class="carinfo_ctbl">
+				<span>餐厅业务：</span>
+				<div class="newfood_web">
+					#vtext($!businessDetail.cdlBusiness,'C069')
+				</div>
+			</div>
+			<div class="carinfo_ctbl">
+				<span>最低起订早餐标准：</span>
+				<div class="carinfo_ctblra" style="width:430px;">
+					<span style="color:black;">$!businessDetail.cdlOrderNorme 元/人起</span>
+					<span style="font-weight:bold;color:#393838;padding-left:20px;">最低起订正餐标准：</span>
+					<span style="color:black;">$!businessDetail.cdlOrderNormz 元/人起</span>
+				</div>
+			</div>
+			<div class="carinfo_ctbl">
+				<span>可同时接团数量：</span>
+				<div class="carinfo_ctblra" style="width:202px;">
+					<span style="color:black;">$!businessDetail.cdlReceiveNum 人</span>
+				</div>
+			</div>
+			<div class="carinfo_ctbl">
+				<span>联系人：</span>
+				<div class="carinfo_ctblra1" style="width:202px;">
+					<span style="color:black;">$!businessDetail.cdlSpecialName</span>
+				</div>
+			</div>
+			<div class="carinfo_ctbl">
+				<span>电话：</span>
+				<div class="carinfo_ctblra1" style="width:202px;">
+					<span style="color:black;">$!businessDetail.cdlPhone</span>
+				</div>
+			</div>
+			<div class="carinfo_ctbl">
+				<span>QQ：</span>
+				<div class="carinfo_ctblra1" style="width:202px;">
+					<span style="color:black;">$!businessDetail.cdlPeopleQq</span>
+				</div>
+			</div>
+			<div class="carinfo_ctbl" style="margin-bottom:80px;">
+				<span></span>
+				<div class="carinfo_ctblrbtn">
+					<button type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+</div>

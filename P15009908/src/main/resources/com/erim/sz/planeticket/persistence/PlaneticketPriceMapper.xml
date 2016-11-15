@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="planeticketPrice">
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		gdl_id				AS	gdlId,
+		pre_date			AS	preDate,
+		ptd_class			AS	ptdClass,
+		pre_is_open			AS	preIsOpen,
+		pre_week			AS	preWeek,
+		pre_sign			AS	preSign,
+		pre_trade_price		AS	preTradePrice,
+		pre_retail_price	AS	preRetailPrice,
+		pre_tallage			AS	preTallage,
+		pre_is_tallage		AS	preIsTallage,
+		pre_required		AS	preRequired,
+		pre_required_show	AS	preRequiredShow,
+		pre_optional		AS	preOptional,
+		pre_optianal_show	AS	preOptianalShow,
+		pre_issue_start		AS	preIssueStart,
+		pre_issue_end		AS	preIssueEnd,
+		pre_create_time		AS	preCreateTime,
+		pre_create_user		AS	preCreateUser,
+		pre_trade			AS  preTrade,
+		pre_retail			AS  preRetail
+	</sql>
+	
+	<!-- 查询数据列表 -->
+	<select id="selectPriceList" parameterType="java.util.Map" resultType="planeticketPriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid="sql_column" />
+			FROM
+				planeticket_price
+			ORDER BY
+				pre_create_time
+			DESC
+		) t
+		GROUP BY
+			t.preDate,
+			t.ptdClass,
+			t.gdlId
+		HAVING	
+			t.gdlId 		= #{bean.gdlId}
+			AND t.ptdClass 	= #{bean.ptdClass}
+			AND	t.preDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		INSERT INTO 
+			planeticket_price (
+				gdl_Id,
+				pre_date,
+				ptd_class,
+				pre_is_open,
+				pre_week,
+				<if test = "preSign != null">
+					pre_sign,
+				</if>
+				<if test = "preTradePrice != null or preRetailPrice != null or preTallage != null or preRequired != null or preOptional != null or preTrade != null or preRetail != null">
+					pre_trade_price,
+					pre_retail_price,
+					pre_tallage,
+					pre_required,
+					pre_optional,
+					pre_trade,
+					pre_retail,
+				</if>
+				pre_is_tallage,
+				pre_required_show,
+				pre_optianal_show,
+				pre_issue_start,
+				pre_issue_end,
+				pre_create_time,
+				pre_create_user
+			) VALUES (
+				#{gdlId},
+				#{preDate},
+				#{ptdClass},
+				#{preIsOpen},
+				#{preWeek},
+				<if test = "preSign != null">
+					#{preSign},
+				</if>
+				<if test = "preTradePrice != null or preRetailPrice != null or preTallage != null or preRequired != null or preOptional != null or preTrade != null or preRetail != null">
+					#{preTradePrice},
+					#{preRetailPrice},
+					#{preTallage},
+					#{preRequired},
+					#{preOptional},
+					#{preTrade},
+					#{preRetail},
+				</if>
+				#{preIsTallage},
+				#{preRequiredShow},
+				#{preOptianalShow},
+				#{preIssueStart},
+				#{preIssueEnd},
+				#{preCreateTime},
+				#{preCreateUser}
+			)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updatePrice">
+		UPDATE
+			planeticket_price
+		SET
+			pre_sign 			= #{preSign},
+			pre_trade_price 	= #{preTradePrice},
+			pre_retail_price 	= #{preRetailPrice},
+			pre_is_open			= 02
+		WHERE
+			id  = #{id}
+	</update>
+	
+	<!-- 批量更改是是否出售状态 -->
+	<update id="updateIsOpen">
+		UPDATE
+			planeticket_price
+		SET	
+			pre_is_open		= #{preIsOpen}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 批量更改是否出售状态 -->
+	<update id="updateBatchIsOpen" parameterType="java.util.Map">
+		UPDATE
+			planeticket_price
+		SET
+			pre_is_open		= #{bean.preIsOpen}
+		WHERE
+			<!-- 产品ID -->
+			gdl_Id = #{bean.gdlId}
+			<!-- 产品舱位 -->
+			AND ptd_class = #{bean.ptdClass}
+			<!-- 日期 -->
+			AND	pre_date IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</update>
+</mapper>

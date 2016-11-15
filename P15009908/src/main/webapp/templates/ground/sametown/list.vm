@@ -1,0 +1,244 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/ground/ground.css">
+<script type="text/javascript"> 
+	
+	//搜索项留下输入内容
+	// 是否为港澳台/国际
+	var a = $("input[name='gddCountylocation']:checked").val();
+	if (a == '04') {
+		$('#county01').show();//主要国家显示
+	}else{
+		$('#county01').hide();//主要国家隐藏
+	}
+	
+	//点击事件
+	//点击港澳台国际时主要国家和出发城市的隐藏和切换
+	$("input[name='gddInternation']").change(function() {
+		var a = $("input[name='gddInternation']:checked").val();
+		if (a == '1') {
+			//国际港澳台隐藏
+    		$('#szd02').hide();
+			//国内显示
+    		$('#szd01').show();
+		}else if (a == '2'){
+			//国际港澳台显示
+			$('#szd02').show();
+			//国内显示
+    		$('#szd01').hide();
+		}
+	});
+	//点击港澳台国际时主要国家和出发城市的隐藏和切换
+	
+	//点击香港和澳门的时候国家和城市隐藏
+	$('#nation01').click(function() {
+		$('#county01').hide();
+	});
+	$('#nation02').click(function() {
+		$('#county01').hide();
+	});
+	//点击台湾的时候城市出现国家隐藏
+	$('#nation03').click(function() {
+		$('#county01').hide();
+	});
+	//点击国际时国家出现城市隐藏
+	$('#nation04').click(function() {
+		$('#county01').toggle();
+	});
+	//国内和国际.港澳台切换
+	$('#gddInland01').click(function() {
+		$('#szd02').hide();
+		$('#szd01').show();
+		$('#county01').hide();
+	});
+	$('#gddInland02').click(function() {
+		$('#szd01').hide();
+		$('#szd02').show();
+		$('#county01').hide();
+	});
+	
+	//搜索项停留内容
+	// 是否国内
+	var a = $("input[name='gddInternation']:checked").val();	
+	if (a == '1') {
+		// 国内显示
+		$('#szd01').show();
+		// 国际隐藏
+		$('#szd02').hide();
+	} else if (a == '2') {
+		// 国内隐藏
+		$('#szd01').hide();
+		// 国际展示
+		$('#szd02').show();
+	} else {
+		// 国内显示
+		$('#szd01').show();
+		// 国际隐藏
+		$('#szd02').hide();
+	}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/ren.png" alt="同业资源当地旅游" title="同业资源当地旅游">同业资源当地旅游<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<input type="hidden" name="dis_city" value="$GroundDetail.gddCity" />
+	<input type="hidden" name="dis_county" value="$GroundDetail.gddCounty" />
+	<form class="form-search" method="post" id="form1" style="min-width:1000px;">
+        <div class="doadmin_topl" style="width:auto;">
+			<div class="doadmin_toplbox">
+                <span>产品分类：</span>
+                <label>
+                    <input type="radio" id="gddInland01" name="gddInternation" #if($groundDetail.gddInternation == '1') checked #end value="1" /> 国内
+				</label>
+                <label>
+                    <input type="radio" id="gddInland02" name="gddInternation" #if($groundDetail.gddInternation == '2') checked #end value="2" /> 国际/港澳台
+				</label>
+            </div>
+		</div>
+		<div class="cb"></div>
+        <div class="doadmin_topl" style="margin-top:15px;width:auto;">
+			<div class="doadmin_toplbox">
+				<span>产品编码：</span>
+				<div class="doadmin_toplbra">
+					<input type="text" value="$!groundDetail.gddCode" name="gddCode" style="height:28px;width:150px;margin-left:2px;"/>
+				</div>
+			</div>
+			<div class="doadmin_toplbox" id="szd01" style="margin-left:-139px;width:480px;">
+				<span>出发城市：</span>
+				<div class="doadmin_toplbrb" style="width:360px;">
+					#lockProvince('gddProvice','gddProvice','','1',$!groundDetail.gddProvice,'gddCity','gddCounty',$!groundDetail.gddCity,$!groundDetail.gddCounty)
+                    <select name='gddCity' id='gddCity' class='w90' onchange="lock.town($(this),'gddCounty');"></select>
+                    <select name='gddCounty' id='gddCounty' class='w90'></select>
+				</div>
+			</div>
+			<div class="doadmin_toplbox" id="szd02" style="margin-left:-139px;">
+				<span>出发城市：</span>
+				<div class="doadmin_toplbrb" style="width:300px;">
+    				<label>
+                        <input type="radio" name="gddCountylocation" id="nation01" value="01" #if($groundDetail.gddCountylocation == '01') checked #end/>香港&nbsp;
+					</label>
+					<label>
+						<input type="radio" name="gddCountylocation" id="nation02" value="02" #if($groundDetail.gddCountylocation == '02') checked #end/>澳门&nbsp;
+					</label>
+                    <label>
+						<input type="radio" name="gddCountylocation" id="nation03" value="03" #if($groundDetail.gddCountylocation == '03') checked #end/>台湾&nbsp;
+					</label>
+                    <label>
+						<input type="radio" name="gddCountylocation" id="nation04" value="04" #if($groundDetail.gddCountylocation == '04') checked #end/>国际&nbsp;
+    				</label>
+                </div>
+        	</div>
+			<div class="co_nationdiv" id="county01">
+				<span>国家：</span>
+				<input type="text" name="gddMajorcountries" value="$!groundDetail.gddMajorcountries" style="width:120px;height:25px;border: 1px solid #ccc;">
+				<span>城市：</span>
+				<input type="text" name="gddDeparturecity" value="$!groundDetail.gddDeparturecity" style="width:120px;height:25px;border: 1px solid #ccc;">
+			</div>
+		</div>
+		<div class="cb"></div>
+		<div class="doadmin_topl" style="margin-top:15px;width:auto;">
+			<div class="doadmin_toplboxa" style="width:270px;">
+				<span style="font-weight:400;  width:100px;">产品编号：</span>
+				<div class="doadmin_toplbra" style="width:160px;">
+					<input type="text" value="$!groundDetail.gddCodeone" name="gddCodeone" style="height:28px;width:150px;"/>
+				</div>
+			</div>
+			<div class="doadmin_toplboxa" style="width:270px;">
+				<span style="font-weight:400; width:98px;">线路名称：</span>
+				<div class="doadmin_toplbra" style="width:160px;">
+					<input type="text" value="$!groundDetail.gddName" name="gddName" style="height:28px;width:150px;"/>
+				</div>
+			</div>
+			<div class="doadmin_toplboxa" style="width:270px;">
+				<span style="font-weight:400; width:98px;">产品标准：</span>
+				<div class="doadmin_toplbra" style="width:160px;">
+					<select  name="gddThemeone" class="searchSelect" style="height:28px;width:102px;">
+						<option value=""></option>
+                        #foreach($item in $standards.keySet())
+							<option value="$item" #if($groundDetail.gddThemeone == $item) selected #end>$standards.get($item)</option>
+                        #end
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="cb"></div>
+		<div class="doadmin_toplboxa" style="width:300px;margin-top:15px;">
+			<span style="font-weight:400; width:124px;">产品形态：</span>
+			<div class="doadmin_toplbra" style="width:160px;">
+				<select name="gddProduct" class="searchSelect" style="height:28px;width:150px;">
+					<option value=""></option>
+                    #foreach($item in $product.keySet())
+						<option value="$item" #if($groundDetail.gddProduct == $item) selected #end>$product.get($item)</option>
+                    #end
+				</select>
+			</div>
+		</div>
+		<div class="input_block clearfix mb20">
+			<div class="label_left" style="font-weight:400;width:93px;margin-top:15px;">出发日期：</div>
+			<div class="input_right input_right_wauto" style="margin-top:15px;">
+				<span class="tishi_box w110" onClick="WdatePicker({minDate:'%y-%M-%d'})">
+					<input type="text" value="$!groundDetail.gpeDate" class="w80" name="gpeDate" style="width:108px;background:url($staticRoot/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer">
+				</span>
+				<label class="ml15" style="width:121px;">公司/品牌名称： </label>
+				<input class="w150" name="cpyName" value="$!groundDetail.cpyName">
+				<button class="y_but ml35" style="margin-left:75px;" type="button" onclick="index.searchform('form1','$appRoot/ground/detail/sametown');">查询</button>
+		    </div>
+		</div>
+	</form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml25" style="width:92%">
+		<table cellspacing="0" cellspadding="0" style="min-width:1000px;">
+			<thead>
+				<tr>
+					<td style="min-width:90px;">产品编码</td>
+					<td style="min-width:70px;">产品编号</td>
+					<td style="min-width:80px;">出发城市</td>
+					<td style="min-width:200px;">路线名称</td>
+					<td style="min-width:70px;">产品标准</td>
+					<td style="min-width:70px;">产品形态</td>
+					<td style="min-width:100px;">价格/数量</td>
+					<td style="min-width:180px;">公司/品牌名称</td>
+					<td style="min-width:100px;">计调/电话</td>
+					<td style="min-width:80px;">在线交流</td>
+					<!-- 
+					<td>在线预定</td>
+					-->
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $groundList)
+    				<tr>
+    					<td>$!item.gddCode</td>
+						<td>$!item.gddCodeone</td>
+    					<td>
+							#if($item.gddInternation == '1')
+								  #vregion($!item.gddCity)
+							#else
+								#if($item.gddCountylocation == '04')
+									$item.gddMajorcountries $item.gddDeparturecity
+								#else
+									#vtext($item.gddCountylocation,'C108')
+								#end
+							#end
+						</td>
+    					<td><a style="white-space:normal;word-break:break-all;word-wrap:break-word;" href="$webRoot/ground/lvyouxiang/$item.id" target="_blank" title="查看外网展示">$!item.gddName</a></td>
+    					<td>$!item.gddThemeone</td>
+    					<td>$!item.gddProduct</td>
+    					<td>
+							<a href="javascript:index.load('$appRoot/ground/price/list?gdlId=$!item.id&gdlName=$!item.gddName&portal=05');">
+								#if($erim.isNotEmpty($!item.gpeTradeAdult))
+									￥$!item.gpeTradeAdult元/$!item.gpeSign位
+								#else
+									查看量/价
+								#end
+							</a>
+						</td>
+    					<td>$!item.cpyName / $!item.cpyBrand</td>
+    					<td>$!item.ccpName / $!item.ccpTelephone</td>
+						<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+						<!--<td><a href="javascript:index.load('$appRoot/ground/order/insert')">预订</a></td>-->
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

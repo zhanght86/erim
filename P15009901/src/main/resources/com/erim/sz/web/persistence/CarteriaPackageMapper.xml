@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CafeteriaPackage">
+	<sql id="sql_query">
+		<where>
+			<if test="cdlID != null  and cdlID != ''">	and 	cdl_id 	 =  #{cdlID} </if>
+		</where>
+	</sql>
+	<sql id="sql_column">
+			id,
+			cdl_id				AS cdlID,	
+			cpe_name 	        AS cpeName,
+			cpe_person_min      AS cpePersonMin,
+			cpe_person_max      AS cpePersonMax,
+			cpe_start_time      AS cpeStartTime,
+			cpe_end_time        AS cpeEndTime,
+			cpe_content_price   AS cpeContentPrice,
+			cpe_introduction    AS cpeIntroduction,
+ 			cpe_buy_know        AS cpeBuyKnow,
+ 			cpe_friendly_tips   AS cpeFriendlyTips,
+ 			cpe_img5            AS cpeImg5
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="cafeteriaPackageBean">
+		select <include refid="sql_column" /> ,b.cpc_retail_price as cpcRetailPrice from cafeteria_package a
+		left join 
+		(
+			select c1.cpe_id ,min(c1.cpc_retail_price) as cpc_retail_price from cafeteria_price c1  join 
+			(
+				select c2.cpe_id,max(c2.cpc_create_time) as cpc_create_time,c2.cpc_date  from cafeteria_price c2 group by c2.cpc_date ,c2.cpe_id
+			) c2
+			on c1.cpe_id = c2.cpe_id
+			and c1.cpc_create_time = c2.cpc_create_time
+			and c1.cpc_date = c2.cpc_date
+			where c1.cpc_date &gt;= date_format(now(),'%Y-%m-%d') and c1.cpc_date &lt;= date_format(last_day(curdate()),'%Y-%m-%d')
+			GROUP BY  c1.cpe_id
+		) b
+		on a.id = b.cpe_id
+		<if test="cdlID != null  and cdlID != ''">	where	a.cdl_id 	 =  #{cdlID} </if>
+		having cpcRetailPrice is not null
+	</select>
+	<!-- 根据id来查询 -->
+	<select id="selectById" resultType="cafeteriaPackageBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			cafeteria_package
+		WHERE
+			id = #{id}
+		<include refid="sql_query" />
+	</select>
+</mapper>

@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>签证_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+		<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/visa.css">
+	<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/visa.js"></script>
+	<!--script type="text/javascript" src="$staticRoot/js/laydate.js"></script-->
+	
+	<style >
+		##设置宽度
+		pre{
+			width:870px;
+		}
+    </style>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+	
+		<div class="visa">
+			<div class="visa_top">
+				<!--签证头部-->
+				<div class="visa_topl">
+					<div class="visa_crumbs"><a href="#">佳旅签证&nbsp;</a>><a href="#">&nbsp;$managementDetail.mdlNtype&nbsp;</a>><a href="#">&nbsp;$managementDetail.mdlAddress</a>
+					</div>
+					<div class="visa_title">
+						<span>$managementDetail.mdlAddress  ($managementDetail.mdlSend)</span>
+						<label><strong>￥$!managementprice.mdlPriceSeal</strong>元起/人</label>
+						<p class="b_bianhao_mr20 b_fr_lh45" style="float:left;margin-left:20px;line-height:50px;">产品编号：$managementDetail.mdlCode</p>
+					</div>
+					<div class="visa_date">
+						<span>出行日期</span>
+						<input class="laydate-icon" onclick="laydate()">
+						<span>成人</span><input type="text">
+						<span>儿童</span><input type="text">
+						<button  onclick="ordertips()">立即预订</button>
+					</div>
+					<div class="visa_qijia">
+						<div class="visa_qijial">
+							起价说明:
+						</div>
+						<div class="visa_qijiar">本起价是可选出发日期中，按双人出行共住一间房核算的最低单人价格。产品价格会根据您所选择的出行日期、出行人数、入住酒店房型航班或交通以及所选附加服务的不同而有所差别</div>
+					</div>
+				</div>
+				<div class="visa_topr">
+					#if($!managementDetail.mdlFlag)
+						<img src="$staticRoot$managementDetail.mdlFlag" title="" alt="">
+					#else
+						<img src="$staticRoot/images/visa1.jpg" title="" alt="">
+					#end
+				</div>
+				<!--/签证头部-->
+			</div>
+			<div class="visa_tct">
+			<!--	<div class="visa_tct2l">
+					产品编号
+				</div> 
+				<div class="visa_tct2r">
+					$managementDetail.mdlCode
+				</div>-->
+				
+			<!--	<div class="visa_tct2l">
+					<span style="font-weight:bold;">国家</span>
+				</div> 
+				<div class="visa_tct2r">
+					$managementDetail.mdlAddress
+				</div>-->
+				<div class="visa_tct2l">
+					签证类型
+				</div> 
+				<span class="visa_span">
+					$managementDetail.mdlNtype
+				</span>
+			<!--	<div class="visa_tct2l">
+					<span style="font-weight:bold;">签证材料</span>
+				</div> 
+				<div class="visa_tct2r">
+					$managementDetail.mdlNtype
+				</div>-->
+				<div class="visa_tct2l">
+					办理时长
+				</div> 
+				<span class="visa_span">
+					$managementDetail.mdlLong 天
+				</span>
+				<br clear="left">
+				<div class="visa_tct2l">
+					入境次数
+				</div> 
+				<span class="visa_span">
+					$managementDetail.mdlNum
+				</span>
+				<div class="visa_tct2l">
+					可停留天数
+				</div> 
+				<span class="visa_span">
+					$managementDetail.mdlStay 天
+				</span>
+				<br clear="left">
+				<div class="visa_tct2l">
+					签证有效期
+				</div> 
+				<span class="visa_span">
+					$managementDetail.mdlValidity 个月
+				</span>
+			<!--	<div class="visa_tct2l">
+					<span style="font-weight:bold;">材料名称</span>
+				</div> 
+				<div class="visa_tct2r">
+					$managementDetail.mdlMaterial
+				</div>
+				<div class="visa_tct2l">
+					<span style="font-weight:bold;">材料说明</span>
+				</div> 
+				<div class="visa_tct2r">
+					$managementDetail.mdlTextKnow
+				</div>-->
+				<div class="visa_tct2l">
+					是否面签
+				</div> 
+				<span class="visa_span">
+					$managementDetail.mdlInterview
+				</span>
+				<br clear="left">
+				<div class="visa_tct2l">
+					签证办理流程
+				</div> 
+				<div class="visa_tct2r">
+					<pre>$!managementDetail.mdlMoneyContain</pre>
+				<!--	<img src="$staticRoot/images/visa2.jpg"> -->
+				</div>
+				<div class="visa_tct2l">
+					受理范围
+				</div> 
+				<div class="visa_tct2r">
+					<pre>$!managementDetail.mdlProvince</pre>
+				</div>
+			<!--	<div class="visa_tct2l">
+					<span style="font-weight:bold;">送签地</span>
+				</div> 
+				<div class="visa_tct2r">
+					$managementDetail.mdlSend
+				</div>-->
+			</div>
+			<!--签证tab-->
+			<div class="visa_cter">
+				<div class="visa_ctertop">
+					<ul>
+						<li class="visa_ctertoplihover" readonly>材料明细</li>
+						<li>预订说明</li>
+					</ul>
+				</div>
+				<div class="visa_cterbig">
+					<div class="visa_cterbox">
+						<div class="visact_bul">
+							<ul>
+								<li>在职</li>
+								<li>自由职业</li>
+								<li>在校学生</li>
+								<li>退休</li>
+								<li>学龄前儿童</li>
+							</ul>
+							<p></p>
+						</div>
+						
+						<div class="visa_cterboxbiger">
+							<!-- 在职-->
+							<div class="visa_cterboxbd show">
+								#foreach($item in $mapMaterial1)
+								<div class="visa_ctbxbd">
+									<h2 class="notes-title">$item.mmlMaterial</h2>
+                    				<pre>$item.mmlKnow</pre>
+									#if($!item.mmlImg != '')
+										 <a href="$staticFileRes$item.mmlImg" title="" target="_blank">
+    										<img src="$staticFileRes$item.mmlImg" class="notes-txt-img" style="height:225px;">
+    									 </a>
+									#end
+									#if($!item.mmlText != '')
+									<div class="notes-line">
+                    					<span class="notes-stitle">
+												<a class="notes-stext" title="" target="_blank" href="$staticFileRes$item.mmlText">附件下载</a>
+										</span>
+									</div>
+									#end
+								</div>
+								#end
+								<!--<div class="visa_down"><a href="$appRoot/$cpyno/management/qianzheng/download/$!managementDetail.id?mmlNtype=1">马上下载</a></div>-->
+							</div>
+							<div class="visa_cterboxbd">
+								#foreach($item in $mapMaterial2)
+								<div class="visa_ctbxbd">
+									<h2 class="notes-title">$item.mmlMaterial</h2>
+                    				<pre>$item.mmlKnow</pre>
+								    #if($!item.mmlImg != '')
+										 <a href="$staticFileRes$item.mmlImg" title="" target="_blank">
+    										<img src="$staticFileRes$item.mmlImg" class="notes-txt-img" style="height:225px;">
+    									 </a>
+									#end
+									<div class="notes-line">
+                    					<span class="notes-stitle">
+											#if($!item.mmlText != '')
+											<a class="notes-stext" title="" target="_blank" href="$staticFileRes$item.mmlText">附件下载</a>
+											#end
+										</span>
+									</div>
+								</div>
+								#end
+								<!--<div class="visa_down"><a href="$appRoot/$cpyno/management/qianzheng/download/$!managementDetail.id?mmlNtype=2">马上下载</a></div>-->
+							</div>
+							<div class="visa_cterboxbd">
+								#foreach($item in $mapMaterial3)
+								<div class="visa_ctbxbd">
+									<h2 class="notes-title">$item.mmlMaterial</h2>
+                    				<pre>$item.mmlKnow</pre>
+								    #if($!item.mmlImg != '')
+										 <a href="$staticFileRes$item.mmlImg" title="" target="_blank">
+    										<img src="$staticFileRes$item.mmlImg" class="notes-txt-img" style="height:225px;">
+    									 </a>
+									#end
+									<div class="notes-line">
+                    					<span class="notes-stitle">
+											#if($!item.mmlText != '')
+											<a class="notes-stext" title="" target="_blank" href="$staticFileRes$item.mmlText">附件下载</a>
+											#end
+										</span>
+									</div>
+								</div>
+								#end
+								<!--<div class="visa_down"><a href="$appRoot/$cpyno/management/qianzheng/download/$!managementDetail.id?mmlNtype=3">马上下载</a></div>-->
+							</div>
+							<div class="visa_cterboxbd">
+								#foreach($item in $mapMaterial4)
+								<div class="visa_ctbxbd">
+									<h2 class="notes-title">$item.mmlMaterial</h2>
+                    				<pre>$item.mmlKnow</pre>
+								    #if($!item.mmlImg != '')
+										 <a href="$staticFileRes$item.mmlImg" title="" target="_blank">
+    										<img src="$staticFileRes$item.mmlImg" class="notes-txt-img" style="height:225px;">
+    									 </a>
+									#end
+									<div class="notes-line">
+                    					<span class="notes-stitle">
+											#if($!item.mmlText != '')
+											<a class="notes-stext" title="" target="_blank" href="$staticFileRes$item.mmlText">附件下载</a>
+											#end
+										</span>
+									</div>
+								</div>
+								#end
+								<!--<div class="visa_down"><a href="$appRoot/$cpyno/management/qianzheng/download/$!managementDetail.id?mmlNtype=4">马上下载</a></div>-->
+							</div>
+							<div class="visa_cterboxbd">
+								#foreach($item in $mapMaterial5)
+								<div class="visa_ctbxbd">
+									<h2 class="notes-title">$item.mmlMaterial</h2>
+                    				<pre>$item.mmlKnow</pre>
+								    #if($!item.mmlImg != '')
+										 <a href="$staticFileRes$item.mmlImg" title="" target="_blank">
+    										<img src="$staticFileRes$item.mmlImg" class="notes-txt-img" style="height:225px;">
+    									 </a>
+									#end
+									<div class="notes-line">
+                    					<span class="notes-stitle">
+											#if($!item.mmlText != '')
+											<a class="notes-stext" title="" target="_blank" href="$staticFileRes$item.mmlText">附件下载</a>
+											#end
+										</span>
+									</div>
+								</div>
+								#end
+								<!--<div class="visa_down"><a href="$appRoot/$cpyno/management/qianzheng/download/$!managementDetail.id?mmlNtype=5">马上下载</a></div>-->
+							</div>
+						</div>
+					</div>
+					<div class="visa_cterbox" style="float:left;padding:20px 46px 40px 44px;width:1108px;display:none;">
+						<h2 class="notes-title">
+        					预订须知
+                        </h2>
+                       <pre>$!managementDetail.mdlOrderKnow</pre>
+        				<!--结束-->
+						
+        				<!--开始-->
+        				<h2 class="notes-title">
+        					签证类型说明
+                        </h2>
+						<pre>$!managementDetail.mdlResponsibility</pre>
+        				<!--结束-->
+        				<!--开始-->
+						#if($managementDetail.mdladdInstruction !='')
+        				<h2 class="notes-title">
+        					补充说明
+                        </h2>
+						<pre>$!managementDetail.mdladdInstruction</pre>
+						#end
+        				<!--结束-->
+					</div>
+				</div>
+			</div>
+			<!--/签证tab-->
+		</div>
+		#parse("common/footer.vm")
+                            </div>
+</body>
+</html>
+ <script>
+!function(){
+laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+laydate({elem: '#demo'});//绑定元素
+}();
+
+laydate(start);
+laydate(end);
+//自定义日期格式
+laydate({
+    elem: '#test1',
+    format: 'YYYY年MM月DD日',
+    festival: true, //显示节日
+    choose: function(datas){ //选择日期完毕的回调
+        alert('得到：'+datas);
+    }
+});
+//日期范围限定在昨天到明天
+laydate({
+    elem: '#hello3',
+    min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
+    max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+});
+
+function ordertips(){
+	alert('对不起，预定功能暂不开放');
+}
+
+</script>

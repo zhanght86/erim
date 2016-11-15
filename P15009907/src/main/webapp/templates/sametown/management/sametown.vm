@@ -1,0 +1,60 @@
+<div class="rdivv">
+	<div class="tese">
+		<div class="tesetop4">			
+		</div>
+		<div class="tesetop2">
+			<form class="form-search" method="post" id="form1">
+    			<div class="teseline">
+    				<span>名称：</span>
+    				<input class="input-medium search-query" name="mdlName" value="$!planeticketDetail.mdlName" type="text" />
+    			</div>
+    			<button type="button" onclick="index.searchform('form1','$appRoot/cafeteria/order/list');"></button>
+            </form>
+		</div>
+		<div class="tesetop3"></div>
+
+		<div class="tesect">
+			<div class="tesetable">
+				<table border="0" cellspadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>订单信息</th>
+    						<th>订单编号</th>
+    						<th>确认订单</th>
+                            <th>总价格</th>
+    						<th>线上支付</th>
+    						<th>线下支付</th>
+    						<th>最终支付</th>
+                            <th>下单时间</th>
+    						<th>确认/拒接</th>
+    						<th >状态</th>
+    						<th >操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($item in $managementList)
+						<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+                            <td>$!item.id</td>
+    	                    <td>$!item.corCode</td>
+    	                    <td>$!item.corIssure</td>
+                            <td>$!item.corTotalprice</td>
+    						<td>$!item.corPayOnline</td>
+    						<td>$!item.corPayOffline</td>
+    						<td>$!item.corPayMoney</td>
+                            <td>$!item.corCreatetime</td>
+    						<td>$!item.corNtype</td>
+    						<td>#if($item.corIsThrough == 1)<font color="red">已接单</font> #else 未接单 #end</td>
+    						 <td >
+    							<input type="hidden" id="$!item.id" value="$!item.corIsThrough">
+                                <a href="javascript:;" name="operate" id="receive_$!item.id">接单</a>&nbsp;&nbsp;
+                                <a href="javascript:;" name="operate" id="refuse_$!item.id">拒接</a>
+                             </td>
+						</tr>
+						#end
+					</tbody>
+				</table>
+				#parse("common/page.vm")
+			</div>
+		</div>
+	</div>
+</div>

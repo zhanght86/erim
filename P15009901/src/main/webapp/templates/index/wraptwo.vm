@@ -1,0 +1,13 @@
+<!--bar右边-->
+<div class="indexwraptwo">
+	<ul>
+		<li><a href="$appRoot/$cpyno/jiudian.html" target="_blank" class="inde_jiu">酒店</a></li>
+		<li><a href="$appRoot/$cpyno/menpiao.html" target="_blank" class="inde_men">门票</a></li>
+		<li><a href="$appRoot/$cpyno/car.html" target="_blank" class="inde_zu">租车</a></li>
+		<li><a href="$appRoot/$cpyno/daoyou.html" target="_blank" class="inde_dao">导游</a></li>
+		<li><a href="$appRoot/$cpyno/qianzhengxiang.html" target="_blank" class="inde_qian">签证</a></li>
+		##<li><a href="$appRoot/$cpyno/jipiao.html" target="_blank" class="inde_ji">机票</a></li>
+		<li><a href="$appRoot/$cpyno/tesecan.html" target="_blank" class="inde_te">特色餐</a></li>
+	</ul>
+</div>
+<!--bar右边-->

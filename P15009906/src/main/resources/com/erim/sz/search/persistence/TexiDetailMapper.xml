@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="texidetail">
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		texi_detail.id,
+		tdl_code					 AS tdlCode,
+		tdl_inland					 AS tdlInland,
+		tdl_province                 AS tdlProvince,
+		tdl_city                     AS tdlCity,
+		tdl_county                   AS tdlCounty,
+		tdl_external                 AS tdlExternal,
+		tdl_foreign                  AS tdlForeign,
+		tdl_foreign_city             AS tdlForeignCity,
+		tdl_brand                    AS tdlBrand,
+		tdl_name                     AS tdlName,
+		tdl_text_type				 AS tdlTexttype,
+		tdl_type                     AS tdlType,
+		tdl_text_gear				 AS tdlTextgear,
+		tdl_text_pail				 AS tdlTextpail,
+		tdl_num                      AS tdlNum,
+		tdl_createcardate            AS tdlCreatecardate,
+		tdl_img_appearance           AS tdlImgAppearance,
+		tdl_img_bosom                AS tdlImgBosom,
+		tdl_jiedan					 AS tdlJiedan,
+		tdl_createuser               AS tdlCreateuser,
+		tdl_createdate               AS tdlCreatedate,
+        texi_detail.cpy_id                   AS cpyId,
+		tdl_is_del_status            AS tdlIsDelStatus
+	</sql>
+	
+	<sql id="sql_query">
+		<where>
+			1 = 1
+		
+					  			  
+		      <if test="tdlCode != null    			and tdlCode != ''">	            		and 	tdl_code 	                like "%"#{tdlCode}"%"</if>
+			  <if test=" tdlInland!= null and tdlInland!= '' ">                                 				and     tdl_inland              		=	#{tdlInland}</if>
+			  
+			  <if test="tdlInland == 02">
+			     <if test="tdlProvince != null    			and tdlProvince != ''">	            		and 	tdl_province 	                like "%"#{tdlProvince}"%"</if>
+		         <if test="tdlCity != null    			and tdlCity != ''">	            		and 	tdl_city 	                like "%"#{tdlCity}"%"</if>
+		         <if test="tdlCounty != null    			and tdlCounty != ''">	            		and 	tdl_county 	                like "%"#{tdlCounty}"%"</if>
+			  </if> 
+		      <if test="tdlInland == 01">
+		        
+		         <if test="tdlExternal != null    			and tdlExternal != ''">	            		and 	tdl_external 	                like "%"#{tdlExternal}"%"</if>
+		         <if test="tdlForeign != null    			and tdlForeign != ''">	            		and 	tdl_foreign 	                like "%"#{tdlForeign}"%"</if>
+		         <if test="tdlForeignCity != null    			and tdlForeignCity != ''">	            		and 	tdl_foreign_city 	                like "%"#{tdlForeignCity}"%"</if>
+		      
+		      </if> 
+		       <if test="tdlTexttype != null    			and tdlTexttype != ''">	            		and 	tdl_text_type 	                like "%"#{tdlTexttype}"%"</if>
+		       <if test="tdlType != null    			and tdlType != ''">	            		and 	tdl_type 	                like "%"#{tdlType}"%"</if>
+		      					      
+		      
+              <if test="allTexiIdType == 01">
+	             and
+	           	   ( EXISTS
+                     ( select a.id from  texi_send a join  texi_send_price b on  b.send_id= a.id 
+                      where a.tdl_id=texi_detail.id and gdl_type=#{allTexiIdType}
+                         <if test="tspDate1 != null  and  tspDate1 != ''">
+                             and b.tsp_date=#{tspDate1} 
+                         </if>
+                         <if test="gdlStart != null  and  gdlStart != ''">
+                             and (a.gdl_start like "%"#{gdlStart}"%" )
+                         </if>
+                         <if test="gdlEnd != null  and  gdlEnd != ''">
+                             and (a.gdl_end like "%"#{gdlEnd}"%" )
+                         </if>    
+                         and  (b.tsp_date &gt;=CURDATE() )    
+                      )
+                   )
+	             
+			  </if>
+			  <if test="allTexiIdType == 02">
+	             and
+	           	   ( EXISTS
+                     ( select a.id from  texi_send a join  texi_send_price b on  b.send_id= a.id 
+                      where a.tdl_id=texi_detail.id and gdl_type=#{allTexiIdType}
+                         <if test="tspDate2 != null  and  tspDate2 != ''">
+                             and b.tsp_date=#{tspDate2} 
+                         </if>
+                          <if test="gdlMachine != null  and  gdlMachine != ''">
+                             and (a.gdl_machine like "%"#{gdlMachine}"%" )
+                         </if>
+                         <if test="gdlMachineback != null  and  gdlMachineback != ''">
+                             and (a.gdl_machineback like "%"#{gdlMachineback}"%" )
+                         </if>
+                         and  (b.tsp_date &gt;=CURDATE() )     
+                      )
+                   )
+	             
+			  </if>
+			  
+			   <if test="allTexiIdType == 03">
+	             and
+	           	   ( EXISTS
+                     ( select a.id from  texi_send a join  texi_send_price b on  b.send_id= a.id 
+                      where a.tdl_id=texi_detail.id and gdl_type=#{allTexiIdType}
+                         <if test="tspDate3 != null  and  tspDate3 != ''">
+                             and b.tsp_date=#{tspDate3} 
+                         </if>
+                          <if test="gdlStation != null  and  gdlStation != ''">
+                             and (a.gdl_station like "%"#{gdlStation}"%" )
+                         </if>
+                         <if test="gdlStationup != null  and  gdlStationup != ''">
+                             and (a.gdl_stationup like "%"#{gdlStationup}"%" )
+                         </if>   
+                         and  (b.tsp_date &gt;=CURDATE() )  
+                      )
+                   )
+	             
+			  </if>
+			  
+			   <if test="allTexiIdType == 04">
+	             and
+	           	   ( EXISTS
+                     ( select a.id from  texi_send a join  texi_send_price b on  b.send_id= a.id 
+                      where a.tdl_id=texi_detail.id and gdl_type=#{allTexiIdType}
+                         <if test="tspDate4 != null  and  tspDate4 != ''">
+                             and b.tsp_date=#{tspDate4} 
+                         </if>
+                          <if test="gdlStationback != null  and  gdlStationback != ''">
+                             and (a.gdl_stationback like "%"#{gdlStationback}"%" )
+                         </if>
+                         <if test="gdlStationnup != null  and  gdlStationnup != ''">
+                             and (a.gdl_stationnup like "%"#{gdlStationnup}"%" )
+                         </if>  
+                         and  (b.tsp_date &gt;=CURDATE() )   
+                      )
+                   )
+	             
+			  </if>
+			  
+			   <if test="allTexiIdType == 05">
+	             and
+	           	   ( EXISTS
+                     ( select a.id from  texi_send a join  texi_send_price b on  b.send_id= a.id 
+                      where a.tdl_id=texi_detail.id and gdl_type=#{allTexiIdType}
+                         <if test="tspDate5 != null  and  tspDate5 != ''">
+                             and b.tsp_date=#{tspDate5} 
+                         </if>
+                          <if test="gdlStartcity != null  and  gdlStartcity != ''">
+                             and (a.gdl_startcity like "%"#{gdlStartcity}"%" )
+                         </if>
+                         <if test="gdlEndcity != null  and  gdlEndcity != ''">
+                             and (a.gdl_endcity like "%"#{gdlEndcity}"%" )
+                         </if> 
+                         and  (b.tsp_date &gt;=CURDATE() )    
+                      )
+                   )
+	             
+			  </if>
+				
+			 <if test="allTexiIdType == 06">
+	             and
+	           	   ( EXISTS
+                     ( select  b.tcp_date from texi_car a join texi_car_price b on a.id=b.bcl_id 
+                         where   a.tdl_id= texi_detail.id
+                         
+                         <if test="tcpDate1 != null  and  tcpDate1 != ''">
+                             and b.tcp_date=#{tcpDate1} 
+                         </if>
+                         and  (b.tcp_date &gt;=CURDATE() )  
+                         
+                       
+                     )
+                   )
+	             
+			  </if>	
+			  
+			   <if test="allTexiIdType == 07">
+	             and
+	           	   ( EXISTS
+                     ( select  b.id from texi_drive a join texi_drive_price b on a.id=b.zjl_id 
+                         where   a.tdl_id= texi_detail.id                         
+                         
+                         <if test="tdpDate1 != null  and  tdpDate1 != ''">
+                             and b.tdp_date=#{tdpDate1} 
+                         </if>
+                         <if test="zjlBackPlaceVo != null  and  zjlBackPlaceVo != ''">
+                             and (a.zjl_hf_back_place like "%"#{zjlBackPlaceVo}"%" )
+                         </if>
+                         <if test="zjlTakePlaceVo != null  and  zjlTakePlaceVo != ''">
+                             and (a.zjl_hf_take_place like "%"#{zjlTakePlaceVo}"%" )
+                         </if> 
+                         <if test="tdlHuanche != null  and  tdlHuanche != ''">
+                             and b.zjl_place_car=#{tdlHuanche} 
+                         </if> 
+                         and  (b.tdp_date &gt;=CURDATE() )  
+                       
+                     )
+                   )
+	             
+			  </if>	
+				
+		</where>
+	</sql>
+	
+	<!-- 根据ID获取一条租车信息 -->
+	<select id="getTexiDetailById" resultType="texiDetailBean">
+		SELECT
+			<include refid="sql_column" />
+ 		FROM  
+			texi_detail
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageTexi" resultType="texiDetailBean">
+		SELECT
+			<include refid="sql_column" />
+			, 
+			company_detail.cpy_name        			AS cpyName,
+			company_detail.cpy_brand       			AS cpyBrand,
+			company_detail.cpy_telephone   			AS cpyTelephone,
+			company_contact_person.ccp_name			AS ccpName,
+			company_contact_person.ccp_telephone	AS ccpTelephone,
+			company_contact_person.ccp_qq			AS ccpQq,
+			company_business.cbs_operator			AS cbsOperator,
+			company_business.cbs_operator_phone		AS cbsOperatorPhone,
+			company_business.cbs_operator_qq		AS cbsOperatorQq  
+ 		FROM
+			texi_detail    
+		LEFT JOIN
+			company_detail
+		ON 
+			company_detail.id = texi_detail.cpy_id
+		LEFT JOIN
+			company_contact_person
+		ON
+			company_contact_person.cpy_id = texi_detail.cpy_id
+		LEFT JOIN
+			company_business
+		ON
+			company_business.cpy_id = texi_detail.cpy_id
+			<include refid="sql_query" />
+		ORDER BY 
+			tdl_createdate 
+		DESC
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageTexiCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			texi_detail
+	</select>
+	
+</mapper>

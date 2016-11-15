@@ -1,0 +1,333 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/zh.css">
+##<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+
+<div class="zh_block">
+	<ul class="list_main">
+		<li>
+			<dl class="clearfix">
+				<dd>终端费</dd>
+				<dt><span>金额：<em>12800</em>元</span><span>剩余时长：<em>永久</em></span><!--<a href="javascript:void(0);" class="win_2">支付明细</a><a href="#">充值</a>--><span style="color:#A2A29F">赠送</span></dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>服务费</dd>
+				<dt><span>剩余时长：
+    				#if("1"==$!lockuser)
+    					<em>0</em>
+    				#elseif("2"==$!lockuser)
+    					<em>24</em>小时
+    				#elseif("3"==$!lockuser)
+    					<em>15</em>个月
+    				#end
+				</span><span>收费标准：<em>598</em>元/年</span><a class="win_1" href="javascript:void(0);">支付明细</a><a href="$appRoot/price/pay/payService" target="_blank">充值</a></dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>运维费</dd>
+				<dt><span>预付款余额：<em>0</em>元</span><span>收费标准：<em>10</em>元/条/产品</span><span style="color:#A2A29F">半年建设期内赠送</span></dt>
+					##<a href="javascript:void(0);" class="win_5">支付明细</a><a href="#">充值</a></dt>
+			</dl>
+		</li>
+		<li>
+			<dl class="clearfix">
+				<dd>担保金</dd>
+				<dt><span>担保金总额：<em>0</em>元</span><a href="javascript:void(0);" class="win_7">充值明细</a><span>已担保金额：<em>0</em>元</span><a href="javascript:void(0);" class="win_8">担保详情</a><span>可担保金额：<em>0</em>元</span><a href="#">增加担保金</a><a href="#">申请退回</a></dt>
+			</dl>
+		</li>
+	</ul>
+</div>
+<div class="win_box_bg"></div>
+<div class="win_box_edit">
+	<table id="table_1" class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<th width="50%">日期</th>
+			<th>支付</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+	</table>
+	<table id="table_2" class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<th width="33%">日期</th>
+			<th>支付类型</th>
+			<th>支付</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>终端费充值</td>
+			<td class="green">10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>终端费充值</td>
+			<td class="red">-9000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>终端费充值</td>
+			<td class="green">10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>终端费充值</td>
+			<td class="red">-9000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>终端费充值</td>
+			<td class="green">10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>终端费充值</td>
+			<td class="red">-9000元</td>
+		</tr>
+	</table>
+	<table id="table_3" class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<th width="50%">日期</th>
+			<th>支付</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>10000元</td>
+		</tr>
+	</table>
+	<table id="table_4" class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<th width="33%">日期</th>
+			<th>使用条数</th>
+			<th>支付</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>500条</td>
+			<td>500元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>500条</td>
+			<td>500元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>500条</td>
+			<td>500元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>500条</td>
+			<td>500元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>500条</td>
+			<td>500元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>500条</td>
+			<td>500元</td>
+		</tr>
+	</table>
+	<table id="table_5" class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<th width="33%">日期</th>
+			<th>支付类型</th>
+			<th>支付</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>预付款充值</td>
+			<td class="green">10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>周费扣除</td>
+			<td class="red">-9000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>预付款充值</td>
+			<td class="green">10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>周费扣除</td>
+			<td class="red">-9000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>预付款充值</td>
+			<td class="green">10000元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>周费扣除</td>
+			<td class="red">-9000元</td>
+		</tr>
+	</table>
+	<table id="table_6" class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<th width="33%">日期</th>
+			<th>消耗流量</th>
+			<th>剩余套餐流量</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>20MB</td>
+			<td>500MB</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>20MB</td>
+			<td>500MB</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>20MB</td>
+			<td>500MB</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>20MB</td>
+			<td>500MB</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>20MB</td>
+			<td>500MB</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>20MB</td>
+			<td>500MB</td>
+		</tr>
+	</table>
+	<table id="table_7" class="mb10" cellpadding="0" cellspacing="0" border="0">
+		<Caption>担保金总额小计：50000元</Caption>
+		<tr>
+			<th width="33%">日期</th>
+			<th>支付类型</th>
+			<th>总金额变更</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>增加保证金</td>
+			<td class="green">+500元</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>增加保证金</td>
+			<td class="red">-500元</td>
+		</tr>
+		<tr>
+			<td> </td>
+			<td> </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> </td>
+			<td> </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> </td>
+			<td> </td>
+			<td> </td>
+		</tr>
+	</table>
+	<table id="table_8" class="mb10" cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+		<Caption>担保金总额小计：50000元</Caption>
+		<tr style="width:100%;">
+			<th>日期</th>
+			<th>担保订单编号</th>
+			<th>产品类别</th>
+			<th>担保订单内容</th>
+			<th>担保金</th>
+			<th>担保状态</th>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>1234124123</td>
+			<td>酒店</td>
+			<td>西三教招待所/双人标准间/10间/含双早<br>2015年12月12日入住/2015年12月20日离店/共8晚<br>联系人：陈超拥/电话：15699984762</td>
+			<td>50000元</td>
+			<td>担保中</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>1234124123</td>
+			<td>酒店</td>
+			<td>西三教招待所/双人标准间/10间/含双早<br>2015年12月12日入住/2015年12月20日离店/共8晚<br>联系人：陈超拥/电话：15699984762</td>
+			<td>50000元</td>
+			<td>担保中</td>
+		</tr>
+		<tr>
+			<td>2015年5月5日</td>
+			<td>1234124123</td>
+			<td>酒店</td>
+			<td>西三教招待所/双人标准间/10间/含双早<br>2015年12月12日入住/2015年12月20日离店/共8晚<br>联系人：陈超拥/电话：15699984762</td>
+			<td>50000元</td>
+			<td>担保中</td>
+		</tr>
+	</table>
+    <div class="return mb20">
+        <div class="tpage">
+            <a class="no_box" href="#">首页</a>
+            <!--<a class="no_box" href="#">上一页</a>-->
+            <a href="#" class="on">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a class="no_box" href="#">下一页</a>
+            <a class="no_box" href="#">尾页</a>
+        </div>
+    </div>
+		<center><a class="hui_a carinfo_sub" href="javascript:void(0);">返回</a></center>
+</div>

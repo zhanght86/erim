@@ -1,0 +1,282 @@
+	<form method="post" id="form1">
+    <style type="text/css">
+#box{}
+#box li{list-style: none; float: left; } 
+#box ul{margin:0;padding:0;list-style:none}
+#box #tab{height:25px;padding-left:10px;}
+
+#box #tab_con{border-top:none;padding:20px; float: left;}
+#box #tab_con li{display:none;float: left;}
+#box #tab_con #tab_con_1{display:block;}
+</style>
+</head>
+            <div class="search_block clearfix">
+				<div class="input_bg">
+					<div class="input_block clearfix" style="margin-bottom:0;">
+						<div class="input_right input_right_wauto">
+
+							 <label class="ml10 pl10">地区：</label>
+                            <label><input type="radio" id="dq_gn" name="n1">国内</label>
+							<label><input type="radio" name="n1" id="dq_gj">国际/港澳台 </label>
+                            <span id="dq_gn_block" class="ml15"  style="display:none; ">
+								<select class="w90"><option>呼和浩特</option></select> 省
+								<select class="w90"><option></option></select> 市
+								<select class="w90"><option></option></select> 区/县
+							</span>
+							<span id="dq_gj_block" class="ml15" style="display:none; ">	
+								<label><input type="radio" name="n2"> 香港 </label><label>
+										<input type="radio" name="n2"> 澳门 </label>
+										<label><input type="radio" name="n2"> 台湾 </label>
+											<label><input id="gj" type="radio" name="n2">
+													国家
+ </label><span id="gj_block" style="display:none;"><input  class="w130" >   <label class="ml10 pl10">城市：</label> <input id="gj_block" class="w130" ></span>
+	
+	    
+							</span>
+							<div class="cb mb5"></div>
+							 		<label class="ml10 pl10">产品编码</label>
+							<input class="w110" name="" value="">
+
+							<label class="ml10 pl10">出发城市：</label>
+							<input class="w90">
+								<label class="ml10 pl10">目的城市：</label>
+							<input class="w90">
+							
+									<label class="ml10 pl10">出发日期：</label>
+							<input class="w110">
+								<!--<label class="ml10 pl10">返程日期：</label>
+							<input class="w110">-->
+							<span class="red_a ml25" type="button">查询</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="show_block">
+					<div><!--接机-->
+						<span class="input_block clearfix" style="margin-bottom:0;padding:0;border:none;">
+    						<span class="input_right input_right_wauto" style="padding:0;border:none;">
+    							<label class="ml25 pl10">机场：</label>
+    							<input class="w130">
+    							<label class="ml25 pl10">目的地：</label>
+    							<input class="w130">
+    							<label class="ml25 pl10">用车日期：</label>
+    							<input class="w130">
+    						</span>
+						</span>
+					</div>
+				</div>
+				
+				<div class="select_block">
+					<ul class="select_cont clearfix">
+						<li class="first"><span class="span_tit">起飞时间</span></li>
+						<li class="second bx"><a class="on">不限</a></li>
+						<li><a>上午（6点-12点）</a></li>
+						<li><a>下午（12点-18点）</a></li>
+						<li><a>下午（18点-24点）</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>			
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">航空公司</span></li>
+						<li class="second bx"><a class="on">不限</a></li>
+						<li><a>南海航空</a></li>
+						<li><a>厦门航空</a></li>
+						<li><a>上海航空</a></li>
+						<li><a>东方航空</a></li>
+						<li><a>首都航空</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>
+				<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">航位选择</span></li>
+						<li class="second bx"><a class="on">不限</a></li>
+						<li><a>经济舱</a></li>
+						<li><a>商务舱</a></li>
+						
+					</ul>
+					<a class="more_a"></a>
+				</div>
+			
+				<!--<div class="select_block">
+					<ul class="select_cont">
+						<li class="first"><span class="span_tit">设施</span></li>
+						<li class="second"><a class="on">不限</a></li>
+						<li><a>免费无线</a></li>
+						<li><a>免费有线</a></li>
+						<li><a>含早餐</a></li>
+						<li><a>三人/家庭房</a></li>
+						<li><a>大床</a></li>
+						<li><a>双床</a></li>
+						<li><a>停车场</a></li>
+						<li><a>游泳池</a></li>
+						<li><a>接送服务</a></li>
+						<li><a>健身房</a></li>
+						<li><a>穿梭机场班车</a></li>
+						<li><a>新开业/新装修</a></li>
+						<li><a>含早餐</a></li>
+						<li><a>三人/家庭房</a></li>
+						<li><a>大床</a></li>
+						<li><a>双床</a></li>
+						<li><a>停车场</a></li>
+						<li><a>游泳池</a></li>
+						<li><a>接送服务</a></li>
+						<li><a>健身房</a></li>
+						<li><a>穿梭机场班车</a></li>
+						<li><a>新开业/新装修</a></li>
+						<li><a>三人/家庭房</a></li>
+						<li><a>大床</a></li>
+						<li><a>双床</a></li>
+						<li><a>停车场</a></li>
+						<li><a>游泳池</a></li>
+						<li><a>接送服务</a></li>
+						<li><a>健身房</a></li>
+						<li><a>穿梭机场班车</a></li>
+						<li><a>新开业/新装修</a></li>
+					</ul>
+					<a class="more_a"></a>
+				</div>-->
+				
+			</div>
+		<a class="big_more_a"  style="display: none;">更多查询项</a>
+	</form>
+	<div class="g_block_2 g_block_7 mb20">
+		
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th>产品编码</th>
+                <th>航空公司</th>
+                <th>航班号</th>
+				 <th>航位类型</th>
+                <th>起飞机场/时间</th>
+                <th>中转城市/时间</th>
+                <th>到达城市/时间</th>
+               
+                <th>公司/品牌名称</th>
+              <!--  <th>负责人/电话</th> -->
+                <th>计调/电话</th>
+                <th>在线交谈</th>
+				<th>预订</th>
+			</tr>
+			#foreach($item in $planeticketList)
+				<tr>
+                  	<td>$!item.ptdNo</td>
+                    
+					<td>$!item.ptdNumber</td>
+					<td><a class="clistctma_ctl" href="javascript:void(0);">$!item.ptdCompany</a></td>
+                    <td>$!item.ptdStartCity$!item.ptoStartTime</td>
+					<td>$!item.ptdEndStay</td>
+					<td>$!item.ptdEndCity$!item.ptoEndTime</td>
+					<td>$!item.ptdClassEconomy</td>
+					<td>$!item.cpyName</td>
+					<!--<td>$!item.cpyTelephone</td> -->
+					<td>$!item.ccpName / $!item.ccpTelephone</td>
+					<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.cdlPeopleQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+					<!--<td><a href="javascript:index.load('$appRoot/reservation/planeticket/page')">预订</a></td>-->
+					<td><a class="chakan_a" href="javascript:void(0);">查看</a></td>
+				</tr>
+              #end
+		</table>
+		
+		#parse("common/page.vm")
+	</div>
+<div class="chakan_jdxx clearfix" style="display:none;">
+	 	<div class="b_div_h35">
+            <ul style="margin:0px;padding:0px;clear:both">
+                <li><span class="mr20" style="font-size:16px;">南洋航空公司</span><span class=" mr20">国内</span>=经停北京上海澳门</li>
+            </ul>
+            <a class="close_a" href="javascript:void(0);"></a>
+        </div>
+        <div class="b_div_h270 pl24"><br>
+                 <p><span>中转城市/时间：</span>北京  15：00</p>
+                 <p><span>飞机餐：</span>中餐、西餐</p>
+				 <p><span>飞行总时长：</span>24小时</p>
+				
+			<br>
+        </div>
+</div>
+<div class="chakan_cont clearfix">
+            <table class="fl_list_g" cellpadding="0" cellspacing="0">
+				<tr class="fl_list_t">
+                	<td class="w130">舱位类型</td>
+					<td class="w270">退改签规则</td>
+					<td class="w100">税费</td>
+					
+				
+					<td colspan="6" class="date_td"><img width="10" class="first" src="$staticRoot/images/aas_03.png"><span class="date_cont"><a class="jin" href="javascript:;">11/23</a><a href="#">11/24</a><a href="javascript:;">11/25</a><a href="javascript:;">11/26</a><a class="on" href="javascript:;">11/27</a><a href="javascript:;">11/28</a></span><img width="10" class="last" src="$staticRoot/images/aas_05.png"></td>
+				</tr>
+				<tr>
+                	<td class="w130">经济舱</td>
+					<td class="w270">需手续费<br>带身份证等证件</td>
+					<td class="w100">20</td>
+				
+					
+					<td class="w101">量20张<br>批190元<br>零180元</td>
+					<td class="w101">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+				</tr>
+				<tr>
+                <td class="w130">经济舱</td>
+					<td class="w270">需手续费<br>带身份证等证件</td>
+					<td class="w100">20</td>
+					
+					<td class="w101">量20张<br>批190元<br>零180元</td>
+					<td class="w101">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+					<td class="w90">量20张<br>批190元<br>零180元</td>
+				</tr>
+				
+            </table>              
+			<a class="a_zhifu" href="#">预订</a><br><br><br>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".select_block").each(function(){
+		if($(this).height()>90){
+			$(this).children(".more_a").show();
+			$(this).css({"height":"40px","overflow":"hidden"});
+		}
+	})
+	/*酒店详情*/
+	$(".zh_block").on("click",".clistctma_ctl",function(){
+			$(".chakan_block").parent().parent().remove();
+			$(this).parent().parent().after("<tr><td colspan = '12' style='height:0;'><div class='chakan_block'></div></td></tr>");
+			var el = $(".chakan_block"),curHeight = el.height(),autoHeight = el.css('height', 'auto').height()+$(".chakan_jdxx").height();
+			el.height(curHeight).animate({height: autoHeight}, 500);
+			$(".chakan_jdxx").clone().appendTo(".chakan_block").show();
+			$(".chakan_a").text("查看").css("background-color","#EB6464");
+	})
+	$(".zh_block").on("click",".g_block_2 .close_a",function(){
+		$(".chakan_block").animate({height:"0px"},function(){
+			$(".chakan_block").parent().parent().remove();
+		});
+	});
+	
+
+	/*酒店预订*/
+	$(".chakan_a").click(function(){
+		if($(this).text()=="查看"){
+			$(".chakan_block").parent().parent().remove();
+			$(this).parent().parent().after("<tr><td colspan = '12' style='height:0;'><div class='chakan_block'></div></td></tr>");
+			var el2 = $(".chakan_block"),curHeight = el2.height(),autoHeight = el2.css('height','auto').height()+$(".chakan_cont").height()+5;
+			el2.height(curHeight).animate({height: autoHeight}, 500);
+			$(".chakan_cont").clone().appendTo(".chakan_block").show();
+			$(".chakan_a").text("查看").css("background-color","#EB6464");
+			$(this).text("查看中").css("background-color","#969696");
+		}
+		else{
+			$(".chakan_block").animate({height:"0px"},function(){
+				$(".chakan_block").parent().parent().remove();
+			});
+			$(this).text("查看").css("background-color","#EB6464");
+		}
+	})
+})
+</script>
+ 

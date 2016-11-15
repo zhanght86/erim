@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>旅游咨询_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<script type="text/javascript" src="$staticRoot/js/jquery.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script> 
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+    <link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			<div class="about_left">
+            	<div class="about_zx" id="gongsi1" onclick="show_about(this.id,'rigrht1')">关于我们</div>
+            	<a href="$appRoot/$cpyno/news/news?newType=00"><div class="about_zx" id="gongsi3" onclick="show_about(this.id,'rigrht3')">旅游资讯</div></a>
+                <a href="$appRoot/$cpyno/news/newsCX?newType=01"><div class="about_gs" id="gongsi1" onclick="show_about(this.id,'rigrht1')">出行指南</div></a>
+                <a href="$appRoot/$cpyno/news/newsHW?newType=02"><div class="about_zx" id="gongsi4" onclick="show_about(this.id,'rigrht4')">户外指南</div></a>
+				<a href="$appRoot/$cpyno/news/newsFooter"><div class="about_zx" id="gongsi5" onclick="show_about(this.id,'rigrht5')">帮助中心</div></a>
+			</div>
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht3">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">出行指南</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">出行指南</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<p>$newsBean.newTitle</p>
+								<div class="about_guib">
+									<ul>
+										<li>来源：</li>
+										<li>时间： $newsBean.createTime</li>
+										<li>点击： $newsBean.newClick</li>
+									</ul>
+								</div>
+								<div class="about_guic">
+									<p><span>摘要: </span>$newsBean.newContent
+									</p>
+								</div>
+								<div class="about_cen">
+									<p> $newsBean.newContent</p>
+									
+								</div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+			
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+
+<!--中间内容区域 结束-->
+		#parse("common/footer.vm")
+</body>
+</html>

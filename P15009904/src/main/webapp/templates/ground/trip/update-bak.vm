@@ -1,0 +1,292 @@
+<script >
+	window.UEDITOR_HOME_URL = "$staticRoot/js/ueditor/1.4.3/";
+</script>
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/ueditor.config.lianhe.js"></script>
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/lang/en/en.js"></script>
+<link rel="stylesheet" href="$staticRoot/js/ueditor/1.4.3/themes/default/css/ueditor.css" type="text/css">
+<!-- 专线行程-->
+<div class="newline">
+<div class="newline_suptop">
+    <img src="$staticRoot/images/ddy.png" />
+    <span>行程管理</span>
+	<div class="cb"></div>
+	<div class="g_line"></div>
+</div>
+<div class="newline_ct">
+    <div class="newline_ctr">
+        <div class="newline_ctrl">
+            <span><strong>行程管理</strong></span>
+        </div>
+		#foreach($item in $groundtrip)
+			<form method="post">
+    			<input type="hidden" name="id" value="$item.id" />
+        		<input type="hidden" name="tdlId" value="$!tdlId"/>
+                <div class="newline_ctrlbox">
+                	<div class="newline_ctrlbls">
+                		<span><strong>第<span name='span_day'>$velocityCount</span>天</strong>线路：</span>
+                        <input type="text" name="gddLine" value="$!item.gddLine"  class="validate[maxSize[30]]" />
+                		<div class="newline_ctrlblrs">
+                			<select class="w80" name="gddTool">
+                				#foreach($item in $traffic.keySet())
+									<option value="$item" #if($item.gddTool == $item) selected #end>$traffic.get($item)</option>
+                                #end
+                			</select>
+                			<input type="text" name="gddLineup" value="$!item.gddLineup" class="validate[maxSize[30]]" />
+                			<a href="javascript:void(0);">+</a>
+                		</div>
+                	</div>
+                    <div class="newline_ctrlbl">
+                        <span>上午：</span>
+                        <div class="newline_ctrlblr">
+                            <textarea name="gddAm" value="$!item.gddAm" class="validate[maxSize[1000]]">$!item.gddAm</textarea>
+                        </div>
+                    </div>
+					<div class="newline_ctrlbl">
+                        <span>上传图片：</span>
+                        <div class="newline_ctrlblrb">
+                            <input name="gddImg2" type="hidden" id="gdlImgCard1"/>
+                        	<input name="file" id="uploadify1" contenteditable="false" size="30" type="file" />
+                			<span id="filespan"></span>
+                			<div id="fileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="newline_ctrlbl">
+                        <span>中餐：</span>
+                        <div class="newline_ctrlblrb">
+                            <input type="text" name="gddLunch" value="$!item.gddLunch" class="validate[maxSize[200]]">
+                        </div>
+                    </div>
+                    <div class="newline_ctrlbl">
+                        <span>下午：</span>
+                        <div class="newline_ctrlblr">
+                            <textarea name="gddAfternoon" value="$!item.gddAfternoon" class="validate[maxSize[1000]]">$!item.gddAfternoon</textarea>
+                        </div>
+                    </div>
+                	<div class="newline_ctrlbl">
+                        <span>上传图片：</span>
+                        <div class="newline_ctrlblrb">
+                            <input name="gddImg1" type="hidden" id="gdlImgCard"/>
+                        	<input name="file" id="uploadify2" contenteditable="false" size="30" type="file" />
+                			<span id="filespan"></span>
+                			<div id="fileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="newline_ctrlbl">
+                        <span>晚餐：</span>
+                        <div class="newline_ctrlblrb">
+                            <input type="text" name="gddDinner" value="$!item.gddDinner" class="validate[maxSize[200]]">
+                        </div>
+                    </div>
+                	<div class="newline_ctrlbl">
+                        <span>补充说明：</span>
+                        <div class="newline_ctrlblr">
+                            <textarea name="gddSupplement" class="validate[maxSize[400]]" value="$!item.gddSupplement" placeholder="可不填">$!item.gddSupplement</textarea>
+                        </div>
+                    </div>
+                	<div class="carinfo_ctbl">
+                        <span></span>
+                        <div class="carinfo_ctblrbtn">
+                			<button type="button" class="carinfo_qu"  onclick="trip.delete($(this))">删除当天</button>
+						</div>
+                    </div>
+				</div>
+			</form>
+		#end
+		<form method="post" id="form1">
+			<div id="div_date"></div>
+			<input type="hidden" name="tdlId" value="$!tdlId"/>
+			<div class="input_block clearfix" style="padding-top:20px;margin-bottom:0;">
+				<div class="label_left" style="width:114px;font-weight:lighter;margin-right:5px;">产品特色：</div>
+    			<div class="div_big" style="float:left;width:300px;">
+				#foreach($item in $gddFeature)
+            		<div class="input_right newline_ctllr4" >
+            			<input type="text" class="w200 lab_input validate[required,maxSize[20]]" name="gddFeature" value="$!item"/>
+        				<span class="mess_star_red">*</span>
+						#if($!{velocityCount} == '1')
+							<a href='javascript:void(0)' class="add_gdd_feature">+</a>
+						#else
+							<a href='javascript:void(0)' class="add_gdd_feature">-</a>
+						#end
+            		</div>
+				#end
+    			</div>
+        	</div>
+			<div class="newline_ctrlbl">
+                <span>产品经理推荐理由：</span>
+                <div class="newline_ctrlblr">
+                    <textarea name="gddReasons" class="validate[maxSize[600]]" placeholder="内容限300字以内">$!groundDetail.gddReasons</textarea>
+                </div>
+            </div>
+			<div class="newline_ctrlbl">
+                <span>行程特色：</span>
+                <div class="newline_ctrlblr">
+					  <script type="text/plain" id="editor" name="gddProject" value="$!groundDetail.gddProject"></script>
+                </div>
+            </div>
+            <div class="carinfo_ctbl">
+                <span></span>
+                <div class="carinfo_ctblrbtn">
+					<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/ground/detail/updatetrip', '$appRoot/ground/detail/updatePage?id=$!tdlId');">提交</button>
+                    <button type="button" class="carinfo_qu" onclick="index.load('$appRoot/ground/detail/updatePage?id=$!tdlId');">返回</button> 
+                </div>
+            </div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- /新增线路 -->
+<script type="text/javascript">
+ 	/*产品特色*/
+    $("#ltproadtrip .newline_ctllr6 .a_button").live("click",function(){
+        var stu_num = $(this).parent().parent().find(".input_right").length;
+        if($(this).text()=="-"){
+            $(this).parent().remove();
+        }
+        if (stu_num > 1) {return;}
+        if($(this).text()=="+") {
+            $(this).parent().after('<div class="newline_ctllr6" ><input type="text" style="width:150px;" name="gddFeature" class="validate[required,maxSize[50]]"><a href="javascript:void(0)" class="a_button">-</a></div>');
+        }
+    });
+	//上传图片
+	uploadify('uploadify1','gdlImgCard');
+	uploadify('uploadify2','gdlImgCard1');
+	
+	var editor = new baidu.editor.ui.Editor();
+    editor.render("editor");
+	
+	//行程管理js
+	var trip = {
+		//序列
+		index : $groundtrip.size()+1,
+		//新增
+		add : function(data){
+			data.hide();
+			trip.setday();
+			trip.insert(data.parents("form").serialize(),data.parents("form"));
+		},
+		//删除一天
+		delete : function(data){
+			var id = data.parents("form").find("input[name='id']").val();
+			if(""!=id) trip.del(id);
+			data.parents(".newline_ctrlbox").remove();
+			trip.initindex();
+		},
+		//添加行程
+		setday : function(){
+			//如果等于1 则删除当天隐藏
+			if(trip.index==1) {$("#div_demo").find(".carinfo_qu").hide();}
+			else{$("#div_demo").find(".carinfo_qu").show();}
+			//设置第几天序列
+			$("#div_demo").find("span[name='span_day']").html(trip.index);
+			var h = $("#div_demo").html();
+			$("#div_date").append(h);
+			trip.index ++;
+		},
+		//序列化
+		initindex : function(){
+			var i = 1;
+			//长度
+			$.each($(".newline_ctrlbox"),function(){
+				$(this).find("span[name='span_day']").html(i);
+				i++;
+			});
+			
+			$("button[btn='add']:last").show();
+			trip.index = i-1;
+		},
+		//插入操作
+		insert : function(data,formdata){
+			var url = "$appRoot/ground/trip/insert";
+			$.post(url,data,function(data){
+				formdata.find("input[name='id']").attr("value",data);
+			},'json');
+		},
+		//删除
+		del : function(id){
+			var url = "$appRoot/ground/trip/delete?id="+id;
+			$.post(url,function(data){},'json');
+		}
+	}
+	//初始化
+	trip.setday();
+</script>
+
+<div id="div_demo" style="display:none">
+	<!-- 行程管理 -->
+	<form method="post">
+		<input type="hidden" name="id" value="" />
+		<input type="hidden" value="$!tdlId" name="tdlId"/>
+        <div class="newline_ctrlbox">
+        	<div class="newline_ctrlbls">
+        		<span><strong>第<span name='span_day'>1</span>天</strong>线路：</span>
+                <input type="text" name="gddLine" value="$!item.gddLine"  class="validate[required,maxSize[10]]" />
+        		<div class="newline_ctrlblrs">
+        			<select class="w80" name="gddTool">
+        				#foreach($item in $traffic.keySet())
+							<option value="$item" #if($item.gddTool == $item) selected #end>$traffic.get($item)</option>
+                        #end
+        			</select>
+        			<input type="text" name="gddLineup" value="$!item.gddLineup" class="validate[required,maxSize[10]]" />
+        			<a href="javascript:void(0);">+</a>
+        		</div>
+        	</div>
+            <div class="newline_ctrlbl">
+                <span>上午：</span>
+                <div class="newline_ctrlblr">
+                    <textarea name="gddAm" value="$!item.gddAm" class="validate[maxSize[1000]]">$!item.gddAm</textarea>
+                </div>
+            </div>
+        	<div class="newline_ctrlbl">
+                <span>上传图片：</span>
+                <div class="newline_ctrlblrb">
+                    <input name="gddImg2" type="hidden" id="gdlImgCard1"/>
+                	<input name="file" id="uploadify1" contenteditable="false" size="30" type="file" />
+        			<span id="filespan"></span>
+        			<div id="fileQueue"></div>
+                </div>
+            </div>
+            <div class="newline_ctrlbl">
+                <span>中餐：</span>
+                <div class="newline_ctrlblrb">
+                    <input type="text" name="gddLunch" value="$!item.gddLunch" class="validate[maxSize[1000]]">
+                </div>
+            </div>
+            <div class="newline_ctrlbl">
+                <span>下午：</span>
+                <div class="newline_ctrlblr">
+                    <textarea name="gddAfternoon" value="$!item.gddAfternoon" class="validate[maxSize[1000]]">$!item.gddAfternoon</textarea>
+                </div>
+            </div>
+        	<div class="newline_ctrlbl">
+                <span>上传图片：</span>
+                <div class="newline_ctrlblrb">
+                    <input name="gddImg1" type="hidden" id="gdlImgCard"/>
+                	<input name="file" id="uploadify2" contenteditable="false" size="30" type="file" />
+        			<span id="filespan"></span>
+        			<div id="fileQueue"></div>
+                </div>
+            </div>
+            <div class="newline_ctrlbl">
+                <span>晚餐：</span>
+                <div class="newline_ctrlblrb">
+                    <input type="text" name="gddDinner" value="$!item.gddDinner" class="validate[maxSize[1000]]">
+                </div>
+            </div>
+        	<div class="newline_ctrlbl">
+                <span>补充说明：</span>
+                <div class="newline_ctrlblr">
+					<textarea name="gddSupplement" value="$!item.gddSupplement" placeholder="可不填">$!item.gddSupplement</textarea>
+                </div>
+            </div>
+        	<div class="carinfo_ctbl">
+                <span></span>
+                <div class="carinfo_ctblrbtn">
+                    <button type="button" class="carinfo_sub" btn='add' onclick="trip.add($(this));">增加一天</button>
+        			<button type="button" class="carinfo_qu"  onclick="trip.delete($(this))">删除当天</button>
+                </div>
+            </div>
+        </div>
+	</form>
+</div>

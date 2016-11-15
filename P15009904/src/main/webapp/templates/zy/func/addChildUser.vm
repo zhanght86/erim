@@ -1,0 +1,140 @@
+#set($CPNTYPE = {"HOTEL":"酒店","TICKET":"门票","TEXI":"租车","CAFETERIA":"特色餐","GROUND":"当地旅游","GUIDE":"导游(领队)","MANAGEMENT":"签证","PLANETICKET":"机票","TRANSTICKET":"火车票" })
+<form method="post" id="form1">
+	<input type="hidden" value="$ntype" name="cooNtype"/>
+	<input type="hidden" value="$cid" name="cooCid"/>
+    <div class="rdivv">
+		<!--合作管理-->
+		<div class="doadmin">
+			<div class="newfood_suptop mb20">
+				<img src="$staticRoot/images/aa_4.png">
+				<span>权限管理</span>
+				<div class="cb"></div>
+				<div class="g_line"></div>
+			</div>
+			<div class="carad_ctrtable mb20">
+				<table cellspacing="0" cellspadding="0">
+					<thead>
+						<tr>
+							<td>用户名</td>
+							<td>授权产品类型</td>
+							<td>授权产品</td>
+							<td>创建时间</td>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($ite in $listCooperation)
+    	    				<tr>
+								<td>$!ite.rolename</td>
+								<td>#cpntype($!ite.cooNtype $CPNTYPE)</td>
+								<td>$!ite.cooCid</td>
+								<td>$!date.format('yyyy年MM月dd日 HH:mm:ss',$!ite.cooCreatetime)</td>
+							</tr>
+    					#end
+					</tbody>
+				</table>
+			</div>
+			<div class="cb"></div>
+			<div class="g_line mb20"></div>
+			<div class="admin_div">
+				<div class="doadmin_topl">
+					<div class="doadmin_toplboxb">
+						<span  style="margin-top:-8px;">用户:</span>
+						<div class="doadmin_toplbrb">
+							<select name="roleid"  style="margin-top:-8px;">
+								<option value=""></option>
+								#foreach($item in $listrole)
+									<option value="$item.id">$item.zyRoleName</option>
+								#end
+							</select><span style="width:300px;color:#59b2fe;margin-left:110px;margin-top:-32px;font-size:14px;font-weight:bold">请在系统管理-用户管理增加用户</span>
+						</div>
+					</div>
+				</div>
+    			</div>
+    			<div class="cb"></div>
+    			<div class="g_line mb20"></div>
+    					<div class="carad_ct">
+    						<div class="carad_ctrtable">
+    							<table cellspacing="0" cellspadding="0">
+    								<thead>
+    									<tr>
+    										<td>模块</td>
+    										<td>子模块</td>
+    										<td>子模块</td>
+    									</tr>
+    								</thead>
+    								<tbody>
+    									#foreach($item in $listFunc)
+                    	    				#foreach($childitem in $item.childListZySystemFuncBean)
+                    							<tr>
+                    								#if($velocityCount == 1)
+                    		    						<td rowspan="$item.childSize">$item.zyFuncName</td>
+                    		    					#end
+                    								<td>$childitem.zyFuncName</td>
+                    								<td><p>
+                    		    						#foreach($rescource in $childitem.childListZySystemFuncRescourceBean)
+                                                            <label class="right_control"><input type="checkbox" class="right_controli" name="rescourceCode" value="$rescource.zyFuncRescourceCode"/>$rescource.zyFuncRescourceName</label> 
+                										#end</p>
+                    		    					</td>
+    												<!--
+        												<td>
+        													<label class="right_controla"><input type="checkbox" class="right_controlia" name="subBox" id="checkLine">本行全选</label>
+        												</td>
+    												-->
+                    							</tr>
+                    						#end
+                    					#end
+    								</tbody>
+    							</table>
+								#if($shiro.hasPermission("SYSTEM_SERVICE_UPDATE"))
+        							<div class="tpage">
+										<span style="margin-left:310px;color:#59b2fe;font-size:14px;font-weight:bold">请仔细了解权限管理，初次使用如有不解可咨询技术客服</span>
+        								<div class="tpager">
+                                            <span></span>
+                                            <div class="carinfo_ctblrbtn">
+                                                <button type="button" id="btn" class="carinfo_sub">确定</button>
+												<button type="button" onclick="index.load(page.url);"  style=""  class="carinfo_qu">返回</button>
+                                            </div>
+                                        </div>
+        							</div>
+								#end
+    						</div>
+    					</div>
+		</div>
+    </div>
+</form>
+<script >
+	//选择角色时查询
+	$("select[name='roleid']").change(function(){
+		//重置复选框
+		$("input[name='rescourceCode']").attr("checked",false);
+		//获取要查询角色值
+		var roleval = $("select[name='roleid']").val();
+		if(null != roleval && "" != roleval){
+			//获取角色对应权限
+			$.post("$appRoot/zy/func/ajaxGetFunByRoleid", {roleid:roleval},function(data){
+				//解析数组
+				$.each(data,function(i,item){
+					$("input[name='rescourceCode'][value='"+item.zyFuncCode+"']").attr("checked",'checked');
+				});
+			},'json');
+		}
+	});
+	//确定添加权限
+	
+	//非本权限不可用
+	$.each($("input[name='rescourceCode']"),function(){
+		if($(this).val().indexOf("$ntype") == -1){
+			$(this).remove();
+		}
+	});
+	
+	//确定添加权限
+	$(".carinfo_sub").click(function(){
+		var role = $("select[name='roleid']").val();
+		if("" == role){
+			wxcalert('请选择用户!');
+		}else{
+			subform.ajaxload($("#form1").serialize(),"$appRoot/zy/func/insertChildFunc");
+		}
+	});
+</script>

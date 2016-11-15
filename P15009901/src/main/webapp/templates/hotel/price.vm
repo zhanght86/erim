@@ -1,0 +1,344 @@
+<div class="chakan_cont_price pt13 pb10 clearfix">
+	<div class="riqi ml20 mr30 clearfix">
+    	<table class="xuanze" cellpadding="0" cellspacing="0" border="0" style="border-bottom:none;">
+        	<tbody>
+            	<tr>
+                    <td class="w200 blue_a white">选择入住日期</td>
+                    <td>
+						<form id="form1">
+							<input type="hidden" name="hheId" value="$!hheId" />
+							<input type="hidden" name="year" value="$!year" />
+							<input type="hidden" name="month" value="$!month" />
+                        	<span class="sjleft liangjiaxiang_left">
+							<!--	<a href="javascript:void(0);" class="liangjiaxiang_left">-->
+									<img src="$staticRoot/images/sanjiaoleft.jpg" />
+							<!--	</a>-->
+                            </span>
+                            <p class="date-title">$year 年 $month 月</p>
+                            <span class="sjright liangjiaxiang_right">
+                            <!--	<a href="javascript:void(0);" class="liangjiaxiang_right">-->
+									<img src="$staticRoot/images/sanjiaoright.jpg" />
+							<!--	</a>-->
+                            </span>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    	<table cellpadding="0" cellspacing="0" border="0" style="border-top:none;">
+            <tbody id="price_body">
+                <tr>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th class="red">六</th>
+                    <th class="borderright red">日</th>
+                </tr>
+                <tr style="cursor:pointer">
+					#foreach($item in $priceList)
+						<!-- 停售 -->
+						#if($!item.hnpIsOpen == '01')
+							<td class="hui price_td" style="cursor:pointer">
+								<!-- 是否为今天 -->
+								#if($!item.isUpdate == '02')
+									<span class="shu">今</span>
+								#else
+									<span class="shu">$!item.day</span>
+								#end
+								<input type="hidden" name="hnpIsOpen" value="$!item.hnpIsOpen" />
+								<input type="hidden" name="isUpdate" value="$!item.isUpdate" />
+								<span class="b_date_topright white">￥$!item.hnpRetailPrice</span><br>
+								<!--<span class="b_date_bottom white">余:$!item.hnpSign间</span>-->
+								<span class="b_date_bottom white">已停售</span>
+                            </td>
+						<!-- 出售 -->
+						#elseif($!item.hnpIsOpen == '02' )
+							<!--剩余票数为0-->
+							#if($!item.hnpSign == '0' || $!item.hnpSign == 0 || $!item.isPredetermine == '0')
+								<!-- 是否为今天 -->
+    							#if($!item.isUpdate == '02')
+        							<td class="hui">
+                                        <span class="shu">今</span>
+    							#else
+        							<td class="hui">
+                                        <span class="shu">$!item.day</span>
+    							#end
+    									<span class="b_date_topright white">￥$!item.hnpRetailPrice</span><br>
+										#if($!item.hnpSign == '0' || $!item.hnpSign == 0)
+        									<span class="b_date_bottom white">已售完</span>
+        								#elseif($!item.isPredetermine == '0')
+        									<span class="b_date_bottom white">已过期</span>
+        								#end	
+                                </td>
+							#else 
+								<!-- 是否为今天 -->
+    							#if($!item.isUpdate == '02')
+        							<td class="yellow_bg price_td">
+                                        <span class="shu">今</span>
+    									<input type="hidden" id="hnpBreakfast" value="$!item.hnpBreakfast" />
+    									<input type="hidden" id="hnpStartH" value="$!item.hnpStartH" />
+        								<input type="hidden" id="hnpEndH" value="$!item.hnpEndH" />
+        								<input type="hidden" id="hnpService" value="$!item.hnpService" />
+    									<input type="hidden" id="hnpUpdateRule" value="$!item.hnpUpdateRule" />
+    							#else
+        							<td class="price_td">
+                                        <span class="shu">$!item.day</span>
+    							#end
+    								<!-- 被选中的数据  01为未选中 02已选中-->
+    								<input type="hidden" name="isChecked" value="01" />
+    								<input type="hidden" name="hnpIsOpen" value="$!item.hnpIsOpen" />
+    								<input type="hidden" name="isUpdate" value="$!item.isUpdate" />
+    								<input type="hidden" name="hnpRetailPrice" value="$!item.hnpRetailPrice" />
+    								
+    								<input type="hidden" name="hnpBreakfast" value="$!item.hnpBreakfast" />
+    								<input type="hidden" name="hnpStartH" value="$!item.hnpStartH" />
+        							<input type="hidden" name="hnpEndH" value="$!item.hnpEndH" />
+        							<input type="hidden" name="hnpService" value="$!item.hnpService" />
+    								<input type="hidden" name="hnpUpdateRule" value="$!item.hnpUpdateRule" />
+									
+									<input type="hidden" name="hnpSign" value="$!item.hnpSign" />
+									
+    								<span class="b_date_topright yellow">￥$!item.hnpRetailPrice</span><br>
+                					<span class="b_date_bottom blue">余:$!item.hnpSign间</span>
+                                </td>
+							#end
+							
+						<!-- 无数据 -->
+						#else
+							#if($!item.isUpdate == '02')
+								<td class="yellow_bg price_td">
+								<span class="shu">今</span>
+							#else
+								<td class="price_td">
+								<span class="shu">$!item.day</span>
+							#end
+							<input type="hidden" name="isUpdate" value="$!item.isUpdate" />
+							</td>
+						#end
+						<!-- 为周日时换行 -->
+						#if($!{velocityCount} == 7 || $!{velocityCount} == 14 || $!{velocityCount} == 21 || $!{velocityCount} == 28 || $!{velocityCount} == 35)
+                            </tr>
+                            <tr style="cursor:pointer">
+    					#end
+					#end
+                </tr>
+			</tbody>
+    	</table>
+	</div>
+	<div class="chakan_right">
+		<p>预定间数：<span class="goupiao_num"><input type="text" id="jiudian_num">间</span></p>
+		<p>入住时长：共<span class="font_cheng"><b class="day_num">0</b></span>天</p>
+		<p>总价格：<span class="font_hong"><b class="day_price">￥0</b></span></p>
+        <p>早餐：<span id="zaocan" style="font:14px/24px 'weiruanyahei'"></span></p>
+        <span id="shijianSpan"><p>早餐时间：<span id="shijian" style="font:14px/24px 'weiruanyahei'"></span></p></span>
+		<span id="qitafuwuSpan"><p>房费包含其他服务：<span id="qitafuwu" style="font:14px/24px 'weiruanyahei'"></span></p></span>
+		<span id="guizeSpan"><p>更改/取消规则：<span id="guize" style="font:14px/24px 'weiruanyahei'"></span></p></span>
+		<p class="font_hui">*注：入住时间一般为所选第一天的当天下午（具体时间以酒店提供的信息为准）</p>
+		<a href="javascript:void(0)" class="yuding_but ml350" onclick="ordertips()">预定</a>
+	</div>
+</div>
+<input type="hidden" id="price_dan" value="" />
+<script type="text/javascript">
+$("#jiudian_num").blur(function(){
+	//如果输入不是正整数 默认为0
+	var regNum = /^[1-9]\d*$/;
+	var countNum = $(this).val();
+	if(!regNum.test(countNum)) {$(this).attr("value",0); return;}
+	
+	var chooseRed = $(".red_bg").size();
+	if(chooseRed>0){
+		var totalRoomNum = 0;
+    	$.each($(".red_bg"),function(){
+			//计算总和  改为 计算最低房间数
+    		//totalRoomNum +=  Number($(this).find("input[name='hnpSign']").val());
+			
+			//计算最低
+			var numHnpSign = Number($(this).find("input[name='hnpSign']").val());
+			if(totalRoomNum > numHnpSign || totalRoomNum == 0){
+				totalRoomNum = numHnpSign;
+			}
+    	})
+    	if(countNum > totalRoomNum){
+			alert('最大房间数为:'+totalRoomNum+',请重新输入!');
+			$(this).attr("value",0); return;
+		}
+    	
+    	var price_dan = $("#price_dan").val();
+    	var totalPirce = parseInt(countNum)*parseInt(price_dan);
+    	$(".day_price").text("￥"+totalPirce);
+	}else{ 
+		alert('请选择时间!');
+		$(this).attr("value",0); return;
+	}
+});
+
+	$(document).ready(function() {
+		//显示其他字段
+		setDisplayCode();
+		
+		// 时间向后选择
+    	$(".liangjiaxiang_left").click(function() {
+		
+			var hheId = $("#form1").find("input[name='hheId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+		
+    		$(".chakan_block").load("$appRoot/$cpyno/hotel/jiudianxiang/liangjiaxiangdate?hheId=" + hheId + "&enteringStart=" + year + "&enteringEnd=" + month + "&portal=02");
+    	});
+		// 时间向前选择
+		$(".liangjiaxiang_right").click(function() {
+			var hheId = $("#form1").find("input[name='hheId']").val();
+			var year = $("#form1").find("input[name='year']").val();
+			var month = $("#form1").find("input[name='month']").val();
+			
+    		$(".chakan_block").load("$appRoot/$cpyno/hotel/jiudianxiang/liangjiaxiangdate?hheId=" + hheId + "&enteringStart=" + year + "&enteringEnd=" + month + "&portal=01");
+    	});
+		
+		// 入住时长
+		var dayNum = 0;
+		// 总价格
+		var price = 0;
+		var price_isckecked = 0;
+		
+		// 点击事件
+		$("#price_body").find("td").click(function() {
+			
+			// 是否出售
+			var hnpIsOpen = $(this).find("input[name='hnpIsOpen']").val();
+			if (hnpIsOpen != '02') {
+				return;
+			}
+			// 价格
+			var retailPrice = $(this).find("input[name='hnpRetailPrice']").val();
+			// 是否为已选中
+			var isChecked = $(this).find("input[name='isChecked']").val();
+			if (isChecked == '02') { // 已选中为02
+				// 改为未选中
+				$(this).find("input[name='isChecked']").val("01");
+				// 去除颜色的class
+				$(this).removeClass("red_bg");
+				// 入住天数
+				dayNum--;
+				// 总价格
+				price = parseInt(price) - parseInt(retailPrice);
+				
+			} else if (isChecked == '01') { // 未选中为01
+				// 改为选中状态
+				$(this).find("input[name='isChecked']").val("02");
+				// 设置颜色的class
+				$(this).addClass("red_bg");
+				// 入住天数
+				dayNum++;
+				// 总价格
+				price = parseInt(price) + parseInt(retailPrice);
+			}
+			$(".day_num").text(dayNum);
+			var jiudian_num = $("#jiudian_num").val();
+			if(jiudian_num == null || jiudian_num == ''){
+				jiudian_num = 1;
+			}
+			//保存房间数为一间的总价格
+			$("#price_dan").val(price);
+			var price_total =  parseInt(jiudian_num) * parseInt(price);
+			$(".day_price").text("￥"+price_total);
+			
+			
+			
+			setDisplayCode2($(this));
+			
+			
+			
+		});
+	});
+	
+	function setDisplayCode(){
+		//字段显示设置
+		//01:不含早餐 02：含单早 03：含双早 04：含早餐
+		var zaocan = $("#hnpBreakfast").val();
+		var time1 = $("#hnpStartH").val();
+		var time2 = $("#hnpEndH").val();
+		var time = '';
+		var qitafuwu = $("#hnpService").val();
+		var guize = $("#hnpUpdateRule").val();
+		if(zaocan == null){
+			$("#zaocan").html("未选择日期");
+		}else if(zaocan != null && zaocan == '01'){
+			$("#zaocan").html("不含早餐");
+		}else if(zaocan != null && zaocan == '02'){
+			$("#zaocan").html("含单早");
+			var time = time1 + "-" + time2;
+		}else if(zaocan != null && zaocan == '03'){
+			$("#zaocan").html("含单早");
+			var time = time1 + "-" + time2;
+		}else if(zaocan != null && zaocan == '04') {
+			$("#zaocan").html("含早餐");
+			var time = time1 + "-" + time2;
+		}
+		if(time == ''){
+			$("#shijianSpan").css("display","none") ;
+		}else{
+			$("#shijianSpan").css("display","block") ;
+			$("#shijian").html(time);
+		}
+		
+		if(qitafuwu == null || qitafuwu == ''){
+			$("#qitafuwuSpan").css("display","none") ;
+		}else{
+			$("#qitafuwuSpan").css("display","block") ;
+			$("#qitafuwu").html(qitafuwu);
+		}
+		if(guize == null || guize == ""){
+			$("#guizeSpan").css("display","none") ;
+		}else{
+			$("#guizeSpan").css("display","block") ;
+			$("#guize").html(guize);
+		}
+	
+	}
+	function setDisplayCode2(obj){
+			var zaocan = $(obj).find("input[name='hnpBreakfast']").val();
+    		var time1  = $(obj).find("input[name='hnpStartH']").val()
+    		var time2  = $(obj).find("input[name='hnpEndH']").val()
+    		var time   = '';
+    		var qitafuwu = $(obj).find("input[name='hnpService']").val()
+    		var guize  = $(obj).find("input[name='hnpUpdateRule']").val()
+			if(zaocan != null && zaocan == '01'){
+				$("#zaocan").html("不含早餐");
+    		}else if(zaocan != null && zaocan == '02'){
+    			$("#zaocan").html("含单早");
+    			var time = time1 + "-" + time2;
+    		}else if(zaocan != null && zaocan == '03'){
+    			$("#zaocan").html("含单早");
+    			var time = time1 + "-" + time2;
+    		}else if(zaocan != null && zaocan == '04') {
+    			$("#zaocan").html("含早餐");
+    			var time = time1 + "-" + time2;
+    		}
+    		if(time == ''){
+    			$("#shijianSpan").css("display","none") ;
+    		}else{
+				$("#shijianSpan").css("display","block") ;
+    			$("#shijian").html(time);
+    		}
+    		if(qitafuwu == ''){
+    			$("#qitafuwuSpan").css("display","none") ;
+    		}else{
+				$("#qitafuwuSpan").css("display","block") ;
+    			$("#qitafuwu").html(qitafuwu);
+    		}
+    		if(guize == ""){
+    			$("#guizeSpan").css("display","none") ;
+    		}else{
+				$("#guizeSpan").css("display","block") ;
+    			$("#guize").html(guize);
+    		}
+	}
+	
+	
+	
+function ordertips(){
+	alert('对不起，预定功能暂不开放');
+}
+</script>

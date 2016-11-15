@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="priceservice">
+	<!-- 查询订单接口 -->
+	<select id="findPriceBeanByPseNo" resultType="priceServiceBean">
+		SELECT
+			pse_is_sx 	   AS pseIsSx,
+			cpy_id		   AS cpyId
+		FROM
+			price_service
+		WHERE
+			pse_no = #{pseNo}
+	</select>
+	
+	<!-- 修改方法 -->
+	<update id="update">
+		UPDATE
+			price_service
+		SET
+			pse_is_sx  = #{pseIsSx},
+			pse_sxtime = #{pseSxtime},
+			pse_jstime = #{pseJstime},
+			trade_no   = #{tradeNo}
+		WHERE
+			pse_no	   = #{pseNo}
+	</update>
+</mapper>

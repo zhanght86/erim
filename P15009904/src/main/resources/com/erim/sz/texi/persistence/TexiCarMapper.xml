@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="texicar">
+
+	<!-- 根据车辆ID查询 -->
+	<select id="getTexiCarById" resultType="texiCarBean">
+		SELECT
+		    id,
+		    tdl_id          	AS    tdlId,
+		 	bcl_hf_limit   		AS    bclHfLimit,
+			bcl_hf_km      		AS    bclHfKm,
+		    bcl_hf_length  		AS    bclHfLength,
+		 	bcl_hf_lengthkm 	AS    bclHfLengthkm,
+	     	bcl_hf_cost     	AS    bclHfCost,
+			bcl_hf_service  	AS	  bclHfService,
+		    bcl_limit       	AS    bclLimit,
+		  	bcl_km          	AS	  bclKm,
+		    bcl_length     		AS    bclLength,
+		    bcl_lengthkm    	AS    bclLengthkm,
+		    bcl_cost        	AS    bclCost,
+		    bcl_service     	AS    bclService
+		FROM
+			texi_car
+		WHERE
+			tdl_id 		= #{tdlId}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert">
+  		INSERT INTO
+			texi_car
+			(
+				tdl_id,
+				bcl_hf_limit,
+				bcl_hf_km,
+				bcl_hf_length,
+				bcl_hf_lengthkm,
+				bcl_hf_cost,
+				bcl_hf_service,
+				bcl_limit,
+				bcl_km,
+				bcl_length,
+				bcl_lengthkm,
+				bcl_cost,
+				bcl_service
+			)
+			VALUES
+			(
+				#{tdlId},
+				#{bclHfLimit},
+				#{bclHfKm},
+				#{bclHfLength},
+				#{bclHfLengthkm},
+				#{bclHfCost},
+				#{bclHfService},
+				#{bclLimit},
+				#{bclKm},
+				#{bclLength},
+				#{bclLengthkm},
+				#{bclCost},
+				#{bclService}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			texi_car
+		SET
+		 	bcl_hf_limit      = #{bclHfLimit},
+			bcl_hf_km         = #{bclHfKm},
+		    bcl_hf_length     = #{bclHfLength},
+		 	bcl_hf_lengthkm   = #{bclHfLengthkm},
+	     	bcl_hf_cost       = #{bclHfCost},
+			bcl_hf_service    = #{bclHfService},
+		    bcl_limit         = #{bclLimit},
+		  	bcl_km         	  = #{bclKm},
+		    bcl_length        = #{bclLength},
+		    bcl_lengthkm      = #{bclLengthkm},
+		    bcl_cost          = #{bclCost},
+		    bcl_service       = #{bclService}
+	   WHERE
+			id = #{id}
+	</update>
+</mapper>

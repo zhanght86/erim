@@ -1,0 +1,299 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/guide/guide.css">
+<script type="text/javascript">
+	
+	//国内国际地陪和国际港澳台领队、国际港澳台地陪切换
+	$("input[name='gdlServer']").change(function() {
+		var a = $("input[name='gdlServer']:checked").val();
+		if (a == '01') {
+    		$('#county01').show();
+    		$('#county02').hide();
+    		$('#county03').hide();
+    		$('#county04').hide();
+		}
+		if (a == '02') {
+    		$('#county01').hide();
+    		$('#county02').show();
+    		$('#county03').hide();
+    		$('#county04').hide();
+		}
+		if (a == '03') {
+			$('#county01').hide();
+    		$('#county02').hide();
+    		$('#county03').show();
+    		$('#county04').hide();
+		}
+		if (a == '04') {
+			$('#county01').hide();
+    		$('#county02').hide();
+    		$('#county03').hide();
+    		$('#county04').show();
+		}
+	});
+	//获取国内国际值
+	//搜索项留下输入内容
+	var b = $("input[name='gdlServer']:checked").val();
+	if(b == '01'){
+		$('#county01').show();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').hide();
+	}else if(b == '02'){
+		$('#county01').hide();
+		$('#county02').show();
+		$('#county03').hide();
+		$('#county04').hide();
+	}else if(b == '03'){
+		$('#county01').hide();
+		$('#county02').hide();
+		$('#county03').show();
+		$('#county04').hide();
+	}else if(b == '04'){
+		$('#county01').hide();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').show();
+	}else{
+		$('#county01').show();
+		$('#county02').hide();
+		$('#county03').hide();
+		$('#county04').hide();
+	}
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/ren.png" alt="同业资源导游" title="同业资源导游">同业资源导游<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form mothed="post" id="form1" style="min-width:1000px;">
+		<div class="input_block clearfix">
+			<div style="width:120px;font-weight:400" class="label_left">服务类型：</div>
+			<div class="input_right">
+				<label>
+					<input type="radio" name="gdlServer" value="01" #if($erim.contains($!guideDetail.gdlServer,'01')) checked #end />国内地陪
+				</label>
+				<!--
+				<label class="ml15">
+					<input type="radio" name="gdlServer" value="02" #if($erim.contains($!guideDetail.gdlServer,'02')) checked #end />国内全陪
+				</label>
+				<label class="ml15">
+					<input type="radio" name="gdlServer" value="03" #if($erim.contains($!guideDetail.gdlServer,'03')) checked #end />国际/港澳台领队
+				</label>
+				-->
+				<label class="ml15">
+					<input type="radio" name="gdlServer" value="04" #if($erim.contains($!guideDetail.gdlServer,'04')) checked #end />国际/港澳台地陪
+				</label>
+            </div>
+		</div>
+		<!---------- 国内地陪 ------------------------------------------->
+		<div class="input_block clearfix" id="county01">
+			<div style="width:120px;font-weight:400" class="label_left">目的地：</div>
+			<div class="doadmin_toplbrb" style="width:360px;">
+				#lockProvince('gdlLocalProvince','gdlLocalProvince','','1',$!guideDetail.gdlLocalProvince,'gdlLocalCity','gdlLocalCounty',$!guideDetail.gdlLocalCity,$!guideDetail.gdlLocalCounty)
+                <select name='gdlLocalCity' id='gdlLocalCity' class='w90' onchange="lock.town($(this),'gdlLocalCounty');"></select>
+                <select name='gdlLocalCounty' id='gdlLocalCounty' class='w90'></select>
+			</div>
+		</div>
+		<!---------- 国内全陪 ------------------------------------------->
+		<div class="input_block clearfix" id="county02">
+			<div class="label_left" style="font-weight:400;width:120px;">出发地：</div>
+			<div class="input_right">
+				<select name="gdlNationalProvince" style="width:100px;">
+					<option value=""></option>
+					#foreach($item in $provinces)
+						<option value="$item.regionNo" #if($guideDetail.gdlNationalProvince == $item.regionNo) selected #end>$item.regionName</option>
+					#end
+                </select>
+				<em class="w20">省</em>
+				<select type="text" name="gdlNationalCity" style="width:100px;"></select><em class="w20">市</em>
+			    <select type="text" name="gdlNationalCounty" style="width:100px;"></select>县
+			</div>
+		</div>
+		<!---------- 国际港澳台领队 ------------------------------------------->
+		<div class="input_block clearfix" id="county03">
+			<div class="label_left" style="font-weight:400;width:120px;">出发地：</div>
+			<div class="input_right">
+				<select style="width:110px;height:30px;" name="gdlLeaderProvince">
+					<option value=""></option>
+					#foreach($item in $provinces)
+						<option value="$item.regionNo" #if($guideDetail.gdlLeaderProvince == $item.regionNo) selected #end>$item.regionName</option>
+					#end
+				</select>
+                <em class="w20">省</em>
+				<select type="text" name="gdlLeaderCity" style="width:100px;"></select>
+				<em class="w20">市</em>
+				<select type="text" name="gdlLeaderCounty" style="width:100px;"></select>县
+            </div><br clear="left">
+			<div class="label_left" style="font-weight:400;width:120px;margin-top:15px;"  >目的地：</div>
+			<div class="input_right" style="margin-top:15px;">
+				<label><input type="radio" name="gdlDestination" value="01" #if($erim.contains($!guideDetail.gdlDestination,'01')) checked #end/>香港&nbsp;</label>
+				<label class="ml15"><input type="radio" name="gdlDestination" #if($erim.contains($!guideDetail.gdlDestination,'02')) checked #end value="02" />澳门&nbsp;</label>
+				<label class="ml15"><input type="radio" name="gdlDestination" #if($erim.contains($!guideDetail.gdlDestination,'03')) checked #end value="03" />台湾&nbsp;</label>
+				<label class="ml35">国家：</label>
+				
+				#vcountry('gdlDestinationCountry','gdlDestinationCountry','','','')
+			</div>
+		</div>
+		<!---------- 国际港澳台地陪 ------------------------------------------->
+		<div class="input_block clearfix" id="county04">
+			<div class="label_left" style="font-weight:400;width:120px;">目的地：</div>
+			<div class="input_right">
+				<label><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'01')) checked #end value="01" />香港&nbsp;</label>
+				<label class="ml15"><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'02')) checked #end value="02" />澳门&nbsp;</label>
+				<label class="ml15"><input type="radio"  name="gdlGaidLokal" #if($erim.contains($!guideDetail.gdlGaidLokal,'03')) checked #end value="03" />台湾&nbsp;</label>
+				<label class="ml35">国家：</label>
+				#vcountry('gdlGaidCountry','gdlGaidCountry','','','')
+			 </div>
+		</div>
+		<!---------- 结束 ------------------------------------------->
+		<div class="input_block clearfix">
+			<div class="doadmin_toplboxt">
+				<span style="width:118px;">系统编码：</span>
+				<div class="doadmin_toplbra" style="width:117px;">
+					<input style="width:101px;"  type="text" name="gdlCode" value="$!guideDetail.gdlCode" />
+				</div>
+			</div>
+			<div class="doadmin_toplboxt">
+				<span style="width:70px;">导游姓名：</span>
+				<div class="doadmin_toplbra" style="width:117px;">
+					<input style="width:101px;"  type="text" name="gdlName" value="$!guideDetail.gdlName" />
+				</div>
+			</div>
+			<div class="doadmin_toplboxt">
+				<span style="width:36px;">性别：</span>
+				<div class="doadmin_toplbra" style="width:64px;">
+					<select name="gdlSex" style="width:57px;">
+						<option value=""></option>
+                        #foreach($item in $sex.keySet())
+							<option value="$item" #if($guideDetail.gdlSex == $item) selected #end>$sex.get($item)</option>
+                        #end
+					</select>
+				</div>
+			</div>
+			<div class="doadmin_toplboxt">
+				<span style="width:75px;">从业时间：</span>
+				<div class="doadmin_toplbra" style="width:95px;">
+					<select name="gdlAge">
+						<option value=""></option>
+                        #foreach($item in $age.keySet())
+							<option value="$item" #if($guideDetail.gdlAge == $item) selected #end>$age.get($item)</option>
+                        #end
+					</select>
+				</div>
+			</div>
+		</div>
+		
+		<div class="input_block clearfix mb20">
+    		<div class="label_left" style="font-weight:400;width:118px;">语种：</div>
+			<div class="input_right input_right_wauto">
+     			<select name="gdlLanguage" class="w100">
+    					<option value=""></option>
+                        #foreach($item in $language.keySet())
+    						<option value="$item" #if($guideDetail.gdlLanguage == $item) selected #end>$language.get($item)</option>
+                        #end
+    			</select>
+    			
+    			<label class="ml25">导游等级： </label>
+    			<select  name="gdlGrade" class="w100" value="$!guideDetail.gdlGrade">
+    					<option value=""></option>
+                        #foreach($item in $grade.keySet())
+    						<option value="$item" #if($guideDetail.gdlGrade == $item) selected #end>$grade.get($item)</option>
+                        #end
+    			</select>
+
+				<label class="ml15">公司/品牌名称： </label>
+				<input class="w130" name="cpyName" value="$!guideDetail.cpyName">
+				<label class="ml15">空档查询： </label>
+				<span class="tishi_box w110" onClick="WdatePicker({minDate:'%y-%M-%d'})">
+					<input type="text" value="$!guideDetail.gpeDate" name="gpeDate" class="w80" style="width:108px;background:url($staticRoot/images/tt_5.jpg) no-repeat 85px 6px;cursor:pointer">
+               	</span> 
+				<button class="y_but ml15" type="button" onclick="index.searchform('form1','$appRoot/guide/detail/sametown');">查 询</button>
+           	</div>
+		</div>
+    </form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable" style="width:98%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td style="min-width:80px;">系统编码</td>
+					<td style="min-width:75px;">所在地区</td>
+					<td style="min-width:65px;">姓名</td>
+					<td style="min-width:25px;">性别</td>
+					<td style="min-width:90px;">语种</td>
+					<td style="min-width:65px;">从业时间</td>
+					<!-- 
+						注释原因：项太多
+						注释人：宁晓强
+						注释时间：2015.12.19
+						<td style="width:65px;">公司评级</td>
+					-->
+					<td style="min-width:55px;">导游等级</td>
+					<td style="min-width:75px;">国内地陪</td>
+					<td style="min-width:75px;">国际地陪</td>
+					<td style="min-width:77px;">查看导服/档期</td>
+					<td style="min-width:240px;">公司/品牌名称</td>
+					<td style="min-width:140px;">计调/电话</td>
+					<td style="min-width:74px;">在线交流</td>
+					<!-- 
+					<td>在线预定</td>
+					-->
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $guideList)
+    				<tr>
+    					<td>$!item.gdlCode</td>
+						#if($erim.contains($!guideDetail.gdlServer,'04'))
+							<td width="8%">
+    							#if($erim.contains($!item.gdlServer,'04'))
+    								#vtextarray($!item.gdlGaidLokal,'C108')
+    								<span><br/>$!item.gdlGaidCountry</span>
+    							#end
+    						</td>
+						#else
+							<td>
+    							#if($erim.contains($!item.gdlServer,'01'))
+    								$!item.gdlLocalCity
+    							#end
+    						</td>
+						#end
+    					<td><a href="$webRoot/guide/daoyouxiang;"  target="_blank" title="点击查看外网展示" style="white-space:normal; word-break:break-all; word-wrap:break-word;">$!item.gdlName</a></td>
+    					<td>$!item.gdlSex</td>
+    					<td width="8%">$!item.gdlLanguage</td>
+    					<td>#vtext($!item.gdlAge,'C114')</td>
+    					<!-- 
+	    					<td>$!item.gdlCompanyRating</td>
+						-->
+						<td>$!item.gdlGrade</td>
+						<!-- 国内地陪 -->
+    					<td>
+							#if($erim.contains($!item.gdlServer,'01'))
+								$!item.gdlLocalCity
+							#end
+						</td>
+						<!-- 国际地陪 -->
+    					<td width="8%">
+							#if($erim.contains($!item.gdlServer,'04'))
+								#vtextarray($!item.gdlGaidLokal,'C108')
+								<span><br/>$!item.gdlGaidCountry</span>
+							#end
+						</td>
+						<td>
+							<a href="javascript:price.sametown('$appRoot/guide/price/getInternal?isInternal=$!item.gdlServer', '$appRoot/guide/price/list?gdlId=$!item.id&GdlName=$!item.gdlName&portal=06&sex=$!item.gdlSex&certificate=$!item.gdlCertificate&isInternal=$!item.gdlServer');">
+								#if($erim.isNotEmpty($!item.gpeFloorPrice))
+									￥$!item.gpeFloorPrice元
+								#else
+									查看价格
+								#end
+							</a>
+                        </td>
+						<td>$!item.cpyName / $!item.cpyBrand</td>
+    					<td>$!item.ccpName / $!item.ccpTelephone</td>
+						<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+						<!--<td><a href="javascript:index.load('$appRoot/guide/order/insert')">预订</a></td>-->
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

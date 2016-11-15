@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mallshop">
+	
+	<!-- 查询 -->
+	<select id="selectList" resultType="mallShopBean">
+		SELECT
+			id		  AS id,
+			msp_name  AS mspName,
+			msp_level AS mspLevel,
+			msp_id    AS mspId,
+			msp_order AS mspOrder,
+			msp_no    AS mspNo
+		FROM
+			mall_shop
+		WHERE
+			1=1
+			<if test="mspLevel != null and mspLevel != '' ">   and msp_level = #{mspLevel}</if>
+			<if test="mspId != null and mspId != '' ">	   	   and msp_id = #{mspId}	  </if>
+		ORDER BY
+			msp_order
+	</select>
+</mapper>

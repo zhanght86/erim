@@ -1,0 +1,103 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+<div class="rdivv">
+	<div class="setfood">
+		<div class="newfood_suptop">
+            <img src="$staticRoot/images/htfood.png">
+            <span>套餐管理</span>
+            <div class="cb"></div>
+            <div class="g_line"></div>
+        </div>
+		<div class="setfood_top" style="min-width:1015px;">
+			<form class="form-search" method="post" id="form1">
+            	<div class="setfood_topbox">
+                	<span>套餐编号：</span>
+                	<input type="text" value="$!cafeteriaPackage.cpeCode" name="cpeCode">
+                </div>
+                <div class="setfood_topbox">
+                	<span>套餐名称：</span>
+                	<input type="text" name="cpeName" value="$!cafeteriaPackage.cpeName">
+                </div>
+                <div class="setfood_topbox">
+                	<span>有效日期：</span>
+                	<input type="text" name="cpeEndTime" onClick="WdatePicker({minDate:'%y-%M-%d'})" value="$!cafeteriaPackage.cpeEndTime">
+                </div>
+				<button class="setfood_see" type="button" onclick="index.searchform('form1','$appRoot/cafeteria/package/list');">查询</button>
+			</form>
+		</div>
+        <div class="cb"></div>
+        <div class="g_line"></div>
+        <div class="carad_ct">
+			<div class="carad_ctbtn">
+				<button onclick="index.load('$appRoot/cafeteria/package/insertPage');">+新增套餐</button>
+			</div>
+            <div class="carad_ctrtable">
+                <table cellspacing="0" cellspadding="0">
+                    <thead>
+                    	<tr>
+                    		<td style="min-width:80px;">套餐编号</td>
+                    		<td style="min-width:200px;">套餐名称</td>
+                    		<td style="min-width:170px;">有效期</td>
+                    		<td style="min-width:90px;">适用人数</td>
+                            <td style="min-width:70px;">套餐总价</td>
+                    		<td style="min-width:170px;">套餐管理</td>
+                    		<td style="min-width:60px;">上线状态</td>
+                    	</tr>
+                    </thead>
+                    <tbody>
+                    	#foreach($item in $cafeteriaList)
+							<tr #if($velocityCount  % 2 !=0) class="ttr" #end>
+                                <td>$!item.cpeCode</td>
+                                <td>$!item.cpeName</td>
+                                <td>$!item.cpeStartTime至$!item.cpeEndTime</td>
+                                <td>$!item.cpePersonMin&nbsp;至&nbsp;$!item.cpePersonMax&nbsp;人</td>
+                                <td>$!item.cpeContentPrice </td>
+                                <td>
+    								#if($shiro.hasPermission("PRODUCT_CAFETERIA_PACKAGE"))
+                                	<a href="javascript:index.load('$appRoot/cafeteria/package/updatePage?id=$item.id&cdlID=$!item.cdlID');">查看/修改</a>&nbsp;&nbsp;
+    								#end
+    								#if($shiro.hasPermission("PRODUCT_CAFETERIA_PACKAGE"))
+                                	<a href="javascript:index.load('$appRoot/cafeteria/price/list?cpeId=$!item.id&cpeName=$!item.cpeName&cdlId=$!item.cdlID&portal=01');">量价管理</a>&nbsp;&nbsp;
+    								#end
+                                </td>
+								<td>
+									<div class="wrapper">
+										<div class="imageContainer1">
+											#if($!item.cpeIsDelStatus == '1')
+												<span><img src="$staticRoot/images/lvdui.png"/></span>
+												<a href="javascript:index.load('$appRoot/cafeteria/package/delete?id=$item.id&cpeIsDelStatus=0');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+											#end
+											#if($!item.cpeIsDelStatus == '0')
+												<a href="javascript:index.load('$appRoot/cafeteria/package/delete?id=$item.id&cpeIsDelStatus=1');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+												<span><img src="$staticRoot/images/hongcuo.png"/></span>
+											#end
+										</div>
+									</div>
+								</td>
+							</tr>
+						#end
+					</tbody>
+				</table>
+				<div class="carinfo_ctbl_wxy">
+					<button  type="button" onclick="index.load(page.url);"mdfg class="carinfo_qutao">返回</button>
+				</div>
+			</div>
+    		#parse("common/page.vm")
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+		$('.dwp_f_a').mouseover(function(){
+        	$(this).parent().css('position','relative');
+    		$(this).parent().css('z-index','2');
+    		$(this).children().show();
+    	})
+        $('.dwp_f_a').mouseout(function(){
+    		$(this).parent().css('position','inherit');
+    		$(this).parent().css('z-index','0');
+    		$(this).children().hide();
+    	})
+	})
+
+</script>

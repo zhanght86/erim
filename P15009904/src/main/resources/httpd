@@ -1,0 +1,53 @@
+#www.ipwin.cn
+<VirtualHost *:80>
+    ServerAdmin admin@e-rimming.com
+    ServerName ipwin.cn
+    ServerAlias ipwin.cn
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyPass / http://localhost:13201/
+    ProxyPassReverse / http://localhost:13201/
+    ErrorLog logs/ipwin.cn.error_log
+    ZytomLog logs/ipwin.cn.access_log combined
+</VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin admin@e-rimming.com
+    ServerName www.ipwin.cn
+    ServerAlias www.ipwin.cn
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyPass / http://localhost:13201/
+    ProxyPassReverse / http://localhost:13201/
+    ErrorLog logs/ipwin.cn.error_log
+    ZytomLog logs/ipwin.cn.access_log combined
+</VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin admin@e-rimming.com
+    ServerName admin.ipwin.cn
+    ServerAlias admin.ipwin.cn
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyPass / http://localhost:13201/admin/
+    ProxyPassReverse / http://localhost:13201/admin/
+    ErrorLog logs/ipwin.cn.error_log
+    ZytomLog logs/ipwin.cn.access_log combined
+</VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin admin@e-rimming.com
+    ServerName file.ipwin.cn
+    ServerAlias file.ipwin.cn
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyPass / http://localhost:13201/file/
+    ProxyPassReverse / http://localhost:13201/file/
+    ErrorLog logs/ipwin.cn.error_log
+    ZytomLog logs/ipwin.cn.access_log combined
+</VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin admin@e-rimming.com
+    DocumentRoot /data/static/demostatic
+    ServerName static.ipwin.cn
+    ServerAlias static.ipwin.cn
+    ErrorLog logs/ipwin.error_log
+    ZytomLog logs/ipwin.com.access_log combined
+</VirtualHost>

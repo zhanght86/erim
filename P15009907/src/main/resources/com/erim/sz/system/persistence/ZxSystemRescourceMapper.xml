@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zxsystemrescource">
+	<select id="selectRescourceByUrl" resultType="zxSystemRescourceBean">
+		SELECT
+			id 					   AS id,
+			zx_func_rescource_code AS zxFuncRescourceCode,
+			zx_rescource_name 	   AS zxRescourceName,
+			zx_rescource_url	   AS zxRescourceUrl
+		FROM
+			zx_system_rescource
+		WHERE
+			zx_rescource_url = #{zxRescourceUrl}
+	</select>
+</mapper>

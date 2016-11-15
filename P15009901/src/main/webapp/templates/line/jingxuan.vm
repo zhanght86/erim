@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="renderer" content="webkit" />
+    <title>热门精选_$!mallWeb.webCpyname网站</title>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+    <link href="$staticRoot/css/jingxuan.css" rel="stylesheet" type="text/css"/>
+    <link href="$staticRoot/css/headerfooter.css" rel="stylesheet" type="text/css" />
+    
+</head>
+<body>
+<div class="indexwrap">
+	<!--头部-->
+	#parse("common/head.vm")
+<div class="jbodyer">
+    <div class="jbodyer_cen" id="wrapper">
+        <div class="jbodyer_con" id="carousel">
+            <ul class="jbodyer_top">
+                #foreach($item in $hotLinezb)
+                <li class="jbodyer_li1 #if($velocityCount%3 == 0) mr0 #end">
+                    <a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" target="_blank" alt="" title="$!item.ldlName">
+						#if($!item.ldlPicture != '')
+							<img src="$staticFileRes$!item.ldlPicture"/>
+						#else
+							<img src="$staticRoot/images/isnull.png" title="" alt="">
+						#end
+                        <div class="jbodyer_li1_p" >
+							#set($str=$!item.ldlName)
+                            #if($str.length()>40)
+                            #set($str=$str.substring(0,40))
+                               $str ...
+                            #else
+                               $!item.ldlName
+                            #end
+						</div>
+                        <div class="jbodyer_lib">
+                             <div class="li1" style="display:none">$!item.ldlNotes</div>
+                             <div class="li1" style="display:none">$!item.ldlMoneyContain</div>
+                             <div class="jbodyer_lib_men"><span>￥&nbsp;$!item.lpeRetailAdult</span>起</div>
+                        </div>
+                    </a>
+                </li>
+				#end
+            </ul>
+            <div class="clearfix">
+				<a id="prev" class="prev" href="#">&lt;</a>
+				<a id="next" class="next" href="#">&gt;</a>
+			</div>
+        </div>
+    </div>
+</div>
+<div class="jbody_center">
+	<div class="jbodcen_cen">
+    	<div class="jbodcen_con">
+            <ul class="jbodcen_top" id="tab-wrapj">
+                <li class="jbodcentop_li1 activej"> 周边旅游</li>
+                <li class="jbodcentop_li1">国内旅游</li>
+                <li class="jbodcentop_li2">港澳台/日韩/东南亚</li>
+                <li class="jbodcentop_li3">朝鲜/俄罗斯/欧洲/美洲</li>
+                <li class="jbodcentop_li4">澳洲/中东/非洲</li>
+            </ul>
+            <div id="tab-conj">
+            	<ul class="jbodcen_bot tab-con1j">
+					#foreach($item in $hotLinezb)
+                    <li class="jbodcen_juli #if($velocityCount%3 == 0) mr0 #end">
+                        <div>
+                            <a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" target="_blank" alt="" title="$!item.ldlName">
+                                #if($!item.ldlPicture != '')
+        							<img src="$staticFileRes$!item.ldlPicture" title="" alt="" style="width:380px;height:214px;"/>
+        						#else
+        							<img src="$staticRoot/images/isnull.png" title="" alt="" style="width:380px;height:214px;"/>
+        						#end
+                                <p>
+                                    <span class="jbodcen_span">
+										#set($str=$!item.ldlName)
+                                        #if($str.length()>40)
+                                            #set($str=$str.substring(0,40))
+                                            $str ...
+                                        #else
+                                            $!item.ldlName
+                                        #end
+									</span>
+                                </p>
+                                <p class="jbodcen_pbot">
+                                    <span class="jbodcen_cor">￥$!item.lpeRetailAdult</span>起
+                                </p>
+                            </a>
+                        </div>
+                    </li>
+					#end
+            	</ul>
+                <ul class="jbodcen_bot tab-con1j" style="display:none;">
+					#foreach($item in $hotLineGn)
+                        <li class="jbodcen_juli #if($velocityCount%3 == 0) mr0 #end">
+                            <div>
+                                <a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" target="_blank" alt="" title="$!item.ldlName">
+                                    #if($!item.ldlPicture != '')
+            							<img src="$staticFileRes$!item.ldlPicture" title="" alt="" style="width:380px;height:214px;"/>
+            						#else
+            							<img src="$staticRoot/images/isnull.png" title="" alt="" style="width:380px;height:214px;" />
+            						#end
+                                    <p>
+                                        <span class="jbodcen_span">
+											#set($str=$!item.ldlName)
+                                            #if($str.length()>40)
+                                                #set($str=$str.substring(0,40))
+                                                $str ...
+                                            #else
+                                                $!item.ldlName
+                                            #end
+										</span>
+                                    </p>
+                                    <p class="jbodcen_pbot">
+                                        <span class="jbodcen_cor">￥$!item.lpeRetailAdult</span>起
+                                    </p>
+                                </a>
+                            </div>
+                        </li>
+                    #end
+                </ul>
+                <ul class="jbodcen_bot tab-con1j" style="display:none;">
+					#foreach($item in $hotLineGw1)
+                    <li class="jbodcen_juli #if($velocityCount%3 == 0) mr0 #end">
+                        <div>
+                            <a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" target="_blank" alt="" title="$!item.ldlName">
+                                #if($!item.ldlPicture != '')
+            						<img src="$staticFileRes$!item.ldlPicture" title="" alt="" style="width:380px;height:214px;" />
+            					#else
+            						<img src="$staticRoot/images/isnull.png" title="" alt="" style="width:380px;height:214px;">
+            					#end
+                                <p>
+                                    <span class="jbodcen_span">
+										#set($str=$!item.ldlName)
+                                        #if($str.length()>40)
+                                            #set($str=$str.substring(0,40))
+                                            $str ...
+                                        #else
+                                            $!item.ldlName
+                                        #end
+									</span>
+                                </p>
+                               <p class="jbodcen_pbot">
+                                    <span class="jbodcen_cor1" style="display:none">￥3000</span>
+                                    <span class="jbodcen_cor">￥$!item.lpeRetailAdult</span>起
+                               </p>
+                            </a>
+                        </div>
+                    </li>
+                    #end
+                </ul>
+                <ul class="jbodcen_bot tab-con1j" style="display:none;">
+					#foreach($item in $hotLineGw2)
+                    <li class="jbodcen_juli #if($velocityCount%3 == 0) mr0 #end">
+                        <div>
+                            <a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" target="_blank" alt="" title="$!item.ldlName">
+								#if($!item.ldlPicture != '')
+            						<img src="$staticFileRes$!item.ldlPicture" title="" alt="" style="width:380px;height:214px;"/>
+            					#else
+            						<img src="$staticRoot/images/isnull.png" title="" alt="" style="width:380px;height:214px;">
+            					#end
+                                <p>
+                                    <span class="jbodcen_span">
+										#set($str=$!item.ldlName)
+                                        #if($str.length()>40)
+                                            #set($str=$str.substring(0,40))
+                                            $str ...
+                                        #else
+                                            $!item.ldlName
+                                        #end
+									</span>
+                                </p>
+                                <p class="jbodcen_pbot">
+                                    <span class="jbodcen_cor1" style="display:none">￥3000</span>
+                                    <span class="jbodcen_cor">￥$!item.lpeRetailAdult</span>起
+                                </p>
+                            </a>
+                        </div>
+                    </li>
+                   #end 
+                </ul>
+                <ul class="jbodcen_bot tab-con1j" style="display:none;">
+					#foreach($item in $hotLineGw3)
+                    <li class="jbodcen_juli #if($velocityCount%3 == 0) mr0 #end">
+                        <div>
+							<a href="$appRoot/$cpyno/line/tejiaxiang/$!item.id?searchModel=1" target="_blank" alt="" title="$!item.ldlName">
+                                #if($!item.ldlPicture != '')
+            						<img src="$staticFileRes$!item.ldlPicture" title="" alt="" style="width:380px;height:214px;"/>
+            					#else
+            						<img src="$staticRoot/images/isnull.png" title="" alt="" style="width:380px;height:214px;">
+            					#end
+                                <p>
+                                    <span class="jbodcen_span">
+										#set($str=$!item.ldlName)
+                                        #if($str.length()>40)
+                                            #set($str=$str.substring(0,40))
+                                            $str ...
+                                        #else
+                                            $!item.ldlName
+                                        #end
+									</span>
+                                </p>
+                                <p class="jbodcen_pbot" >
+                                    <span class="jbodcen_cor">￥$!item.lpeRetailAdult</span>起
+                                </p>
+                            </a>
+                        </div>
+                    </li>
+                    #end 
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+#parse("common/footer.vm")
+</div>
+</body>
+</html>
+<script src="$staticRoot/js/jquery.min.js"></script>
+<script src="$staticRoot/js/jquery.carouFredSel-6.0.4-packed.js" type="text/javascript"></script>
+<script>
+$(function() {
+	$('#carousel ul').carouFredSel({
+		prev: '#prev',
+		next: '#next',
+		pagination: "#pager",
+		scroll: 1000
+	});
+	$("#tab-wrapj li").mouseover(function(){
+    	$(this).siblings().removeClass("activej");
+    	$(this).addClass("activej");
+    	$("#tab-conj .tab-con1j").hide().eq($(this).prevAll().length).show();
+	});
+
+});
+
+</script>

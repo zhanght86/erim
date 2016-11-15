@@ -1,0 +1,16 @@
+<div class="em_body">
+	##页面主体
+	<div class="em5002">
+        <div class="image"></div>
+        <div class="text">
+            <div class="title">系统错误，可能是以下原因造成：</div>
+            <div>
+                <ul>
+                    <li>因长时间未操，系统超时，请重新登录系统。</li>
+                    <li>您的会员账号在异地登录，请检查账号安全性。</li>
+                    <li>如果您无法知道错误原因，可以和我们的客服取得联系。</li>
+                </ul>
+            </div>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>系统消息</title>
+<style>
+    body{font-size:12px; font-family:"宋体",Arial, Helvetica, sans-serif;color:#363636; background: #f1f1f1;}
+    html, body, div, span, h1, h2, h3, h4, h5, h6, em, img, strong, sub, sup, tt,dd, dl, dt, form, label, table, caption, tbody, tfoot, thead, tr, th, td,ul,li,p,a{ margin: 0; padding: 0;  }
+    .cbody{ margin:0 auto;width:982px; position:relative;background:#FFF;}
+    img{ border:0;}
+    ul,li{ list-style-type:none;}
+    a:link,a:visited{text-decoration:none;color:#010101;}
+    a:hover{text-decoration:none;color:#ED0909;}
+    .overhide{overflow:hidden;text-indent:-100em; }
+    .clear {clear: both;}
+    .clearfix:after {clear: both;content: ' ';display: block;font-size: 0;line-height: 0;visibility: hidden;width: 0;height: 0;}
+    .clearfix{zoom:1}
+    /*公共属性结束*/
+    .xitong{ width: 100%; border: 1px solid #cccccc; border-radius: 5px;font-family:"微软雅黑"; font-size: 12px; background: #FFFFFF;}
+    .b_title{ height: 30px; background: #d09e64; color: #FFFFFF; font-size: 14px; line-height: 30px; padding-left: 20px; font-weight: bold;  border-bottom: 1px solid  #cccccc; border-radius:5px 5px 0px 0px;}
+    .b_titleright{ float: right;}
+    .b_titleright span{ margin-right: 10px; }
+    .b_p20{ padding: 20px;}
+    .b_p20 p{ margin-bottom: 15px; line-height: 20px;}
+    .b_text-indent2{ text-indent: 2em;}
+    .b_prb20{ padding-right: 20px; padding-bottom: 20px;  height: 75px;}
+    .b_frcenter{ float:right; text-align: center; }
+    .b_frcenter p{margin-bottom: 15px; }
+    .b_pt20{ padding-top: 20px;}
+</style>
+</head>
+
+<body>
+    <div class="xitong">
+        <div class="b_title">
+            <span>$!pubNotice.pneTitle</span>
+            <div class="b_titleright" >
+                <span>$date.format('yyyy年MM月dd日 HH:mm:ss',$!pubNotice.pneCreatetime)</span>
+            </div>
+        </div>
+        <div class="b_p20">
+            <p>$!pubNotice.pneContent</p>
+        </div>
+        <div class="b_prb20">
+            <div class="b_frcenter">
+                <p>佳旅联合</p>
+                <p>技术研发部</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

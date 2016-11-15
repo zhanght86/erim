@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriavoucher">
+	
+	<!-- 根据套餐ID查询 -->
+	<select id="selectCafeteriaVoucherById" resultType="cafeteriaVoucherBean">
+		SELECT 
+			id                          AS id,
+			cdl_id                      AS cdlID,					
+			djq_start_date              AS djqStartDate,
+			djq_end_date 	            AS djqEndDate,
+			djq_buy_show 	            AS djqBuyShow,
+			djq_order_remind            AS djqOrderRemind,
+			djq_use_show                AS djqUseShow,
+			djq_voucher                 AS djqVoucher
+		FROM
+			cafeteria_voucher
+		WHERE
+			cdl_id = #{cdlID}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			cafeteria_voucher (
+			    cdl_id,		
+				djq_start_date,
+				djq_end_date,
+				djq_buy_show,
+				djq_order_remind,
+				djq_use_show,
+				djq_voucher
+			) VALUES (
+				#{cdlID},
+				#{djqStartDate},
+				#{djqEndDate},
+				#{djqBuyShow},
+			    #{djqOrderRemind},
+		        #{djqUseShow},
+			    #{djqVoucher}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			cafeteria_voucher
+		SET
+		    cdl_id                     = #{cdlID},		
+			djq_start_date             = #{djqStartDate},
+			djq_end_date 	           = #{djqEndDate},
+			djq_buy_show 	           = #{djqBuyShow},
+			djq_order_remind           = #{djqOrderRemind},
+			djq_use_show               = #{djqUseShow},
+			djq_voucher                = #{djqVoucher}
+		WHERE 
+			id = #{id}
+	</update>
+	
+</mapper>

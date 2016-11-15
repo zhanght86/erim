@@ -1,0 +1,412 @@
+.coadmin{
+	width: 95%;
+	height: 100%;
+	margin-left:20px;
+}
+.coadmin_top{
+	height: 185px;
+	width: 100%;
+	float: left;
+}
+.coadmin_topl{
+	float: left;
+	margin-left: 35px;
+	height: 30px;
+	margin-top: 15px;
+	width: 95%;
+}
+.coadmin_topl>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	text-align: right;
+	width: 100px;
+	font-size: 12px;
+	color: #393838;
+	margin-right: 10px;
+}
+.coadmin_topl>label{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	width: 100px;
+}
+.coadmin_tct{
+	float: left;
+	width: 100%;
+	height: 45px;
+}
+.coadmin_tct .show{
+	display: block;
+}
+.coadmin_tctb{
+	display: none;
+	padding-left: 35px;
+	padding-top: 15px;
+}
+.doadmin_toplbr>label{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	width: 80px;
+}
+.doadmin_toplbr>label>input{
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-top: 7px;
+	margin-right: 10px;
+}
+.co_nationdiv{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	display: none;
+}
+.co_nationdiv>select{
+	float: left;
+	height: 28px;
+	line-height: 28px;
+	width: 150px;
+	border:1px solid #ccc;
+	margin-right: 10px;
+}
+.co_nationdiv>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	margin-right: 10px;
+}
+.ticket{
+	width: 95%;
+	height: 100%;
+	margin: 0 auto;
+}
+.ticket_ct{
+	float: left;
+	width: 100%;
+}
+.ticket_ctl{
+	float: left;
+	width: 50%;
+	height: 100%;
+	background: url("../images/line.png") repeat-y;
+	background-position: right;
+}
+.ticket_ctll{
+	line-height: 30px;
+	float: left;
+	margin-left: 35px;
+	width: 600px;
+}
+.ticket_ctll>span{
+	width: 100px;
+	text-align: right;
+	font-size: 12px;
+	line-height: 30px;
+	color: #393838;
+	margin-right: 10px;
+	margin-top: 15px;
+	float: left;
+}
+.ticket_ctllb{
+	float: left;
+	width: 490px;
+}
+.ticket_ctlla{
+	float: left;
+	width: 220px;
+	height: 30px;
+	margin-top: 15px;
+}
+.ticket_ctlla>input{
+	float: left;
+	height: 28px;
+	width: 165px;
+	border: 1px solid #ccc;
+}
+.ticket_ctlla>a{
+	float: left;
+    height: 20px;
+    width: 20px;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 20px;
+    color: #fff;
+    background:#d09e64;
+    line-height: 20px;
+    text-align: center;
+}
+.ticket_ctllb>ul{
+	float: left;
+	margin-top: 15px;
+}
+.ticket_ctllb>ul>li{
+	float: left;
+	height: 30px;
+	width: 90px;
+	text-align: center;
+	line-height: 30px;
+	background: #ccc;
+	margin-right: 5px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+.ticket_ctllbiger{
+	float: left;
+	margin-left: 110px;
+	width: 500px;
+	background: #fff;
+	padding-bottom: 20px;
+}
+.ticket_ctllbiger .show{
+	display: block;
+}
+.ticket_ctllbox{
+	display: none;
+}
+.ticket_ctllbl{
+	margin-top: 15px;
+	float: left;
+	width: 500px;
+}
+.ticket_ctllbl>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	width: 80px;
+	text-align: right;
+	margin-right: 10px;
+}
+.ticket_ctllbl>textarea{
+	float: left;
+	width: 348px;
+	height: 90px;
+	border: 1px solid #ccc;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+}
+/*右边*/
+.ticket_ctr{
+	float: left;
+	width: 45%;
+	margin-left: 35px;
+}
+.ticket_ctrl{
+	margin-top: 15px;
+	line-height: 30px;
+	float: left;
+	margin-left: 25px;
+}
+.ticket_ctrl>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	text-align: right;
+}
+#bg{
+	background: #fff;
+}
+
+/*新增景点*/
+.newjing{
+	width: 95%;
+	height: 100%;
+	margin: 0 auto;
+}
+.newjing_ct{
+	float: left;
+	margin-left: 35px;
+}
+.newjing_ctl{
+	float: left;
+	width: 800px;
+}
+.newjing_ctl>span{
+	height: 30px;
+	line-height: 30px;
+	float: left;
+	font-size: 12px;
+	text-align: right;
+	width: 100px;
+	color: #393838;
+	margin-right: 10px;
+	margin-top: 15px;
+}
+.newjing_ctlr{
+	float: left;
+	margin-top: 15px;
+	width: 690px;
+}
+.newjing_ctlr>input{
+	height: 28px;
+	width: 300px;
+	border:1px solid #ccc;
+	font-size: 12px;
+	float: left;
+}
+.newjing_ctlr>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	font-size: 12px;
+	color: #393838;
+}
+.newjing_ctlr>label{
+	padding:0 15px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	float: left;
+}
+.newjing_ctlr>label>input{
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-top: 7px;
+	margin-right: 15px;
+}
+.newjing_ctlra{
+	float: left;
+	margin-top: 15px;
+	width: 690px;
+}
+.newjing_ctlra>label{
+	padding:0 15px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	float: left;
+}
+.newjing_ctlra>label>input{
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-top: 7px;
+	margin-right: 15px;
+}
+.newjing_ctlbiger{
+	float: left;
+	width: 880px;
+}
+.newjing_ctlbiger .show{
+	display: block;
+}
+.newjing_ctlbox{
+	display: none;
+	margin-top: 15px;
+}
+.jingwei{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 15px;
+	font-size: 12px;
+	color: #2da0e6;
+}
+.newjing_ctlraa{
+	float: left;
+	margin-top: 15px;
+	width: 690px;
+}
+.newjing_ctlraa>label{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	float: left;
+}
+.newjing_ctlraa>label>input{
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-top: 7px;
+	margin-right: 15px;
+}
+.newjing_ctlrab{
+	float: left;
+	margin-top: 15px;
+	width: 690px;
+}
+.newjing_ctlrab>input{
+	height: 28px;
+	width: 300px;
+	border:1px solid #ccc;
+	font-size: 12px;
+	float: left;
+}
+.newjing_ctlrab>span{
+	float: left;
+	height: 28px;
+	line-height: 28px;
+	font-size: 12px;
+	color: #393838;
+	border: 1px solid #ccc;
+	border-left: none;
+	width: 70px;
+	text-align: center;
+	background: #fff;
+}
+.newjing_ctlrabb{
+	float: left;
+	width: 690px;
+}
+.newjing_ctlraba{
+	float: left;
+	margin-top: 15px;
+	width: 425px;
+}
+.newjing_ctlraba>input{
+	height: 28px;
+	width: 300px;
+	border:1px solid #ccc;
+	font-size: 12px;
+	float: left;
+}
+.newjing_ctlraba>span{
+	float: left;
+	height: 28px;
+	line-height: 28px;
+	font-size: 12px;
+	color: #393838;
+	border: 1px solid #ccc;
+	border-left: none;
+	width: 70px;
+	text-align: center;
+	background: #fff;
+}
+.newjing_ctlraba>a{
+	float: left;
+    height: 20px;
+    width: 20px;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 20px;
+    color: #fff;
+    background:#d09e64;
+    line-height: 20px;
+    text-align: center;
+}
+.newjing_ctlrab>textarea{
+	float: left;
+	width: 370px;
+	height: 90px;
+	border: 1px solid #ccc;
+	line-height: 30px;
+	font-size: 12px;
+}

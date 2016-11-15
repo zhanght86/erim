@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="drivePrice">
+	
+	<sql id="sql_query">
+		1 = 1
+		<!-- 日期 -->
+		<if test = "tdpDate != null and tdpDate != ''"> AND tdp_date = #{tdpDate} </if>
+		<!-- 包车ID -->
+		<if test = "zjlId != null and zjlId != ''"> AND zjl_id = #{zjlId} </if>
+		<!-- 包车类型 -->
+		<if test = "zjlType != null and zjlType != ''"> AND zjl_type = #{zjlType} </if>
+	</sql>
+	
+	<!-- 查询数据  -->
+	<select id="selectDrivePriceList" parameterType="java.util.Map" resultType="texiDrivePriceBean">
+		SELECT * FROM (
+			SELECT
+				id,
+				zjl_id 						AS zjlId,
+				zjl_type 					AS zjlType,
+				tdp_date 					AS tDpDate,
+				tdp_is_open 				AS tDpIsOpen,
+				tdp_week 					AS tDpWeek,
+				tdp_sign 					AS tdpSign,
+				tdp_trade_price 			AS tdpTradePrice,
+				tdp_combination_price 		AS tdpCombinationPrice,
+				tdp_retail_price 			AS tdpRetailPrice,
+				tdp_price_show 				AS tdpPriceShow,
+				tdp_cancel_indent 			AS tdpCancelIndent,
+				tdp_create_time				AS tdpCreateTime
+			FROM
+				texi_drive_price
+			ORDER BY 
+				tdp_create_time
+			DESC
+		) t
+		GROUP BY
+			t.tdpDate,
+			t.zjlId,
+			t.zjlType
+		HAVING
+			t.zjlId = #{bean.zjlId} 
+			AND t.zjlType = #{bean.zjlType} 
+			<!-- 日期 -->
+			AND t.tdpDate IN 
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="texiDrivePriceBean">
+		INSERT INTO
+			texi_drive_price (
+				cpy_id,
+				zjl_id,
+				zjl_type,
+				tdp_date,
+				tdp_is_open,
+				tdp_week,
+				<if test = "tdpSign != null">
+					tdp_sign,
+				</if>
+				<if test = "tdpTradePrice != null or tdpCombinationPrice != null or tdpRetailPrice != null">
+					tdp_trade_price,
+					tdp_combination_price,
+					tdp_retail_price,
+				</if>
+				tdp_price_show,
+				tdp_cancel_indent,
+				tdp_create_time,
+				tdp_create_user
+			) VALUES (
+				#{cpyId},
+				#{zjlId},
+				#{zjlType},
+				#{tdpDate},
+				#{tdpIsOpen},
+				#{tdpWeek},
+				<if test = "tdpSign != null">
+					#{tdpSign},
+				</if>
+				<if test = "tdpTradePrice != null or tdpCombinationPrice != null or tdpRetailPrice != null">
+					#{tdpTradePrice},
+					#{tdpCombinationPrice},
+					#{tdpRetailPrice},
+				</if>
+				#{tdpPriceShow},
+				#{tdpCancelIndent},
+				#{tdpCreateTime},
+				#{tdpCreateUser}
+			)
+	</insert>
+	
+	<!-- 开关房 -->
+	<update id="updateIsOpen">
+		UPDATE
+			texi_drive_price
+		SET
+			tdp_is_open 	= #{tdpIsOpen}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 修改房量 -->
+	<update id="updatePrice">
+		UPDATE
+			texi_drive_price
+		SET
+			tdp_sign 				= #{tdpSign},
+			tdp_trade_price 		= #{tdpTradePrice},
+			tdp_combination_price 	= #{tdpCombinationPrice},
+			tdp_retail_price 		= #{tdpRetailPrice},
+			tdp_is_open				= '02'
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 批量关房 -->
+	<update id="updateBatchOpen">
+		UPDATE
+			texi_drive_price
+		SET
+			tdp_is_open				= #{tdpIsOpen}
+		WHERE
+			<include refid = "sql_query" />
+	</update>
+</mapper>

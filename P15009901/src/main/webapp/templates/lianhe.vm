@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+	<meta name="renderer" content="webkit" />
+    <title></title>
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/zutuan.css">
+</head>
+<body>
+	<script src="$staticRoot/js/jquery.min.js" type="text/javascript"></script>
+<script>
+    $(function(){
+        var mainleft=$(".zuteam-left").height();
+        var mainright= $(".zuteam-right").height();
+        if(mainleft >mainright){
+            $(".zuteam-right").css("height",mainleft-6);
+        }else{
+            $(".zuteam-left").css("height",mainright);
+        }
+        //导航切换
+        $(".ztl-menu li").click(function(){
+            $(".ztl-menu li.active").removeClass("active");
+            $(this).addClass("active");
+			
+        });
+
+        $('.zuteaml-title').click(function(){
+            var $ul = $(this).next('ul');
+            $('dd').find('ul').slideUp();
+            $(".zuteam-left dd div.lefton").removeClass("lefton");
+			
+            if($ul.is(':visible')){
+                $(".zuteam-left dd div.lefton").removeClass("lefton");
+                $(this).next('ul').slideUp(function(){
+					var mainleft=$(".zuteam-left").css('height', 'auto').height()-6;
+					if(mainleft>$(".zuteam-right").height()){
+						$(".zuteam-right").css("height",mainleft);
+					}
+				});
+            }else{
+                $(this).addClass("lefton");
+                $(this).next('ul').slideDown(function(){
+					var mainleft=$(".zuteam-left").css('height', 'auto').height()-6;
+					if(mainleft>$(".zuteam-right").height()){
+						$(".zuteam-right").css("height",mainleft);
+					}
+				});
+            }
+			
+        });
+
+    });
+</script>
+    <div class="zuteam" >
+      
+        <div class="zuteam-line">
+            旅行社
+        </div>
+        <div class="zuteam-main">
+            <dl class="zuteam-left">
+				#foreach($item in $listRegion)
+					#if($item.regionLevel == '1')
+                        <dd>
+                            <div class="zuteaml-title">
+                                $item.regionName
+                            </div>
+                            <ul class="ztl-menu">
+								#foreach($i in $listRegion)
+									#if($i.regionLevel == '2' && $i.regionPid==$item.regionId)
+										<li><span onclick="window.location='$appRoot/$cpyno/lianhe/$i.regionName'">$i.regionName</span></li>
+									#end
+								#end
+                            </ul>
+                        </dd>
+					#end
+				#end
+            </dl>
+            <div class="zuteam-right">
+               <ul>
+    				#foreach($item in $listSell)
+                       	<li>
+                       		<span class="lxsm"><a href="#">$!item.sstName</a></span> 
+                       		<span class="lxdz">$!item.sstAddress</span>
+                       		<span class="lxdh">$!item.sstTelephone</span>
+                       	</li>
+    				#end
+               </ul>
+               
+            </div>
+         
+        </div>
+		
+    </div>
+      
+     <div style=" width:1200px; margin: 0 auto; padding-bottom: 40px; margin-top: 40px;text-align: center;">
+         <a href="http://sell.jialvlianhe.com" class="zuteam-top zutuan" title="组团社入口" target="_blank">组团社入口</a>
+        <a href="http://line.jialvlianhe.com" class="zuteam-top line" title="专线商入口" target="_blank">专线商入口</a>
+        <a href="http://crm.jialvlianhe.com" class="zuteam-top crm" title="生产商入口" target="_blank">生产商入口</a>
+        <a  href="$appRoot/$cpyno/abouts.html" class="zuteam-top help mr0" title="帮助中心" target="_blank">帮助中心</a>
+        </div>
+</body>
+</html>

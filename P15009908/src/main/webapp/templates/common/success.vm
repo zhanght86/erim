@@ -1,0 +1,17 @@
+<!--删除成功-->
+<div class="del success">
+	<div class="deltop">提示</div>
+	<div class="delcter">
+		<div class="delctera">
+			<img src="$staticRoot/images/del.png">
+			<div class="delfont">
+				<span>删除成功</span>
+			</div>
+		</div>
+		<div class="delcterb">
+			<button type="button" class="delquxiao"></button>
+		</div>
+	</div>
+</div>
+<div class="del_mask"></div>
+<!--删除成功-->

@@ -1,0 +1,1137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>主题推荐</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css" />
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/zhuti.css" />
+    <script src="$staticRoot/js/jquery.min.js"></script>
+</head>
+<body>
+<div class="indexwrap">
+	<!--头部-->
+	#parse("common/head.vm")
+</div>
+<div class="ubanner">
+	<div class="ubanner_cen bannerbox">
+    	<div class="ubanner_con" id="focus">
+        	<ul>
+                <li class="ubanner_li">
+                	<div class="ubanner_lilft">
+                    	<a href="#">
+                            <img src="$staticRoot/images/upic—9.png"/>
+                            <div class="ubanner_lft_title">
+                            	<div class="ubanner_titlft">
+                                    <p class="ubanner_titile1">
+                                        <span>夕阳红老人旅游团</span>
+                                        <span>跟团游</span>
+                                        <span>三天三夜</span>
+                                        <span>夕阳红老人旅游团</span>
+                                        <span>跟团游</span>
+                                    </p>
+                                    <p class="ubanner_titile2">
+                                        <span>食宿全包</span>  
+                                        <span>车费报销</span>
+                                    </p>
+                                </div>
+                                <p class="ubanner_titile3">
+                                    <span>￥2000</span>起
+                                </p>
+                            </div>
+                         </a>
+                    </div>
+                    <div class="ubanner_lirgt">
+                    	<a href="#">
+                            <div class="ubanrgt_top">
+                                <img src="$staticRoot/images/upic2.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="ubanrgt_bot ubanrgt_top">
+                                <img src="$staticRoot/images/upic3.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="ubanner_li">
+                	<div class="ubanner_lilft">
+                    	<a href="#">
+                            <img src="$staticRoot/images/upic—9.png"/>
+                            <div class="ubanner_lft_title">
+                                <p class="ubanner_titile1">
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                    <span>三天三夜</span>
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                </p>
+                                <p class="ubanner_titile2">
+                                    <span>食宿全包</span>  
+                                    <span>车费报销</span>
+                                </p>
+                                <p class="ubanner_titile3">
+                                    <span>￥2000</span>起
+                                </p>
+                            </div>
+                         </a>
+                    </div>
+                    <div class="ubanner_lirgt">
+                    	<a href="#">
+                            <div class="ubanrgt_top">
+                                <img src="$staticRoot/images/upic2.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="ubanrgt_bot ubanrgt_top">
+                                <img src="$staticRoot/images/upic3.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="ubanner_li">
+                	<div class="ubanner_lilft">
+                    	<a href="#">
+                            <img src="$staticRoot/images/upic—9.png"/>
+                            <div class="ubanner_lft_title">
+                                <p class="ubanner_titile1">
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                    <span>三天三夜</span>
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                </p>
+                                <p class="ubanner_titile2">
+                                    <span>食宿全包</span>  
+                                    <span>车费报销</span>
+                                </p>
+                                <p class="ubanner_titile3">
+                                    <span>￥2000</span>起
+                                </p>
+                            </div>
+                         </a>
+                    </div>
+                    <div class="ubanner_lirgt">
+                    	<a href="#">
+                            <div class="ubanrgt_top">
+                                <img src="$staticRoot/images/upic2.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="ubanrgt_bot ubanrgt_top">
+                                <img src="$staticRoot/images/upic3.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="ubanner_li">
+                	<div class="ubanner_lilft">
+                    	<a href="#">
+                            <img src="$staticRoot/images/upic—9.png"/>
+                            <div class="ubanner_lft_title">
+                                <p class="ubanner_titile1">
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                    <span>三天三夜</span>
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                </p>
+                                <p class="ubanner_titile2">
+                                    <span>食宿全包</span>  
+                                    <span>车费报销</span>
+                                </p>
+                                <p class="ubanner_titile3">
+                                    <span>￥2000</span>起
+                                </p>
+                            </div>
+                         </a>
+                    </div>
+                    <div class="ubanner_lirgt">
+                    	<a href="#">
+                            <div class="ubanrgt_top">
+                                <img src="$staticRoot/images/upic2.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="ubanrgt_bot ubanrgt_top">
+                                <img src="$staticRoot/images/upic3.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="ubanner_li">
+                	<div class="ubanner_lilft">
+                    	<a href="#">
+                            <img src="$staticRoot/images/upic—9.png"/>
+                            <div class="ubanner_lft_title">
+                                <p class="ubanner_titile1">
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                    <span>三天三夜</span>
+                                    <span>夕阳红老人旅游团</span>
+                                    <span>跟团游</span>
+                                </p>
+                                <p class="ubanner_titile2">
+                                    <span>食宿全包</span>  
+                                    <span>车费报销</span>
+                                </p>
+                                <p class="ubanner_titile3">
+                                    <span>￥2000</span>起
+                                </p>
+                            </div>
+                         </a>
+                    </div>
+                    <div class="ubanner_lirgt">
+                    	<a href="#">
+                            <div class="ubanrgt_top">
+                                <img src="$staticRoot/images/upic2.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="ubanrgt_bot ubanrgt_top">
+                                <img src="$staticRoot/images/upic3.jpg"/>
+                                <p class="ubanrgt_top_titile4">
+                                    <span>夕阳红老人旅游团 </span>
+                                    <span> 跟团游  </span>
+                                    <span> 三天三夜</span>
+                                </p>
+                                <p class="ubanrgt_top_title5">
+                                    <span>￥2999</span>起
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <div class="ubanner_div">
+    	<img class="pre" scr="$staticRoot/images/upic5.jpg"/>
+    
+    	<img class="next" scr="$staticRoot/images/upic4.jpg"/>
+    </div>
+</div>
+<div class="ubodyer">
+	<div class="ubodyer_cen">
+    	<div class="ubodyer_con">
+            <div class="ubodyer_bot">
+        		<div class="ubodyer_botlft">
+                	<ul>
+                    	<li class="about_gs" id="gongsi1" onmouseover="show_about(this.id,'rigrht1')">
+                            <span class="rbodyer_li_span">周末</span>
+                        </li>
+                        <li id="gongsi2" onmouseover="show_about(this.id,'rigrht2')">
+                        	<span class="rbodyer_li_span">海岛</span>
+                        </li>
+                        <li id="gongsi3" onmouseover="show_about(this.id,'rigrht3')">
+                        	<span class="ubodyer_li_span">夕阳红</span>
+                        </li>
+                        <li id="gongsi4" onmouseover="show_about(this.id,'rigrht4')">
+                        	<span class="rbodyer_li_span">蜜月</span>
+                        </li>
+                        <li id="gongsi5" onmouseover="show_about(this.id,'rigrht5')">
+                        	<span class="sbodyer_li_span">亲子 冬 夏令营</span>
+                        </li>
+                        <li id="gongsi6" onmouseover="show_about(this.id,'rigrht6')">
+                        	<span class="ubodyer_li_span">旅游购</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ubodyer_botrgt">
+                	<div >
+                        <ul id="rigrht1">
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                <a href="$appRoot/$cpyno/line/zhutixiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                            	</div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul id="rigrht2">
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪花丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul id="rigrht3">
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪花美海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul id="rigrht4">
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪花美丽滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul id="rigrht5">
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪花美丽海</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul id="rigrht6">
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                            <li class="ubodbotrgt_li">
+                            	<div>
+                                	<a href="$appRoot/$cpyno/line/tejiaxiang">
+                                	<img src="$staticRoot/images/upc6.jpg" />
+                                    <ul class="ubodyer_ul">
+                                        <li>浪美丽海滩</li>
+                                        <li>雾岛</li>
+                                        <li>一日游</li>
+                                    </ul>
+                                    <p class="ubodyer_jiage">
+                                        <span>￥2000</span>起
+                                    </p>
+                                 </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+</div>
+#parse("common/footer.vm")
+</body>
+</html>
+<script src="$staticRoot/js/simplefoucs.js" type="text/javascript"></script>

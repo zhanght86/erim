@@ -1,0 +1,98 @@
+<script >
+	// 更改当前选择舱位
+	$("input[name='ptdClass']").change(function() {
+		var ptdClass = $("input[name='ptdClass']:checked").val();
+		index.load("$appRoot/planeticket/price/list?portal=09&ptdClass="+ptdClass);
+	});
+</script>
+<div class="jd_block">
+	<p class="tit_1 ml35"><img src="$staticRoot/images/jd_3.png" alt="查看量/价" title="查看量/价" />查看量/价</p>
+	<div class="g_line mb25"></div>
+	<div class="clearfix ml35">
+		<div class="date_m">
+			<a id="hou" href="javascript:index.load('$appRoot/planeticket/price/list?portal=07');">
+				<img src="$staticRoot/images/jd_7.png">
+			</a>
+			<span>$!priceYeMon</span>
+			<a class="qian_a" href="javascript:index.load('$appRoot/planeticket/price/list?portal=06');">
+				<img src="$staticRoot/images/jd_9.png">
+			</a>
+		</div>
+	</div>
+	<table class="fangliang_date ml35 mb20_marginleft39" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="td_fxxz" colspan="7">$!gdlName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;舱位选择：
+                <label class="w80"><input type="radio" name="ptdClass" #if($!ptdClass == '01') checked #end value="01" />经济舱</label>
+                <label class="w80"><input type="radio" name="ptdClass" #if($!ptdClass == '02') checked #end value="02" />商务舱</label>
+                <label class="w80"><input type="radio" name="ptdClass" #if($!ptdClass == '03') checked #end value="03" />头等舱</label>
+			</td>
+		</tr>
+		<tr>
+			<th>周一</th>
+			<th>周二</th>
+			<th>周三</th>
+			<th>周四</th>
+			<th>周五</th>
+			<th>周六</th>
+			<th>周日</th>
+		</tr>
+		<tr>
+			<td colspan="7">
+				<ul id="pre_date_d">
+					#foreach($item in $priceList)
+						#if(!$!item.id)
+        					<li class="kong">
+								#if($!item.day)
+									<span class="date_d">$!item.day</span>
+								#end
+							</li>
+						#end
+						#if($!item.id)
+							#if($!item.preSign == '0')
+								<li class="finish_li">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									余：$!item.preSign 位<br>
+    									同：$!item.preTradePrice 元<br>
+    									零：$!item.preRetailPrice 元<br>
+									</div>
+    								<span class="icon"></span>
+            					</li>
+							#elseif($!item.preIsOpen == '01')
+    							<li class="close_li">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									余：$!item.preSign 位<br>
+    									同：$!item.preTradePrice 元<br>
+    									零：$!item.preRetailPrice 元<br>
+									</div>
+    								<span class="icon"></span>
+    							</li>
+							#else
+								<li class="open_li">
+            						<span class="date_d">$!item.day</span>
+    								<div class="mess_box">
+    									余：$!item.preSign 位<br>
+    									同：$!item.preTradePrice 元<br>
+    									零：$!item.preRetailPrice 元<br>
+									</div>
+            						<span class="icon"></span>
+            					</li>
+							#end
+						#end
+					#end
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<div class="min_mess_box clearfix ml35 mb25">
+		<button type="button" style="cursor:pointer" class="carinfo_qu ml35" onclick="javascript:index.load(page.url);">返回</button>
+		<span>
+			<img src="$staticRoot/images/ljgl_03.png" /> 正常出售 
+			<img src="$staticRoot/images/ljgl_01.png" /> 暂不出售
+			<img src="$staticRoot/images/ljgl_02.png" /> 已售完
+		</span>
+	</div>
+	<div class="cb"></div>
+</div>
+<div class="win_box_bg"></div>

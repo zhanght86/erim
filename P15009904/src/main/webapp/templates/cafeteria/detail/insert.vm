@@ -1,0 +1,358 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/cafeteria/cafeteria.css">
+<div class="rdivv">
+<div class="newfood">
+	<div class="newfood_suptop">
+		<img src="$staticRoot/images/htfood.png" />
+		<span>新增餐厅</span>
+		<div class="cb"></div>
+	    <div class="g_line"></div>
+	</div>
+	<form method="post" id="form1" style="margin-top:20px;">
+		<div class="newfood_ct carinfo_ct_w700">
+			<div class="newfood_box show">
+				<div class="carinfo_ctbl">
+					<span>餐厅名称：</span>
+					<div class="carinfo_ctblra1" style="width:202px;">
+						<input type="text" name="cdlName" class="validate[required,maxSize[80]]" style="width:194px;"/>
+					</div>
+					<span class="mess_star_red">*</span>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>主打菜系：</span>
+					<div class="carinfo_ctblra" style="width:204px;">
+						<select name="cdlSort" style="width:204px;">
+							<option></option>
+							#foreach($item in $sort.keySet())
+								<option value="$item">$sort.get($item)</option>
+                            #end
+                        </select>
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>餐厅特色：</span>
+					<div class="carinfo_ctblra1" style="width:202px;">
+						<input type="text" name="cdlSpecial" class="validate[maxSize[80]]" placeholder = "例如：湘西土匪鸭" style="width:194px;"/>
+					</div>
+				</div>
+				<div class="newfood_top" style="float:left;">
+        			<span>国家：</span>
+        			<label class="w65">
+        				<input type="radio" id="newfood01" name="cdlInland" value="02" checked />国内
+        			</label>
+					#* 
+        			<label class="w887">
+        				<input type="radio" id="newfood02" name="cdlInland" value="01" />国际·港澳台
+        			</label>
+					*# 
+        		</div>
+				<div class="carinfo_ctbl" id="city_gn">
+					<span>所在地：</span>
+					<div class="carinfo_ctblr">
+						#lockProvince('cdlProvince','cdlProvince','','1','','cdlCity','cdlCounty','','')
+						<span>省</span>
+						<select name="cdlCity" id="cdlCity" style="width:103px;" onchange="lock.town($(this),'cdlCounty');"></select>
+						<span>市</span>
+						<select name="cdlCounty" id="cdlCounty" style="width:103px;"></select>
+						<span>区/县</span>
+					</div>
+				</div>
+				<div class="cb"></div>
+				<div class="input_block clearfix" id="city_gj">
+            		<div class="label_left" style="width:125px; color:#393838;">所在地：</div>
+            		<div class="input_right input_right_wauto">
+            			<label class="w65">
+        					<input type="radio" name="cdlExternal" value="01">香港
+        				</label>
+        				<label class="w65">
+        					<input type="radio" name="cdlExternal" value="02">澳门
+        				</label>
+        				<label class="w65">
+        					<input type="radio" name="cdlExternal" value="03">台湾
+        				</label>
+        				<label class="w65">
+        					<input type="radio" name="cdlExternal" value="04">国际
+        				</label>
+						<label id="county">
+                            <input type="text" name="cdlForeign" class="validate[maxSize[15]] autoquerycountry" style="border: 1px solid #ccc;">国家&nbsp;
+                            <input type="text"  name="cdlForeignCity" class="validate[maxSize[10]]" style="border: 1px solid #ccc;">城市
+                        </label>                  
+                    </div>
+        		</div>
+				<div class="carinfo_ctbl">
+					<span>详细地址：</span>
+					<div class="carinfo_ctblra1" style="width:345px;">
+						<input type="text" name="cdlAddress" class="validate[required,maxSize[100]]" />
+					</div>
+					<span class="mess_star_red">*</span>
+				</div> 
+			</div>
+	<!--	<div class="carinfo_ctbl">
+			<span>地图经度：</span>
+			<div class="carinfo_ctblra">
+				<input type="text"  style="width:128px;" name="cdlX" /><span class="mess_star_red">*</span>
+				<span style="color:#393838;">&nbsp;地图纬度：</span>
+				<input type="text"  style="width:128px;"  name="cdlY"><span class="mess_star_red">*</span>
+			</div>
+			<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank" style="color:blue;font-size:12px;">&nbsp;&nbsp;经纬度获取方法</a>
+		</div> -->			
+		<div class="carinfo_ctbl">
+			<span>餐厅电话：</span>
+			<div class="carinfo_ctblra1" style="width:202px;">
+				<input type="text" style="width:194px;" name="cdlTelephone" class="validate[required,custom[phone]]" />
+	      	</div>
+			<span class="mess_star_red">*</span>
+    	</div>
+		<div class="carinfo_ctbl">
+			<span>所属商圈：</span>
+			<div class="carinfo_ctblra1" style="width:202px;">
+				<input type="text" style="width:194px;" placeholder="没有可不填" name="cdlDistrict" class="validate[maxSize[100]]">
+			</div>
+		</div>
+		<div class="carinfo_ctbl">
+			<span>营业时间：</span>
+			<div class="carinfo_ctblra" style="width:203px;">
+				<input type="text" style="width:80px;" onFocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})" name="cdlOpenTime" id="cdlOpenTime" class="validate[required]" />
+				<span style="color:black;padding:0 7px;">至</span>
+				<input type="text" style="width:80px;" onFocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm',minDate:'#F{$dp.$D(\'cdlOpenTime\',{m:1});}'})" name="cdlCloseTime" class="validate[required]" />
+			</div>
+			<span class="mess_star_red">*</span>
+		</div>                                                                                                                                               
+		<div class="carinfo_ctbl">
+			<span>停车场：</span>
+			<div class="newfood_web">
+				#foreach($item in $stopcar.keySet())
+					<label class="checkbox inline"> 
+						<input class="input-xlarge" type="radio" #if ($item == '01')  checked #end name="cdlStopCar" value="$item">$stopcar.get($item)
+	               	</label>
+                #end
+			</div>
+		</div>
+		<div class="carinfo_ctbl">
+			<span>可同时用餐人数：</span>
+			<div class="carinfo_ctblra1" style="width:202px;">
+                <input type="text" style="width:80px;" id="cdlEatPeople" name="cdlEatPeople" class="validate[required,custom[integer],min[1],maxSize[4]]" />
+				<span style="margin-left:-13PX;color:black;">人</span>
+				<label style="float:left;"><input style="width:15px;margin:0px 10px 0px 10px;" type="checkbox" id="buxian" name="cdlUnlimited" value="0">不限</label>
+				<span style="margin-left:7px;color:red;">*</span>
+	    	 </div>
+    	</div>
+		<div class="carinfo_ctbl">
+			<span>网络设施：</span>
+			<div class="newfood_web">
+				#foreach($item in $cdlinternet.keySet())
+					<label class="checkbox inline"> 
+                        <input class="input-xlarge" type="radio" name="cdlInternet" #if($item == '01') checked #end value="$item"  >$cdlinternet.get($item)
+	               	</label>
+				#end
+			</div>
+		</div>
+		<div class="newfood_ctrbl">
+			<span class="newfood_ctrbll">推荐理由：</span>
+			<div class="newfood_ctblr">
+				<textarea name="cdlReason" class="validate[maxSize[1000]]" placeholder="最多输入500个字"></textarea>
+			</div>
+		</div>
+		<div class="newfood_ctrbl">
+			<span class="newfood_ctrbll">餐厅介绍：</span>
+			<div class="newfood_ctblr">
+				<textarea name="cdlIntroduce" class="validate[maxSize[1000]]" placeholder="最多输入500个字"></textarea>
+			</div>
+		</div>
+		<div class="newfood_ctrbl"style="margin-bottom:5px;">
+			<span class="newfood_ctrbll">通知公告：</span>
+			<div class="newfood_ctblr">
+				<textarea name="cdlNotice" class="validate[maxSize[200]]" placeholder="最多输入100个字"></textarea>
+			</div>
+		</div>
+		<div class="carinfo_ctbl" style="margin-bottom:5px;">
+			<span></span>
+			<div class="carinfo_ctblra" style="width:390px;">
+				<span style="margin-left:-72px;font-size:14px;">注：请勿添加带有其他标志(水印、字样)的图片，否则该餐厅将会下线</span>
+			</div>
+		</div>
+		<div class="input_block clearfix" style="clear:both;margin-left:2px;">
+    		<div class="label_left" style="width:125px;">餐厅图片：</div>
+    		<div class="input_right position_re" style="margin-left:136px;margin-top:-24px;">
+				<input name="cdlImg1" value="" type="hidden" id="cdlImg1"/>
+            	<input name="file" id="uploadify1" contenteditable="false" size="30" type="file"/>
+				<span id="filespan1"></span>
+				<div id="fileQueue1"></div>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left"></div>
+    		<div class="input_right position_re" style="margin-left:136px;">
+    			<input name="cdlImg2" value="" type="hidden" id="cdlImg2"/>
+            	<input name="file" id="uploadify2" contenteditable="false" size="30" type="file" />
+				<span id="filespan2"></span>
+				<div id="fileQueue2"></div>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left"></div>
+    		<div class="input_right position_re" style="margin-left:136px;">
+    			<input name="cdlImg3" value="" type="hidden" id="cdlImg3"/>
+            	<input name="file" id="uploadify3" contenteditable="false" size="30" type="file" />
+				<span id="filespan3"></span>
+				<div id="fileQueue3"></div>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left"></div>
+    		<div class="input_right position_re" style="margin-left:136px;">
+    			<input name="cdlImg4" value="" type="hidden" id="cdlImg4"/>
+            	<input name="file" id="uploadify4" contenteditable="false" size="30" type="file" />
+				<span id="filespan4"></span>
+				<div id="fileQueue4"></div>
+    		</div>
+    	</div>
+    	<div class="input_block clearfix">
+    		<div class="label_left"></div>
+    		<div class="input_right position_re" style="margin-left:136px;">
+    			<input name="cdlImg5" value="" type="hidden" id="cdlImg5"/>
+            	<input name="file" id="uploadify5" contenteditable="false" size="30" type="file" />
+				<span id="filespan5"></span>
+				<div id="fileQueue5"></div>
+    		</div>
+    	</div>
+		<div class="newfood_ctblc" style="margin-top:30px;">
+			<span style="width:300px;text-align:left;font-weight:bold;color:#59b2fe;font-size:16px">以下信息不在外网展示，仅供同行参考</span>
+		</div>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+	    <div class="carinfo_ctbl" style="margin-top:30px;">
+			<span>餐厅业务：</span>
+			<div class="newfood_web">
+				#foreach($item in $business.keySet())
+					<label class="checkbox inline"> 
+						<input class="input-xlarge" type="radio" name="cdlBusiness" value="$item" #if($item == '01') checked #end >$business.get($item)
+					</label>
+                #end
+			</div>
+		</div>
+		<div class="carinfo_ctbl">
+			<span>最低起订早餐标准：</span>
+			<div class="carinfo_ctblra" style="width:430px;">
+				<input type="text" style="width:80px;margin-right:6px;" name="cdlOrderNorme" class="validate[custom[integer],maxSize[3],min[1]]" placeholder="不接可不填"/>
+				<span style="color:black;">元/人起</span>
+				<span style="color:#393838;padding-left:20px;font-weight:bold;">最低起订正餐标准：</span>
+				<input type="text" style="width:80px;margin-right:6px;" name="cdlOrderNormz" class="validate[custom[integer],maxSize[3],min[1]]" />
+				<span style="color:black;">元/人起</span>
+			</div>
+        </div>
+		<div class="carinfo_ctbl">
+			<span>可同时接团数量：</span>
+			<div class="carinfo_ctblra1" style="width:202px;">
+				<input type="text" style="width:80px;" name="cdlReceiveNum" class="validate[required,custom[integer],max[100000],min[1]]" >
+				<span style="margin-left:-13PX;color:black;">人</span><span style="margin-left:7px;">*</span>
+			</div>
+		</div>
+		<div class="carinfo_ctbl">
+			<span>联系人：</span>
+			<div class="carinfo_ctblra1" style="width:202px;">
+				<input type="text" style="width:194px;" name="cdlSpecialName" class="validate[required,maxSize[10]]" >
+			</div>
+			<span class="mess_star_red">*</span>
+		</div>
+		<div class="carinfo_ctbl">
+			<span>电话：</span>
+			<div class="carinfo_ctblra1" style="width:202px;">
+				<input type="text" style="width:194px;" name="cdlPhone"  class="validate[required,custom[phone]]">
+			</div><span class="mess_star_red">*</span>
+		</div>
+		<div class="carinfo_ctbl">
+			<span>QQ：</span>
+			<div class="carinfo_ctblra1" style="width:202px;">
+				<input type="text" style="width:194px;" name="cdlPeopleQq" class="validate[required,custom[qq]]">
+			</div>
+			<span class="mess_star_red">*</span>
+		</div>
+		 <div class="carinfo_ctbl" style="margin-top:30px;">
+			<span></span>
+			<div class="carinfo_ctblrbtn" style="width:360px;margin-left:-10px;margin-bottom:80px">
+				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/cafeteria/detail/insert','$appRoot/cafeteria/detail/list');">提交</button>
+				<button type="reset" class="carinfo_qu">重置</button>
+				<button type="button" onclick="index.load(page.url);" class="carinfo_qu">返回</button>
+			</div>
+		 </div>
+    </form>
+</div>
+</div>
+	<script type="text/javascript"> 
+
+		
+	$('#city_gj').hide();
+	//点击国内时
+	$('#newfood01').click(function() {
+    	$('#city_gj').hide();
+		$('#city_gn').show();
+		$("input[name='cdlForeign']").val("");
+	    $("input[name='cdlForeignCity']").val("");
+	});
+	//点击国外时
+	$('#newfood02').click(function() {
+		$('#city_gn').hide();
+		$('#city_gj').show();
+		$('#county').hide();
+	});
+	// 当点击国际所在地时
+	$("input[name='cdlExternal']").change(function() {
+		var a = $("input[name='cdlExternal']:checked").val();
+		if (a == '04') {
+		     $('#county').show();
+		} else {
+		     $('#county').hide();
+		}
+	});
+	//上传图片
+	uploadify('uploadify1','cdlImg1','filespan1','fileQueue1');
+	uploadify('uploadify2','cdlImg2','filespan2','fileQueue2');
+	uploadify('uploadify3','cdlImg3','filespan3','fileQueue3');
+	uploadify('uploadify4','cdlImg4','filespan4','fileQueue4');
+	uploadify('uploadify5','cdlImg5','filespan5','fileQueue5');
+	
+	//点击不接团餐时
+	$("input[name='cdlBusiness']").change(function() {
+		var a = $("input[name='cdlBusiness']:checked").val();
+		if (a == '01' || a == '02') {
+			$("input[name='cdlOrderNorme']").attr('disabled',false);
+			$("input[name='cdlOrderNormz']").attr('disabled',false);
+			$("input[name='cdlReceiveNum']").attr('disabled',false);
+			$("input[name='cdlSpecialName']").attr('disabled',false);
+			$("input[name='cdlPhone']").attr('disabled',false);
+			$("input[name='cdlPeopleQq']").attr('disabled',false);
+		} else{
+			$("input[name='cdlOrderNorme']").attr('disabled',"true");
+			$("input[name='cdlOrderNormz']").attr('disabled',"true");
+			$("input[name='cdlReceiveNum']").attr('disabled',"true");
+			$("input[name='cdlSpecialName']").attr('disabled',"true");
+			$("input[name='cdlPhone']").attr('disabled',"true");
+			$("input[name='cdlPeopleQq']").attr('disabled',"true");
+			$("input[name='cdlOrderNorme']").val("");
+			$("input[name='cdlOrderNormz']").val("");
+			$("input[name='cdlReceiveNum']").val("");
+			$("input[name='cdlSpecialName']").val("");
+			$("input[name='cdlPhone']").val("");
+			$("input[name='cdlPeopleQq']").val("");
+		}
+	});
+	//点击不限
+	$("input[name='cdlUnlimited']").change(function() {
+	 var a = $("input[name='cdlUnlimited']:checked").val();
+	 if(a == '0'){
+	 	$("input[name='cdlEatPeople']").attr('disabled',"true");
+		$("input[name='cdlEatPeople']").val("");
+	 }else {
+	 	$("input[name='cdlEatPeople']").attr('disabled',false);
+	 }
+	});
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+   var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+});
+</script>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

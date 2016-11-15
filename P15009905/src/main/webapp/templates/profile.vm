@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>编辑资料</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+	<script type="text/javascript">
+		$(function() {
+			// 点击提交
+    		$("#info_sub").click(function() {
+				if (guide.checkForm('form1')) {
+        			var data = $("#form1").serialize()
+        			window.location = _appRoot + '/profile?'+data;
+				}
+    		});
+		});
+    </script>
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        <a class="left_btn" href="$appRoot/userinfo">
+            <img src="$staticRoot/img/left_btn.png"/>
+        </a>
+			编辑资料
+        <a class="right_btn" id="info_sub">
+			保存
+        </a>
+    </div>
+    <!-- content -->
+    <div class="content">
+		<form method="post" id="form1">
+            <table class="profile_table" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th><strong>真实姓名</strong></th>
+                    <td>
+                        $guideInfo.gdlName
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>个人签名</strong></th>
+                    <td>
+                        <input name="gdlSignature" class="validate[required,maxSize[200]]" value="$!guideInfo.gdlSignature" />
+                    </td>
+                </tr>
+				<tr>
+                    <th><strong>自我介绍</strong></th>
+                    <td>
+                        <textarea name="gdlIntroduction" class="validate[required,maxSize[600]]">$!guideInfo.gdlIntroduction</textarea>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5_focus.png"/>
+        </a>
+    </div>
+</body>
+</html>

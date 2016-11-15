@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hoteldetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="hdlName != null     and hdlName != ''">				and 	hdl_name 				like "%"#{hdlName}"%" </if>
+			<if test="hdlCode != null     and hdlCode != ''">				and 	hdl_code 				like "%"#{hdlCode}"%" </if>
+			<if test="hdlLevel != null	  and hdlLevel != ''">			    and 	hdl_level 				=    #{hdlLevel}</if>
+			<if test="hdlCity != null	  and hdlCity != ''">			    and 	hdl_city 				like "%"#{hdlCity}"%"</if>
+			<if test="hdlProvince != null	  and hdlProvince != ''">			    and 	hdl_Province 				like "%"#{hdlProvince}"%"</if>
+			<if test="hdlCounty != null	  and hdlCounty != ''">			    and 	hdl_county 				like "%"#{hdlCounty}"%"</if>
+			
+			<if test="hdlFacilities != null	  and hdlFacilities != ''">			    and 	hdl_Facilities 				like "%"#{hdlFacilities}"%"</if>
+			
+			<if test="cpyId !=null">                                        and     cpy_id                  =     #{cpyId}</if>
+			<if test="hdlForeignCity !=null 	and hdlForeignCity != ''">  and  	hdl_foreign_city  	    =   #{hdlForeignCity}</if>
+			<if test="hdlForeign !=null 		and hdlForeign != ''"> 	   	and  	hdl_foreign  	        =   #{hdlForeign}</if>
+			<if test="hdlExternal !=null 		and hdlExternal != ''"> 	and  	hdl_external  	        =   #{hdlExternal}</if>
+			<if test="hdlIsInternal !=null 		and hdlIsInternal != ''"> 	and  	hdl_is_internal  	    =   #{hdlIsInternal}</if>
+			<if test="hnpDate !=null 		and hnpDate != ''"> 
+		    	and EXISTS (select hdl_id from hotel_room_price where hnp_is_open="02"
+			       and hnp_date=#{hnpDate} and hdl_id=hotel_detail.id)
+			</if>  
+			
+			<if test="hdlPrice1 !=null 		and hdlPrice1 != '' and hdlPrice2 !=null and hdlPrice2 != ''"> 
+		    	and EXISTS (select hdl_id from hotel_room_price where hnp_is_open="02"
+			       and hnp_date &gt;=CURDATE() and hdl_id=hotel_detail.id 
+			       and hnp_retail_price &gt;=#{hdlPrice1}   and hnp_retail_price &lt;=#{hdlPrice2}
+			       ) 
+			</if>  
+		</where>
+	</sql>
+	<sql id="sql_column">
+		hotel_detail.id      AS id,
+		hdl_name             AS hdlName,
+		hdl_code             AS hdlCode,
+		hdl_province         AS hdlProvince,
+		hdl_city             AS hdlCity,
+		hdl_county           AS hdlCounty,
+		hdl_is_start         AS hdlStart,
+		hdl_address          AS hdlAddress,
+		hdl_telephone        AS hdlTelephone,
+		hdl_feature          AS hdlFeature,
+		hdl_mark             AS hdlMark,
+		hdl_region           AS hdlRegion,
+		hdl_position         AS hdlPosition,
+		hdl_district         AS hdlDistrict,
+		hdl_level            AS hdlLevel,
+		hdl_characteristic   AS hdlCharacteristic,
+		hdl_renovation_date  AS hdlRenovationDate,
+		hdl_facilities       AS hdlFacilities,
+		hdl_facilities_other AS hdlFacilitiesOther,
+		hdl_room_num         AS hdlRoomNum,
+		hdl_game             AS hdlGame,
+		hdl_game_other       AS hdlGameOther,
+		hdl_food             AS hdlFood,
+		hdl_creditcard       AS hdlCreditcard,
+		hdl_service          AS hdlService,
+		hdl_describe         AS hdlDescribe,
+		hdl_img1             AS hdlImg1,
+		hdl_img2             AS hdlImg2,
+		hdl_img3             AS hdlImg3,
+		hdl_img4             AS hdlImg4,
+		hdl_img5             AS hdlImg5,
+		hdl_createtime       AS hdlCreatetime,
+		hdl_createuser       AS hdlCreateuser,
+		hdl_is_through       AS hdlIsThrough,
+		hdl_through_time     AS hdlThroughTime,
+		hdl_through_user     AS hdlThroughUser,
+		hdl_keyword			 AS hdlKeyword,
+		hotel_detail.cpy_id	 AS cpyId,
+		hdl_is_del_status    AS hdlIsDelStatus,
+		hdl_is_internal		 AS hdlIsInternal,
+		hdl_external		 AS hdlExternal,
+		hdl_foreign			 AS hdlForeign,
+		hdl_foreign_city	 AS hdlForeignCity
+	</sql>
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageHotel" resultType="hotelDetailBean">
+		SELECT
+			<include refid="sql_column" />
+			, (SELECT code_value FROM tm_system_code WHERE code_id = 'C022' AND code_key = hdl_level)        dicLevel
+			, (SELECT region_name FROM tm_system_region WHERE region_pid = '0' AND region_id = hdl_province) dicCity
+			, 
+			cpy_name        	AS cpyName,
+			cpy_brand        	AS cpyBrand,
+			cpy_telephone   	AS cpyTelephone,
+			ccp_name			AS ccpName,
+			ccp_telephone		AS ccpTelephone,
+			ccp_qq				AS ccpQq,
+			cbs_operator		AS cbsOperator,
+			cbs_operator_phone	AS cbsOperatorPhone,
+			cbs_operator_qq		AS cbsOperatorQq  
+		FROM
+			hotel_detail
+		LEFT JOIN
+			company_detail
+		ON 
+			company_detail.id = hotel_detail.cpy_id
+		LEFT JOIN
+			company_contact_person
+		ON
+			company_contact_person.cpy_id = hotel_detail.cpy_id
+		LEFT JOIN
+			company_business
+		ON
+			company_business.cpy_id = hotel_detail.cpy_id
+		<include refid="sql_query" />
+	</select>
+	
+	<select id="selectBeanByPriId" resultType="hotelDetailBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			hotel_detail
+		WHERE
+			id = #{id}
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageHotelCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			hotel_detail
+		<include refid="sql_query" />
+	</select>
+	
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tmsystemregion">
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="tmSystemRegionBean">
+		SELECT
+			region_id     AS regionId,
+			region_no     AS regionNo,
+			region_pid    AS regionPid,
+			region_level  AS regionLevel,
+			region_name   AS regionName,
+			region_spell  AS regionSpell,
+			region_remark AS regionRemark
+		FROM
+			tm_system_region
+		ORDER BY
+			region_id
+	</select>
+	
+	<!-- 根据ID查询一条信息 -->
+	<select id="getSystemRegionById" resultType="tmSystemRegionBean">
+		SELECT
+			region_id     AS regionId,
+			region_no     AS regionNo,
+			region_pid    AS regionPid,
+			region_level  AS regionLevel,
+			region_name   AS regionName,
+			region_spell  AS regionSpell,
+			region_remark AS regionRemark
+		FROM
+			tm_system_region
+		WHERE
+			region_id = #{regionId}
+	</select>
+</mapper>

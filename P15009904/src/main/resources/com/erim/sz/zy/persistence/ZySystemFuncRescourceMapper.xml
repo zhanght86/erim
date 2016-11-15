@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zysystemfuncrescource">
+	<!-- 查询所有 -->
+	<select id="selectAll" resultType="zySystemFuncRescourceBean">
+		SELECT
+			id                      AS id,
+			zy_func_code           AS zyFuncCode,
+			zy_func_rescource_code AS zyFuncRescourceCode,
+			zy_func_rescource_name AS zyFuncRescourceName
+		FROM
+			zy_system_func_rescource
+	</select>
+	<!-- 根据登录名查询对象 -->
+	<select id="selectRecourceByFuncCode" resultType="zySystemFuncRescourceBean">
+		
+		SELECT
+			id AS id,
+			zy_func_code AS zyFuncCode,
+			zy_func_rescource_code AS zyFuncRescourceCode,
+			zy_func_rescource_name AS zyFuncRescourceName
+		FROM
+			zy_system_func_rescource
+		WHERE
+			zy_func_code = #{zyFuncCode}
+	</select>
+</mapper>

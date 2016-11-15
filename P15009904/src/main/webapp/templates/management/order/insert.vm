@@ -1,0 +1,60 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/yuding.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/management/management.css">
+    <!--新增套餐-->
+    <div class="newadd">
+        <div class="newfood_suptop">
+            <img src="$staticRoot/images/dd_ci_03.png">
+            <span>签证预定</span>
+        </div>
+        <div class="g_line"></div>
+        <div class="yuding_line">
+            <span class="yuding_span"><strong>联系人信息：</strong></span>
+        </div>
+        <div class="yuding_line">
+            <span class="yuding_span">姓名：</span>
+            <input type="text" class="yuding_input">
+        </div>
+        <div class="yuding_line">
+            <span class="yuding_span">手机号码：</span>
+            <input type="text" class="yuding_input">
+        </div>
+        <div class="yuding_line">
+            <span class="yuding_span"><strong>签证人信息：</strong></span>
+        </div>
+        <div class="yuding_bigerbox">
+            <div class="yuding_bigbox">
+                <div class="yuding_box">
+                    <span class="yuding_span mt20">姓名：</span>
+                    <input type="text" class="yuding_input mt20">
+                    <br clear="left">
+                    <span class="yuding_span mt20">证件号码：</span>
+                    <input type="text" class="yuding_input mt20">
+                    <br clear="left">
+                    <span class="yuding_span mt20">手机号码：</span>
+                    <input type="text" class="yuding_input mt20">
+                </div>
+                <a href="javascript:void(0)" class="btn_add">添加签证</a>
+            </div>
+        </div>
+        <div class="yuding_line mb50">
+            <button class="btn_add btn_fanhui">返回</button>
+            <button class="btn_add btn_sub">提交订单</button>
+        </div>
+
+    </div>
+    <!--/新增套餐-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".yuding_bigbox a").live("click",function(){
+            if($(this).text()=="添加签证"){
+                $(this).text('删除签证').css("background-color","#ccc");
+                $(this).parent().after('<div class="yuding_bigbox"><div class="yuding_box"><span class="yuding_span mt20">姓名：</span><input type="text" class="yuding_input mt20"><br clear="left"><span class="yuding_span mt20">证件号码：</span><input type="text" class="yuding_input mt20"><br clear="left"><span class="yuding_span mt20">手机号码：</span><input type="text" class="yuding_input mt20"></div><a href="javascript:void(0)" class="btn_add">添加签证</a></div>');
+            }else{
+                $(this).parent().remove();
+            }
+        });
+    });
+
+
+</script>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sqlsession">
+	
+    <!-- 根据传入的SQL查询数据，selectOne和selectList的结合 -->
+    <select id="selectData" parameterType="hashMap" resultType="hashMap">
+        ${sql}
+    </select>
+    
+    <!-- 根据传入的SQL查询数据总条数 -->
+    <select id="selectDataCount" parameterType="hashMap" resultType="int">
+        ${sql}
+    </select>
+    
+</mapper>

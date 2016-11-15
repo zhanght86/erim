@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>签证_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>	
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+<!--dwp html start-->
+		<div class="box_cb"></div>
+        <div class="g_cont pt25">
+        	<div class="g_left_rt">
+				<div class="g_nav_box gengduo_nav mb10">
+					<div class="nav_1 nav_price2"><span class="b_rw70">目的地：</span><a class="on" id="no_seed" href="javascript:;" >不限</a><div class="a_box_show"><em class="more_but">+更多</em><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><br><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a><a href="javascript:;">韩国</a></div><div class="box_cb"></div></div>
+					
+					<div class="nav_1 nav_price"><span class="b_rw70">签证类型：</span>
+						<a class="on" href="javascript:;" id="no_seed2">不限</a>
+						<div class="a_box_show">
+							<a href="javascript:;">个人旅游</a>
+							<a href="javascript:;">商务</a>
+							<br><a href="javascript:;">三亚地区</a>
+								<a href="javascript:;">三亚一地</a>
+								<a href="javascript:;">三亚地区</a>
+								<a href="javascript:;">三亚一地</a>
+								<a href="javascript:;">三亚地区</a>
+								<a href="javascript:;">三亚一地</a>
+								<a href="javascript:;">三亚地区</a>
+								<a href="javascript:;">三亚一地</a>
+							</div>
+							<div class="box_cb"></div>
+					</div>
+					<div class="nav_1 nav_way"><span class="b_rw70">面试：</span><a class="on" href="javascript:;" id="no_seed3">不限</a><div class="a_box_show"><a href="javascript:;">无需</a><a href="javascript:;">商务</a></div><div class="box_cb"></div></div>
+                    <div class="nav_1 nav_price2"><span class="b_rw70">送签地：</span>
+						<a class="on" id="no_seed" href="javascript:;" >不限</a>
+						<div class="a_box_show">
+							<a href="javascript:;">北京</a>
+							<a href="javascript:;">广州</a>
+							<a href="javascript:;">上海</a>
+							<a href="javascript:;">成都</a>
+							<a href="javascript:;">青岛</a>
+							<a href="javascript:;">韩国</a>
+							<br>
+							<a href="javascript:;">韩国</a>
+							<a href="javascript:;">韩国</a>
+							<a href="javascript:;">韩国</a>
+							<a href="javascript:;">韩国</a>
+							<a href="javascript:;">韩国</a>
+						</div>
+						<div class="box_cb"></div>
+					</div>
+                    <div class="nav_1 select_list">已选条件：<span class="a_1"></span><span class="a_2"></span><span class="a_3"></span><em>暂无查询条件</em></div>
+				</div>
+
+
+				<ul class="g_list_2">
+					#foreach($item in $managementList)
+    					<li>
+    						<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id">
+								#if($!item.mdlFlag)
+									<img src="$staticRoot$item.mdlFlag" title="" alt="">
+								#else
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								#end
+						   </a>
+    						<div class="desc_txt">
+    							<p class="title"><a href="#" title="">$!item.mdlAddress（$!item.mdlSend送签）</a></p>
+    							<p><span class="b_hui_mr10">价格构成</span>10旅馆价206元+服务费28元</p>
+    							<p><span class="b_hui_mr10">提前预订</span>10个工作日</p>
+    							<p><span class="b_hui_mr10 b_rw48">供应商</span>$!item.cpyId</p>
+    						</div>
+    						<div class="tool_block">
+    							<p class="price pt20"><em>￥52</em>起</p>
+    							<a href="$appRoot/$cpyno/management/qianzhengxiang/$item.id">查看详情</a>
+    						</div>
+    						<div class="box_cb"></div>
+    					</li>
+					#end
+				</ul>
+				#parse("common/page.vm")
+            </div>
+			
+			#parse("common/hot.vm")
+            
+            <div class="box_cb"></div>
+        </div>
+<!--dwp html end-->
+        
+		#parse("common/footer.vm")
+	</div>
+</body>
+</html>
+<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".g_nav_box .nav_1").on("click","a",function(){
+		if($(this).parent().hasClass("nav_price2")||$(this).parent().parent().hasClass("nav_price2"))
+		{$(".select_list .a_1").addClass("del_s").html($(this).text()+" &times;");
+			em_sh();}
+		if($(this).parent().hasClass("nav_price")||$(this).parent().parent().hasClass("nav_price"))
+		{$(".select_list .a_2").addClass("del_s").html($(this).text()+" &times;");
+			em_sh();}
+		if($(this).parent().hasClass("nav_way")||$(this).parent().parent().hasClass("nav_way"))
+		{$(".select_list .a_3").addClass("del_s").html($(this).text()+" &times;");
+			em_sh();}
+		if($(this).hasClass("on"))
+		{return true;}
+		else if($(this).parent().hasClass("a_box_show"))
+		{$(this).addClass("on").siblings().removeClass("on");
+			$(this).parent().siblings().removeClass("on");
+		}else{$(this).addClass("on").siblings().removeClass("on");}
+	})
+	$(".g_nav_box .nav_1").on("click","#no_seed",function(){
+		$(".select_list .a_1").html($(this).text()+" &times;");
+		$(".select_list .a_1").removeClass("del_s");
+		$(this).siblings('.a_box_show').children().removeClass("on");
+		em_sh();})
+	$(".g_nav_box .nav_1").on("click","#no_seed2",function(){
+		$(".select_list .a_2").html($(this).text()+" &times;");
+		$(".select_list .a_2").removeClass("del_s");
+		$(this).siblings('.a_box_show').children().removeClass("on");
+		em_sh();})
+	$(".g_nav_box .nav_1").on("click","#no_seed3",function(){
+		$(".select_list .a_3").html($(this).text()+" &times;");
+		$(".select_list .a_3").removeClass("del_s");
+		$(this).siblings('.a_box_show').children().removeClass("on");
+		em_sh();})
+	$(".select_list").on("click","span",function(){
+		cName=$(this).attr('class');
+		switch(cName){
+			case "a_1 del_s":
+				$("#no_seed").addClass('on').siblings().children().removeClass('on');
+				$(this).removeClass("del_s");
+				break;
+			case "a_2 del_s":
+				$("#no_seed2").addClass('on').siblings().children().removeClass('on');
+				$(this).removeClass("del_s");
+				break;
+			case "a_3 del_s":
+				$("#no_seed3").addClass('on').siblings().children().removeClass('on');
+				$(this).removeClass("del_s");
+				break;
+			default:
+				return false;
+		}
+		em_sh();
+	})
+	
+	
+var currentHeight = $("#mybox").css("height");
+
+//Set height to auto
+$("#mybox").css("height","auto");
+
+//Store auto height
+var animateHeight = $("#mybox").css("height");
+
+//Put height back
+$("#mybox").css("height", currentHeight);
+
+//Do animation with animateHeight
+$("#mybox").animate({
+     height: animateHeight
+     }, 500);
+	
+		$(".g_nav_box .nav_1").on("click",".more_but",function(){
+			if($(this).text()=="+更多"){
+				
+				var currentHeight = $(this).parent().css("height");
+				$(this).parent().css("height","auto");
+				var animateHeight = $(this).parent().css("height");
+				$(this).parent().css("height", currentHeight);
+				$(this).parent().animate({height: animateHeight});
+				//$(this).animate({"color":"#ffffff"});
+				$(this).text("- 收缩");
+			}else{
+				$(this).parent().animate({height:"24px"});
+				$(this).text("+更多");
+			}
+		})
+	function em_sh(){
+		if($(".select_list span").hasClass("del_s")){
+			$(".select_list em").hide();
+		}else{
+			$(".select_list em").show();
+		}
+	}
+})
+</script>

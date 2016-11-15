@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ticketprice">
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		tcl_id					AS	tclId,
+		tcl_type				AS	tclType,
+		tpl_date				AS	tplDate,
+		tpl_is_open				AS	tplIsOpen,
+		tpl_week				AS	tplWeek,
+		tpl_sign				AS	tplSign,
+		tpl_is_sign				AS	tplIsSign,
+		tpl_trade_price			AS	tplTradePrice,
+		tpl_combination_price	AS	tplCombinationPrice,
+		tpl_retail_price		AS	tplRetailPrice,
+		tpl_insure_price		AS	tplInsurePrice,
+		tpl_Explain				AS	tplExplain,
+		tpl_date_type			AS	tplDateType,
+		tpl_same_h				AS	tplSameH,
+		tpl_same_m				AS	tplSameM,
+		tpl_forward_d			AS	tplForwardD,
+		tpl_forward_h			AS	tplForwardH,
+		tpl_forward_m			AS	tplForwardM,
+		tpl_create_time			AS	tplCreateTime,
+		tpl_create_user			AS	tplCreateUser,
+		cpy_id					AS	cpyId
+	</sql>
+	
+	<!-- 根据票类ID和录入时间 获取最新的一条信息 -->
+	<select id = "selectTicketPrice" resultType="ticketPriceBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			ticket_price
+		WHERE
+			tcl_id		 = #{tclId}
+		AND
+			tpl_date between #{startDate} and #{endDate}
+	</select>
+</mapper>

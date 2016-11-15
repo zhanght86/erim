@@ -1,0 +1,32 @@
+<script>
+	function photoUpload(guiId) {
+        $.ajaxFileUpload({
+            url: '$staticRoot/js/upload05.jsp', // 文件上传服务器地址
+            secureuri: false, // 是否需要安全协议，一般设置为false
+            type: 'post', // 提交方式
+            fileElementId: 'reportimg1', // 上传文件域的id
+            dataType: 'text',//返回值类型 一般设置为json
+            data:guiId, // 导游ID
+            success: function(data, status) { 
+            	if (status == "success" && undefined != data) {
+            		data = eval("("+data+")");
+            		var name = data.filename;
+            		var url = data.url;
+					$.post("/photo/insert?gptImgUrl="+url,function(result) {
+            			if ("1" == result) {
+            				// 刷新页面
+            				window.location = _appRoot + '/photo';
+            			} else {
+            				alert("上传失败");
+            			}
+            		}, 'text');
+            	} else {
+            		alert("上传失败");
+            	}
+            },
+            error: function(data, status, e) {
+                alert(data+'----'+status+'---'+e);
+            }
+        });
+    }
+</script>

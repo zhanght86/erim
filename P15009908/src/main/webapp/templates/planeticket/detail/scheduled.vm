@@ -1,0 +1,34 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/jipiao.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/planeticket/planeticket.css">
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/jp_03.png" >预定方式
+	</p>
+	<input type="hidden" name="city" value="$planeticketDetail.ptdStartCity" />
+	<input type="hidden" name="endcity" value="$planeticketDetail.ptdEndCity" />
+	<input type="hidden" name="jtcity" value="$planeticketDetail.ptdCity" />
+	<form method="post" id="form1">
+		<input type="hidden" name="id" value="$!planeticketDetail.id" />
+			<div class="g_line"></div>
+		<div class="flt_box mr60">
+			<span class="ml55"><b></b></span>
+			<div class="cb"></div>
+			<div class="input_block clearfix">
+				<div class="label_left">预定方式：</div>
+				<div class="input_right input_right_wauto">
+					#foreach($item in $scheduled.keySet()) 
+						<label class="checkbox inline">
+							<input class="input-xlarge validate[minCheckbox[1]] checkbox" type="checkbox" name="ptdScheduled" value="$item" #if($erim.contains($!planeticketDetail.ptdScheduled,$item)) checked #end>$scheduled.get($item)
+						</label> 
+					#end
+				</div><span style=" color:red;margin-left:8px;float: left; margin-top:7px;">*</span>
+			</div>
+			<div class="carinfo_ctbl">
+    			<div class="carinfo_ctblrbtn pb80" style="width:360px; margin-left:48px;">
+    				<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/planeticket/detail/scheduled','$appRoot/planeticket/detail/list');">提交</button>
+    				<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+    			</div>
+			</div>
+		</div>
+	</form>
+</div>

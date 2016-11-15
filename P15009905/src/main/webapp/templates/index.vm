@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>档期管理</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        <a class="left_btn" href="$appRoot/guide/price/updateDate?portal=02">
+            <img src="$staticRoot/img/left_btn.png"/>
+        </a>
+		<!-- 展示年月 -->
+        <span id="cal_date">$!year 年 $!month 月</span>
+        <a class="right_btn" href="$appRoot/guide/price/updateDate?portal=01">
+            <img src="$staticRoot/img/right_btn.png"/>
+        </a>
+    </div>
+	<!-- 服务类型 -->
+	#foreach($item in $serviceList)
+       <label style="float:left;padding:10px;"><input type="radio" #if($!item.gdlServiceCode == $!currService) checked #end name="isInternal" value="$item.gdlServiceCode" /> $item.gdlServiceName</label>
+	#end
+    <!-- content -->
+    <div class="content">
+		<div class="month-container">
+			<img src="$staticRoot/img/calander/week.jpg">
+			<!-- 日历 -->
+			<ul id="date_ul" class="month-body">
+				<!-- 
+					1. 当天日期，左上角小方块变色
+					2. 满档为红色
+					3. 空档为蓝色
+					4. 无数据为灰色
+				-->
+				#foreach($item in $priceList)
+					#if($item.day)
+						<!-- 有数据  -->
+						#if($!item.id)
+    						<li class="month-cell pink #if($item.gpeIsOpen == '02') b_blue #else b_red #end">
+								<input type="hidden" name="id" value="$!item.id" />
+								<input type="hidden" name="gpeIsOpen" value="$!item.gpeIsOpen" />
+								<input type="hidden" name="gdlId" value="$!item.gdlId" />
+								<input type="hidden" name="day" value="$!item.day" />
+            					<div class="month-box">
+									#if($item.isNow == '02')
+										<!--<img src="$staticRoot/img/calander/jin.jpg">-->
+										<span class="fff_btn col_blue">
+                                        </span>
+									#else
+										<span class="fff_btn">
+                                        </span>
+										<!--<img src="$staticRoot/img/calander/checkbox.png">-->
+									#end
+            					</div>
+            					<div class="month-month">$!item.day</div>
+            					<div class="month-price"></div>
+            				</li>
+						#else
+							<!-- 无数据 -->
+    						<li class="month-cell">
+            					<div class="month-box">
+            						#if($item.isNow == '02')
+										<img src="$staticRoot/img/calander/jin.jpg">
+									#else
+										<img src="$staticRoot/img/calander/checkbox.png">
+									#end
+            					</div>
+            					<div class="month-month">$!item.day</div>
+            					<div class="month-price"></div>
+            				</li>
+						#end
+					#else
+						<!-- 无日期 -->
+        				<li class="month-cell">
+        					<div class="month-box">
+        						<img src="$staticRoot/img/calander/checkbox.png">
+        					</div>
+        					<div class="month-month"></div>
+        					<div class="month-price"></div>
+        				</li>
+					#end
+				#end
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<!--
+        <img id="schedule_btn" src="$staticRoot/img/schedule.png">
+		-->
+        <div class="date">
+            <div class="date_left">
+             <!--   <div class="date_left_top">
+                    <span style="font-size: 50px;" class="date_left_top_day"></span>
+                    <span class="date_left_top_week"></span>
+                </div>-->
+                <div class="date_left_bottom">
+					#if($currService == '01')
+    					目的地：<span style="color: #f00;">$!guideDetail.gdlLocalCity</span><br/>
+						<!-- 
+    					金&nbsp;&nbsp;&nbsp;额：<span style="color: #f00;">300元</span>
+						-->
+					#elseif($currService == '02')
+    					出发地：<span style="color: #f00;">$!guideDetail.gdlNationalCity</span><br/>
+					#elseif($currService == '03')
+    					出发地：<span style="color: #f00;">$!guideDetail.gdlLeaderCity</span><br/>
+    					目的地：<span style="color: #f00;">
+							#if($guideDetail.gdlDestination == '04')
+								$!guideDetail.gdlDestinationCountry
+							#else
+								#vtextarray($!guideDetail.gdlDestination,'C108')
+							#end</span><br/>
+					#elseif($currService == '04')
+    					目的地：<span style="color: #f00;">
+							#if($guideDetail.gdlGaidLokal == '04')
+            					$!guideDetail.gdlGaidCountry
+            				#else
+            					#vtextarray($guideDetail.gdlGaidLokal,'C108')
+            				#end
+						</span><br/>
+					#end
+                </div>
+            </div>
+          <!--  <div class="date_right">
+    			
+                <div class="date_right_top">
+                    <a id="date_btn">管理</br> 档期</a>
+    			</div>
+                <div class="date_right_split"></div>
+                <div class="date_right_top">
+                    <a id="amount_btn">管理</br> 金额</a>
+    			</div>
+				
+    		</div>-->
+			<div style="clear:both"></div>
+        </div>
+    </div>
+	<!-- 档期设置 -->
+    <div id="date_popup" class="popup_wraper">
+		<form method="post" id="form_dq" action="$appRoot/guide/price/updateIsOpen">
+            <div class="tanchu">
+                <div class="biaoti"><span style="color:red" id="span_date"></span>档期设置</div>
+                <div class="wenben">
+					<input type="hidden" name="id" />
+					<input type="hidden" name="gdlId" />
+					<input type="hidden" name="day" />
+                    <div class="biao">
+        				请设置工作档期:&nbsp;&nbsp;
+                        <label><input type="radio" value="02" name="gpeIsOpen" />空档</label>
+						&nbsp;&nbsp;&nbsp;
+    					<label><input type="radio" value="01" name="gpeIsOpen"/>满档</label>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+				<!--
+                <div class="wenben">
+    				<div class="biao">
+        				请输入单日价格:
+                        <input type="text" value="300" class="jine validate[required,custom[integer],maxSize[4]]" maxlength＝"4" name="gsePrice" id="gsePrice" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+				-->
+                <div class="wenben anniu1">
+                    <div class="anniu">
+                        <a class="shuxian" style="color:#900">确定</a>
+                    </div>
+                    <div class="anniu">
+                        <a onclick='$("#date_popup").hide();'>取消</a>
+                    </div>
+                </div>
+            </div>
+		</form>
+    </div>
+	<!-- 操作 -->
+	<div id="schedule_popup" class="popup_wraper">
+        <div class="tanchu">
+            <div class="biaoti">操作</div>
+            <div class="wenben">
+                <a onclick=' $("#schedule_popup").hide();'>设置为满档</a>
+            </div>
+            <div class="wenben">
+                <a onclick=' $("#schedule_popup").hide();'>设置为空档</a>
+                <span>(更改为空挡，两小时内不可重复操作)</span>
+            </div>
+        </div>
+    </div>
+	<!--金额管理-->
+	<form method="post" id="form_je" action="$appRoot/guide/schedule/insert">
+        <div id="amount_popup" class="popup_wraper">
+            <div class="tanchu">
+            <div class="biaoti">输入金额</div>
+            <div class="wenben">
+                <div class="biao">
+    				请选择开始日期:
+                    <input type="date" style="width:100px;" class="validate[required]" name="gseDateStart" id="je_startDate"/>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="wenben">
+                <div class="biao">
+    				请选择结束日期:
+                    <input type="date" style="width:100px;" class="validate[required]" name="gseDateEnd" id="je_endDate"/>
+                </div>
+                <div class="clear"></div>
+            </div>
+			<div class="wenben">
+                <div class="biao">
+    				请设置工作档期:
+					&nbsp;&nbsp;
+                    <input type="radio" value="1" name="gseIsFree" checked />空档
+					&nbsp;&nbsp;&nbsp;
+					<input type="radio" value="2" name="gseIsFree"/>满档
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="wenben">
+				<div class="biao">
+    				请输入单日价格:
+                    <input type="text" value="300" class="jine validate[required,custom[integer],maxSize[4]]" maxlength＝"4" name="gsePrice" id="gsePrice" />
+                </div>
+                <div class="clear"></div>
+            </div>
+                <div class="wenben anniu1">
+                    <div class="anniu">
+                        <a class="shuxian" style="color:#900">确定</a>
+                    </div>
+                    <div class="anniu">
+                        <a onclick=' $("#amount_popup").hide();'>取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</form>
+    <!-- footer -->
+    <div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1_focus.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5.png"/>
+        </a>
+    </div>
+	<script>
+		var fullDate = "",fullFree = "",fullPrice = "";
+		#foreach($item in $listGuideSchedule)
+			fullDate +="$item.gseDateStart,";
+			fullFree +="$item.gseIsFree,";
+			fullPrice+="$item.gsePrice,";
+		#end
+    </script>
+	<!-- 日历 -->
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/calander.css"/>
+	<script type="text/javascript" src="$staticRoot/js/guide/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+	<div class="g_block_2 mb20 pb5">
+		<div class="input_block clearfix">
+            <div class="label_left" style="width:60px;"><label>选择主题：</label></div>
+    		<div class="input_right input_right_wauto" style="width:760px;">
+    			<span class="add_block_1">    			
+    			<select class="w130" style="margin-bottom:15px;">
+					#foreach($item in $codeList1)
+						<option value="$item.codeId$item.codeKey">$item.codeValue</option>
+					#end
+					#foreach($item in $codeList2)
+						<option value="$item.codeId$item.codeKey">$item.codeValue</option>
+					#end
+					
+				</select>
+				</span> <button class="add_but1 red_a" href="javascript:void(0);">确认添加</button>
+    		</div>
+    	</div>
+    </div>
+	<p class="tab_a_2">    
+		#foreach ($item in $listThemeType)			
+		  <a id="a$item.theme_type_id" href="javascript:index.load('$appRoot/mall/theme/show?mteNtype=$item.theme_type_id');" class="add_theme">
+		   <span class="add_span">$item.mteNtypeName</span>
+		   <em class="add_del"  onclick="javascript:index.load('$appRoot/mall/theme/show?Theme_type_id=$item.theme_type_id&InsertOrDelete=0');">&times;</em>
+		  </a>		
+		#end
+			
+	</p>
+	
+ 	<div class="g_block_2 mb20" id="tab_a_block">
+		<div class="tab_con">
+			<div class="tab_n tab_show">
+        		<div>
+					
+					
+        			<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+        				<tr>
+        					<th style="min-width:80px;">已选<span id="span_choose">0</span>个</th>
+        					<th style="width:75px;">产品编码</th>
+            				<th style="width:75px;">所属专线</th>
+            				<th>线路名称</th>
+            				<th style="width:75px;">行程天数</th>
+            				<th style="width:75px;">大交通</th>
+            				<th style="width:75px;">产品形态</th>
+            				<th style="width:75px;">产品标准</th>
+            				<th style="width:140px;">同行识别</th>
+        				</tr>
+						#foreach($item in $lineList)
+            				<tr>
+            					<td><input type="checkbox" name="child_box" value="$!item.id"></td>
+            					<td>$!item.ldlCode</td>
+        						<td>$!item.ldlSpecialLine</td>
+        						<td> <a href="http://www.jialvlianhe.com/$userCompany.cpyCode/line/zhutixiang/$item.id" target="_blank" title="点击打开外网展示">$!item.ldlName</a></td>
+                                <td>$!item.zdyDate 天</td>
+        						<td>#vtext($!item.ldlBigTraffic,'C115')+#vtext($!item.ldlBigTraffic1,'C115')</td>
+                				<td>#vtext($!item.ldlProductForm,'C072')</td>
+                				<td>#vtext($!item.ldlProductStandard,'C074')</td>
+                				<td>#vtext($!item.ldlSameSign,'C091')</td>
+            				</tr>
+						#end
+        			</table>
+        			<div class="tpage mb20">
+        				<div class="tpagel tpage2 pl0"><span class="select_mess"><img src="$staticRoot/images/sd_03.jpg">请在此选择您热门精选模块需要展示的产品（只能选择7个）</span></div>
+        			</div>
+        			<div class="g_right"><a id="btn" class="red_a ml25" href="javascript:insert();">确定</a></div>
+        		</div>
+			</div>
+		</div>
+	</div>
+		
+	<script >
+		var v_ntype = "";
+		//默认上次选择的功能
+		#if($malltheme.mteNtype)
+			$("span[class='on']").removeClass('on');
+			$("#a$malltheme.mteNtype span").addClass('on');
+			v_ntype = '$malltheme.mteNtype';
+		#end
+
+		//点击事件
+		$("input[name='child_box']").click(function(){
+			var len = $("input[name='child_box']:checked").length;
+			if(len>7) {wxcalert('只能选择7个'); $(this).prop('checked',false);}
+			else{ $("#span_choose").html(len); }
+		});
+
+		var checkedLength = 0;
+		//循环
+		#foreach($item in $listTheme)
+			$("input[name='child_box'][value='$item.lineId']").prop('checked',true);
+			checkedLength++;
+		#end
+		$("#span_choose").html(checkedLength);
+
+		
+		//insert
+		function insert(){
+			var chooseInput = "";
+			//获取所有选中的
+			$.each($("input[name='child_box']:checked"),function(){
+				chooseInput += $(this).val()+",";
+			});
+			if(""!=chooseInput){ chooseInput = chooseInput.substring(0,chooseInput.length-1)};
+			
+			var url  = "$appRoot/mall/theme/insert";
+			var data = {'lineId':chooseInput,'mteNtype':v_ntype};
+			$.post(url,data,function(){wxcalert('保存成功!');},'json');
+		}
+    </script>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+		    
+		    //判断是否隐藏 保存 按钮
+		    var lh=$(".tab_a_2 a").length;
+			if( lh>0)
+			{
+			  $("#btn").show();
+			}
+			else
+			{ 
+			  $("#btn").hide();
+			}
+		
+			//删除主题	
+			/*
+			$(".tab_a_2").on("click",".add_del",function(){
+				$(this).parent().remove();
+				showorhide();
+			});
+			*/
+	        //判断主题个数处理
+			function showorhide(){
+			    var lh=$(".tab_a_2 a").length;
+				if( lh>= 6){
+					wxcalert('最多可选6项主题!');
+					return 0;
+				}else{
+					$(".input_right .add_but1").text("确认主题").css("background-color","#F3BF73").attr("disabled", false); 
+					$(".add_block_1 select").attr("disabled", false);
+					return 1;
+				}
+			}
+		
+			//点击加号添加主题
+			$(".input_right .add_but1").click(function(){
+				
+				if(!$(".input_right select").val()==""){
+    				for(var i=0;i<$(".tab_a_2 a").length;i++){
+    						if($(".input_right select").find("option:selected").text()==$(".tab_a_2 a").eq(i).find("span").text()){
+							    wxcalert('此主题已存在!');
+    							return false;						
+    						}
+    					}
+					    
+					
+					
+						var r=showorhide();
+						if (r>0) 
+						{
+						   
+							var url_add='$appRoot/mall/theme/show?Theme_type_id='+$(".input_right select").val()+'&InsertOrDelete=1';
+					     	index.load(url_add);
+							
+						}
+						//alert(html);
+						
+						
+    					$(".tab_a_2 a").each(function(){
+            				if($(this).find("span").text()==""){
+            					$(this).hide();
+            				}else{
+            					$(this).show();
+            				}
+            			});
+				}
+			});
+			
+	
+        })
+	</script>

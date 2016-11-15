@@ -1,0 +1,165 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<div class="rdivv">
+	<div class="carinfo">
+		<div class="carfixed_top">
+			<img src="$staticRoot/images/htcar1.png">
+			<span>查看车辆信息</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<form method="post" id="form1">
+		<input type="hidden" value="$texiDetail.id" name="id"/>
+		<div class="carinfo_ct">
+			#if($!texiDetail.tdlInland == '1')
+			<div class="carinfo_cttop">
+				<span>国内</span>
+			</div>
+			<div class="carinfo_ctbiger">
+				<div class="carinfo_ctbox show">
+					<div class="carinfo_ctbl">
+						<span>所在城市:</span>
+							$!texiDetail.tdlProvince省
+							$!texiDetail.tdlCity市
+							$!texiDetail.tdlCounty区/县
+					</div>
+			#end
+			#if($!texiDetail.tdlInland == '2')
+			<div class="carinfo_cttop">
+				<span>国际/港澳台</span>
+			</div>
+			<div class="carinfo_ctbiger">
+				<div class="carinfo_ctbox show">
+					<div class="carinfo_ctbl">
+						<span>所在国家:</span>
+						 $!texiDetail.tdlBrand
+					</div>
+			#end
+					<div class="carinfo_ctbl">
+						<span>汽车品牌:</span>
+							$!texiDetail.tdlBrand
+					</div>
+					<div class="carinfo_ctbl">
+						<span>汽车名称:</span>
+							$!texiDetail.tdlName
+					</div>
+					<div class="carinfo_ctbl">
+						<span>车辆档次:</span>
+							$!texiDetail.tdlTexttype
+					</div>
+					<div class="carinfo_ctbl">
+						<span>车型:</span>
+							$!texiDetail.tdlType
+					</div>
+					<div class="carinfo_ctbl">
+						<span>手自档:</span>
+							$!texiDetail.tdlTextgear
+					</div>
+					<div class="carinfo_ctbl">
+						<span>乘坐人数:</span>
+							$!texiDetail.tdlNum
+					</div>
+					<div class="carinfo_ctbl">
+						<span>汽车排量:</span>
+							$!texiDetail.tdlTextpail
+						</div>
+					</div>
+					<div class="carinfo_ctbl">
+						<span>购买日期:</span>
+							 $!texiDetail.tdlCreatecardate
+					</div>
+					<div class="carinfo_ctblc">
+						<span>汽车图片:</span>
+						<div class="carinfo_ctblrc">
+							<img src="$staticRoot/images/htcar12.png"><span>*</span>
+						</div>
+					</div>
+					<div class="carinfo_ctbl">
+						<span>可同时接单数量:</span>
+							$!texiDetail.tdlJiedan
+						</div>
+					</div>
+					<div class="carinfo_ctbl">
+						<span></span>
+						<div class="carinfo_ctblrbtn">
+							<a href="#">量/价格管理</a>
+							<button type="button" class="carinfo_qu" onclick="index.load(page.url);">返回</button>
+						</div>
+					</div>
+					</form>
+				</div>
+				<div class="carinfo_ctbox">
+					<div class="carinfo_ctbl">
+						<span>国际:</span>
+						<div class="carinfo_ctblra">
+							<select>
+								<option>本田</option>
+							</select>
+							<span>*</span>
+						</div>
+				</div>
+				<form method="post" id="form1">
+					<input type="hidden" value="$texiDetail.id" name="id"/>
+				<div class="carinfo_ctbl">
+					<span>汽车品牌:</span>
+					<div class="carinfo_ctblra">
+						$!texiDetail.tdlBrand
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>汽车名称:</span>
+					<div class="carinfo_ctblra">
+						$!texiDetail.tdlName
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>车辆档次:</span>
+					<div class="carinfo_ctblra">
+						$!texiDetail.tdlTexttype
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>车型:</span>
+					<div class="carinfo_ctblrb">
+						$!texiDetail.tdlType
+						<span class="carinfo_ctblrss">手自档:</span>
+						$!texiDetail.tdlTextgear
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>汽车排量:</span>
+					<div class="carinfo_ctblrb">
+						$!texiDetail.tdlTextpail
+						<span class="carinfo_ctblrss">乘坐人数:</span>
+						$!texiDetail.tdlNum
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>购买日期:</span>
+					<div class="carinfo_ctblra">
+						$!texiDetail.tdlCreatecardate" onClick="WdatePicker()
+					</div>
+				</div>
+				<div class="carinfo_ctblc">
+					<span>汽车图片:</span>
+					<div class="carinfo_ctblrc">
+						<img src="$staticRoot/images/htcar12.png"><span>*</span>
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span>可同时接单数量:</span>
+					<div class="carinfo_ctblra">
+						$!texiDetail.tdlJiedan
+					</div>
+				</div>
+				<div class="carinfo_ctbl">
+					<span></span>
+					<div class="carinfo_ctblrbtn">
+						<a href="#">量/价格管理</a>
+						<button class="carinfo_qu" type="button" onclick="index.load(page.url);">返回</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>

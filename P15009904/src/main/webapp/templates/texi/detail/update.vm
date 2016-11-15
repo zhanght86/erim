@@ -1,0 +1,210 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/texi/texi.css">
+<div class="rdivv">
+	<div class="carinfo">
+		<div class="carfixed_top">
+			<img src="$staticRoot/images/htcar1.png" />
+			<span>修改车辆信息</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<form method="post" id="form1">
+			<input type="hidden" value="$texiDetail.id" name="id" />
+			<div class="carinfo_ct carinfo_ct_w700">
+    			<div class="carinfo_cttop" style="margin-left:21px;">
+    				<span><strong>国家：</strong></span>
+    				<label><input type="radio" id="tdlInland11" name="tdlInland" #if($!texiDetail.tdlInland == '02') checked #end value="02" style="width:13px;margin-left:6px;"/>国内</label>
+    				##<label><input type="radio" id="tdlInland12" name="tdlInland" #if($!texiDetail.tdlInland == '01') checked #end value="01" style="width:13px;"/>国际·港澳台</label>
+					<!--<span style="margin-left:-103px;color:red;">*</span> -->
+				</div>
+    			<div class="carinfo_ctbiger">
+    				<div class="carinfo_ctbox show">
+    					<div class="carinfo_ctbl" id="city_gn11" >
+    						<span>所在地：</span>
+    						<div class="carinfo_ctblr">
+                                #lockProvince('tdlProvince','tdlProvince','','1',$!texiDetail.tdlProvince,'tdlCity','tdlCounty',$!texiDetail.tdlCity,$!texiDetail.tdlCounty)
+    							<span>省</span>
+    							<select name="tdlCity" id="tdlCity" style="width:103px;" onchange="lock.town($(this),'tdlCounty');"  class="validate[required]"></select>
+    							<span>市</span>
+    							<select name="tdlCounty" id="tdlCounty" style="width:103px;"></select>
+    							<span>区/县</span><span style="margin-left:-2px;color:red;">*</span>
+    						</div>
+    					</div>
+    					<div class="input_block clearfix" id="city_gj12" style="margin-left:-9px;">
+        					<div class="label_left">所在地：</div>
+        					<div class="input_right input_right_wauto">
+                    			<label class="w65">
+                					<input type="radio" name="tdlExternal" #if($texiDetail.tdlExternal == '01') checked #end value="01" checked="checked"/>香港
+                				</label>
+                				<label class="w65">
+                					<input type="radio" name="tdlExternal" #if($texiDetail.tdlExternal == '02') checked #end value="02" />澳门
+                				</label>
+                				<label class="w65">
+                					<input type="radio" name="tdlExternal" #if($texiDetail.tdlExternal == '03') checked #end value="03" />台湾
+                				</label>
+                				<label class="w65">
+                					<input type="radio" name="tdlExternal" #if($texiDetail.tdlExternal == '04') checked #end value="04" />国际
+                				</label>
+								<label id="county" style="margin-left:-14px;">
+                    				<input type="text" class="w110 validate[maxSize[15]] autoquerycountry" name="tdlForeign" value="$!texiDetail.tdlForeign" style="border:1px solid #ccc">国家&nbsp;
+                    				<input type="text" class="w110 validate[maxSize[10]]" name="tdlForeignCity" value="$!texiDetail.tdlForeignCity" style="border:1px solid #ccc">城市
+								</label>
+                    		</div>
+        				</div>
+						<div class="carinfo_ctbl">
+    						<span>汽车品牌/名称：</span>
+    						<div class="carinfo_ctblra" style="width:390px;">
+    							<input type="text" name="tdlName" class="validate[required,maxSize[30]]" value="$!texiDetail.tdlName">
+								<span class="carinfo_ctblrs">*</span>
+    						</div>
+    					</div>
+						<div class="carinfo_ctbl">
+    						<span>车型：</span>
+    						<div class="carinfo_ctblrb">
+    							<select name="tdlType">
+                                    #foreach($item in $models.keySet())
+										<option value="$item" #if($texiDetail.tdlType == $item) selected #end>$models.get($item)</option>
+                                    #end
+    							</select>
+    							<span class="carinfo_ctblrs">*</span>
+    							<span class="carinfo_ctblrss" style="margin-left:29px;">乘坐人数：</span>
+    							<select  name="tdlNum">
+                                    #foreach($item in $textzuo)
+                                      <option value="$item.codeKey" #if($texiDetail.tdlNum == $item.codeKey) selected #end>$item.codeValue</option>
+                                    #end
+    							</select>
+    							<span class="carinfo_ctblrs">*</span>
+    						</div>
+    					</div>
+						<div class="carinfo_ctbl">
+    						<span>购买日期：</span>
+    						<div class="carinfo_ctblra" style="width:390px;">
+    							<input type="text" class="validate[required,custom[date],past[NOW]]" name="tdlCreatecardate" onClick="WdatePicker({maxDate:'%y-%M-%d'})" style="width:113px;" value="$!texiDetail.tdlCreatecardate">
+    							<span class="carinfo_ctblrs">*</span>
+    							<span class="carinfo_ctblrss" style="color:#323232;margin-left:27px;">车辆档次：</span>
+    							<select  name="tdlTexttype">
+                                    #foreach($item in $texitype.keySet())
+                                      <option value="$item" #if($texiDetail.tdlTexttype == $item) selected #end>$texitype.get($item)</option>
+                                    #end
+    							</select>
+    							<span style="margin-left:4px;">*</span>
+    						</div>
+    					</div>
+						<div class="carinfo_ctbl">
+    						<span>汽车排量：</span>
+    						<div class="carinfo_ctblrb">
+								<select  name="tdlTextpail">
+									<option value="0"></option>
+                                    #foreach($item in $displacement)								  
+                                      <option value="$item.codeKey" #if($texiDetail.tdlTextpail == $item.codeKey) selected #end>$item.codeValue</option>
+                                    #end
+    							</select>
+								<span class="carinfo_ctblrss" style="margin-left:44px;">手自档：</span>
+    							<select name="tdlTextgear">
+									<option value="o"></option>
+                                    #foreach($item in $texigear.keySet())	
+										<option value="$item" #if($texiDetail.tdlTextgear == $item) selected #end>$texigear.get($item)</option>
+                                    #end
+    							</select>
+    						</div>
+    					</div>
+						<!-- <div class="carinfo_ctbl">
+    						<span>预定方式：</span>
+    						<div class="carinfo_ctblra" style="width:293px;" >
+                				#foreach($item in $scheduled.keySet())
+                        			<label class="w90"> 
+            				        <input type="checkbox" class="validate[required] checkbox" #if($erim.contains($!texiDetail.tdlScheduled,$item)) checked #end name="tdlScheduled" value="$item"> $scheduled.get($item)
+                        			</label>
+            					#end
+    						</div><span  style=" color:red;margin-left:-115px;float: left; margin-top: 4px;">*</span>
+							</div>-->
+						<div class="carinfo_ctbl" style="margin-bottom:-12px;">
+    						<span></span>
+    						<div class="carinfo_ctblra" style="width:390px;">
+								<span style="margin-left:-72px;font-size:14px;">注：请勿添加带有其他标志(水印、字样)的图片，否则该汽车将会下线</span>
+    						</div>
+    					</div>
+						<div class="newline_ctlla2" style="margin-left:24px;">
+            				<span>汽车图片：</span>
+            				<div class="newline_ctllr3" style="margin-top:20px;">
+									#if("$!texiDetail.tdlImgAppearance" == "")
+										<input name="tdlImgAppearance" value="" type="hidden" id="gdlImgCard"/>
+										<input name="file" id="uploadify_car" contenteditable="false" size="30" type="file" />
+                    				#else
+										<input name="tdlImgAppearance" value="$texiDetail.tdlImgAppearance" type="hidden" id="gdlImgCard"/>
+										<input name="file" id="uploadify_car" contenteditable="false" size="30" type="file"/>
+                    					<img class="img200" src="$staticFileRes$texiDetail.tdlImgAppearance" /><a href="javascript:uploadDelete('uploadify_car','filespan_car','$texiDetail.tdlImgAppearance','gdlImgCard');">删除图片</a>                    				
+									#end
+										<span id="filespan_car"></span>
+										<div id="fileQueue_car"></div>
+            				</div>
+            			</div>
+    					<div class="carinfo_ctbl">
+    						<span></span>
+    						<div class="carinfo_ctblrbtn">
+    							<button type="button" id="btn" class="carinfo_sub" onclick="subform.sub('form1','$appRoot/texi/detail/update','$appRoot/texi/detail/list');">提交</button>
+    							<button class="carinfo_qu" type="button" onclick="index.load(page.url);">返回</button>
+    						</div>
+    					</div>
+    				</div>
+    		    </div>
+			</div>
+		</form>
+	</div>
+</div>
+	
+<script type="text/javascript"> 
+	
+	// 默认隐藏国外类的组件
+	var b = $!texiDetail.tdlInland;
+	if (b == '01') {
+    	$('#city_gn11').hide();
+		var d = $texiDetail.tdlExternal;
+		if(d == '04'){
+			$('#county').show();
+		}else{
+			$('#county').hide();
+		}
+    	//省市县级联选择
+	} else if (b == '02') {
+    	//省市县级联选择
+    	$('#city_gj12').hide();
+		$('#county').hide();
+	}
+	// 点击国内时
+	$('#tdlInland11').click(function() {
+		$('#city_gj12').hide();
+		$('#city_gn11').show();
+	});
+	
+	// 点击国外时
+	$('#tdlInland12').click(function() {
+		$('#city_gn11').hide();
+		$('#city_gj12').show();
+	});
+	
+	//当点击国际所在地时
+	$("input[name='tdlExternal']").change(function() {
+		var a = $("input[name='tdlExternal']:checked").val();
+		if (a == '04') {
+			$('#county').show();
+		} else {
+			$('#county').hide();
+		}
+	});
+	//上传图片
+	uploadify('uploadify_car','gdlImgCard','filespan_car','fileQueue_car');
+	
+	
+	#if("$!texiDetail.tdlImgAppearance" != "")
+		$("#uploadify_car").hide();
+	#end
+</script>
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/autocomplete.min/jquery.autocomplete.css"/>
+<script type="text/javascript">
+$(function() {
+   var guojiastr = $("#guojiaforqueryId").html();
+    var arr = guojiastr.split(",");
+    $(".autoquerycountry").autocomplete(arr);
+});
+</script>
+<div style="display:none" id="guojiaforqueryId" >$!guojiaforquery</div>

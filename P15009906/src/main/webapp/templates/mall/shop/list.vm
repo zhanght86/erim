@@ -1,0 +1,102 @@
+
+
+	<ul class="menu_list mb20">
+		#foreach($item in $listmall)
+			#if($item.mspLevel == 1)
+				#if($item.listCode.size()>0)
+    				<li id="li_$item.id">$item.mspName
+            			<div class="second_block">
+            				#foreach($obj in $item.listCode)
+    							#if($item.id==1 || $item.id==4)
+    								<a id="a_${item.id}_$obj.codeKey" href="javascript:index.load('$appRoot/mall/shop/list?li=li_${item.id}&aid=a_${item.id}_$obj.codeKey${item.queryLink}$obj.codeKey');">$obj.codeValue</a>
+    							#else
+    								<a id="a_${item.id}_$obj.codeKey" href="javascript:index.load('$appRoot/mall/shop/list?li=li_${item.id}&aid=a_${item.id}_$obj.codeKey${item.queryLink}$obj.codeValue');">$obj.codeValue</a>
+    							#end
+    						#end
+            			</div>
+            		</li>
+				#end
+			#end
+		#end
+	</ul>
+	
+	<div class="g_block_2 g_block_7 mb20">
+		<p class="g_tit_1 mb10">专线信息</p>
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th style="width:75px;"><label><input type="checkbox" id="chooseAll">全选</label></th>
+				<!--<th style="width:75px;">产品编码</th> -->
+				<th style="width:75px;">所属专线</th>
+				<th>线路名称</th>
+                <th>公司/品牌</th>
+				<th style="width:150px;">计调/电话</th>
+				<!--<th style="width:75px;">行程天数</th>-->
+				<th style="width:75px;">大交通</th>
+				<th style="width:75px;">产品形态</th>
+				<th style="width:75px;">产品标准</th>
+				<th style="width:140px;">同行识别</th>
+			</tr>
+			#foreach($item in $lineList)
+    			<tr>
+						<td><input #if($!item.zscIsCoopertion == 1) checked #end type="checkbox" name="inp_all" value="$item.id" cid="$item.cpyId"></td>
+						<!--<td>$!item.ldlCode</td>-->
+						<td>$!item.ldlSpecialLine</td>
+						<td> <a href="http://www.jialvlianhe.com/$userCompany.cpyCode/line/zhutixiang/$item.id" target="_blank" title="点击打开外网展示">$!item.ldlName</a></td>
+                        <td>$item.cpyName</td>
+                        <td>$item.ccpName / $item.ccpTelephone</td>
+						<!--<td>$!item.zdyDate 天</td>-->
+						<td>#vtext($!item.ldlBigTraffic,'C115')+#vtext($!item.ldlBigTraffic1,'C115')</td>
+        				<td>#vtext($!item.ldlProductForm,'C072')</td>
+        				<td>#vtext($!item.ldlProductStandard,'C074')</td>
+        				<td>#vtext($!item.ldlSameSign,'C091')</td>
+    			</tr>
+			#end
+		</table>
+		<div class="g_right"><a class="red_a ml25" href="javascript:insert();">确定</a></div>
+	</div>
+	
+	<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+	
+	<script >
+		//默认上次选择
+		$("#$!li").attr("class","on");
+		$("#$!aid").attr("class","on");
+		
+		// chooseAll
+		$("#chooseAll").click(function(){
+			$("input[name='inp_all']").prop("checked",$("#chooseAll").prop("checked"));
+		});
+		// 插入
+		function insert(){
+			var chooseInput = "";
+			var chooseCpyid = "";
+			var sts="";
+			//获取所有选中的
+			var temp="";
+			$.each($("input[name='inp_all']"),function(){
+			
+				chooseInput += $(this).val()+",";
+				chooseCpyid += $(this).attr("cid")+",";
+				
+			    if ($(this).attr("checked")=="checked"){
+				  sts += "1"+",";
+				}
+				else
+				{
+				  sts += "0"+",";
+				}
+		    });
+			
+			
+			if(""!=chooseInput){ 
+				chooseInput = chooseInput.substring(0,chooseInput.length-1);
+				chooseCpyid = chooseCpyid.substring(0,chooseCpyid.length-1);
+				sts=sts.substring(0,sts.length-1);
+			}
+			
+    		var url  = "$appRoot/zxsell/detail/insertAll";
+    		var data = {'lineId':chooseInput,'cpyId':chooseCpyid,'sts':sts};
+    		$.post(url,data,function(){wxcalert('保存成功!');},'json');
+			
+		}
+    </script>

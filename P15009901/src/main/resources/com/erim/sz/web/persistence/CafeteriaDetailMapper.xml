@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriadetail">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			and cafeteria_detail.cdl_is_del_status = '1'
+			<!--and a.cpc_retail_price is not null-->
+			<if test="cdlSort != null and cdlSort != ''">			and 		cafeteria_detail.cdl_sort 			like "%"#{cdlSort}"%"</if>
+            <if test="cdlName != null and cdlName != ''">			and 		(cafeteria_detail.cdl_name like "%"#{cdlName}"%"   or   cafeteria_detail.cdl_address like "%"#{cdlName}"%" or cafeteria_detail.cdl_sort like "%"#{cdlName}"%")</if>					
+			<if test="cdlProvince != null and cdlProvince != ''">	and 	cdl_province 			=    #{cdlProvince}   </if>
+			<if test="cdlCity != null and cdlCity != ''">			and 	cdl_city 			=    #{cdlCity}   </if>
+			<if test="cdlForeignCity != null and cdlForeignCity != ''">			
+				and 	(cdl_foreigncity  like    "%"#{cdlForeignCity}"%" or cdl_foreign like  "%"#{cdlForeignCity}"%") 
+			</if>
+			<if test="cdlExternal != null and cdlExternal != ''">	and 	cdl_external 		=    #{cdlExternal}   </if>
+			<!--<if test="cdlForeign != null and cdlForeign != ''">	 	and 	cdl_foreign 		=    #{cdlForeign}   </if>-->
+			<if test="cdlPrice1 != null">			             	and 	a.cpc_retail_price		&gt;=  #{cdlPrice1}</if>
+			<if test="cdlPrice2 != null">			            	and 	a.cpc_retail_price 		&lt;=  #{cdlPrice2}</if>
+		</where> 
+	</sql>
+	<sql id="sql_colum">
+			id ,
+			cdl_name 			AS 		cdlName,
+			cdl_telephone		AS 		cdlTelephone,
+			cdl_province 		AS 		cdlProvince,
+			cdl_city 			AS 		cdlCity,
+			cdl_address 		AS 		cdlAddress,
+			cdl_x 				AS 		cdlX,
+			cdl_y 				AS 		cdlY,
+			cdl_img1 			AS 		cdlImg1,
+			cdl_img2 			AS 		cdlImg2,
+			cdl_img3 			AS 		cdlImg3,
+			cdl_img4 			AS 		cdlImg4,
+			cdl_img5 			AS 		cdlImg5,
+			cdl_createtime 		AS 		cdlCreatetime,
+			cdl_createuse 		AS 		cdlCreateuse,
+			cdl_is_through 		AS 		cdlIsThrough,
+			cdl_through_time 	AS 		cdlThroughTime,
+			cdl_through_user 	AS 		cdlThroughUser,
+			cdl_is_del_status   AS      cdlIsDelStatus,
+			cdl_price           AS      cdlPrice,
+			cdl_special_price   AS      cdlSpecialPrice,
+		    cdl_special_name	AS      cdlSpecialName,
+		    cdl_level           AS      cdlLevel,
+		    cdl_special         AS      cdlSpecial,
+		    cdl_business        AS      cdlBusiness,
+		    cdl_order_norme     AS      cdlOrderNorme,
+			cdl_order_normz     AS      cdlOrderNormz,
+			cdl_receive_num     AS      cdlReceiveNum,
+			cdl_people_qq       AS      cdlPeopleQq,
+			cdl_phone           AS      cdlPhone
+	</sql>
+	<!-- 根据特色餐ID查询 -->
+	<select id="selectCafeteriaDetialById" resultType="cafeteriaDetailBean">
+		SELECT
+			id,
+			cdl_name 			AS 		cdlName,
+			cdl_code            AS      cdlCode,
+			cdl_telephone		AS 		cdlTelephone,
+			cdl_province 		AS 		cdlProvince,
+			cdl_city 			AS 		cdlCity,
+			cdl_address 		AS 		cdlAddress,
+			cdl_x 				AS 		cdlX,
+			cdl_y 				AS 		cdlY,
+			cdl_img1 			AS 		cdlImg1,
+			cdl_img2 			AS 		cdlImg2,
+			cdl_img3 			AS 		cdlImg3,
+			cdl_img4 			AS 		cdlImg4,
+			cdl_img5 			AS 		cdlImg5,
+			cdl_createtime 		AS 		cdlCreatetime,
+			cdl_createuse 		AS 		cdlCreateuse,
+			cdl_is_through 		AS 		cdlIsThrough,
+			cdl_through_time 	AS 		cdlThroughTime,
+			cdl_through_user 	AS 		cdlThroughUser,
+			cdl_is_del_status   AS      cdlIsDelStatus,
+			cdl_price           AS      cdlPrice,
+			cdl_special_price   AS      cdlSpecialPrice,
+			cdl_special_name    AS      cdlSpecialName,
+			cdl_open_time       AS      cdlOpenTime,
+			cdl_close_time      AS      cdlCloseTime,
+			cdl_sort            AS      cdlSort,
+			cdl_district		AS 		cdlDistrict,
+			cdl_stop_car        AS      cdlStopCar,
+			cdl_eat_people      AS      cdlEatPeople,
+			cdl_internet        AS      cdlInternet,
+			cdl_reason          AS      cdlReason,
+			cdl_introduce       AS      cdlIntroduce,
+			cdl_notice          AS      cdlNotice,
+			cdl_business        AS      cdlBusiness,
+			cdl_receive_num     AS      cdlReceiveNum,
+			cdl_people_qq       AS      cdlPeopleQq,
+			cdl_order_norme     AS      cdlOrderNorme,
+			cdl_order_normz     AS      cdlOrderNormz,
+			cdl_province 		AS 		cdlProvince,
+			cdl_city 			AS 		cdlCity,
+			cdl_county          AS      cdlCounty,
+			cdl_level           AS      cdlLevel,
+			cdl_special         AS      cdlSpecial,
+			cdl_business        AS      cdlBusiness,
+			cdl_order_norme     AS      cdlOrderNorme,
+			cdl_order_normz     AS      cdlOrderNormz,
+			cdl_receive_num     AS      cdlReceiveNum,
+			cdl_people_qq       AS      cdlPeopleQq,
+			cdl_phone           AS      cdlPhone,
+			cdl_unlimited           AS      cdlUnlimited
+ 		FROM
+			cafeteria_detail
+		WHERE
+			id = #{id}
+	</select>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageCafeteria" resultType="cafeteriaDetailBean">
+		select <include refid="sql_colum" />,a.cpc_retail_price as cpcRetailPrice from cafeteria_detail 
+		join 
+		(
+			select cdl_id,min(cpc_retail_price) as cpc_retail_price from 
+			(
+				select a.cdl_id ,b.cpc_retail_price from cafeteria_package a
+				left join 
+				(
+					select c1.cpe_id ,min(c1.cpc_retail_price) as cpc_retail_price from cafeteria_price c1  join 
+					(
+						select c2.cpe_id,max(c2.cpc_create_time) as cpc_create_time,c2.cpc_date  from cafeteria_price c2 group by c2.cpc_date ,c2.cpe_id
+					) c2
+					on c1.cpe_id = c2.cpe_id
+					and c1.cpc_create_time = c2.cpc_create_time
+					and c1.cpc_date = c2.cpc_date
+					where c1.cpc_date &gt;= date_format(now(),'%Y-%m-%d') and c1.cpc_date &lt;= date_format(last_day(curdate()),'%Y-%m-%d')
+					GROUP BY  c1.cpe_id
+		
+				) b
+				on a.id = b.cpe_id
+			) d
+			group by cdl_id 
+			having cpc_retail_price is not null
+		) a
+		on cafeteria_detail.id = a.cdl_id 
+		<include refid="sql_query" />
+	</select>
+	
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCafeteriaCount" resultType="int">
+		select count(1) from 
+		(
+			select a.cpc_retail_price as cpcRetailPrice from cafeteria_detail 
+			join 
+			(
+				select cdl_id,min(cpc_retail_price) as cpc_retail_price from 
+				(
+					select a.cdl_id ,b.cpc_retail_price from cafeteria_package a
+					left join 
+					(
+						select c1.cpe_id ,min(c1.cpc_retail_price) as cpc_retail_price from cafeteria_price c1  join 
+						(
+							select c2.cpe_id,max(c2.cpc_create_time) as cpc_create_time,c2.cpc_date  from cafeteria_price c2 group by c2.cpc_date ,c2.cpe_id
+						) c2
+						on c1.cpe_id = c2.cpe_id
+						and c1.cpc_create_time = c2.cpc_create_time
+						and c1.cpc_date = c2.cpc_date
+						where c1.cpc_date &gt;= date_format(now(),'%Y-%m-%d') and c1.cpc_date &lt;= date_format(last_day(curdate()),'%Y-%m-%d')
+						GROUP BY  c1.cpe_id
+			
+					) b
+					on a.id = b.cpe_id
+				) d
+				group by cdl_id 
+				having cpc_retail_price is not null
+			) a
+			on cafeteria_detail.id = a.cdl_id 
+			<include refid="sql_query" />
+		) a
+	</select>
+</mapper>

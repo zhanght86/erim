@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>添加机票</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="css/houtai.css">
+<link rel="stylesheet" type="text/css" href="css/fangliang.css">
+<link rel="stylesheet" type="text/css" href="css/jipiao.css">
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/kaiguan.js"></script>
+</head>
+<body bgcolor="#f1f1f1">
+<div class="jd_block">
+	<p class="tit_1 ml35"><img src="images/jp_add_jp_03.jpg" alt="添加机票" title="添加机票">添加机票</p>
+	<div class="g_line mb20"></div>
+<div class="flt_box mr60">
+	<span class="ml55"><b>航班基础信息</b></span>
+	<div class="cb mb20"></div>
+	<div class="input_block clearfix">
+		<div class="label_left w130">国内/国际：</div>
+		<div class="input_right input_right_wauto">
+			<label class="w65"><input type="radio" name="gj" checked>国内</label><label class="w90"><input type="radio" name="tcf">国际/港澳台</label>
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">产品编号：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w130">
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">所属航空公司：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w130">
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">航班号：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w130">
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">机型：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w130">
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">舱位：</div>
+		<div class="input_right input_right_wauto">
+			<label><input type="checkbox"> 经济舱 </label><span class="tishi_box w90"><input type="text" class="w65">个</span> 座位<label class="w65 ml15"><input type="checkbox">经济舱</label><span class="tishi_box w90"><input type="text" class="w65">个</span> 座位
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">出发城市：</div>
+		<div class="input_right input_right_wauto">
+			<select class="w130"><option></option></select><label class="ml35">到达城市：</label><select class="w130"><option></option></select>
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">起飞时间：</div>
+		<div class="input_right input_right_wauto">
+			<input type="text" class="w130"><label class="ml35">落地时间：</label><input type="text" class="w130">
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">起飞航站楼：</div>
+		<div class="input_right input_right_wauto">
+			<input type="text" class="w130"><label class="ml15"> 落地航站楼： </label> <input type="text" class="w130">
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">飞机餐：</div>
+		<div class="input_right input_right_wauto">
+			<label class="w65"><input type="radio" name="gj">有</label><label class="w90"><input type="radio" name="tcf" checked>无</label>
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">机场建设费：</div>
+		<div class="input_right input_right_wauto">
+			<input type="text" class="w130"><label class="ml15"> 燃油附加费： </label> <input type="text" class="w130">
+		</div>
+	</div>
+	<div class="cb"></div>
+	<div class="button_block button_block_w500 clearfix"><button class="y_but ml35">&nbsp; 确 定 &nbsp;</button><button class="b_but ml35">&nbsp; 返 回 &nbsp;</button></div>
+</div>
+
+	<div class="flt_box">
+		<span><b>发班日期管理:</b></span>
+		<div class="cb mb20"></div>
+		<div class="bg_block">
+			<div class="cb"></div>
+			<div class="input_block clearfix">
+				<div class="input_right ml15">
+					日期：<span class="tishi_box w110"><input type="text" class="w80"><img src="images/tt_5.jpg"></span>&nbsp; 至 &nbsp;<span class="tishi_box w110"><input type="text" class="w80"><img src="images/tt_5.jpg"></span>
+				</div>
+			</div>
+			<div class="input_block clearfix">
+				<div class="input_right input_right_wauto ml15 mt_15">
+					按周选择：<label class="w50"><input type="checkbox">
+					全选</label><label class="w50"><input type="checkbox">
+					周一</label><label class="w50"><input type="checkbox">
+					周二</label><label class="w50"><input type="checkbox">
+					周三</label><label class="w50"><input type="checkbox">
+					周四</label><label class="w50"><input type="checkbox">
+					周五</label><label class="w50"><input type="checkbox">
+					周六</label><label class="w50"><input type="checkbox">
+					周日</label>
+				</div>
+			</div>
+
+			<div class="input_right clearfix mt_10 mb16">
+				<div class="input_right ml15">
+					<span class="green_box">&nbsp;</span> 发班<button class="y_but ml15 mr20">确 定</button> <button class="b_but ml15">返 回</button>
+				</div>
+			</div>
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<th>周一</th>
+					<th>周二</th>
+					<th>周三</th>
+					<th>周四</th>
+					<th>周五</th>
+					<th class="red">周六</th>
+					<th class="red">周日</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="td_noline pitch_on">1</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td class="pitch_on">5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>10</td>
+					<td>11</td>
+					<td>12</td>
+					<td>13</td>
+					<td>14</td>
+					<td>15</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>17</td>
+					<td>18</td>
+					<td>19</td>
+					<td>20</td>
+					<td>21</td>
+					<td>22</td>
+				</tr>
+				<tr>
+					<td>23</td>
+					<td>24</td>
+					<td>25</td>
+					<td>26</td>
+					<td>27</td>
+					<td>28</td>
+					<td>29</td>
+				</tr>
+				<tr>
+					<td>30</td>
+					<td>31</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guideprice">
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		gdl_id				AS	gdlId,
+		gdl_name			AS	gdlName,
+		gdl_service_code	AS	gdlServiceCode,
+		gpe_date			AS	gpeDate,
+		gpe_is_open			AS	gpeIsOpen,
+		gpe_week			AS	gpeWeek,
+		gpe_floor_price		AS	gpeFloorPrice,
+		gpe_cluster_price	AS	gpeClusterPrice,
+		gpe_guest_price		AS	gpeGuestPrice,
+		gpe_service			AS	gpeService,
+		gpe_service_show	AS	gpeServiceShow,
+		gpe_appoint_type	AS	gpeAppointType,
+		gpe_appoint_num		AS	gpeAppointNum,
+		gpe_create_time		AS	gpeCreateTime,
+		gpe_create_user		AS	gpeCreateUser,
+		cpy_id				AS	cpyId
+	</sql>
+	
+	<!-- 查询数据列表 -->
+	<select id="selectGuidePriceList" parameterType="java.util.Map" resultType="guidePriceBean">
+		SELECT * FROM (
+			SELECT 
+			<include refid="sql_column" />
+			FROM	
+				guide_price
+			ORDER BY
+				gpe_create_time
+			DESC
+		) t
+		GROUP BY
+			t.gpeDate,
+			t.gdlId,
+			t.gdlServiceCode
+		HAVING
+			t.gdlId	= #{bean.gdlId}
+			AND t.gdlServiceCode  = #{bean.gdlServiceCode}
+			and t.gpeDate  &gt;= date_format(now(),'%Y-%m-%d')
+			AND	t.gpeDate IN
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+</mapper>

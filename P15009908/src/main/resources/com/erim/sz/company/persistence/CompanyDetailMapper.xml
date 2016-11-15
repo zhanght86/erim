@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="companydetail">
+	
+	<!-- 新增基础信息 -->
+	<insert id="insertInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			company_detail (
+			cpy_code,
+			cpy_name,
+			cpy_brand,
+			cpy_telephone,
+			cpy_fax,
+			cpy_email,
+			cpy_is_inland,
+			cpy_province,
+			cpy_city,
+			cpy_county,
+			cpy_external,
+			cpy_foreign,
+			cpy_foreign_city,
+			cpy_address,
+			cpy_x,
+			cpy_y,
+			cpy_nature,
+			cpy_img_permit1,
+			cpy_img_permit2,
+			cpy_img_permit3,
+			cpy_custom_id,
+			cpy_createdate,
+			cpy_createip,
+			cpy_roe,
+			cpy_ntype,
+			cpy_img,
+			cpy_is_through,
+			yj_user_code
+		) VALUES (
+			#{cpyCode},
+			#{cpyName},
+			#{cpyBrand},
+			#{cpyTelephone},
+			#{cpyFax},
+			#{cpyEmail},
+			#{cpyIsInland},
+			#{cpyProvince},
+			#{cpyCity},
+			#{cpyCounty},
+			#{cpyExternal},
+			#{cpyForeign},
+			#{cpyForeignCity},
+			#{cpyAddress},
+			#{cpyX},
+			#{cpyY},
+			#{cpyNature},
+			#{cpyImgPermit1},
+			#{cpyImgPermit2},
+			#{cpyImgPermit3},
+			#{cpyCustomId},
+			#{cpyCreatedate},
+			#{cpyCreateip},
+			#{cpyRoe},
+			#{cpyNtype},
+			#{cpyImg},
+			#{cpyIsThrough},
+			#{yjUserCode}
+		)
+	</insert>
+	
+	<!-- 修改公司Logo -->
+	<update id="updateCpyLogo">
+		UPDATE
+			company_detail
+		SET
+			cpy_img 	= #{cpyImg}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 修改公司基础信息 -->
+	<update id="updateInfo">
+		UPDATE
+			company_detail
+		SET
+			cpy_name 			= #{cpyName},
+			cpy_brand 			= #{cpyBrand},
+			cpy_telephone 		= #{cpyTelephone},
+			cpy_fax 			= #{cpyFax},
+			cpy_email 			= #{cpyEmail},
+			cpy_is_inland 		= #{cpyIsInland},
+			cpy_province 		= #{cpyProvince},
+			cpy_city 			= #{cpyCity},
+			cpy_county 			= #{cpyCounty},
+			cpy_external 		= #{cpyExternal},
+			cpy_foreign 		= #{cpyForeign},
+			cpy_foreign_city 	= #{cpyForeignCity},
+			cpy_address 		= #{cpyAddress},
+			cpy_img 			= #{cpyImg},
+			cpy_x 				= #{cpyX},
+			cpy_y 				= #{cpyY}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+
+		INSERT INTO
+			company_detail
+			(
+				cpy_code,
+				cpy_name,
+				cpy_telephone,
+				cpy_fax,
+				cpy_email,
+				cpy_province,
+				cpy_city,
+				cpy_county,
+				cpy_address,
+				cpy_nature,
+				cpy_x,
+				cpy_y,
+				cpy_img_permit1,
+				cpy_img_permit2,
+				cpy_img_permit3,
+				cpy_custom_id,
+				cpy_createdate,
+				cpy_createip,
+				cpy_roe,
+				cpy_ntype,
+				cpy_is_through,
+				cpy_brand
+			)
+		VALUES
+			(
+				#{cpyCode},
+				#{cpyName},
+				#{cpyTelephone},
+				#{cpyFax},
+				#{cpyEmail},
+				#{cpyProvince},
+				#{cpyCity},
+				#{cpyCounty},
+				#{cpyAddress},
+				#{cpyNature},
+				#{cpyX},
+				#{cpyY},
+				#{cpyImgPermit1},
+				#{cpyImgPermit2},
+				#{cpyImgPermit3},
+				#{cpyCustomId},
+				sysdate(),
+				#{cpyCreateip},
+				#{cpyRoe},
+				#{cpyNtype},
+				#{cpyIsThrough},
+				#{cpyBrand}
+			)
+	</insert>
+	
+	<!-- 查询分页 -->
+	<select id="selectPage" resultType="companyDetailBean">
+		SELECT
+			cpy.id,
+			cpy_code        	AS cpyCode,
+			cpy_name        	AS cpyName,
+			cpy_brand       	AS cpyBrand,
+			cpy_telephone   	AS cpyTelephone,
+			cpy_fax         	AS cpyFax,
+			cpy_email       	AS cpyEmail,
+			cpy_is_inland		AS cpyIsInland,
+			cpy_province    	AS cpyProvince,
+			cpy_city        	AS cpyCity,
+			cpy_county      	AS cpyCounty,
+			cpy_external		AS cpyExternal,
+			cpy_foreign			AS cpyForeign,
+			cpy_foreign_city	AS cpyForeignCity,
+			cpy_address     	AS cpyAddress,
+			cpy_nature      	AS cpyNature,
+			cpy_x           	AS cpyX,
+			cpy_y           	AS cpyY,
+			cpy_img_permit1 	AS cpyImgPermit1,
+			cpy_img_permit2 	AS cpyImgPermit2,
+			cpy_img_permit3 	AS cpyImgPermit3,
+			cpy_custom_id   	AS cpyCustomId,
+			cpy_createdate  	AS cpyCreatedate,
+			cpy_createip    	AS cpyCreateip,
+			cpy_roe         	AS cpyRoe,
+			cpy_ntype       	AS cpyNtype,
+			cpy_is_through  	AS cpyIsThrough,
+			p.ccp_qq			AS ccpQq
+		FROM
+			company_detail cpy 
+		LEFT JOIN 
+			company_contact_person p
+		ON 
+			cpy.id = p.cpy_id
+		WHERE
+			cpy.cpy_roe = #{cpyRoe}
+			<if test=" cpyName != null and cpyName != '' "> and cpy.cpy_name like "%"#{cpyName}"%" </if>
+			<if test=" cpyBrand != null and cpyBrand != '' "> and cpy.cpy_brand like "%"#{cpyBrand}"%" </if>
+			<if test=" ccpName != null and ccpName != '' "> and p.ccp_Name like "%"#{ccpName}"%" </if>
+	</select>
+	
+	<!-- 查询分页总数 -->
+	<select id="selectPageCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			company_detail
+		WHERE
+			cpy_roe = #{cpyRoe}
+	</select>
+	
+	<!-- 根据ID查询一条数据 -->
+	<select id="selectBeanById" resultType="companyDetailBean">
+		SELECT
+			cpy.id,
+			cpy_code        	AS cpyCode,
+			cpy_name        	AS cpyName,
+			cpy_brand       	AS cpyBrand,
+			cpy_telephone   	AS cpyTelephone,
+			cpy_fax         	AS cpyFax,
+			cpy_email       	AS cpyEmail,
+			cpy_is_inland		AS cpyIsInland,
+			cpy_province    	AS cpyProvince,
+			cpy_city        	AS cpyCity,
+			cpy_county      	AS cpyCounty,
+			cpy_external		AS cpyExternal,
+			cpy_foreign			AS cpyForeign,
+			cpy_foreign_city	AS cpyForeignCity,
+			cpy_address     	AS cpyAddress,
+			cpy_nature      	AS cpyNature,
+			cpy_x           	AS cpyX,
+			cpy_y           	AS cpyY,
+			cpy_img           	AS cpyImg,
+			cpy_img_permit1 	AS cpyImgPermit1,
+			cpy_img_permit2 	AS cpyImgPermit2,
+			cpy_img_permit3 	AS cpyImgPermit3,
+			cpy_custom_id   	AS cpyCustomId,
+			cpy_createdate  	AS cpyCreatedate,
+			cpy_createip    	AS cpyCreateip,
+			cpy_roe         	AS cpyRoe,
+			cpy_ntype       	AS cpyNtype,
+			cpy_is_through  	AS cpyIsThrough,
+			cpy_through_time 	AS cpyThroughTime,
+			cpy_is_lock			AS cpyIsLock,
+			person.ccp_name			AS ccpName,
+			person.ccp_telephone	AS ccpTelephone,
+			person.ccp_qq			AS ccpQq,
+	    	price_service.pse_is_sx AS pseIsSx	
+		FROM
+			company_detail cpy
+		LEFT JOIN
+			company_contact_person person
+		ON	
+			cpy.id = person.cpy_id
+		LEFT JOIN
+			price_service
+		ON
+			price_service.cpy_id = cpy.id
+		WHERE
+			cpy.id = #{id}
+	</select>
+	
+	<sql id="sql_query">
+		<where>
+			1=1
+			<if test = "cpyRoe != null">
+				and cpy_roe = #{cpyRoe}
+			</if>
+			<if test=" cpyProvince != null and cpyProvince!=''">
+				and cpy_province = #{cpyProvince}
+			</if>
+			<if test=" id != null and id!=''">
+				and company_detail.id != #{id}
+			</if>
+			<if test=" cpyName != null and cpyName != '' ">
+				and cpy_name like '%${cpyName}%'
+			</if>
+			<if test=" cpyBrand != null and cpyBrand !=''">
+				and cpy_brand like '%${cpyBrand}%'
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 锁定公司 -->
+	<update id="lockCpy">
+		UPDATE 
+			company_detail
+		SET
+			cpy_is_lock  = '1'
+		WHERE
+			id	= #{id}
+	</update>
+	<!-- 支付完成后 解除公司锁定 -->
+	<update id="unlock">
+		UPDATE 
+			company_detail
+		SET
+			cpy_is_lock = ''
+		WHERE
+			id	= #{id}
+	</update>
+	
+	<!-- 获取数据列表 -->
+	<select id="selectPageCafeteria" resultType="companyDetailBean">
+		SELECT
+			company_detail.id 	  	AS id,
+			cpy_code		      	AS cpyCode,
+			cpy_name 			  	AS cpyName,
+			cpy_telephone		  	AS cpyTelephone,
+			cpy_fax 			  	AS cpyFax,
+			cpy_email 			  	AS cpyEmail,
+			cpy_province		  	AS cpyProvince,
+			cpy_city 			  	AS cpyCity,
+			cpy_county			  	AS cpyCounty,
+			cpy_address			  	AS cpyAddress,
+			cpy_nature			  	AS cpyNature,
+			cpy_x 				  	AS cpyX,
+			cpy_y 				  	AS cpyY,
+			cpy_img_permit1       	AS cpyImgPermit1,
+			cpy_img_permit2		  	AS cpyImgPermit2,
+			cpy_img_permit3 	  	AS cpyImgPermit3,
+			cpy_custom_id 		  	AS cpyCustomId,
+			cpy_createdate 		  	AS cpyCreatedate,
+			cpy_createip		  	AS cpyCreateip,
+			cpy_roe 			  	AS cpyRoe,
+			cpy_ntype 			  	AS cpyNtype,
+			cpy_is_through		  	AS cpyIsThrough,
+			cpy_brand			  	AS cpyBrand,
+			cpy_is_people 		  	AS cpyIsPeople,
+			cpy_is_phone 		  	AS cpyIsPhone,
+			cpy_is_operation 	  	AS cpyIsOperation,
+			cpy_is_operationphone 	AS cpyIsOperationphone,
+			cpy_is_qq 			  	AS cpyIsQq,
+			cpy_is_inland 		  	AS cpyIsInland,
+			cpy_external 		  	AS cpyExternal,
+			cpy_foreign			  	AS cpyForeign,
+			cpy_foreign_city 	  	AS cpyForeignCity,
+			ccp.cbs_operator        AS ccpName,
+			ccp.cbs_operator_phone  AS ccpTelephone,
+			ccp.cbs_operator_qq     AS ccpQq
+		FROM
+			company_detail
+		LEFT JOIN
+			company_business ccp
+		ON 
+			ccp.cpy_id = company_detail.id
+			<include refid="sql_query" />
+			<include refid="town_query" />
+	</select>
+	
+	<select id="selectPageCafeteriaCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			company_detail
+			<include refid="sql_query" />
+			<include refid="town_query" />
+	</select>
+	
+	<!-- 同城同业 -->
+	<select id="selectSameTownList" resultType="companyDetailBean">
+		SELECT
+			id 					  AS id,
+			cpy_code		      AS cpyCode,
+			cpy_name 			  AS cpyName,
+			cpy_telephone		  AS cpyTelephone,
+			cpy_fax 			  AS cpyFax,
+			cpy_email 			  AS cpyEmail,
+			cpy_province		  AS cpyProvince,
+			cpy_city 			  AS cpyCity,
+			cpy_county			  AS cpyCounty,
+			cpy_address			  AS cpyAddress,
+			cpy_nature			  AS cpyNature,
+			cpy_x 				  AS cpyX,
+			cpy_y 				  AS cpyY,
+			cpy_img_permit1       AS cpyImgPermit1,
+			cpy_img_permit2		  AS cpyImgPermit2,
+			cpy_img_permit3 	  AS cpyImgPermit3,
+			cpy_custom_id 		  AS cpyCustomId,
+			cpy_createdate 		  AS cpyCreatedate,
+			cpy_createip		  AS cpyCreateip,
+			cpy_roe 			  AS cpyRoe,
+			cpy_ntype 			  AS cpyNtype,
+			cpy_is_through		  AS cpyIsThrough,
+			cpy_brand			  AS cpyBrand,
+			cpy_is_people 		  AS cpyIsPeople,
+			cpy_is_phone 		  AS cpyIsPhone,
+			cpy_is_operation 	  AS cpyIsOperation,
+			cpy_is_operationphone AS cpyIsOperationphone,
+			cpy_is_qq 			  AS cpyIsQq,
+			cpy_is_inland 		  AS cpyIsInland,
+			cpy_external 		  AS cpyExternal,
+			cpy_foreign			  AS cpyForeign,
+			cpy_foreign_city 	  AS cpyForeignCity
+		FROM
+			company_detail
+			<include refid="sql_query" />
+			<include refid="town_query" />
+	</select>
+	
+	
+	<sql id="town_query">
+		<if test="townNtype != null and townNtype != 'GUIDE'">
+			and company_detail.id in (
+				select cpy_id from cus_system_user
+			)
+			and company_detail.id in (
+				select company_business.cpy_id from company_business where 
+				<if test="townProvince != null and townProvince != ''">
+					(
+						(cbs_ran_province1 = #{townProvince} and cbs_ran_city1 = '' and cbs_ran_county1 = '' and cbs_ran_city1 is not null and cbs_ran_county1 is not null)
+						or  (cbs_ran_province2 = #{townProvince} and cbs_ran_city2 = '' and cbs_ran_county2 = '' and cbs_ran_city2 is not null and cbs_ran_county2 is not null)
+						or  (cbs_ran_province3 = #{townProvince} and cbs_ran_city3 = '' and cbs_ran_county3 = '' and cbs_ran_city3 is not null and cbs_ran_county3 is not null)
+						or  (cbs_ran_province4 = #{townProvince} and cbs_ran_city4 = '' and cbs_ran_county4 = '' and cbs_ran_city4 is not null and cbs_ran_county4 is not null)
+						or  (cbs_ran_province5 = #{townProvince} and cbs_ran_city5 = '' and cbs_ran_county5 = '' and cbs_ran_city5 is not null and cbs_ran_county5 is not null)
+					)
+				</if>
+				<if test="townTown != null and townTown != '' ">
+					or ( 
+						company_business.cbs_ran_county1 = #{townTown}
+						or company_business.cbs_ran_county2 = #{townTown}
+						or company_business.cbs_ran_county3 = #{townTown}
+						or company_business.cbs_ran_county4 = #{townTown}
+						or company_business.cbs_ran_county5 = #{townTown}
+					)
+				</if>
+				<if test="townCity != null and townCity!= ''">
+					or (
+						   (company_business.cbs_ran_city1 = #{townCity} and cbs_ran_county1 = '' and cbs_ran_county1 is not null)
+						or (company_business.cbs_ran_city2 = #{townCity} and cbs_ran_county2 = '' and cbs_ran_county2 is not null)
+						or (company_business.cbs_ran_city3 = #{townCity} and cbs_ran_county3 = '' and cbs_ran_county3 is not null)
+						or (company_business.cbs_ran_city4 = #{townCity} and cbs_ran_county4 = '' and cbs_ran_county4 is not null)
+						or (company_business.cbs_ran_city5 = #{townCity} and cbs_ran_county5 = '' and cbs_ran_county5 is not null)
+						)
+				</if>
+				<if test="townRanInterna != null and townRanInterna != '' and townRanInterna != '04'">
+					<if test="townProvince != null and townProvince != ''">
+						or
+					</if>
+					(
+						company_business.cbs_ran_interna like '%${townRanInterna}%'
+					)
+				</if>
+				<if test="townRanState != null and townRanState != ''">
+					<if test="townProvince != null and townProvince != ''">
+						or
+					</if>
+					<if test="townRanInterna != '04'">
+						or
+					</if>
+						(
+							company_business.cbs_ran_state1 like '%${townRanState}%'
+						or  company_business.cbs_ran_state2 like '%${townRanState}%'
+						or  company_business.cbs_ran_state3 like '%${townRanState}%'
+						or  company_business.cbs_ran_state4 like '%${townRanState}%'
+						or  company_business.cbs_ran_state5 like '%${townRanState}%'
+					)
+				</if>
+			)			
+		</if>
+		<if test="townNtype == 'GUIDE'">
+			and company_detail.id in (
+				select cpy_id from cus_system_user
+			)
+			and company_detail.id in (
+				select company_business.cpy_id from company_business where 
+				<if test="aTownProvince != null and aTownProvince != ''">
+					(
+							(cbs_ran_province1 in <foreach item="item" index="index" collection="aTownProvince" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_city1 = '' and cbs_ran_county1 = '' and cbs_ran_city1 is not null and cbs_ran_county1 is not null)
+						or  (cbs_ran_province2 in <foreach item="item" index="index" collection="aTownProvince" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_city2 = '' and cbs_ran_county2 = '' and cbs_ran_city2 is not null and cbs_ran_county2 is not null)
+						or  (cbs_ran_province3 in <foreach item="item" index="index" collection="aTownProvince" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_city3 = '' and cbs_ran_county3 = '' and cbs_ran_city3 is not null and cbs_ran_county3 is not null)
+						or  (cbs_ran_province4 in <foreach item="item" index="index" collection="aTownProvince" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_city4 = '' and cbs_ran_county4 = '' and cbs_ran_city4 is not null and cbs_ran_county4 is not null)
+						or  (cbs_ran_province5 in <foreach item="item" index="index" collection="aTownProvince" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_city5 = '' and cbs_ran_county5 = '' and cbs_ran_city5 is not null and cbs_ran_county5 is not null)
+					)
+				</if>
+				<if test="aTownTown != null and aTownTown != ''">
+					or ( 
+						company_business.cbs_ran_county1 in <foreach item="item" index="index" collection="aTownTown" open="(" separator="," close=")"> ${item} </foreach>
+						or company_business.cbs_ran_county2 in <foreach item="item" index="index" collection="aTownTown" open="(" separator="," close=")"> ${item} </foreach>
+						or company_business.cbs_ran_county3 in <foreach item="item" index="index" collection="aTownTown" open="(" separator="," close=")"> ${item} </foreach>
+						or company_business.cbs_ran_county4 in <foreach item="item" index="index" collection="aTownTown" open="(" separator="," close=")"> ${item} </foreach>
+						or company_business.cbs_ran_county5 in <foreach item="item" index="index" collection="aTownTown" open="(" separator="," close=")"> ${item} </foreach>
+					)
+				</if>
+				<if test="aTownCity != null and aTownCity!= ''">
+					or (
+						   (company_business.cbs_ran_city1 in <foreach item="item" index="index" collection="aTownCity" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_county1 = '' and cbs_ran_county1 is not null)
+						or (company_business.cbs_ran_city2 in <foreach item="item" index="index" collection="aTownCity" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_county2 = '' and cbs_ran_county2 is not null)
+						or (company_business.cbs_ran_city3 in <foreach item="item" index="index" collection="aTownCity" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_county3 = '' and cbs_ran_county3 is not null)
+						or (company_business.cbs_ran_city4 in <foreach item="item" index="index" collection="aTownCity" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_county4 = '' and cbs_ran_county4 is not null)
+						or (company_business.cbs_ran_city5 in <foreach item="item" index="index" collection="aTownCity" open="(" separator="," close=")"> ${item} </foreach> and cbs_ran_county5 = '' and cbs_ran_county5 is not null)
+						)
+				</if>
+				<if test="aTownRanInterna != null and aTownRanInterna != '' and townRanInterna != '04'">
+					<if test="aTownProvince != null and aTownProvince != ''">
+						or
+					</if>
+					(
+						<foreach collection="aTownRanInterna" item="item" index="index" separator="or">
+							company_business.cbs_ran_interna like '%${item}%'						
+						</foreach>
+					)
+				</if>
+				<if test="townRanState != null and townRanState != ''">
+					<if test="townProvince != null and townProvince != ''">
+						or
+					</if>
+					<if test="townRanInterna != '04'">
+						or
+					</if>
+						(
+							company_business.cbs_ran_state1 like '%${townRanState}%'
+						or  company_business.cbs_ran_state2 like '%${townRanState}%'
+						or  company_business.cbs_ran_state3 like '%${townRanState}%'
+						or  company_business.cbs_ran_state4 like '%${townRanState}%'
+						or  company_business.cbs_ran_state5 like '%${townRanState}%'
+					)
+				</if>
+			)
+		</if>
+	</sql>
+</mapper>

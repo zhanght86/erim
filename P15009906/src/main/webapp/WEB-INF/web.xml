@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+    xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    
+    <!-- 项目名称 -->
+    <display-name>P15009907</display-name>
+    
+    <!-- 项目描述 -->
+    <description>sz</description>
+    
+    <!-- 参 数:log4j配置路径 -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/log4j.xml</param-value>
+    </context-param>
+
+    <!-- 参 数:Log4j设定文件中可以引用当前应用的根目录，避免使用绝对路径 -->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>webAppRootKey.templet</param-value>
+    </context-param>
+    
+    <!-- 参 数:Spring配置路径 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+    <!-- Spring Listener -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- 过滤器:字符编码过滤 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Shiro Filter is defined in the spring application context: -->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    
+    <!-- SpringMVC -->
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/*-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    <!-- 上传servlet -->
+    <servlet>
+    <servlet-name>FileUploadServlet</servlet-name>
+  	<servlet-class>com.erim.sz.web.util.FileUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FileUploadServlet</servlet-name>
+  	<url-pattern>/FileUploadServlet</url-pattern>
+  </servlet-mapping>
+    
+    <!--身份验证失败，没有权限-->
+    <error-page>
+        <error-code>401</error-code>
+        <location>/html/http/401</location>
+    </error-page>
+    
+    <!--找不到url-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/html/http/404</location>
+    </error-page>
+    
+    <!--不支持的url方式post/get等-->
+    <error-page>
+        <error-code>405</error-code>
+        <location>/html/http/404</location>
+    </error-page>
+	
+    <!--内部错误-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/html/http/5002</location>
+    </error-page>
+	
+    <!-- session超时定义,单位为分钟 -->
+    <session-config>
+        <session-timeout>1440</session-timeout>
+    </session-config>
+    
+    <!-- 欢迎页面定义 -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+</web-app>

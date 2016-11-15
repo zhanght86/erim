@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+
+    <!-- 基础设置 -->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false" />
+    </settings>
+    
+    <!-- 类缩写 -->
+    <typeAliases>
+		<!-- java base -->
+		<typeAlias alias="hashMap"                  	type="java.util.HashMap"/>
+        
+        <!-- erim web common -->
+        <typeAlias alias="codeBean"                     type="com.erim.web.bean.CodeBean" />
+        
+		<!-- 酒店 -->
+		<typeAlias alias="hotelDetailBean"              type="com.erim.sz.common.bean.HotelDetailBean" />
+		
+		<!-- 特色餐 -->
+		<typeAlias alias="cafeteriaDetailBean"          type="com.erim.sz.common.bean.CafeteriaDetailBean" />
+		
+		<!-- 门票-->
+		<typeAlias alias="ticketDetailBean"             type="com.erim.sz.common.bean.TicketDetailBean" />
+		
+		<!-- 导游-->
+		<typeAlias alias="guideDetailBean"              type="com.erim.sz.common.bean.GuideDetailBean" />
+		
+		<!-- 当地旅游-->
+		<typeAlias alias="groundDetailBean"             type="com.erim.sz.common.bean.GroundDetailBean" />
+		<typeAlias alias="groundPriceBean"           	 type="com.erim.sz.common.bean.GroundPriceBean" />
+		
+		<!-- 专线 -->
+		<typeAlias alias="lineDetailBean"               type="com.erim.sz.common.bean.LineDetailBean" />
+		<typeAlias alias="lineOrderBean"           		type="com.erim.sz.common.bean.LineOrderBean" />
+		<typeAlias alias="lineTripBean"           		type="com.erim.sz.common.bean.LineTripBean" />
+		<typeAlias alias="linePriceBean"           		type="com.erim.sz.common.bean.LinePriceBean" />
+  		<!-- 租车 -->
+		<typeAlias alias="texiDetailBean"           	type="com.erim.sz.common.bean.TexiDetailBean" />
+		
+		<!-- 签证 -->
+		<typeAlias alias="managementDetailBean"         type="com.erim.sz.common.bean.ManagementDetailBean" />  
+		<typeAlias alias="managementOrderBean"          type="com.erim.sz.common.bean.ManagementOrderBean" />
+		<typeAlias alias="managementPriceBean"          type="com.erim.sz.common.bean.ManagementPriceBean" />
+		<typeAlias alias="managementMaterialBean"       type="com.erim.sz.common.bean.ManagementMaterialBean" />
+		
+		<!-- 飞机票 -->
+		<typeAlias alias="planeticketDetailBean"        type="com.erim.sz.common.bean.PlaneticketDetailBean" />
+		<typeAlias alias="planeticketMiddleBean"        type="com.erim.sz.common.bean.PlaneticketMiddleBean" />
+		<typeAlias alias="planeticketReturnBean"        type="com.erim.sz.common.bean.PlaneticketReturnBean" />
+		<typeAlias alias="planeticketOrderBean"         type="com.erim.sz.common.bean.PlaneticketOrderBean" />
+		<typeAlias alias="planeticketPriceBean"         type="com.erim.sz.common.bean.PlaneticketPriceBean" />
+		
+		<!-- 火车票 -->
+		<typeAlias alias="transticketDetailBean"        type="com.erim.sz.common.bean.TransticketDetailBean" />
+		<typeAlias alias="transticketDetailNumBean"     type="com.erim.sz.common.bean.TransticketDetailNumBean" />
+		
+		<!-- 企业-->
+		<typeAlias alias="vCompanyDetailBean"           type="com.erim.sz.common.bean.VCompanyDetailBean" />
+		<typeAlias alias="companyDetailBean"            type="com.erim.sz.common.bean.CompanyDetailBean" />
+		<typeAlias alias="companyContactPersonBean"     type="com.erim.sz.common.bean.CompanyContactPersonBean" />
+		<typeAlias alias="companyDirectionBean"         type="com.erim.sz.common.bean.CompanyDirectionBean" />
+		<typeAlias alias="comBusRegionBean"         	type="com.erim.sz.common.bean.ComBusRegionBean" />
+        <typeAlias alias="pubNewsBean" 					type="com.erim.sz.common.bean.PubNewsBean" />		
+        <typeAlias alias="companyBusinessBean" 			type="com.erim.sz.common.bean.CompanyBusinessBean" />		
+        
+		<!-- 系统 -->
+		<typeAlias alias="zxSystemUserBean"             type="com.erim.sz.system.bean.ZxSystemUserBean" />
+		<typeAlias alias="zxSystemRoleBean"             type="com.erim.sz.system.bean.ZxSystemRoleBean" />
+		<typeAlias alias="zxSystemFuncBean"             type="com.erim.sz.system.bean.ZxSystemFuncBean" />
+		<typeAlias alias="zxSystemFuncRescourceBean"    type="com.erim.sz.system.bean.ZxSystemFuncRescourceBean" />
+		<typeAlias alias="zxSystemRoleFuncBean"    	 	type="com.erim.sz.system.bean.ZxSystemRoleFuncBean" />
+		<typeAlias alias="zxSystemRescourceBean"        type="com.erim.sz.system.bean.ZxSystemRescourceBean" />
+		<typeAlias alias="zxSystemLogBean"              type="com.erim.sz.system.bean.ZxSystemLogBean" />
+		
+		<!-- 字典 -->
+		<typeAlias alias="tmSystemRegionBean"           type="com.erim.sz.tm.bean.TmSystemRegionBean" />
+		<typeAlias alias="tmSystemCountryBean"          type="com.erim.sz.tm.bean.TmSystemCountryBean" />
+	
+		<!-- 支付 -->
+		<typeAlias alias="priceCpyBean"           		type="com.erim.sz.common.bean.PriceCpyBean" />
+		
+		<!-- 通知通告 -->
+		<typeAlias alias="PubNoticeBean"                type="com.erim.sz.common.bean.PubNoticeBean" />
+		
+		<!-- 支付相关 -->
+		<typeAlias alias="priceServiceBean"             type="com.erim.sz.common.bean.PriceServiceBean" />
+		
+		<!-- 专线组团合作 -->
+		<typeAlias alias="zxSellCooperationBean"        type="com.erim.sz.common.bean.ZxSellCooperationBean" />
+    </typeAliases>
+    
+    <!-- 分页插件 -->
+    <plugins>
+        <plugin interceptor="com.erim.utils.mybatis.OffsetLimitInterceptor">
+        <property name="dialectClass" value="com.erim.utils.jdbc.dialect.MySQLDialect"/>
+        </plugin>
+    </plugins>
+    
+    <!-- 映射文件 -->
+    <mappers>
+        <!-- erim web -->
+        <mapper resource="com/erim/web/persistence/CodeMapper.xml"/>
+        <!-- erim sz -->
+        
+        <!-- 酒店-->
+        <mapper resource="com/erim/sz/sametown/persistence/HotelDetailMapper.xml"/>
+        
+        <!-- 门票-->
+        <mapper resource="com/erim/sz/sametown/persistence/TicketDetailMapper.xml"/>
+        
+        <!-- 特色餐-->
+        <mapper resource="com/erim/sz/sametown/persistence/CafeteriaDetailMapper.xml"/>
+        
+        <!-- 当地旅游-->
+        <mapper resource="com/erim/sz/sametown/persistence/GroundDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/sametown/persistence/GroundPriceMapper.xml"/>
+        
+        <!-- 导游-->
+        <mapper resource="com/erim/sz/sametown/persistence/GuideDetailMapper.xml"/>
+        
+        <!-- 专线 -->
+        <mapper resource="com/erim/sz/line/persistence/LineDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/line/persistence/LineOrderMapper.xml"/>
+		<mapper resource="com/erim/sz/line/persistence/LineTripMapper.xml"/>
+		<mapper resource="com/erim/sz/line/persistence/LinePriceMapper.xml"/>
+		
+		<!-- 租车 -->
+        <mapper resource="com/erim/sz/sametown/persistence/TexiDetailMapper.xml"/>
+        
+        <!-- 签证 -->
+        <mapper resource="com/erim/sz/management/persistence/ManagementDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/management/persistence/ManagementOrderMapper.xml"/>
+        <mapper resource="com/erim/sz/management/persistence/ManagementPriceMapper.xml"/>
+        <mapper resource="com/erim/sz/management/persistence/ManagementMaterialMapper.xml"/>
+        
+        <!-- 火车票 -->
+        <mapper resource="com/erim/sz/transticket/persistence/TransticketDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/transticket/persistence/TransticketDetailNumMapper.xml"/>
+        
+        <!-- 飞机票 -->
+        <mapper resource="com/erim/sz/planeticket/persistence/PlaneticketDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/planeticket/persistence/PlaneticketOrderMapper.xml"/>
+        
+        <!-- 企业 -->
+        <mapper resource="com/erim/sz/company/persistence/VCompanyDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/company/persistence/CompanyDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/company/persistence/CompanyContactPersonMapper.xml"/>
+        <mapper resource="com/erim/sz/company/persistence/CompanyDirectionMapper.xml"/>
+		<mapper resource="com/erim/sz/news/persistence/PubNewsMapper.xml"/>
+		<mapper resource="com/erim/sz/company/persistence/ComBusRegionMapper.xml"/>
+		<mapper resource="com/erim/sz/company/persistence/CompanyBusinessMapper.xml"/>
+        
+        <!-- 飞机票 -->
+        <mapper resource="com/erim/sz/planeticket/persistence/PlaneticketDetailMapper.xml"/>
+        <mapper resource="com/erim/sz/planeticket/persistence/PlaneticketMiddleMapper.xml"/>
+        <mapper resource="com/erim/sz/planeticket/persistence/PlaneticketOrderMapper.xml"/>
+        <mapper resource="com/erim/sz/planeticket/persistence/PlaneticketReturnMapper.xml"/>
+        <mapper resource="com/erim/sz/planeticket/persistence/PlaneticketPriceMapper.xml"/>
+        
+		<!-- 系统 -->
+		<mapper resource="com/erim/sz/system/persistence/ZxSystemUserMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/ZxSystemRoleMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/ZxSystemRoleFuncMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/ZxSystemFuncMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/ZxSystemFuncRescourceMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/ZxSystemRescourceMapper.xml"/>
+		<mapper resource="com/erim/sz/system/persistence/ZxSystemLogMapper.xml"/>
+		
+		<!-- 字典 -->
+		<mapper resource="com/erim/sz/web/persistence/TmSystemRegionMapper.xml"/>
+		<mapper resource="com/erim/sz/tm/persistence/TmSystemCountryMapper.xml"/>
+		
+		<!-- 支付 -->
+		<mapper resource="com/erim/sz/price/persistence/PriceCpyMapper.xml"/>
+		
+		<!-- 通知通告 -->
+        <mapper resource="com/erim/sz/notice/persistence/PubNoticeMapper.xml"/>
+        
+        <!-- 支付相关 -->
+		<mapper resource="com/erim/sz/price/persistence/PriceServiceMapper.xml"/>
+		
+		<!-- 专线组团合作 -->
+		<mapper resource="com/erim/sz/zx/persistence/ZxSellCooperationServiceMapper.xml"/>
+    </mappers>
+    
+</configuration>

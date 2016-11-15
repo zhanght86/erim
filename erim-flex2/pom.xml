@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.e-rimming</groupId>
+        <artifactId>erim-parent</artifactId>
+        <version>0.0.2</version>
+        <relativePath>../erim-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>erim-flex2</artifactId>
+    <packaging>jar</packaging>
+    <name>E-rimming :: Module :: Flex2</name>
+
+    <dependencies>
+        <!--==================================================================================== -->
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- xml -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+        </dependency>
+        <!-- xls -->
+        <dependency>
+            <groupId>jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- apache pswd -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- erimming -->
+        <dependency>
+            <groupId>com.e-rimming</groupId>
+            <artifactId>erim-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming</groupId>
+            <artifactId>erim-utils</artifactId>
+        </dependency>
+        <!--==================================================================================== -->
+        <!-- erim third -->
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-proxy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-remoting</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.e-rimming.third</groupId>
+            <artifactId>blazeds-rds-server</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+  <title>佳旅联合</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+  <link rel="bookmark" href="$staticRoot/favicon.ico"/>
+  <meta name="keywords" content="登录" />
+  <meta name="description" content="登录" />
+
+<link rel="stylesheet" type="text/css" href="$staticFilePlug/bootstrap/3.3.5/css/bootstrap-combined.min.css"/>
+<link rel="stylesheet" type="text/css" href="$staticFilePlug/bootstrap/3.3.5/css/bootstrap.min.css"/>
+<script type="text/javascript" src="$staticFilePlug/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="$staticFilePlug/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/login.css"/>
+
+ </head>
+<body>
+	<div id="bodybg">
+	  <img src="$staticRoot/img/background.png" class="stretch" />
+      
+      <div id="login">
+      		<form action="$appRoot/zx/user/login" method="post">
+            	<input type="text" name="username" id="loginname"/>
+            	<input type="password" name="password" id="password"/>
+                <input type="submit" class="btn1" value=""/>
+                <input type="button" class="btn2" value="" onclick="window.location='$appRoot/company/regedit/choose';"/>
+            </form>
+      </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<div class="doadmin">
+	<div class="newfood_suptop">
+		<img src="$staticRoot/images/jiaose.png">
+		<span>角色管理</span>
+	</div>
+	<div class="g_line mb20"></div>
+	<div class="coadmin_top">
+		<form class="form-search" method="post" id="form1">
+    		<div class="doadmin_topl" style="margin:0;margin-bottom: 20px;">
+    			<div class="doadmin_toplboxa" style="width:270px;">
+    				<span>角色名:</span>
+    				<div class="doadmin_toplbra" style="width:160px;">
+    					<input type="text" value="$!cmsSystemRole.zxRoleName" name="zxRoleName" />
+    				</div>
+    			</div>
+    			 <button class="doadmin_see" style="margin-left:0;" type="button" onclick="index.searchform('form1','$appRoot/zx/role/list');">查询</button>
+    		</div>
+		</form>
+	</div>
+    <div class="cb mb20"></div>
+	<div class="g_line"></div>
+	<div class="doadmin_ct">
+		<div class="doadmin_ct_top">
+			<div class="carad_ctbtn">
+			   <button onclick="index.load('$appRoot/zx/role/insertPage');">+新增角色</button>
+            </div>
+		</div>
+		<div class="doadmin_ct">
+			<div class="carad_ct">
+				<div class="carad_ctrtable">
+					<table cellspacing="0" cellspadding="0">
+						<thead>
+							<tr>
+								<td>序号</td>
+        						<td>角色名</td>
+        						<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $userList)
+        						<tr>
+									<td>$item.id</td>
+            			            <td>$!item.zxRoleName</td>
+									<td><a href="javascript:index.load('$appRoot/zx/role/updatePage?id=$item.id');">查看/修改</a></td>
+    							</tr>
+    						#end
+					  </tbody>
+					</table>
+					#parse("common/page.vm")
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

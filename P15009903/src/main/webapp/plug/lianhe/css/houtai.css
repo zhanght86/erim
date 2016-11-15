@@ -1,0 +1,880 @@
+*{
+	margin:0;
+	padding: 0;
+}
+img{
+	border: none;
+}
+a{
+	outline: none;
+	text-decoration: none;
+	color: #a1a1a1;
+}
+ul{
+	list-style: none;
+}
+.bd{
+	width: 100%;
+	height: 100%;
+	background: #f1f1f1;
+}
+/*头部*/
+.head{
+	width: 100%;
+	height: 148px;
+	position: fixed;
+	top: 0;
+	float: left;
+}
+/*logo*/
+.htop{
+	width: 100%;
+	height: 87px;
+	background: url("../images/bg.gif") repeat-x;
+	float: left;
+}
+.htopl{
+	width: 500px;
+	height: 87px;
+	float: left;
+}
+.htopl img{
+	margin-left: 35px;
+	width: 89px;
+	height: 87px;
+	float: left;
+}
+.htopl span{
+	float: left;
+	height: 87px;
+	line-height: 87px;
+	font-size: 46px;
+	font-family: "隶书";
+}
+/*右边*/
+.htopr{
+	float: right;
+	height: 27px;
+	line-height: 27px;
+	margin-top: 30px;
+	padding-right: 55px;
+}
+.htopr span{
+	float: left;
+	height: 27px;
+	line-height: 27px;
+	font-size: 14px;
+	color: #393838;
+	padding-right: 18px;
+}
+.htopl a img{
+	float: left;
+	margin-right: 18px;
+}
+/*当前位置*/
+.hfooter{
+	width: 100%;
+	height: 61px;
+	background: url("../images/lbg.png") repeat-x;
+	float: left;
+}
+.hfl{
+	float: left;
+	width: 290px;
+	height: 61px;
+	text-align: center;
+	line-height: 61px;
+	font-size: 14px;
+	color: #8d8d8d;
+}
+.hfm{
+	width: 20px;
+	float: left;
+	height: 61px;
+}
+.hfm img{
+	width: 2px;
+	height: 35px;
+	margin-left: 9px;
+	margin-top: 13px;
+	float: left;
+}
+.hfr{
+	float: left;
+	height: 61px;
+	text-align: left;
+	line-height: 61px;
+	color: #8d8d8d;
+	font-size: 14px;
+	overflow: hidden;
+}
+.hfr p{
+	color: #8d8d8d;
+	float: left;
+}
+.hfr a{
+	color: #8d8d8d;
+	float: left;
+}
+/*body*/
+.wrap{
+	width:100%;
+	height: 100%;
+	float: left;
+	margin-top: 148px;
+}
+/*左边*/
+.wrap .left{
+	width: 310px;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	float: left;
+}
+.wrap .left .leftdiv{
+	width: 290px;
+	height: 100%;
+	background: #caae8d;
+	float: left;
+}
+.leftdivi{
+	float: left;
+	width: 290px;
+	height: 50px;
+	background: url("../images/bg2.gif") no-repeat;
+}
+.leftdivi span{
+	float: left;
+	width: 165px;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 55px;
+}
+.leftdiv dl{
+	width: 290px;
+	line-height: 50px;
+	float: left;
+}
+.leftdiv dl dt{
+	line-height: 50px;
+	height: 50px;
+	width: 290px;
+	text-align: center;
+	float: left;
+	background: #c8aa87;
+	cursor: pointer;
+}
+.leftdiv dl dt span{
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	text-align: left;
+	width: 165px;
+	padding-left: 55px;
+}
+.leftdiv dl div{
+	padding-top: 16px;
+	padding-bottom: 16px;
+	background:#727271;
+	float: left;
+	display: none;
+}
+.leftdiv dl div dd{
+	line-height: 24px;
+	width: 290px;
+	cursor: pointer;
+	background: #727271;
+}
+.leftdiv dl div dd span{
+	float: left;
+	width: 217px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 14px;
+	color: #fff;
+	padding-left: 18px;
+	margin-left: 55px;
+}
+.leftdivp{
+	float: left;
+	width: 20px;
+	height: 100%;
+	background: #a1a1a1;
+	position: relative;
+}
+.leftdivp img{
+	width: 20px;
+	height: 50px;
+	margin-top: 50px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+/*右边*/
+.wrap .right{
+	width: 83.7%;
+	height: 100%;
+	float: left;
+	margin-left: 310px;
+	background: #f1f1f1;
+}
+.wrap .right .rightdiv{
+	height: 100%;
+}
+.wrap .right .rightdiv .rightcontent{
+	height: 100%;
+}
+.lidiv{
+	height: 100%;
+	background: #f1f1f1;
+}
+/*特色餐管理*/
+.tese{
+	margin:0 auto;
+	float: left;
+	height: auto;
+	width: 100%;
+	background: #f1f1f1;
+}
+.tesetop{
+	float: left;
+	height: 46px;
+	line-height: 46px;
+	font-size: 20px;
+	color: #393838;
+	padding-left: 40px;
+}
+.tesetop4{
+	float: left;
+	width: 100%;
+	height: 4px;
+	color: #fff;
+	background: url("../images/houtai4.png") repeat-x;
+}
+.tesetop2{
+	padding-left: 30px;
+	float: left;
+}
+.teseline{
+	float: left;
+	margin-top: 20px;
+	height: 30px;
+}
+.teseline span{
+	float: left;
+	width: 92px;
+	text-align: right;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	color: #393838;
+	margin-right: 18px;
+
+}
+.teseline input{
+	float: left;
+	width: 193px;
+	height: 28px;
+	border: 1px solid #ccc;
+	outline: none;
+	line-height: 28px;
+	padding-left: 5px;
+	font-size: 14px;
+	color: #393838;
+	margin-right: 30px;
+}
+.tesetop2 button{
+	float: left;
+	width: 91px;
+	height: 30px;
+	border: none;
+	cursor: pointer;
+	margin-left: 30px;
+	margin-top: 20px;
+	background: url("../images/chaxun.png") no-repeat;
+}
+.tesetop3{
+	float: left;
+	margin-top: 20px;
+	width: 100%;
+	height: 4px;
+	color: #fff;
+	background: url("../images/houtai4.png") repeat-x;
+}
+.tesenew{
+	width: 100%;
+	float: left;
+}
+.tesenew button{
+	border: none;
+	float: left;
+	width: 91px;
+	height: 33px;
+	margin-top: 7px;
+	margin-left: 70px;
+	cursor: pointer;
+	background: url("../images/new.png") no-repeat;
+}
+/*table列表*/
+.tesect{
+	width: 100%;
+	height: 100%;
+	clear: both;
+}
+.tesetable{
+	width: 90%;
+	height: 100%;
+	float: left;
+	margin-left: 70px;
+	margin-top: 7px;
+}
+.tesetable table{
+	width: 100%;
+	height:100%;
+	border: 1px solid #ccc;
+	float: left;
+}
+.tesetable table tr td{
+	padding-left: 15px;
+	padding-right: 15px;
+	height: 43px;
+	line-height: 43px;
+}
+.tesetable table thead{
+	height: 43px;
+	line-height: 43px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px solid #FFF;
+	background: url("../images/toutai5.png") repeat-x;
+	font-size: 14px;
+	color: #303030;
+}
+.tesetable table tbody tr td{
+	border-top: 1px solid #ccc;
+	text-align: center;
+}
+.tsamee{
+	color: #567cd1;
+}
+.tcan{
+	color: #567cd1;
+	margin-right: 10px;
+}
+.tadd{
+	color: #567cd1;
+	margin-right: 10px;
+}
+.txiu{
+	color: #567cd1;
+	margin-right: 10px;
+}
+.tdel{
+	color: #eb6464;
+}
+.tesetable table tbody tr td a{
+	font-size: 14px;
+	text-align: center;
+}
+.ttr{
+	background: #fff;
+}
+.thandle{
+	color: red;
+}
+
+
+
+/*页码开始*/
+.tpage{
+	float: left;
+	width: 90%;
+	margin-top: 10px;
+	height: 24px;
+	margin-right: 10px;
+	margin-bottom: 100px;
+}
+.tpagel{
+	float: left;
+	height: 24px;
+	line-height: 24px;
+	width: 260px;
+	padding-left: 40px;
+	font-size: 14px;
+	color: #323232;
+}
+.tpager{
+	float: right;
+	height: 24px;
+	line-height: 24px;
+}
+.tpager a{
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 22px;
+	line-height: 22px;
+	float: left;
+	border: 1px solid #ccc;
+	margin-right: 5px;
+	color: #323232;
+}
+.tpager a:hover{
+	background: #5074c3;
+	color: #fff;
+}
+/*页码结束*/
+/*添加酒店*/
+.addhotel{
+	float: left;
+	height: 100%;
+	background: #e8e8e8;
+}
+/*头*/
+.addhltop{
+	width: 80%;
+	height: 60px;
+	line-height: 60px;
+	float: left;
+	margin-left: 65px;
+}
+.addhltop span{
+	float: left;
+	height: 60px;
+	line-height: 60px;
+	padding-left: 38px;
+	font-size: 20px;
+	color: #393838;
+}
+.addline{
+	height: 4px;
+	width: 90%;
+	float: left;
+	margin-left: 65px;
+	background: url("../images/houtai4.png") repeat-x;
+}
+.addhotelc{
+	margin-left: 65px;
+}
+.addhotelcbox{
+	margin-top: 20px;
+	line-height: 32px;
+	float: left;
+	width: 100%;
+}
+.addhotelcboxl{
+	width: 122px;
+	float: left;
+	line-height: 32px;
+	margin-right: 23px;
+	text-align: right;
+	font-size: 14px;
+	color: #393939;
+}
+.addhotelcboxr{
+	float: left;
+	line-height: 32px;
+	width: 80%;
+}
+.addhotelcboxr input{
+	float: left;
+	height: 30px;
+	width: 275px;
+	line-height: 30px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	outline: none;
+}
+.addhotelcboxr span{
+	color: red;
+}
+.addhotelselect{
+	float: left;
+	line-height: 32px;
+	width: 80%;
+}
+.addhotelselect select{
+	float: left;
+	height: 30px;
+	width: 275px;
+	line-height: 30px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	outline: none;
+}
+/*酒店地址*/
+.addhaddress{
+	width: 100%;
+	float: left;
+	line-height: 32px;
+	margin-top: 20px;
+}
+.addhadl{
+	width: 122px;
+	float: left;
+	line-height: 32px;
+	margin-right: 23px;
+	text-align: right;
+	font-size: 14px;
+	color: #393939;
+}
+.addhadr{
+	float: left;
+	line-height: 32px;
+	width: 80%;
+}
+.addhadr input{
+	float: left;
+	width: 150px;
+	height: 30px;
+	border: 1px solid #ccc;
+	outline: none;
+	margin-right: 10px;
+}
+#addhadri{
+	width: 470px;
+	margin-top: 8px;
+}
+
+/*行政区*/
+.addhregion{
+	margin-top: 20px;
+	line-height: 32px;
+	float: left;
+	width: 80%;
+}
+.addhrl{
+	width: 122px;
+	float: left;
+	line-height: 32px;
+	margin-right: 23px;
+	text-align: right;
+	font-size: 14px;
+	color: #393939;
+}
+.addhrr{
+	line-height: 32px;
+	float: left;
+	width: 80%;
+}
+.addhrr input{
+	float: left;
+	width: 150px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	outline: none;
+}
+/*酒店特色*/
+.addhiteam{
+	width: 90%;
+	margin-top: 20px;
+	line-height: 32px;
+	float: left;
+}
+.addhiteaml{
+	width: 122px;
+	float: left;
+	line-height: 32px;
+	margin-right: 23px;
+	text-align: right;
+	font-size: 14px;
+	color: #393939;
+}
+.addhiteamr{
+	width: 80%;
+	float: left;
+	line-height: 32px;
+}
+.addhiteamr label{
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	margin-right: 20px;
+}
+.addhiteamr label span{ 
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	font-size: 14px;
+	color: #393838;
+}
+.addhiteamr label input{
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-top: 8px;
+	margin-right: 5px;
+}
+/*酒店介绍*/
+.addinfo{
+	width: 80%;
+	float: left;
+	line-height: 32px;
+	margin-top: 20px;
+}
+.adddinfol{
+	width: 122px;
+	float: left;
+	line-height: 32px;
+	margin-right: 23px;
+	text-align: right;
+	font-size: 14px;
+	color: #393939;
+}
+.adddinfor{
+	float: left;
+	width: 80%;
+	line-height: 32px;
+}
+.adddinfor textarea{
+	float: left;
+	width: 281px;
+	height: 72px;
+}
+.addsubmit{
+	float: left;
+	width: 60%;
+	margin-top: 46px;
+	margin-left: 145px;
+	margin-bottom: 100px;
+}
+.addsubmit .submit{
+	height: 31px;
+	width: 98px;
+	float: left;
+	border: none;
+	outline: none;
+	background: url("../images/submit.png") no-repeat;
+}
+.addsubmit .back{
+	float: left;
+	width: 98px;
+	height: 32px;
+	margin-left: 42px;
+	background: url("../images/fanhui.png") no-repeat;
+}
+/*选项卡*/
+.managetab{
+	float: left;
+}
+.mtabtop{
+	float: left;
+	border-radius: 5px 5px 0 0;
+	height: 62px;
+	width: 94%;
+	background: url("../images/m.png") repeat-x;
+	padding-left: 90px;
+}
+.mtabtop ul li{
+	float: left;
+	height: 61px;
+	line-height: 61px;
+	padding-left: 24px;
+	padding-right: 24px;
+	border: 1px solid #ccc;
+	font-size: 20px;
+	color: #313232;
+	cursor: pointer;
+}
+.mtabtopli{
+	border-bottom: none;
+	background: #e8e8e8; 
+}
+/*大盒子*/
+.mtabbiger{
+	width: 100%;
+	height: 100%;
+	background: #e8e8e8;
+}
+.mtabbiger .mtabbox{
+	display: none;
+	width: 100%;
+	height: 100%;
+}
+.mtabbiger .show{
+	display: block;
+}
+
+/*修改金额*/
+.fix{
+	z-index:9999;
+	position:fixed;
+	top:50%;
+	left:50%;
+	width:500px;
+	height:250px;
+	margin:-125px 0 0 -250px;
+	border-radius:5px;
+	border:solid 2px #666;
+	background-color:#fff;
+	display:none;
+	box-shadow: 0 0 10px #666;
+}
+.fixtop{
+	height: 33px;
+	line-height: 33px;
+	width: 464px;
+	background: #f1d2af;
+	padding-left: 36px;
+	font-size: 18px;
+	border-bottom: 1px solid #745737;
+}
+.fixcter{
+	width: 500px;
+	height: 215px;
+	border-top: 1px solid #fff;
+	background: #eee;
+}
+.fixctera{
+	height: 25px;
+	margin-left: 36px;
+	width: 464px;
+	margin-top: 38px;
+	float: left;
+}
+.fixctera span{
+	float: left;
+	width: 95px;
+	text-align: right;
+	height: 25px;
+	line-height: 25px;
+	margin-right: 5px;
+}
+.fixctera input{
+	float: left;
+	width: 78px;
+	height: 23px;
+	border: 1px solid #ccc;
+}
+.fixcterb{
+	height: 27px;
+	margin-left: 36px;
+	width: 464px;
+	margin-top: 70px;
+	float: left;
+}
+.queren{
+	width: 85px;
+	height: 27px;
+	float: left;
+	margin-left: 106px;
+	border: none;
+	cursor: pointer;
+	background: url("../images/queren.png") no-repeat;
+}
+.quxiao{
+	width: 85px;
+	height: 27px;
+	float: left;
+	margin-left: 35px;
+	border: none;
+	cursor: pointer;
+	background: url("../images/quxiao.png") no-repeat;
+}
+.fix_mask{
+	z-index: 9998;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	display:none
+}
+/*删除*/
+.del{
+	z-index:9999;
+	position:fixed;
+	top:50%;
+	left:50%;
+	width:500px;
+	height:250px;
+	margin:-125px 0 0 -250px;
+	border-radius:5px;
+	border:solid 2px #666;
+	background-color:#fff;
+	display:none;
+	box-shadow: 0 0 10px #666;
+}
+.deltop{
+	height: 33px;
+	line-height: 33px;
+	width: 464px;
+	background: #f1d2af;
+	padding-left: 36px;
+	font-size: 18px;
+	border-bottom: 1px solid #745737;
+}
+.delcter{
+	width: 500px;
+	height: 215px;
+	border-top: 1px solid #fff;
+	background: #eee;
+}
+.delctera{
+	margin-top: 36px;
+	height: 40px;
+	width: 500px;
+	float: left;
+}
+.delctera img{
+	float: left;
+	width: 40px;
+	height: 40px;
+	margin-left: 134px;
+	margin-right: 23px;
+}
+.delfont{
+	float: left;
+	height: 40px;
+	line-height: 20px;
+	width: 303px;
+}
+.delfont span{
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	width: 303px;
+	font-size: 14px;
+	color: #323232;
+}
+.delcterb{
+	height: 27px;
+	margin-left: 36px;
+	width: 464px;
+	margin-top: 70px;
+	float: left;
+}
+.delqueren{
+	width: 85px;
+	height: 27px;
+	float: left;
+	margin-left: 106px;
+	border: none;
+	cursor: pointer;
+	background: url("../images/queren.png") no-repeat;
+}
+.delquxiao{
+	width: 85px;
+	height: 27px;
+	float: left;
+	margin-left: 35px;
+	border: none;
+	cursor: pointer;
+	background: url("../images/quxiao.png") no-repeat;
+}
+.del_mask{
+	z-index: 9998;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+	display:none
+}

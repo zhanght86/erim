@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>编辑资料</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+	<script type="text/javascript">
+		$(function() {
+			// 点击提交
+    		$("#info_sub").click(function() {
+    			$("#form1").validationEngine({   
+                    scroll       			: true,
+                    showOneMessage			: true,
+                    focusFirstField			: true,
+					promptPosition  		: "topLeft"
+                });
+        		//如果验证通过则提交
+        		if($("#form1").validationEngine('validate')){
+            		$.post("$appRoot/updatePsd", $("#form1").serialize(), function(response) {
+            			if (response == '0') {
+            				alert("服务器繁忙，请稍后！");
+            			} else if (response == '2') {
+            				alert("输入原密码错误或着输入新密码为空");
+            			} else if (response == '1') {
+            				alert("操作成功！");
+            				setTimeout(function() {
+            					window.location = "$appRoot/userinfo"
+            				}, 1000);
+            			}
+            		}, "json");
+        		}
+    		});
+		});
+    </script>
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        <a class="left_btn" href="$appRoot/userinfo">
+            <img src="$staticRoot/img/left_btn.png"/>
+        </a>
+			编辑资料
+        <a class="right_btn" id="info_sub">
+			保存
+        </a>
+    </div>
+    <!-- content -->
+    <div class="content">
+		<form method="post" id="form1">
+            <table class="profile_table" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th><strong>账号(手机号)</strong></th>
+                    <td>
+                        $!userName
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>原密码</strong></th>
+                    <td>
+                        <input type="password" class="validate[required,maxSize[100]]" name="oldPassword" />
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>新密码</strong></th>
+                    <td>
+                        <input type="password" class="validate[required,custom[onlyLetterNumber],minSize[6]]" id="cusUserPassword" name="newPassword" />
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>确认密码</strong></th>
+                    <td>
+                        <input type="password" class="validate[required,minSize[6],custom[onlyLetterNumber],equals[cusUserPassword]]" name="gdlPwd" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5_focus.png"/>
+        </a>
+    </div>
+</body>
+</html>

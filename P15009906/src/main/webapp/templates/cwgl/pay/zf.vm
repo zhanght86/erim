@@ -1,0 +1,138 @@
+<link href="$staticRoot/images/bank/index.css" rel="stylesheet" type="text/css">
+<style rel="stylesheet" type="text/css">
+#form1 table img{vertical-align: middle;}
+#form1 table label{padding-left:50px;}
+</style>
+
+<div class="c_v1">
+	<div class="content">
+		<div class="con_top_l">
+			<div class="gouwuche">
+    			<div class="ticketInfo" style="text-align:center;">
+        			<h2 align="left" style="margin-left:20px;padding-left:20px;"><a href="javascript:;" style="color:#323232;border-bottom:none;">选择支付方式</a></h2>
+        			<form id="form1" target="_black" method="post" action="$appRoot/price/pay/payService">
+        				<table width="100%" border="0" cellpadding="4" cellspacing="1" align="center" style="height:50px;margin-bottom:30px;">
+        						<tbody><tr>
+        								<td align="center"></td>
+        								<td align="center"></td>
+        								<td align="center"></td>
+        								<td align="center"></td>
+        								<td align="center"></td>
+        								<td align="center"></td>
+        						</tr>
+        						<tr bgcolor="#FFFFFF">
+        							<td align="center" width="170px" height="38px">
+        							<label><input type="radio" checked  name="v_pmode" value="ZFB"> <img border="0" src="$staticRoot/images/bank/ZFB.jpg" height="21" width="100/">
+        							</label></td>
+        							<td align="center"></td>
+        						    <td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        						</tr>
+        				</tbody>
+        				</table>
+        				<h2 align="left" style="margin-left:20px;padding-left:20px;"><a href="javascript:;" style="color:#323232;border-bottom:none;">其他银行</a></h2>
+        				<table width="100%" border="0" cellpadding="4" cellspacing="1" align="center" style="height:250px;">
+        					<tbody>
+        						<tr>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        						</tr>
+        						
+        						
+        						<tr bgcolor="#FFFFFF">
+        							<td align="center"><label><input type="radio" name="v_pmode" value="CMB"> <img border="0" src="$staticRoot/images/bank/CMBC.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="CCB"> <img border="0" src="$staticRoot/images/bank/CBC.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="ABC"> <img border="0" src="$staticRoot/images/bank/ABC.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="ICBCB2C"> <img border="0" src="$staticRoot/images/bank/ICBC.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="GDB"> <img border="0" src="$staticRoot/images/bank/ICGB.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="SHBANK"> <img border="0" src="$staticRoot/images/bank/BOS.jpg" height="20" width="100/">
+        							</label></td>
+        						</tr>
+        						<tr>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        						</tr>
+        						
+        						<tr bgcolor="#FFFFFF">
+        							<td align="center"><label><input type="radio" name="v_pmode" value="SPABANK"> <img border="0" src="$staticRoot/images/bank/PAB.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="POSTGC"> <img border="0" src="$staticRoot/images/bank/PSBC.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="BJBANK"> <img border="0" src="$staticRoot/images/bank/BBJ.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="COMM"> <img border="0" src="$staticRoot/images/bank/BOC.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="BJRCB"> <img border="0" src="$staticRoot/images/bank/BRCB.jpg" height="20" width="100/">
+        							</label></td>
+        							<td align="center"><label><input type="radio" name="v_pmode" value="CIB"> <img border="0" src="$staticRoot/images/bank/CIB.jpg" height="20" width="100/">
+        							</label></td>
+        						</tr>
+        						<tr>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        							<td align="center"></td>
+        						</tr>
+        						<tr bgcolor="#FFFFFF">
+        							<td align="center" colspan="6">
+        								<input onClick="openwin()" type="submit" value="" style="border:0px;height:43px;width:182px;background: url('$staticRoot/images/bank/goumai.jpg') no-repeat left top;">
+        							</td>
+        						</tr>
+        						</tbody>
+        				</table>
+        			</form>
+        			<div style="clear: both;"></div>
+    			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--支付弹窗开始-->
+<style rel="stylesheet" type="text/css">
+/*2015-12-22d*/
+.zf_bg{width:100%;height:100%;position:fixed;z-index:20;top:0;left:0;background:url($staticRoot/images/bg_07.png) repeat left top;}
+.zf_block{background-color:#fff;width:420px;height:220px;position:absolute;left:50%;top:50%;margin-left:-210px;margin-top:-110px;}
+.zf_block .title2{padding-left:18px;height:40px;font-size:20px;line-height:40px;color:#323232;background-color:#f3f3f3;}
+.zf_block .title2 .close{position:absolute;top:13px;right:15px;cursor:pointer;}
+.zf_block .but{display:inline-block;margin:0 20px;}
+.zf_block .txt{padding:20px 30px 20px 25px;color:#666;font-size:14px;}
+</style>
+<div class="zf_bg" style="display:none;">
+	<div class="zf_block">
+		<p class="title2">充值<img class="close" src="$staticRoot/images/a_02.jpg"></p>
+		<p class="txt">付款完成前请不要关闭此窗口。完成付款后请根据您的情况点击下面的按钮。</p>
+		<center><a class="but" href="#"><img src="$staticRoot/images/aa_11.jpg"></a><a class="but" href="#"><img src="$staticRoot/images/aa_13.jpg"></a></center>
+		<p class="txt"><a href="javascript:;" class="close">返回选择其他充值方式</a></p>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".zf_bg .close").click(function(){
+		closewin();
+	})
+});
+function openwin(){
+$(".zf_bg").show();
+}
+function closewin(){
+$(".zf_bg").hide();
+}
+</script> 
+<!--支付弹窗结束-->

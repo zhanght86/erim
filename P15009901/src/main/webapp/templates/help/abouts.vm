@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>关于我们_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/index.css">
+    <link href="$staticRoot/css/headerfooter.css" type="text/css" rel="stylesheet" />
+	<link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/user.css">
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+		<div class="about_contnet W" style="margin:30px auto;">
+			<!--left-->
+			<div class="about_left">
+            	<a href="$appRoot/$cpyno/abouts.html?searchModel=5&about=1"><div class="#if($!about == '1' || $!about == 1) about_gs #else about_zx #end ">关于我们</div></a>
+            	<a href="$appRoot/$cpyno/news/news?newType=00"><div class="#if($!newType == '00') about_gs #else about_zx #end " id="gongsi3" onclick="show_about(this.id,'rigrht3')">旅游资讯</div></a>
+                <a href="$appRoot/$cpyno/news/news?newType=01"><div class="#if($!newType == '01') about_gs #else about_zx #end " id="gongsi1" onclick="show_about(this.id,'rigrht1')">出行指南</div></a>
+                <a href="$appRoot/$cpyno/news/news?newType=02"><div class="#if($!newType == '02') about_gs #else about_zx #end " id="gongsi4" onclick="show_about(this.id,'rigrht4')">户外指南</div></a>
+				<a href="$appRoot/$cpyno/news/newsFooter"><div class="about_zx" id="gongsi5" onclick="show_about(this.id,'rigrht5')">帮助中心</div></a>
+            </div>
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht3">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">关于我们</span>
+						<ul class="gbodyer_ul">
+							<li><a href="#">关于我们</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li><a href="#">资讯</a></li>
+							<li><img src="$staticRoot/images/gbg.jpg"/></li>
+							<li>您当前的位置：<a href="#">首页</a></li>
+						</ul>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia1">
+								<p>$!aboutus.cpyName</p>
+								<pre>$!aboutus.sauRemark</pre>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+			
+		<!--/right-->
+		</div>
+		<!--/content-->
+
+		#parse("common/footer.vm")
+		<!--固定位置-->
+	</div>
+</body>
+</html>

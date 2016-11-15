@@ -1,0 +1,154 @@
+<script type="text/javascript" src="$staticRoot/js/zd.js"></script>
+	<ul class="menu_list mb20">
+		<li>同城/周边
+			<div class="second_block">
+				<a href="#">鹿泉</a>
+				<a href="#">平山</a>
+			</div>
+		</li>
+		<li class="on">国内
+			<div class="second_block">
+				<a href="#" class="on">山东专线</a>
+				<a href="#">山西专线</a>
+				<a href="#" class="on">西北专线</a>
+				<a href="#">陕西专线</a>
+				<a href="#">华北专线</a>
+				<a href="#">山东专线</a>
+				<a href="#">山西专线</a>
+				<a href="#">西北专线</a>
+				<a href="#">陕西专线</a>
+				<a href="#">华北专线</a>
+				<a href="#">山东专线</a>
+				<a href="#">山西专线</a>
+				<a href="#">西北专线</a>
+				<a href="#">陕西专线</a>
+				<a href="#">华北专线</a>
+				<a href="#">山东的专线</a>
+				<a href="#">山西专线</a>
+				<a href="#">西北专线</a>
+				<a href="#">陕西专线</a>
+				<a href="#">华北专线</a>
+			</div>
+		</li>
+		<li>欧洲/美洲
+			<div class="second_block">
+				<a href="#">美国</a>
+				<a href="#">巴西</a>
+			</div>
+		</li>
+		<li>日本/韩国/朝鲜
+			<div class="second_block">
+				<a href="#">日本</a>
+				<a href="#">韩国</a>
+				<a href="#">朝鲜</a>
+			</div>
+		</li>
+		<li>东南亚/南亚/泰国
+			<div class="second_block">
+				<a href="#">东南亚</a>
+				<a href="#">南亚</a>
+				<a href="#">泰国</a>
+			</div>
+		</li>
+		<li>香港/澳门/台湾
+			<div class="second_block">
+				<a href="#">香港</a>
+				<a href="#">澳门</a>
+				<a href="#">台湾</a>
+			</div>
+		</li>
+		<li>澳洲/中东/非洲
+			<div class="second_block">
+				<a href="#">澳洲</a>
+				<a href="#">中东</a>
+				<a href="#">非洲</a>
+			</div>
+		</li>
+		<li>其他
+			<div class="second_block">
+				<a href="#">非洲</a>
+				<a href="#">毛里求斯</a>
+				<a href="#">肯尼亚</a>
+			</div>
+		</li>
+	</ul>
+	<div class="g_block_2 g_block_7 mb20">
+		<p class="g_tit_1 mb10">产品商信息</p>
+		<table class="mb10" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<th><label><input type="checkbox">全选</label></th>
+				<th>供应商ID</th>
+				<th>所属专线</th>
+				<th>产品数量</th>
+				<th>公司/品牌</th>
+				<th>负责人/电话</th>
+				<th>计调/电话</th>
+				<th>在线交流</th>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>23452353</td>
+				<td>石家庄</td>
+				<td>20</td>
+				<td><a href="$appRoot/tourism/detail/linelist">石家庄新源</a></td>
+				<td>王建/1231231232</td>
+				<td>张占波/1231231232</td>
+				<td><img src="$staticRoot/images/001.gif"></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>23452353</td>
+				<td>石家庄</td>
+				<td>20</td>
+				<td><a href="#">石家庄新源</a></td>
+				<td>王建/1231231232</td>
+				<td>张占波/1231231232</td>
+				<td><img src="$staticRoot/images/001.gif"></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>23452353</td>
+				<td>石家庄</td>
+				<td>20</td>
+				<td><a href="#">石家庄新源</a></td>
+				<td>王建/1231231232</td>
+				<td>张占波/1231231232</td>
+				<td><img src="$staticRoot/images/001.gif"></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>23452353</td>
+				<td>石家庄</td>
+				<td>20</td>
+				<td><a href="#">石家庄新源</a></td>
+				<td>王建/1231231232</td>
+				<td>张占波/1231231232</td>
+				<td><img src="$staticRoot/images/001.gif"></td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>23452353</td>
+				<td>石家庄</td>
+				<td>20</td>
+				<td><a href="#">石家庄新源</a></td>
+				<td>王建/1231231232</td>
+				<td>张占波/1231231232</td>
+				<td><img src="$staticRoot/images/001.gif"></td>
+			</tr>
+		</table>
+		<div class="tpage mb20">
+			<div class="tpagel pl0">共有<span>56</span>条结果，当前第<span>1</span>页</div>
+			<div class="tpager">
+				<a class="no_box" href="#">首页</a>
+				<!--<a class="no_box" href="#">上一页</a>-->
+				<a href="#" class="on">1</a>
+				<a href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">4</a>
+				<a href="#">5</a>
+				<a class="no_box" href="#">下一页</a>
+				<a class="no_box" href="#">尾页</a>
+			</div>
+		</div>
+	</div>
+	

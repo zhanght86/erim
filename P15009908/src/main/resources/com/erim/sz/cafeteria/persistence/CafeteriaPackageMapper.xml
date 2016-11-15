@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cafeteriapackage">
+	
+	<!-- 套餐分页查询过滤条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+	     	<if test="cdlID != null 		and cdlID != ''		">			and 	cdl_id 			    = #{cdlID}</if>
+	     	<if test="cpeCode != null 		and cpeCode != ''	">			and 	cpe_code 		    like "%"#{cpeCode}"%"</if>  
+	     	<if test="cpeName !=null 		and cpeName != ''	">          and     cpe_name            like "%"#{cpeName}"%"</if>
+	     	<if test="cpeEndTime != null 	and cpeEndTime != ''"> 
+	     		and TO_DAYS(cpe_start_time) &lt; TO_DAYS(#{cpeEndTime}) and TO_DAYS(cpe_end_time) &gt; TO_DAYS(#{cpeEndTime})
+	     	</if>
+		</where>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		cdl_id				AS cdlID,	
+		cpe_name 	        AS cpeName,
+		cpe_Person_min 	    AS cpePersonMin,
+		cpe_person_max      AS cpePersonMax,
+		cpe_content_num     AS cpeContentNum,
+		cpe_each_price      AS cpeEachPrice,
+		cpe_cafeteria_type  AS cpeCafeteriaType,
+ 		cpe_cafeteria_norms AS cpeCafeteriaNorms,
+ 		cpe_cafeteria_name  AS cpeCafeteriaName,
+ 		cpe_cafeteria_img   AS cpeCafeteriaImg,
+ 		cpe_start_time      AS cpeStartTime,
+ 		cpe_end_time        AS cpeEndTime,
+ 		cpe_introduction    AS cpeIntroduction,
+ 		cpe_buy_know        AS cpeBuyKnow,
+ 		cpe_message 	    AS cpeMessage,
+ 		cpe_friendly_tips   AS cpeFriendlyTips,
+ 		cpe_service         AS cpeService,
+ 		cpe_is_del_status   AS cpeIsDelStatus,
+ 		cpe_code            AS cpeCode,
+ 		cpe_create_time     AS cpeCreatetime,
+ 		cpe_other_name      AS cpeOtherName,
+ 		cpe_other_norms     AS cpeOtherNorms,
+ 		cpe_other_price     AS cpeOtherPrice,
+ 		cpe_image           AS cpeImage,
+ 		cpe_content_price   AS cpeContentPrice,
+ 		cpe_Img5            AS cpeImg5
+	</sql>
+	
+	<!-- 根据套餐ID查询 -->
+	<select id="selectCafeteriaPackageById" resultType="cafeteriaPackageBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			cafeteria_package
+		WHERE
+			id= #{id}
+	</select>
+	
+	<!-- 套餐查询本页数据，用于显示当前页 -->
+	<select id="selectPageCafeteria" resultType="cafeteriaPackageBean">
+		SELECT
+			<include refid="sql_column" />
+		FROM
+			cafeteria_package 
+			<include refid="sql_query" />
+		ORDER BY 
+			cpe_is_del_status
+		DESC,
+			cpe_create_time 
+		DESC
+	</select>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCafeteriaCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			cafeteria_package
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 套餐增加 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="cafeteriaPackageBean">
+		INSERT INTO
+			cafeteria_package (
+				cdl_id,
+		 		cpe_code,
+				cpe_name, 	        
+				cpe_Person_min,
+				cpe_person_max,
+		 		cpe_start_time,
+		 		cpe_end_time,
+		 		cpe_content_price,
+		 		cpe_introduction,
+		 		cpe_buy_know,
+		 		cpe_friendly_tips,
+		 		cpe_is_del_status,
+		 		cpe_create_time,
+		 		cpe_Img5
+			) VALUES (
+				#{cdlID},
+		 		#{cpeCode},
+				#{cpeName},
+				#{cpePersonMin},
+				#{cpePersonMax},
+		 		#{cpeStartTime},
+		 		#{cpeEndTime},
+				#{cpeContentPrice},
+		 		#{cpeIntroduction},
+		 		#{cpeBuyKnow},
+		 		#{cpeFriendlyTips},
+		 		#{cpeIsDelStatus},
+		 		#{cpeCreatetime},
+		 		#{cpeImg5}
+			)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			cafeteria_package
+		SET
+			cpe_name 	         = #{cpeName},
+			cpe_Person_min 	     = #{cpePersonMin},
+			cpe_person_max       = #{cpePersonMax},
+			cpe_content_num      = #{cpeContentNum},
+			cpe_each_price       = #{cpeEachPrice},
+			cpe_cafeteria_type   = #{cpeCafeteriaType},
+	 		cpe_cafeteria_norms  = #{cpeCafeteriaNorms},
+	 		cpe_cafeteria_name   = #{cpeCafeteriaName},
+	 		cpe_cafeteria_img    = #{cpeCafeteriaImg},
+	 		cpe_start_time       = #{cpeStartTime},
+	 		cpe_end_time         = #{cpeEndTime},
+	 		cpe_introduction     = #{cpeIntroduction},
+	 		cpe_buy_know         = #{cpeBuyKnow},
+	 		cpe_message 	     = #{cpeMessage},
+	 		cpe_friendly_tips    = #{cpeFriendlyTips},
+	 		cpe_service          = #{cpeService},
+	 		cpe_other_name       = #{cpeOtherName},
+	 		cpe_other_norms      = #{cpeOtherNorms},
+	 		cpe_other_price      = #{cpeOtherPrice},
+	 		cpe_image            = #{cpeImage},
+	 		cpe_content_price    = #{cpeContentPrice},
+	 		cpe_Img5             = #{cpeImg5}
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<!-- 更新产品编号 -->
+	<update id="updatecode">
+		UPDATE
+			cafeteria_package
+		SET
+			cpe_code  =  #{cpeCode}
+		WHERE
+			id = #{id}
+	</update>
+
+	<!-- 上下架 -->
+	<delete id="delete" parameterType="int">
+		UPDATE
+			cafeteria_package
+		SET
+			cpe_is_del_status 	 = #{cpeIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>
+	
+</mapper>

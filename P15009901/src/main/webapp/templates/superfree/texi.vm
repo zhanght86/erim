@@ -1,0 +1,61 @@
+<div class="cjzyzuche">
+	<div class="cjzyzuchetop">
+		<img src="$staticRoot/images/chaoji8.jpg"> <a
+			href="$appRoot/$cpyno/car.html"><span>租车</span></a>
+		<div class="cjzy_zuchetop">
+			<ul>
+				<li><a href="javascript:void(0)" onclick="$('#tdlInland2').val('02');$('#form_texi1').submit();">国内租车</a></li>
+				<li><a href="javascript:void(0)" onclick="$('#tdlInland2').val('01');$('#form_texi1').submit();">国际租车</a></li>
+				<li><a href="javascript:void(0)" onclick="$('#tdlInland5').val('02');$('#form_texi5').submit();">国内包车</a></li>
+				<li><a href="javascript:void(0)" onclick="$('#tdlInland5').val('01');$('#form_texi5').submit();">国际包车</a></li>
+				<li><a href="javascript:void(0)" onclick="$('#tdlInland6').val('02');$('#form_texi6').submit();">国内自驾</a></li>
+				<li><a href="javascript:void(0)" onclick="$('#tdlInland6').val('01');$('#form_texi6').submit();">国际自驾</a></li>
+				<form id="form_texi1" method="post" action="$appRoot/$cpyno/texi/car1.html">
+					<input type="hidden" name="tdlInland" id="tdlInland2" />
+				</form>
+				<form id="form_texi5" method="post" action="$appRoot/$cpyno/texi/car5.html">
+					<input type="hidden" name="tdlInland" id="tdlInland5" />
+				</form>
+				<form id="form_texi6" method="post" action="$appRoot/$cpyno/texi/car6.html">
+					<input type="hidden" name="tdlInland" id="tdlInland6" />
+				</form>
+			</ul>
+		</div>
+	</div>
+	<div class="cjzyzuchecontent">
+		#*
+		<div class="cjzyzcctleft"> 
+			<ul>
+				<li><span>热门城市</span></li>
+				<li><a href="#" target="_blank" alt="" title="">北京</a>&#124;<a href="#" target="_blank" alt="" title="">上海</a>&#124;
+					<a href="#" target="_blank" alt="" title="">广州</a>&#124;<a href="#" target="_blank" alt="" title="">深圳</a></li>
+				<li><a href="#" target="_blank" alt="" title="">长春</a>&#124;<a href="#" target="_blank" alt="" title="">大连</a>&#124;
+					<a href="#" target="_blank" alt="" title="">杭州</a>&#124;<a href="#" target="_blank" alt="" title="">天津</a></li>
+				<li><a href="#" target="_blank" alt="" title="">长沙</a>&#124;<a href="#" target="_blank" alt="" title="">厦门</a>&#124;
+					<a href="#" target="_blank" alt="" title="">香港</a>&#124;<a href="#" target="_blank" alt="" title="">澳门</a></li>
+				<li><a href="#" target="_blank" alt="" title="">台湾</a>&#124;<a href="#" target="_blank" alt="" title="">承德</a>&#124;
+					<a href="#" target="_blank" alt="" title="">武汉</a>&#124;<a href="#" target="_blank" alt="" title="">青岛</a></li>
+
+			</ul>
+		</div>
+		*#
+		<div class="cjzyzcctright" style="width:1230px">
+			#foreach($item in $texiList)
+    			<div class="cjzyz_cctbox">
+    				<div class="cjzyzcctrtcbox">
+    					<a href="$appRoot/$cpyno/texi/carxiang/$item.id" target="_blank" alt="" title="$!item.tdlName">
+							#if($!item.tdlImgAppearance != '')
+								<img src="$staticFileRes$item.tdlImgAppearance" title="" alt="">
+							#else
+								<img src="$staticRoot/images/isnull.png" title="" alt="">
+							#end 
+								<spanclass="cjzyzcctrtcboxname">$!item.tdlName</span> 
+								<span class="cjzyzcctrtcboxmoney"><label>￥$!item.tspRetailPrice</label>起
+    					</span>
+    					</a>
+    				</div>
+    			</div>
+			#end
+		</div>
+	</div>
+</div>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zysystemcooperation">
+	
+	<!-- 查询所有 -->
+	<select id="selectCooperation" resultType="zySystemCooperationBean">
+		SELECT
+			id 			   AS id,
+			role_id 	   AS roleId,
+			cpy_id 		   AS cpyId,
+			coo_ntype 	   AS cooNtype,
+			coo_cid 	   AS cooCid,
+			coo_createtime AS cooCreatetime,
+			coo_createuser AS cooCreateuser,
+			(select zy_role_name from zy_system_role role where role_id = role.id)  rolename
+		FROM
+			zy_system_cooperation
+		WHERE
+			cpy_id 	  = #{cpyId}
+		AND
+			coo_ntype = #{cooNtype}
+	</select>
+	
+	<select id="selectOneCooperation" resultType="zySystemCooperationBean">
+		ELECT
+			id 			   AS id,
+			role_id 	   AS roleId,
+			cpy_id 		   AS cpyId,
+			coo_ntype 	   AS cooNtype,
+			coo_cid 	   AS cooCid,
+			coo_createtime AS cooCreatetime,
+			coo_createuser AS cooCreateuser,
+			(select zy_role_name from zy_system_role role where role_id = role.id)  rolename
+		FROM
+			zy_system_cooperation
+		WHERE
+			cpy_id 	  = #{cpyId}
+		AND
+			coo_ntype = #{cooNtype}
+		AND
+			role_id   = #{roleId}
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			zy_system_cooperation
+		(
+			role_id,
+			cpy_id,
+			coo_ntype,
+			coo_cid,
+			coo_createtime,
+			coo_createuser
+		)
+		VALUES
+		(
+			#{roleId},
+			#{cpyId},
+			#{cooNtype},
+			#{cooCid},
+			#{cooCreatetime},
+			#{cooCreateuser}
+		)
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+			zy_system_cooperation
+		WHERE
+			cpy_id 	  = #{cpyId}
+		AND
+			role_id   = #{roleId}
+		AND
+			coo_ntype = #{cooNtype}
+	</delete>
+</mapper>

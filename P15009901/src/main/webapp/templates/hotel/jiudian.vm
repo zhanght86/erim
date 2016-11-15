@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>酒店列表页_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/hotellist.css">
+	<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="indexwrap">
+		<!--导航-->
+         #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+		
+		<!--头部-->
+		#parse("common/head.vm")
+		
+		<div class="hotel_ct">
+			<form id="form1" method="post" action="$appRoot/$cpyno/jiudian.html">
+    			<div class="search-menu">
+					#vsearcharea('','hdlProvince',$!hotel.hdlProvince,'hdlCity',$!hotel.hdlCity,'hdlExternal',$!hdlExternal,'hdlForeignCity',$!hotel.hdlForeignCity)
+					
+            		<div class="smenu-li">
+            			<label class="search-lab" style="width:280px;">
+							<span class="smenu-title">入住日期：</span>
+            				<input type="text" class="search-input laydate-icon" onclick="laydate();" name="hnpDate" value="$!hotel.hnpDate">
+            			</label>
+            			<label class="search-lab" style="width:280px;">
+        				<span class="smenu-title">关键词：</span>
+            				<input type="text" class="search-input" name="hdlName" value="$!hotel.hdlName">
+            			</label>
+            			<button class="search-btn" value="" type="submit" onclick="$('#form1').submit();">搜索</button>
+            		</div>
+					#* 
+            		<dl class="smenu-li">
+            			<dt class="smenu-title">所在区域：</dt>
+            			<dd class="smenu-items">
+            				<span class="no-num  #if(($!hotel.hdlForeignCityVo == '' || !$hotel.hdlForeignCityVo) && ('' == $!hotel.hdlProvince ||  !$hotel.hdlProvince))      item-hover #end nation-no"  onclick="$('#hdlProvince').attr('value',''); $('#hdlForeignCityVo').attr('value','');$('#form1').submit();">不限</span>
+            				<div class="smenu-nation">
+            					<span class="item-area" id="guonei">国内<em class="icon-img"></em></span>
+            					<span class="item-area" id="guoji">国际·港澳台<em class="icon-img"></em></span>
+            				</div>
+            				<div class="nations">
+            					<div class="local-city">
+									   <span class="no-num #if("" == $!hotel.hdlProvince || ! $hotel.hdlProvince)  item-hover  #end" onclick="$('#hdlProvince').attr('value',''); $('#hdlForeignCityVo').attr('value','');$('#form1').submit();">不限</span>
+									#foreach($item in $provinces)
+                					   <span class="smenu-item  #if($!hotel.hdlProvince == $item.regionNo) item-hover #end" id="a_level_$item.id" onclick="$('#hdlProvince').attr('value','$item.regionNo'); $('#hdlForeignCityVo').attr('value','');$('#form1').submit();">$item.regionName</span>
+                					#end
+            					</div>
+            					<div class="local-city">
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '')      item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','');     $('#hdlProvince').attr('value',''); $('#form1').submit();">不限</span>
+            						<span class="smenu-item #if($!hotel.hdlForeignCityVo == '香港')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','香港');   $('#hdlProvince').attr('value',''); $('#form1').submit();">香港</span>
+            						<span class="smenu-item #if($!hotel.hdlForeignCityVo == '澳门')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','澳门');   $('#hdlProvince').attr('value',''); $('#form1').submit();">澳门</span>
+            						<span class="smenu-item #if($!hotel.hdlForeignCityVo == '台湾')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','台湾');   $('#hdlProvince').attr('value',''); $('#form1').submit();">台湾</span>
+            						<span class="smenu-item #if($!hotel.hdlForeignCityVo == '东京')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','东京');   $('#hdlProvince').attr('value',''); $('#form1').submit();">东京</span>
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '首尔')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','首尔');   $('#hdlProvince').attr('value',''); $('#form1').submit();">首尔</span>
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '曼谷')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','曼谷');   $('#hdlProvince').attr('value',''); $('#form1').submit();">曼谷</span>
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '芭提雅')  item-hover #end" onclick="$('#hdlForeignCityVo').attr('value','芭提雅'); $('#hdlProvince').attr('value','');  $('#form1').submit();">芭提雅</span>
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '巴黎')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','巴黎');   $('#hdlProvince').attr('value',''); $('#form1').submit();">巴黎</span>
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '新西兰')  item-hover #end" onclick="$('#hdlForeignCityVo').attr('value','新西兰'); $('#hdlProvince').attr('value','');  $('#form1').submit();">新西兰</span>
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '纽约')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','纽约');   $('#hdlProvince').attr('value',''); $('#form1').submit();">纽约</span>
+									<span class="smenu-item #if($!hotel.hdlForeignCityVo == '加州')   item-hover #end"  onclick="$('#hdlForeignCityVo').attr('value','加州');   $('#hdlProvince').attr('value',''); $('#form1').submit();">加州</span>
+								</div>
+            				</div>
+            			</dd>
+            		</dl>
+					*#
+					<dl class="smenu-li">
+            			<dt class="smenu-title">价格范围：</dt>
+            			<dd class="smenu-items">
+            				<span  class="smenu-item #if(!$hotel.hdlPrice1  && !$hotel.hdlPrice2 ) item-hover #end" onclick="$('#hdlPrice1').attr('value',null); $('#hdlPrice2').attr('value',null);$('#form1').submit();">不限</span>
+            				<span  class="smenu-item #if(!$hotel.hdlPrice1  && $hotel.hdlPrice2 == 150) item-hover #end"       onclick="$('#hdlPrice1').attr('value',null); $('#hdlPrice2').attr('value',150);$('#form1').submit();">150元以下</span>
+            				<span  class="smenu-item #if($hotel.hdlPrice1 == 151  && $hotel.hdlPrice2 == 300) item-hover #end" onclick="$('#hdlPrice1').attr('value',151); $('#hdlPrice2').attr('value',300);$('#form1').submit();">151-300元</span>
+							<span  class="smenu-item #if($hotel.hdlPrice1 == 301  && $hotel.hdlPrice2 == 450) item-hover #end" onclick="$('#hdlPrice1').attr('value',301); $('#hdlPrice2').attr('value',450);$('#form1').submit();">301-450元</span>
+							<span  class="smenu-item #if($hotel.hdlPrice1 == 451  && $hotel.hdlPrice2 == 600) item-hover #end" onclick="$('#hdlPrice1').attr('value',451); $('#hdlPrice2').attr('value',600);$('#form1').submit();">451-600元</span>
+							<span  class="smenu-item #if($hotel.hdlPrice1 == 600  && !$hotel.hdlPrice2) item-hover #end"       onclick="$('#hdlPrice1').attr('value',600); $('#hdlPrice2').attr('value',null);$('#form1').submit();">600元以上</span>
+							<label class="item-lab">
+            					<input class="item-input" type="text" id="searchPrice1" value="$!hotel.hdlPrice1">
+            					<span class="item-span">至</span>
+            					<input class="item-input" type="text" id="searchPrice2" value="$!hotel.hdlPrice2">
+            					<button type="button" class="item-btn" onclick="$('#hdlPrice1').attr('value',$('#searchPrice1').val()); $('#hdlPrice2').attr('value',$('#searchPrice2').val());$('#form1').submit();">确定</button>
+            				</label>
+            			</dd>
+            		</dl>
+					<dl class="smenu-li">
+            			<dt class="smenu-title">酒店档次：</dt>
+            			<dd class="smenu-items">
+            				<span class="no-num #if("" == $!hotel.hdlLevel || ! $hotel.hdlLevel)  item-hover  #end" onclick="$('#hdlLevel').attr('value',''); $('#form1').submit();">不限</span>
+            				#foreach($item in $startlevel.keySet())
+							   <span class="smenu-item  #if($!hotel.hdlLevel == $item) item-hover #end" id="a_level_$item.id" onclick="$('#hdlLevel').attr('value','$item'); $('#form1').submit();">$startlevel.get($item)</span>
+            				#end 
+            			</dd>
+            		</dl>
+					<dl class="smenu-li last">
+            			<dt class="smenu-title">酒店特色：</dt>
+            			<dd class="smenu-items">
+            				<span class="no-num  #if("" == $!hotel.hdlCharacteristic || ! $hotel.hdlCharacteristic) item-hover #end"  onclick="$('#hdlCharacteristic').attr('value',''); $('#form1').submit();">不限</span>
+            				<div class="smenu-right">
+								#foreach($item in $hotelfeatures.keySet())
+            					   <span class="smenu-item  #if($!hotel.hdlCharacteristic == $item) item-hover #end" id="a_level_$item.id" onclick="$('#hdlCharacteristic').attr('value','$item'); $('#form1').submit();">$hotelfeatures.get($item)</span>
+            					#end
+            				</div>
+            				<span class="smenu-item-more">更多</span>
+            			</dd>
+            		</dl>
+					<dl class="smenu-li"  style="display:none">
+            			<dt class="smenu-title">酒店设施：</dt>
+            			<dd class="smenu-items">
+            				<span class="no-num  #if("" == $!hotel.hdlFacilities || ! $hotel.hdlFacilities) item-hover #end"  onclick="$('#hdlFacilities').attr('value',''); $('#form1').submit();">不限</span>
+            				<div class="smenu-right">
+								#foreach($item in $hotelfacilities.keySet())
+									<span class="smenu-item #if($!hotel.hdlFacilities == $item) item-hover #end" id="a_level_$item.id" onclick="$('#hdlFacilities').attr('value','$item'); $('#form1').submit();">$hotelfacilities.get($item)</span>
+								#end 	
+            				</div>
+            				<span class="smenu-item-more">更多</span>
+            			</dd>
+            		</dl>
+					<dl class="smenu-li last" style="display:none">
+            			<dt class="smenu-title">酒店服务：</dt>
+            			<dd class="smenu-items">
+            				<span class="no-num #if("" == $!hotel.hdlService || ! $hotel.hdlService) item-hover #end"  onclick="$('#hdlService').attr('value',''); $('#form1').submit();">不限</span>
+            				<div class="smenu-right">
+								#foreach($item in $serviceitems.keySet())
+									<span class="smenu-item #if($!hotel.hdlService == $item) item-hover #end" id="a_level_$item.id" onclick="$('#hdlService').attr('value','$item'); $('#form1').submit();">$serviceitems.get($item)</span>
+            					#end
+            				</div>
+            				<span class="smenu-item-more">更多</span>
+            			</dd>
+            		</dl>
+            	</div>
+				<input type="hidden" name="hdlLevel" id="hdlLevel" value="$!hotel.hdlLevel"/>
+				<input type="hidden" name="hdlCharacteristic" id="hdlCharacteristic" value="$!hotel.hdlCharacteristic"/>
+				<input type="hidden" name="hdlFacilities" id="hdlFacilities" value="$!hotel.hdlFacilities"/>
+				<input type="hidden" name="hdlService" id="hdlService" value="$!hotel.hdlService"/>
+				<!--<input type="hidden" name="hdlForeignCityVo" id="hdlForeignCityVo" value="$!hotel.hdlForeignCityVo"/>-->
+				<input type="hidden" name="hdlPrice1" id="hdlPrice1" value="$!hotel.hdlPrice1"/>
+				<input type="hidden" name="hdlPrice2" id="hdlPrice2" value="$!hotel.hdlPrice2"/>
+			</form>
+			
+			<div class="hlct_ct">
+				<div class="hlct_ctl">
+				<!--<div class="hlct_tocl">
+						<a href="#"><span>价格</span><img src="$staticRoot/images/hltop.png"></a>
+						<a href="#"><span>好评率</span><img src="$staticRoot/images/hlxia.png"></a>
+						<div class="hlct_tocj">
+							<input name="textfield" type="text" value="最低价" onfocus="if (value =='最低价'){value =''}" onblur="if (value ==''){value='最低价'}" />~<input name="textfield" type="text" value="最高价" onfocus="if (value =='最高价'){value =''}" onblur="if (value ==''){value='最高价'}" />
+						</div>
+						<div class="hlct_tocx">
+							<label><input type="checkbox"><span>促销活动</span></label>
+						</div>
+					</div>-->
+					<div class="hlct_ctlct">
+						#foreach($item in $hotelList)
+    						<div class="hlct_box">
+    							<div class="hlct_boxl">
+									#if($!item.hdlImg1 != '')
+    									<a href="$appRoot/$cpyno/hotel/jiudianxiang/$item.id?hnpDate=$!hotel.hnpDate" target="_blank"><img src="$staticFileRes$item.hdlImg1" title="" alt=""></a>
+    								#else
+    									<a href="$appRoot/$cpyno/hotel/jiudianxiang/$item.id?hnpDate=$!hotel.hnpDate" target="_blank"><img src="$staticRoot/images/isnull.png" title="" alt=""></a>
+    								#end
+    							</div>
+    							<div class="hlct_boxm">
+    								<div class="hlct_boxmt">
+    									<a href="$appRoot/$cpyno/hotel/jiudianxiang/$item.id?hnpDate=$!hotel.hnpDate" target="_blank"><span title="$!item.hdlName">$erim.subString($!item.hdlName,13)</span></a>
+										#if($!item.hdlLevel == '01')
+											<img src="$staticRoot/images/star3.png">
+										#elseif($!item.hdlLevel == '02')
+											<img src="$staticRoot/images/star4.png">
+										#elseif($!item.hdlLevel == '03')
+											<img src="$staticRoot/images/star5.png">
+										#else
+										#end
+										<img src="$staticRoot/images/hlwifi.png" title="wifi">
+										#if($erim.contains($!item.hdlFacilities,'02'))	
+											<img src="$staticRoot/images/hlp.png" title="停车场">
+										#end
+										#if($erim.contains($!item.hdlFacilities,'14') || $erim.contains($!item.hdlFacilities,'15'))
+											<img src="$staticRoot/images/hl5.png" title="游泳池">
+										#end
+										#if($erim.contains($!item.hdlFacilities,'05'))
+											<img src="$staticRoot/images/hl6.png" title="健身房">
+										#end
+										<!--<br clear="left">
+										<span style="font-size:13px;color:#323232;">品牌名称：$!item.cpyBrand</span>
+										<br clear="left">
+										<span style="font-size:13px;color:#323232;">企业名称：$!item.cpyName</span>
+										<br clear="left">-->
+										##<br clear="left">
+										##<span style="font-size:14px;"></span>
+    								</div>
+    								<div class="hlct_boxmm">
+										酒店电话：$!item.hdlTelephone    房间数量：$!item.hdlRoomNum
+										<br/>
+										开业时间：$!item.hdlStart  #if($item.hdlRenovationDate !='')  最近装修时间：$!item.hdlRenovationDate #end
+										<br/>
+										所在地：#vregion($!item.hdlProvince) #vregion($!item.hdlCity) #vregion($!item.hdlCounty) 
+										<br/>
+										详细地址：$!item.hdlAddress
+    									##<span title="$!item.hdlDescribe">$!erim.subString($!item.hdlDescribe,90)</span>
+    								</div>
+    								##<div class="hlct_boxmb">
+    								<!--	<a href="#"><img src="$staticRoot/images/hl4.png" id="hlct_boxmbs"></a>-->
+    								##</div>
+    							</div>
+    							<div class="hlct_boxr">
+									<!-- 最低零售价 -->
+    								<div class="hlct_boxrm"><label>￥$!item.hnpRetailPrice</label>起</div>
+    								<div class="hlct_boxrq">
+    									<a href="$appRoot/$cpyno/hotel/jiudianxiang/$item.id?hnpDate=$!hotel.hnpDate" target="_blank">查看</a>
+    								</div>
+    							</div>
+    						</div>
+						#end
+					</div>
+                    #parse("common/page.vm")   
+				</div>
+				<div class="hlct_ctr"style="width: 250px;height: 250px; border:none;">
+					<div id="hlfloat">
+						<a href="#"><img src="$staticRoot/images/jiudianliebiao.jpg" style="width: 250px;height: 250px;"></a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		#parse("common/footer.vm")
+	</div>
+	
+</body>
+</html>
+	<script type="text/javascript" src="$staticRoot/js/hlxuan.js"></script>
+    <script type="text/javascript">
+    	int();//初始化隐藏多余标签
+
+	$(function(){
+		
+		//酒店特色默认展开项
+		if('$!hotel.hdlCharacteristic' != ''){
+			$(".smenu-item-more").text("收起");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").show();
+		}else{
+			$(".smenu-item-more").text("更多");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").hide();
+		}		
+	});	
+	
+	$(".nation-no").click(function(){
+		$(".nations").find(".local-city").slideUp();
+	});
+    </script>

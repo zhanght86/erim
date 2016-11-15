@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guideorder">
+	<sql id="sql_query">
+		<where>
+			1 = 1
+ 			<if test="gorCode != null and gorCode !=''">			and 	gor_code 			like "%"#{gorCode}"%"</if>
+ 			<if test="cpyId !=null">            and     cpy_id                  =     #{cpyId}</if>
+<!--			<if test="gdlTotalprice != null">	and 	gdl_totalprice 		like "%"#{gdlTotalprice}"%"</if>
+			<if test="gdlIsThrough != null">	and 	gdl_is_through 		like "%"#{gdlIsThrough}"%"</if>
+			<if test="gdlNtp != null">			and 	gdl_ntp 			like "%"#{gdlNtp}"%"</if>-->
+  	     	 
+		</where>
+	</sql>
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectPageGuide" resultType="guideOrderBean">
+	SELECT
+			id ,
+			gor_code AS gorCode,
+			gdl_totalprice AS gdlTotalprice,
+			gdl_issure AS gdlIssure,
+			gdl_pay_online AS gdlPayOnline,
+			gdl_pay_offline AS gdlPayOffline,
+			gdl_pay_money AS gdlPayMoney,
+			gdl_ntype AS gdlNtype,
+			gdl_createtime AS gdlCreatetime,
+			gdl_createuser AS gdlCreateuser,
+			gdl_is_through AS gdlIsThrough,
+			gdl_ntp		   AS gdlNtp,
+			cpy_id          AS  cpyId
+		FROM
+			guide_order
+		<include refid="sql_query" />
+	</select>
+
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageGuideCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			guide_order
+		<include refid="sql_query" />
+	</select>
+	<!-- 接单/拒接 -->
+	<update id="receiveOrRefuse" parameterType="GuideOrderBean">
+		UPDATE
+			guide_order
+		SET
+			gdl_ntp = #{gdlNtp}
+		WHERE
+			id = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="hashMap">
+		DELETE FROM
+			guide_order
+		WHERE
+			id
+		IN
+			<foreach collection="dataitems" item="item"  open="(" separator="," close=")">#{item.id}</foreach>
+	</delete>
+	
+</mapper>

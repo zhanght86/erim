@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="linetrip">
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="tripByLineId" resultType="lineTripBean">
+		SELECT
+			id,
+            tdl_id                 AS tdlId,
+			ltp_date 		       AS ltpDate,
+			ltp_startplace         AS ltpStartplace,
+			ltp_endplace           AS ltpEndplace,
+			ltp_road               AS ltpRoad,
+			ltp_road_trip          AS ltpRoadTrip,
+			ltp_food               AS ltpFood,
+			ltp_food_trip          AS ltpFoodTrip,
+			ltp_ntype              AS ltpNtype,
+			ltp_road1              AS ltpRoad1,
+			ltp_road_trip1         AS ltpRoadTrip1,
+			ltp_food1              AS ltpFood1,
+			ltp_food_trip1         AS ltpFoodTrip1,
+			ldl_money_contain      AS ldlMoneyContain,
+			ldl_money_contain_off  AS ldlMoneyContainOff,
+			ldl_project            AS ldlProject,
+			ltp_remark             AS ltpRemark,
+			ldl_schedule_travel    AS ldlScheduleTravel,
+			gdd_img1			   AS gddImg1,
+	        gdd_img2			   AS gddImg2,
+			ldl_trip_traffic       AS ldlTripTraffic 
+		FROM
+			line_trip
+	    WHERE 
+	        tdl_id = #{tdlId}
+	</select>
+</mapper>

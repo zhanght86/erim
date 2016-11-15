@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="combusregion">
+	
+	<!-- 新增 -->
+	<insert id="insert">
+		INSERT INTO
+			com_bus_region (
+				cpy_id,
+				cbr_bus_type,
+				cbr_province,
+				cbr_city,
+				cbr_county
+			) 
+		VALUES 
+			(
+				#{cpyId},
+				#{cbrBusType},
+				#{cbrProvince},
+				#{cbrCity},
+				#{cbrCounty}
+			)
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+			com_bus_region
+		WHERE
+			cpy_id = #{cpyId}
+		AND
+			cbr_bus_type = #{cbrBusType}
+	</delete>
+	
+	<!-- 查询返回所有 -->
+	<select id="listRegion" resultType="comBusRegionBean">
+		SELECT
+			cpy_id        AS cpyId,
+			cbr_bus_type  AS cbrBusType,
+			cbr_province  AS cbrProvince,
+			cbr_city      AS cbrCity,
+			cbr_county    AS cbrCounty
+		FROM
+			com_bus_region
+		WHERE
+			cpy_id       = #{cpyId}
+		AND
+			cbr_bus_type = #{cbrBusType}
+	</select>
+	
+	<!-- 根据企业id 查询 可服务地区省市县-->
+	<select id="listRegionByCpyId" resultType="comBusRegionBean">
+		SELECT
+			cpy_id        AS cpyId,
+			cbr_bus_type  AS cbrBusType,
+			cbr_province  AS cbrProvince,
+			cbr_city      AS cbrCity,
+			cbr_county    AS cbrCounty
+		FROM
+			com_bus_region
+		WHERE
+			cpy_id       = #{cpyId}
+	</select>
+	
+</mapper>

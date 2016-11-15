@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>佳旅联合-地接社应用平台</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/101.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/105train.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/visa.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/houtai.css">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/price.css">
+<script type="text/javascript" src="$staticFilePlug/jquery/jquery-1.7.2.min.js"></script>
+
+##<script type="text/javascript" src="$staticRoot/js/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="$staticRoot/js/cookie.js"></script>
+
+<!--自定义-->
+<script type="text/javascript" src="$staticRoot/js/index.js"></script>
+<script type="text/javascript" src="$staticRoot/js/page.js"></script>
+<script type="text/javascript" src="$staticRoot/js/form.js"></script>
+<script type="text/javascript" src="$staticRoot/js/product/price.js"></script>
+<script type="text/javascript" src="$staticRoot/js/dictionary.js"></script>
+
+
+<script type="text/javascript" src="$staticRoot/js/lock.js"></script>
+
+<!--联合自定义-->
+<script type="text/javascript" src="$staticRoot/js/lianhe/tranc.js"></script>
+
+
+<script >
+	window.UEDITOR_HOME_URL = "$staticRoot/js/ueditor/1.4.3/";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/ueditor.config.lianhe.js"></script>
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="$staticRoot/js/ueditor/1.4.3/lang/en/en.js"></script>
+
+##同城同业CSS 机票
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/tongchengtongye.css">
+<!--时间控件-->
+<script type="text/javascript" src="$staticRoot/js/My97DatePicker/WdatePicker.js"></script>
+
+
+##<script charset="utf-8" src="$staticRoot/js/kindeditor/4.1.10/kindeditor.js"></script>
+
+<link rel="stylesheet" type="text/css" href="$staticRoot/js/confirm/css/xcConfirm.css"/>
+<script src="$staticRoot/js/confirm/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+
+<!--验证框架js-->
+<link rel="stylesheet" type="text/css" href="$staticFilePlug/jqueryValidationEngine/2.6.2/css/validationEngine.jquery.css"/>
+<script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine.min.js"></script>
+<script type="text/javascript" src="$staticFilePlug/jqueryValidationEngine/2.6.2/js/jquery.validationEngine-zh_CN.js"></script>
+
+<!--上传附件-->
+<link rel="stylesheet" type="text/css" href="$staticFilePlug/uploadify/uploadify.css"/>
+<script type="text/javascript" src="$staticFilePlug/uploadify/jquery.uploadify.js"></script>
+
+<!--自动补全-->
+<script type="text/javascript" src="$staticRoot/js/autocomplete.min/jquery.autocomplete.js"></script>
+
+##kindeditor
+<link rel="stylesheet" href="$staticRoot/js/kindeditor/4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="$staticRoot/js/kindeditor/4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="$staticRoot/js/kindeditor/4.1.10/lang/zh_CN.js"></script>
+
+
+<style>
+	.phcolor{ color:#999;}
+	.strong { font-weight : bold}
+	.img200 {width: 200px;height:100px;}
+</style>
+<script type="text/javascript">
+	
+	$.ajax({cache:false,async:false});
+
+	jQuery(document).ready(function($) {
+		$('.tadd').click(function() {
+			$('.fix_mask').fadeIn(100);
+			$('.fix').slideDown(200);
+		});
+		$('.fix .quxiao').click(function() {
+			$('.fix_mask').fadeOut(100);
+			$('.fix').slideUp(200);
+		});
+		$('.fix .queren').click(function() {
+			$('.fix_mask').fadeOut(100);
+			$('.fix').slideUp(200);
+		});
+	})
+	
+	//弹出内容封装
+	function wxcalert(txt){
+		window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.info);
+	}
+	
+	//初始化编辑器
+	function initKinEditor(name){
+		var editor = KindEditor.create('textarea[name="'+name+'"]', {
+			resizeType : 1,
+			//无样式粘贴  如删掉则可复制文本图片等内容
+			pasteType : 1,
+			allowPreviewEmoticons : false,
+			syncType : 'form',
+			allowImageUpload : false,
+			afterBlur: function () { this.sync(); self.edit = edit = this; },
+			items : [ 'forecolor', 'bold', 'removeformat' ]
+    	});
+	}
+</script>
+</head>
+<body>
+	<!--加载宏-->
+	#parse("common/macro.vm")
+	
+	<div class="bd">
+		<!--head-->
+		#parse("common/head.vm")
+		
+		<div class="wrap">
+			<!--head-->
+			#parse("common/left.vm")
+			
+			<div class="right">
+				<div class="rightdiv">
+					<div class="rightcontent">
+						<div class="rdiv" id="rdiv"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="$staticRoot/js/houtai.js"></script>
+	<script type="text/javascript" src="$staticRoot/js/h5.js"></script>
+	
+	<script >
+		var uploadify = function(id,inputid,spanid,fileid){
+        	 $("#"+id).uploadify({
+                auto            : true,
+                'swf'		    : '$staticRoot/js/uploadify/uploadify.swf',
+                //后台处理的页面
+                'uploader'      : '$staticFileUpload',
+                queueID         : fileid,//与下面的id对应
+                buttonClass	    :'btn',
+                buttonImage     : null,
+                formData        : {cpyid:"$userCpyId"},
+                buttonText	    :'点击浏览图片',
+                multi           :  false, //多文件上传
+                fileTypeDesc    : '请选择图片，仅支持格式JPG,BMP,PNG,GIF，最大4M',
+                fileTypeExts    : '*.JPG;*.GIF;*.PNG;*.BMP;', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+                buttonText      : '点击上传',
+                fileObjName     : 'file',//服务端File对应的名称。
+            	fileSizeLimit   : '2MB',//文件上传的大小限制，如果是字符串单位可以是B KB MB GB，默认是0，表示无限制
+            	width		    : 65,
+            	height		    : 20,
+            	onUploadSuccess : function(file,data,response) {//上传完成时触发（每个文件触发一次
+            		if(response==true){//如果服务器返回200表示成功
+        				data=eval("("+data+")");
+        				var filename = data.filename;
+        				var url   	 = data.url;
+						//全部替换
+					    var html     = "<a href='$staticFileRes"+url+"' target='_blank'>"+filename+"</a> <a href='javascript:;' onclick='uploadDelete(\""+id+"\",\""+spanid+"\",\""+url.replace(new RegExp("/", "g"),"___")+"\",\""+inputid+"\",\"1\");'>删除图片</a>";
+						//上传文件
+						url = url.replace(new RegExp("___", "g"),"/");
+        				$("#"+spanid).html(html);
+        				$("#"+inputid).attr("value",url);	
+						
+						$("#"+id).hide();
+						
+            		}else{
+            			wxcalert('上传失败','e');
+            		}
+        		},
+        		onUploadError : function(file,data,response) {
+            		wxcalert('上传失败','e');
+        		}
+         	});
+		};
+		
+		var uploadifydoc = function(id,inputid,spanid,fileid){
+        	 $("#"+id).uploadify({
+                auto            : true,
+                'swf'		    : '$staticRoot/js/uploadify/uploadify.swf',
+                //后台处理的页面
+                'uploader'      : '$staticFileUpload',
+                queueID         : fileid,//与下面的id对应
+                buttonClass	    :'btn',
+                buttonImage     : null,
+                formData        : {cpyid:"$userCpyId"},
+                buttonText	    :'点击浏览图片',
+                multi           :  false, //多文件上传
+                fileTypeDesc    : '请选择图片，仅支持格式doc,xls,xlsx,ppt,txt,pdf,docx，最大4M',
+                fileTypeExts    : '*.doc;*.xls;*.xlsx;*.ppt;*.txt;*.pdf;*.docx', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+                buttonText      : '点击上传',
+                fileObjName     : 'file',//服务端File对应的名称。
+            	fileSizeLimit   : '2MB',//文件上传的大小限制，如果是字符串单位可以是B KB MB GB，默认是0，表示无限制
+            	width		    : 65,
+            	height		    : 20,
+            	onUploadSuccess : function(file,data,response) {//上传完成时触发（每个文件触发一次
+            		if(response==true){//如果服务器返回200表示成功
+        				data=eval("("+data+")");
+        				var filename = data.filename;
+        				var url   	 = data.url;
+						//全部替换
+					    var html     = "<a href='$staticFileRes"+url+"' target='_blank'>"+filename+"</a> <a href='javascript:;' onclick='uploadDelete(\""+id+"\",\""+spanid+"\",\""+url.replace(new RegExp("/", "g"),"___")+"\",\""+inputid+"\",\"1\");'>删除文件</a>";
+						//上传文件
+						url = url.replace(new RegExp("___", "g"),"/");
+        				$("#"+spanid).html(html);
+        				$("#"+inputid).attr("value",url);	
+						
+						$("#"+id).hide();
+						
+            		}else{
+            			wxcalert('上传失败','e');
+            		}
+        		},
+        		onUploadError : function(file,data,response) {
+            		wxcalert('上传失败','e');
+        		}
+         	});
+		};
+		
+		//图片删除
+		function uploadDelete(id,spanid,url,inputid,ntype){
+			url = url.replace(new RegExp("___", "g"),"/");
+			
+			url = "$staticFileDelete?imgUrl="+url;
+			$.ajax({
+                  url: url,
+                  success: function(data){},
+                  dataType: 'json'
+              });
+				
+			 $("#"+id).show();	
+			 $("#"+spanid).html("");
+			 if(inputid != undefined && inputid != ''){
+			 	$("#"+inputid).attr("value","");
+			 }
+			 
+			 if("1" != ntype){
+			 	$("#"+spanid).prev().hide();
+				 $("#"+spanid).prev().prev().hide();
+			 }
+		};
+		
+		//重载缓存中路径  加载到当前位置
+		var loadurl = mycookie.get("loaddata");
+		if(loadurl!=undefined && loadurl.indexOf('http:') > -1){
+			index.load(loadurl);
+		}else{
+			index.load('$appRoot/welcome');
+		}
+		//分页页面
+		var pageurl = mycookie.get("pageurl");
+		if(pageurl!=undefined && pageurl.indexOf('http:') > -1){
+			page.url = pageurl;
+		}
+    </script>
+</body>
+</html>

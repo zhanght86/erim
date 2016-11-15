@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <!-- <title>我的动态</title> -->
+	<title>手机导游</title> 
+    #parse("common/global.vm")
+    #parse("common/recordUpload.vm")
+	<script type="text/javascript">
+		$(function() {
+		
+			// 导游ID
+			var guiId = '$!id';
+			
+			// 点击上传第一张图片
+    		$("#photo_add_btn1").click(function() {
+    			$("#reportimg1").click();
+    		});
+    		// 当选择图片后
+    		$("#reportimg1").change(function() {
+    			var str = $(this).val();
+    			if (str != '') {
+    				// 上传图片
+					recordUpload(guiId,'reportimg1', 'photo_add_btn1','photo_url1');
+    			}
+    		});
+			
+			// 点击上传第二张图片
+    		$("#photo_add_btn2").click(function() {
+    			$("#reportimg2").click();
+    		});
+    		// 当选择图片后
+    		$("#reportimg2").change(function() {
+    			var str = $(this).val();
+    			if (str != '') {
+    				// 上传图片
+					recordUpload(guiId,'reportimg2', 'photo_add_btn2','photo_url2');
+    			}
+    		});
+			
+			// 点击上传第三张图片
+    		$("#photo_add_btn3").click(function() {
+    			$("#reportimg3").click();
+    		});
+    		// 当选择图片后
+    		$("#reportimg3").change(function() {
+    			var str = $(this).val();
+    			if (str != '') {
+    				// 上传图片
+					recordUpload(guiId,'reportimg3', 'photo_add_btn3','photo_url3');
+    			}
+    		});
+			
+			// 提交
+    		$(".right_btn").click(function(){
+    			//点击
+    			if(guide.checkForm('form1')){
+    				//提交
+    				$.post($("#form1").attr("action"),$("#form1").serialize(),function(data){
+            			if(1==data){
+            				window.location = _appRoot + '/record';
+            			}
+            		},'json');
+    			}
+    		});
+		});
+    </script>
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        <a class="left_btn" href="$appRoot/record">
+            <img src="$staticRoot/img/left_btn.png"/>
+        </a>
+			发表动态
+        <a class="right_btn">
+			确认
+        </a>
+    </div>
+    <!-- content -->
+	<FORM action="$appRoot/addRecords" method="post" id="form1">
+        <div class="content">
+            <div class="edit_wraper">
+                <textarea class="textarea validate[required,maxSize[200]]" name="grdRemark" placeholder="想说点什么..."></textarea>
+				<input type="hidden" id="photo_url1" name="grdImg1" value="" />
+				<input type="hidden" id="photo_url2" name="grdImg2" value="" />
+				<input type="hidden" id="photo_url3" name="grdImg3" value="" />
+                <div style="font-size: 12px; color: #e8e8e8; width:300px;text-align: center;margin-top: 10px;">
+					<div style="float:left;">
+        				上传图片<br/>
+                        <a><img id="photo_add_btn1" class="photo_add_btn" src="$staticRoot/img/photo_add_btn.png" /></a>
+                    </div>
+					<div style="clear:buth; float:left; margin-left:10px;">
+        				上传图片<br/>
+                        <a><img id="photo_add_btn2" class="photo_add_btn" src="$staticRoot/img/photo_add_btn.png" /></a>
+                    </div>
+					<div style="clear:buth; float:left; margin-left:10px;">
+        				上传图片<br/>
+                        <a><img id="photo_add_btn3" class="photo_add_btn" src="$staticRoot/img/photo_add_btn.png" /></a>
+                    </div>
+					可上传三张图片
+                </div>
+				<div hidden>
+    				<input type="file" accept="image/*" id="reportimg1" name="reportimg1"/>
+    				<input type="file" accept="image/*" id="reportimg2" name="reportimg2"/>
+    				<input type="file" accept="image/*" id="reportimg3" name="reportimg3"/>
+                </div>
+            </div>
+        </div>
+	</FORM>
+    <!-- footer -->
+    <div class="footer">
+        <a href="javascript:guide.init(1);">
+            <img src="$staticRoot/img/menu_1.png"/>
+        </a>
+        <a href="javascript:guide.init(2);">
+            <img src="$staticRoot/img/menu_2.png""/>
+        </a>
+        <a href="javascript:guide.init(3);">
+            <img src="$staticRoot/img/menu_3_focus.png"/>
+        </a>
+        <a href="javascript:guide.init(4);">
+            <img src="$staticRoot/img/menu_4.png"/>
+        </a>
+        <a href="javascript:guide.init(5);">
+            <img src="$staticRoot/img/menu_5.png"/>
+        </a>
+    </div>
+	
+	<script>
+	 	
+	</script>
+</body>
+</html>

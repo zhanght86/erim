@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="yjsystemlog">
+	<!-- 插入 -->
+	<insert id="insert">
+		INSERT INTO
+			yj_system_log
+		(
+			log_username,
+			log_content,
+			log_operation,
+			log_usercpyid,
+			log_userid,
+			log_userrealname,
+			log_ip,
+			log_url,
+			log_func_resource_code,
+			log_func_code,
+			log_resource_name
+		)
+		VALUES
+		(
+			#{logUsername},
+			#{logContent},
+			#{logOperation},
+			#{logUsercpyid},
+			#{logUserid},
+			#{logUserrealname},
+			#{logIp},
+			#{logUrl},
+			#{logFuncResourceCode},
+			#{logFuncCode},
+			#{logResourceName}
+		)
+	</insert>
+	<!-- 查询日志 -->
+	<select id="selectPageByLogFuncCode" resultType="yjSystemLogBean">
+			SELECT
+				id                         AS id,
+				log_username               AS logUsername,
+				log_createdate             AS logCreatedate,
+				log_content                AS logContent,
+				log_operation              AS logOperation,
+				log_usercpyid              AS logUsercpyid,
+				log_userid                 AS logUserid,
+				log_userrealname           AS logUserrealname,
+				log_ip                     AS logIp,
+				log_url                    AS logUrl,
+				log_func_resource_code     AS logFuncResourceCode,
+				log_func_code              AS logFuncCode,
+				log_resource_name          AS logResourceName
+			FROM
+				yj_system_log
+			ORDER BY
+				log_createdate desc
+	</select>
+	<select id="selectPageByLogFuncCodeCount" resultType="int">
+			SELECT
+				count(1)
+			FROM
+				yj_system_log
+	</select>
+</mapper>

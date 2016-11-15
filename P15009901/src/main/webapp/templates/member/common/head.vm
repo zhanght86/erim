@@ -1,0 +1,12 @@
+    <head>
+        <title>$title</title>
+        <meta charset="utf-8">
+		<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+		<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="$staticRoot/css/index.css">
+        <link href="$staticRoot/css/headerfooter.css" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="$staticRoot/css/all.css" />
+        <link rel="stylesheet" type="text/css" href="$staticRoot/css/user.css">
+			
+		<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+    </head>

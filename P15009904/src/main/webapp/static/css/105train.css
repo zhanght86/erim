@@ -1,0 +1,293 @@
+.train_local{
+	width: 95%;
+	height: 100%;
+	margin-left:20px;
+}
+.train_local_suptop{
+	height: 48px;
+	width: 100%;
+}
+.train_local_suptop img{
+	float: left;
+	width: 25px;
+	height: 25px;
+	margin: 20px 10px 3px 20px;
+}
+.train_local_suptop span{
+	height: 20px;
+	float: left;
+	font-size: 14px;
+	margin-top: 20px;
+	color: #393838;
+	font-weight: bold;
+	margin-bottom: 6px;
+}
+.train_local_ct{
+	width: 100%;
+	float: left;
+}
+.trainl_ct{
+	float: left;
+	width: 100%;
+	height: auto;
+}
+.trainl_cttop{
+	float: left;
+	height: 30px; 
+	width: 100%;
+	margin-left:30px;
+}
+.trainl_cttop>ul>li{
+	float: left;
+	width: 100px;
+	height: 28px;
+	border: 1px solid #ccc;
+	line-height: 28px;
+	font-size: 12px;
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+	background: #969696;
+	color: #fff;
+	border-radius: 5px 5px 0 0;
+}
+#trainl_li{
+	background: #d09e64;
+}
+.trainl_cttop>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #969696;
+	margin-left: 106px;
+}
+.trainl_biger .show{
+	display: block;
+}
+.train_box{
+	display: none;
+}
+.trainl_ctct{
+	float: left;
+	width: 100%;
+	height: auto;
+}
+.trainl_ctctl{
+	float: left;
+	line-height: 30px;
+	width: 100%;
+	margin-left: 50px;
+	margin-top: 15px;
+}
+.trainl_ctctl>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	width: 100px;
+	text-align: right;
+	margin-right: 10px;
+}
+.trainl_ctctlr{
+	float: left;
+	height: 28px;
+	width: 200px;
+	border: 1px solid #ccc;
+}
+.trainl_ctctlr>input{
+	height: 28px;
+	line-height: 28px;
+	float: left;
+	width: 170px;
+	outline: none;
+	border: none;
+}
+.trainl_ctctlr>span{
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	float: left;
+	width: 26px;
+	background: #fff;
+}
+.trainl_ctctla{
+	float: left;
+	line-height: 30px;
+	width: 100%;
+	margin-left: 50px;
+}
+.trainl_ctctla>span{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+	width: 100px;
+	text-align: right;
+	margin-right: 10px;
+	margin-top: 15px;
+}
+.trainl_ctctlra{
+	float: left;
+	width: 90%;
+}
+.trainl_ctctlraa{
+	float: left;
+	height: 28px;
+	width: 225px;
+	margin-top: 15px;
+}
+.trainl_ctctlraa>input{
+	height: 28px;
+	line-height: 28px;
+	float: left;
+	width: 170px;
+	outline: none;
+	border: 1px solid #ccc;
+}
+.trainl_ctctlraa>a{
+	float: left;
+	height: 20px;
+	width: 20px;
+	margin-top: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	font-size: 20px;
+	color: #fff;
+	background:#d09e64;
+	line-height: 20px;
+	text-align: center;
+}
+.trainl_ctctla>label{
+	float: left;
+	width: 90px;
+	height: 30px;
+	margin-top: 15px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #393838;
+}
+.trainl_ctctla>label>input{
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-top: 7px;
+	margin-right: 10px;
+}
+.trainl_ctctlrb{
+	float: left;
+	width: 75%;
+	display: none;
+}
+.trainl_ctctlrba{
+	float: left;
+	height: 28px;
+	width: 250px;
+	margin-top: 15px;
+}
+.trainl_ctctlrba>input{
+	height: 28px;
+	line-height: 28px;
+	float: left;
+	width: 170px;
+	outline: none;
+	border: 1px solid #ccc;
+}
+.trainl_ctctlrba>span{
+	height: 28px;
+	line-height: 28px;
+	font-size: 12px;
+	color: #393838;
+	margin-left: 10px;
+	width: 15px;
+	text-align: center;
+	float: left;
+}
+.trainl_ctctlrba>a{
+	float: left;
+	height: 20px;
+	width: 20px;
+	margin-top: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	font-size: 20px;
+	color: #fff;
+	background:#d09e64;
+	line-height: 20px;
+	text-align: center;
+}
+.trainl_ctctbox{
+	float: left;
+	width: 100%;
+}
+.trainl_ctctbl{
+	height: 30px;
+	line-height: 30px;
+	margin-top: 15px;
+	width: 90%;
+	margin-left: 70px;
+}
+.trainl_ctctbl>span{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+	color: #393838;
+	margin: 0 10px;
+	float: left;
+}
+.tl1{
+	width: 80px;
+}
+
+.tl2{
+	width: 100px;
+}
+.tl3{
+	width: 120px;
+}
+.tl4{
+	width: 350px;
+}
+.tl5{
+	width: 80px;
+}
+
+.tl7{
+	width: 80px;
+}
+.trainl_ctctbl>input{
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	font-size: 12px;
+	color: #393838;
+	margin: 0 10px;
+	float: left;
+	border: 1px solid #ccc;
+}
+.trainl_ctctbl>select{
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	font-size: 12px;
+	color: #393838;
+	margin: 0 10px;
+	float: left;
+	border: 1px solid #ccc;
+}
+.trainl_ctctbl>a{
+	float: left;
+	height: 20px;
+	width: 20px;
+	margin-top: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	font-size: 20px;
+	color: #fff;
+	background:#d09e64;
+	line-height: 20px;
+	text-align: center;
+}

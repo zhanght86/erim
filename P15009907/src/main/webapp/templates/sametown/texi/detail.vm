@@ -1,0 +1,80 @@
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="$staticRoot/images/ren.png" alt="租车同业产品管理" title="租车同业产品管理">租车同业产品管理<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form  method="post" id="form1">
+	<div class="input_block clearfix">
+		<div class="label_left">所在地区：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w130" name="tdlCity">
+			<label class="ml15">租车类型：</label>
+			<select class="w130" name="gdlType">
+				<option value=""></option>
+				<option value="1">包车</option>
+				<option value="2">自驾</option>
+				<option value="3">固定接送</option>
+				
+			</select>
+			<label class="ml154">乘坐人数：</label>
+			<select class="w130" name="tdlNum">
+				<option></option>
+				 #foreach($item in $textzuo.keySet())
+				  <option value="$item" #if($texiDetail.tdlNum == $item) selected #end>$textzuo.get($item)</option>
+                 #end
+			</select>
+			<label class="ml35">用车日期： </label>
+			<span class="tishi_box w110" name="" onClick="WdatePicker()">
+				<input type="text" class="w80"><img src="$staticRoot/images/tt_5.jpg"></span>
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">出发地：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w130" name="">
+			<label class="ml155">目的地： </label>
+			<input class="w130" name="">
+				<label class="ml15">公司品牌/名称： </label>
+			<input class="w130" name="">
+			<button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/sametown/texi/detail');">查 询</button>
+		</div>
+	</div>
+	</form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>产品编号</td>
+					<td>所在地区</td>
+					<td>汽车品牌/名称</td>
+					<td>汽车档次</td>
+					<td>车型</td>
+					<td>租车类型</td>
+					<td>乘坐人数</td>
+					<td>公司/品牌名称</td>
+					<td>联系电话</td>
+					<td>在线交流</td>
+					<td>在线预定</td>
+				</tr>
+			</thead>
+			<tbody>
+			#foreach($item in $texiList)
+    				<tr>
+    					<td>$!item.tdlCode</td>
+    					<td>$!item.tdlCity</td>
+    					<td><a href="#">$!item.tdlBrand$item.tdlName</a></td>
+    					<td>$!item.tdlTexttype</td>
+    					<td>$!item.tdlType</td>
+						<td></td>
+    					<td>$!item.tdlNum</td>
+    					<td>$!item.cpyName</td>
+    					<td>$!item.ccpTelephone</td>
+						<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$!item.ccpQq&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+    					<td><a href="#">预定</a></td>
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+</div>

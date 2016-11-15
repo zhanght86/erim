@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotelcafeteria">
+	
+	<!-- 查询条件 -->
+	<sql id="sql_query">
+		<where>
+			1 = 1
+			<if test="tdlId != null and tdlId != ''">   	and 	    tdl_id 	     =   #{tdlId}</if>
+		</where>
+	</sql>
+	
+	<!-- 查询总数，用于页面分页 -->
+	<select id="selectPageCefeteriaListCount" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			hotel_cafeteria
+		<include refid="sql_query" />
+	</select>
+	
+	<!-- 显示当前页 -->
+	<select id="selectPageCefeteriaList" resultType="hotelCefeteriaBean">
+		SELECT
+			id,
+			hmg_cafeterianame       AS hmgCafeterianame,
+			hmg_cafeteriatype       AS hmgCafeteriatype,
+			hmg_cafeteriaarea     	AS hmgCafeteriaarea,
+			hmg_cafeterianum 	    AS hmgCafeterianum,
+			hmg_cafeterianumend     AS hmgCafeterianumend,
+			hmg_cafeteriaimg		AS hmgCafeteriaimg,
+			tdl_id            		AS tdlId
+		FROM
+			hotel_cafeteria
+		<include refid="sql_query" />
+	</select>
+	
+	
+	<!-- 根据ID查询一条信息 -->
+	<select id="selectCafdeteriaById" resultType="hotelCefeteriaBean">
+		SELECT
+			id,
+			hmg_cafeterianame       AS hmgCafeterianame,
+			hmg_cafeteriatype       AS hmgCafeteriatype,
+			hmg_cafeteriaarea     	AS hmgCafeteriaarea,
+			hmg_cafeterianum 	    AS hmgCafeterianum,
+			hmg_cafeterianumend     AS hmgCafeterianumend,
+			hmg_cafeteriaimg		AS hmgCafeteriaimg
+		FROM
+			hotel_cafeteria
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="insert">
+		INSERT INTO
+			hotel_cafeteria
+			(
+				hmg_cafeterianame,
+				hmg_cafeteriatype,
+				hmg_cafeteriaarea,
+				hmg_cafeterianum,
+				hmg_cafeterianumend,
+				hmg_cafeteriaimg,
+				tdl_id
+			)
+		VALUES
+			(
+				#{hmgCafeterianame},
+				#{hmgCafeteriatype},
+				#{hmgCafeteriaarea},
+				#{hmgCafeterianum},
+				#{hmgCafeterianumend},
+				#{hmgCafeteriaimg},
+				#{tdlId}
+			)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update">
+		UPDATE
+			hotel_cafeteria
+		SET
+			hmg_cafeterianame       = #{hmgCafeterianame},
+			hmg_cafeteriatype       = #{hmgCafeteriatype},
+			hmg_cafeteriaarea     	= #{hmgCafeteriaarea},
+			hmg_cafeterianum 	    = #{hmgCafeterianum},
+			hmg_cafeterianumend     = #{hmgCafeterianumend},
+			hmg_cafeteriaimg		= #{hmgCafeteriaimg}
+		WHERE
+			id = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			hotel_cafeteria
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<!--上下架 
+	<delete id="delet" parameterType="int">
+		UPDATE
+			hotel_cafeteria
+		SET
+			hmg_is_del_status 	 = #{hmgIsDelStatus}
+		WHERE
+			id = #{id}
+	</delete>-->
+	
+</mapper>

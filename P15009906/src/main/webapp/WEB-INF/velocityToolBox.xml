@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+	<!-- application start -->
+	<tool>
+		<key>shiro</key>
+		<scope>application</scope>
+		<class>com.erim.sz.web.shiro.Permission</class>
+	</tool>
+	<tool>
+	   <key>date</key>
+	   <scope>application</scope>
+	   <class>org.apache.velocity.tools.generic.DateTool</class>
+	</tool>
+	<tool>
+	   <key>erim</key>
+	   <scope>application</scope>
+	   <class>com.erim.sz.common.tag.ErimTag</class>
+	</tool>
+	<!-- application end -->
+</toolbox>

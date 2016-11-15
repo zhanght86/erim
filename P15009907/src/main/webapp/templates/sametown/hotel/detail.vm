@@ -1,0 +1,71 @@
+<div class="jd_block">
+	<p class="tit_1 ml20">
+		<img src="$staticRoot/images/ren.png" alt="租车同业产品管理" title="租车同业产品管理">酒店同业产品管理<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" id="form1">
+    	<div class="input_block clearfix">
+    		<div class="label_left">所在地区：</div>
+    		<div class="input_right input_right_wauto">
+    			<input class="w130" name="hdlCity">
+    			<label class="ml15">酒店名称：</label>
+    			<input class="w130" name="hdlName">
+    			<label class="ml15">酒店房型：</label>
+    			<input class="w130" name="hhePresonnum">
+    		</div>
+    	</div>
+    	<div class="input_block clearfix mb20">
+    		<div class="label_left">日期：</div>
+    		<div class="input_right input_right_wauto">
+    			<span class="tishi_box w110" onClick="WdatePicker()">
+    				<input type="text" class="w80">
+    				<img src="$staticRoot/images/tt_5.jpg">
+    			</span> 至
+                <span class="tishi_box w110" onClick="WdatePicker()">
+                	<input type="text" class="w80">
+                	<img src="$staticRoot/images/tt_5.jpg">
+                </span>
+                <label class="ml15">公司/品牌名称： </label>
+                <input class="w150">
+                <button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/hotel/detail/sametown');">查 询</button>
+            </div>
+    	</div>
+	</form>
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>产品编号</td>
+					<td>所在地区</td>
+					<td>酒店名称</td>
+					<td>酒店档次</td>
+					<td>酒店房型</td>
+					<td>价格/数量</td>
+					<td>公司/品牌名称</td>
+					<td>联系电话</td>
+					<td>在线交流</td>
+					<td>在线预定</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $hotelList)
+    				<tr>
+    					<td>$!item.hdlCode</td>
+    					<td>$!item.hdlCity</td>
+    					<td><a href="#">$!item.hdlName</a></td>
+    					<td>$!item.dicLevel</td>
+    					<td>$!item.hhePresonnum</td>
+    					<td>$!item.hnpTradePrice</a></td>
+    					<td></td>
+    					<td></td>
+    					<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=599125570&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+    					<td><a href="#">预定</a></td>
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+
+</div>

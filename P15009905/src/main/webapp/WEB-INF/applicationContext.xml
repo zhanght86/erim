@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:util="http://www.springframework.org/schema/util"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 http://www.springframework.org/schema/util
+	 http://www.springframework.org/schema/util/spring-util-3.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+    
+    <!--==================================================================================== -->
+    <!-- 注解自动装配 -->
+    <context:annotation-config/>
+    
+    <!-- 加入Spring注解自动装配管理 -->
+    <context:component-scan base-package="com.erim.web.*" />
+    <context:component-scan base-package="com.erim.sz.web.controller" />
+    <context:component-scan base-package="com.erim.sz.web.service" />
+    <context:component-scan base-package="com.erim.sz.web.shiro" />
+	<context:component-scan base-package="com.erim.sz.web.dao" />
+	<context:component-scan base-package="com.erim.sz.web.tm.dao" />
+	<context:component-scan base-package="com.erim.sz.web.tm.service" />
+    
+    <!-- 打开aop 注解 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    
+	<!-- 加载properties配置文件 -->
+	<util:properties id="appProperties" location="classpath:application.properties"/>
+	
+    <!-- 定义受环境影响易变的变量 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath*:/application.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+        <property name="driverClassName"                value="${jdbc.driver}"      />
+        <property name="url"                            value="${jdbc.url}"         />
+        <property name="username"                       value="${jdbc.username}"    />
+        <property name="password"                       value="${jdbc.password}"    />
+        <property name="maxIdle"                        value="${dbcp.maxIdle}"     />
+        <property name="maxActive"                      value="${dbcp.maxActive}"   />
+        <property name="defaultAutoCommit"              value="false"               />
+        <property name="timeBetweenEvictionRunsMillis"  value="3600000"             />
+        <property name="minEvictableIdleTimeMillis"     value="3600000"             />
+    </bean>
+    
+    <!--==================================================================================== -->
+    <!-- 定义MyBatis的SqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+    </bean>
+    
+    <!-- 定义MyBatis的SqlSessionBean -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+    
+    <!-- 定义全局的事物管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- 注解管理事物 -->
+    <tx:annotation-driven />
+    
+    <!--==================================================================================== -->
+<!-- Shiro's main business-tier object for web-enabled applications -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroDbRealm" />
+    </bean>
+    
+    <!-- shiro过滤器 -->
+    <!-- Shiro Filter,loginUrl及unauthorizedUrl是必须的,successUrl交由springmvc控制 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/loginPage" />
+        <property name="successUrl" value="/index" />  
+        <property name="unauthorizedUrl" value="/loginPage" /> 
+        <property name="filterChainDefinitions">
+            <value>
+                # static file chains  
+	            /static/js/**       		   = anon  
+	            /static/css/**     			   = anon  
+	            /static/img/**      		   = anon
+	            /loginPage					   = anon
+	            /login						   = anon
+	            /index						   = anon
+	            /							   = anon
+	            /**                            = authc
+            </value>
+        </property>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    
+    <!-- AOP式方法级权限检查  -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    <!--==================================================================================== -->
+    <!-- 全局异常处理 -->
+    <bean id="exceptionHandler" class="com.erim.sz.web.exception.MyExceptionHandler"/> 
+    
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="html/http/500"></property>
+    </bean>
+    
+</beans>

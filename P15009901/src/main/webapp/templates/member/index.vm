@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+	
+	#set($title='会员中心')
+    #parse("member/common/head.vm")
+	
+    <body>
+        <div class="indexwrap">
+            #parse("common/head.vm")
+
+            <!--dwp html start-->
+            <div class="box_cb mb20"></div>
+            <div class="g_cont">
+
+				#parse("member/common/left.vm")
+				
+                <div class="g_fl_lt">
+                    <div class="g_u_block pt20 pl20 pb20 mb20">
+                        <div class="u_img"><img src="$staticRoot/images/user_img_03.jpg">
+                        </div>
+                        <div class="u_desc">
+                            <p class="u_name">
+                                <strong>朱建乐</strong>欢迎你
+                            </p>
+                            <p>
+                                账户安全等级：高<a class="a_tel" href="#">修改手机</a><a class="e_mail" href="">修改邮箱</a><a class="a_passw" href="#">修改密码</a>
+                            </p>
+                            <p class="u_mess">
+                                <a href="#">未出行订单(0)</a><a href="#">待付款订单(0)</a><a href="#">消息提醒(<em>3</em>)</a>
+                            </p>
+                        </div>
+                        <div class="box_cb"></div>
+                    </div>
+
+                    <div class="g_u_block pb20">
+                        <p class="u_tit_1">
+                            近期关注
+                        </p>
+                        <ul class="u_list_1 pl150">
+
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="$staticRoot/images/tem_img/food1_03.jpg"></a>
+                            </li>
+                        </ul>
+                        <div class="box_cb"></div>
+                    </div>
+                </div>
+                <div class="box_cb"></div>
+            </div>
+            <!--dwp html end-->
+            <div class="rfooter">
+        		#parse("common/footer.vm")
+            </div>
+          </div>
+		  
+		  <script>
+            $(".on").removeClass('on');
+            $(".g_u_menu dt").eq(0).attr("class","on");
+        </script>
+    </body>
+</html>

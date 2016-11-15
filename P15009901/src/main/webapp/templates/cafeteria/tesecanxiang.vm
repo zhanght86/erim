@@ -1,0 +1,509 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>特色餐详情页_$!mallWeb.webCpyname网站</title>
+    <meta charset="utf-8">
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+    <link rel="bookmark" href="$staticRoot/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/hlxq.css">
+    <script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+ <script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+</head>
+    <body>
+        <div class="indexwrap"></div>
+            <!--头部-->
+            #parse("common/head.vm")
+
+            <!--dwp html start-->
+            <div class="box_cb"></div>
+            <div class="g_cont">
+                <div class="g_crumbs">
+                    <a href="$appRoot/$cpyno/superfree/superfree">超级自由行</a>&gt;<a href="$appRoot/$cpyno/cafeteria/tesecan">特色餐</a>&gt;$!cafeteria.cdlCity美食&gt;$!cafeteria.cdlName
+                </div>
+                <div class="foot_img_block">
+                    <ul id="img_block" class="img_block">
+                        <li>
+                            <a href="#" title="" target="_blank">
+								#if($!cafeteria.cdlImg1 != '')
+    								<img src="$staticFileRes$cafeteria.cdlImg1" title="" alt="">
+    							#else
+    								<img src="$staticRoot/images/isnull.png" title="" alt="">
+    							#end
+							</a>
+                        </li>
+                        <li>
+                            <a href="#" title="" target="_blank">
+								#if($!cafeteria.cdlImg2 != '')
+    								<img src="$staticFileRes$cafeteria.cdlImg2" title="" alt="">
+    							#else
+    								<img src="$staticRoot/images/isnull.png" title="" alt="">
+    							#end
+							</a>
+                        </li>
+                        <li>
+                            <a href="#" title="" target="_blank">
+								#if($!cafeteria.cdlImg3 != '')
+    								<img src="$staticFileRes$cafeteria.cdlImg3" title="" alt="">
+    							#else
+    								<img src="$staticRoot/images/isnull.png" title="" alt="">
+    							#end
+							</a>
+                        </li>
+                        <li>
+                            <a href="#" title="" target="_blank">
+								#if($!cafeteria.cdlImg4 != '')
+    								<img src="$staticFileRes$cafeteria.cdlImg4" title="" alt="">
+    							#else
+    								<img src="$staticRoot/images/isnull.png" title="" alt="">
+    							#end
+							</a>
+                        </li>
+                        <li>
+                            <a href="#" title="" target="_blank">
+								#if($!cafeteria.cdlImg5 != '')
+    								<img src="$staticFileRes$cafeteria.cdlImg5" title="" alt="">
+    							#else
+    								<img src="$staticRoot/images/isnull.png" title="" alt="">
+    							#end
+							</a>
+                        </li>
+                    </ul>
+                    <ul id="img_menu" class="img_menu_wxy">
+                        <li>
+							#if($!cafeteria.cdlImg1 != '')
+								<img src="$staticFileRes$cafeteria.cdlImg1" title="" alt="">
+							#else
+								<img src="$staticRoot/images/isnull.png" title="" alt="">
+							#end
+                        </li>
+                        <li>
+							#if($!cafeteria.cdlImg2 != '')
+								<img src="$staticFileRes$cafeteria.cdlImg2" title="" alt="">
+							#else
+								<img src="$staticRoot/images/isnull.png" title="" alt="">
+							#end
+                        </li>
+                        <li>
+							#if($!cafeteria.cdlImg3 != '')
+								<img src="$staticFileRes$cafeteria.cdlImg3" title="" alt="">
+							#else
+								<img src="$staticRoot/images/isnull.png" title="" alt="">
+							#end
+                        </li>
+                        <li>
+							#if($!cafeteria.cdlImg4 != '')
+								<img src="$staticFileRes$cafeteria.cdlImg4" title="" alt="">
+							#else
+								<img src="$staticRoot/images/isnull.png" title="" alt="">
+							#end
+                        </li>
+                        <li class="last">
+							#if($!cafeteria.cdlImg5 != '')
+								<img src="$staticFileRes$cafeteria.cdlImg5" title="" alt="">
+							#else
+								<img src="$staticRoot/images/isnull.png" title="" alt="">
+							#end
+                        </li>
+                    </ul>
+                </div>
+				<!--特色餐信息-->
+				<div class="foot_img_block2">
+                	<h1 class="g_title_2_2 mb10">$!cafeteria.cdlName</h1>
+                   <!-- <p class="g_txt_1 mb5 cheng_color">现金抵用1次，免费wifi，美味来袭，欢乐共享现金抵用1次，免费wifi，美味来袭，欢费wifi，美味来袭，欢乐共享！</p>-->
+                    <p class="g_txt_1 mb5"><strong>餐厅编码：</strong>$!cafeteria.cdlCode</p>
+					#if($erim.isNotEmpty($!cafeteria.cdlSort))
+						<p class="g_txt_1 mb5"><strong>主打菜系：</strong>$!cafeteria.cdlSort</p>
+					#end
+					<p class="g_txt_1 mb5"><strong>营业时间：</strong>$!cafeteria.cdlOpenTime -- $!cafeteria.cdlCloseTime</p>
+					#if($erim.isNotEmpty($!cafeteria.cdlSpecial))
+						<p class="g_txt_1 mb5"><strong>餐厅特色：</strong>$!cafeteria.cdlSpecial</p>
+					#end
+					##if($erim.isNotEmpty($!cafeteria.cdlNotice))
+						##<p class="g_txt_1 mb5"><strong>通知通告：</strong><pre>$!cafeteria.cdlNotice</pre></p>
+					###end
+					#if($erim.isNotEmpty($!cafeteria.cdlReason))
+    					<p class="g_txt_1 mb5"><strong>推荐理由：</strong></p>
+    					<div class="h100_block">
+    						<p class="g_txt_1">$!cafeteria.cdlReason</p>
+    					</div>
+					#end
+                    <div class="box_cb"></div>
+				</div>
+                <div class="map_block">
+                    <img src="$staticRoot/images/tesecan.jpg" border="0" usemap="#ditutese" alt="Planets" >
+                    <map name="ditutese" id="ditutese">
+                        <area shape="rect" coords="0,0,100,35" href ="http://www.dashimoxing.com/001/" alt="Sun" />
+                    </map>
+                </div>
+
+                <div class="box_cb mb20"></div>
+
+                <p class="g_tab">
+					<a class="tab_1 on" href="javascript:void(0);" name="more">代金券</a>
+					<a href="#tcjj" class="tab_00">套餐简介</a>
+					<a href="#tec" class="tab_00">推荐特色菜</a>
+					<a class="tab_2" href="javascript:void(0);">餐厅详情</a>
+				<p>
+                   <div class="tab_block">
+                <div class="block_tab_1 pt20">
+					<!--代金券-->
+					<h3 class="g_title_3 pl10 mb10">代金券</h3>
+					<div class="hlxqctctl_ct hlxqctctl_ct_line">
+								<ul class="hlxqctctl_cttop m0">
+									<li class="m1 w30_0"><strong>有效期</strong></li>
+									<li class="m2 w20_0"><strong>包间使用</strong></li>
+									<li class="m3 w20_"><strong>代金券面额</strong></li>
+									<li class="m3"><strong>团购价</strong></li>
+									<li class="m2 w20_0"><strong>购买数量</strong></li>
+									<li class="m7 w10_0">&nbsp;</li>
+								</ul>
+							#foreach($item in $CafeteriaVoucher)
+								<ul class="hlxqctctl_cttoc m0" style="height:50px;">
+									<li class="m1 w30_0">$!item.djqStartDate 至 $!item.djqEndDate</li>
+									<li class="m2 w20_0">$!item.djqVoucher</li>
+									<li class="m3 hlm" style="padding:0">￥$!item.cvpPriceTotal</li>
+									<li class="m3 hlm" style="padding:0">￥$!item.cvpPriceRetail</li>
+									<li class="m2 w20_0"><img class="add_minus_img minus_right" src="$staticRoot/images/ss_03.jpg"><input class="add_minus_img add_minus_num" type="text" value="0"><img class="add_minus_img add_left" src="$staticRoot/images/ss_05.jpg"></li>
+									<li class="m7 w10_0" style="width:150px;"><a class="chakan_a" href="javascript:void(0);">查看</a></li>
+								</ul>
+								<div class="chakan_cont pt13 pb10 clearfix">
+                                	<div class="w496 ml20 mr30 fl">
+                                    	<p class="mb10"><strong>购买须知：</strong></p>
+                                    	<pre>$!item.djqBuyShow</pre>
+                                	</div>
+                                	<div class="w496 ml20 mr30 fl">
+                                    	<p class="mb10"><strong>使用说明：</strong></p>
+                                    	<pre>$!item.djqUseShow</pre>
+                                	</div>
+                                	<div class="w100 fl pt35">
+                                		<a href="javascript:void(0)" onclick="ordertips()"  class="yuding_but mt75 w75h25">预订</a>
+                                	</div>
+								</div>
+							#end
+							<a name="tcjj"></a>
+					</div>
+							
+					<!--套餐简介-->
+                	 					<!--套餐简介-->
+                	 <h3 class="g_title_3 pl10 pt30 mb10">套餐简介</h3>
+					 <table class="g_table_1" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    	<tr>
+                            <th width="16%">套餐名称</th>
+                            <th width="38%">套餐包含</th>
+                            <th width="8%">适用人数</th>
+							<th width="15%">有效期</th>
+                            <th width="8%">单点总价</th>
+							 <th width="8%">团购总价</th>
+							<th width="7%"></th>
+                        </tr>
+						#foreach($item in $listPackage)
+    						<tr>
+                                <td class="td_2 tc_img" align="left">
+									<a href="javascript:void(0)" rel="$staticFileRes$!item.cpeImg5" class="preview">
+											#if($!item.cpeImg5 != '')
+                								<img src="$staticFileRes$item.cpeImg5" title="" alt="">
+                							#else
+                								<img src="$staticRoot/images/isnull.png" title="" alt="">
+                							#end
+									</a><span>$!item.cpeName</span></td>
+                                <td class="td_left">
+    								#foreach($foodItem in $item.dishesList)
+            							<p>菜品$velocityCount：【
+											#foreach($ifood in $foodItem.foodList)
+												#if($velocityCount == $!foodItem.foodList.size())
+													#if($ifood.cpfImg1 && $!ifood.cpfImg1 != '')
+														<a href="javascript:void(0)" rel="$staticFileRes$ifood.cpfImg1" class="preview">$ifood.cpfName</a>
+														数量：$!ifood.cpfNumber
+													#else
+														<a href="javascript:void(0)" rel="$staticRoot/images/isnull.png" class="preview">$ifood.cpfName</a>
+														数量：$!ifood.cpfNumber
+													#end	
+												#else
+													#if($ifood.cpfImg1 && $!ifood.cpfImg1 != '')
+														<a href="javascript:void(0)" rel="$staticFileRes$ifood.cpfImg1" class="preview">$ifood.cpfName</a>
+														数量：$!ifood.cpfNumber、
+													#else
+														<a href="javascript:void(0)" rel="$staticRoot/images/isnull.png" class="preview">$ifood.cpfName</a>
+														数量：$!ifood.cpfNumber、
+													#end
+													
+												#end
+												
+												##$ifood.cpfNtype
+												##$ifood.cpfNumber
+												##$ifood.cpfPrice
+												##<br/>
+											#end】(可选：$!foodItem.cpdAvenue道 单点：$!foodItem.cpdPrice元/道)
+										</p>
+									#end
+        									#if($item.foodOtherList && $item.foodOtherList.size() > 0 && $item.foodOtherList.get(0).cpfName != '')
+        										<p>其&nbsp;&nbsp;它：【
+        									#end
+											#foreach($otherItem in $item.foodOtherList)
+												<a href="javascript:void(0)" title="价格:$otherItem.cpfPrice¥">$!otherItem.cpfName</a>
+												#if($velocityCount != $!item.foodOtherList.size())
+													、
+												#end
+												##$ifood.cpfNtype
+												##$ifood.cpfNumber
+												##$ifood.cpfPrice
+												##<br/>
+											#end
+											#if($item.foodOtherList && $item.foodOtherList.size() > 0 && $item.foodOtherList.get(0).cpfName != '')
+    											】
+    										#end
+											
+										</p>
+								</td>
+								<!--
+								#foreach($qitaItem in $item.qitaList)
+        							<p>其他：【<a href="javascript:void(0)" rel="$staticRoot/images/hlxq4.jpg" class="preview">$!qitaItem.cpfName</a>、<a href="javascript:void(0)" rel="$staticRoot/images/hlxq4.jpg" class="preview">$!foodItem.cpfNtype</a>、<a href="javascript:void(0)" rel="$staticRoot/images/hlxq4.jpg" class="preview">$!foodItem.cpfNumber</a>、<a href="javascript:void(0)" rel="$staticRoot/images/hlxq4.jpg" class="preview">特色烤鸭</a>、<a href="javascript:void(0)" rel="$staticRoot/images/hlxq4.jpg" class="preview">大闸蟹</a>】</p>
+								#end
+								-->
+    							<td>$!item.cpePersonMin至$!item.cpePersonMax人</td>
+                                <td>$!item.cpeStartTime 至 $!item.cpeEndTime</td>
+    							<td class="red size20">￥$!item.cpeContentPrice</td>
+								<td class="red size20">￥$!item.cpcRetailPrice起</td>
+								<td>
+									<input type="hidden" name="cpeId" value="$!item.id" />
+									<a class="chakan_a2 yuding" href="javascript:void(0);">查看</a>
+								</td>
+                            </tr>
+							<tr >
+                            	<td colspan='7' style='padding:0;border-top:none;'>
+                            		<div class='chakan_block2' align='left' id="chakan_block2$velocityCount" style="display:none;height:auto;">
+										<div class="chakan_cont_taocan pt13 pb10 clearfix" style="display:block;" id="chakan_cont_taocan$velocityCount" style="zoom:1;overflow:hidden;">
+                                        								
+            								<div class="w496 ml20 mr30 fl">
+            									#if($erim.isNotEmpty($!item.cpeIntroduction))
+                                                	<p class="mb10"><strong>套餐说明：</strong></p>
+                                                	<p class="mb10">$!item.cpeIntroduction</p>
+            									#end
+            									#if($erim.isNotEmpty($!item.cpeFriendlyTips))
+                                                	<p class="mb10"><strong>温馨提示：</strong></p>
+                                                	<pre>$!item.cpeFriendlyTips</pre>
+            									#end
+                                        	</div>								
+            								<div class="w496 ml20 mr30 fl">
+            									#if($erim.isNotEmpty($!item.cpeBuyKnow))
+                                                    <p class="mb10"><strong>购买须知：</strong></p>
+                                                	<pre>$!item.cpeBuyKnow</pre>                               	
+            									#end
+            								</div>
+                                        	<div class="w100 fr">
+                                        		<a href="#" class="yuding_but w75h25">预订</a>
+                                        	</div>
+            								<div style="clear"></div>
+                                        </div>
+									</div>
+                            	</td>
+                            </tr>
+							
+							
+						#end
+						<a name="tec"></a>
+					</table>
+                    <div class="box_cb mb30 mb10"></div>
+                    <h3 class="g_title_3 pl10">推荐特色菜</h3>
+                     <table class="g_table_1" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    	<tr>
+                            <th width="30%">特色菜名称</th>
+                            <th width="40%">特色菜介绍</th>
+							<th width="30%">特色菜价格</th>
+                        </tr>
+						#foreach($item in $listCuisine)
+                            <tr>
+                                <td class="td_2 tc_img" align="left">
+									<a href="javascript:void(0)" rel="$staticFileRes$item.cslImag" class="preview">
+										#if($!item.cslImag != '')
+            								<img src="$staticFileRes$item.cslImag" title="" alt="">
+            							#else
+            								<img src="$staticRoot/images/isnull.png" title="" alt="">
+            							#end
+									</a><span>$!item.cslName</span></td>
+                                <td class="td_left">
+    								<p>$!item.cslIntroduce</p>
+    							</td>
+    							<td class="red size20">￥$!item.cslPrice</td>
+                            </tr>
+						#end
+					</table>
+					<div class="box_cb"></div>
+               </div>
+                <div class="block_tab_2 pt20 pl30 " style="padding:20px 46px 40px 44px;width:1108px;">
+					#if($!cafeteria.cdlIntroduce != '')
+    					<h2 class="notes-title">
+        					餐厅介绍
+                        </h2>
+        				<p class="notes-txt">$!cafeteria.cdlIntroduce
+                        </p>
+    				#end
+    				<!--开始-->
+    				<h2 class="notes-title">
+    					餐厅信息
+                    </h2>
+					#if($cafeteria.cdlSpecial)
+        				<div class="notes-line">
+        					<span class="notes-stitle">餐厅特色</span>
+        					<span class="notes-stext">$!cafeteria.cdlSpecial</span>
+                        </div>
+					#end
+					#if($!cafeteria.cdlSort != '')
+        				<div class="notes-line">
+        					<span class="notes-stitle">主打菜系</span>
+        					<span class="notes-stext">$!cafeteria.cdlSort</span>
+                        </div>
+					#end
+					<div class="notes-line">
+    					<span class="notes-stitle">餐厅电话</span>
+    					<span class="notes-stext">$!cafeteria.cdlTelephone</span>
+    				</div>
+					<div class="notes-line">
+    					<span class="notes-stitle">营业时间</span>
+    					<span class="notes-stext">$!cafeteria.cdlOpenTime -- $!cafeteria.cdlCloseTime</span>
+    				</div>
+					<div class="notes-line">
+    					<span class="notes-stitle">可同时用餐人数</span>
+    					<span class="notes-stext">
+							#if(!$cafeteria.cdlEatPeople) 不限 
+							#else $!cafeteria.cdlEatPeople人
+							#end
+						</span>
+                    </div>
+					<div class="notes-line">
+    					<span class="notes-stitle">停车场</span>
+    					<span class="notes-stext">#if($!cafeteria.cdlStopCar == '01') 有  #else 无 #end</span>
+    				</div>
+					<div class="notes-line">
+    					<span class="notes-stitle">网络设施</span>
+    					<span class="notes-stext">$!cafeteria.cdlInternet</span>
+    				</div>
+					<!--结束-->
+					<h2 class="notes-title">
+    					餐厅位置
+                    </h2>
+    				<div class="notes-line">
+    					<span class="notes-stitle">详细地址</span>
+    					<span class="notes-stext">$!cafeteria.cdlAddress</span>
+    				</div>
+					#if($!cafeteria.cdlDistrict != '')
+    					<div class="notes-line">
+        					<span class="notes-stitle">所属商圈</span>
+        					<span class="notes-stext">$!cafeteria.cdlDistrict</span>
+        				</div>
+					#end
+					#if($!cafeteria.cdlReason != '')	
+        				<h2 class="notes-title">
+        					推荐理由
+                        </h2>
+        				<pre>$!cafeteria.cdlReason</pre>		
+					#end
+					#if($!cafeteria.cdlNotice != '')
+    					<h2 class="notes-title">
+        					通知公告
+                        </h2>
+        				<pre>$!cafeteria.cdlNotice</pre>
+    				#end			
+                    <div class="box_cb"></div>
+                </div>
+             </div>
+                    <div class="box_cb"></div>
+            </div>
+            <!--dwp html end-->
+            #parse("common/footer.vm")
+    </body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script> 
+<script type="text/javascript" src="$staticRoot/js/jquery.SuperSlide.js"></script>
+<script src="$staticRoot/js/wan-spinner.js"></script>
+<script>
+$(document).ready(function() {
+$(".wan-spinner").WanSpinner();
+
+$(".chakan_a").click(function(){
+		if($(this).text()=="查看"){
+			$(".chakan_block").remove();
+			$(this).parent().parent().after("<div class='chakan_block'></div>");
+			//$(".chakan_block").animate({height:"auto"});
+			
+			var el = $(".chakan_block"),curHeight = el.height(),autoHeight = el.css('height', 'auto').height()+$(".chakan_cont").height()+25;
+			el.height(curHeight).animate({height: autoHeight}, 300);
+			//alert(autoHeight);
+			$(".chakan_cont").clone().appendTo(".chakan_block").show();
+			$(".chakan_a").text("查看");
+			$(this).text("收起");
+		}else{
+			$(".chakan_block").animate({height:"0px"});
+			$(".chakan_cont").css("border","none;")
+			$(this).text("查看");
+		}
+	})
+	
+	/*套餐简介 查看*/
+	$(".chakan_a2").click(function(){
+		var id = $(this).parent().find("input[name='cpeId']").val();
+		if($(this).text()=="查看"){
+			$(".chakan_block2").parents('tr').remove();
+			$(this).parent().parent().after("<tr><td colspan='7' style='padding:0;'><div class='chakan_block2' align='left' style='height:auto'></div></td></tr>");
+			
+			//var el = $(".chakan_block2"),curHeight = el.height(),autoHeight = el.css('height', 'auto').height()+$(".chakan_cont_taocan").height()+450;
+			//el.height(curHeight).animate({height: autoHeight});
+			//alert(curHeight);
+			$(".chakan_block2").show();
+			//$(".chakan_cont_taocan").clone().appendTo(".chakan_block2").show();
+			$(".chakan_block2").load("$appRoot/$cpyno/cafeteria/tesecanxiang/price?cpeId=" + id);
+			$(".chakan_a2").text("查看");
+			$(this).text("收起");
+		}else{
+			//$(".chakan_block2").animate({height:"0px"});
+			$(".chakan_block2").hide();
+			$(".chakan_cont_taocan").css("border","none;")
+			$(this).text("查看");
+		}
+	})
+
+
+/*购买数量*/
+$(".add_minus_img").click(function(){
+		if($(this).hasClass('add_left')){
+			$(this).siblings('.add_minus_num').val(parseInt($(this).siblings('.add_minus_num').val())+1);
+		}else if($(this).siblings('.add_minus_num').val()=="0"){
+			return false;
+		}else{
+			$(this).siblings('.add_minus_num').val(parseInt($(this).siblings('.add_minus_num').val())-1);
+		}
+	})
+
+
+});
+</script>
+<script type="text/javascript">
+var i=0;
+var int=self.setInterval("show()",2000)
+function show(){
+	
+	  $("#img_menu li").click(function(){ 
+	    $(this).addClass("on").siblings().removeClass("on");
+		i=$(this).index(); });
+	  
+	  if(i<=$("#img_menu li").length-1)
+	  {	  $("#img_block li").eq(i).fadeIn(80);
+		  $("#img_block li").eq(i).siblings().fadeOut(80);
+		  $("#img_menu li").eq(i).addClass("on").siblings().removeClass("on");
+		  i=i+1;  }
+	  else
+	  {	  i=0;
+		  $("#img_block li").eq(i).fadeIn(80);
+		  $("#img_block li").eq(i).siblings().fadeOut(80);
+		  $("#img_menu li").eq(i).addClass("on").siblings().removeClass("on");
+		  i=i+1;  } }
+		  
+		  
+function ordertips(){
+	alert('对不起，预定功能暂不开放');
+}
+
+</script>

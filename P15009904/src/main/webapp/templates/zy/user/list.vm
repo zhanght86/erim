@@ -1,0 +1,72 @@
+<div class="doadmin">
+	<div class="newfood_suptop mb20">
+		<img src="$staticRoot/images/user1.png">
+		<span>用户管理</span>
+		<div class="cb"></div>
+		<div class="g_line"></div>
+	</div>
+	<div class="coadmin_top" style="float:left">
+		<form class="form-search" method="post" id="form1">
+    		<div class="doadmin_topl" style="margin-top:0; margin-bottom:20px;">
+    			<div class="doadmin_toplboxa" style="width:240px;">
+    				<span style="width:88px;">名称:</span>
+    				<div class="doadmin_toplbra" style="width:130px;">
+    					<input type="text" value="$!cmsSystemUser.zyUserRealname" name="zyUserRealname" />
+    				</div>
+    			</div>
+    			<button class="doadmin_see" type="button" onclick="index.searchform('form1','$appRoot/zy/user/list');">查询</button>
+    		</div>
+		</form>
+	</div>
+	<div class="cb"></div>
+	<div class="g_line"></div>
+	<div class="doadmin_ct">
+		<div class="doadmin_ct_top">
+			<div class="carad_ctbtn">
+			   <button onclick="index.load('$appRoot/zy/user/insertPage');">+新增用户</button>
+            </div>
+		</div>
+		<div class="doadmin_ct">
+			<div class="carad_ct">
+				<div class="carad_ctrtable">
+					<table cellspacing="0" cellspadding="0">
+						<thead>
+							<tr>
+								<td>序号</td>
+        						<td>名称</td>
+        						<td>登录名</td>
+        						<td>操作</td>
+								<td>是否停用</td>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $userList)
+        						<tr>
+									<td>$item.id</td>
+            			            <td>$!item.zyUserRealname</td>
+            			            <td>$!item.zyUserLoginname</td>
+									<td>
+										<a href="javascript:index.load('$appRoot/zy/user/updatePage?id=$item.id');">查看/修改</a>
+									</td>
+									<td>
+										<span>
+											#if($!item.zyIsDelStatus==0)
+                                                <img src="$staticRoot/images/lvdui.png"/>&nbsp;
+                                                <a href="javascript:index.load('$appRoot/zy/user/delete?id=$item.id&zyIsDelStatus=1');"><img src="$staticRoot/images/huicuo.png" id="img" class="active" /></a>
+											#end
+											#if($!item.zyIsDelStatus==1)
+                								<a href="javascript:index.load('$appRoot/zy/user/delete?id=$item.id&zyIsDelStatus=0');"><img src="$staticRoot/images/huidui.png" id="png" /></a>
+                								&nbsp;<img src="$staticRoot/images/hongcuo.png"/>
+											#end
+                                        </span>
+									</td>
+    							</tr>
+    						#end
+					  </tbody>
+					</table>
+					#parse("common/page.vm")
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

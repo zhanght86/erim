@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>门票列表页_$!mallWeb.webTitle服务平台_$!mallWeb.webCpyname网站</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit" />
+	<meta content="$!mallWeb.webTitle服务平台" name="keywords"><!--关键词-->
+	<meta content="$!mallWeb.webCpyname网站" name="description"><!--描述-->
+	<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="bookmark" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/headerfooter.css">
+	<script src="$staticRoot/js/jquery-1.9.1.min.js"></script>
+		
+</head>
+<body>
+	<div class="indexwrap">
+		<!--导航-->
+        #parse("common/indexwraptwo.vm")
+		<!--导航结束-->
+		<!--头部-->
+		#parse("common/head.vm")
+
+<!--dwp html start-->
+
+		<div class="box_cb pt25"></div>
+		<form id="form1" method="post" action="$appRoot/$cpyno/menpiao.html">
+			<div class="search-menu">
+    			#vsearcharea('tdlWithinOrOuter','tdlProvince',$!ticket.tdlProvince,'tdlCity',$!ticket.tdlCity,'tdlNation',$!ticket.tdlNation,'tdlCityone',$!ticket.tdlCityone)
+				
+    			<div class="smenu-li">
+    				<label class="search-lab" style="width:280px;">
+        				<span class="smenu-title">参观日期：</span>
+        				<input type="text" class="search-input laydate-icon" onclick="laydate();" name="tplDate" value="$!ticket.tplDate">
+        			</label>
+        			<label class="search-lab" style="width:300px;">
+        				<span class="smenu-title">关键词：</span>
+        				<input type="text" name="tdlName" value="$!ticket.tdlName" class="search-input">
+        			</label>
+        			<button class="search-btn" value="" type="submit" onclick="$appRoot/$cpyno/menpiao.html">搜索</button>
+        		</div>
+    			#* 
+        		<dl class="smenu-li">
+        			<dt class="smenu-title">所在区域：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num #if((!$ticket.tdlProvince || $!ticket.tdlProvince == '') && (!$ticket.tdlCityoneVo || $!ticket.tdlCityoneVo == ''))  item-hover  #end" onclick="$('#tdlCityoneVo').attr('value','');     $('#tdlProvince').attr('value',''); $('#form1').submit();">不限</span>
+        				<div class="smenu-nation">
+        					<span class="item-area">国内<em class="icon-img"></em></span>
+        					<span class="item-area">国际·港澳台<em class="icon-img"></em></span>
+        				</div>
+        				<div class="nations">
+        					<div class="local-city">
+        						<span class="no-num #if("" == $!ticket.tdlProvince || ! $ticket.tdlProvince)  item-hover  #end" onclick="$('#tdlProvince').attr('value','');$('#tdlCityoneVo').attr('value',''); $('#form1').submit();">不限</span>
+    							#foreach($item in $provinces)
+                    				<span class="smenu-item  #if($!ticket.tdlProvince == $item.regionNo) item-hover #end" id="a_level_$item.id" onclick="$('#tdlProvince').attr('value','$item.regionNo');$('#tdlCityoneVo').attr('value','');  $('#form1').submit();">$item.regionName</span>
+                    			#end
+        					</div>
+        					<div class="local-city">
+        						<span class="smenu-item #if($!ticket.tdlCityoneVo == '')      item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','');     $('#tdlProvince').attr('value',''); $('#form1').submit();">不限</span>
+                				<span class="smenu-item #if($!ticket.tdlCityoneVo == '香港')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','香港');   $('#tdlProvince').attr('value',''); $('#form1').submit();">香港</span>
+                				<span class="smenu-item #if($!ticket.tdlCityoneVo == '澳门')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','澳门');   $('#tdlProvince').attr('value',''); $('#form1').submit();">澳门</span>
+                				<span class="smenu-item #if($!ticket.tdlCityoneVo == '台湾')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','台湾');   $('#tdlProvince').attr('value',''); $('#form1').submit();">台湾</span>
+                				<span class="smenu-item #if($!ticket.tdlCityoneVo == '东京')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','东京');   $('#tdlProvince').attr('value',''); $('#form1').submit();">东京</span>
+    							<span class="smenu-item #if($!ticket.tdlCityoneVo == '首尔')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','首尔');   $('#tdlProvince').attr('value',''); $('#form1').submit();">首尔</span>
+    							<span class="smenu-item #if($!ticket.tdlCityoneVo == '曼谷')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','曼谷');   $('#tdlProvince').attr('value',''); $('#form1').submit();">曼谷</span>
+    							<span class="smenu-item #if($!ticket.tdlCityoneVo == '芭提雅')  item-hover #end" onclick="$('#tdlCityoneVo').attr('value','芭提雅');  $('#tdlProvince').attr('value','');  $('#form1').submit();">芭提雅</span>
+    							<span class="smenu-item #if($!ticket.tdlCityoneVo == '巴黎')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','巴黎');   $('#tdlProvince').attr('value',''); $('#form1').submit();">巴黎</span>
+    							<span class="smenu-item #if($!ticket.tdlCityoneVo == '新西兰')  item-hover #end" onclick="$('#tdlCityoneVo').attr('value','新西兰');  $('#tdlProvince').attr('value','');  $('#form1').submit();">新西兰</span>
+    							<span class="smenu-item #if($!ticket.tdlCityoneVo == '纽约')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','纽约');   $('#tdlProvince').attr('value',''); $('#form1').submit();">纽约</span>
+    							<span class="smenu-item #if($!ticket.tdlCityoneVo == '加州')   item-hover #end"  onclick="$('#tdlCityoneVo').attr('value','加州');   $('#tdlProvince').attr('value',''); $('#form1').submit();">加州</span>
+    						</div>
+        				</div>
+        			</dd>
+        		</dl>
+    			<dl class="smenu-li" style="display:none"><!-- zz做不完了先隐藏啦-->
+        			<dt class="smenu-title">所在城市：</dt>
+        			<dd class="smenu-items">
+        				<span class="no-num #if("" == $!ticket.tdlCity || ! $ticket.tdlCity) item-hover #end " onclick="$('#tdlCity').attr('value',''); $('#form1').submit();">不限</span>
+    					<div id="div_city"></div>
+        			</dd>
+        		</dl>
+    			*#
+    		<dl class="smenu-li">
+    			<dt class="smenu-title">景点级别：</dt>
+    			<dd class="smenu-items">
+    				<span class="no-num #if("" == $!ticket.tdlScenicLevel || ! $ticket.tdlScenicLevel) item-hover #end " onclick="$('#tdlScenicLevel').attr('value',''); $('#form1').submit();">不限</span>
+    				#foreach($item in $sceniclevel.keySet())
+						<span class="smenu-item #if($!ticket.tdlScenicLevel == $item) item-hover #end " id="a_level_$item.id" onclick="$('#tdlScenicLevel').attr('value','$item'); $('#form1').submit();">$sceniclevel.get($item)</span>
+    				#end
+    			</dd>
+    		</dl>
+    		<dl class="smenu-li last">
+    			<dt class="smenu-title">景点主题：</dt>
+    			<dd class="smenu-items">
+					<span class="no-num  #if("" == $!ticket.tdlAttractions || ! $ticket.tdlAttractions) item-hover #end " onclick="$('#tdlAttractions').attr('value',''); $('#form1').submit();">不限</span>
+						<div class="smenu-right">
+    					#foreach($item in $attractions.keySet())
+                            <span class="smenu-item #if($!ticket.tdlAttractions == $item) item-hover #end" id="a_level_$item.id" onclick="$('#tdlAttractions').attr('value','$item'); $('#form1').submit();">$attractions.get($item)</span>
+    					#end 
+						</div>
+    				<span class="smenu-item-more">更多</span>
+    			</dd>
+    		</dl>
+    	</div>
+		<input type="hidden" name="tdlAttractions" id="tdlAttractions" value="$!ticket.tdlAttractions">
+		<input type="hidden" name="tdlScenicLevel" id="tdlScenicLevel" value="$!ticket.tdlScenicLevel">
+		<!--<input type="hidden" name="tdlProvince"    id="tdlProvince"    value="$!ticket.tdlProvince">
+		<input type="hidden" name="tdlCity"        id="tdlCity"   	   value="$!ticket.tdlCity">
+		<input type="hidden" name="tdlCityoneVo"     id="tdlCityoneVo"     value="$!ticket.tdlCityoneVo">-->
+	</form>
+        <div class="g_cont pt25" style="clear:both">
+        	<div class="g_left_rt">
+				<ul class="g_list_2">
+					#foreach($item in $ticketList)
+    					<li>
+    						<a href="$appRoot/$cpyno/ticket/menpiaoxiang/$item.id?tplDate=$!ticket.tplDate" title="" target="_blank">
+								#if($!item.tdlImg1 != '')
+									<img src="$staticFileRes$item.tdlImg1" title="" alt="">
+								#else
+									<img src="$staticRoot/images/isnull.png" title="" alt="">
+								#end
+							</a>
+    						<div class="desc_txt">
+    							<p class="title">
+									<a href="$appRoot/$cpyno/ticket/menpiaoxiang/$item.id?tplDate=$!ticket.tplDate" title="$item.tdlName" target="_blank">$erim.subString($item.tdlName,12)</a>
+									<span class="star_box">
+										#if($!item.tdlScenicLevel != '')
+											<em>$item.tdlScenicLevel景区</em>
+										#end
+										
+									</span>
+								</p>
+								<p class="title">
+									开放时间：$!item.tdlTimeOpen
+								</p>
+								<p class="title">
+									容纳人数：
+									#if($!item.tdlNum == '0') 不限
+        							#elseif($!item.tdlNum != '0')
+        								$!item.tdlNum人
+        							#end
+								</p>
+								#if($erim.isNotEmpty($!item.tdlUsingThisDictionary))
+								<p class="title">
+									维护说明：$!item.tdlUsingThisDictionary
+								</p>
+								#end
+								<p class="title">
+									详细地址：#vregion($!item.tdlProvince)#vregion($!item.tdlCity)#vregion($!item.tdlCounty)$!item.tdlAddress
+								</p>
+    							<!--<p class="star_box"><em>$item.tdlScenicLevel景区</em><!--热度 <span class="star"></span></p>-->
+								
+    						</div>
+    						<div class="tool_block">
+    							<p class="price-d"><em>￥$!item.tplRetailPrice</em>起</p>
+								<!--
+    							<div class="zhekou"><span>5.37</span><del>票面价：104</del></div>
+								-->
+    							<a href="$appRoot/$cpyno/ticket/menpiaoxiang/$item.id?tplDate=$!ticket.tplDate" target="_blank">查看</a>
+    						</div>
+    						<div class="box_cb"></div>
+    					</li>
+					#end
+				</ul>
+				#parse("common/page.vm")	
+            </div>
+			#parse("common/hot.vm")
+            <div class="box_cb"></div>
+        </div>
+<!--dwp html end-->
+     #parse("common/footer.vm")
+	</div>
+</body>
+</html>
+<script src="$staticRoot/js/d_u_c.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript">
+
+	$(function(){
+		//所在区域默认展开项
+		if('$!ticket.tdlCityoneVo' != ''){
+    		$(".smenu-nation").prev().removeClass("item-hover");
+    		$(".smenu-nation").children().eq(1).addClass("item-hover").siblings().removeClass("item-hover");
+    		$(".nations .local-city").eq(1).show().siblings(".nations .local-city").hide();
+		}else if('$!ticket.tdlProvince' != ''){
+			$(".smenu-nation").prev().removeClass("item-hover");
+    		$(".smenu-nation").children().eq(0).addClass("item-hover").siblings().removeClass("item-hover");
+    		$(".nations .local-city").eq(0).show().siblings(".nations .local-city").hide();
+		}else{
+			$(".local-city").hide();
+		}
+		//酒店特色默认展开项
+		if('$!ticket.tdlAttractions' != ''){
+			$(".smenu-item-more").text("收起");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").show();
+		}else{
+			$(".smenu-item-more").text("更多");
+			$(".smenu-item-more").prev(".smenu-right").find("span:gt(7)").hide();
+		}		
+	});	
+	
+
+</script>

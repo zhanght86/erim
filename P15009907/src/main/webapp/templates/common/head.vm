@@ -1,0 +1,37 @@
+<div class="head">
+	<div class="htop">
+		<div class="htopl" style="width:auto; max-width:1000px;">
+			#if($erim.isNotEmpty($!userCpyLogo))
+				<img src="$staticFileRes$userCpyLogo" style="width:77px;height:45px; margin-right:-20px;">
+			#end
+			<span style="font-size:15px; margin-left:50px;">&nbsp;&nbsp;$erim.subString($!userCpyBrand,20)<span style="font-size:22px;font-weight: bold;">$erim.subString($!userCpyName,20)</span></span>
+		</div>
+		<div class="htopr">
+			<span>您好:$userName</span> 
+			<a href="javascript:index.load('$appRoot/welcome');" class="signout">主页</a>
+			&nbsp;&nbsp;
+			<a href="javascript:index.load('$appRoot/cpy/detail');" class="signout">企业信息</a>
+			&nbsp;&nbsp;
+			<a href="$appRoot/loginOut" class="signout">退出</a> 
+			&nbsp;&nbsp;
+			<a href="javascript:index.load('$appRoot/zx/user/updatePadPage');">修改密码</a>
+		</div>
+	</div>
+	<div class="hfooter">
+		#if($erim.isNotEmpty($!lockmessage))
+			<div class="hfl" style="width:500px;">
+				<a href="javascript:;" style="color:yellow;">$lockmessage</a>
+			</div>
+    	#else
+    		<div class="hfl">今天是&nbsp;$erim.nowDate()</div>
+    		<div class="hfm">   
+    			<img src="$staticRoot/images/houtai3.png">
+    		</div>
+    		<div class="hfr">
+    			<p>&nbsp;您的位置：&nbsp;</p>
+    			<span id="titleSpan">首页</span>
+    		</div>
+		#end
+		##<div class="hfl">大波波出炉 手撕菠菜</div>
+	</div>
+</div>

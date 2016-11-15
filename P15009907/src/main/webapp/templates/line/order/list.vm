@@ -1,0 +1,141 @@
+<div class="jd_block">
+	<p class="tit_1 ml20"><img src="static/images/dd_ci_03.png" alt="当地旅游订单" title="当地旅游订单">专线订单<br>
+	</p>
+	<div class="g_line mb20"></div>
+	<form method="post" ip="form1">
+	<div class="input_block clearfix">
+		<div class="label_left">订单编号：</div>
+		<div class="input_right input_right_wauto">
+			<input class="w130" name="id">
+			<label class="ml15">线路名称：</label>
+			<input class="w130" name="">
+			<label class="ml15">旅游天数：</label>
+			<input class="w130" name="">
+			<label class="ml15">客户类别：</label>
+			<select class="w130" name="">
+				<option></option>
+				<option value="">组团社</option>
+				<option value="">地接社</option>
+				<option value="">专线商</option>
+				<option value="">直营</option>
+			</select>
+			<label class="ml15">公司名称：</label>
+			<input class="w130">
+		</div>
+	</div>
+	<div class="input_block clearfix">
+		<div class="label_left">预定时间：</div>
+		<div class="input_right input_right_wauto">
+			<span class="tishi_box w130"><input type="text" class="w100" name="gdoCreatetime" onClick="WdatePicker()"><img src="$staticRoot/images/tt_5.jpg"></span>
+			<label class="ml15">支付状态：</label>
+			<select class="w130">
+				<option></option>
+				<option value="">已支付</option>
+				<option value="">窗口付</option>
+				<option value="">线下协议</option>
+			</select>
+			<label class="ml15">参团人： </label><input class="w130" >
+			<label class="ml15">处理人： </label><input class="w130"><button class="y_but ml35" type="button" onclick="index.searchform('form1','$appRoot/line/order/list');">查 询</button>
+		</div>
+	</div>
+	</form>
+	#* 
+	<div class="g_line mb20"></div>
+	<div class="tel_mess_block ml55 mb20">
+		<p><strong>短信内容设置</strong></p>
+		<p class="mb15">预订成功后游客所收短信基本内容：</p>
+		<div class="tel_con ml35 mb15">
+			<table cellpadding="0" cellspacing="0" border="0"><tr><td>您已成功预定：</td><td><p>青岛双飞6日游/2015.10.24参团/共50人<br>成人：10人/儿童：40人</p></td></tr></table>
+			<p>联系人 : 张三</p>
+			<p>请您 <input type="text"></p>
+		</div>
+		<div class="button_block clearfix ml35"><button class="y_but ml35">&nbsp;保存&nbsp;</button></div>
+	</div>
+	*# 
+	<div class="g_line mb20"></div>
+	<div class="carad_ctrtable ml35" style="width:90%">
+		<table cellspacing="0" cellspadding="0" >
+			<thead>
+				<tr>
+					<td>订单编号</td>
+					<td>路线名称</td>
+					<td>客户类型</td>
+					<td>公司/操作人/电话</td>
+					<td>零售单价</td>
+					<td>预定时间</td>
+					<td>预订内容</td>
+					<td>总费用</td>
+					<td>在线交流</td>
+					<td>支付状态</td>
+					<td>订单操作</td>
+					<td>确认状态</td>
+					<td>订单状态</td>
+					<td>处理人</td>
+					<td>备注</td>
+				</tr>
+			</thead>
+			<tbody>
+				#foreach($item in $lineList)
+    				<tr>
+    					<td>$!item.id</td>
+    					<td></td>
+    					<td></td>
+						<td><a class="dwp_f_a" href="javascript:void(0);" style="text-align:left">李庆旅行社<span>操作人：李庆<br />联系电话：14703315972</span></a></td>
+    					<td></td>
+						<td>$!date.lorCreateetime('yyyy-MM-dd HH:mm:ss',$!item.gdoCreatetime)</td>
+    					<td>$!item.lorComment</td>
+    					<td>$!item.lorTotalPrice</td>
+    					<td><a target=blank href="tencent://message/?461656759&Site=在线客服&Menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+    					<td>
+							<select>
+								<option>已支付</option>
+								<option>窗口付</option>
+								<option>线下协议</option>
+							</select>
+						</td>
+    					<td class="click_td_win">
+							<select name="lorNtype">
+								<option>--</option>
+								<option>接单</option>
+								<option>拒单</option>
+							</select>
+						</td>
+    					<td>已接单</td>
+    					<td>
+							<select>
+								<option>未处理</option>
+								<option>已处理</option>
+							</select>
+						</td>
+    					<td>李四</td>
+    					<td></td>
+    				</tr>
+				#end
+			</tbody>
+		</table>
+		#parse("common/page.vm")
+	</div>
+
+</div>
+
+<div class="win_box_bg"></div>
+<div class="win_box_edit win_box_edit2">
+	<a class="esc_a" href="javascript:void(0);">&times;</a>
+	
+	<div class="tel_mess_center"><br>
+		<p class="ml35"><strong>短信内容确认</strong></p><br>
+		<div class="tel_con_1 ml35 mb15">
+			<table cellpadding="0" cellspacing="0" border="0"><tr><td>您已成功预定：</td><td><p>青岛双飞6日游/2015.10.24参团/共50人<br>成人：10人/儿童：40人</p></td></tr></table>
+			<p>联系人 : 李三</p>
+			<p>请您及时于我们联系，合作愉快！ </p>
+		</div><br>
+		<div class="button_block clearfix ml35"><button class="y_but ml35">&nbsp;确认&nbsp;</button><button class="b_but ml35">&nbsp;取消&nbsp;</button></div>
+	</div>
+	
+</div>
+	<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){$('.dwp_f_a').mouseover(function(){
+$(this).parent().css('position','relative');$(this).parent().css('z-index','2');$(this).children().show();})
+$('.dwp_f_a').mouseout(function(){$(this).parent().css('position','inherit');$(this).parent().css('z-index','0');$(this).children().hide();})})
+</script>

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>关于我们_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/index.css">
+    <link href="$staticRoot/css/headerfooter.css" type="text/css" rel="stylesheet" />
+	<link href="$staticRoot/css/aboutcontent.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="$staticRoot/css/user.css">
+
+</head>
+<body>
+	<div class="indexwrap">
+		<!--头部-->
+		#parse("common/head.vm")
+
+		<!--中间内容区域-->
+		<!--banner-->
+		<div class="banner">
+			<img src="$staticRoot/images/banner.jpg"height="120" width="100%"/>
+		</div>
+		<!--/banner-->
+	<!--content-->
+	<center>
+		<div class="about_contnet W">
+			<!--left-->
+			#parse("help/leftOfHelpCenter.vm")
+			<!--/left-->
+			<!--right-->
+			
+			<!-- 旅游资讯 -->
+			<div id="rigrht3">
+				<div class="gbodyer_rgt tab-con1 gbodyer_yc">
+					<div class="gbodyer_rgt_top">
+						<span class="gbodyer_news">合同签署</span>
+					</div>
+					<div class="about_inner">
+					   <div class="about_gui">
+							<div class="about_guia">
+								<div class="about_cen">
+
+
+<p>1.门市地址在什么地方？</p><br>
+
+<p>答：地址：南京市中山东路300号CFC长发中心A座2楼；电话：400-090-5190</p><br>
+
+<p>2.能传真签合同吗？</p><br>
+
+<p>答：合同可以选择传真签约、快递签约或者去门市签约；我们会把盖章后的合同传真或扫描件发邮件给您，在合同发送后24小时内或在我司要求时间内，您签字回传后合同即时生效。</p><br>
+
+<p>3.在网上支付如何签订合同？</p><br>
+
+<p>答：在您付费前可阅读合同条款、补充条款等内容，在您选择"阅读并接受以上合同条款、补充条款、保险条款和其他所有内容"并付费后，视为双方默认合同实际履行。</p><br>
+
+<p>4.在线签约的合同是否具有法律效力？</p><br>
+
+<p>答：依据《中华人民共和国合同法》，当事人订立合同，有书面形式、口头形式和其他形式。其中书面形式指合同书、信件和数据电文（包括电报、电传、传真、电子数据交换和电子邮件）等可以有形地表现所载内容的形式。在线签订的合同是属于数据电文的一种，和纸质合同一样具有同样的法律效力。</p><br>
+
+<p>5.门市签约流程是什么？</p><br>
+
+<p>答：您通过电话或在线预订满意的旅游产品后，客服专员将与您核对好出游的日期、人数、签约方式、付款方式等信息；若您选择门市签约，需要提前确认好签约的时间，我们将提前为您做好准备；您抵达门市后，请提供订单号或预订时的手机号码，门市接待人员将为您办理签约手续；门市接待人员根据确定的订单信息办理签约手续，若您的出游安排有变化，请提前与客服专员联系；签约完毕后，订单的后续事宜将由客服专员为您安排，有问题请您及时与我们联系。</p><br>
+
+
+
+
+								</div>
+							</div>
+					   </div>
+					</div>
+				</div>
+			</div>
+			<!-- /旅游资讯 -->
+			
+		<!--/right-->
+		</div>
+		<!--/content-->
+	</center>
+
+		#parse("common/footer.vm")
+		<!--固定位置-->
+	</div>
+	<script type="text/javascript" src="$staticRoot/js/aboutcontent.js"></script>
+</body>
+</html>

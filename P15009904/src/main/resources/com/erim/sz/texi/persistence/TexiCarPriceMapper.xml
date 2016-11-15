@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="carPrice">
+	
+	<sql id="sql_query">
+		1 = 1
+		<!-- 日期 -->
+		<if test = "tcpDate != null and tcpDate != ''"> AND tcp_date = #{tcpDate} </if>
+		<!-- 包车ID -->
+		<if test = "bclId != null and bclId != ''"> AND bcl_id = #{bclId} </if>
+		<!-- 包车类型 -->
+		<if test = "bclType != null and bclType != ''"> AND bcl_type = #{bclType} </if>
+	</sql>
+	
+	<!-- 查询字段 -->
+	<sql id="sql_column">
+		id,
+		bcl_id 						AS bclId,
+		bcl_type 					AS bclType,
+		tcp_date 					AS tcpDate,
+		tcp_is_open 				AS tcpIsOpen,
+		tcp_week 					AS tcpWeek,
+		tcp_sign 					AS tcpSign,
+		tcp_trade_price 			AS tcpTradePrice,
+		tcp_combination_price 		AS tcpCombinationPrice,
+		tcp_retail_price 			AS tcpRetailPrice,
+		tcp_price_show 				AS tcpPriceShow,
+		tcp_cancel_indent 			AS tcpCancelIndent,
+		tcp_create_time				AS tcpCreateTime,
+		tcp_create_user				AS tcpCreateUser
+	</sql>
+	
+	<!-- 查询数据  -->
+	<select id="selectCarPriceList" parameterType="java.util.Map" resultType="texiCarPriceBean">
+		SELECT * FROM (
+			SELECT
+				<include refid = "sql_column" />
+			FROM
+				texi_car_price
+			ORDER BY 
+				tcp_create_time
+			DESC
+		) t
+		GROUP BY
+			t.tcpDate,
+			t.bclType
+		HAVING
+			t.bclId = #{bean.bclId} 
+			AND t.bclType = #{bean.bclType} 
+			<!-- 日期 -->
+			AND t.tcpDate IN 
+			<foreach collection="monthCount" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="texiCarPriceBean">
+		INSERT INTO
+			texi_car_price (
+				cpy_id,
+				bcl_id,
+				bcl_type,
+				tcp_date,
+				tcp_is_open,
+				tcp_week,
+				<if test = "tcpSign != null">
+					tcp_sign,
+				</if>
+				<if test = "tcpTradePrice != null or tcpCombinationPrice != null or tcpRetailPrice != null">
+					tcp_trade_price,
+					tcp_combination_price,
+					tcp_retail_price,
+				</if>
+				tcp_price_show,
+				tcp_cancel_indent,
+				tcp_create_time,
+				tcp_create_user
+			) VALUES (
+				#{cpyId},
+				#{bclId},
+				#{bclType},
+				#{tcpDate},
+				#{tcpIsOpen},
+				#{tcpWeek},
+				<if test = "tcpSign != null">
+					#{tcpSign},
+				</if>
+				<if test = "tcpTradePrice != null or tcpCombinationPrice != null or tcpRetailPrice != null">
+					#{tcpTradePrice},
+					#{tcpCombinationPrice},
+					#{tcpRetailPrice},
+				</if>
+				#{tcpPriceShow},
+				#{tcpCancelIndent},
+				#{tcpCreateTime},
+				#{tcpCreateUser}
+			)
+	</insert>
+	
+	<!-- 开关房 -->
+	<update id="updateIsOpen">
+		UPDATE
+			texi_car_price
+		SET
+			tcp_is_open 	= #{tcpIsOpen}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 修改房量 -->
+	<update id="updatePrice">
+		UPDATE
+			texi_car_price
+		SET
+			tcp_sign 				= #{tcpSign},
+			tcp_trade_price 		= #{tcpTradePrice},
+			tcp_combination_price 	= #{tcpCombinationPrice},
+			tcp_retail_price 		= #{tcpRetailPrice},
+			tcp_is_open				= '02'
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 批量关房 -->
+	<update id="updateBatchOpen">
+		UPDATE
+			texi_car_price
+		SET
+			tcp_is_open				= #{tcpIsOpen}
+		WHERE
+			<include refid = "sql_query" />
+	</update>
+</mapper>

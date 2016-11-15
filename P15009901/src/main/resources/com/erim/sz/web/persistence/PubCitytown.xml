@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pubcitytown">
+	
+	<!-- 查询本页数据，用于显示当前页 -->
+	<select id="selectList" resultType="pubCityshopBean">
+		SELECT
+			id AS id,
+			lb AS lb
+		FROM
+			pub_cityshop
+	</select>
+	
+	<delete id="delete">
+		delete from
+			pub_cityshop
+		where 
+			id = #{id}	
+	</delete>
+</mapper>

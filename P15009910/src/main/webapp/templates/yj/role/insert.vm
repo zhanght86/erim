@@ -1,0 +1,17 @@
+<div class="addhotel">
+	<div class="addhltop">
+		<p class="g_tit_1 mb15">新增角色</p>
+	</div>
+	<form method="post" id="form1">
+    	<div class="input_block clearfix">
+    		<div class="input_right input_right_wauto">
+        		<label class="ml30">角色名:</label>
+        		<input type="text" placeholder="" name="yjRoleName" class="w130 validate[required]"><span style="color:red;margin-left:5px;">*</span>
+        	</div>
+    	</div>
+	 </form>
+	<div class="g_right mr50 mb20" style="float:left;">
+			<a class="red_a ml25 back" href="javascript:index.load(page.url);">返回</a>
+			<a class="red_a ml25" href="javascript:form.sub('form1','$appRoot/yj/role/insert');">确认</a>
+		</div>
+</div>

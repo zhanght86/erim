@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>注册_北京佳旅联合国际旅行社有限公司_www.jialvlianhe.com</title>
+	<meta charset="utf-8">
+		<link rel="shortcut icon" href="$staticRoot/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="$staticRoot/css/register.css">
+
+</head>
+<body>
+	<div class="register">
+		<div class="register_top">
+			<div class="register_topl">
+				<img src="$staticRoot/images/logo1.gif">
+			</div>
+			<div class="register_topm">
+				<h1>佳佳旅行网</h1>
+				<span>石家庄佳佳国际旅行社有限公司</span>
+			</div>
+			<div class="register_topr">
+				<div class="register_toprf">
+					<a href="$appRoot/$cpyno/login.html" class="register_topd">登录&nbsp;</a>
+					<a  href="$appRoot/$cpyno/abouts.html">|&nbsp;帮助中心</a>
+				</div>
+			</div>
+		</div>
+		<div class="register_center">
+			<div class="rc_top">
+				<img src="$staticRoot/images/r1.png">
+			</div>
+			<div class="form-bak">
+				<form method="post" action="$appRoot/$cpyno/register.html" onsubmit="adaptValue();">
+					<div class="left">
+						<div class="line" id="line_name">
+							<div class="info">
+								<span>手机号</span>
+							</div>
+							<div class="input">
+								<input type="text" name="mluLoginname" id="name" onblur="v_name();" onkeyup="v_name();" placeholder="请输入手机号" />
+							</div>
+							<div class="tips"><div class="none"><span></span></div></div>
+						</div>
+						<div class="line" id="line_account">
+							<div class="info">
+								<span>邮箱</span>
+							</div>
+							<div class="input">
+								<input type="text" name="mluEmail" id="account" onblur="v_account();" onkeyup="v_account();" placeholder="请输入邮箱"/>
+							</div>
+							<div class="tips"><div class="none"><span></span></div></div>
+						</div>
+						<div class="line" id="line_password">
+							<div class="info">
+								<span>密码</span>
+							</div>
+							<div class="input">
+								<input type="password" name="password" id="password" onblur="v_password();" onkeyup="v_password();" placeholder="请输入6至16个字符" />
+								
+							</div>
+							<div class="tips"><div class="none"><span></span></div></div>
+						</div>
+						
+						<div class="line" id="line_repeat">
+							<div class="info">
+								<span>确认密码</span>
+							</div>
+							<div class="input">
+								<input type="password" name="mluPassword" id="repeat" onblur="v_repeat();" onkeyup="v_repeat();"  placeholder="再次输入密码"/>
+							</div>
+							<div class="tips"><div class="none"><span></span></div></div>
+						</div>
+					</div>
+					
+					<div class="right">
+						<div class="readagreement-wrap" onclick="onReadAgreementClick();">
+							<input type="checkbox" name="agree" id="agree" onchange="v_submitbutton();" />
+							<span>同意佳佳旅行网服务条款《<a id="readagreement" href="#agreement" onclick="showAgreement();" title="查看条款">查看条款</a>》</span>
+						</div>
+						<input type="submit" id="submit" value="下一步" disabled="disabled"/>
+					</div>
+				</form>
+			</div>
+
+			<div id="agreement" class="agreement" style="display:none;">
+				<h1>用户使用协议</h1>
+				<iframe src="$appRoot/$cpyno/login/tiaokuan"></iframe>
+				<input type="button" value="同意" onclick="agree();"/>
+				<a href="#" class="backtotop" >返回顶部</a>
+			</div>
+		</div>
+		<div class="register_footer">
+			Copyright@2002-2014&nbsp;版权所有&nbsp;北京佳旅联合国际旅行社有限公司&nbsp;苏ICP证B2-2000204&nbsp;旅行社业务许可证：L-JS-CJ00070  
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="$staticRoot/js/jquery.min.js"></script>
+<script type="text/javascript" src="$staticRoot/js/register.js"></script>

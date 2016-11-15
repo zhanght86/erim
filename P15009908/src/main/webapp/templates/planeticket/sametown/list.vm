@@ -1,0 +1,183 @@
+<link rel="stylesheet" type="text/css" href="$staticRoot/css/planeticket/planeticket.css">
+<script type="text/javascript">
+    regUtil.initProvince(0,'ptdStartProvince','ptdStartCity','');
+	 regUtil.initProvince(0,'ptdEndProvince','ptdEndCity','');
+	  /*同业资源机票单程往返*/	
+      $(".b_label1").click(function(){
+      $(".b_same_topctnbll").hide();
+      });
+      $(".b_label2").click(function(){
+      $(".b_same_topctnbll").show();
+      });
+	  /*同业资源机票单程往返*/	
+      $(".b_gn").click(function(){
+	  $(".b_gn_span").show();
+      $(".b_gj_span").hide();
+      });
+      $(".b_gj").click(function(){
+      $(".b_gj_span").show();
+	  $(".b_gn_span").hide();
+      });
+</script>
+	
+<div class="rdivv">
+	<!-- 同城同业 -->
+	<div class="same">
+		<div class="newfood_suptop">
+			<img src="$staticRoot/images/ren.png">
+			<span>同业资源机票</span>
+			<div class="cb"></div>
+			<div class="g_line"></div>
+		</div>
+		<form method="post" id="form1">
+		<div class="same_top">
+			<div class="same_topn">
+				<span>国家：</span>
+				<label class="b_gn"><input type="radio" name="sn" checked="checked">国内</label>
+				<label class="b_gj"><input type="radio" name="sn">国际</label>
+			</div>
+			<div class="same_toph">
+				<div class="same_tophb show">
+					<div class="same_tophbn">
+						<span>航程类型：</span>
+						<label class="b_label1"><input type="radio" name="ptdType" checked="checked">单程</label>
+						<label class="b_label2"><input type="radio" name="ptdType">往返</label>
+					</div>
+				</div>
+			</div>
+			<div class="same_topct">
+				<div class="same_topctb show">
+					<div class="same_topctn">
+						<div class="same_topctnb show">
+							<div class="same_topctnbl" style="width: 1125px;">
+								<div class="same_topctnbll">
+									<span style="width: 80px; text-align: right; margin-right: 10px; padding: 0px;">产品编号：</span>
+									<input type="text" name="ptdNo" style="width:90px;">
+								</div>
+								<div class="same_topctnbll" style="margin-left:5px;">
+									<span>航空公司：</span>
+									<input type="text" name="ptdCompany" style="width:90px;">
+								</div>
+								<div class="same_topctnbll">
+									<span>航班号：</span>
+									<input type="text" name="ptdNo" style="width:90px;">
+								</div>
+								<div class="same_topctnbll">
+									<span>公司/品牌名称：</span>
+									<input type="text" name="" style="width:90px;">
+								</div>
+								<div class="same_topctnbll">
+									<span>出发日期：</span>
+									<input type="text" name="preDate" onClick="WdatePicker()" style="width:90px;">
+								</div>
+								<div class="same_topctnbll b_same_topctnbll" style="display: none;">
+									<span>返回日期：</span>
+									<input type="text" onClick="WdatePicker()"  style="width:90px;">
+								</div>
+							</div>
+							<div class="same_topctnbl">
+								<div class="same_topctnblr">
+									<span style="width: 80px; text-align: right; margin-right: 10px; padding: 0px;">出发城市：</span>
+										<select  name="ptdStartProvince" style="height:30px;width:90px;">
+											<option value=""></option>
+                    						#foreach($item in $provinces)
+                    						  <option value="$item.regionNo">$item.regionName</option> #end
+                    					</select> 
+								  </div>
+								<div class="same_topctnblr">
+									
+									<span class="b_gn_span">省</span>
+									<span class="b_gj_span">国家</span>
+									<select name="ptdStartCity" style="height:30px;width:90px;"></select>
+									<span class="b_gn_span" style="float:right;">市</span>
+									<span class="b_gj_span" style="float:right;">城市</span>
+								</div>
+								<div class="same_topctnblr">
+									<span style="margin-left: 28px;padding: 0px 15px 0px 10px;">到达城市：</span>
+									<select style="width:90px;height:30px;" name="ptdEndProvince">
+										<option value=""></option>
+                						#foreach($item in $provinces)
+                						<option value="$item.regionNo">$item.regionName</option> #end
+                					</select>
+								</div>
+								<div class="same_topctnblr">
+									<span class="b_gn_span">省</span>
+									<span class="b_gj_span">国家</span>
+									<select name="ptdEndCity" style="height:30px;width:90px;"></select>
+									<span class="b_gn_span" style="float:right;">市</span>
+									<span class="b_gj_span" style="float:right;">城市</span>
+								 </div>
+								<div class="same_topctnblr">
+									<span>舱位类型：</span>
+									<select name="gdlSex" class="validate[required]" style="width:90px; height:30px;">
+										<option></option>
+										 <option value="01" #if($planeticketDetail.gdlSex == '01') selected #end>经济舱</option>
+							             <option value="02" #if($planeticketDetail.gdlSex == '02') selected #end>商务舱</option>
+							             <option value="03" #if($planeticketDetail.gdlSex == '03') selected #end>头等舱</option>
+                					</select>
+								</div>
+								<div class="same_boxbtn">
+									<button type="button" onclick="index.searchform('form1','$appRoot/planeticket/detail/sametown');" >查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<div class="cb"></div>
+		<div class="g_line mb20"></div>
+		<div class="carad_ctrtable">
+			<table cellspacing="0" cellspadding="0">
+				<thead>
+					<tr>
+						<td>产品编码</td>
+						<td>航空公司</td>
+						<td>航班号</td>
+						<td>起飞城市/时间</td>
+						<td>经停城市/历时</td>
+						<td>落地城市/时间</td>
+						<td>舱位类型</td>
+						<td>价格</td>
+						<td>公司/品牌名称</td>
+						<td>联系人/电话</td>
+						<td>在线交流</td>
+						<!--
+						<td>在线预订</td>
+						-->
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($item in $planeticketList)
+    					<tr>
+    						<td>$!item.ptdNo</td>
+    						<td>$!item.ptdCompany</td>
+    						<td>$!item.ptdNumber</td>
+    						<td>$!item.ptdStartCity/$!item.ptdStartTime</td>
+							<td></td>
+    						<td>$!item.ptdEndCity/$!item.ptdEndTime</td>
+    						<td>$!item.ptdSpace</td>
+    						<td>
+								<a href="javascript:index.load('$appRoot/planeticket/price/list?gdlId=$!item.id&portal=05');">￥$!item.preTradePrice元/$!item.preSign张</a>
+							</td>
+         					<td>$!item.cpyName / $!item.cpyBrand</td>
+        					<td>$!item.ccpName / $!item.ccpTelephone</td>
+							<td><a target=blank href="http://wpa.qq.com/msgrd?v=3&uin=$item.ccpQq&site=qq&menu=yes"><img border=0 SRC="/static/images/button_old_101.gif" alt="在线交流"></a></td>
+							<!--<td><a href="javascript:index.load('$appRoot/planeticket/order/insert')">预订</a></td>-->
+    					</tr>
+					 #end
+				</tbody>
+			</table>
+			#parse("common/page.vm")
+		</div>
+	</div>
+	<!-- /同城同业 -->
+</div>
+	
+<script >
+	//初始化出发省市县
+	//regUtil.initProvince(0,'ptdStartProvince','ptdStartCity','');
+	//初始化出发省市县
+	//regUtil.initProvince(0,'ptdEndProvince','ptdEndCity','');
+</script>
