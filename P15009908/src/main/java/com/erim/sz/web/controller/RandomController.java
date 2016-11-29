@@ -27,10 +27,10 @@ public class RandomController {
 	@RequestMapping(value = "/check/code")
 	public void init(HttpServletRequest request, HttpServletResponse response) {
 		
-		RandomNumUtil util = RandomNumUtil.Instance();
-		SecurityUtils.getSubject().getSession().setAttribute("sessionCode", util.getStr());
-		System.out.println("Sessionis = " + SecurityUtils.getSubject().getSession().getId());
 		try {
+			// 生成验证码实例
+			RandomNumUtil util = RandomNumUtil.Instance();
+			SecurityUtils.getSubject().getSession().setAttribute("sessionCode", util.getStr());
 			ServletOutputStream stream = response.getOutputStream();
 			ImageIO.write(util.getImage(), "JPEG", stream);
 			stream.flush();

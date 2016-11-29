@@ -38,7 +38,7 @@ public class RandomNumUtil {
 	}
 	
 	private void init() {
-		// 在内存中创建图象
+		// 在内存中创建图象，设置图像的宽高
 		int width = 120, height = 30;
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		// 获取图形上下文
