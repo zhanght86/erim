@@ -86,13 +86,13 @@
     
     <!-- 上传servlet -->
     <servlet>
-    <servlet-name>FileUploadServlet</servlet-name>
-  	<servlet-class>com.erim.sz.web.util.FileUploadServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>FileUploadServlet</servlet-name>
-  	<url-pattern>/FileUploadServlet</url-pattern>
-  </servlet-mapping>
+	    <servlet-name>FileUploadServlet</servlet-name>
+	  	<servlet-class>com.erim.sz.web.util.FileUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  	<servlet-name>FileUploadServlet</servlet-name>
+	  	<url-pattern>/FileUploadServlet</url-pattern>
+	</servlet-mapping>
     
     <!--身份验证失败，没有权限-->
     <error-page>
